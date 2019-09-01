@@ -14,7 +14,18 @@
                         time an external event occurs. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/pipelines-webhooks-migration.html">Configure Your GitHub
                            Pipelines to Use Webhooks for Change Detection</a> in the <em>AWS CodePipeline
                            User Guide</em>.
-                     </p><h2 id="aws-resource-codepipeline-webhook-syntax">Syntax</h2><p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p><div id="JSON" name="JSON" class="section langfilter">
+                     </p><p>We strongly recommend that you use AWS Secrets Manager to store your credentials.
+                        If
+                        you use Secrets Manager, you must have secrets in your secrets manager. For more information,
+                        see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager"> Using Dynamic References to Specify Template Values</a>. 
+                     </p><div class="aws-note">
+                        <p class="aws-note">Important</p>
+                        <p>When passing secret parameters, do not enter the value directly into the template.
+                           The value is rendered as plain text and is readable. For security purposes, do not
+                           use plain
+                           text in your CloudFormation template to store your credentials.
+                        </p>
+                     </div><h2 id="aws-resource-codepipeline-webhook-syntax">Syntax</h2><p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p><div id="JSON" name="JSON" class="section langfilter">
                         <h3 id="aws-resource-codepipeline-webhook-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;Type&quot; : &quot;AWS::CodePipeline::Webhook&quot;,
   &quot;Properties&quot; : {
@@ -214,7 +225,8 @@ Properties:
                         for
                         the pipeline&apos;s GitHub source repository. In this example, WebhookPipeline is the logical
                         ID of the pipeline to which you want to add the webhook.
-                     </p><h4 id="aws-resource-codepipeline-webhook--examples--Webhook_Resource_Configuration--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{ 
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-codepipeline-webhook--examples--Webhook_Resource_Configuration--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{ 
   &quot;Webhook&quot;: { 
     &quot;Type&quot;: &quot;AWS::CodePipeline::Webhook&quot;, 
     &quot;Properties&quot;: {
@@ -235,7 +247,8 @@ Properties:
       &quot;RegisterWithThirdParty&quot;: &quot;true&quot; 
     } 
   } 
-}</code></pre><h4 id="aws-resource-codepipeline-webhook--examples--Webhook_Resource_Configuration--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Webhook: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-codepipeline-webhook--examples--Webhook_Resource_Configuration--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Webhook: 
   Type: &apos;AWS::CodePipeline::Webhook&apos; 
   Properties:
     AuthenticationConfiguration: 
@@ -248,7 +261,7 @@ Properties:
     TargetAction: Source 
     Name: MyWebhook 
     TargetPipelineVersion: !GetAtt WebhookPipeline.Version
-    RegisterWithThirdParty: &apos;true&apos;</code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+    RegisterWithThirdParty: &apos;true&apos;</code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>

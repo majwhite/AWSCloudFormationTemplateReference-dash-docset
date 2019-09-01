@@ -156,7 +156,7 @@ Properties:
                                  maintenance window Run Command tasks.
                               </p>
                               
-                              <p><em>Required</em>: Yes
+                              <p><em>Required</em>: No
                               </p>
                               <p><em>Type</em>: String
                               </p>
@@ -272,7 +272,7 @@ Properties:
                               
                               <p>The ID of the maintenance window where the task is registered.</p>
                               
-                              <p><em>Required</em>: No
+                              <p><em>Required</em>: Yes
                               </p>
                               <p><em>Type</em>: String
                               </p>
@@ -286,7 +286,119 @@ Properties:
                         When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the maintenance window task ID, such as
                         <code class="code">12a345b6-bbb7-4bb6-90b0-8c9577a2d2b9</code>.
                      </p><p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
-                     </p><h2 id="aws-resource-ssm-maintenancewindowtask--seealso">See Also</h2><div class="itemizedlist">
+                     </p><h2 id="aws-resource-ssm-maintenancewindowtask--examples">Examples</h2><h3 id="aws-resource-ssm-maintenancewindowtask--examples--AWS_Systems_Manager_Maintenance_Window_Task_Window_Target_ID_Example">AWS Systems Manager Maintenance Window Task Window Target ID Example</h3><p>The following example creates a Systems Manager maintenance window task that 
+                        runs the specified Step Function. The maintenance window task targets managed 
+                        instances using a maintenance window target ID.
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-ssm-maintenancewindowtask--examples--AWS_Systems_Manager_Maintenance_Window_Task_Window_Target_ID_Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+  &quot;Resources&quot;: {
+    &quot;MaintenanceWindowStepFunctionsTask&quot;: {
+      &quot;Type&quot;: &quot;AWS::SSM::MaintenanceWindowTask&quot;,
+      &quot;Properties&quot;: {
+        &quot;WindowId&quot;: &quot;MaintenanceWindow&quot;,
+        &quot;Targets&quot;: [
+          {
+            &quot;Key&quot;: &quot;WindowTargetIds&quot;,
+            &quot;Values&quot;: [
+              &quot;MaintenanceWindowTarget&quot;
+            ]
+          }
+        ],
+        &quot;TaskArn&quot;: &quot;SSMStepFunctionDemo&quot;,
+        &quot;ServiceRoleArn&quot;: &quot;StepFunctionRole.Arn&quot;,
+        &quot;TaskType&quot;: &quot;STEP_FUNCTIONS&quot;,
+        &quot;TaskInvocationParameters&quot;: {
+          &quot;MaintenanceWindowStepFunctionsParameters&quot;: {
+            &quot;Input&quot;: &quot;{\&quot;instanceId\&quot;: \&quot;{{TARGET_ID}}\&quot;, \&quot;wait_time\&quot;: 20}&quot;,
+            &quot;Name&quot;: &quot;{{INVOCATION_ID}}&quot;
+          }
+        },
+        &quot;Priority&quot;: 1,
+        &quot;MaxConcurrency&quot;: 5,
+        &quot;MaxErrors&quot;: 5,
+        &quot;Name&quot;: &quot;StepFunctionsTask&quot;
+      },
+      &quot;DependsOn&quot;: &quot;MaintenanceWindowTarget&quot;
+    }
+  }
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-ssm-maintenancewindowtask--examples--AWS_Systems_Manager_Maintenance_Window_Task_Window_Target_ID_Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Resources:
+  MaintenanceWindowStepFunctionsTask:
+    Type: &apos;AWS::SSM::MaintenanceWindowTask&apos;
+    Properties:
+      WindowId: !Ref MaintenanceWindow
+      Targets:
+        - Key: &apos;WindowTargetIds&apos;
+          Values:
+          - !Ref MaintenanceWindowTarget
+      TaskArn: !Ref SSMStepFunctionDemo
+      ServiceRoleArn: !GetAtt StepFunctionRole.Arn
+      TaskType: &apos;STEP_FUNCTIONS&apos;
+      TaskInvocationParameters:
+        MaintenanceWindowStepFunctionsParameters:
+          Input: &apos;{&quot;instanceId&quot;: &quot;{{TARGET_ID}}&quot;, &quot;wait_time&quot;: 20}&apos;
+          Name: &apos;{{INVOCATION_ID}}&apos;
+      Priority: 1
+      MaxConcurrency: 5
+      MaxErrors: 5
+      Name: &apos;StepFunctionsTask&apos;
+    DependsOn: MaintenanceWindowTarget</code></pre></div><h3 id="aws-resource-ssm-maintenancewindowtask--examples--AWS_Systems_Manager_Maintenance_Window_Task_Instance_ID_Target_Example">AWS Systems Manager Maintenance Window Task Instance ID Target Example</h3><p>The following example creates a Systems Manager maintenance window task that 
+                        runs the specified Step Function. The maintenance window task targets the specified
+                        instance IDs.
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-ssm-maintenancewindowtask--examples--AWS_Systems_Manager_Maintenance_Window_Task_Instance_ID_Target_Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+  &quot;Resources&quot;: {
+    &quot;StepFunctionsTask&quot;: {
+      &quot;Type&quot;: &quot;AWS::SSM::MaintenanceWindowTask&quot;,
+      &quot;Properties&quot;: {
+        &quot;WindowId&quot;: &quot;MaintenanceWindow&quot;,
+        &quot;Targets&quot;: [
+          {
+            &quot;Key&quot;: &quot;InstanceIds&quot;,
+            &quot;Values&quot;: [
+              &quot;i-012345678912345678&quot;
+            ]
+          }
+        ],
+        &quot;TaskArn&quot;: &quot;SSMStepFunctionDemo&quot;,
+        &quot;ServiceRoleArn&quot;: &quot;StepFunctionRole.Arn&quot;,
+        &quot;TaskType&quot;: &quot;STEP_FUNCTIONS&quot;,
+        &quot;TaskInvocationParameters&quot;: {
+          &quot;MaintenanceWindowStepFunctionsParameters&quot;: {
+            &quot;Input&quot;: &quot;{\&quot;instanceId\&quot;: \&quot;{{TARGET_ID}}\&quot;, \&quot;wait_time\&quot;: 20}&quot;,
+            &quot;Name&quot;: &quot;{{INVOCATION_ID}}&quot;
+          }
+        },
+        &quot;Priority&quot;: 1,
+        &quot;MaxConcurrency&quot;: 5,
+        &quot;MaxErrors&quot;: 5,
+        &quot;Name&quot;: &quot;StepFunctionsTask&quot;
+      },
+      &quot;DependsOn&quot;: &quot;MaintenanceWindowTarget&quot;
+    }
+  }
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-ssm-maintenancewindowtask--examples--AWS_Systems_Manager_Maintenance_Window_Task_Instance_ID_Target_Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Resources:
+  StepFunctionsTask:
+    Type: &apos;AWS::SSM::MaintenanceWindowTask&apos;
+    Properties:
+      WindowId: !Ref MaintenanceWindow
+      Targets:
+        - Key: &apos;InstanceIds&apos;
+          Values:
+          - i-012345678912345678
+      TaskArn: !Ref SSMStepFunctionDemo
+      ServiceRoleArn: !GetAtt StepFunctionRole.Arn
+      TaskType: &apos;STEP_FUNCTIONS&apos;
+      TaskInvocationParameters:
+        MaintenanceWindowStepFunctionsParameters:
+          Input: &apos;{&quot;instanceId&quot;: &quot;{{TARGET_ID}}&quot;, &quot;wait_time&quot;: 20}&apos;
+          Name: &apos;{{INVOCATION_ID}}&apos;
+      Priority: 1
+      MaxConcurrency: 5
+      MaxErrors: 5
+      Name: &apos;StepFunctionsTask&apos;
+    DependsOn: MaintenanceWindowTarget</code></pre></div><h2 id="aws-resource-ssm-maintenancewindowtask--seealso">See Also</h2><div class="itemizedlist">
                         
                         
                         

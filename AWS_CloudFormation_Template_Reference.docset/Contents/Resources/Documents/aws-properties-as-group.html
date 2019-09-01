@@ -115,7 +115,8 @@ Properties:
                                  properties: <code class="code">VPCZoneIdentifier</code> or <code class="code">AvailabilityZones</code>. 
                               </p>
                               
-                              <p>If your account supports EC2-Classic and VPC, this property is required to launch
+                              <p>If your account supports EC2-Classic and VPC, this property is required to create
+                                 an Auto Scaling group that launches
                                  instances into EC2-Classic.
                               </p>
                               
@@ -158,18 +159,14 @@ Properties:
                                  minimum size of the group.
                               </p>
                               
-                              <p>If <code class="code">SpotPrice</code> is not set in the <a href="aws-properties-as-launchconfig.html">LaunchConfiguration</a> for the Auto Scaling group, then Amazon EC2 Auto Scaling will
-                                 begin to launch instances based on <code class="code">DesiredCapacity</code>. CloudFormation will not mark
-                                 the Auto Scaling group as successful (by setting its status to CREATE_COMPLETE) until
+                              <p>CloudFormation marks
+                                 the Auto Scaling group as successful (by setting its status to CREATE_COMPLETE) when
                                  the
-                                 desired capacity is reached. 
-                              </p>
-                              
-                              <p>If <code class="code">SpotPrice</code>
-                                 <em>is</em> set, then <code class="code">DesiredCapacity</code> will not be used as a criteria
-                                 for success, since instances will only be started when the Spot price has been matched.
-                                 After
-                                 the Spot price has been matched, however, Amazon EC2 Auto Scaling uses
+                                 desired capacity is reached. However, if <code class="code">SpotPrice</code> is set in the <a href="aws-properties-as-launchconfig.html">launch configuration</a>, 
+                                 then desired capacity is not used as a criteria for success, because whether your
+                                 request is fulfilled depends on Spot Instance capacity and your maximum price. If
+                                 the current Spot price is less than your specified maximum price, Amazon EC2 Auto
+                                 Scaling uses
                                  <code class="code">DesiredCapacity</code> as the target capacity for the group. 
                               </p>
                               
@@ -239,9 +236,7 @@ Properties:
                                     Guide</em>. 
                               </p>
                               
-                              <p>When you create an Auto Scaling group, you must specify one of the following properties
-                                 in
-                                 your request: <code class="code">LaunchConfigurationName</code>, <code class="code">LaunchTemplate</code>,
+                              <p>You must specify one of the following properties: <code class="code">LaunchConfigurationName</code>, <code class="code">LaunchTemplate</code>,
                                  <code class="code">InstanceId</code>, or <code class="code">MixedInstancesPolicy</code>.
                               </p>
                               
@@ -257,15 +252,7 @@ Properties:
                               <p>The name of the <a href="aws-properties-as-launchconfig.html">LaunchConfiguration</a> to use to launch instances.
                               </p>
                               
-                              <p>If this resource has a public IP address and is also in a VPC that is defined in the
-                                 same
-                                 template, you must use the <a href="aws-attribute-dependson.html">DependsOn
-                                    attribute</a> to declare a dependency on the <a href="aws-resource-ec2-vpc-gateway-attachment.html">VPC-gateway attachment</a>.
-                              </p>
-                              
-                              <p>When you create an Auto Scaling group, you must specify one of the following properties
-                                 in
-                                 your request: <code class="code">LaunchConfigurationName</code>, <code class="code">LaunchTemplate</code>,
+                              <p>You must specify one of the following properties: <code class="code">LaunchConfigurationName</code>, <code class="code">LaunchTemplate</code>,
                                  <code class="code">InstanceId</code>, or <code class="code">MixedInstancesPolicy</code>.
                               </p>
                               
@@ -294,9 +281,7 @@ Properties:
                               <p>The <a href="aws-resource-ec2-launchtemplate.html">LaunchTemplate</a> to use to launch instances.
                               </p>
                               
-                              <p>When you create an Auto Scaling group, you must specify one of the following properties
-                                 in
-                                 your request: <code class="code">LaunchConfigurationName</code>, <code class="code">LaunchTemplate</code>,
+                              <p>You must specify one of the following properties: <code class="code">LaunchConfigurationName</code>, <code class="code">LaunchTemplate</code>,
                                  <code class="code">InstanceId</code>, or <code class="code">MixedInstancesPolicy</code>.
                               </p>
                               
@@ -385,7 +370,7 @@ Properties:
                               <p>An embedded object that specifies a mixed instances policy.</p>
                               
                               <p>The policy includes properties that not only define the distribution of On-Demand
-                                 Instances and Spot Instances, the maximum price to pay for Spot instances, and how
+                                 Instances and Spot Instances, the maximum price to pay for Spot Instances, and how
                                  the Auto
                                  Scaling group allocates instance types to fulfill On-Demand and Spot capacity, but
                                  also the
@@ -399,9 +384,7 @@ Properties:
                                     Guide</em>.
                               </p>
                               
-                              <p>When you create an Auto Scaling group, you must specify one of the following properties
-                                 in
-                                 your request: <code class="code">LaunchConfigurationName</code>, <code class="code">LaunchTemplate</code>,
+                              <p>You must specify one of the following properties: <code class="code">LaunchConfigurationName</code>, <code class="code">LaunchTemplate</code>,
                                  <code class="code">InstanceId</code>, or <code class="code">MixedInstancesPolicy</code>.
                               </p>
                               
@@ -516,14 +499,20 @@ Properties:
                            <dt><a id="cfn-as-group-vpczoneidentifier"></a><span class="term"><code class="code">VPCZoneIdentifier</code></span></dt>
                            <dd>
                               
-                              <p>A list of subnet IDs for a virtual private cloud (VPC). You must specify one of the
-                                 following properties: <code class="code">VPCZoneIdentifier</code> or <code class="code">AvailabilityZones</code>. If you
+                              <p>A list of subnet IDs for a virtual private cloud (VPC). If you
                                  specify <code class="code">VPCZoneIdentifier</code> with <code class="code">AvailabilityZones</code>, the subnets that
                                  you specify for this property must reside in those Availability Zones. 
                               </p>
                               
-                              <p>If your account supports EC2-Classic and VPC, this property is required to launch
+                              <p>If your account supports EC2-Classic and VPC, this property is required to create
+                                 an Auto Scaling group that launches
                                  instances into a VPC. 
+                              </p>
+                              
+                              <p>If this resource has a public IP address and is also in a VPC that is defined in the
+                                 same
+                                 stack template, you must use the <a href="aws-attribute-dependson.html">DependsOn
+                                    attribute</a> to declare a dependency on the <a href="aws-resource-ec2-vpc-gateway-attachment.html">VPC-gateway attachment</a>.
                               </p>
                               
                               <div class="aws-note">
@@ -543,7 +532,7 @@ Properties:
                               <p><em>Minimum</em>: <code class="code">1</code></p>
                               <p><em>Maximum</em>: <code class="code">2047</code></p>
                               <p><em>Pattern</em>: <code class="code">[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*</code></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
                            </dd>
                         </dl>
                      </div><h2 id="aws-properties-as-group-return-values">Return Values</h2><h3 id="aws-properties-as-group-return-values-ref">Ref</h3><p>When the logical ID of this resource is provided to the <code class="code">Ref</code> intrinsic
@@ -568,7 +557,8 @@ Properties:
                         number
                         of instances in the group at a minimum of 1 instance and a maximum of 4 based on the
                         values for <code class="code">MinSize</code> and <code class="code">MaxSize</code>.
-                     </p><h4 id="aws-properties-as-group--examples--Auto_Scaling_Group_with_Load_Balancer_and_Multiple_Properties--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-properties-as-group--examples--Auto_Scaling_Group_with_Load_Balancer_and_Multiple_Properties--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;myASGroup&quot;:{
     &quot;Type&quot;:&quot;AWS::AutoScaling::AutoScalingGroup&quot;,
     &quot;Properties&quot;:{
@@ -608,7 +598,8 @@ Properties:
       ]
     }
   }
-}</code></pre><h4 id="aws-properties-as-group--examples--Auto_Scaling_Group_with_Load_Balancer_and_Multiple_Properties--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myASGroup: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-properties-as-group--examples--Auto_Scaling_Group_with_Load_Balancer_and_Multiple_Properties--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myASGroup: 
   Type: AWS::AutoScaling::AutoScalingGroup
   Properties: 
     AvailabilityZones: 
@@ -631,7 +622,7 @@ Properties:
         PropagateAtLaunch: &quot;true&quot;
       - Key: Purpose
         Value: WebServerGroup
-        PropagateAtLaunch: &quot;false&quot;</code></pre><h3 id="aws-properties-as-group--examples--Rolling_Updates_with_Batch_Update_Policy">Rolling Updates with Batch Update Policy</h3><p>The following example specifies an <a href="aws-attribute-updatepolicy.html">UpdatePolicy
+        PropagateAtLaunch: &quot;false&quot;</code></pre></div><h3 id="aws-properties-as-group--examples--Rolling_Updates_with_Batch_Update_Policy">Rolling Updates with Batch Update Policy</h3><p>The following example specifies an <a href="aws-attribute-updatepolicy.html">UpdatePolicy
                            attribute</a> for an Auto Scaling group and configures it to use the
                         <code class="code">AutoScalingRollingUpdate</code> policy with attributes that define the update
                         policy settings. 
@@ -650,7 +641,8 @@ Properties:
                         <code class="code">Terminate</code>, or <code class="code">AddToLoadBalancer</code> (if the Auto Scaling group is
                         being used with Elastic Load Balancing) process types because it can prevent the rolling
                         update from functioning properly. 
-                     </p><h4 id="aws-properties-as-group--examples--Rolling_Updates_with_Batch_Update_Policy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-properties-as-group--examples--Rolling_Updates_with_Batch_Update_Policy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;myASGroup&quot;:{
     &quot;UpdatePolicy&quot;:{
       &quot;AutoScalingRollingUpdate&quot;:{
@@ -680,7 +672,8 @@ Properties:
       &quot;MinSize&quot;:&quot;1&quot;
     }
   }
-}</code></pre><h4 id="aws-properties-as-group--examples--Rolling_Updates_with_Batch_Update_Policy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myASGroup: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-properties-as-group--examples--Rolling_Updates_with_Batch_Update_Policy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myASGroup: 
   UpdatePolicy: 
     AutoScalingRollingUpdate: 
       MinInstancesInService: &quot;1&quot;
@@ -700,7 +693,7 @@ Properties:
     LaunchConfigurationName: 
       Ref: &quot;myLaunchConfig&quot;
     MaxSize: &quot;3&quot;
-    MinSize: &quot;1&quot;</code></pre><h3 id="aws-properties-as-group--examples--Batch_Update_Policy_with_Wait_Condition">Batch Update Policy with Wait Condition</h3><p>The following example demonstrates a batch update policy that instructs CloudFormation
+    MinSize: &quot;1&quot;</code></pre></div><h3 id="aws-properties-as-group--examples--Batch_Update_Policy_with_Wait_Condition">Batch Update Policy with Wait Condition</h3><p>The following example demonstrates a batch update policy that instructs CloudFormation
                         to wait for new instances to signal the Auto Scaling group before the group proceeds
                         to
                         update the next batch of instances. In the <a href="aws-attribute-updatepolicy.html">UpdatePolicy
@@ -709,7 +702,8 @@ Properties:
                         within the specified <code class="code">PauseTime</code> before continuing the update. To signal the
                         Auto Scaling group, a <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-signal.html">cfn-signal</a> helper
                         script (not shown) is run on each instance. 
-                     </p><h4 id="aws-properties-as-group--examples--Batch_Update_Policy_with_Wait_Condition--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-properties-as-group--examples--Batch_Update_Policy_with_Wait_Condition--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;myASGroup&quot;:{
     &quot;UpdatePolicy&quot;:{
       &quot;AutoScalingRollingUpdate&quot;:{
@@ -740,7 +734,8 @@ Properties:
       &quot;MinSize&quot;:&quot;1&quot;
     }
   }
-}</code></pre><h4 id="aws-properties-as-group--examples--Batch_Update_Policy_with_Wait_Condition--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myASGroup: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-properties-as-group--examples--Batch_Update_Policy_with_Wait_Condition--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myASGroup: 
   UpdatePolicy: 
     AutoScalingRollingUpdate: 
       MinInstancesInService: &quot;1&quot;
@@ -761,7 +756,7 @@ Properties:
     LaunchConfigurationName: 
       Ref: &quot;myLaunchConfig&quot;
     MaxSize: &quot;3&quot;
-    MinSize: &quot;1&quot;</code></pre><h2 id="aws-properties-as-group--seealso">See Also</h2><div class="itemizedlist">
+    MinSize: &quot;1&quot;</code></pre></div><h2 id="aws-properties-as-group--seealso">See Also</h2><div class="itemizedlist">
                         
                         
                         

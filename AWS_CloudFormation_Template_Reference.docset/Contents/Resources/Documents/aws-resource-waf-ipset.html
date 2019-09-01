@@ -71,7 +71,8 @@ Properties:
                      </p><p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                      </p><h2 id="aws-resource-waf-ipset--examples">Examples</h2><h3 id="aws-resource-waf-ipset--examples--Define_IP_Addresses">Define IP Addresses</h3><p>The following example defines a set of IP addresses for a web access control list
                         (ACL) rule.
-                     </p><h4 id="aws-resource-waf-ipset--examples--Define_IP_Addresses--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;MyIPSetBlacklist&quot;: {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-waf-ipset--examples--Define_IP_Addresses--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;MyIPSetBlacklist&quot;: {
   &quot;Type&quot;: &quot;AWS::WAF::IPSet&quot;,
   &quot;Properties&quot;: {
     &quot;Name&quot;: &quot;IPSet for blacklisted IP adresses&quot;,
@@ -86,7 +87,8 @@ Properties:
       }
     ]
   }      
-}</code></pre><h4 id="aws-resource-waf-ipset--examples--Define_IP_Addresses--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">MyIPSetBlacklist: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-waf-ipset--examples--Define_IP_Addresses--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">MyIPSetBlacklist: 
   Type: &quot;AWS::WAF::IPSet&quot;
   Properties: 
     Name: &quot;IPSet for blacklisted IP adresses&quot;
@@ -96,9 +98,10 @@ Properties:
         Value: &quot;192.0.2.44/32&quot;
       - 
         Type: &quot;IPV4&quot;
-        Value: &quot;192.0.7.0/24&quot;</code></pre><h3 id="aws-resource-waf-ipset--examples--Associate_an_IPSet_with_a_Web_ACL_Rule">Associate an IPSet with a Web ACL Rule</h3><p>The following example associates the <code class="code">MyIPSetBlacklist</code> IP Set with a web
+        Value: &quot;192.0.7.0/24&quot;</code></pre></div><h3 id="aws-resource-waf-ipset--examples--Associate_an_IPSet_with_a_Web_ACL_Rule">Associate an IPSet with a Web ACL Rule</h3><p>The following example associates the <code class="code">MyIPSetBlacklist</code> IP Set with a web
                         ACL rule.
-                     </p><h4 id="aws-resource-waf-ipset--examples--Associate_an_IPSet_with_a_Web_ACL_Rule--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;MyIPSetRule&quot; : {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-waf-ipset--examples--Associate_an_IPSet_with_a_Web_ACL_Rule--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;MyIPSetRule&quot; : {
   &quot;Type&quot;: &quot;AWS::WAF::Rule&quot;,
   &quot;Properties&quot;: {
     &quot;Name&quot;: &quot;MyIPSetRule&quot;,
@@ -111,7 +114,8 @@ Properties:
       }
     ]
   }      
-}</code></pre><h4 id="aws-resource-waf-ipset--examples--Associate_an_IPSet_with_a_Web_ACL_Rule--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">MyIPSetRule: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-waf-ipset--examples--Associate_an_IPSet_with_a_Web_ACL_Rule--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">MyIPSetRule: 
   Type: &quot;AWS::WAF::Rule&quot;
   Properties: 
     Name: &quot;MyIPSetRule&quot;
@@ -121,10 +125,11 @@ Properties:
         DataId: 
           Ref: &quot;MyIPSetBlacklist&quot;
         Negated: false
-        Type: &quot;IPMatch&quot;</code></pre><h3 id="aws-resource-waf-ipset--examples--Create_a_Web_ACL">Create a Web ACL</h3><p>The following example associates the <code class="code">MyIPSetRule</code> rule with a web ACL.
+        Type: &quot;IPMatch&quot;</code></pre></div><h3 id="aws-resource-waf-ipset--examples--Create_a_Web_ACL">Create a Web ACL</h3><p>The following example associates the <code class="code">MyIPSetRule</code> rule with a web ACL.
                         The web ACL allows requests that originate from all IP addresses except for addresses
                         that are defined in the <code class="code">MyIPSetRule</code>.
-                     </p><h4 id="aws-resource-waf-ipset--examples--Create_a_Web_ACL--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;MyWebACL&quot;: {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-waf-ipset--examples--Create_a_Web_ACL--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;MyWebACL&quot;: {
   &quot;Type&quot;: &quot;AWS::WAF::WebACL&quot;,
   &quot;Properties&quot;: {
     &quot;Name&quot;: &quot;WebACL to block blacklisted IP addresses&quot;,
@@ -142,7 +147,8 @@ Properties:
       }
     ]
   }      
-}</code></pre><h4 id="aws-resource-waf-ipset--examples--Create_a_Web_ACL--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">MyWebACL: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-waf-ipset--examples--Create_a_Web_ACL--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">MyWebACL: 
   Type: &quot;AWS::WAF::WebACL&quot;
   Properties: 
     Name: &quot;WebACL to block blacklisted IP addresses&quot;
@@ -155,7 +161,7 @@ Properties:
           Type: &quot;BLOCK&quot;
         Priority: 1
         RuleId: 
-          Ref: &quot;MyIPSetRule&quot;</code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+          Ref: &quot;MyIPSetRule&quot;</code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>

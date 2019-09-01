@@ -124,6 +124,27 @@ Properties:
                               
                               <p>For cross-region subscriptions, the region in which the topic resides.</p>
                               
+                              <p>If no region is specified, CloudFormation uses the region of the caller as the default.</p>
+                              
+                              <p>If you perform an update operation that only updates the <code class="code">Region</code> property of a <code class="code">AWS::SNS::Subscription</code> resource, that operation will fail unless you are either:
+                              </p>
+                              
+                              <div class="itemizedlist">
+                                 
+                                 
+                                 
+                                 <ul class="itemizedlist" type="disc">
+                                    <li class="listitem">
+                                       <p>Updating the <code class="code">Region</code> from <code class="code">NULL</code> to the caller region.
+                                       </p>
+                                    </li>
+                                    <li class="listitem">
+                                       <p>Updating the <code class="code">Region</code> from the caller region to <code class="code">NULL</code>.
+                                       </p>
+                                    </li>
+                                 </ul>
+                              </div>
+                              
                               <p><em>Required</em>: No
                               </p>
                               <p><em>Type</em>: String
@@ -144,26 +165,29 @@ Properties:
                         </dl>
                      </div><h2 id="aws-resource-sns-subscription--examples">Examples</h2><h3 id="aws-resource-sns-subscription--examples--Create_a_subscription_with_mandatory_attributes">Create a subscription with mandatory attributes</h3><p>The following example creates a subscription with only an endpoint, protocol, and
                         topic ARN.
-                     </p><h4 id="aws-resource-sns-subscription--examples--Create_a_subscription_with_mandatory_attributes--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;MySubscription&quot; : {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-sns-subscription--examples--Create_a_subscription_with_mandatory_attributes--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;MySubscription&quot; : {
   &quot;Type&quot; : &quot;AWS::SNS::Subscription&quot;,
   &quot;Properties&quot; : {
     &quot;Endpoint&quot; : &quot;test@example.com&quot;,
     &quot;Protocol&quot; : &quot;email&quot;,
     &quot;TopicArn&quot; : { &quot;Ref&quot; : &quot;MySNSTopic&quot; }
   }
-}</code></pre><h4 id="aws-resource-sns-subscription--examples--Create_a_subscription_with_mandatory_attributes--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">MySubscription:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-sns-subscription--examples--Create_a_subscription_with_mandatory_attributes--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">MySubscription:
   Type: AWS::SNS::Subscription
   Properties:
     Endpoint: test@example.com
     Protocol: email
-    TopicArn: !Ref &apos;MySNSTopic&apos;</code></pre><h3 id="aws-resource-sns-subscription--examples--Create_a_subscription_with_optional_attributes">Create a subscription with optional attributes</h3><p>The following example creates a subscription with a filter policy, delivery
+    TopicArn: !Ref &apos;MySNSTopic&apos;</code></pre></div><h3 id="aws-resource-sns-subscription--examples--Create_a_subscription_with_optional_attributes">Create a subscription with optional attributes</h3><p>The following example creates a subscription with a filter policy, delivery
                         policy, and raw message delivery enabled.
                      </p><div class="aws-note">
                         <p class="aws-note">Note</p>
                         <p>You can set subscription attributes only on standalone Amazon SNS subscriptions
                            (not on subscriptions nested in topics).
                         </p>
-                     </div><h4 id="aws-resource-sns-subscription--examples--Create_a_subscription_with_optional_attributes--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+                     </div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-sns-subscription--examples--Create_a_subscription_with_optional_attributes--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Resources:
   CarSalesTopic:
     Type: &apos;AWS::SNS::Topic&apos;
@@ -211,7 +235,8 @@ Resources:
     Properties: {}
 Parameters:
   myHttpEndpoint:
-    Type: String</code></pre><h4 id="aws-resource-sns-subscription--examples--Create_a_subscription_with_optional_attributes--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+    Type: String</code></pre></div><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-sns-subscription--examples--Create_a_subscription_with_optional_attributes--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
     &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
     &quot;Resources&quot;: {
         &quot;CarSalesTopic&quot;: {
@@ -285,7 +310,7 @@ Parameters:
             &quot;Type&quot;: &quot;String&quot;
         }
     }
-}</code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+}</code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>

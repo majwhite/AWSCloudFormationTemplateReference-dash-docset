@@ -69,11 +69,19 @@
                                  per the <code class="code">OnDemandPercentageAboveBaseCapacity</code> setting.
                               </p>
                               
+                              <div class="aws-note">
+                                 <p class="aws-note">Note</p>
+                                 <p>An update to this property means a gradual replacement of instances to maintain the
+                                    specified number of On-Demand Instances for your base capacity. When replacing instances,
+                                    Amazon EC2 Auto Scaling launches new instances before terminating the old ones. 
+                                 </p>
+                              </div>
+                              
                               <p><em>Required</em>: No
                               </p>
                               <p><em>Type</em>: Integer
                               </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
                            </dd>
                            <dt><a id="cfn-autoscaling-autoscalinggroup-instancesdistribution-ondemandpercentageabovebasecapacity"></a><span class="term"><code class="code">OnDemandPercentageAboveBaseCapacity</code></span></dt>
                            <dd>
@@ -87,21 +95,40 @@
                                  Instances. 
                               </p>
                               
+                              <div class="aws-note">
+                                 <p class="aws-note">Note</p>
+                                 <p>An update to this property means a gradual replacement of instances to maintain the
+                                    percentage of On-Demand Instances for your additional capacity above the base capacity.
+                                    When
+                                    replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating
+                                    the
+                                    old ones. 
+                                 </p>
+                              </div>
+                              
                               <p><em>Required</em>: No
                               </p>
                               <p><em>Type</em>: Integer
                               </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
                            </dd>
                            <dt><a id="cfn-autoscaling-autoscalinggroup-instancesdistribution-spotallocationstrategy"></a><span class="term"><code class="code">SpotAllocationStrategy</code></span></dt>
                            <dd>
                               
                               <p>Indicates how to allocate Spot capacity across Spot pools.</p>
                               
-                              <p>The only valid value is <code class="code">lowest-price</code>, which is also the default value. The
-                                 Auto Scaling group selects the cheapest Spot pools and evenly allocates your Spot
-                                 capacity
-                                 across the number of Spot pools that you specify. 
+                              <p>If the allocation strategy is <code class="code">lowest-price</code>, the Auto Scaling group launches
+                                 instances using the Spot pools with the lowest price, and evenly allocates your instances
+                                 across the number of Spot pools that you specify. If the allocation strategy is
+                                 <code class="code">capacity-optimized</code>, the Auto Scaling group launches instances using Spot pools
+                                 that are optimally chosen based on the available Spot capacity. 
+                              </p>
+                              
+                              <p>The default is <code class="code">lowest-price</code>.
+                              </p>
+                              
+                              <p>Valid values: <code class="code">lowest-price</code> | <code class="code">capacity-optimized</code>
+                                 
                               </p>
                               
                               <p><em>Required</em>: No
@@ -115,10 +142,11 @@
                            <dd>
                               
                               <p>The number of Spot pools to use to allocate your Spot capacity. The Spot pools are
-                                 determined from the different instance types in the Overrides array of <a href="aws-properties-autoscaling-autoscalinggroup-launchtemplate.html">LaunchTemplate</a>. 
+                                 determined from the different instance types in the Overrides array of <a href="aws-properties-autoscaling-autoscalinggroup-launchtemplate.html">LaunchTemplate</a>. The range is 1&#x2013;20. The default value is 2. 
                               </p>
                               
-                              <p>The range is 1&#x2013;20 and the default is 2. </p>
+                              <p>Valid only when the Spot allocation strategy is <code class="code">lowest-price</code>. 
+                              </p>
                               
                               <p><em>Required</em>: No
                               </p>
@@ -133,7 +161,7 @@
                                  you
                                  leave the value of this property blank (which is the default), the maximum Spot price
                                  is set
-                                 at the On-Demand price.
+                                 at the On-Demand price. 
                               </p>
                               
                               <p><em>Required</em>: No

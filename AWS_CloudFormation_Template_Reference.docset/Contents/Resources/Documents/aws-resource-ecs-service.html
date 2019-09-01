@@ -99,7 +99,12 @@ Properties:
                                  running on your cluster.
                               </p>
                               
-                              <p><em>Required</em>: No
+                              <p>This is required if <code class="code">schedulingStrategy</code> is <code class="code">REPLICA</code> or is not
+                                 specified. If <code class="code">schedulingStrategy</code> is <code class="code">DAEMON</code> then this is not
+                                 required.
+                              </p>
+                              
+                              <p><em>Required</em>: Conditional
                               </p>
                               <p><em>Type</em>: Integer
                               </p>
@@ -496,14 +501,16 @@ Properties:
                         </dl>
                      </div><h2 id="aws-resource-ecs-service--examples">Examples</h2><h3 id="aws-resource-ecs-service--examples--Define_a_Basic_Amazon_ECS_Service">Define a Basic Amazon ECS Service</h3><p>The following example defines an Amazon ECS service that uses a cluster and
                         task definition that are declared elsewhere in the same template.
-                     </p><h4 id="aws-resource-ecs-service--examples--Define_a_Basic_Amazon_ECS_Service--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;WebApp&quot;: {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-ecs-service--examples--Define_a_Basic_Amazon_ECS_Service--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;WebApp&quot;: {
   &quot;Type&quot;: &quot;AWS::ECS::Service&quot;,
   &quot;Properties&quot; : {
     &quot;Cluster&quot;: { &quot;Ref&quot;: &quot;cluster&quot; },
     &quot;DesiredCount&quot;: { &quot;Ref&quot;: &quot;desiredcount&quot; },
     &quot;TaskDefinition&quot; : { &quot;Ref&quot;: &quot;taskdefinition&quot; }
   }
-}</code></pre><h4 id="aws-resource-ecs-service--examples--Define_a_Basic_Amazon_ECS_Service--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">WebApp: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-ecs-service--examples--Define_a_Basic_Amazon_ECS_Service--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">WebApp: 
   Type: AWS::ECS::Service
   Properties: 
     Cluster: 
@@ -511,7 +518,7 @@ Properties:
     DesiredCount: 
       Ref: &quot;desiredcount&quot;
     TaskDefinition: 
-      Ref: &quot;taskdefinition&quot;</code></pre><h3 id="aws-resource-ecs-service--examples--Associate_an_Application_Load_Balancer_with_a_Service">Associate an Application Load Balancer with a Service</h3><p>The following example associates an Application Load Balancer with an Amazon
+      Ref: &quot;taskdefinition&quot;</code></pre></div><h3 id="aws-resource-ecs-service--examples--Associate_an_Application_Load_Balancer_with_a_Service">Associate an Application Load Balancer with a Service</h3><p>The following example associates an Application Load Balancer with an Amazon
                         ECS service by referencing an
                         <code class="code">AWS::ElasticLoadBalancingV2::TargetGroup</code> resource.
                      </p><div class="aws-note">
@@ -520,7 +527,8 @@ Properties:
                            Load Balancer listener rule and the Application Load Balancer listener. This
                            prevents the service from starting before the listener is ready.
                         </p>
-                     </div><h4 id="aws-resource-ecs-service--examples--Associate_an_Application_Load_Balancer_with_a_Service--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;service&quot; : {
+                     </div><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-ecs-service--examples--Associate_an_Application_Load_Balancer_with_a_Service--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;service&quot; : {
   &quot;Type&quot; : &quot;AWS::ECS::Service&quot;,
   &quot;DependsOn&quot;: [&quot;Listener&quot;],
   &quot;Properties&quot; : {
@@ -534,7 +542,8 @@ Properties:
     }],
     &quot;Cluster&quot; : { &quot;Ref&quot; : &quot;ECSCluster&quot; }
   }
-}</code></pre><h4 id="aws-resource-ecs-service--examples--Associate_an_Application_Load_Balancer_with_a_Service--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">service:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-ecs-service--examples--Associate_an_Application_Load_Balancer_with_a_Service--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">service:
   Type: AWS::ECS::Service
   DependsOn:
   - Listener
@@ -550,11 +559,12 @@ Properties:
       ContainerPort: 80
       ContainerName: sample-app
     Cluster:
-      Ref: ECSCluster</code></pre><h3 id="aws-resource-ecs-service--examples--Define_a_Service_with_a_Health_Check_Grace_Period">Define a Service with a Health Check Grace Period</h3><p>The following example defines a service with a parameter that enables users to
+      Ref: ECSCluster</code></pre></div><h3 id="aws-resource-ecs-service--examples--Define_a_Service_with_a_Health_Check_Grace_Period">Define a Service with a Health Check Grace Period</h3><p>The following example defines a service with a parameter that enables users to
                         specify how many seconds that the Amazon ECS service scheduler should ignore
                         unhealthy Elastic Load Balancing target health checks after a task has first
                         started.
-                     </p><h4 id="aws-resource-ecs-service--examples--Define_a_Service_with_a_Health_Check_Grace_Period--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-ecs-service--examples--Define_a_Service_with_a_Health_Check_Grace_Period--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;AWSTemplateFormatVersion&quot; : &quot;2010-09-09&quot;,
   &quot;Description&quot; : &quot;Creating ECS service&quot;,
   &quot;Parameters&quot;: {
@@ -739,7 +749,8 @@ Properties:
       &quot;Value&quot;: {&quot;Ref&quot; : &quot;cluster&quot;}
     }
   }
-}</code></pre><h4 id="aws-resource-ecs-service--examples--Define_a_Service_with_a_Health_Check_Grace_Period--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-ecs-service--examples--Define_a_Service_with_a_Health_Check_Grace_Period--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Description: Creating ECS service
 Parameters:
   AppName:
@@ -781,7 +792,7 @@ Resources:
             - &apos;-D&apos;
             - FOREGROUND
           Memory: &apos;500&apos;
-          Essential: &apos;true&apos;
+          Essential: true
         - Name: busybox
           Image: busybox
           Cpu: &apos;10&apos;
@@ -793,7 +804,7 @@ Resources:
             - &gt;-
               /bin/sh -c &quot;while true; do /bin/date &gt; /var/www/my-vol/date; sleep
               1; done&quot;
-          Essential: &apos;false&apos;
+          Essential: false
           VolumesFrom:
             - SourceContainer: !Ref AppName
       Volumes:
@@ -867,7 +878,7 @@ Resources:
         - &apos;arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceRole&apos;
 Outputs:
   Cluster:
-    Value: !Ref cluster</code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+    Value: !Ref cluster</code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>

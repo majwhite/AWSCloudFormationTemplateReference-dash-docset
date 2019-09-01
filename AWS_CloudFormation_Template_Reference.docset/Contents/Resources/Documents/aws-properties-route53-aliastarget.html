@@ -371,42 +371,37 @@
                            </dd>
                            <dt><a id="cfn-route53-aliastarget-evaluatetargethealth"></a><span class="term"><code class="code">EvaluateTargetHealth</code></span></dt>
                            <dd>
-                              		       
-                              <p>
-                                 <em>Applies only to alias, failover alias, geolocation alias, latency alias, and weighted
-                                    alias resource record sets:</em> 
-                                 			When <code class="code">EvaluateTargetHealth</code> is <code class="code">true</code>, an alias resource record set inherits the health of the referenced AWS resource,
-                                 
-                                 			such as an ELB load balancer or another resource record set in the hosted zone.
+                              		
+                              <p><em>Applies only to alias resource record sets with any routing policy:</em> When <code class="code">EvaluateTargetHealth</code> is 
+                                 			<code class="code">true</code>, an alias resource record set inherits the health of the referenced AWS resource,
+                                 such as an ELB load balancer or 
+                                 			another resource record set in the hosted zone.
                               </p>
-                              		       
+                              		
                               <p>Note the following:</p>
-                              
-                              		       
+                              		
                               <div class="variablelist">
-                                 			         
-                                 			         
-                                 			         
-                                 			         
-                                 			         
-                                 		       
+                                 			
+                                 			
+                                 			
+                                 			
+                                 			
+                                 		
                                  <dl>
-                                    				           
+                                    				
                                     <dt><a id="cfn-route53-aliastarget-evaluatetargethealth"></a><span class="term">CloudFront distributions</span></dt>
-                                    				           
+                                    				
                                     <dd>
-                                       
-                                       <p>You can&apos;t set <code class="code">EvaluateTargetHealth</code> to <code class="code">true</code> when the alias target is a 
-                                          					CloudFront distribution.
+                                       					
+                                       <p>You can&apos;t set <code class="code">EvaluateTargetHealth</code> to <code class="code">true</code> when the alias target is a CloudFront distribution.
                                        </p>
-                                       
+                                       				
                                     </dd>
-                                    			         
-                                    				           
+                                    			
+                                    				
                                     <dt><a id="cfn-route53-aliastarget-evaluatetargethealth"></a><span class="term">Elastic Beanstalk environments that have regionalized subdomains</span></dt>
-                                    				           
+                                    				
                                     <dd>
-                                       
                                        <p>If you specify an Elastic Beanstalk environment in <code class="code">DNSName</code> and the environment contains an ELB load balancer, 
                                           					Elastic Load Balancing routes queries only to the healthy Amazon EC2 instances
                                           that are registered with the load balancer. (An environment automatically 
@@ -417,116 +412,107 @@
                                           					Route 53 routes queries to other available resources that are healthy, if any.
                                           
                                        </p>
-                                       					             
+                                       					
                                        <p>If the environment contains a single Amazon EC2 instance, there are no special requirements.</p>
-                                       
+                                       				
                                     </dd>
-                                    			         
-                                    				           
+                                    			
+                                    				
                                     <dt><a id="cfn-route53-aliastarget-evaluatetargethealth"></a><span class="term">ELB load balancers</span></dt>
-                                    				           
+                                    				
                                     <dd>
-                                       
                                        <p>Health checking behavior depends on the type of load balancer:</p>
-                                       					             
+                                       					
                                        <div class="itemizedlist">
-                                          						               
-                                          						               
-                                          					             
+                                          						
+                                          						
+                                          					
                                           <ul class="itemizedlist" type="disc">
                                              <li class="listitem">
-                                                
-                                                <p>
-                                                   <b>Classic Load Balancers</b>: If you specify an ELB Classic Load Balancer in 
+                                                <p><b>Classic Load Balancers</b>: If you specify an ELB Classic Load Balancer in 
                                                    							<code class="code">DNSName</code>, Elastic Load Balancing routes queries only to the healthy Amazon EC2 instances that
                                                    are registered with the load balancer. 
                                                    							If you set <code class="code">EvaluateTargetHealth</code> to <code class="code">true</code> and either no EC2 instances are healthy or the 
                                                    							load balancer itself is unhealthy, Route 53 routes queries to other resources.
                                                 </p>
-                                                
+                                                						
                                              </li>
                                              <li class="listitem">
-                                                
-                                                <p>
-                                                   <b>Application and Network Load Balancers</b>: If you specify an ELB 
+                                                <p><b>Application and Network Load Balancers</b>: If you specify an ELB 
                                                    							Application or Network Load Balancer and you set <code class="code">EvaluateTargetHealth</code> to <code class="code">true</code>, 
                                                    							Route 53 routes queries to the load balancer based on the health of the target
                                                    groups that are associated with the load balancer:
                                                 </p>
-                                                							                 
+                                                							
                                                 <div class="itemizedlist">
-                                                   								                   
-                                                   								                   
-                                                   							                 
+                                                   								
+                                                   								
+                                                   							
                                                    <ul class="itemizedlist" type="disc">
                                                       <li class="listitem">
-                                                         
                                                          <p>For an Application or Network Load Balancer to be considered healthy, every target
                                                             group that contains targets 
                                                             									must contain at least one healthy target. If any target group contains only
                                                             unhealthy targets, the load balancer is considered 
                                                             									unhealthy, and Route 53 routes queries to other resources.
                                                          </p>
-                                                         
+                                                         								
                                                       </li>
                                                       <li class="listitem">
-                                                         
                                                          <p>A target group that has no registered targets is considered unhealthy.</p>
-                                                         
                                                       </li>
                                                    </ul>
                                                 </div>
-                                                						               
+                                                						
                                              </li>
                                           </ul>
                                        </div>
-                                       					             
+                                       					
                                        <div class="aws-note">
                                           <p class="aws-note">Note</p>
                                           <p>When you create a load balancer, you configure settings for Elastic Load Balancing
                                              health checks; they&apos;re not Route 53 health checks, but 
-                                             						they perform a similar function. Do not create Route 53 health checks for the
+                                             							they perform a similar function. Do not create Route 53 health checks for the
                                              EC2 instances that you register with an ELB load balancer. 
                                           </p>
                                        </div>
-                                       				           
+                                       				
                                     </dd>
-                                    			         
-                                    				           
+                                    			
+                                    				
                                     <dt><a id="cfn-route53-aliastarget-evaluatetargethealth"></a><span class="term">S3 buckets</span></dt>
-                                    				           
+                                    				
                                     <dd>
-                                       
                                        <p>There are no special requirements for setting <code class="code">EvaluateTargetHealth</code> to <code class="code">true</code> 
                                           					when the alias target is an S3 bucket.
                                        </p>
-                                       
+                                       				
                                     </dd>
-                                    			         
-                                    				           
+                                    			
+                                    				
                                     <dt><a id="cfn-route53-aliastarget-evaluatetargethealth"></a><span class="term">Other records in the same hosted zone</span></dt>
-                                    				           
+                                    				
                                     <dd>
-                                       
                                        <p>If the AWS resource that you specify in <code class="code">DNSName</code> is a record or a group of records 
                                           					(for example, a group of weighted records) but is not another alias record, we
                                           recommend that you associate a health check 
                                           					with all of the records in the alias target. For more information, see 
-                                          					<a href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-complex-configs.html#dns-failover-complex-configs-hc-omitting">What Happens When You Omit Health Checks?</a> 
-                                          					in the <em>Amazon Route 53 Developer Guide</em>.
+                                          					<a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-complex-configs.html#dns-failover-complex-configs-hc-omitting">What Happens 
+                                             						When You Omit Health Checks?</a> in the <em>Amazon Route 53 Developer Guide</em>.
                                        </p>
-                                       
+                                       				
                                     </dd>
-                                    			         
+                                    			
                                  </dl>
                               </div>
                               		
-                              		       
+                              		
                               <p>For more information and examples, see 
-                                 			<a href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html">Amazon Route 53 Health Checks and DNS Failover</a> in the <em>Amazon Route 53 Developer Guide</em>.
+                                 			<a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html">Amazon Route 53 Health Checks and DNS Failover</a> in the 
+                                 			<em>Amazon Route 53 Developer Guide</em>.
                               </p>
                               		
-                              	     
+                              	
                               <p><em>Required</em>: No
                               </p>
                               <p><em>Type</em>: Boolean
@@ -619,7 +605,7 @@
                                           						must have a regionalized subdomain. For a list of regions and the corresponding
                                           hosted zone IDs, see 
                                           						<a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region">AWS Elastic Beanstalk</a> in the 
-                                          						&quot;AWS Regions and Endpoints&quot; chapter of the <em>Amazon Web Services General Reference</em>.
+                                          						&quot;AWS Service Endpoints&quot; chapter of the <em>Amazon Web Services General Reference</em>.
                                        </p>
                                        				           
                                     </dd>
@@ -645,7 +631,7 @@
                                                 
                                                 <p>
                                                    <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#elb_region">Elastic Load Balancing</a> table 
-                                                   							in the &quot;AWS Regions and Endpoints&quot; chapter of the <em>Amazon Web Services General Reference</em>: Use the value that corresponds with 
+                                                   							in the &quot;AWS Service Endpoints&quot; chapter of the <em>Amazon Web Services General Reference</em>: Use the value that corresponds with 
                                                    							the region that you created your load balancer in. Note that there are separate
                                                    columns for Application and Classic Load Balancers 
                                                    							and for Network Load Balancers.
@@ -738,7 +724,7 @@
                                        <p>Specify the hosted zone ID for the region that you created the bucket in. For more
                                           information about 
                                           						valid values, see the <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">Amazon Simple Storage Service Website Endpoints</a> table in the
-                                          						&quot;AWS Regions and Endpoints&quot; chapter of the <em>Amazon Web Services General Reference</em>.
+                                          						&quot;AWS Service Endpoints&quot; chapter of the <em>Amazon Web Services General Reference</em>.
                                        </p>
                                        				           
                                     </dd>

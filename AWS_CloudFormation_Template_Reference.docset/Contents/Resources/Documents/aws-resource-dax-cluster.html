@@ -51,10 +51,10 @@ Properties:
                            <dt><a id="cfn-dax-cluster-availabilityzones"></a><span class="term"><code class="code">AvailabilityZones</code></span></dt>
                            <dd>
                               
-                              <p>The Availability Zones (AZs) in which the cluster nodes will be created. All nodes
-                                 belonging to the cluster are placed in these Availability Zones. Use this parameter
-                                 if you want
-                                 to distribute the nodes across multiple AZs.
+                              <p>The Availability Zones (AZs) in which the cluster nodes will reside after the cluster
+                                 has been created or updated. If provided, the length of this list must equal the <code class="code">ReplicationFactor</code> parameter.
+                                 If you omit this parameter, DAX will spread the nodes across Availability Zones for
+                                 the highest availability.
                               </p>
                               
                               <p><em>Required</em>: No
@@ -68,19 +68,13 @@ Properties:
                               
                               <p>The name of the DAX cluster.</p>
                               
-                              <div class="aws-note">
-                                 <p class="aws-note">Note</p>
-                                 <p>
-                                    Updates are not supported for this property. 
-                                    
-                                 </p>
-                              </div>
                               
                               <p><em>Required</em>: No
                               </p>
                               <p><em>Type</em>: String
                               </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                              <p><em>Update requires</em>: Updates are not supported.
+                              </p>
                            </dd>
                            <dt><a id="cfn-dax-cluster-description"></a><span class="term"><code class="code">Description</code></span></dt>
                            <dd>
@@ -101,19 +95,13 @@ Properties:
                                  behalf.
                               </p>
                               
-                              <div class="aws-note">
-                                 <p class="aws-note">Note</p>
-                                 <p>
-                                    Updates are not supported for this property. 
-                                    
-                                 </p>
-                              </div>
                               
                               <p><em>Required</em>: Yes
                               </p>
                               <p><em>Type</em>: String
                               </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                              <p><em>Update requires</em>: Updates are not supported.
+                              </p>
                            </dd>
                            <dt><a id="cfn-dax-cluster-nodetype"></a><span class="term"><code class="code">NodeType</code></span></dt>
                            <dd>
@@ -122,19 +110,13 @@ Properties:
                                  the same type.)
                               </p>
                               
-                              <div class="aws-note">
-                                 <p class="aws-note">Note</p>
-                                 <p>
-                                    Updates are not supported for this property. 
-                                    
-                                 </p>
-                              </div>
                               
                               <p><em>Required</em>: Yes
                               </p>
                               <p><em>Type</em>: String
                               </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                              <p><em>Update requires</em>: Updates are not supported.
+                              </p>
                            </dd>
                            <dt><a id="cfn-dax-cluster-notificationtopicarn"></a><span class="term"><code class="code">NotificationTopicARN</code></span></dt>
                            <dd>
@@ -186,7 +168,9 @@ Properties:
                                  create a single-node cluster, without any read replicas. For additional fault tolerance,
                                  you can create a multiple node cluster with one or more read replicas. To do this,
                                  set
-                                 <em>ReplicationFactor</em> to 2 or more.
+                                 <code class="code">ReplicationFactor</code> to a number between 3 (one primary and two read replicas) and 10 (one primary and
+                                 nine read replicas). 
+                                 <code class="code">If the AvailabilityZones</code> parameter is provided, its length must equal the <code class="code">ReplicationFactor</code>.
                               </p>
                               
                               <div class="aws-note">
@@ -238,20 +222,14 @@ Properties:
                                  <p>DAX clusters can only run in an Amazon VPC environment. All of the subnets
                                     that you specify in a subnet group must exist in the same VPC.
                                  </p>
-                                 <div class="aws-note">
-                                    <p class="aws-note">Note</p>
-                                    <p>
-                                       Updates are not supported for this property.
-                                       
-                                    </p>
-                                 </div>
                               </div>
                               
                               <p><em>Required</em>: No
                               </p>
                               <p><em>Type</em>: String
                               </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                              <p><em>Update requires</em>: Updates are not supported.
+                              </p>
                            </dd>
                            <dt><a id="cfn-dax-cluster-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                            <dd>
@@ -298,7 +276,8 @@ Properties:
                               
                               </dd>
                         </dl>
-                     </div><h2 id="aws-resource-dax-cluster--examples">Examples</h2><h3 id="aws-resource-dax-cluster--examples--Create_Cluster">Create Cluster</h3><p>The following example creates a DAX cluster.</p><h4 id="aws-resource-dax-cluster--examples--Create_Cluster--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">
+                     </div><h2 id="aws-resource-dax-cluster--examples">Examples</h2><h3 id="aws-resource-dax-cluster--examples--Create_Cluster">Create Cluster</h3><p>The following example creates a DAX cluster.</p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-dax-cluster--examples--Create_Cluster--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">
 {
   &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
   &quot;Description&quot;: &quot;Create a DAX cluster&quot;,
@@ -368,7 +347,8 @@ Properties:
     }
   }
 }
-          </code></pre><h4 id="aws-resource-dax-cluster--examples--Create_Cluster--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">
+          </code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-dax-cluster--examples--Create_Cluster--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">
 AWSTemplateFormatVersion: &quot;2010-09-09&quot;
 Description: &quot;Create a DAX cluster&quot;
 Resources:
@@ -416,7 +396,7 @@ Resources:
 Outputs:
   Cluster:
     Value: !Ref daxCluster
-          </code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+          </code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>

@@ -80,13 +80,16 @@ Properties:
                                  are allowed. 
                               </p>      
                               
+                              <p>This property is required to create a DynamoDB table.</p> 
+                              
                               <p>Update requires: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a>. Replacement if you edit an existing AttributeDefinition. 
                                  
                               </p>
                               
-                              <p><em>Required</em>: No
+                              <p><em>Required</em>: Conditional
                               </p>
                               <p><em>Type</em>: List of <a href="aws-properties-dynamodb-attributedef.html">AttributeDefinition</a></p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
                            </dd>
                            <dt><a id="cfn-dynamodb-table-billingmode"></a><span class="term"><code class="code">BillingMode</code></span></dt>
                            <dd>
@@ -103,14 +106,14 @@ Properties:
                                     <li class="listitem">
                                        
                                        <p>
-                                          <code class="code">PROVISIONED</code> - Sets the billing mode to <code class="code">PROVISIONED</code>. We recommend using <code class="code">PROVISIONED</code> for predictable workloads.
+                                          <code class="code">PROVISIONED</code> - We recommend using <code class="code">PROVISIONED</code> for predictable workloads. <code class="code">PROVISIONED</code> sets the billing mode to <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual">Provisioned Mode</a>.
                                        </p>
                                        
                                     </li>
                                     <li class="listitem">
                                        
                                        <p>
-                                          <code class="code">PAY_PER_REQUEST</code> - Sets the billing mode to <code class="code">PAY_PER_REQUEST</code>. We recommend using <code class="code">PAY_PER_REQUEST</code> for unpredictable workloads.
+                                          <code class="code">PAY_PER_REQUEST</code> - We recommend using <code class="code">PAY_PER_REQUEST</code> for unpredictable workloads. <code class="code">PAY_PER_REQUEST</code> sets the billing mode to <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand">On-Demand Mode</a>.
                                           
                                        </p>
                                        
@@ -125,7 +128,6 @@ Properties:
                               </p>
                               <p><em>Type</em>: String
                               </p>
-                              <p><em>Allowed Values</em>: <code class="code">PAY_PER_REQUEST | PROVISIONED</code></p>
                               <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                            </dd>
                            <dt><a id="cfn-dynamodb-table-gsi"></a><span class="term"><code class="code">GlobalSecondaryIndexes</code></span></dt>
@@ -242,6 +244,7 @@ Properties:
                               <p><em>Required</em>: No
                               </p>
                               <p><em>Type</em>: <a href="aws-properties-dynamodb-table-ssespecification.html">SSESpecification</a></p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
                            </dd>
                            <dt><a id="cfn-dynamodb-table-streamspecification"></a><span class="term"><code class="code">StreamSpecification</code></span></dt>
                            <dd>
@@ -361,7 +364,8 @@ Properties:
                      </p><p>For querying the sales of an album, the local secondary index uses the same hash key
                         as
                         the table but uses the <code class="code">Sales</code> attribute as the range key.
-                     </p><h4 id="aws-resource-dynamodb-table--examples--DynamoDB_Table_with_Local_and_Secondary_Indexes--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-dynamodb-table--examples--DynamoDB_Table_with_Local_and_Secondary_Indexes--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">
 {
   &quot;AWSTemplateFormatVersion&quot; : &quot;2010-09-09&quot;,
   &quot;Resources&quot; : {
@@ -464,7 +468,8 @@ Properties:
     }
   }
 }
-         </code></pre><h4 id="aws-resource-dynamodb-table--examples--DynamoDB_Table_with_Local_and_Secondary_Indexes--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">
+         </code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-dynamodb-table--examples--DynamoDB_Table_with_Local_and_Secondary_Indexes--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">
 AWSTemplateFormatVersion: &quot;2010-09-09&quot;
 Resources: 
   myDynamoDBTable: 
@@ -544,7 +549,7 @@ Resources:
               - &quot;Artist&quot;
               - &quot;NumberOfSongs&quot;
             ProjectionType: &quot;INCLUDE&quot;
-         </code></pre><h3 id="aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute">DynamoDB Table with a DependsOn Attribute</h3><p>If you include multiple DynamoDB tables with indexes in a single template, you must
+         </code></pre></div><h3 id="aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute">DynamoDB Table with a DependsOn Attribute</h3><p>If you include multiple DynamoDB tables with indexes in a single template, you must
                         include
                         dependencies so that the tables are created sequentially. DynamoDB limits the number
                         of tables
@@ -557,7 +562,8 @@ Resources:
                         <code class="code">myFirstDDBTable</code> table so that AWS CloudFormation creates the tables one at a
                         time.
                         
-                     </p><h4 id="aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">
 &quot;mySecondDDBTable&quot; : {
   &quot;Type&quot; : &quot;AWS::DynamoDB::Table&quot;,
   &quot;DependsOn&quot; : &quot;myFirstDDBTable&quot; ,
@@ -614,7 +620,8 @@ Resources:
     ]
   }
 }
-         </code></pre><h4 id="aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">
+         </code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">
 mySecondDDBTable: 
   Type: AWS::DynamoDB::Table
   DependsOn: &quot;myFirstDDBTable&quot;
@@ -658,10 +665,11 @@ mySecondDDBTable:
     Tags:
       - Key: foo
 Value: bar         
-         </code></pre><h3 id="aws-resource-dynamodb-table--examples--DynamoDB_Table_with_Application_Auto_Scaling">DynamoDB Table with Application Auto Scaling</h3><p>This example sets up Application Auto Scaling for a <code class="code">AWS::DynamoDB::Table</code> resource.
+         </code></pre></div><h3 id="aws-resource-dynamodb-table--examples--DynamoDB_Table_with_Application_Auto_Scaling">DynamoDB Table with Application Auto Scaling</h3><p>This example sets up Application Auto Scaling for a <code class="code">AWS::DynamoDB::Table</code> resource.
                         The template defines a <code class="code">TargetTrackingScaling</code> scaling policy that scales up the <code class="code">WriteCapacityUnits</code> throughput for the table.
                         
-                     </p><h4 id="aws-resource-dynamodb-table--examples--DynamoDB_Table_with_Application_Auto_Scaling--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-dynamodb-table--examples--DynamoDB_Table_with_Application_Auto_Scaling--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;Resources&quot;: {
     &quot;DDBTable&quot;: {
       &quot;Type&quot;: &quot;AWS::DynamoDB::Table&quot;,
@@ -797,7 +805,8 @@ Value: bar
       }
     }
   }
-}</code></pre><h4 id="aws-resource-dynamodb-table--examples--DynamoDB_Table_with_Application_Auto_Scaling--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Resources:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-dynamodb-table--examples--DynamoDB_Table_with_Application_Auto_Scaling--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Resources:
   DDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -887,7 +896,7 @@ Value: bar
         ScaleInCooldown: 60
         ScaleOutCooldown: 60
         PredefinedMetricSpecification:
-          PredefinedMetricType: DynamoDBWriteCapacityUtilization</code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+          PredefinedMetricType: DynamoDBWriteCapacityUtilization</code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>

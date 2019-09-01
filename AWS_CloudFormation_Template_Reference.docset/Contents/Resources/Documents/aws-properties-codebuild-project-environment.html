@@ -195,54 +195,36 @@
                            <dt><a id="cfn-codebuild-project-environment-privilegedmode"></a><span class="term"><code class="code">PrivilegedMode</code></span></dt>
                            <dd>
                               
-                              <p>Indicates how the project builds Docker images. Specify <code class="code">true</code> to enable running the Docker daemon inside a Docker container.
+                              <p>Enables running the Docker daemon inside a Docker container. Set to true only if the
+                                 build project is used to build Docker images. Otherwise, a build that attempts 
+                                 to interact with the Docker daemon fails.
                               </p>
                               
-                              <p>This value must be set to <code class="code">true</code> only if this build project will be used to build Docker images, and the specified
-                                 build environment 
-                                 image is not one provided by AWS CodeBuild with Docker support. Otherwise, all associated
-                                 builds that attempt to interact with the Docker daemon 
-                                 fail. For more information, see the <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/create-project.html#create-project-cli">
-                                    <code class="code">privilegedMode</code>
-                                    </a> field in the <em>AWS CodeBuild User Guide</em>.
-                              </p>   
-                              
-                              
-                              <p>You must also start the Docker daemon so that
-                                 builds can interact with it. One way to do this is to initialize the Docker daemon
-                                 during
-                                 the install phase of your build spec by running the following build commands. (Do
-                                 not run
-                                 these commands if the specified build environment image is provided by AWS CodeBuild
-                                 with Docker
-                                 support.)
+                              <p>You can initialize the Docker daemon during the install phase of your build by adding
+                                 one of the following sets of commands 
+                                 to the install phase of your buildspec file:
                               </p>
                               
                               <p>If the operating system&apos;s base image is Ubuntu Linux:</p>
                               
-                              <p>
-                                 <code class="code">- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375
+                              <p><code class="code">- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375
                                     --storage-driver=overlay&amp;</code>
                                  
                               </p>
                               
-                              <p>
-                                 <code class="code">- timeout 15 sh -c &quot;until docker info; do echo .; sleep 1; done&quot;</code>
+                              <p><code class="code">- timeout 15 sh -c &quot;until docker info; do echo .; sleep 1; done&quot;</code>
                                  
                               </p>
                               
-                              <p>If the operating system&apos;s base image is Alpine Linux, add the <code class="code">-t</code> argument
+                              <p>If the operating system&apos;s base image is Alpine Linux and the previous command does
+                                 not work, add the <code class="code">-t</code> argument
                                  to <code class="code">timeout</code>:
                               </p>
                               
-                              <p>
-                                 <code class="code">- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375
-                                    --storage-driver=overlay&amp;</code>
-                                 
-                              </p>
+                              <p><code class="code">- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375
+                                    --storage-driver=overlay&amp;</code></p>
                               
-                              <p>
-                                 <code class="code">- timeout -t 15 sh -c &quot;until docker info; do echo .; sleep 1; done&quot;</code>
+                              <p><code class="code">- timeout -t 15 sh -c &quot;until docker info; do echo .; sleep 1; done&quot;</code>
                                  
                               </p>
                               

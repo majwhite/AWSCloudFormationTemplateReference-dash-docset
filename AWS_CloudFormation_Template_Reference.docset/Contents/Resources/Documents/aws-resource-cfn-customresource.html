@@ -123,7 +123,8 @@ Properties:
                      </p><p>All properties other than <code class="code">ServiceToken</code>, and all
                         <code class="code">Fn::GetAtt</code> resource attributes, are defined by
                         the custom resource provider.
-                     </p><h4 id="aws-resource-cfn-customresource--examples--Creating_a_Custom_Resource_Definition_in_a_Template--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-cfn-customresource--examples--Creating_a_Custom_Resource_Definition_in_a_Template--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;AWSTemplateFormatVersion&quot; : &quot;2010-09-09&quot;,
   &quot;Resources&quot; : {
     &quot;MyFrontEndTest&quot; : {
@@ -145,7 +146,8 @@ Properties:
       &quot;Value&quot; : { &quot;Fn::GetAtt&quot; : [&quot;MyFrontEndTest&quot;, &quot;responseKey2&quot;] }
     }
   }
-}</code></pre><h4 id="aws-resource-cfn-customresource--examples--Creating_a_Custom_Resource_Definition_in_a_Template--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: &quot;2010-09-09&quot;
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-cfn-customresource--examples--Creating_a_Custom_Resource_Definition_in_a_Template--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: &quot;2010-09-09&quot;
 Resources: 
   MyFrontEndTest: 
     Type: &quot;Custom::PingTester&quot;
@@ -167,11 +169,12 @@ Outputs:
     Value: 
       Fn::GetAtt: 
         - MyFrontEndTest
-        - responseKey2</code></pre><h3 id="aws-resource-cfn-customresource--examples--Using_an_AWS_Lambda_Function_in_a_Custom_Resource">Using an AWS Lambda Function in a Custom Resource</h3><p>With Lambda functions and custom resources, you can run custom code in response to
+        - responseKey2</code></pre></div><h3 id="aws-resource-cfn-customresource--examples--Using_an_AWS_Lambda_Function_in_a_Custom_Resource">Using an AWS Lambda Function in a Custom Resource</h3><p>With Lambda functions and custom resources, you can run custom code in response to
                         stack events (create, update, and delete). The following custom resource invokes a
                         Lambda function and sends it the StackName property as input. The function uses this
                         property to get outputs from the appropriate stack.
-                     </p><h4 id="aws-resource-cfn-customresource--examples--Using_an_AWS_Lambda_Function_in_a_Custom_Resource--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;MyCustomResource&quot; : {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-cfn-customresource--examples--Using_an_AWS_Lambda_Function_in_a_Custom_Resource--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;MyCustomResource&quot; : {
   &quot;Type&quot; : &quot;Custom::TestLambdaCrossStackRef&quot;,
   &quot;Properties&quot; : {
     &quot;ServiceToken&quot;: { &quot;Fn::Join&quot;: [ &quot;&quot;, [ &quot;arn:aws:lambda:&quot;, { &quot;Ref&quot;: &quot;AWS::Region&quot; }, &quot;:&quot;, { &quot;Ref&quot;: &quot;AWS::AccountId&quot; }, &quot;:function:&quot;, {&quot;Ref&quot; : &quot;LambdaFunctionName&quot;} ] ] },
@@ -179,13 +182,14 @@ Outputs:
       &quot;Ref&quot;: &quot;NetworkStackName&quot;
     }
   }
-}</code></pre><h4 id="aws-resource-cfn-customresource--examples--Using_an_AWS_Lambda_Function_in_a_Custom_Resource--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">MyCustomResource: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-cfn-customresource--examples--Using_an_AWS_Lambda_Function_in_a_Custom_Resource--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">MyCustomResource: 
   Type: &quot;Custom::TestLambdaCrossStackRef&quot;
   Properties: 
     ServiceToken:
       !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${LambdaFunctionName}
     StackName: 
-      Ref: &quot;NetworkStackName&quot;</code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+      Ref: &quot;NetworkStackName&quot;</code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>

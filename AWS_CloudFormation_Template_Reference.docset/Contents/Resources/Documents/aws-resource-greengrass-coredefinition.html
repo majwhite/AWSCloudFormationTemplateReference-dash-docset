@@ -32,7 +32,8 @@
   &quot;Type&quot; : &quot;AWS::Greengrass::CoreDefinition&quot;,
   &quot;Properties&quot; : {
       &quot;<a href="#cfn-greengrass-coredefinition-initialversion">InitialVersion</a>&quot; : <em class="replaceable"><code><a href="aws-properties-greengrass-coredefinition-coredefinitionversion.html">CoreDefinitionVersion</a></code></em>,
-      &quot;<a href="#cfn-greengrass-coredefinition-name">Name</a>&quot; : <em class="replaceable"><code>String</code></em>
+      &quot;<a href="#cfn-greengrass-coredefinition-name">Name</a>&quot; : <em class="replaceable"><code>String</code></em>,
+      &quot;<a href="#cfn-greengrass-coredefinition-tags">Tags</a>&quot; : <em class="replaceable"><code>Json</code></em>
     }
 }
 </code></pre></div><div id="YAML" name="YAML" class="section langfilter">
@@ -41,6 +42,7 @@ Properties:
   <a href="#cfn-greengrass-coredefinition-initialversion">InitialVersion</a>: <em class="replaceable"><code>
     <a href="aws-properties-greengrass-coredefinition-coredefinitionversion.html">CoreDefinitionVersion</a></code></em>
   <a href="#cfn-greengrass-coredefinition-name">Name</a>: <em class="replaceable"><code>String</code></em>
+  <a href="#cfn-greengrass-coredefinition-tags">Tags</a>: <em class="replaceable"><code>Json</code></em>
 </code></pre></div><h2 id="aws-resource-greengrass-coredefinition-properties">Properties</h2><div class="variablelist">
                         <dl>
                            <dt><a id="cfn-greengrass-coredefinition-initialversion"></a><span class="term"><code class="code">InitialVersion</code></span></dt>
@@ -72,6 +74,32 @@ Properties:
                               <p><em>Required</em>: Yes
                               </p>
                               <p><em>Type</em>: String
+                              </p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                           </dd>
+                           <dt><a id="cfn-greengrass-coredefinition-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                           <dd>        
+                              
+                              <p>Application-specific metadata to attach to the core definition.
+                                 		   You can use tags in IAM policies to control access to AWS IoT Greengrass resources.
+                                 
+                                 		   You can also use tags to categorize your resources. For more information, see
+                                 
+                                 		   <a href="https://docs.aws.amazon.com/greengrass/latest/developerguide/tagging.html">Tagging Your AWS IoT Greengrass 
+                                    		   Resources</a> in the <em>AWS IoT Greengrass Developer Guide</em>.
+                              </p>
+                              		
+                              <p>This <code class="code">Json</code> property type is processed as a map of key-value pairs. It uses the following format,
+                                 which 
+                                 		       is different from most <code class="code">Tags</code> implementations in AWS CloudFormation templates.
+                              </p>
+                              <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;Tags&quot;: {
+    &quot;KeyName0&quot;: &quot;value&quot;,
+    &quot;KeyName1&quot;: &quot;value&quot;,
+    &quot;KeyName2&quot;: &quot;value&quot;
+}</code></pre><p><em>Required</em>: No
+                              </p>
+                              <p><em>Type</em>: Json
                               </p>
                               <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                            </dd>
@@ -131,7 +159,8 @@ Properties:
                         ARN, and certificate ARN 
                         		  to use for the core. It also outputs the ID of the new core definition.
                      </p><p>For another template example, see the <a href="aws-resource-greengrass-group.html"><code class="code">AWS::Greengrass::Group</code></a> resource.
-                     </p><h4 id="aws-resource-greengrass-coredefinition--examples--Create_a_Core_Definition--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-greengrass-coredefinition--examples--Create_a_Core_Definition--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
     &quot;Description&quot;: &quot;Create CoreDefinition with InitialVersion&quot;,
     &quot;Parameters&quot;: {
         &quot;CoreDefinitionName&quot;: {
@@ -184,7 +213,8 @@ Properties:
             }
         }
     }
-}</code></pre><h4 id="aws-resource-greengrass-coredefinition--examples--Create_a_Core_Definition--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Description: Create CoreDefinition with InitialVersion
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-greengrass-coredefinition--examples--Create_a_Core_Definition--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Description: Create CoreDefinition with InitialVersion
 Parameters:
   CoreDefinitionName:
     Type: String
@@ -211,7 +241,7 @@ Resources:
             SyncShadow: &apos;true&apos;
 Outputs:
   CoreDefinitionId:
-    Value: !Ref CoreDefinition</code></pre><h2 id="aws-resource-greengrass-coredefinition--seealso">See Also</h2><div class="itemizedlist">          
+    Value: !Ref CoreDefinition</code></pre></div><h2 id="aws-resource-greengrass-coredefinition--seealso">See Also</h2><div class="itemizedlist">          
                                   
                         
                         

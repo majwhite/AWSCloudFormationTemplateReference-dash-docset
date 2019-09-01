@@ -87,27 +87,29 @@ Properties:
                            <dt><a id="cf-as-launchconfig-associatepubip"></a><span class="term"><code class="code">AssociatePublicIpAddress</code></span></dt>
                            <dd>
                               
-                              <p>Used for groups that launch instances into a virtual private cloud (VPC). Specifies
-                                 whether to assign a public IP address to each instance. If you specify <code class="code">true</code>, each
-                                 instance in the Auto Scaling group receives a unique public IP address. 
-                              </p>
-                              
-                              <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html">Launching Auto Scaling Instances in a
+                              <p>For Auto Scaling groups that are running in a virtual private cloud (VPC), specifies
+                                 whether to assign a public IP address to the group&apos;s instances. If you specify
+                                 <code class="code">true</code>, each instance in the Auto Scaling group receives a unique public IP
+                                 address. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html">Launching Auto Scaling Instances in a
                                     VPC</a> in the <em>Amazon EC2 Auto Scaling User Guide</em>. 
                               </p>
                               
-                              <p>Default: If the instance is launched into a default subnet, the default is to assign
-                                 a
-                                 public IP address. If the instance is launched into a nondefault subnet, the default
-                                 is not to
-                                 assign a public IP address. 
+                              <p>If an instance receives a public IP address and is also in a VPC that is defined in
+                                 the same
+                                 stack template, you must use the <a href="aws-attribute-dependson.html">DependsOn
+                                    attribute</a> to declare a dependency on the <a href="aws-resource-ec2-vpc-gateway-attachment.html">VPC-gateway attachment</a>. 
                               </p>
                               
                               <div class="aws-note">
                                  <p class="aws-note">Note</p>
-                                 <p>If this resource has a public IP address and is also in a VPC that is defined in the
-                                    same template, you must use the <a href="aws-attribute-dependson.html">DependsOn
-                                       attribute</a> to declare a dependency on the <a href="aws-resource-ec2-vpc-gateway-attachment.html">VPC-gateway attachment</a>.
+                                 <p>If the instance is launched into a default subnet, the default is to assign a public
+                                    IP
+                                    address, unless you disabled the option to assign a public IP address on the subnet.
+                                    If the
+                                    instance is launched into a nondefault subnet, the default is not to assign a public
+                                    IP
+                                    address, unless you enabled the option to assign a public IP address on the subnet.
+                                    
                                  </p>
                               </div>
                               
@@ -358,7 +360,7 @@ Properties:
                            <dd>
                               
                               <p>The tenancy of the instance, either <code class="code">default</code> or <code class="code">dedicated</code>. An
-                                 instance with <code class="code">dedicated</code> tenancy runs in an isolated, single-tenant hardware and
+                                 instance with <code class="code">dedicated</code> tenancy runs on isolated, single-tenant hardware and
                                  can only be launched into a VPC. You must set the value of this property to
                                  <code class="code">dedicated</code> if want to launch dedicated instances in a shared tenancy VPC (a VPC
                                  with the instance placement tenancy attribute set to default). 
@@ -409,8 +411,8 @@ Properties:
                            <dd>
                               
                               <p>A list that contains the security groups to assign to the instances in the Auto Scaling
-                                 group. The list can contain either the IDs of existing security groups or references
-                                 to <a href="aws-properties-ec2-security-group.html">SecurityGroup</a> resources created in the template, but not both. 
+                                 group. The list can contain both the IDs of existing security groups and references
+                                 to <a href="aws-properties-ec2-security-group.html">SecurityGroup</a> resources created in the template.
                               </p>
                               
                               <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html">Security Groups for Your
@@ -428,25 +430,18 @@ Properties:
                               
                               <p>The maximum hourly price to be paid for any Spot Instance launched to fulfill the
                                  request.
-                                 Spot Instances are launched when the price you specify exceeds the current Spot market
-                                 price.
+                                 Spot Instances are launched when the price you specify exceeds the current Spot price.
                                  For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-spot-instances.html">Launching Spot Instances in
                                     your Auto Scaling Group</a> in the <em>Amazon EC2 Auto Scaling User
                                     Guide</em>. 
                               </p>
                               
-                              <p>If a Spot price is set, then the Auto Scaling group will only launch when the Spot
-                                 price
-                                 has been met, regardless of the setting in the Auto Scaling group&apos;s
-                                 <code class="code">DesiredCapacity</code>. 
-                              </p>
-                              
                               <div class="aws-note">
                                  <p class="aws-note">Note</p>
-                                 <p>When you change your Spot price by creating a new launch configuration, running
-                                    instances will continue to run as long as the Spot price for those running instances
+                                 <p>When you change your maximum price by creating a new launch configuration, running
+                                    instances will continue to run as long as the maximum price for those running instances
                                     is
-                                    higher than the current Spot market price.
+                                    higher than the current Spot price.
                                  </p>
                               </div>
                               
@@ -490,7 +485,8 @@ Properties:
                         volume type based on the region and is not deleted when terminating the instance it
                         is
                         attached to. 
-                     </p><h4 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_Block_Device_Mappings--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_Block_Device_Mappings--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;myLaunchConfig&quot;:{
     &quot;Type&quot;:&quot;AWS::AutoScaling::LaunchConfiguration&quot;,
     &quot;Properties&quot;:{
@@ -546,7 +542,8 @@ Properties:
       ]
     }
   }
-}</code></pre><h4 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_Block_Device_Mappings--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myLaunchConfig: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_Block_Device_Mappings--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myLaunchConfig: 
   Type: AWS::AutoScaling::LaunchConfiguration
   Properties: 
     KeyName: 
@@ -575,10 +572,11 @@ Properties:
       - DeviceName: &quot;/dev/sdm&quot;
         Ebs: 
           VolumeSize: &quot;100&quot;
-          DeleteOnTermination: &quot;false&quot;</code></pre><h3 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_Spot_Price">Launch Configuration with Spot Price</h3><p>This example shows a launch configuration that launches Spot Instances in the Auto
-                        Scaling group. This launch configuration will only be active if the current Spot market
-                        price is less than the price in the template specification (0.05).
-                     </p><h4 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_Spot_Price--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+          DeleteOnTermination: &quot;false&quot;</code></pre></div><h3 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_Spot_Price">Launch Configuration with Spot Price</h3><p>This example shows a launch configuration that launches Spot Instances in the Auto
+                        Scaling group. This launch configuration will only be active if the current Spot price
+                        is less than the price in the template specification (0.05).
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_Spot_Price--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;myLaunchConfig&quot;:{
     &quot;Type&quot;:&quot;AWS::AutoScaling::LaunchConfiguration&quot;,
     &quot;Properties&quot;:{
@@ -613,7 +611,8 @@ Properties:
       }
     }
   }
-}</code></pre><h4 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_Spot_Price--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myLaunchConfig: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_Spot_Price--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myLaunchConfig: 
   Type: AWS::AutoScaling::LaunchConfiguration
   Properties: 
     KeyName: 
@@ -630,14 +629,15 @@ Properties:
       - Ref: &quot;InstanceSecurityGroup&quot;
     SpotPrice: &quot;0.05&quot;
     InstanceType: 
-      Ref: &quot;InstanceType&quot;</code></pre><h3 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_IAM_Instance_Profile">Launch Configuration with IAM Instance Profile</h3><p>This example demonstrates a launch configuration that uses the
+      Ref: &quot;InstanceType&quot;</code></pre></div><h3 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_IAM_Instance_Profile">Launch Configuration with IAM Instance Profile</h3><p>This example demonstrates a launch configuration that uses the
                         <code class="code">IamInstanceProfile</code> property. Only the
                         <code class="code">AWS::AutoScaling::LaunchConfiguration</code> specification is shown. For an
                         example of the full template, including the definition of, and further references
                         from the
                         <a href="aws-resource-iam-instanceprofile.html">InstanceProfile</a> object referenced here as <code class="code">RootInstanceProfile</code>, see
                         <a href="https://s3.amazonaws.com/cloudformation-templates-us-east-1/auto_scaling_with_instance_profile.template" target="_blank">auto_scaling_with_instance_profile.template</a>.
-                     </p><h4 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_IAM_Instance_Profile--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_IAM_Instance_Profile--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;myLaunchConfig&quot;:{
     &quot;Type&quot;:&quot;AWS::AutoScaling::LaunchConfiguration&quot;,
     &quot;Properties&quot;:{
@@ -666,7 +666,8 @@ Properties:
       }
     }
   }
-}</code></pre><h4 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_IAM_Instance_Profile--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myLaunchConfig: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_IAM_Instance_Profile--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myLaunchConfig: 
   Type: AWS::AutoScaling::LaunchConfiguration
   Properties: 
     ImageId: 
@@ -680,7 +681,7 @@ Properties:
     InstanceType: 
       Ref: &quot;InstanceType&quot;
     IamInstanceProfile: 
-      Ref: &quot;RootInstanceProfile&quot;</code></pre><h3 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_a_Provisioned_IOPS_EBS_Volume">Launch Configuration with a Provisioned IOPS EBS Volume</h3><p>This example demonstrates a launch configuration that configures the
+      Ref: &quot;RootInstanceProfile&quot;</code></pre></div><h3 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_a_Provisioned_IOPS_EBS_Volume">Launch Configuration with a Provisioned IOPS EBS Volume</h3><p>This example demonstrates a launch configuration that configures the
                         <code class="code">EbsOptmized</code> property to launch instances with a provisioned IOPS
                         EBS-optimized volume. This can increase the performance of your EBS-backed
                         instances.
@@ -736,7 +737,8 @@ Properties:
                            User Guide</em>.
                      </p><p>For more performance tips, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSPerformance.html">Amazon EBS Volume Performance on Linux
                            Instances</a> in the <em>Amazon Elastic Compute Cloud User Guide</em>. 
-                     </p><h4 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_a_Provisioned_IOPS_EBS_Volume--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_a_Provisioned_IOPS_EBS_Volume--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;myLaunchConfig&quot;:{
     &quot;Type&quot;:&quot;AWS::AutoScaling::LaunchConfiguration&quot;,
     &quot;Properties&quot;:{
@@ -752,13 +754,15 @@ Properties:
       &quot;SecurityGroups&quot;:[
         {
           &quot;Ref&quot;:&quot;InstanceSecurityGroup&quot;
-        }
+        },
+        &quot;sg-903004f8&quot; 
       ],
       &quot;InstanceType&quot;:&quot;m1.large&quot;,
       &quot;EbsOptimized&quot;:&quot;true&quot;
     }
   }
-}</code></pre><h4 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_a_Provisioned_IOPS_EBS_Volume--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myLaunchConfig: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-properties-as-launchconfig--examples--Launch_Configuration_with_a_Provisioned_IOPS_EBS_Volume--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myLaunchConfig: 
   Type: AWS::AutoScaling::LaunchConfiguration
   Properties: 
     KeyName: 
@@ -769,8 +773,9 @@ Properties:
         Ref: &quot;WebServerPort&quot;
     SecurityGroups: 
       - Ref: &quot;InstanceSecurityGroup&quot;
+      - sg-903004f8
     InstanceType: &quot;m1.large&quot;
-    EbsOptimized: &quot;true&quot;</code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+    EbsOptimized: &quot;true&quot;</code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>

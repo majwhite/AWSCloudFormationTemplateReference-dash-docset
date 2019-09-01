@@ -12,6 +12,9 @@
                         has a route table that describes the 
                         			available destination network routes. Each route in the route table specifies the
                         path for tra&#xFB03;c to speci&#xFB01;c resources or networks.
+                     </p><p>A target network association must be created before you can specify a route. If you&apos;re
+                        setting up all the components of a Client VPN endpoint at the same time, you must
+                        use the <a href="aws-attribute-dependson.html">DependsOn Attribute</a> to declare a dependency on the <code class="code">AWS::EC2::ClientVpnTargetNetworkAssociation</code> resource.
                      </p><h2 id="aws-resource-ec2-clientvpnroute-syntax">Syntax</h2><p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p><div id="JSON" name="JSON" class="section langfilter">
                         <h3 id="aws-resource-ec2-clientvpnroute-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;Type&quot; : &quot;AWS::EC2::ClientVpnRoute&quot;,
@@ -109,7 +112,8 @@ Properties:
                               <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                            </dd>
                         </dl>
-                     </div><h2 id="aws-resource-ec2-clientvpnroute--examples">Examples</h2><h3 id="aws-resource-ec2-clientvpnroute--examples--Adding_a_route_to_a_Client_VPN_endpoint">Adding a route to a Client VPN endpoint</h3><p>The following example adds a route for internet access to a Client VPN endpoint.</p><h4 id="aws-resource-ec2-clientvpnroute--examples--Adding_a_route_to_a_Client_VPN_endpoint--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myRoute:
+                     </div><h2 id="aws-resource-ec2-clientvpnroute--examples">Examples</h2><h3 id="aws-resource-ec2-clientvpnroute--examples--Adding_a_route_to_a_Client_VPN_endpoint">Adding a route to a Client VPN endpoint</h3><p>The following example adds a route for internet access to a Client VPN endpoint.</p><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-ec2-clientvpnroute--examples--Adding_a_route_to_a_Client_VPN_endpoint--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myRoute:
   Type: &quot;AWS::EC2::ClientVpnRoute&quot;
   Properties:
     ClientVpnEndpointId: 
@@ -117,7 +121,8 @@ Properties:
     TargetVpcSubnetId: 
       Ref: mySubnet
     DestinationCidrBlock: &quot;0.0.0.0/0&quot;
-    Description: &quot;myRoute&quot;</code></pre><h4 id="aws-resource-ec2-clientvpnroute--examples--Adding_a_route_to_a_Client_VPN_endpoint--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;myRoute&quot;: {
+    Description: &quot;myRoute&quot;</code></pre></div><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-ec2-clientvpnroute--examples--Adding_a_route_to_a_Client_VPN_endpoint--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;myRoute&quot;: {
     &quot;Type&quot;: &quot;AWS::EC2::ClientVpnRoute&quot;,
     &quot;Properties&quot;: {
         &quot;ClientVpnEndpointId&quot;: {
@@ -129,7 +134,7 @@ Properties:
         &quot;DestinationCidrBlock&quot;: &quot;0.0.0.0/0&quot;,
         &quot;Description&quot;: &quot;myRoute&quot;
     }
-}</code></pre><h2 id="aws-resource-ec2-clientvpnroute--seealso">See Also</h2><div class="itemizedlist">
+}</code></pre></div><h2 id="aws-resource-ec2-clientvpnroute--seealso">See Also</h2><div class="itemizedlist">
                         				
                         				
                         			

@@ -14,7 +14,9 @@
                         <h3 id="aws-resource-dms-replicationtask-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;Type&quot; : &quot;AWS::DMS::ReplicationTask&quot;,
   &quot;Properties&quot; : {
+      &quot;<a href="#cfn-dms-replicationtask-cdcstartposition">CdcStartPosition</a>&quot; : <em class="replaceable"><code>String</code></em>,
       &quot;<a href="#cfn-dms-replicationtask-cdcstarttime">CdcStartTime</a>&quot; : <em class="replaceable"><code>Double</code></em>,
+      &quot;<a href="#cfn-dms-replicationtask-cdcstopposition">CdcStopPosition</a>&quot; : <em class="replaceable"><code>String</code></em>,
       &quot;<a href="#cfn-dms-replicationtask-migrationtype">MigrationType</a>&quot; : <em class="replaceable"><code>String</code></em>,
       &quot;<a href="#cfn-dms-replicationtask-replicationinstancearn">ReplicationInstanceArn</a>&quot; : <em class="replaceable"><code>String</code></em>,
       &quot;<a href="#cfn-dms-replicationtask-replicationtaskidentifier">ReplicationTaskIdentifier</a>&quot; : <em class="replaceable"><code>String</code></em>,
@@ -28,7 +30,9 @@
 </code></pre></div><div id="YAML" name="YAML" class="section langfilter">
                         <h3 id="aws-resource-dms-replicationtask-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Type: AWS::DMS::ReplicationTask
 Properties: 
+  <a href="#cfn-dms-replicationtask-cdcstartposition">CdcStartPosition</a>: <em class="replaceable"><code>String</code></em>
   <a href="#cfn-dms-replicationtask-cdcstarttime">CdcStartTime</a>: <em class="replaceable"><code>Double</code></em>
+  <a href="#cfn-dms-replicationtask-cdcstopposition">CdcStopPosition</a>: <em class="replaceable"><code>String</code></em>
   <a href="#cfn-dms-replicationtask-migrationtype">MigrationType</a>: <em class="replaceable"><code>String</code></em>
   <a href="#cfn-dms-replicationtask-replicationinstancearn">ReplicationInstanceArn</a>: <em class="replaceable"><code>String</code></em>
   <a href="#cfn-dms-replicationtask-replicationtaskidentifier">ReplicationTaskIdentifier</a>: <em class="replaceable"><code>String</code></em>
@@ -40,6 +44,30 @@ Properties:
   <a href="#cfn-dms-replicationtask-targetendpointarn">TargetEndpointArn</a>: <em class="replaceable"><code>String</code></em>
 </code></pre></div><h2 id="aws-resource-dms-replicationtask-properties">Properties</h2><div class="variablelist">
                         <dl>
+                           <dt><a id="cfn-dms-replicationtask-cdcstartposition"></a><span class="term"><code class="code">CdcStartPosition</code></span></dt>
+                           <dd>
+                              
+                              <p>Indicates when you want a change data capture (CDC) operation to start. Use either
+                                 CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start.
+                                 Specifying both values results in an error.
+                              </p>
+                              
+                              <p> The value can be in date, checkpoint, or LSN/SCN format.</p>
+                              
+                              <p>Date Example: --cdc-start-position &#x201C;2018-03-08T12:12:12&#x201D;</p>
+                              
+                              <p>Checkpoint Example: --cdc-start-position
+                                 &quot;checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93&quot;
+                              </p>
+                              
+                              <p>LSN Example: --cdc-start-position &#x201C;mysql-bin-changelog.000024:373&#x201D;</p>
+                              
+                              <p><em>Required</em>: No
+                              </p>
+                              <p><em>Type</em>: String
+                              </p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                           </dd>
                            <dt><a id="cfn-dms-replicationtask-cdcstarttime"></a><span class="term"><code class="code">CdcStartTime</code></span></dt>
                            <dd>
                               
@@ -51,10 +79,30 @@ Properties:
                               </p>
                               <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                            </dd>
+                           <dt><a id="cfn-dms-replicationtask-cdcstopposition"></a><span class="term"><code class="code">CdcStopPosition</code></span></dt>
+                           <dd>
+                              
+                              <p>Indicates when you want a change data capture (CDC) operation to stop. The value can
+                                 be
+                                 either server time or commit time.
+                              </p>
+                              
+                              <p>Server time example: --cdc-stop-position &#x201C;server_time:3018-02-09T12:12:12&#x201D;</p>
+                              
+                              <p>Commit time example: --cdc-stop-position &#x201C;commit_time: 3018-02-09T12:12:12 &#x201C;</p>
+                              
+                              <p><em>Required</em>: No
+                              </p>
+                              <p><em>Type</em>: String
+                              </p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                           </dd>
                            <dt><a id="cfn-dms-replicationtask-migrationtype"></a><span class="term"><code class="code">MigrationType</code></span></dt>
                            <dd>
                               
-                              <p>The migration type.</p>
+                              <p>The migration type. Valid values: <code class="code">full-load</code> | <code class="code">cdc</code> | <code class="code">full-load-and-cdc</code>
+                                 
+                              </p>
                               
                               <p><em>Required</em>: Yes
                               </p>
@@ -66,7 +114,7 @@ Properties:
                            <dt><a id="cfn-dms-replicationtask-replicationinstancearn"></a><span class="term"><code class="code">ReplicationInstanceArn</code></span></dt>
                            <dd>
                               
-                              <p>The Amazon Resource Name (ARN) of the replication instance.</p>
+                              <p>The Amazon Resource Name (ARN) of a replication instance.</p>
                               
                               <p><em>Required</em>: Yes
                               </p>
@@ -77,7 +125,7 @@ Properties:
                            <dt><a id="cfn-dms-replicationtask-replicationtaskidentifier"></a><span class="term"><code class="code">ReplicationTaskIdentifier</code></span></dt>
                            <dd>
                               
-                              <p>The replication task identifier.</p>
+                              <p>An identifier for the replication task.</p>
                               
                               <p>Constraints:</p>
                               
@@ -114,9 +162,7 @@ Properties:
                            <dt><a id="cfn-dms-replicationtask-replicationtasksettings"></a><span class="term"><code class="code">ReplicationTaskSettings</code></span></dt>
                            <dd>
                               
-                              <p>Settings for the task, such as target metadata settings. For a complete list of task
-                                 settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html">Task Settings
-                                    for AWS Database Migration Service Tasks</a> in the <em>AWS Database Migration
+                              <p>Overall settings for the task, in JSON format. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html">Task Settings</a> in the <em>AWS Database Migration
                                     User Guide.</em>
                                  
                               </p>
@@ -131,7 +177,7 @@ Properties:
                            <dt><a id="cfn-dms-replicationtask-sourceendpointarn"></a><span class="term"><code class="code">SourceEndpointArn</code></span></dt>
                            <dd>
                               
-                              <p>The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.</p>
+                              <p>An Amazon Resource Name (ARN) that uniquely identifies the source endpoint.</p>
                               
                               <p><em>Required</em>: Yes
                               </p>
@@ -142,13 +188,12 @@ Properties:
                            <dt><a id="cfn-dms-replicationtask-tablemappings"></a><span class="term"><code class="code">TableMappings</code></span></dt>
                            <dd>
                               
-                              <p>When using the AWS CLI or boto3, provide the path of the JSON file that contains the
-                                 table mappings. Precede the path with &quot;file://&quot;. When working with the DMS API, provide
-                                 the
-                                 JSON as the parameter value.
+                              <p>The table mappings for the task, in JSON format. For more information, see 
+                                 <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html">Table
+                                    Mapping</a> in the <em>AWS Database Migration
+                                    User Guide.</em>
+                                 
                               </p>
-                              
-                              <p>For example, --table-mappings file://mappingfile.json</p>
                               
                               <p><em>Required</em>: Yes
                               </p>
@@ -159,7 +204,7 @@ Properties:
                            <dt><a id="cfn-dms-replicationtask-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                            <dd>
                               
-                              <p>Tags to be added to the replication instance.</p>
+                              <p>One or more tags to be assigned to the replication task.</p>
                               
                               <p><em>Required</em>: No
                               </p>
@@ -169,7 +214,7 @@ Properties:
                            <dt><a id="cfn-dms-replicationtask-targetendpointarn"></a><span class="term"><code class="code">TargetEndpointArn</code></span></dt>
                            <dd>
                               
-                              <p>The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.</p>
+                              <p>An Amazon Resource Name (ARN) that uniquely identifies the target endpoint.</p>
                               
                               <p><em>Required</em>: Yes
                               </p>
@@ -181,7 +226,8 @@ Properties:
                      </div><h2 id="aws-resource-dms-replicationtask-return-values">Return Values</h2><h3 id="aws-resource-dms-replicationtask-return-values-ref">Ref</h3><p>
                         When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the replication task ARN.
                      </p><p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
-                     </p><h2 id="aws-resource-dms-replicationtask--examples">Examples</h2><h3 id="aws-resource-dms-replicationtask--examples--"></h3><h4 id="aws-resource-dms-replicationtask--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><h2 id="aws-resource-dms-replicationtask--examples">Examples</h2><h3 id="aws-resource-dms-replicationtask--examples--"></h3><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-dms-replicationtask--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
     &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
     &quot;Resources&quot;: {
         &quot;myReplicationTask&quot;: {
@@ -195,7 +241,8 @@ Properties:
             }
         }
     }
-}</code></pre><h4 id="aws-resource-dms-replicationtask--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-dms-replicationtask--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Resources: 
   myReplicationTask: 
     Properties: 
@@ -205,7 +252,7 @@ Resources:
       TableMappings: &quot;{ \&quot;rules\&quot;: [ { \&quot;rule-type\&quot;: \&quot;selection\&quot;, \&quot;rule-id\&quot;: \&quot;1\&quot;, \&quot;rule-name\&quot;: \&quot;1\&quot;, \&quot;object-locator\&quot;: { \&quot;schema-name\&quot;: \&quot;%\&quot;, \&quot;table-name\&quot;: \&quot;%\&quot; }, \&quot;rule-action\&quot;: \&quot;include\&quot; } ] }&quot;
       TargetEndpointArn: TargetEndpoint
     Type: &quot;AWS::DMS::ReplicationTask&quot;
-</code></pre><h2 id="aws-resource-dms-replicationtask--seealso">See Also</h2><div class="itemizedlist">
+</code></pre></div><h2 id="aws-resource-dms-replicationtask--seealso">See Also</h2><div class="itemizedlist">
                         
                         
                         

@@ -92,7 +92,7 @@ Properties:
                               </p>
                               <p><em>Type</em>: String
                               </p>
-                              <p><em>Allowed Values</em>: <code class="code">INSTANCE</code></p>
+                              <p><em>Allowed Values</em>: <code class="code">INSTANCE | RESOURCE_GROUP</code></p>
                               <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                            </dd>
                            <dt><a id="cfn-ssm-maintenancewindowtarget-targets"></a><span class="term"><code class="code">Targets</code></span></dt>
@@ -134,7 +134,47 @@ Properties:
                         When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the maintenance window target ID, such as
                         <code class="code">12a345b6-bbb7-4bb6-90b0-8c9577a2d2b9</code>.
                      </p><p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
-                     </p><h2 id="aws-resource-ssm-maintenancewindowtarget--seealso">See Also</h2><div class="itemizedlist">
+                     </p><h2 id="aws-resource-ssm-maintenancewindowtarget--examples">Examples</h2><h3 id="aws-resource-ssm-maintenancewindowtarget--examples--AWS_Systems_Manager_Maintenance_Window_Target_Example">AWS Systems Manager Maintenance Window Target Example</h3><p>The following example creates a Systems Manager maintenance window target that targets
+                        
+                        managed instances with the tag key <code class="code">ENV</code> and the tag value <code class="code">DEV</code>.
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-ssm-maintenancewindowtarget--examples--AWS_Systems_Manager_Maintenance_Window_Target_Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+  &quot;Resources&quot;: {
+    &quot;MaintenanceWindowTarget&quot;: {
+      &quot;Type&quot;: &quot;AWS::SSM::MaintenanceWindowTarget&quot;,
+      &quot;Properties&quot;: {
+        &quot;WindowId&quot;: &quot;MaintenanceWindow&quot;,
+        &quot;ResourceType&quot;: &quot;INSTANCE&quot;,
+        &quot;Targets&quot;: [
+          {
+            &quot;Key&quot;: &quot;tag:ENV&quot;,
+            &quot;Values&quot;: [
+              &quot;DEV&quot;
+            ]
+          }
+        ],
+        &quot;OwnerInformation&quot;: &quot;SSM Step Function Demo&quot;,
+        &quot;Name&quot;: &quot;SSMStepFunctionDemo&quot;,
+        &quot;Description&quot;: &quot;A target for demonstrating maintenance windows and step functions&quot;
+      },
+      &quot;DependsOn&quot;: &quot;MaintenanceWindow&quot;
+    }
+  }
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-ssm-maintenancewindowtarget--examples--AWS_Systems_Manager_Maintenance_Window_Target_Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Resources:
+  MaintenanceWindowTarget:
+    Type: &apos;AWS::SSM::MaintenanceWindowTarget&apos;
+    Properties:
+      WindowId: !Ref MaintenanceWindow
+      ResourceType: &apos;INSTANCE&apos;
+      Targets:
+      - Key: &apos;tag:ENV&apos;
+        Values:
+        - &apos;DEV&apos;
+      OwnerInformation: &apos;SSM Step Function Demo&apos;
+      Name: &apos;SSMStepFunctionDemo&apos;
+      Description: &apos;A target for demonstrating maintenance windows and step functions&apos;
+    DependsOn: MaintenanceWindow</code></pre></div><h2 id="aws-resource-ssm-maintenancewindowtarget--seealso">See Also</h2><div class="itemizedlist">
                         
                         
                         

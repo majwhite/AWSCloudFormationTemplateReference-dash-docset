@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="content" style="padding: 10px 30px;">
-    <h1 class="topictitle" id="aws-properties-ec2-security-group">AWS::EC2::SecurityGroup</h1><p>Specifies a security group. To create a VPC security group, use the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-vpcid">VpcId</a> property.
+    <h1 class="topictitle" id="aws-properties-ec2-security-group">AWS::EC2::SecurityGroup</h1><p>Specifies a security group. To create a security group, use the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html#cfn-ec2-securitygroup-vpcid">VpcId</a> property to specify the VPC for which to create the security group.
                      </p><p>This type supports updates. For more information about updating stacks, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">AWS CloudFormation Stacks Updates</a>.
                      </p><div class="aws-note">
                         <p class="aws-note">Important</p>
@@ -123,7 +123,8 @@ Properties:
                               <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                            </dd>
                         </dl>
-                     </div><h2 id="aws-properties-ec2-security-group-return-values">Return Values</h2><h3 id="aws-properties-ec2-security-group-return-values-ref">Ref</h3><p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the resource name.
+                     </div><h2 id="aws-properties-ec2-security-group-return-values">Return Values</h2><h3 id="aws-properties-ec2-security-group-return-values-ref">Ref</h3><p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the resource ID. For security groups that were created without specifying
+                        a VPC (EC2-Classic or a default VPC), <code class="code">Ref</code> returns the resource name.
                      </p><p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                      </p><h3 id="aws-properties-ec2-security-group-return-values-fn--getatt">Fn::GetAtt</h3><p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
                         are the available attributes and sample return values.
@@ -150,7 +151,8 @@ Properties:
                         </dl>
                      </div><h2 id="aws-properties-ec2-security-group--examples">Examples</h2><h3 id="aws-properties-ec2-security-group--examples--Define_Basic_Ingress_and_Egress_Rules">Define Basic Ingress and Egress Rules</h3><p>The following example specifies a security group with an ingress and egress rule.
                         
-                     </p><h4 id="aws-properties-ec2-security-group--examples--Define_Basic_Ingress_and_Egress_Rules--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;InstanceSecurityGroup&quot; : {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-properties-ec2-security-group--examples--Define_Basic_Ingress_and_Egress_Rules--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;InstanceSecurityGroup&quot; : {
    &quot;Type&quot; : &quot;AWS::EC2::SecurityGroup&quot;,
    &quot;Properties&quot; : {
       &quot;GroupDescription&quot; : &quot;Allow http to client host&quot;,
@@ -168,7 +170,8 @@ Properties:
          &quot;CidrIp&quot; : &quot;0.0.0.0/0&quot;
       }]
    }
-}</code></pre><h4 id="aws-properties-ec2-security-group--examples--Define_Basic_Ingress_and_Egress_Rules--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">InstanceSecurityGroup:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-properties-ec2-security-group--examples--Define_Basic_Ingress_and_Egress_Rules--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">InstanceSecurityGroup:
   Type: AWS::EC2::SecurityGroup
   Properties:
       GroupDescription: Allow http to client host
@@ -183,12 +186,13 @@ Properties:
       - IpProtocol: tcp
         FromPort: 80
         ToPort: 80
-        CidrIp: 0.0.0.0/0</code></pre><h3 id="aws-properties-ec2-security-group--examples--Remove_Default_Rule">Remove Default Rule</h3><p>When you specify a VPC security group, Amazon EC2 creates a default egress rule that
+        CidrIp: 0.0.0.0/0</code></pre></div><h3 id="aws-properties-ec2-security-group--examples--Remove_Default_Rule">Remove Default Rule</h3><p>When you specify a VPC security group, Amazon EC2 creates a default egress rule that
                         allows egress traffic on all ports and IP protocols to any location. The default rule
                         is removed only when you specify one or more egress rules. If you want to remove the
                         default rule and limit egress traffic to just the localhost (127.0.0.1/32), use the
                         following example. 
-                     </p><h4 id="aws-properties-ec2-security-group--examples--Remove_Default_Rule--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;sgwithoutegress&quot;: {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-properties-ec2-security-group--examples--Remove_Default_Rule--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;sgwithoutegress&quot;: {
   &quot;Type&quot;: &quot;AWS::EC2::SecurityGroup&quot;,
   &quot;Properties&quot;: {
     &quot;GroupDescription&quot;: &quot;Limits security group egress traffic&quot;,
@@ -200,7 +204,8 @@ Properties:
     ],
     &quot;VpcId&quot;: { &quot;Ref&quot;: &quot;myVPC&quot;}
    }
-}</code></pre><h4 id="aws-properties-ec2-security-group--examples--Remove_Default_Rule--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">sgwithoutegress:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-properties-ec2-security-group--examples--Remove_Default_Rule--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">sgwithoutegress:
   Type: AWS::EC2::SecurityGroup
   Properties:
     GroupDescription: Limits security group egress traffic
@@ -208,7 +213,8 @@ Properties:
     - CidrIp: 127.0.0.1/32
       IpProtocol: &quot;-1&quot;
     VpcId:
-      Ref: myVPC</code></pre><h2 id="aws-properties-ec2-security-group--seealso">See Also</h2><div class="itemizedlist">
+      Ref: myVPC</code></pre></div><h2 id="aws-properties-ec2-security-group--seealso">See Also</h2><div class="itemizedlist">
+                        
                         
                         
                         
@@ -217,6 +223,13 @@ Properties:
                               
                               <p>
                                  <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Security Groups for Your VPC</a> in the <em>Amazon VPC User Guide</em></p>
+                              
+                           </li>
+                           <li class="listitem">
+                              
+                              <p>
+                                 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-classic-platform.html">EC2-Classic</a> in the <em>Amazon EC2 User Guide for Linux Instances</em> for information about accounts that support EC2-Classic security groups
+                              </p>
                               
                            </li>
                            <li class="listitem">

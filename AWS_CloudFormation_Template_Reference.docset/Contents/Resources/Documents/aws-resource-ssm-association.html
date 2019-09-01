@@ -69,10 +69,20 @@ Properties:
                            <dt><a id="cfn-ssm-association-instanceid"></a><span class="term"><code class="code">InstanceId</code></span></dt>
                            <dd>
                               
-                              <p>The ID of the instance that the SSM document is associated with.</p>
-                              
-                              <p>You must specify the <code class="code">InstanceId</code> or <code class="code">Targets</code> property.
+                              <p>The ID of the instance that the SSM document is associated with. You must specify
+                                 the
+                                 <code class="code">InstanceId</code> or <code class="code">Targets</code> property.
                               </p>
+                              
+                              <div class="aws-note">
+                                 <p class="aws-note">Note</p>
+                                 <p><code class="code">InstanceId</code> has been deprecated. To specify an instance ID for an association, use
+                                    the <code class="code">Targets</code> parameter. If you use the parameter <code class="code">InstanceId</code>, you cannot use the parameters
+                                    <code class="code">AssociationName</code>, <code class="code">DocumentVersion</code>, <code class="code">MaxErrors</code>,
+                                    <code class="code">MaxConcurrency</code>, <code class="code">OutputLocation</code>, or <code class="code">ScheduleExpression</code>.
+                                    To use these parameters, you must use the <code class="code">Targets</code> parameter.
+                                 </p>
+                              </div>
                               
                               <p><em>Required</em>: Conditional
                               </p>
@@ -134,9 +144,7 @@ Properties:
                            <dt><a id="cfn-ssm-association-targets"></a><span class="term"><code class="code">Targets</code></span></dt>
                            <dd>
                               
-                              <p>The targets for the association.</p>
-                              
-                              <p>You must specify the <code class="code">InstanceId</code> or <code class="code">Targets</code> property.
+                              <p>The targets for the association. You must specify the <code class="code">InstanceId</code> or <code class="code">Targets</code> property.
                               </p>
                               
                               <p><em>Required</em>: Conditional
@@ -149,31 +157,102 @@ Properties:
                      </div><h2 id="aws-resource-ssm-association--examples">Examples</h2><h3 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_a_specific_instance">Associate a Systems Manager document with a specific instance</h3><p>The following example associates an SSM document with a specific instance. The ID
                         of the
                         instance is specified by the <code class="code">myInstanceId</code> parameter.
-                     </p><h4 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_a_specific_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;association&quot;: {
-  &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
-  &quot;Properties&quot;: {
-    &quot;Name&quot;: {
-      &quot;Ref&quot;: &quot;document&quot;
-    },
-    &quot;Parameters&quot;: {
-      &quot;Directory&quot;: [&quot;myWorkSpace&quot;]
-    },
-    &quot;Targets&quot;: [{
-      &quot;Key&quot;: &quot;InstanceIds&quot;,
-      &quot;Values&quot;: [{
-        &quot;Ref&quot;: &quot;myInstanceId&quot;
-      }]
-    }]
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_a_specific_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+  &quot;Resources&quot;: {
+    &quot;Association&quot;: {
+      &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
+      &quot;Properties&quot;: {
+        &quot;Name&quot;: {
+          &quot;Ref&quot;: &quot;document&quot;
+        },
+        &quot;Parameters&quot;: {
+          &quot;Directory&quot;: [&quot;myWorkSpace&quot;]
+        },
+        &quot;Targets&quot;: [{
+          &quot;Key&quot;: &quot;InstanceIds&quot;,
+          &quot;Values&quot;: [{
+            &quot;Ref&quot;: &quot;myInstanceId&quot;
+          }]
+        }]
+      }
+    }
   }
-}</code></pre><h4 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_a_specific_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">association:
-  Type: AWS::SSM::Association
-  Properties:
-    Name: !Ref &apos;document&apos;
-    Parameters:
-      Directory: [&quot;myWorkSpace&quot;]
-    Targets:
-    - Key: InstanceIds
-      Values: [!Ref &apos;myInstanceId&apos;]</code></pre><h2 id="aws-resource-ssm-association--seealso">See Also</h2><div class="itemizedlist">
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_a_specific_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Resources:
+  Association:
+    Type: AWS::SSM::Association
+    Properties:
+      Name: !Ref &apos;document&apos;
+      Parameters:
+        Directory: [&quot;myWorkSpace&quot;]
+      Targets:
+      - Key: InstanceIds
+        Values: [!Ref &apos;myInstanceId&apos;]</code></pre></div><h3 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_all_managed_instances">Associate a Systems Manager document with all managed instances</h3><p>The following example associates the document <code class="code">AWS-UpdateSSMAgent</code> with all instances registered with Systems Manager.
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_all_managed_instances--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+  &quot;Resources&quot;: {
+    &quot;UpdateSSMAgent&quot;: {
+      &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
+      &quot;Properties&quot;: {
+        &quot;AssociationName&quot;: &quot;UpdateSSMAgent&quot;,
+        &quot;Name&quot;: &quot;AWS-UpdateSSMAgent&quot;,
+        &quot;ScheduleExpression&quot;: &quot;cron(0 2 ? * SUN *)&quot;,
+        &quot;Targets&quot;: [
+          {
+            &quot;Key&quot;: &quot;InstanceIds&quot;,
+            &quot;Values&quot;: [
+              &quot;*&quot;
+            ]
+          }
+        ]
+      }
+    }
+  }
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_all_managed_instances--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Resources:
+  UpdateSSMAgent:
+    Type: AWS::SSM::Association
+    Properties:
+      AssociationName: UpdateSSMAgent
+      Name: AWS-UpdateSSMAgent
+      ScheduleExpression: &quot;cron(0 2 ? * SUN *)&quot;
+      Targets:
+      - Key: InstanceIds
+        Values:
+          - &quot;*&quot;</code></pre></div><h3 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_a_specific_tag">Associate a Systems Manager document with a specific tag</h3><p>The following example associates the document <code class="code">AWS-UpdateSSMAgent</code> with instances that have the tag key <code class="code">ENV</code> and value <code class="code">DEV</code>.
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_a_specific_tag--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+  &quot;Resources&quot;: {
+    &quot;UpdateSSMAgent&quot;: {
+      &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
+      &quot;Properties&quot;: {
+        &quot;AssociationName&quot;: &quot;UpdateSSMAgent&quot;,
+        &quot;Name&quot;: &quot;AWS-UpdateSSMAgent&quot;,
+        &quot;ScheduleExpression&quot;: &quot;cron(0 2 ? * SUN *)&quot;,
+        &quot;Targets&quot;: [
+          {
+            &quot;Key&quot;: &quot;tag:ENV&quot;,
+            &quot;Values&quot;: [
+              &quot;DEV&quot;
+            ]
+          }
+        ]
+      }
+    }
+  }
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_a_specific_tag--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Resources:
+  UpdateSSMAgent:
+    Type: AWS::SSM::Association
+    Properties:
+      AssociationName: UpdateSSMAgent
+      Name: AWS-UpdateSSMAgent
+      ScheduleExpression: &quot;cron(0 2 ? * SUN *)&quot;
+      Targets:
+      - Key: &quot;tag:ENV&quot;
+        Values:
+          - &quot;DEV&quot;</code></pre></div><h2 id="aws-resource-ssm-association--seealso">See Also</h2><div class="itemizedlist">
                         
                         
                         <ul class="itemizedlist" type="disc">

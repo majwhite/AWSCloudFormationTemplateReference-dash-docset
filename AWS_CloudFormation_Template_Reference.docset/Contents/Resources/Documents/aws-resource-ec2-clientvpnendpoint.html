@@ -23,6 +23,7 @@
       &quot;<a href="#cfn-ec2-clientvpnendpoint-description">Description</a>&quot; : <em class="replaceable"><code>String</code></em>,
       &quot;<a href="#cfn-ec2-clientvpnendpoint-dnsservers">DnsServers</a>&quot; : <em class="replaceable"><code>[ String, ... ]</code></em>,
       &quot;<a href="#cfn-ec2-clientvpnendpoint-servercertificatearn">ServerCertificateArn</a>&quot; : <em class="replaceable"><code>String</code></em>,
+      &quot;<a href="#cfn-ec2-clientvpnendpoint-splittunnel">SplitTunnel</a>&quot; : <em class="replaceable"><code>Boolean</code></em>,
       &quot;<a href="#cfn-ec2-clientvpnendpoint-tagspecifications">TagSpecifications</a>&quot; : <em class="replaceable"><code>[ <a href="aws-properties-ec2-clientvpnendpoint-tagspecification.html">TagSpecification</a>, ... ]</code></em>,
       &quot;<a href="#cfn-ec2-clientvpnendpoint-transportprotocol">TransportProtocol</a>&quot; : <em class="replaceable"><code>String</code></em>
     }
@@ -39,6 +40,7 @@ Properties:
   <a href="#cfn-ec2-clientvpnendpoint-dnsservers">DnsServers</a>: <em class="replaceable"><code>
     - String</code></em>
   <a href="#cfn-ec2-clientvpnendpoint-servercertificatearn">ServerCertificateArn</a>: <em class="replaceable"><code>String</code></em>
+  <a href="#cfn-ec2-clientvpnendpoint-splittunnel">SplitTunnel</a>: <em class="replaceable"><code>Boolean</code></em>
   <a href="#cfn-ec2-clientvpnendpoint-tagspecifications">TagSpecifications</a>: <em class="replaceable"><code>
     - <a href="aws-properties-ec2-clientvpnendpoint-tagspecification.html">TagSpecification</a></code></em>
   <a href="#cfn-ec2-clientvpnendpoint-transportprotocol">TransportProtocol</a>: <em class="replaceable"><code>String</code></em>
@@ -131,9 +133,8 @@ Properties:
                               		       
                               <p>Information about the DNS servers to be used for DNS resolution. A Client VPN endpoint
                                  can
-                                 			have up to two DNS servers. If no DNS server is specified, the DNS address of the
-                                 VPC
-                                 			that is to be associated with Client VPN endpoint is used as the DNS server.
+                                 			have up to two DNS servers. If no DNS server is specified, the DNS address configured
+                                 on the device is used for the DNS server.
                               </p>
                               	     
                               <p><em>Required</em>: No
@@ -152,6 +153,23 @@ Properties:
                               <p><em>Required</em>: Yes
                               </p>
                               <p><em>Type</em>: String
+                              </p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                           </dd>
+                           <dt><a id="cfn-ec2-clientvpnendpoint-splittunnel"></a><span class="term"><code class="code">SplitTunnel</code></span></dt>
+                           <dd>
+                              		       
+                              <p>Indicates whether split-tunnel is enabled on the AWS Client VPN endpoint.</p>
+                              		       
+                              <p>By default, split-tunnel on a VPN endpoint is disabled.</p>
+                              		       
+                              <p>For information about split-tunnel VPN endpoints, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html">Split-Tunnel AWS Client VPN Endpoint</a> in the <em>AWS
+                                    				Client VPN Administrator Guide</em>.
+                              </p>
+                              	     
+                              <p><em>Required</em>: No
+                              </p>
+                              <p><em>Type</em>: Boolean
                               </p>
                               <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                            </dd>
@@ -187,7 +205,8 @@ Properties:
                      </p><h2 id="aws-resource-ec2-clientvpnendpoint--examples">Examples</h2><h3 id="aws-resource-ec2-clientvpnendpoint--examples--Creating_a_Client_VPN_endpoint">Creating a Client VPN endpoint</h3><p>The following example creates a Client VPN endpoint that uses Active Directory authentication
                         and assigns 
                         					client IP addresses from the <code class="code">10.0.0.0/22</code> CIDR range.
-                     </p><h4 id="aws-resource-ec2-clientvpnendpoint--examples--Creating_a_Client_VPN_endpoint--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myClientVpnEndpoint:
+                     </p><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-ec2-clientvpnendpoint--examples--Creating_a_Client_VPN_endpoint--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myClientVpnEndpoint:
   Type: AWS::EC2::ClientVpnEndpoint
   Properties: 
     AuthenticationOptions:
@@ -206,7 +225,8 @@ Properties:
         Tags:
         - Key: &quot;Purpose&quot;
           Value: &quot;Production&quot;
-    TransportProtocol: &quot;udp&quot;</code></pre><h4 id="aws-resource-ec2-clientvpnendpoint--examples--Creating_a_Client_VPN_endpoint--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;myClientVpnEndpoint&quot;: {
+    TransportProtocol: &quot;udp&quot;</code></pre></div><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-ec2-clientvpnendpoint--examples--Creating_a_Client_VPN_endpoint--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;myClientVpnEndpoint&quot;: {
     &quot;Type&quot;: &quot;AWS::EC2::ClientVpnEndpoint&quot;,
     &quot;Properties&quot;: {
         &quot;AuthenticationOptions&quot;: [
@@ -239,7 +259,7 @@ Properties:
         ],
         &quot;TransportProtocol&quot;: &quot;udp&quot;
     }
-}</code></pre><h2 id="aws-resource-ec2-clientvpnendpoint--seealso">See Also</h2><div class="itemizedlist">
+}</code></pre></div><h2 id="aws-resource-ec2-clientvpnendpoint--seealso">See Also</h2><div class="itemizedlist">
                         				
                         				
                         			

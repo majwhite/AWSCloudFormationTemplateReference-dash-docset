@@ -10,10 +10,10 @@
     <div id="content" style="padding: 10px 30px;">
     <h1 class="topictitle" id="aws-properties-autoscalingplans-scalingplan-customizedloadmetricspecification">AWS::AutoScalingPlans::ScalingPlan CustomizedLoadMetricSpecification</h1><p>
                         <code class="code">CustomizedLoadMetricSpecification</code> is a subproperty of <a href="aws-properties-autoscalingplans-scalingplan-scalinginstruction.html">ScalingInstruction</a> that specifies a customized load metric for predictive
-                        scaling to use with AWS Auto Scaling. 
+                        scaling to use with AWS Auto Scaling.
                      </p><p>For predictive scaling to work with a customized load metric specification, AWS Auto
                         Scaling needs access to the <code class="code">Sum</code> and <code class="code">Average</code> statistics that
-                        CloudWatch computes from metric data. 
+                        CloudWatch computes from metric data.
                      </p><p>When you choose a load metric, make sure that the required <code class="code">Sum</code> and
                         <code class="code">Average</code> statistics for your metric are available in CloudWatch and that
                         they provide relevant data for predictive scaling. The <code class="code">Sum</code> statistic must
@@ -25,10 +25,18 @@
                         <code class="code">Sum</code> statistic represents the total request count processed by the group,
                         then the <code class="code">Average</code> statistic for the specified metric must represent the average
                         request count processed by each instance of the group. 
+                     </p><p>If you publish your own metrics, you can aggregate the data points at a given interval
+                        and then publish the aggregated data points to CloudWatch. Before AWS Auto Scaling
+                        generates the forecast, it sums up all the metric data points that occurred within
+                        each hour to match the granularity period that is used in the forecast (60 minutes).
                      </p><p>For information about terminology, available metrics, or how to publish new metrics,
                         see
                         <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html">Amazon CloudWatch
                            Concepts</a> in the <em>Amazon CloudWatch User Guide</em>. 
+                     </p><p>After creating your scaling plan, you can use the AWS Auto Scaling console to visualize
+                        forecasts for the specified metric. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-create-scaling-plan.html#gs-view-resource">View
+                           Scaling Information for a Resource</a> in the
+                        <em>AWS Auto Scaling User Guide</em>.
                      </p><h2 id="aws-properties-autoscalingplans-scalingplan-customizedloadmetricspecification-syntax">Syntax</h2><p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p><div id="JSON" name="JSON" class="section langfilter">
                         <h3 id="aws-properties-autoscalingplans-scalingplan-customizedloadmetricspecification-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;<a href="#cfn-autoscalingplans-scalingplan-customizedloadmetricspecification-dimensions">Dimensions</a>&quot; : <em class="replaceable"><code>[ <a href="aws-properties-autoscalingplans-scalingplan-metricdimension.html">MetricDimension</a>, ... ]</code></em>,
@@ -85,15 +93,14 @@
                            <dt><a id="cfn-autoscalingplans-scalingplan-customizedloadmetricspecification-statistic"></a><span class="term"><code class="code">Statistic</code></span></dt>
                            <dd>
                               
-                              <p>The statistic of the metric. Currently, the value must always be <code class="code">Sum</code>.
-                                 
-                              </p>
+                              <p>The statistic of the metric.</p>
+                              
+                              <p><em>Allowed Values</em>: <code class="code">Sum</code></p>
                               
                               <p><em>Required</em>: Yes
                               </p>
                               <p><em>Type</em>: String
                               </p>
-                              <p><em>Allowed Values</em>: <code class="code">Average | Maximum | Minimum | SampleCount | Sum</code></p>
                               <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                            </dd>
                            <dt><a id="cfn-autoscalingplans-scalingplan-customizedloadmetricspecification-unit"></a><span class="term"><code class="code">Unit</code></span></dt>

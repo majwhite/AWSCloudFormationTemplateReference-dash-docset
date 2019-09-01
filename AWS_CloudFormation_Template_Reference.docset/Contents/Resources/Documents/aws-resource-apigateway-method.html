@@ -223,7 +223,8 @@ Properties:
                      </div><h2 id="aws-resource-apigateway-method-return-values">Return Values</h2><h3 id="aws-resource-apigateway-method-return-values-ref">Ref</h3><p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the method ID, such as <code class="code">mysta-metho-01234b567890example</code>.
                      </p><p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                      </p><h2 id="aws-resource-apigateway-method--examples">Examples</h2><h3 id="aws-resource-apigateway-method--examples--Mock_Method">Mock Method</h3><p>The following example creates a mock GET method for the <code class="code">MyApi</code> API.
-                     </p><h4 id="aws-resource-apigateway-method--examples--Mock_Method--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-apigateway-method--examples--Mock_Method--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
     &quot;MockMethod&quot;: {
         &quot;Type&quot;: &quot;AWS::ApiGateway::Method&quot;,
         &quot;Properties&quot;: {
@@ -243,7 +244,8 @@ Properties:
             }
         }
     }
-}</code></pre><h4 id="aws-resource-apigateway-method--examples--Mock_Method--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">MockMethod:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-apigateway-method--examples--Mock_Method--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">MockMethod:
   Type: &apos;AWS::ApiGateway::Method&apos;
   Properties:
     RestApiId: !Ref MyApi
@@ -254,14 +256,15 @@ Properties:
     AuthorizationType: NONE
     Integration:
       Type: MOCK
-</code></pre><h3 id="aws-resource-apigateway-method--examples--Lambda_Proxy">Lambda Proxy</h3><p>The following example creates a proxy resource to enable clients to call a Lambda
+</code></pre></div><h3 id="aws-resource-apigateway-method--examples--Lambda_Proxy">Lambda Proxy</h3><p>The following example creates a proxy resource to enable clients to call a Lambda
                         function with a single integration setup on a catch-all ANY method. The <code class="code">Uri</code> property specifies the Lambda function. For more information about Lambda proxy integration
                         and a sample Lambda function, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-api-as-simple-proxy-for-lambda.html">Create an API with Lambda Proxy Integration through a Proxy Resource</a> in the <em>API Gateway Developer Guide</em>.
                      </p><div class="aws-note">
                         <p class="aws-note">Note</p>
                         <p>Use the <a href="aws-resource-lambda-permission.html">AWS::Lambda::Permission</a> resource to grant API Gateway permission to invoke your Lambda function.
                         </p>
-                     </div><h4 id="aws-resource-apigateway-method--examples--Lambda_Proxy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </div><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-apigateway-method--examples--Lambda_Proxy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
     &quot;ProxyResource&quot;: {
         &quot;Type&quot;: &quot;AWS::ApiGateway::Resource&quot;,
         &quot;Properties&quot;: {
@@ -297,7 +300,8 @@ Properties:
             }
         }
     }
-}</code></pre><h4 id="aws-resource-apigateway-method--examples--Lambda_Proxy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">ProxyResource:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-apigateway-method--examples--Lambda_Proxy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">ProxyResource:
   Type: &apos;AWS::ApiGateway::Resource&apos;
   Properties:
     RestApiId: !Ref LambdaSimpleProxy
@@ -317,10 +321,11 @@ ProxyResourceANY:
       IntegrationHttpMethod: POST
       Uri: !Sub &gt;-
         arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaForSimpleProxy.Arn}/invocations
-</code></pre><h3 id="aws-resource-apigateway-method--examples--Associated_Request_Validator">Associated Request Validator</h3><p>The following example creates a REST API, method, and request validator, and associates
+</code></pre></div><h3 id="aws-resource-apigateway-method--examples--Associated_Request_Validator">Associated Request Validator</h3><p>The following example creates a REST API, method, and request validator, and associates
                         the request validator with the method. It also lets you specify how to convert the
                         request payload.
-                     </p><h4 id="aws-resource-apigateway-method--examples--Associated_Request_Validator--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-apigateway-method--examples--Associated_Request_Validator--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;Parameters&quot;: {
     &quot;contentHandling&quot;: {
       &quot;Type&quot;: &quot;String&quot;
@@ -419,7 +424,8 @@ ProxyResourceANY:
       }
     }
   }
-}</code></pre><h4 id="aws-resource-apigateway-method--examples--Associated_Request_Validator--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Parameters:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-apigateway-method--examples--Associated_Request_Validator--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Parameters:
   contentHandling:
     Type: String
   operationName:
@@ -466,7 +472,7 @@ Resources:
       ValidateRequestParameters: !Ref validateRequestParameters
 Outputs:
   RootResourceId:
-    Value: !GetAtt RestApi.RootResourceId</code></pre><h2 id="aws-resource-apigateway-method--seealso">See Also</h2><div class="itemizedlist">
+    Value: !GetAtt RestApi.RootResourceId</code></pre></div><h2 id="aws-resource-apigateway-method--seealso">See Also</h2><div class="itemizedlist">
                         
                         
                         <ul class="itemizedlist" type="disc">

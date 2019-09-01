@@ -14,14 +14,91 @@
                         <code class="code">EcsParameters</code> is a property of the <a href="aws-properties-events-rule-target.html">Target</a> property type.
                      </p><h2 id="aws-properties-events-rule-ecsparameters-syntax">Syntax</h2><p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p><div id="JSON" name="JSON" class="section langfilter">
                         <h3 id="aws-properties-events-rule-ecsparameters-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+  &quot;<a href="#cfn-events-rule-ecsparameters-group">Group</a>&quot; : <em class="replaceable"><code>String</code></em>,
+  &quot;<a href="#cfn-events-rule-ecsparameters-launchtype">LaunchType</a>&quot; : <em class="replaceable"><code>String</code></em>,
+  &quot;<a href="#cfn-events-rule-ecsparameters-networkconfiguration">NetworkConfiguration</a>&quot; : <em class="replaceable"><code><a href="aws-properties-events-rule-networkconfiguration.html">NetworkConfiguration</a></code></em>,
+  &quot;<a href="#cfn-events-rule-ecsparameters-platformversion">PlatformVersion</a>&quot; : <em class="replaceable"><code>String</code></em>,
   &quot;<a href="#cfn-events-rule-ecsparameters-taskcount">TaskCount</a>&quot; : <em class="replaceable"><code>Integer</code></em>,
   &quot;<a href="#cfn-events-rule-ecsparameters-taskdefinitionarn">TaskDefinitionArn</a>&quot; : <em class="replaceable"><code>String</code></em>
 }
 </code></pre></div><div id="YAML" name="YAML" class="section langfilter">
-                        <h3 id="aws-properties-events-rule-ecsparameters-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">  <a href="#cfn-events-rule-ecsparameters-taskcount">TaskCount</a>: <em class="replaceable"><code>Integer</code></em>
+                        <h3 id="aws-properties-events-rule-ecsparameters-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">  <a href="#cfn-events-rule-ecsparameters-group">Group</a>: <em class="replaceable"><code>String</code></em>
+  <a href="#cfn-events-rule-ecsparameters-launchtype">LaunchType</a>: <em class="replaceable"><code>String</code></em>
+  <a href="#cfn-events-rule-ecsparameters-networkconfiguration">NetworkConfiguration</a>: <em class="replaceable"><code>
+    <a href="aws-properties-events-rule-networkconfiguration.html">NetworkConfiguration</a></code></em>
+  <a href="#cfn-events-rule-ecsparameters-platformversion">PlatformVersion</a>: <em class="replaceable"><code>String</code></em>
+  <a href="#cfn-events-rule-ecsparameters-taskcount">TaskCount</a>: <em class="replaceable"><code>Integer</code></em>
   <a href="#cfn-events-rule-ecsparameters-taskdefinitionarn">TaskDefinitionArn</a>: <em class="replaceable"><code>String</code></em>
 </code></pre></div><h2 id="aws-properties-events-rule-ecsparameters-properties">Properties</h2><div class="variablelist">
                         <dl>
+                           <dt><a id="cfn-events-rule-ecsparameters-group"></a><span class="term"><code class="code">Group</code></span></dt>
+                           <dd>
+                              
+                              <p>Specifies an ECS task group for the task. The maximum length is 255 characters.</p>
+                              
+                              <p><em>Required</em>: No
+                              </p>
+                              <p><em>Type</em>: String
+                              </p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                           </dd>
+                           <dt><a id="cfn-events-rule-ecsparameters-launchtype"></a><span class="term"><code class="code">LaunchType</code></span></dt>
+                           <dd>
+                              
+                              <p>Specifies the launch type on which your task is running. The launch type that you
+                                 specify here must match one of the launch type (compatibilities) of the target task.
+                                 The <code class="code">FARGATE</code>
+                                 value is supported only in the Regions where AWS Fargate with Amazon ECS is supported.
+                                 For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html">AWS Fargate on Amazon
+                                    ECS</a> in the <em>Amazon Elastic Container Service Developer
+                                    Guide</em>.
+                              </p>
+                              
+                              <p><em>Required</em>: No
+                              </p>
+                              <p><em>Type</em>: String
+                              </p>
+                              <p><em>Allowed Values</em>: <code class="code">EC2 | FARGATE</code></p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                           </dd>
+                           <dt><a id="cfn-events-rule-ecsparameters-networkconfiguration"></a><span class="term"><code class="code">NetworkConfiguration</code></span></dt>
+                           <dd>
+                              
+                              <p>Use this structure if the ECS task uses the <code class="code">awsvpc</code> network mode. This
+                                 structure specifies the VPC subnets and security groups associated with the task and
+                                 whether a public IP address is to be used. This structure is required if
+                                 <code class="code">LaunchType</code> is <code class="code">FARGATE</code> because the <code class="code">awsvpc</code> mode
+                                 is required for Fargate tasks.
+                              </p>
+                              
+                              <p>If you specify <code class="code">NetworkConfiguration</code> when the target ECS task doesn&apos;t use
+                                 the <code class="code">awsvpc</code> network mode, the task fails.
+                              </p>
+                              
+                              <p><em>Required</em>: No
+                              </p>
+                              <p><em>Type</em>: <a href="aws-properties-events-rule-networkconfiguration.html">NetworkConfiguration</a></p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                           </dd>
+                           <dt><a id="cfn-events-rule-ecsparameters-platformversion"></a><span class="term"><code class="code">PlatformVersion</code></span></dt>
+                           <dd>
+                              
+                              <p>Specifies the platform version for the task. Specify only the numeric portion of the
+                                 platform version, such as <code class="code">1.1.0</code>.
+                              </p>
+                              
+                              <p>This structure is used only if <code class="code">LaunchType</code> is <code class="code">FARGATE</code>.
+                                 For more information about valid platform versions, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">AWS Fargate Platform
+                                    Versions</a> in the <em>Amazon Elastic Container Service Developer
+                                    Guide</em>.
+                              </p>
+                              
+                              <p><em>Required</em>: No
+                              </p>
+                              <p><em>Type</em>: String
+                              </p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                           </dd>
                            <dt><a id="cfn-events-rule-ecsparameters-taskcount"></a><span class="term"><code class="code">TaskCount</code></span></dt>
                            <dd>
                               

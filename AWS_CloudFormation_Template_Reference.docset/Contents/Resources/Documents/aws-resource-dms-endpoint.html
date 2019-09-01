@@ -131,7 +131,8 @@ Properties:
                            <dt><a id="cfn-dms-endpoint-endpointtype"></a><span class="term"><code class="code">EndpointType</code></span></dt>
                            <dd>
                               
-                              <p>The type of endpoint.</p>
+                              <p>The type of endpoint.  Valid values are <code class="code">source</code> and <code class="code">target</code>.
+                              </p>
                               
                               <p><em>Required</em>: Yes
                               </p>
@@ -144,7 +145,7 @@ Properties:
                            <dd>
                               
                               <p>The type of engine for the endpoint. Valid values, depending on the
-                                 <code class="code">EndPointType</code> value, include <code class="code">mysql</code>, <code class="code">oracle</code>,
+                                 <code class="code">EndpointType</code> value, include <code class="code">mysql</code>, <code class="code">oracle</code>,
                                  <code class="code">postgres</code>, <code class="code">mariadb</code>, <code class="code">aurora</code>,
                                  <code class="code">aurora-postgresql</code>, <code class="code">redshift</code>, <code class="code">s3</code>,
                                  <code class="code">db2</code>, <code class="code">azuredb</code>, <code class="code">sybase</code>, <code class="code">dynamodb</code>,
@@ -160,7 +161,16 @@ Properties:
                            <dt><a id="cfn-dms-endpoint-extraconnectionattributes"></a><span class="term"><code class="code">ExtraConnectionAttributes</code></span></dt>
                            <dd>
                               
-                              <p>Additional attributes associated with the connection.</p>
+                              <p>Additional attributes associated with the connection. Each attribute is specified
+                                 as a
+                                 name-value pair associated by an equal sign (=). Multiple attributes are separated
+                                 by a
+                                 semicolon (;) with no additional white space. For information on the attributes available
+                                 for connecting your source or target endpoint, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Endpoints.html">Working with
+                                    AWS DMS Endpoints</a> in the <em>AWS Database Migration Service User
+                                    Guide.</em>
+                                 
+                              </p>
                               
                               <p><em>Required</em>: No
                               </p>
@@ -172,7 +182,7 @@ Properties:
                            <dd>
                               
                               <p>Settings in JSON format for the target Amazon Kinesis Data Streams endpoint. For more
-                                 information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping             ">Using Object Mapping to Migrate Data to a Kinesis Data Stream</a> in the
+                                 information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping">Using Object Mapping to Migrate Data to a Kinesis Data Stream</a> in the
                                  <em>AWS Database Migration User Guide.</em>
                                  
                               </p>
@@ -185,10 +195,17 @@ Properties:
                            <dt><a id="cfn-dms-endpoint-kmskeyid"></a><span class="term"><code class="code">KmsKeyId</code></span></dt>
                            <dd>
                               
-                              <p>The AWS KMS key identifier to use to encrypt the connection parameters. If you
-                                 don&apos;t specify a value for the <code class="code">KmsKeyId</code> parameter, then AWS DMS uses your
-                                 default encryption key. AWS KMS creates the default encryption key for your AWS account.
-                                 Your AWS account has a different default encryption key for each AWS Region.
+                              <p>An AWS KMS key identifier that is used to encrypt the connection parameters for the
+                                 endpoint.
+                              </p>
+                              
+                              <p>If you don&apos;t specify a value for the <code class="code">KmsKeyId</code> parameter, then
+                                 AWS DMS uses your default encryption key.
+                              </p>
+                              
+                              <p>AWS KMS creates the default encryption key for your AWS account. Your AWS account
+                                 has a
+                                 different default encryption key for each AWS Region.
                               </p>
                               
                               <p><em>Required</em>: No
@@ -265,10 +282,9 @@ Properties:
                            <dt><a id="cfn-dms-endpoint-sslmode"></a><span class="term"><code class="code">SslMode</code></span></dt>
                            <dd>
                               
-                              <p>The Secure Sockets Layer (SSL) mode to use for the SSL connection. The SSL mode can
-                                 be
-                                 one of four values: <code class="code">none</code>, <code class="code">require</code>, <code class="code">verify-ca</code>,
-                                 <code class="code">verify-full</code>. The default value is <code class="code">none</code>.
+                              <p>The Secure Sockets Layer (SSL) mode to use for the SSL connection. The default is
+                                 <code class="code">none</code>
+                                 
                               </p>
                               
                               <p><em>Required</em>: No
@@ -281,7 +297,7 @@ Properties:
                            <dt><a id="cfn-dms-endpoint-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                            <dd>
                               
-                              <p>Tags to be added to the endpoint.</p>
+                              <p>One or more tags to be assigned to the endpoint.</p>
                               
                               <p><em>Required</em>: No
                               </p>
@@ -315,7 +331,8 @@ Properties:
                               
                            </dd>
                         </dl>
-                     </div><h2 id="aws-resource-dms-endpoint--examples">Examples</h2><h3 id="aws-resource-dms-endpoint--examples--"></h3><h4 id="aws-resource-dms-endpoint--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </div><h2 id="aws-resource-dms-endpoint--examples">Examples</h2><h3 id="aws-resource-dms-endpoint--examples--"></h3><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-dms-endpoint--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
   &quot;Resources&quot;: {
     &quot;myBasicEndpoint&quot;: {
@@ -333,7 +350,8 @@ Properties:
       }
     }
   }
-}</code></pre><h4 id="aws-resource-dms-endpoint--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-dms-endpoint--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Description: &quot;Endpoint test&quot;
 Resources: 
   BasicEndpoint: 
@@ -350,7 +368,7 @@ Resources:
           Value: new
       Username: username
     Type: &quot;AWS::DMS::Endpoint&quot;
-</code></pre><h2 id="aws-resource-dms-endpoint--seealso">See Also</h2><div class="itemizedlist">
+</code></pre></div><h2 id="aws-resource-dms-endpoint--seealso">See Also</h2><div class="itemizedlist">
                         
                         
                         

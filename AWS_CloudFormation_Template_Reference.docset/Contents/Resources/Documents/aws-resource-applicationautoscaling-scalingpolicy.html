@@ -58,13 +58,14 @@ Properties:
                            <dt><a id="cfn-applicationautoscaling-scalingpolicy-policytype"></a><span class="term"><code class="code">PolicyType</code></span></dt>
                            <dd>
                               
-                              <p>The Application Auto Scaling policy type. Valid values are <code class="code">StepScaling</code> and
-                                 <code class="code">TargetTrackingScaling</code>.
+                              <p>The Application Auto Scaling policy type. </p>
+                              
+                              <p>The following policy types are supported: </p>
+                              
+                              <p><code class="code">StepScaling</code>&#x2014;Not supported for Amazon DynamoDB
                               </p>
                               
-                              <p>For DynamoDB, only <code class="code">TargetTrackingScaling</code> is supported. For Amazon ECS, Spot
-                                 Fleet, and Amazon RDS, both <code class="code">StepScaling</code> and <code class="code">TargetTrackingScaling</code>
-                                 are supported. For any other service, only <code class="code">StepScaling</code> is supported. 
+                              <p><code class="code">TargetTrackingScaling</code>&#x2014;Not supported for Amazon EMR or AppStream
                               </p>
                               
                               <p><em>Required</em>: Yes
@@ -183,7 +184,8 @@ Properties:
                         with Application Auto Scaling. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_PutScalingPolicy.html">PutScalingPolicy</a> in the <em>Application Auto Scaling API
                            Reference</em>.
                      </p><h3 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_Tracking_Scaling_Policy_with_an_Amazon_DynamoDB_Table">Target Tracking Scaling Policy with an Amazon DynamoDB Table</h3><p>This example both registers a <a href="aws-resource-dynamodb-table.html">AWS::DynamoDB::Table</a> as a scalable target and defines a <code class="code">TargetTrackingScaling</code> scaling policy that scales the <code class="code">WriteCapacityUnits</code> throughput for the table. 
-                     </p><h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_Tracking_Scaling_Policy_with_an_Amazon_DynamoDB_Table--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_Tracking_Scaling_Policy_with_an_Amazon_DynamoDB_Table--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;Resources&quot;:{
     &quot;DDBTable&quot;:{
       &quot;Type&quot;:&quot;AWS::DynamoDB::Table&quot;,
@@ -326,7 +328,8 @@ Properties:
       }
     }
   }
-}</code></pre><h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_Tracking_Scaling_Policy_with_an_Amazon_DynamoDB_Table--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Resources:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_Tracking_Scaling_Policy_with_an_Amazon_DynamoDB_Table--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Resources:
   DDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -418,10 +421,11 @@ Properties:
         ScaleInCooldown: 60
         ScaleOutCooldown: 60
         PredefinedMetricSpecification:
-          PredefinedMetricType: DynamoDBWriteCapacityUtilization</code></pre><h3 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Step_Scaling_Policy_for_Scale_Out">Step Scaling Policy for Scale Out</h3><p>The following example creates a step scaling policy for a specified scalable target.
+          PredefinedMetricType: DynamoDBWriteCapacityUtilization</code></pre></div><h3 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Step_Scaling_Policy_for_Scale_Out">Step Scaling Policy for Scale Out</h3><p>The following example creates a step scaling policy for a specified scalable target.
                         When an associated alarm is triggered, the policy increases the capacity of the scalable
                         target by 200%, with a cooldown period of 60 seconds. 
-                     </p><h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Step_Scaling_Policy_for_Scale_Out--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Step_Scaling_Policy_for_Scale_Out--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;scalingPolicy&quot;:{
     &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalingPolicy&quot;,
     &quot;Properties&quot;:{
@@ -443,7 +447,8 @@ Properties:
       }
     }
   }
-}</code></pre><h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Step_Scaling_Policy_for_Scale_Out--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">scalingPolicy:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Step_Scaling_Policy_for_Scale_Out--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">scalingPolicy:
   Type: AWS::ApplicationAutoScaling::ScalingPolicy
   Properties:
     PolicyName: MyStepPolicy
@@ -456,7 +461,19 @@ Properties:
       MetricAggregationType: Average
       StepAdjustments:
       - MetricIntervalLowerBound: 0
-        ScalingAdjustment: 200</code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+        ScalingAdjustment: 200</code></pre></div><h2 id="aws-resource-applicationautoscaling-scalingpolicy--seealso">See Also</h2><div class="itemizedlist">
+                        
+                        
+                        <ul class="itemizedlist" type="disc">
+                           <li class="listitem">
+                              
+                              <p><a href="https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html">Application Auto Scaling User Guide</a>
+                                 
+                              </p>
+                              
+                           </li>
+                        </ul>
+                     </div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>

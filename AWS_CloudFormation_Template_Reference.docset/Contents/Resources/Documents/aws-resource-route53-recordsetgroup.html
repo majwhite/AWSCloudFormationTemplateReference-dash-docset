@@ -10,8 +10,11 @@
     <div id="content" style="padding: 10px 30px;">
     <h1 class="topictitle" id="aws-resource-route53-recordsetgroup">AWS::Route53::RecordSetGroup</h1><p>A complex type that contains an optional comment, the name and ID of the hosted zone
                         that you want to make changes in, 
-                        			and values for the resource record sets that you want to add, update, or delete.
-                     </p><h2 id="aws-resource-route53-recordsetgroup-syntax">Syntax</h2><p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p><div id="JSON" name="JSON" class="section langfilter">
+                        			and values for the resource record sets that you want to create.
+                     </p><div class="aws-note">
+                        <p class="aws-note">Note</p>
+                        <p>You can&apos;t use AWS CloudFormation to update or delete records.</p>
+                     </div><h2 id="aws-resource-route53-recordsetgroup-syntax">Syntax</h2><p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p><div id="JSON" name="JSON" class="section langfilter">
                         <h3 id="aws-resource-route53-recordsetgroup-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;Type&quot; : &quot;AWS::Route53::RecordSetGroup&quot;,
   &quot;Properties&quot; : {
@@ -63,9 +66,7 @@ Properties:
                            <dt><a id="cfn-route53-recordsetgroup-hostedzonename"></a><span class="term"><code class="code">HostedZoneName</code></span></dt>
                            <dd>
                               		
-                              <p>The name of the hosted zone that you want to create, update, or delete resource record
-                                 sets in.
-                              </p>
+                              <p>The name of the hosted zone that you want to create resource record sets in.</p>
                               	
                               <p><em>Required</em>: No
                               </p>
@@ -77,7 +78,7 @@ Properties:
                            <dt><a id="cfn-route53-recordsetgroup-recordsets"></a><span class="term"><code class="code">RecordSets</code></span></dt>
                            <dd>
                               		
-                              <p>A complex type that contains one <code class="code">RecordSet</code> element for each resource record set that you want to add, update, or delete.
+                              <p>A complex type that contains one <code class="code">RecordSet</code> element for each resource record set that you want to create.
                               </p>
                               	
                               <p><em>Required</em>: No
@@ -89,7 +90,10 @@ Properties:
                      </div><h2 id="aws-resource-route53-recordsetgroup-return-values">Return Values</h2><h3 id="aws-resource-route53-recordsetgroup-return-values-ref">Ref</h3><p>
                         			When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the name of the record set group, for example, <code class="code">MyRecordSetGroup</code>.
                      </p><p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
-                     </p><h2 id="aws-resource-route53-recordsetgroup--examples">Examples</h2><h3 id="aws-resource-route53-recordsetgroup--examples--Mapping_a_Route_53_A_record_to_the_public_IP_of_an_Amazon_EC2_instance">Mapping a Route 53 A record to the public IP of an Amazon EC2 instance</h3><h4 id="aws-resource-route53-recordsetgroup--examples--Mapping_a_Route_53_A_record_to_the_public_IP_of_an_Amazon_EC2_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;Resources&quot; : {
+                     </p><h2 id="aws-resource-route53-recordsetgroup--examples">Examples</h2><p>For more examples, see 
+                        				<a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-route53.html">Route 53 Template Snippets</a>.
+                     </p><h3 id="aws-resource-route53-recordsetgroup--examples--Mapping_a_Route_53_A_record_to_the_public_IP_of_an_Amazon_EC2_instance">Mapping a Route 53 A record to the public IP of an Amazon EC2 instance</h3><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-route53-recordsetgroup--examples--Mapping_a_Route_53_A_record_to_the_public_IP_of_an_Amazon_EC2_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;Resources&quot; : {
    &quot;Ec2Instance&quot; : {
       &quot;Type&quot; : &quot;AWS::EC2::Instance&quot;,
       &quot;Properties&quot; : {
@@ -117,7 +121,8 @@ Properties:
          ]
       }
    }
-}</code></pre><h4 id="aws-resource-route53-recordsetgroup--examples--Mapping_a_Route_53_A_record_to_the_public_IP_of_an_Amazon_EC2_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Resources:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-route53-recordsetgroup--examples--Mapping_a_Route_53_A_record_to_the_public_IP_of_an_Amazon_EC2_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Resources:
   Ec2Instance:
     Type: AWS::EC2::Instance
     Properties:
@@ -131,7 +136,7 @@ Properties:
       Type: A
       TTL: &apos;900&apos;
       ResourceRecords:
-      - !GetAtt Ec2Instance.PublicIp</code></pre><h2 id="aws-resource-route53-recordsetgroup--seealso">See Also</h2><div class="itemizedlist">
+      - !GetAtt Ec2Instance.PublicIp</code></pre></div><h2 id="aws-resource-route53-recordsetgroup--seealso">See Also</h2><div class="itemizedlist">
                         
                         
                         <ul class="itemizedlist" type="disc">

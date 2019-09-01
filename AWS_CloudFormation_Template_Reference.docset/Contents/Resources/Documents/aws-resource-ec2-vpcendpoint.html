@@ -86,7 +86,7 @@ Properties:
                                  <code class="code">enableDnsSupport</code>.
                               </p>
                               
-                              <p>Default: <code class="code">true</code></p>
+                              <p>Default: <code class="code">false</code></p>
                               
                               <p><em>Required</em>: No
                               </p>
@@ -112,7 +112,9 @@ Properties:
                                  endpoint network interface.
                               </p>
                               
-                              <p><em>Required</em>: No
+                              <p>This field is required when the endpoint is an interface.</p>
+                              
+                              <p><em>Required</em>: Conditional
                               </p>
                               <p><em>Type</em>: List of String
                               </p>
@@ -138,7 +140,9 @@ Properties:
                                  network interface.
                               </p>
                               
-                              <p><em>Required</em>: No
+                              <p>This field is required when the endpoint is an interface.</p>
+                              
+                              <p><em>Required</em>: Conditional
                               </p>
                               <p><em>Type</em>: List of String
                               </p>
@@ -163,7 +167,9 @@ Properties:
                               
                               <p>The ID of the VPC in which the endpoint will be used.</p>
                               
-                              <p><em>Required</em>: Yes
+                              <p>This field is required when the endpoint is an interface.</p>
+                              
+                              <p><em>Required</em>: Conditional
                               </p>
                               <p><em>Type</em>: String
                               </p>
@@ -221,7 +227,8 @@ Properties:
                         on the examplebucket bucket. Traffic to S3 within subnets that are associated with
                         the routetableA and routetableB route tables is automatically routed through the VPC
                         endpoint. 
-                     </p><h4 id="aws-resource-ec2-vpcendpoint--examples--VPC_Endpoint--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-ec2-vpcendpoint--examples--VPC_Endpoint--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">
 &quot;S3Endpoint&quot; : {
    &quot;Type&quot; : &quot;AWS::EC2::VPCEndpoint&quot;,
    &quot;Properties&quot; : {
@@ -238,21 +245,23 @@ Properties:
    &quot;ServiceName&quot; : { &quot;Fn::Sub&quot;: &quot;com.amazonaws.${AWS::Region}.s3&quot; },
    &quot;VpcId&quot; : {&quot;Ref&quot; : &quot;VPCID&quot;}
  }
-}</code></pre><h4 id="aws-resource-ec2-vpcendpoint--examples--VPC_Endpoint--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Type: AWS::EC2::VPCEndpoint
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-ec2-vpcendpoint--examples--VPC_Endpoint--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Type: AWS::EC2::VPCEndpoint
 Properties:
   PolicyDocument: 
     Version: 2012-10-17
     Statement:
     - Effect: Allow
+      Principal: &quot;*&quot;
       Action:
-        - &apos;s3:GetObject&apos;
+        - &quot;s3:GetObject&quot;
       Resource:
-        - &apos;arn:aws:s3:::examplebucket/&apos;
+        - &quot;arn:aws:s3:::examplebucket/&quot;
   RouteTableIds:
     - !Ref routetableA
     - !Ref routetableB
   ServiceName: !Sub com.amazonaws.${AWS::Region}.s3
-  VpcId: !Ref VPCID</code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+  VpcId: !Ref VPCID</code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>

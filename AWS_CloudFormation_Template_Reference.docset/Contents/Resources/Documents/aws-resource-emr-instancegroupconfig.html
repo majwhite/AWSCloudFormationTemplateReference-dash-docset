@@ -59,12 +59,8 @@ Properties:
                            <dt><a id="cfn-emr-instancegroupconfig-bidprice"></a><span class="term"><code class="code">BidPrice</code></span></dt>
                            <dd>
                               
-                              <p>The maximum Spot price your are willing to pay for EC2 instances.</p>
-                              
-                              <p>If <code class="code">BidPrice</code> is specified, Amazon EMR uses Spot Instances for the instance group. Specified in
-                                 USD. Alternatively, a value of <code class="code">OnDemandPrice</code> indicates that the maximum Spot price is set equal to the On-Demand price.
+                              <p>The bid price for each EC2 Spot instance type as defined by <code class="code">InstanceType</code>. Expressed in USD. If neither <code class="code">BidPrice</code> nor <code class="code">BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code class="code">BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.
                               </p>
-                              
                               
                               <p><em>Required</em>: No
                               </p>
@@ -181,7 +177,8 @@ Properties:
                      </div><h2 id="aws-resource-emr-instancegroupconfig-return-values">Return Values</h2><h3 id="aws-resource-emr-instancegroupconfig-return-values-ref">Ref</h3><p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns returns the ID of the instance group.
                      </p><p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                      </p><h2 id="aws-resource-emr-instancegroupconfig--examples">Examples</h2><p>Example instance group configuration specifications.</p><h3 id="aws-resource-emr-instancegroupconfig--examples--Add_a_task_instance_group">Add a task instance group</h3><p>The following example adds a task instance group to a cluster named <code class="code">TestCluster</code>.
-                     </p><h4 id="aws-resource-emr-instancegroupconfig--examples--Add_a_task_instance_group--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;TestInstanceGroupConfig&quot;: {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-emr-instancegroupconfig--examples--Add_a_task_instance_group--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;TestInstanceGroupConfig&quot;: {
     &quot;Type&quot;: &quot;AWS: : EMR: : InstanceGroupConfig&quot;,
     &quot;Properties&quot;: {
         &quot;InstanceCount&quot;: 2,
@@ -193,7 +190,8 @@ Properties:
             &quot;Ref&quot;: &quot;cluster&quot;
         }
     }
-}</code></pre><h4 id="aws-resource-emr-instancegroupconfig--examples--Add_a_task_instance_group--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">TestInstanceGroupConfig: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-emr-instancegroupconfig--examples--Add_a_task_instance_group--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">TestInstanceGroupConfig: 
   Properties: 
     InstanceCount: 2
     InstanceRole: TASK
@@ -202,8 +200,9 @@ Properties:
       Ref: cluster
     Market: ON_DEMAND
     Name: cfnTask2
-  Type: &quot;AWS::EMR::InstanceGroupConfig&quot;</code></pre><h3 id="aws-resource-emr-instancegroupconfig--examples--Specify_an_Automatic_Scaling_Policy">Specify an Automatic Scaling Policy</h3><p>The following example defines an <code class="code">AutoScalingPolicy</code> for an <code class="code">InstanceGroupConfig</code> resource.
-                     </p><h4 id="aws-resource-emr-instancegroupconfig--examples--Specify_an_Automatic_Scaling_Policy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;MyInstanceGroupConfig&quot;: {
+  Type: &quot;AWS::EMR::InstanceGroupConfig&quot;</code></pre></div><h3 id="aws-resource-emr-instancegroupconfig--examples--Specify_an_Automatic_Scaling_Policy">Specify an Automatic Scaling Policy</h3><p>The following example defines an <code class="code">AutoScalingPolicy</code> for an <code class="code">InstanceGroupConfig</code> resource.
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-emr-instancegroupconfig--examples--Specify_an_Automatic_Scaling_Policy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;MyInstanceGroupConfig&quot;: {
   &quot;Type&quot;: &quot;AWS::EMR::InstanceGroupConfig&quot;,
   &quot;Properties&quot;: {
     &quot;InstanceCount&quot;: 1,
@@ -287,7 +286,8 @@ Properties:
       ]
     }
   }
-}</code></pre><h4 id="aws-resource-emr-instancegroupconfig--examples--Specify_an_Automatic_Scaling_Policy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">MyInstanceGroupConfig:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-emr-instancegroupconfig--examples--Specify_an_Automatic_Scaling_Policy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">MyInstanceGroupConfig:
   Type: &apos;AWS::EMR::InstanceGroupConfig&apos;
   Properties:
     InstanceCount: 1
@@ -340,7 +340,7 @@ Properties:
               Statistic: AVERAGE
               Threshold: 75
               Unit: PERCENT
-              MetricName: YARNMemoryAvailablePercentage</code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+              MetricName: YARNMemoryAvailablePercentage</code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>

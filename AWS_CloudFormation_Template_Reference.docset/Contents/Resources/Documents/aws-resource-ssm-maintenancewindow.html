@@ -210,7 +210,40 @@ Properties:
                         When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the maintenance window ID, such as
                         <code class="code">mw-abcde1234567890yz</code>.
                      </p><p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
-                     </p><h2 id="aws-resource-ssm-maintenancewindow--seealso">See Also</h2><div class="itemizedlist">
+                     </p><h2 id="aws-resource-ssm-maintenancewindow--examples">Examples</h2><h3 id="aws-resource-ssm-maintenancewindow--examples--AWS_Systems_Manager_Maintenance_Window_Example">AWS Systems Manager Maintenance Window Example</h3><p>The following example creates a Systems Manager maintenance window that runs for two
+                        hours 
+                        with a one hour cutoff every Sunday at 04:00 AM US Eastern Time. The maintenance window
+                        also doesn&apos;t 
+                        allow unregistered targets.
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-ssm-maintenancewindow--examples--AWS_Systems_Manager_Maintenance_Window_Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+  &quot;Resources&quot;: {
+    &quot;MaintenanceWindow&quot;: {
+      &quot;Type&quot;: &quot;AWS::SSM::MaintenanceWindow&quot;,
+      &quot;Properties&quot;: {
+        &quot;AllowUnassociatedTargets&quot;: false,
+        &quot;Cutoff&quot;: 1,
+        &quot;Description&quot;: &quot;Maintenance Window to update SSM Agent&quot;,
+        &quot;Duration&quot;: 2,
+        &quot;Name&quot;: &quot;UpdateSSMAgentMaintenanceWindow&quot;,
+        &quot;Schedule&quot;: &quot;cron(0 4 ? * SUN *)&quot;,
+        &quot;ScheduleTimezone&quot;: &quot;US/Eastern&quot;
+      }
+    }
+  }
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-ssm-maintenancewindow--examples--AWS_Systems_Manager_Maintenance_Window_Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Resources:
+  MaintenanceWindow:
+    Type: AWS::SSM::MaintenanceWindow
+    Properties: 
+      AllowUnassociatedTargets: false
+      Cutoff: 1
+      Description: &quot;Maintenance Window to update SSM Agent&quot;
+      Duration: 2
+      Name: UpdateSSMAgentMaintenanceWindow
+      Schedule: &quot;cron(0 12 ? * SUN *)&quot;
+      ScheduleTimezone: &quot;US/Eastern&quot;</code></pre></div><h2 id="aws-resource-ssm-maintenancewindow--seealso">See Also</h2><div class="itemizedlist">
+                        
                         
                         
                         
@@ -236,7 +269,15 @@ Properties:
                               
                               <p>
                                  <a href="https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateMaintenanceWindow.html">CreateMaintenanceWindow</a> in the <em>AWS Systems Manager API
-                                    Reference</em>
+                                    Reference.</em>
+                                 
+                              </p>
+                              
+                           </li>
+                           <li class="listitem">
+                              
+                              <p>
+                                 <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html">Reference: Cron and Rate Expressions for Systems Manager</a>
                                  
                               </p>
                               

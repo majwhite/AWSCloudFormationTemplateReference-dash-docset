@@ -234,7 +234,8 @@ Properties:
                         </dl>
                      </div><h2 id="aws-resource-config-configrule--examples">Examples</h2><h3 id="aws-resource-config-configrule--examples--Config_Rule">Config Rule</h3><p>The following example uses an AWS managed rule that checks whether EC2 volumes resource
                         types have a CostCenter tag. 
-                     </p><h4 id="aws-resource-config-configrule--examples--Config_Rule--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;ConfigRuleForVolumeTags&quot;: {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-config-configrule--examples--Config_Rule--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;ConfigRuleForVolumeTags&quot;: {
   &quot;Type&quot;: &quot;AWS::Config::ConfigRule&quot;,
   &quot;Properties&quot;: {
     &quot;InputParameters&quot;: {&quot;tag1Key&quot;: &quot;CostCenter&quot;},
@@ -246,7 +247,8 @@ Properties:
       &quot;SourceIdentifier&quot;: &quot;REQUIRED_TAGS&quot;
     }
   }
-}</code></pre><h4 id="aws-resource-config-configrule--examples--Config_Rule--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">ConfigRuleForVolumeTags: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-config-configrule--examples--Config_Rule--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">ConfigRuleForVolumeTags: 
   Type: AWS::Config::ConfigRule
   Properties: 
     InputParameters: 
@@ -256,12 +258,13 @@ Properties:
         - &quot;AWS::EC2::Volume&quot;
     Source: 
       Owner: AWS
-      SourceIdentifier: &quot;REQUIRED_TAGS&quot;</code></pre><h3 id="aws-resource-config-configrule--examples--Rule_Using_Lambda_Function">Rule Using Lambda Function</h3><p>The following example creates a custom configuration rule that uses a Lambda function.
+      SourceIdentifier: &quot;REQUIRED_TAGS&quot;</code></pre></div><h3 id="aws-resource-config-configrule--examples--Rule_Using_Lambda_Function">Rule Using Lambda Function</h3><p>The following example creates a custom configuration rule that uses a Lambda function.
                         The function checks whether an EC2 volume has the AutoEnableIO property set to true.
                         
                         Note that the configuration rule has a dependency on the Lambda policy so that the
                         rule calls the function only after it&apos;s permitted to do so. 
-                     </p><h4 id="aws-resource-config-configrule--examples--Rule_Using_Lambda_Function--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;ConfigPermissionToCallLambda&quot;: {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-config-configrule--examples--Rule_Using_Lambda_Function--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;ConfigPermissionToCallLambda&quot;: {
   &quot;Type&quot;: &quot;AWS::Lambda::Permission&quot;,
   &quot;Properties&quot;: {
     &quot;FunctionName&quot;: {&quot;Fn::GetAtt&quot;: [&quot;VolumeAutoEnableIOComplianceCheck&quot;, &quot;Arn&quot;]},
@@ -336,7 +339,8 @@ Properties:
     }
   },
   &quot;DependsOn&quot;: &quot;ConfigPermissionToCallLambda&quot;
-}</code></pre><h4 id="aws-resource-config-configrule--examples--Rule_Using_Lambda_Function--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">ConfigPermissionToCallLambda: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-config-configrule--examples--Rule_Using_Lambda_Function--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">ConfigPermissionToCallLambda: 
   Type: AWS::Lambda::Permission
   Properties: 
     FunctionName: 
@@ -409,7 +413,7 @@ ConfigRuleForVolumeAutoEnableIO:
         Fn::GetAtt: 
           - VolumeAutoEnableIOComplianceCheck
           - Arn
-  DependsOn: ConfigPermissionToCallLambda</code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+  DependsOn: ConfigPermissionToCallLambda</code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>

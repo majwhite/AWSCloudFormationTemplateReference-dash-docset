@@ -68,10 +68,10 @@ Properties:
                            <dd>
                               
                               <p>Indicates that major version upgrades are allowed. Changing this parameter does not
-                                 result in an outage and the change is asynchronously applied as soon as possible.
+                                 result in an outage, and the change is asynchronously applied as soon as possible.
                               </p>
                               
-                              <p>Constraints: This parameter must be set to true when specifying a value for the
+                              <p>This parameter must be set to <code class="code">true</code> when specifying a value for the
                                  <code class="code">EngineVersion</code> parameter that is a different major version than the
                                  replication instance&apos;s current version.
                               </p>
@@ -85,8 +85,8 @@ Properties:
                            <dt><a id="cfn-dms-replicationinstance-autominorversionupgrade"></a><span class="term"><code class="code">AutoMinorVersionUpgrade</code></span></dt>
                            <dd>
                               
-                              <p>Indicates that minor engine upgrades will be applied automatically to the replication
-                                 instance during the maintenance window.
+                              <p>Indicates whether minor engine upgrades will be applied automatically to the replication
+                                 instance during the maintenance window. This parameter defaults to <code class="code">true</code>.
                               </p>
                               
                               <p>Default: <code class="code">true</code>
@@ -129,13 +129,17 @@ Properties:
                            <dt><a id="cfn-dms-replicationinstance-kmskeyid"></a><span class="term"><code class="code">KmsKeyId</code></span></dt>
                            <dd>
                               
-                              <p>The AWS KMS key identifier that is used to encrypt the content on the replication
-                                 instance. If you don&apos;t specify a value for the <code class="code">KmsKeyId</code> parameter, then
-                                 AWS DMS uses your default encryption key. AWS KMS creates the default encryption key
-                                 for
-                                 your AWS account. Your AWS account has a different default encryption key for each
-                                 AWS
-                                 Region.
+                              <p>An AWS KMS key identifier that is used to encrypt the data on the replication
+                                 instance.
+                              </p>
+                              
+                              <p>If you don&apos;t specify a value for the <code class="code">KmsKeyId</code> parameter, then
+                                 AWS DMS uses your default encryption key.
+                              </p>
+                              
+                              <p>AWS KMS creates the default encryption key for your AWS account. Your AWS account
+                                 has a
+                                 different default encryption key for each AWS Region.
                               </p>
                               
                               <p><em>Required</em>: No
@@ -147,7 +151,8 @@ Properties:
                            <dt><a id="cfn-dms-replicationinstance-multiaz"></a><span class="term"><code class="code">MultiAZ</code></span></dt>
                            <dd>
                               
-                              <p> Specifies if the replication instance is a Multi-AZ deployment. You cannot set the
+                              <p> Specifies whether the replication instance is a Multi-AZ deployment. You cannot set
+                                 the
                                  <code class="code">AvailabilityZone</code> parameter if the Multi-AZ parameter is set to
                                  <code class="code">true</code>. 
                               </p>
@@ -169,8 +174,8 @@ Properties:
                                  
                               </p>
                               
-                              <p>Default: A 30-minute window selected at random from an 8-hour block of time per region,
-                                 occurring on a random day of the week.
+                              <p>Default: A 30-minute window selected at random from an 8-hour block of time per AWS
+                                 Region, occurring on a random day of the week.
                               </p>
                               
                               <p>Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>
@@ -273,7 +278,7 @@ Properties:
                            <dt><a id="cfn-dms-replicationinstance-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                            <dd>
                               
-                              <p>Tags to be associated with the replication instance.</p>
+                              <p>One or more tags to be assigned to the replication instance.</p>
                               
                               <p><em>Required</em>: No
                               </p>
@@ -316,7 +321,8 @@ Properties:
                               
                            </dd>
                         </dl>
-                     </div><h2 id="aws-resource-dms-replicationinstance--examples">Examples</h2><h3 id="aws-resource-dms-replicationinstance--examples--"></h3><h4 id="aws-resource-dms-replicationinstance--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </div><h2 id="aws-resource-dms-replicationinstance--examples">Examples</h2><h3 id="aws-resource-dms-replicationinstance--examples--"></h3><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-dms-replicationinstance--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
     &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
     &quot;Resources&quot;: {
         &quot;BasicReplicationInstance&quot;: {
@@ -326,13 +332,14 @@ Properties:
             }
         }
     }
-}</code></pre><h4 id="aws-resource-dms-replicationinstance--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-dms-replicationinstance--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Resources: 
   BasicReplicationInstance: 
     Properties: 
       ReplicationInstanceClass: dms.t2.small
     Type: &quot;AWS::DMS::ReplicationInstance&quot;
-</code></pre><h2 id="aws-resource-dms-replicationinstance--seealso">See Also</h2><div class="itemizedlist">
+</code></pre></div><h2 id="aws-resource-dms-replicationinstance--seealso">See Also</h2><div class="itemizedlist">
                         
                         
                         

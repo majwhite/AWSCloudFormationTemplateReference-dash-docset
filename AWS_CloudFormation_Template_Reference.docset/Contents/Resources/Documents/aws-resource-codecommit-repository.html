@@ -15,6 +15,7 @@
       &quot;<a href="#cfn-codecommit-repository-code">Code</a>&quot; : <em class="replaceable"><code><a href="aws-properties-codecommit-repository-code.html">Code</a></code></em>,
       &quot;<a href="#cfn-codecommit-repository-repositorydescription">RepositoryDescription</a>&quot; : <em class="replaceable"><code>String</code></em>,
       &quot;<a href="#cfn-codecommit-repository-repositoryname">RepositoryName</a>&quot; : <em class="replaceable"><code>String</code></em>,
+      &quot;<a href="#cfn-codecommit-repository-tags">Tags</a>&quot; : <em class="replaceable"><code>[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code></em>,
       &quot;<a href="#cfn-codecommit-repository-triggers">Triggers</a>&quot; : <em class="replaceable"><code>[ <a href="aws-properties-codecommit-repository-repositorytrigger.html">RepositoryTrigger</a>, ... ]</code></em>
     }
 }
@@ -25,6 +26,8 @@ Properties:
     <a href="aws-properties-codecommit-repository-code.html">Code</a></code></em>
   <a href="#cfn-codecommit-repository-repositorydescription">RepositoryDescription</a>: <em class="replaceable"><code>String</code></em>
   <a href="#cfn-codecommit-repository-repositoryname">RepositoryName</a>: <em class="replaceable"><code>String</code></em>
+  <a href="#cfn-codecommit-repository-tags">Tags</a>: <em class="replaceable"><code>
+    - <a href="aws-properties-resource-tags.html">Tag</a></code></em>
   <a href="#cfn-codecommit-repository-triggers">Triggers</a>: <em class="replaceable"><code>
     - <a href="aws-properties-codecommit-repository-repositorytrigger.html">RepositoryTrigger</a></code></em>
 </code></pre></div><h2 id="aws-resource-codecommit-repository-properties">Properties</h2><div class="variablelist">
@@ -87,6 +90,16 @@ Properties:
                               <p><em>Pattern</em>: <code class="code">[\w\.-]+</code></p>
                               <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                            </dd>
+                           <dt><a id="cfn-codecommit-repository-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                           <dd>
+                              
+                              <p>One or more tag key-value pairs to use when tagging this repository.</p>
+                              
+                              <p><em>Required</em>: No
+                              </p>
+                              <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                           </dd>
                            <dt><a id="cfn-codecommit-repository-triggers"></a><span class="term"><code class="code">Triggers</code></span></dt>
                            <dd>
                               
@@ -95,6 +108,7 @@ Properties:
                               <p><em>Required</em>: No
                               </p>
                               <p><em>Type</em>: List of <a href="aws-properties-codecommit-repository-repositorytrigger.html">RepositoryTrigger</a></p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
                            </dd>
                         </dl>
                      </div><h2 id="aws-resource-codecommit-repository-return-values">Return Values</h2><h3 id="aws-resource-codecommit-repository-return-values-ref">Ref</h3><p>When the logical ID of this resource is provided to the Ref intrinsic function, <code class="code">Ref</code> returns the repository ID. 
@@ -107,39 +121,40 @@ Properties:
                            <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
                            <dd>
                               
-                              <p>
-                                 When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the Amazon Resource Name (ARN) of the repository.
+                              <p>When you pass the logical ID of this resource, the function returns the Amazon Resource
+                                 Name (ARN) of the repository.
                               </p>
                               
                            </dd>
                            <dt><a id="CloneUrlHttp-fn::getatt"></a><span class="term"><code class="code">CloneUrlHttp</code></span></dt>
                            <dd>
                               
-                              <p>
-                                 When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the URL to use for cloning the repository over HTTPS.
+                              <p>When you pass the logical ID of this resource, the function returns the URL to use
+                                 for cloning the repository over HTTPS.
                               </p>
                               
                            </dd>
                            <dt><a id="CloneUrlSsh-fn::getatt"></a><span class="term"><code class="code">CloneUrlSsh</code></span></dt>
                            <dd>
                               
-                              <p>
-                                 When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the URL to use for cloning the repository over SSH.
+                              <p>When you pass the logical ID of this resource, the function returns the URL to use
+                                 for cloning the repository over SSH.
                               </p>
                               
                            </dd>
                            <dt><a id="Name-fn::getatt"></a><span class="term"><code class="code">Name</code></span></dt>
                            <dd>
                               
-                              <p>
-                                 When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the repository&apos;s name.
+                              <p>When you pass the logical ID of this resource, the function returns the repository&apos;s
+                                 name.
                               </p>
                               
                            </dd>
                         </dl>
                      </div><h2 id="aws-resource-codecommit-repository--examples">Examples</h2><h3 id="aws-resource-codecommit-repository--examples--Example">Example</h3><p>The following example creates a CodeCommit repository with a trigger for all events
                         in the Master branch. 
-                     </p><h4 id="aws-resource-codecommit-repository--examples--Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-codecommit-repository--examples--Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
     &quot;MyRepo&quot;: {
         &quot;Type&quot;: &quot;AWS: : CodeCommit: : Repository&quot;,
         &quot;Properties&quot;: {
@@ -162,7 +177,8 @@ Properties:
             ]
         }
     }
-}</code></pre><h4 id="aws-resource-codecommit-repository--examples--Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">MyRepo:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-codecommit-repository--examples--Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">MyRepo:
   Type: AWS::CodeCommit::Repository
   Properties:
     RepositoryName: MyRepoName
@@ -175,7 +191,7 @@ Properties:
       Branches:
       - Master
       Events:
-      - all</code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+      - all</code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>

@@ -93,7 +93,8 @@ Properties:
                      </div><h2 id="aws-resource-apigateway-deployment-return-values">Return Values</h2><h3 id="aws-resource-apigateway-deployment-return-values-ref">Ref</h3><p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the deployment ID, such as <code class="code">123abc</code>.
                      </p><p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                      </p><h2 id="aws-resource-apigateway-deployment--examples">Examples</h2><p>The following sections provide examples for declaring API Gateway deployments.</p><h3 id="aws-resource-apigateway-deployment--examples--Deployment_with_an_empty_embedded_stage">Deployment with an empty embedded stage</h3><p>The following example deploys the <code class="code">MyApi</code> API to a stage named <code class="code">DummyStage</code>.
-                     </p><h4 id="aws-resource-apigateway-deployment--examples--Deployment_with_an_empty_embedded_stage--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-apigateway-deployment--examples--Deployment_with_an_empty_embedded_stage--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
     &quot;Deployment&quot;: {
         &quot;Type&quot;: &quot;AWS::ApiGateway::Deployment&quot;,
         &quot;Properties&quot;: {
@@ -104,16 +105,18 @@ Properties:
             &quot;StageName&quot;: &quot;DummyStage&quot;
         }
     }
-}</code></pre><h4 id="aws-resource-apigateway-deployment--examples--Deployment_with_an_empty_embedded_stage--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Deployment:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-apigateway-deployment--examples--Deployment_with_an_empty_embedded_stage--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Deployment:
   Type: &apos;AWS::ApiGateway::Deployment&apos;
   Properties:
     RestApiId: !Ref MyApi
     Description: My deployment
     StageName: DummyStage
-</code></pre><h3 id="aws-resource-apigateway-deployment--examples--AWS::ApiGateway::Method_Dependency">AWS::ApiGateway::Method Dependency</h3><p>If you create an <a href="aws-resource-apigateway-restapi.html">AWS::ApiGateway::RestApi</a> resource and its methods (using <a href="aws-resource-apigateway-method.html">AWS::ApiGateway::Method</a>) in the same template as your deployment, the deployment must depend on the <code class="code">RestApi</code>&apos;s methods. To create a dependency, add a <code class="code">DependsOn</code> attribute to the deployment. If you don&apos;t, AWS CloudFormation creates the deployment
+</code></pre></div><h3 id="aws-resource-apigateway-deployment--examples--AWS::ApiGateway::Method_Dependency">AWS::ApiGateway::Method Dependency</h3><p>If you create an <a href="aws-resource-apigateway-restapi.html">AWS::ApiGateway::RestApi</a> resource and its methods (using <a href="aws-resource-apigateway-method.html">AWS::ApiGateway::Method</a>) in the same template as your deployment, the deployment must depend on the <code class="code">RestApi</code>&apos;s methods. To create a dependency, add a <code class="code">DependsOn</code> attribute to the deployment. If you don&apos;t, AWS CloudFormation creates the deployment
                         right after it creates the <code class="code">RestApi</code> resource that doesn&apos;t contain any methods, and AWS CloudFormation encounters the
                         following error: <code class="code">The REST API doesn&apos;t contain any methods</code>.
-                     </p><h4 id="aws-resource-apigateway-deployment--examples--AWS::ApiGateway::Method_Dependency--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-apigateway-deployment--examples--AWS::ApiGateway::Method_Dependency--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
     &quot;Deployment&quot;: {
         &quot;DependsOn&quot;: &quot;MyMethod&quot;,
         &quot;Type&quot;: &quot;AWS::ApiGateway::Deployment&quot;,
@@ -125,14 +128,15 @@ Properties:
             &quot;StageName&quot;: &quot;DummyStage&quot;
         }
     }
-}</code></pre><h4 id="aws-resource-apigateway-deployment--examples--AWS::ApiGateway::Method_Dependency--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Deployment:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-apigateway-deployment--examples--AWS::ApiGateway::Method_Dependency--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Deployment:
   DependsOn: MyMethod
   Type: &apos;AWS::ApiGateway::Deployment&apos;
   Properties:
     RestApiId: !Ref MyApi
     Description: My deployment
     StageName: DummyStage
-</code></pre><h2 id="aws-resource-apigateway-deployment--seealso">See Also</h2><div class="itemizedlist">
+</code></pre></div><h2 id="aws-resource-apigateway-deployment--seealso">See Also</h2><div class="itemizedlist">
                         
                         
                         <ul class="itemizedlist" type="disc">

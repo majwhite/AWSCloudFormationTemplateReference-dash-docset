@@ -186,7 +186,8 @@ Properties:
                      </div><h2 id="aws-resource-events-rule--examples">Examples</h2><h3 id="aws-resource-events-rule--examples--Regularly_Invoke_Lambda_Function">Regularly Invoke Lambda Function</h3><p>The following example creates a rule that invokes the specified Lambda function every
                         10 minutes. 
                         The <code class="code">PermissionForEventsToInvokeLambda</code> resource grants CloudWatch Events permission to invoke the associated function. 
-                     </p><h4 id="aws-resource-events-rule--examples--Regularly_Invoke_Lambda_Function--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;ScheduledRule&quot;: {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-events-rule--examples--Regularly_Invoke_Lambda_Function--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;ScheduledRule&quot;: {
   &quot;Type&quot;: &quot;AWS::Events::Rule&quot;,
   &quot;Properties&quot;: {
     &quot;Description&quot;: &quot;ScheduledRule&quot;,
@@ -206,7 +207,8 @@ Properties:
     &quot;Principal&quot;: &quot;events.amazonaws.com&quot;,
     &quot;SourceArn&quot;: { &quot;Fn::GetAtt&quot;: [&quot;ScheduledRule&quot;, &quot;Arn&quot;] }
   }
-}</code></pre><h4 id="aws-resource-events-rule--examples--Regularly_Invoke_Lambda_Function--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">ScheduledRule: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-events-rule--examples--Regularly_Invoke_Lambda_Function--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">ScheduledRule: 
   Type: AWS::Events::Rule
   Properties: 
     Description: &quot;ScheduledRule&quot;
@@ -229,9 +231,10 @@ PermissionForEventsToInvokeLambda:
     SourceArn: 
       Fn::GetAtt: 
         - &quot;ScheduledRule&quot;
-        - &quot;Arn&quot;</code></pre><h3 id="aws-resource-events-rule--examples--Invoke_Lambda_Function_in_Response_to_an_Event">Invoke Lambda Function in Response to an Event</h3><p>The following example creates a rule that invokes the specified Lambda function when
+        - &quot;Arn&quot;</code></pre></div><h3 id="aws-resource-events-rule--examples--Invoke_Lambda_Function_in_Response_to_an_Event">Invoke Lambda Function in Response to an Event</h3><p>The following example creates a rule that invokes the specified Lambda function when
                         any EC2 instance&apos;s state changes to stopping.
-                     </p><h4 id="aws-resource-events-rule--examples--Invoke_Lambda_Function_in_Response_to_an_Event--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;EventRule&quot;: {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-events-rule--examples--Invoke_Lambda_Function_in_Response_to_an_Event--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;EventRule&quot;: {
   &quot;Type&quot;: &quot;AWS::Events::Rule&quot;,
   &quot;Properties&quot;: {
     &quot;Description&quot;: &quot;EventRule&quot;,
@@ -263,7 +266,8 @@ PermissionForEventsToInvokeLambda:
     &quot;Principal&quot;: &quot;events.amazonaws.com&quot;,
     &quot;SourceArn&quot;: { &quot;Fn::GetAtt&quot;: [&quot;EventRule&quot;, &quot;Arn&quot;] }
   }
-}</code></pre><h4 id="aws-resource-events-rule--examples--Invoke_Lambda_Function_in_Response_to_an_Event--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">EventRule: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-events-rule--examples--Invoke_Lambda_Function_in_Response_to_an_Event--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">EventRule: 
   Type: AWS::Events::Rule
   Properties: 
     Description: &quot;EventRule&quot;
@@ -293,12 +297,13 @@ PermissionForEventsToInvokeLambda:
     SourceArn: 
       Fn::GetAtt: 
         - &quot;EventRule&quot;
-        - &quot;Arn&quot;</code></pre><h3 id="aws-resource-events-rule--examples--Notify_a_Topic_in_Response_to_a_Log_Entry">Notify a Topic in Response to a Log Entry</h3><p>The following example creates a rule that notifies an Amazon Simple Notification Service
+        - &quot;Arn&quot;</code></pre></div><h3 id="aws-resource-events-rule--examples--Notify_a_Topic_in_Response_to_a_Log_Entry">Notify a Topic in Response to a Log Entry</h3><p>The following example creates a rule that notifies an Amazon Simple Notification Service
                         
                         topic if an AWS CloudTrail log entry contains a call by the Root user. The <code class="code">EventTopicPolicy </code>
                         resource grants Amazon CloudWatch Events permission to notify the associated Amazon
                         SNS topic. 
-                     </p><h4 id="aws-resource-events-rule--examples--Notify_a_Topic_in_Response_to_a_Log_Entry--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;OpsEventRule&quot;: {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-events-rule--examples--Notify_a_Topic_in_Response_to_a_Log_Entry--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;OpsEventRule&quot;: {
   &quot;Type&quot;: &quot;AWS::Events::Rule&quot;,
   &quot;Properties&quot;: {
     &quot;Description&quot;: &quot;EventRule&quot;,
@@ -334,7 +339,8 @@ PermissionForEventsToInvokeLambda:
     },
     &quot;Topics&quot;: [ { &quot;Ref&quot;: &quot;MySNSTopic&quot; } ]
   }
-}</code></pre><h4 id="aws-resource-events-rule--examples--Notify_a_Topic_in_Response_to_a_Log_Entry--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">OpsEventRule: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-events-rule--examples--Notify_a_Topic_in_Response_to_a_Log_Entry--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">OpsEventRule: 
   Type: AWS::Events::Rule
   Properties: 
     Description: &quot;EventRule&quot;
@@ -362,7 +368,7 @@ EventTopicPolicy:
           Action: &apos;sns:Publish&apos;
           Resource: &apos;*&apos;
     Topics:
-      - !Ref MySNSTopic</code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+      - !Ref MySNSTopic</code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>

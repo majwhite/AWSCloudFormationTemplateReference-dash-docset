@@ -137,6 +137,7 @@ Properties:
                               <p><em>Required</em>: No
                               </p>
                               <p><em>Type</em>: List of <a href="aws-properties-ec2-network-interface-privateipspec.html">PrivateIpAddressSpecification</a></p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
                            </dd>
                            <dt><a id="cfn-awsec2networkinterface-secondaryprivateipcount"></a><span class="term"><code class="code">SecondaryPrivateIpAddressCount</code></span></dt>
                            <dd>
@@ -220,11 +221,12 @@ Properties:
                         <em>Tip</em>
                         
                      </p><p>For more <code class="code">NetworkInterface</code> template examples, 
-                        see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-template-snippets-eni.html">Elastic Network Interface (ENI) Template
+                        see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ec2.html#cfn-template-snippets-eni">Elastic Network Interface (ENI) Template
                            Snippets</a>.
                      </p><h3 id="aws-resource-ec2-network-interface--examples--Simple_Standalone_ENI">Simple Standalone ENI</h3><p>This is a simple standalone Elastic Network Interface (ENI), using all of the available
                         properties.
-                     </p><h4 id="aws-resource-ec2-network-interface--examples--Simple_Standalone_ENI--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;myENI&quot; : {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-ec2-network-interface--examples--Simple_Standalone_ENI--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;myENI&quot; : {
    &quot;Type&quot; : &quot;AWS::EC2::NetworkInterface&quot;,
    &quot;Properties&quot; : {
       &quot;Tags&quot;: [{&quot;Key&quot;:&quot;foo&quot;,&quot;Value&quot;:&quot;bar&quot;}],
@@ -234,7 +236,8 @@ Properties:
       &quot;SubnetId&quot;: &quot;subnet-3z648z53&quot;,
       &quot;PrivateIpAddress&quot;: &quot;10.0.0.16&quot;
    }
-}</code></pre><h4 id="aws-resource-ec2-network-interface--examples--Simple_Standalone_ENI--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">   myENI:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-ec2-network-interface--examples--Simple_Standalone_ENI--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">   myENI:
       Type: AWS::EC2::NetworkInterface
       Properties:
          Tags:
@@ -245,7 +248,7 @@ Properties:
          GroupSet:
          - sg-75zzz219
          SubnetId: subnet-3z648z53
-         PrivateIpAddress: 10.0.0.16</code></pre><h3 id="aws-resource-ec2-network-interface--examples--ENI_on_an_EC2_instance">ENI on an EC2 instance</h3><p>This is an example of an ENI on an EC2 instance. In this example, one ENI is added
+         PrivateIpAddress: 10.0.0.16</code></pre></div><h3 id="aws-resource-ec2-network-interface--examples--ENI_on_an_EC2_instance">ENI on an EC2 instance</h3><p>This is an example of an ENI on an EC2 instance. In this example, one ENI is added
                         to the instance. 
                         If you want to add more than one ENI, you can specify a list for the NetworkInterface
                         property. 
@@ -254,7 +257,8 @@ Properties:
                         (no associated public IP address). If you have an ENI with a public IP address, specify
                         it 
                         and then use the <code class="code">AWS::EC2::NetworkInterfaceAttachment</code> resource to add additional ENIs.
-                     </p><h4 id="aws-resource-ec2-network-interface--examples--ENI_on_an_EC2_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;Ec2Instance&quot; : {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-ec2-network-interface--examples--ENI_on_an_EC2_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;Ec2Instance&quot; : {
    &quot;Type&quot; : &quot;AWS::EC2::Instance&quot;,
    &quot;Properties&quot; : {
       &quot;ImageId&quot; : { &quot;Fn::FindInMap&quot; : [ &quot;RegionMap&quot;, { &quot;Ref&quot; : &quot;AWS::Region&quot; }, &quot;AMI&quot; ]},
@@ -266,7 +270,8 @@ Properties:
       &quot;Tags&quot; : [ {&quot;Key&quot; : &quot;Role&quot;, &quot;Value&quot; : &quot;Test Instance&quot;}],
       &quot;UserData&quot; : { &quot;Fn::Base64&quot; : { &quot;Ref&quot; : &quot;WebServerPort&quot; }}
    }
-}</code></pre><h4 id="aws-resource-ec2-network-interface--examples--ENI_on_an_EC2_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Ec2Instance:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-ec2-network-interface--examples--ENI_on_an_EC2_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Ec2Instance:
    Type: AWS::EC2::Instance
    Properties:
       ImageId:
@@ -289,7 +294,7 @@ Properties:
         Value: Test Instance
       UserData:
          Fn::Base64:
-            Ref: WebServerPort</code></pre><h2 id="aws-resource-ec2-network-interface--seealso">See Also</h2><div class="itemizedlist">
+            Ref: WebServerPort</code></pre></div><h2 id="aws-resource-ec2-network-interface--seealso">See Also</h2><div class="itemizedlist">
                         
                         
                         <ul class="itemizedlist" type="disc">

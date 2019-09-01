@@ -520,7 +520,8 @@ Properties:
                      </div><h2 id="aws-resource-opsworks-instance--examples">Examples</h2><h3 id="aws-resource-opsworks-instance--examples--Create_Basic_AWS_OpsWorks_Instances">Create Basic AWS OpsWorks Instances</h3><p>The following example creates two AWS OpsWorks instances that are associated with
                         the <code class="code">myStack</code> AWS OpsWorks stack and the <code class="code">myLayer</code> AWS OpsWorks
                         layer:
-                     </p><h4 id="aws-resource-opsworks-instance--examples--Create_Basic_AWS_OpsWorks_Instances--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;myInstance1&quot; : {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-opsworks-instance--examples--Create_Basic_AWS_OpsWorks_Instances--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;myInstance1&quot; : {
   &quot;Type&quot; : &quot;AWS::OpsWorks::Instance&quot;,
   &quot;Properties&quot; : {
     &quot;StackId&quot; : {&quot;Ref&quot;:&quot;myStack&quot;},
@@ -536,7 +537,8 @@ Properties:
     &quot;LayerIds&quot; : [{&quot;Ref&quot;:&quot;myLayer&quot;}],
     &quot;InstanceType&quot; : &quot;m1.small&quot;
   }
-}</code></pre><h4 id="aws-resource-opsworks-instance--examples--Create_Basic_AWS_OpsWorks_Instances--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myInstance1: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-opsworks-instance--examples--Create_Basic_AWS_OpsWorks_Instances--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">myInstance1: 
   Type: &quot;AWS::OpsWorks::Instance&quot;
   Properties: 
     StackId: 
@@ -553,11 +555,12 @@ myInstance2:
     LayerIds: 
       - 
         Ref: &quot;myLayer&quot;
-    InstanceType: &quot;m1.small&quot;</code></pre><h3 id="aws-resource-opsworks-instance--examples--Define_a_Time-based_Auto_Scaling_Instance">Define a Time-based Auto Scaling Instance</h3><p>In the following example, the <code class="code">DBInstance</code> instance is online for four
+    InstanceType: &quot;m1.small&quot;</code></pre></div><h3 id="aws-resource-opsworks-instance--examples--Define_a_Time-based_Auto_Scaling_Instance">Define a Time-based Auto Scaling Instance</h3><p>In the following example, the <code class="code">DBInstance</code> instance is online for four
                         hours from UTC 1200-1600 on Friday, Saturday, and Sunday. The instance is offline
                         for
                         all other times and days.
-                     </p><h4 id="aws-resource-opsworks-instance--examples--Define_a_Time-based_Auto_Scaling_Instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;DBInstance&quot; : {
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-opsworks-instance--examples--Define_a_Time-based_Auto_Scaling_Instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;DBInstance&quot; : {
   &quot;Type&quot; : &quot;AWS::OpsWorks::Instance&quot;,
   &quot;Properties&quot; : {
     &quot;AutoScalingType&quot; : &quot;timer&quot;,
@@ -570,7 +573,8 @@ myInstance2:
       &quot;Sunday&quot; : { &quot;12&quot; : &quot;on&quot;, &quot;13&quot; : &quot;on&quot;, &quot;14&quot; : &quot;on&quot;, &quot;15&quot; : &quot;on&quot; }
     }
   }
-}</code></pre><h4 id="aws-resource-opsworks-instance--examples--Define_a_Time-based_Auto_Scaling_Instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">DBInstance: 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-opsworks-instance--examples--Define_a_Time-based_Auto_Scaling_Instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">DBInstance: 
   Type: &quot;AWS::OpsWorks::Instance&quot;
   Properties: 
     AutoScalingType: &quot;timer&quot;
@@ -581,20 +585,20 @@ myInstance2:
     InstanceType: &quot;m1.small&quot;
     TimeBasedAutoScaling: 
       Friday: 
-        12: &quot;on&quot;
-        13: &quot;on&quot;
-        14: &quot;on&quot;
-        15: &quot;on&quot;
+        &quot;12&quot;: &quot;on&quot;
+        &quot;13&quot;: &quot;on&quot;
+        &quot;14&quot;: &quot;on&quot;
+        &quot;15&quot;: &quot;on&quot;
       Saturday: 
-        12: &quot;on&quot;
-        13: &quot;on&quot;
-        14: &quot;on&quot;
-        15: &quot;on&quot;
+        &quot;12&quot;: &quot;on&quot;
+        &quot;13&quot;: &quot;on&quot;
+        &quot;14&quot;: &quot;on&quot;
+        &quot;15&quot;: &quot;on&quot;
       Sunday: 
-        12: &quot;on&quot;
-        13: &quot;on&quot;
-        14: &quot;on&quot;
-        15: &quot;on&quot;</code></pre><h2 id="aws-resource-opsworks-instance--seealso">See Also</h2><div class="itemizedlist">
+        &quot;12&quot;: &quot;on&quot;
+        &quot;13&quot;: &quot;on&quot;
+        &quot;14&quot;: &quot;on&quot;
+        &quot;15&quot;: &quot;on&quot;</code></pre></div><h2 id="aws-resource-opsworks-instance--seealso">See Also</h2><div class="itemizedlist">
                         
                         
                         

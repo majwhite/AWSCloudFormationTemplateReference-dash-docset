@@ -22,7 +22,8 @@
       &quot;<a href="#cfn-applicationautoscaling-scalabletarget-rolearn">RoleARN</a>&quot; : <em class="replaceable"><code>String</code></em>,
       &quot;<a href="#cfn-applicationautoscaling-scalabletarget-scalabledimension">ScalableDimension</a>&quot; : <em class="replaceable"><code>String</code></em>,
       &quot;<a href="#cfn-applicationautoscaling-scalabletarget-scheduledactions">ScheduledActions</a>&quot; : <em class="replaceable"><code>[ <a href="aws-properties-applicationautoscaling-scalabletarget-scheduledaction.html">ScheduledAction</a>, ... ]</code></em>,
-      &quot;<a href="#cfn-applicationautoscaling-scalabletarget-servicenamespace">ServiceNamespace</a>&quot; : <em class="replaceable"><code>String</code></em>
+      &quot;<a href="#cfn-applicationautoscaling-scalabletarget-servicenamespace">ServiceNamespace</a>&quot; : <em class="replaceable"><code>String</code></em>,
+      &quot;<a href="#cfn-applicationautoscaling-scalabletarget-suspendedstate">SuspendedState</a>&quot; : <em class="replaceable"><code><a href="aws-properties-applicationautoscaling-scalabletarget-suspendedstate.html">SuspendedState</a></code></em>
     }
 }
 </code></pre></div><div id="YAML" name="YAML" class="section langfilter">
@@ -36,6 +37,8 @@ Properties:
   <a href="#cfn-applicationautoscaling-scalabletarget-scheduledactions">ScheduledActions</a>: <em class="replaceable"><code>
     - <a href="aws-properties-applicationautoscaling-scalabletarget-scheduledaction.html">ScheduledAction</a></code></em>
   <a href="#cfn-applicationautoscaling-scalabletarget-servicenamespace">ServiceNamespace</a>: <em class="replaceable"><code>String</code></em>
+  <a href="#cfn-applicationautoscaling-scalabletarget-suspendedstate">SuspendedState</a>: <em class="replaceable"><code>
+    <a href="aws-properties-applicationautoscaling-scalabletarget-suspendedstate.html">SuspendedState</a></code></em>
 </code></pre></div><h2 id="aws-resource-applicationautoscaling-scalabletarget-properties">Properties</h2><div class="variablelist">
                         <dl>
                            <dt><a id="cfn-applicationautoscaling-scalabletarget-maxcapacity"></a><span class="term"><code class="code">MaxCapacity</code></span></dt>
@@ -131,6 +134,56 @@ Properties:
                               </p>
                               <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                            </dd>
+                           <dt><a id="cfn-applicationautoscaling-scalabletarget-suspendedstate"></a><span class="term"><code class="code">SuspendedState</code></span></dt>
+                           <dd>
+                              
+                              <p>An embedded object that contains attributes and attribute values that are used to
+                                 suspend and resume automatic scaling. Setting the value of an attribute to
+                                 <code class="code">true</code> suspends the specified scaling activities. Setting it to
+                                 <code class="code">false</code> (default) resumes the specified scaling activities. 
+                              </p>
+                              
+                              <p><b>Suspension Outcomes</b></p>
+                              
+                              <div class="itemizedlist">
+                                 
+                                 
+                                 
+                                 
+                                 <ul class="itemizedlist" type="disc">
+                                    <li class="listitem">
+                                       
+                                       <p>For <code class="code">DynamicScalingInSuspended</code>, while a suspension is in effect, all
+                                          scale-in activities that are triggered by a scaling policy are suspended.
+                                       </p>
+                                       
+                                    </li>
+                                    <li class="listitem">
+                                       
+                                       <p>For <code class="code">DynamicScalingOutSuspended</code>, while a suspension is in effect, all
+                                          scale-out activities that are triggered by a scaling policy are suspended.
+                                       </p>
+                                       
+                                    </li>
+                                    <li class="listitem">
+                                       
+                                       <p>For <code class="code">ScheduledScalingSuspended</code>, while a suspension is in effect, all
+                                          scaling activities that involve scheduled actions are suspended. 
+                                       </p>
+                                       
+                                    </li>
+                                 </ul>
+                              </div>
+                              
+                              <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html">Suspend and Resume Application Auto Scaling</a> in the <em>Application Auto Scaling User
+                                    Guide</em>.
+                              </p>
+                              
+                              <p><em>Required</em>: No
+                              </p>
+                              <p><em>Type</em>: <a href="aws-properties-applicationautoscaling-scalabletarget-suspendedstate.html">SuspendedState</a></p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                           </dd>
                         </dl>
                      </div><h2 id="aws-resource-applicationautoscaling-scalabletarget-return-values">Return Values</h2><h3 id="aws-resource-applicationautoscaling-scalabletarget-return-values-ref">Ref</h3><p>When the logical ID of this resource is provided to the <code class="code">Ref</code> intrinsic
                         function, <code class="code">Ref</code> returns the AWS CloudFormation-generated ID of the resource. For example: <code class="code">service/ecsStack-MyECSCluster-AB12CDE3F4GH/ecsStack-MyECSService-AB12CDE3F4GH|ecs:service:DesiredCount|ecs</code>. 
@@ -144,7 +197,8 @@ Properties:
                            Reference</em>.
                      </p><h3 id="aws-resource-applicationautoscaling-scalabletarget--examples--Register_a_Scalable_Target">Register a Scalable Target</h3><p>The following example creates a scalable target for an <a href="aws-resource-ecs-service.html">AWS::ECS::Service</a>. Application Auto Scaling can scale the number of tasks at a
                         minimum of 1 task and a maximum of 2.
-                     </p><h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Register_a_Scalable_Target--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Register_a_Scalable_Target--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;scalableTarget&quot;:{
     &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalableTarget&quot;,
     &quot;Properties&quot;:{
@@ -156,7 +210,8 @@ Properties:
       &quot;ServiceNamespace&quot;:&quot;ecs&quot;
       }
     }
-  }</code></pre><h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Register_a_Scalable_Target--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">scalableTarget:
+  }</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Register_a_Scalable_Target--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">scalableTarget:
   Type: AWS::ApplicationAutoScaling::ScalableTarget
   Properties:
     MaxCapacity: 2
@@ -164,10 +219,11 @@ Properties:
     ResourceId: service/ecsStack-MyECSCluster-AB12CDE3F4GH/ecsStack-MyECSService-AB12CDE3F4GH
     RoleARN: !GetAtt [ ApplicationAutoScalingRole, Arn ]
     ScalableDimension: ecs:service:DesiredCount
-    ServiceNamespace: ecs</code></pre><h3 id="aws-resource-applicationautoscaling-scalabletarget--examples--Using_Functions_to_Construct_the_Resource_ID">Using Functions to Construct the Resource ID</h3><p>The following example uses the <a href="intrinsic-function-reference-join.html">Fn::Join</a> and
+    ServiceNamespace: ecs</code></pre></div><h3 id="aws-resource-applicationautoscaling-scalabletarget--examples--Using_Functions_to_Construct_the_Resource_ID">Using Functions to Construct the Resource ID</h3><p>The following example uses the <a href="intrinsic-function-reference-join.html">Fn::Join</a> and
                         <code class="code">Ref</code> intrinsic functions to construct the <code class="code">ResourceId</code> property
                         of the scaling target. 
-                     </p><h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Using_Functions_to_Construct_the_Resource_ID--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Using_Functions_to_Construct_the_Resource_ID--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;SpotFleetScalingTarget&quot;:{
     &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalableTarget&quot;,
     &quot;Properties&quot;:{
@@ -194,7 +250,8 @@ Properties:
       &quot;ServiceNamespace&quot;:&quot;ec2&quot;
     }
   }
-}</code></pre><h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Using_Functions_to_Construct_the_Resource_ID--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">SpotFleetScalingTarget:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Using_Functions_to_Construct_the_Resource_ID--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">SpotFleetScalingTarget:
   Type: AWS::ApplicationAutoScaling::ScalableTarget
   Properties:
     MaxCapacity: 2
@@ -207,10 +264,11 @@ Properties:
       - AutoScalingRole
       - Arn
     ScalableDimension: &apos;ec2:spot-fleet-request:TargetCapacity&apos;
-    ServiceNamespace: ec2</code></pre><h3 id="aws-resource-applicationautoscaling-scalabletarget--examples--Application_Auto_Scaling_Scalable_Target_with_an_Amazon_DynamoDB_Table">Application Auto Scaling Scalable Target with an Amazon DynamoDB Table</h3><p>This example registers an <a href="aws-resource-dynamodb-table.html">AWS::DynamoDB::Table</a> as a scalable target. It also defines a
+    ServiceNamespace: ec2</code></pre></div><h3 id="aws-resource-applicationautoscaling-scalabletarget--examples--Application_Auto_Scaling_Scalable_Target_with_an_Amazon_DynamoDB_Table">Application Auto Scaling Scalable Target with an Amazon DynamoDB Table</h3><p>This example registers an <a href="aws-resource-dynamodb-table.html">AWS::DynamoDB::Table</a> as a scalable target. It also defines a
                         <code class="code">TargetTrackingScaling</code> scaling policy that scales the
                         <code class="code">WriteCapacityUnits</code> throughput for the table. 
-                     </p><h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Application_Auto_Scaling_Scalable_Target_with_an_Amazon_DynamoDB_Table--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Application_Auto_Scaling_Scalable_Target_with_an_Amazon_DynamoDB_Table--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;Resources&quot;:{
     &quot;DDBTable&quot;:{
       &quot;Type&quot;:&quot;AWS::DynamoDB::Table&quot;,
@@ -353,7 +411,8 @@ Properties:
       }
     }
   }
-}</code></pre><h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Application_Auto_Scaling_Scalable_Target_with_an_Amazon_DynamoDB_Table--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Resources:
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Application_Auto_Scaling_Scalable_Target_with_an_Amazon_DynamoDB_Table--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Resources:
   DDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -443,10 +502,11 @@ Properties:
         ScaleInCooldown: 60
         ScaleOutCooldown: 60
         PredefinedMetricSpecification:
-          PredefinedMetricType: DynamoDBWriteCapacityUtilization</code></pre><h3 id="aws-resource-applicationautoscaling-scalabletarget--examples--Scheduled_Actions">Scheduled Actions</h3><p>The following example creates a <a href="aws-properties-applicationautoscaling-scalabletarget-scheduledaction.html">ScheduledAction</a> for a scalable
+          PredefinedMetricType: DynamoDBWriteCapacityUtilization</code></pre></div><h3 id="aws-resource-applicationautoscaling-scalabletarget--examples--Scheduled_Actions">Scheduled Actions</h3><p>The following example creates a <a href="aws-properties-applicationautoscaling-scalabletarget-scheduledaction.html">ScheduledAction</a> for a scalable
                         target. 
-                     </p><h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Scheduled_Actions--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
-  &quot;AWSTemplateFormatVersion&quot;:&quot;2018-09-09&quot;,
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Scheduled_Actions--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+  &quot;AWSTemplateFormatVersion&quot;:&quot;2010-09-09&quot;,
   &quot;Description&quot;:&quot;Creating ECS service&quot;,
   &quot;Parameters&quot;:{
     &quot;AppName&quot;:{
@@ -651,7 +711,8 @@ Properties:
       }
     }
   }
-}</code></pre><h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Scheduled_Actions--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2018-09-09
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Scheduled_Actions--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Description: Creating ECS service
 Parameters:
   AppName:
@@ -763,7 +824,19 @@ Outputs:
       - /
       - - service
         - !Ref cluster
-        - !GetAtt service.Name</code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+        - !GetAtt service.Name</code></pre></div><h2 id="aws-resource-applicationautoscaling-scalabletarget--seealso">See Also</h2><div class="itemizedlist">
+                        
+                        
+                        <ul class="itemizedlist" type="disc">
+                           <li class="listitem">
+                              
+                              <p><a href="https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html">Application Auto Scaling User Guide</a>
+                                 
+                              </p>
+                              
+                           </li>
+                        </ul>
+                     </div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>

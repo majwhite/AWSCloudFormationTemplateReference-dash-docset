@@ -39,7 +39,8 @@ Properties:
                            <dd>
                               
                               <p>
-                                 A Boolean value; set to <b>true</b> to activate the subscription, set to <b>false</b> to create the subscription but not active it.
+                                 A value that indicates whether to activate the subscription. If the event notification
+                                 subscription is not activated, the subscription is created but not active.
                                  
                               </p>
                               
@@ -54,11 +55,13 @@ Properties:
                               
                               <p>
                                  A list of event categories for a SourceType that you want to subscribe to. You can
-                                 see a list of the categories for a given SourceType 
-                                 in the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html">Events</a> topic in the Amazon RDS User Guide  
+                                 see a list of the categories 
+                                 for a given SourceType 
+                                 in the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html">Events</a> topic 
+                                 in the <em>Amazon RDS User Guide</em> 
                                  or by using the <b>DescribeEventCategories</b> action.
                                  
-                              </p>  
+                              </p>
                               
                               <p><em>Required</em>: No
                               </p>
@@ -82,10 +85,10 @@ Properties:
                            <dt><a id="cfn-rds-eventsubscription-sourceids"></a><span class="term"><code class="code">SourceIds</code></span></dt>
                            <dd>
                               
-                              <p>The list of identifiers of the event sources for which events will be returned. If
-                                 not specified, then all sources are included in the response. An identifier must begin
-                                 with a letter and must contain only ASCII letters, digits, and hyphens; it cannot
-                                 end with a hyphen or contain two consecutive hyphens.
+                              <p>The list of identifiers of the event sources for which events are returned. If not
+                                 specified, then all sources are included in the response. An identifier must begin
+                                 with a letter and must contain only ASCII letters, digits, and hyphens; it can&apos;t end
+                                 with a hyphen or contain two consecutive hyphens.
                               </p>
                               
                               <p>Constraints:</p>
@@ -105,22 +108,26 @@ Properties:
                                     </li>
                                     <li class="listitem">
                                        
-                                       <p>If the source type is a DB instance, then a DBInstanceIdentifier must be supplied.</p>
+                                       <p>If the source type is a DB instance, then a <code class="code">DBInstanceIdentifier</code> must be supplied.
+                                       </p>
                                        
                                     </li>
                                     <li class="listitem">
                                        
-                                       <p>If the source type is a DB security group, a DBSecurityGroupName must be supplied.</p>
+                                       <p>If the source type is a DB security group, a <code class="code">DBSecurityGroupName</code> must be supplied.
+                                       </p>
                                        
                                     </li>
                                     <li class="listitem">
                                        
-                                       <p>If the source type is a DB parameter group, a DBParameterGroupName must be supplied.</p>
+                                       <p>If the source type is a DB parameter group, a <code class="code">DBParameterGroupName</code> must be supplied.
+                                       </p>
                                        
                                     </li>
                                     <li class="listitem">
                                        
-                                       <p>If the source type is a DB Snapshot, a DBSnapshotIdentifier must be supplied.</p>
+                                       <p>If the source type is a DB snapshot, a <code class="code">DBSnapshotIdentifier</code> must be supplied.
+                                       </p>
                                        
                                     </li>
                                  </ul>
@@ -135,17 +142,21 @@ Properties:
                            <dt><a id="cfn-rds-eventsubscription-sourcetype"></a><span class="term"><code class="code">SourceType</code></span></dt>
                            <dd>
                               
-                              <p>The type of source that will be generating the events. For example, if you want to
-                                 be notified of events generated by a DB instance, you would set this parameter to
-                                 db-instance. if this value is not specified, all events are returned.
+                              <p>The type of source that is generating the events. For example, if you want to be notified
+                                 of 
+                                 events generated by a DB instance, you would set this parameter to db-instance. if
+                                 this value is not specified, all events are returned.
                               </p>
                               
-                              <p>Valid values: db-instance | db-parameter-group | db-security-group | db-snapshot</p>
+                              <p>Valid values: <code class="code">db-instance</code> | <code class="code">db-cluster</code> | <code class="code">db-parameter-group</code> | <code class="code">db-security-group</code> | <code class="code">db-snapshot</code> | <code class="code">db-cluster-snapshot</code> 
+                                 
+                              </p>
                               
                               <p><em>Required</em>: No
                               </p>
                               <p><em>Type</em>: String
                               </p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
                            </dd>
                         </dl>
                      </div><h2 id="aws-resource-rds-eventsubscription-return-values">Return Values</h2><h3 id="aws-resource-rds-eventsubscription-return-values-ref">Ref</h3><p>
@@ -154,7 +165,8 @@ Properties:
                      </p><h2 id="aws-resource-rds-eventsubscription--examples">Examples</h2><h3 id="aws-resource-rds-eventsubscription--examples--"></h3><p>The following example creates an event subscription for an existing database
                         instance <code class="code">db-instance-1</code> and a database with the logical ID <code class="code">myDBInstance</code>, which is
                         declared elsewhere in the same template. 
-                     </p><h4 id="aws-resource-rds-eventsubscription--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-rds-eventsubscription--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
     &quot;myEventSubscription&quot;: {
         &quot;Type&quot;: &quot;AWS::RDS::EventSubscription&quot;,
         &quot;Properties&quot;: {
@@ -174,7 +186,8 @@ Properties:
             &quot;Enabled&quot;: false
         }
     }
-}</code></pre><h4 id="aws-resource-rds-eventsubscription--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">--- 
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-rds-eventsubscription--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">--- 
 myEventSubscription: 
   Properties: 
     Enabled: false
@@ -189,7 +202,7 @@ myEventSubscription:
         Ref: myDBInstance
     SourceType: db-instance
   Type: &quot;AWS::RDS::EventSubscription&quot;
-</code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+</code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>

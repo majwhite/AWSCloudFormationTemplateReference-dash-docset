@@ -88,13 +88,13 @@ Properties:
                            <dt><a id="cfn-dms-eventsubscription-sourceids"></a><span class="term"><code class="code">SourceIds</code></span></dt>
                            <dd>
                               
-                              <p> The list of identifiers of the event sources for which events will be returned. If
-                                 not
-                                 specified, then all sources are included in the response. An identifier must begin
-                                 with a
-                                 letter and must contain only ASCII letters, digits, and hyphens; it cannot end with
-                                 a
-                                 hyphen or contain two consecutive hyphens. 
+                              <p>A list of identifiers for which AWS DMS provides notification events.</p>
+                              
+                              <p>If you don&apos;t specify a value, notifications are provided for all sources.</p>
+                              
+                              <p>If you specify multiple values, they must be of the same type. For example, if you
+                                 specify a database instance ID, then all of the other values must be database instance
+                                 IDs.
                               </p>
                               
                               <p><em>Required</em>: No
@@ -113,7 +113,9 @@ Properties:
                                  returned. 
                               </p>
                               
-                              <p>Valid values: replication-instance | migration-task</p>
+                              <p>Valid values: <code class="code">replication-instance</code> | <code class="code">replication-task</code>
+                                 
+                              </p>
                               
                               <p><em>Required</em>: No
                               </p>
@@ -124,9 +126,9 @@ Properties:
                            <dt><a id="cfn-dms-eventsubscription-subscriptionname"></a><span class="term"><code class="code">SubscriptionName</code></span></dt>
                            <dd>
                               
-                              <p>The name of the AWS DMS event notification subscription. </p>
-                              
-                              <p>Constraints: The name must be less than 255 characters. </p>
+                              <p>The name of the AWS DMS event notification subscription. This name must be less than
+                                 255 characters.
+                              </p>
                               
                               <p><em>Required</em>: No
                               </p>
@@ -137,7 +139,7 @@ Properties:
                            <dt><a id="cfn-dms-eventsubscription-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                            <dd>
                               
-                              <p>A tag to be attached to the event subscription.</p>
+                              <p>One or more tags to be assigned to the event subscription.</p>
                               
                               <p><em>Required</em>: No
                               </p>
@@ -157,7 +159,8 @@ Properties:
                      </p><h2 id="aws-resource-dms-eventsubscription--examples">Examples</h2><h3 id="aws-resource-dms-eventsubscription--examples--"></h3><p>The following snippet creates an event subscription for an existing
                         replication instance <code class="code">rep-instance-1</code>, which is declared elsewhere in
                         the same template.
-                     </p><h4 id="aws-resource-dms-eventsubscription--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-dms-eventsubscription--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
     &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
     &quot;Resources&quot;: {
         &quot;myEventSubscription&quot;: {
@@ -177,7 +180,8 @@ Properties:
             }
         }
     }
-}</code></pre><h4 id="aws-resource-dms-eventsubscription--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-dms-eventsubscription--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Resources: 
   myEventSubscription: 
     Properties: 
@@ -191,7 +195,7 @@ Resources:
         - rep-instance-1
       SourceType: replication-instance
     Type: &quot;AWS::DMS::EventSubscription&quot;
-</code></pre><h2 id="aws-resource-dms-eventsubscription--seealso">See Also</h2><div class="itemizedlist">
+</code></pre></div><h2 id="aws-resource-dms-eventsubscription--seealso">See Also</h2><div class="itemizedlist">
                         
                         
                         

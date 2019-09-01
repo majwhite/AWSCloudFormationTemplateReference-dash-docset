@@ -168,6 +168,7 @@ Properties:
                               <p><em>Required</em>: Yes
                               </p>
                               <p><em>Type</em>: <a href="aws-properties-elasticmapreduce-cluster-jobflowinstancesconfig.html">JobFlowInstancesConfig</a></p>
+                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
                            </dd>
                            <dt><a id="cfn-elasticmapreduce-cluster-jobflowrole"></a><span class="term"><code class="code">JobFlowRole</code></span></dt>
                            <dd>
@@ -224,8 +225,8 @@ Properties:
                            <dd>
                               
                               <p>The Amazon EMR release label, which determines the version of open-source application
-                                 packages installed on the cluster. Release labels are in the form <code class="code">emr-x.x.x</code>, where x.x.x is an Amazon EMR release version, for example, <code class="code">emr-5.14.0</code>. For more information about Amazon EMR release versions and included application
-                                 versions and features, see <a href="https://docs.aws.amazon.com/emr/latest/ReleaseGuide/">https://docs.aws.amazon.com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases versions 4.x and later. Earlier
+                                 packages installed on the cluster. Release labels are in the form <code class="code">emr-x.x.x</code>, where x.x.x is an Amazon EMR release version such as <code class="code">emr-5.14.0</code>. For more information about Amazon EMR release versions and included application
+                                 versions and features, see <a href="https://docs.aws.amazon.com/emr/latest/ReleaseGuide/">https://docs.aws.amazon.com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases version 4.0 and later. Earlier
                                  versions use <code class="code">AmiVersion</code>.
                               </p>
                               
@@ -311,7 +312,14 @@ Properties:
                                  proper policy permissions set. 
                                  If this value is <code class="code">false</code>, only the IAM user that created the cluster can view and manage it. This value can
                                  be changed using the SetVisibleToAllUsers action.
-                              </p>      
+                              </p>
+                              
+                              <div class="aws-note">
+                                 <p class="aws-note">Note</p>
+                                 <p>When you create clusters directly through the EMR console or API, this value is set
+                                    to <code class="code">true</code> by default. However, for <code class="code">AWS::EMR::Cluster</code> resources in CloudFormation, the default is <code class="code">false</code>.
+                                 </p>
+                              </div>
                               
                               <p><em>Required</em>: No
                               </p>
@@ -337,7 +345,8 @@ Properties:
                         </dl>
                      </div><h2 id="aws-resource-elasticmapreduce-cluster--examples">Examples</h2><p>Create cluster examples.</p><h3 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_Using_a_Custom_AMI_for_EC2_Instances">Create a Cluster Using a Custom AMI for EC2 Instances</h3><p>The following example template specifies a cluster using a custom Amazon Linux AMI
                         for the EC2 instances in the cluster.
-                     </p><h4 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_Using_a_Custom_AMI_for_EC2_Instances--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_Using_a_Custom_AMI_for_EC2_Instances--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
   &quot;Parameters&quot; : {
     &quot;CustomAmiId&quot; : {
@@ -447,7 +456,8 @@ Properties:
       }
     }
   }
-}</code></pre><h4 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_Using_a_Custom_AMI_for_EC2_Instances--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_Using_a_Custom_AMI_for_EC2_Instances--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   CustomAmiId:
     Type: String
@@ -523,9 +533,10 @@ Resources:
     Properties:
       Path: /
       Roles:
-        - !Ref emrEc2Role</code></pre><h3 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_and_Specify_the_Root_Volume_Size_of_EC2_Instances">Create a Cluster and Specify the Root Volume Size of EC2 Instances</h3><p>The following example template enables you to specify the size of the EBS root volume
+        - !Ref emrEc2Role</code></pre></div><h3 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_and_Specify_the_Root_Volume_Size_of_EC2_Instances">Create a Cluster and Specify the Root Volume Size of EC2 Instances</h3><p>The following example template enables you to specify the size of the EBS root volume
                         for cluster instances.
-                     </p><h4 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_and_Specify_the_Root_Volume_Size_of_EC2_Instances--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_and_Specify_the_Root_Volume_Size_of_EC2_Instances--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
   &quot;Parameters&quot; : {
     &quot;InstanceType&quot; : {
@@ -629,7 +640,8 @@ Resources:
       }
     }
   }
-}</code></pre><h4 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_and_Specify_the_Root_Volume_Size_of_EC2_Instances--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_and_Specify_the_Root_Volume_Size_of_EC2_Instances--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   InstanceType:
     Type: String
@@ -702,9 +714,10 @@ Resources:
       Path: /
       Roles:
         - !Ref emrEc2Role
-</code></pre><h3 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_with_Kerberos_Authentication">Create a Cluster with Kerberos Authentication</h3><p>The following example template enables you to specify the Kerberos authentication
+</code></pre></div><h3 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_with_Kerberos_Authentication">Create a Cluster with Kerberos Authentication</h3><p>The following example template enables you to specify the Kerberos authentication
                         configuration for an EMR cluster.
-                     </p><h4 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_with_Kerberos_Authentication--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </p><div id="JSON" name="JSON" class="section langfilter">
+                        <h4 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_with_Kerberos_Authentication--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
   &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
   &quot;Parameters&quot; : {
     &quot;CrossRealmTrustPrincipalPassword&quot; : {
@@ -869,7 +882,8 @@ Resources:
       &quot;Value&quot; : {&quot;Fn::GetAtt&quot; : [&quot;key&quot;, &quot;Arn&quot;]}
     }
   }
-}</code></pre><h4 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_with_Kerberos_Authentication--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
+                        <h4 id="aws-resource-elasticmapreduce-cluster--examples--Create_a_Cluster_with_Kerberos_Authentication--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   CrossRealmTrustPrincipalPassword:
     Type: String
@@ -990,7 +1004,7 @@ Outputs:
     Value: !GetAtt 
       - key
       - Arn
-</code></pre><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
+</code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
                         <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
                      </div></div>
 </body>
