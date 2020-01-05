@@ -8,128 +8,174 @@
 </head>
 <body>
     <div id="content" style="padding: 10px 30px;">
-    <h1 class="topictitle" id="aws-resource-neptune-dbparametergroup">AWS::Neptune::DBParameterGroup</h1><p>
-                        <code class="code">AWS::Neptune::DBParameterGroup</code> creates a new DB parameter group.
-                        This type can be declared in a template and referenced in the <code class="code">DBParameterGroupName</code>
-                        parameter of <code class="code">AWS::Neptune::DBInstance</code>.
-                     </p><div class="aws-note">
-                        <p class="aws-note">Note</p>
-                        <p>Applying a parameter group to a DB instance might require the
-                           instance to reboot, resulting in a database outage for the duration of the reboot.
-                        </p>
-                     </div><p>A DB parameter group is initially created with the default parameters for the database
-                        engine used by the DB instance. To provide custom values for any of the parameters,
-                        you must
-                        modify the group after creating it using <em>ModifyDBParameterGroup</em>. Once
-                        you&apos;ve created a DB parameter group, you need to associate it with your DB instance
-                        using
-                        <em>ModifyDBInstance</em>. When you associate a new DB parameter group with a
-                        running DB instance, you need to reboot the DB instance without failover for the new
-                        DB
-                        parameter group and associated settings to take effect.
-                     </p><div class="aws-note">
-                        <p class="aws-note">Important</p>
-                        <p>After you create a DB parameter group, you should wait at least 5 minutes before
-                           creating your first DB instance that uses that DB parameter group as the default parameter
-                           group. This allows Amazon Neptune to fully complete the create action before the parameter
-                           group is used as the default for a new DB instance. This is especially important for
-                           parameters that are critical when creating the default database for a DB instance,
-                           such as
-                           the character set for the default database defined by the
-                           <code class="code">character_set_database</code> parameter. You can use the <em>Parameter
-                              Groups</em> option of the Amazon Neptune console or the
-                           <em>DescribeDBParameters</em> command to verify that your DB parameter group has
-                           been created or modified.
-                        </p>
-                     </div><h2 id="aws-resource-neptune-dbparametergroup-syntax">Syntax</h2><p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p><div id="JSON" name="JSON" class="section langfilter">
-                        <h3 id="aws-resource-neptune-dbparametergroup-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+    <div id="main-content" class="awsui-util-container">
+            <div id="main-col-body">
+               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
+               <h1 class="topictitle" id="aws-resource-neptune-dbparametergroup">AWS::Neptune::DBParameterGroup</h1>
+               <div class="awsdocs-page-header-container">
+                  <awsdocs-page-header></awsdocs-page-header>
+                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+               </div>
+               <p>
+                  <code class="code">AWS::Neptune::DBParameterGroup</code> creates a new DB parameter group.
+                  This type can be declared in a template and referenced in the <code class="code">DBParameterGroupName</code>
+                  parameter of <code class="code">AWS::Neptune::DBInstance</code>.
+               </p>
+               <div class="awsdocs-note">
+                  <div class="awsdocs-note-title">
+                     <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                  <div class="awsdocs-note-text">
+                     <p>Applying a parameter group to a DB instance might require the
+                        instance to reboot, resulting in a database outage for the duration of the reboot.
+                     </p>
+                  </div>
+               </div>
+               <p>A DB parameter group is initially created with the default parameters for the database
+                  engine used by the DB instance. To provide custom values for any of the parameters,
+                  you must
+                  modify the group after creating it using <em>ModifyDBParameterGroup</em>. Once
+                  you&apos;ve created a DB parameter group, you need to associate it with your DB instance
+                  using
+                  <em>ModifyDBInstance</em>. When you associate a new DB parameter group with a
+                  running DB instance, you need to reboot the DB instance without failover for the new
+                  DB
+                  parameter group and associated settings to take effect.
+               </p>
+               <div class="awsdocs-note">
+                  <div class="awsdocs-note-title">
+                     <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                  <div class="awsdocs-note-text">
+                     <p>After you create a DB parameter group, you should wait at least 5 minutes before
+                        creating your first DB instance that uses that DB parameter group as the default parameter
+                        group. This allows Amazon Neptune to fully complete the create action before the parameter
+                        group is used as the default for a new DB instance. This is especially important for
+                        parameters that are critical when creating the default database for a DB instance,
+                        such as
+                        the character set for the default database defined by the
+                        <code class="code">character_set_database</code> parameter. You can use the <em>Parameter
+                           Groups</em> option of the Amazon Neptune console or the
+                        <em>DescribeDBParameters</em> command to verify that your DB parameter group has
+                        been created or modified.
+                     </p>
+                  </div>
+               </div>
+               <h2 id="aws-resource-neptune-dbparametergroup-syntax">Syntax</h2>
+               <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h3 id="aws-resource-neptune-dbparametergroup-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::Neptune::DBParameterGroup&quot;,
-  &quot;Properties&quot; : {
-      &quot;<a href="#cfn-neptune-dbparametergroup-description">Description</a>&quot; : <em class="replaceable"><code>String</code></em>,
-      &quot;<a href="#cfn-neptune-dbparametergroup-family">Family</a>&quot; : <em class="replaceable"><code>String</code></em>,
-      &quot;<a href="#cfn-neptune-dbparametergroup-name">Name</a>&quot; : <em class="replaceable"><code>String</code></em>,
-      &quot;<a href="#cfn-neptune-dbparametergroup-parameters">Parameters</a>&quot; : <em class="replaceable"><code>Json</code></em>,
-      &quot;<a href="#cfn-neptune-dbparametergroup-tags">Tags</a>&quot; : <em class="replaceable"><code>[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code></em>
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-neptune-dbparametergroup-description">Description</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-neptune-dbparametergroup-family">Family</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-neptune-dbparametergroup-name">Name</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-neptune-dbparametergroup-parameters">Parameters</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-neptune-dbparametergroup-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
 }
-</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
-                        <h3 id="aws-resource-neptune-dbparametergroup-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Type: AWS::Neptune::DBParameterGroup
+</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h3 id="aws-resource-neptune-dbparametergroup-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Neptune::DBParameterGroup
 Properties: 
-  <a href="#cfn-neptune-dbparametergroup-description">Description</a>: <em class="replaceable"><code>String</code></em>
-  <a href="#cfn-neptune-dbparametergroup-family">Family</a>: <em class="replaceable"><code>String</code></em>
-  <a href="#cfn-neptune-dbparametergroup-name">Name</a>: <em class="replaceable"><code>String</code></em>
-  <a href="#cfn-neptune-dbparametergroup-parameters">Parameters</a>: <em class="replaceable"><code>Json</code></em>
-  <a href="#cfn-neptune-dbparametergroup-tags">Tags</a>: <em class="replaceable"><code>
-    - <a href="aws-properties-resource-tags.html">Tag</a></code></em>
-</code></pre></div><h2 id="aws-resource-neptune-dbparametergroup-properties">Properties</h2><div class="variablelist">
-                        <dl>
-                           <dt><a id="cfn-neptune-dbparametergroup-description"></a><span class="term"><code class="code">Description</code></span></dt>
-                           <dd>
-                              
-                              <p>Provides the customer-specified description for this DB parameter group.</p>
-                              
-                              <p><em>Required</em>: Yes
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                           </dd>
-                           <dt><a id="cfn-neptune-dbparametergroup-family"></a><span class="term"><code class="code">Family</code></span></dt>
-                           <dd>
-                              
-                              <p>Must be <code class="code">neptune1</code>.
-                              </p>
-                              
-                              <p><em>Required</em>: Yes
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                           </dd>
-                           <dt><a id="cfn-neptune-dbparametergroup-name"></a><span class="term"><code class="code">Name</code></span></dt>
-                           <dd>
-                              
-                              <p>Provides the name of the DB parameter group.</p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                           </dd>
-                           <dt><a id="cfn-neptune-dbparametergroup-parameters"></a><span class="term"><code class="code">Parameters</code></span></dt>
-                           <dd>
-                              
-                              <p>The parameters to set for this DB parameter group.</p>
-                              
-                              <p>The parameters are expressed as a JSON object consisting of key-value pairs.</p>
-                              
-                              <p>Changes to dynamic parameters are applied immediately. During an update, if
-                                 you have static parameters (whether they were changed or not), it triggers AWS
-                                 CloudFormation to reboot the associated DB instance without failover.
-                              </p>
-                              
-                              <p><em>Required</em>: Yes
-                              </p>
-                              <p><em>Type</em>: Json
-                              </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-neptune-dbparametergroup-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
-                           <dd>
-                              
-                              <p>The tags that you want to attach to this parameter group.</p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                        </dl>
-                     </div><h2 id="aws-resource-neptune-dbparametergroup-return-values">Return Values</h2><h3 id="aws-resource-neptune-dbparametergroup-return-values-ref">Ref</h3><p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the resource name.
-                     </p><p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
-                     </p><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
-                        <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
-                     </div></div>
+  <a href="#cfn-neptune-dbparametergroup-description">Description</a>: <code class="replaceable">String</code>
+  <a href="#cfn-neptune-dbparametergroup-family">Family</a>: <code class="replaceable">String</code>
+  <a href="#cfn-neptune-dbparametergroup-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-neptune-dbparametergroup-parameters">Parameters</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-neptune-dbparametergroup-tags">Tags</a>: <code class="replaceable">
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
+</code></pre></div>
+               <h2 id="aws-resource-neptune-dbparametergroup-properties">Properties</h2>
+               <div class="variablelist">
+                  <dl>
+                     <dt><a id="cfn-neptune-dbparametergroup-description"></a><span class="term"><code class="code">Description</code></span></dt>
+                     <dd>
+                        
+                        <p>Provides the customer-specified description for this DB parameter group.</p>
+                        
+                        <p><em>Required</em>: Yes
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                     </dd>
+                     <dt><a id="cfn-neptune-dbparametergroup-family"></a><span class="term"><code class="code">Family</code></span></dt>
+                     <dd>
+                        
+                        <p>Must be <code class="code">neptune1</code>.
+                        </p>
+                        
+                        <p><em>Required</em>: Yes
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                     </dd>
+                     <dt><a id="cfn-neptune-dbparametergroup-name"></a><span class="term"><code class="code">Name</code></span></dt>
+                     <dd>
+                        
+                        <p>Provides the name of the DB parameter group.</p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                     </dd>
+                     <dt><a id="cfn-neptune-dbparametergroup-parameters"></a><span class="term"><code class="code">Parameters</code></span></dt>
+                     <dd>
+                        
+                        <p>The parameters to set for this DB parameter group.</p>
+                        
+                        <p>The parameters are expressed as a JSON object consisting of key-value pairs.</p>
+                        
+                        <p>Changes to dynamic parameters are applied immediately. During an update, if
+                           you have static parameters (whether they were changed or not), it triggers AWS
+                           CloudFormation to reboot the associated DB instance without failover.
+                        </p>
+                        
+                        <p><em>Required</em>: Yes
+                        </p>
+                        <p><em>Type</em>: Json
+                        </p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-neptune-dbparametergroup-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                     <dd>
+                        
+                        <p>The tags that you want to attach to this parameter group.</p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                  </dl>
+               </div>
+               <h2 id="aws-resource-neptune-dbparametergroup-return-values">Return Values</h2>
+               <h3 id="aws-resource-neptune-dbparametergroup-return-values-ref">Ref</h3>
+               <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the resource name.
+               </p>
+               <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+               </p>
+               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+            </div>
+            <noscript>
+               <div>
+                  <div>
+                     <div>
+                        <div id="js_error_message">
+                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                 browser.</strong></p>
+                           <p>To use the AWS Documentation, Javascript must be
+                              enabled. Please refer to your browser&apos;s Help pages for instructions.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </noscript>
+            
+            <awsdocs-page-utilities></awsdocs-page-utilities>
+         </div></div>
 </body>
 </html>

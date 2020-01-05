@@ -8,187 +8,252 @@
 </head>
 <body>
     <div id="content" style="padding: 10px 30px;">
-    <h1 class="topictitle" id="intrinsic-function-reference-importvalue"><code class="code">Fn::ImportValue</code></h1><p>The intrinsic function <code class="code">Fn::ImportValue</code> returns the value of <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/outputs-section-structure.html">an output exported</a> by another stack. You
-                        typically use this function to <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/walkthrough-crossstackref.html">create cross-stack
-                           references</a>. In the following example template snippets, Stack A exports VPC security
-                        group values and Stack B imports them.
-                     </p><div class="aws-note">
-                        <p class="aws-note">Note</p>
-                        <p>The following restrictions apply to cross-stack references:</p>
-                        <div class="itemizedlist">
-                           
-                           
-                           
-                           
-                           
-                           
-                           <ul class="itemizedlist" type="disc">
-                              <li class="listitem">
-                                 
-                                 <p>For each AWS account, <code class="code">Export</code> names must be unique within a region.
-                                 </p>
-                                 
-                              </li>
-                              <li class="listitem">
-                                 
-                                 <p>You can&apos;t create cross-stack references across regions. You can use the intrinsic
-                                    function 
-                                    <code class="code">Fn::ImportValue</code> to import only values that have been exported within the same region.
-                                 </p>
-                                 
-                              </li>
-                              <li class="listitem">
-                                 
-                                 <p>For outputs, the value of the <code class="code">Name</code> property of an <code class="code">Export</code> can&apos;t use <code class="code">Ref</code> or <code class="code">GetAtt</code> functions that depend on a resource.
-                                 </p>
-                                 
-                                 <p>Similarly, the <code class="code">ImportValue</code> function can&apos;t include <code class="code">Ref</code> or <code class="code">GetAtt</code> functions that depend on a resource.
-                                 </p>        
-                                 
-                              </li>
-                              <li class="listitem">
-                                 
-                                 <p>You can&apos;t delete a stack if another stack references one of its outputs.</p>
-                                 
-                              </li>
-                              <li class="listitem">
-                                 
-                                 <p>You can&apos;t modify or remove an output value that is referenced by another stack.</p>
-                                 
-                              </li>
-                           </ul>
-                        </div>
-                     </div><p>Stack A Export</p><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;Outputs&quot; : {
-  &quot;PublicSubnet&quot; : {
-    &quot;Description&quot; : &quot;The subnet ID to use for public web servers&quot;,
-    &quot;Value&quot; :  { &quot;Ref&quot; : &quot;PublicSubnet&quot; },
-    &quot;Export&quot; : { &quot;Name&quot; : {&quot;Fn::Sub&quot;: &quot;${AWS::StackName}-SubnetID&quot; }}
-  },
-  &quot;WebServerSecurityGroup&quot; : {
-    &quot;Description&quot; : &quot;The security group ID to use for public web servers&quot;,
-    &quot;Value&quot; :  { &quot;Fn::GetAtt&quot; : [&quot;WebServerSecurityGroup&quot;, &quot;GroupId&quot;] },
-    &quot;Export&quot; : { &quot;Name&quot; : {&quot;Fn::Sub&quot;: &quot;${AWS::StackName}-SecurityGroupID&quot; }}
-  }
-}</code></pre><p>Stack B Import</p><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">&quot;Resources&quot; : {
-  &quot;WebServerInstance&quot; : {
-    &quot;Type&quot; : &quot;AWS::EC2::Instance&quot;,
-    &quot;Properties&quot; : {
-      &quot;InstanceType&quot; : &quot;t2.micro&quot;,
-      &quot;ImageId&quot; : &quot;ami-a1b23456&quot;,
-      &quot;NetworkInterfaces&quot; : [{
-        &quot;GroupSet&quot; : [{&quot;Fn::ImportValue&quot; : {&quot;Fn::Sub&quot; : &quot;${NetworkStackNameParameter}-SecurityGroupID&quot;}}],
-        &quot;AssociatePublicIpAddress&quot; : &quot;true&quot;,
-        &quot;DeviceIndex&quot; : &quot;0&quot;,
-        &quot;DeleteOnTermination&quot; : &quot;true&quot;,
-        &quot;SubnetId&quot; : {&quot;Fn::ImportValue&quot; : {&quot;Fn::Sub&quot; : &quot;${NetworkStackNameParameter}-SubnetID&quot;}}
-      }]
-    }
-  }
-}</code></pre><h2 id="w2ab1c21c24c41c15">Declaration</h2><div id="JSON" name="JSON" class="section langfilter">
-                        <h3 id="intrinsic-function-reference-importvalue-syntax.json">JSON</h3>
-                        <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{ &quot;Fn::ImportValue&quot; : <em class="replaceable"><code>sharedValueToImport</code></em> }</code></pre>
-                        </div><div id="YAML" name="YAML" class="section langfilter">
-                        <h3 id="intrinsic-function-reference-importvalue-syntax.yaml">YAML</h3>
-                        
-                        
-                        <p>You can use the full function
-                           name:
-                        </p><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Fn::ImportValue: <em class="replaceable"><code>sharedValueToImport</code></em></code></pre><p>Alternatively,
-                           you can use the short
-                           form:
-                        </p><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">!ImportValue <em class="replaceable"><code>sharedValueToImport</code></em></code></pre>
-                        <div class="aws-note">
-                           <p class="aws-note">Important</p>
-                           <p>You can&apos;t use the short form of <code class="code">!ImportValue</code> when it contains a
-                              <code class="code">!Sub</code>. The following example is valid for AWS CloudFormation, but
-                              <em>not</em> valid for YAML:
-                              
-                           </p><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="nohighlight ">!ImportValue
-  !Sub &quot;${NetworkStack}-SubnetID&quot; </code></pre><p>Instead,
-                              you must use the full function name, for
-                              example:
-                           </p><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="nohighlight ">Fn::ImportValue:
-  !Sub &quot;${NetworkStack}-SubnetID&quot;</code></pre></div>
-                        
-                     </div><h2 id="w2ab1c21c24c41c17">Parameters</h2><div class="variablelist">
-                        
-                        
-                        <dl>
-                           
-                           <dt><span class="term">sharedValueToImport</span></dt>
-                           
-                           <dd>
-                              
-                              <p>The stack output value that you want to import.</p>
-                              
-                           </dd>
-                           
-                        </dl>
-                     </div><h2 id="w2ab1c21c24c41c19">Return Value</h2><p>The stack output value.</p><h2 id="w2ab1c21c24c41c21">Example</h2><div id="JSON" name="JSON" class="section langfilter">
-                        <h3 id="intrinsic-function-reference-importvalue-example.json">JSON</h3>
-                        
-                        <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{ &quot;Fn::ImportValue&quot; : {&quot;Fn::Sub&quot;: &quot;${NetworkStackNameParameter}-SubnetID&quot; } }</code></pre>
-                        </div><div id="YAML" name="YAML" class="section langfilter">
-                        <h3 id="intrinsic-function-reference-importvalue-example.yaml">YAML</h3>
-                        
-                        <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Fn::ImportValue:
-  !Sub &quot;${NetworkStackName}-SecurityGroupID&quot;</code></pre>
-                        </div><h2 id="w2ab1c21c24c41c23">Supported Functions</h2><p>You can use the following functions in the <code class="code">Fn::ImportValue</code> function. The
-                        value of these functions can&apos;t depend on a resource.
-                     </p><div class="itemizedlist">
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+    <div id="main-content" class="awsui-util-container">
+            <div id="main-col-body">
+               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
+               <h1 class="topictitle" id="intrinsic-function-reference-importvalue"><code class="code">Fn::ImportValue</code></h1>
+               <div class="awsdocs-page-header-container">
+                  <awsdocs-page-header></awsdocs-page-header>
+                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+               </div>
+               <p>The intrinsic function <code class="code">Fn::ImportValue</code> returns the value of <a href="./outputs-section-structure.html">an output exported</a> by another stack. You
+                  typically use this function to <a href="./walkthrough-crossstackref.html">create cross-stack
+                     references</a>. In the following example template snippets, Stack A exports VPC security
+                  group values and Stack B imports them.
+               </p>
+               <div class="awsdocs-note">
+                  <div class="awsdocs-note-title">
+                     <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                  <div class="awsdocs-note-text">
+                     <p>The following restrictions apply to cross-stack references:</p>
+                     <div class="itemizedlist">
+                         
+                         
+                         
+                         
+                         
                         
                         <ul class="itemizedlist" type="disc">
                            <li class="listitem">
                               
-                              <p><code class="code">Fn::Base64</code></p>
+                              <p>For each AWS account, <code class="code">Export</code> names must be unique within a region.
+                              </p>
                               
                            </li>
                            <li class="listitem">
                               
-                              <p><code class="code">Fn::FindInMap</code></p>
+                              <p>You can&apos;t create cross-stack references across regions. You can use the intrinsic
+                                 function 
+                                 <code class="code">Fn::ImportValue</code> to import only values that have been exported within the same region.
+                              </p>
                               
                            </li>
                            <li class="listitem">
                               
-                              <p><code class="code">Fn::If</code></p>
+                              <p>For outputs, the value of the <code class="code">Name</code> property of an <code class="code">Export</code> can&apos;t use <code class="code">Ref</code> or <code class="code">GetAtt</code> functions that depend on a resource.
+                              </p>
+                              
+                              <p>Similarly, the <code class="code">ImportValue</code> function can&apos;t include <code class="code">Ref</code> or <code class="code">GetAtt</code> functions that depend on a resource.
+                              </p>        
                               
                            </li>
                            <li class="listitem">
                               
-                              <p><code class="code">Fn::Join</code></p>
+                              <p>You can&apos;t delete a stack if another stack references one of its outputs.</p>
                               
                            </li>
                            <li class="listitem">
                               
-                              <p><code class="code">Fn::Select</code></p>
-                              
-                           </li>
-                           <li class="listitem">
-                              
-                              <p><code class="code">Fn::Split</code></p>
-                              
-                           </li>
-                           <li class="listitem">
-                              
-                              <p><code class="code">Fn::Sub</code></p>
-                              
-                           </li>
-                           <li class="listitem">
-                              
-                              <p><code class="code">Ref</code></p>
+                              <p>You can&apos;t modify or remove an output value that is referenced by another stack.</p>
                               
                            </li>
                         </ul>
-                     </div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
-                        <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
-                     </div></div>
+                     </div>
+                  </div>
+               </div>
+               <p>Stack A Export</p><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Outputs&quot; : <span>{</span>
+  &quot;PublicSubnet&quot; : <span>{</span>
+    &quot;Description&quot; : &quot;The subnet ID to use for public web servers&quot;,
+    &quot;Value&quot; :  <span>{</span> &quot;Ref&quot; : &quot;PublicSubnet&quot; },
+    &quot;Export&quot; : <span>{</span> &quot;Name&quot; : <span>{</span>&quot;Fn::Sub&quot;: &quot;$<span>{</span>AWS::StackName}-SubnetID&quot; }}
+  },
+  &quot;WebServerSecurityGroup&quot; : <span>{</span>
+    &quot;Description&quot; : &quot;The security group ID to use for public web servers&quot;,
+    &quot;Value&quot; :  <span>{</span> &quot;Fn::GetAtt&quot; : [&quot;WebServerSecurityGroup&quot;, &quot;GroupId&quot;] },
+    &quot;Export&quot; : <span>{</span> &quot;Name&quot; : <span>{</span>&quot;Fn::Sub&quot;: &quot;$<span>{</span>AWS::StackName}-SecurityGroupID&quot; }}
+  }
+}</code></pre><p>Stack B Import</p><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">&quot;Resources&quot; : <span>{</span>
+  &quot;WebServerInstance&quot; : <span>{</span>
+    &quot;Type&quot; : &quot;AWS::EC2::Instance&quot;,
+    &quot;Properties&quot; : <span>{</span>
+      &quot;InstanceType&quot; : &quot;t2.micro&quot;,
+      &quot;ImageId&quot; : &quot;ami-a1b23456&quot;,
+      &quot;NetworkInterfaces&quot; : [<span>{</span>
+        &quot;GroupSet&quot; : [<span>{</span>&quot;Fn::ImportValue&quot; : <span>{</span>&quot;Fn::Sub&quot; : &quot;$<span>{</span>NetworkStackNameParameter}-SecurityGroupID&quot;}}],
+        &quot;AssociatePublicIpAddress&quot; : &quot;true&quot;,
+        &quot;DeviceIndex&quot; : &quot;0&quot;,
+        &quot;DeleteOnTermination&quot; : &quot;true&quot;,
+        &quot;SubnetId&quot; : <span>{</span>&quot;Fn::ImportValue&quot; : <span>{</span>&quot;Fn::Sub&quot; : &quot;$<span>{</span>NetworkStackNameParameter}-SubnetID&quot;}}
+      }]
+    }
+  }
+}</code></pre><h2 id="w2ab1c26c24c41c15">Declaration</h2>
+               
+               
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h3 id="intrinsic-function-reference-importvalue-syntax.json">JSON</h3>
+                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;Fn::ImportValue&quot; : <code class="replaceable">sharedValueToImport</code> }</code></pre>
+                  </div>
+               
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h3 id="intrinsic-function-reference-importvalue-syntax.yaml">YAML</h3>
+                  
+                  
+                  <p>You can use the full function
+                     name:
+                  </p><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Fn::ImportValue: <code class="replaceable">sharedValueToImport</code></code></pre><p>Alternatively,
+                     you can use the short
+                     form:
+                  </p><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">!ImportValue <code class="replaceable">sharedValueToImport</code></code></pre>
+                  <div class="awsdocs-note">
+                     <div class="awsdocs-note-title">
+                        <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                     <div class="awsdocs-note-text">
+                        <p>You can&apos;t use the short form of <code class="code">!ImportValue</code> when it contains a
+                           <code class="code">!Sub</code>. The following example is valid for AWS CloudFormation, but
+                           <em>not</em> valid for YAML:
+                           
+                        </p><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">!ImportValue
+  !Sub &quot;$<span>{</span>NetworkStack}-SubnetID&quot; </code></pre><p>Instead,
+                           you must use the full function name, for
+                           example:
+                        </p><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">Fn::ImportValue:
+  !Sub &quot;$<span>{</span>NetworkStack}-SubnetID&quot;</code></pre></div>
+                  </div>
+                  
+               </div>
+               
+               <h2 id="w2ab1c26c24c41c17">Parameters</h2>
+               
+               
+               <div class="variablelist">
+                   
+                  
+                  <dl>
+                     
+                     <dt><span class="term">sharedValueToImport</span></dt>
+                     
+                     <dd>
+                        
+                        <p>The stack output value that you want to import.</p>
+                        
+                     </dd>
+                     
+                  </dl>
+               </div>
+               
+               <h2 id="w2ab1c26c24c41c19">Return Value</h2>
+               
+               
+               <p>The stack output value.</p>
+               
+               <h2 id="w2ab1c26c24c41c21">Example</h2>
+               
+               
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h3 id="intrinsic-function-reference-importvalue-example.json">JSON</h3>
+                  
+                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;Fn::ImportValue&quot; : <span>{</span>&quot;Fn::Sub&quot;: &quot;$<span>{</span>NetworkStackNameParameter}-SubnetID&quot; } }</code></pre>
+                  </div>
+               
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h3 id="intrinsic-function-reference-importvalue-example.yaml">YAML</h3>
+                  
+                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Fn::ImportValue:
+  !Sub &quot;$<span>{</span>NetworkStackName}-SecurityGroupID&quot;</code></pre>
+                  </div>
+               
+               <h2 id="w2ab1c26c24c41c23">Supported Functions</h2>
+               
+               
+               <p>You can use the following functions in the <code class="code">Fn::ImportValue</code> function. The
+                  value of these functions can&apos;t depend on a resource.
+               </p>
+               
+               <div class="itemizedlist">
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                  
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        
+                        <p><code class="code">Fn::Base64</code></p>
+                        
+                     </li>
+                     <li class="listitem">
+                        
+                        <p><code class="code">Fn::FindInMap</code></p>
+                        
+                     </li>
+                     <li class="listitem">
+                        
+                        <p><code class="code">Fn::If</code></p>
+                        
+                     </li>
+                     <li class="listitem">
+                        
+                        <p><code class="code">Fn::Join</code></p>
+                        
+                     </li>
+                     <li class="listitem">
+                        
+                        <p><code class="code">Fn::Select</code></p>
+                        
+                     </li>
+                     <li class="listitem">
+                        
+                        <p><code class="code">Fn::Split</code></p>
+                        
+                     </li>
+                     <li class="listitem">
+                        
+                        <p><code class="code">Fn::Sub</code></p>
+                        
+                     </li>
+                     <li class="listitem">
+                        
+                        <p><code class="code">Ref</code></p>
+                        
+                     </li>
+                  </ul>
+               </div>
+               
+               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+            </div>
+            <noscript>
+               <div>
+                  <div>
+                     <div>
+                        <div id="js_error_message">
+                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                 browser.</strong></p>
+                           <p>To use the AWS Documentation, Javascript must be
+                              enabled. Please refer to your browser&apos;s Help pages for instructions.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </noscript>
+            
+            <awsdocs-page-utilities></awsdocs-page-utilities>
+         </div></div>
 </body>
 </html>

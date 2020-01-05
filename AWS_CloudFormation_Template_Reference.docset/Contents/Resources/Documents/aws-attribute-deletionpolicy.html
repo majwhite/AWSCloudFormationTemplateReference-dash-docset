@@ -8,203 +8,249 @@
 </head>
 <body>
     <div id="content" style="padding: 10px 30px;">
-    <h1 class="topictitle" id="aws-attribute-deletionpolicy">DeletionPolicy Attribute</h1><p>With the DeletionPolicy attribute you can preserve or (in some cases) backup a resource
-                        when its stack is deleted. You specify a DeletionPolicy attribute for each resource
-                        that you
-                        want to control. If a resource has no DeletionPolicy attribute, AWS CloudFormation
-                        deletes the resource by
-                        default.
-                     </p><p>Note that this capability also applies to stack update operations that lead to resources
-                        being deleted from stacks. For example, if you remove the resource from the stack
-                        template, and then update the stack with the template. This capability does not apply
-                        to resources whose physical instance is replaced during stack update operations. For
-                        example, if you edit a resource&apos;s properties such that AWS CloudFormation replaces
-                        that resource during a stack update.
-                     </p><div class="aws-note">
-                        <p class="aws-note">Note</p>
-                        <p><b>Exception</b>: The default policy is <code class="code">Snapshot</code> for 
-                           <code class="code">AWS::RDS::DBCluster</code> resources and for <code class="code">AWS::RDS::DBInstance</code> 
-                           resources that don&apos;t specify the <code class="code">DBClusterIdentifier</code> property.
-                        </p>
-                     </div><p>To keep a resource when its stack is deleted, specify <code class="code">Retain</code> for that
-                        resource. You can use retain for any resource. For example, you can retain a nested
-                        stack, Amazon S3
-                        bucket, or EC2 instance so that you can continue to use or modify those resources
-                        after you
-                        delete their stacks.
-                     </p><div class="aws-note">
-                        <p class="aws-note">Note</p>
-                        <p>If you want to modify resources outside of AWS CloudFormation, use a retain policy
-                           and then delete
-                           the stack. Otherwise, your resources might get out of sync with your AWS CloudFormation
-                           template and
-                           cause stack errors.
-                        </p>
-                     </div><p>For resources that support snapshots, such as <code class="code">AWS::EC2::Volume</code>, specify 
-                        <code class="code">Snapshot</code> to have AWS CloudFormation create a snapshot before deleting the resource.
-                     </p><p>The following snippet contains an Amazon S3 bucket resource with a <code class="code">Retain</code> deletion
-                        policy. When this stack is deleted, AWS CloudFormation leaves the bucket without deleting
-                        it.
-                     </p><div id="JSON" name="JSON" class="section langfilter">
-                        <h2 id="aws-attribute-deletionpolicy-example.json">JSON</h2>
-                        
-                        <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="nohighlight ">{
+    <div id="main-content" class="awsui-util-container">
+            <div id="main-col-body">
+               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
+               <h1 class="topictitle" id="aws-attribute-deletionpolicy">DeletionPolicy Attribute</h1>
+               <div class="awsdocs-page-header-container">
+                  <awsdocs-page-header></awsdocs-page-header>
+                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+               </div>
+               <p>With the DeletionPolicy attribute you can preserve or (in some cases) backup a resource
+                  when its stack is deleted. You specify a DeletionPolicy attribute for each resource
+                  that you
+                  want to control. If a resource has no DeletionPolicy attribute, AWS CloudFormation
+                  deletes the resource by
+                  default.
+               </p>
+               <p>Note that this capability also applies to stack update operations that lead to resources
+                  being deleted from stacks. For example, if you remove the resource from the stack
+                  template, and then update the stack with the template. This capability does not apply
+                  to resources whose physical instance is replaced during stack update operations. For
+                  example, if you edit a resource&apos;s properties such that AWS CloudFormation replaces
+                  that resource during a stack update.
+               </p>
+               <div class="awsdocs-note">
+                  <div class="awsdocs-note-title">
+                     <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                  <div class="awsdocs-note-text">
+                     <p><b>Exception</b>: The default policy is <code class="code">Snapshot</code> for 
+                        <code class="code">AWS::RDS::DBCluster</code> resources and for <code class="code">AWS::RDS::DBInstance</code> 
+                        resources that don&apos;t specify the <code class="code">DBClusterIdentifier</code> property.
+                     </p>
+                  </div>
+               </div>
+               <p>To keep a resource when its stack is deleted, specify <code class="code">Retain</code> for that
+                  resource. You can use retain for any resource. For example, you can retain a nested
+                  stack, Amazon S3
+                  bucket, or EC2 instance so that you can continue to use or modify those resources
+                  after you
+                  delete their stacks.
+               </p>
+               <div class="awsdocs-note">
+                  <div class="awsdocs-note-title">
+                     <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                  <div class="awsdocs-note-text">
+                     <p>If you want to modify resources outside of AWS CloudFormation, use a retain policy
+                        and then delete
+                        the stack. Otherwise, your resources might get out of sync with your AWS CloudFormation
+                        template and
+                        cause stack errors.
+                     </p>
+                  </div>
+               </div>
+               <p>For resources that support snapshots, such as <code class="code">AWS::EC2::Volume</code>, specify 
+                  <code class="code">Snapshot</code> to have AWS CloudFormation create a snapshot before deleting the resource.
+               </p>
+               <p>The following snippet contains an Amazon S3 bucket resource with a <code class="code">Retain</code> deletion
+                  policy. When this stack is deleted, AWS CloudFormation leaves the bucket without deleting
+                  it.
+               </p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h2 id="aws-attribute-deletionpolicy-example.json">JSON</h2>
+                  
+                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class=""><span>{</span>
   &quot;AWSTemplateFormatVersion&quot; : &quot;2010-09-09&quot;,
-  &quot;Resources&quot; : {
-    &quot;myS3Bucket&quot; : {
+  &quot;Resources&quot; : <span>{</span>
+    &quot;myS3Bucket&quot; : <span>{</span>
       &quot;Type&quot; : &quot;AWS::S3::Bucket&quot;,
       &quot;DeletionPolicy&quot; : &quot;Retain&quot;
     }
   }
 }</code></pre>
-                        </div><div id="YAML" name="YAML" class="section langfilter">
-                        <h2 id="aws-attribute-deletionpolicy-example.yaml">YAML</h2>
-                        
-                        <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="nohighlight ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+                  </div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h2 id="aws-attribute-deletionpolicy-example.yaml">YAML</h2>
+                  
+                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
 Resources:
   myS3Bucket:
     Type: AWS::S3::Bucket
     DeletionPolicy: Retain
 </code></pre>
-                        </div><h2 id="aws-attribute-deletionpolicy-options">DeletionPolicy Options</h2><div class="variablelist">
+                  </div>
+               <h2 id="aws-attribute-deletionpolicy-options">DeletionPolicy Options</h2>
+               
+               
+               <div class="variablelist">
+                   
+                   
+                   
+                  
+                  <dl>
+                     
+                     <dt><span class="term">Delete</span></dt>
+                     
+                     <dd>
+                        
+                        <p>AWS CloudFormation deletes the resource and all its content if applicable during stack
+                           deletion. You can add this deletion policy to any resource type. By default, if
+                           you don&apos;t specify a DeletionPolicy, AWS CloudFormation deletes your resources. However,
+                           be aware 
+                           of the following considerations:
+                        </p>
+                        
+                        <div class="itemizedlist">
+                            
+                            
+                            
+                           
+                           <ul class="itemizedlist" type="disc">
+                              <li class="listitem">
+                                 <p>For <code class="code">AWS::RDS::DBCluster</code> resources, the default policy is <code class="code">Snapshot</code>.
+                                 </p>
+                              </li>
+                              <li class="listitem">
+                                 <p>For <code class="code">AWS::RDS::DBInstance</code> resources that don&apos;t specify the <code class="code">DBClusterIdentifier</code> 
+                                    property, the default policy is <code class="code">Snapshot</code>.
+                                 </p>
+                              </li>
+                              <li class="listitem">
+                                 <p>For Amazon S3 buckets, you must delete all objects in the bucket for deletion to succeed.</p>
+                              </li>
+                           </ul>
+                        </div>
+                        
+                     </dd>
+                      
+                     
+                     <dt><span class="term">Retain</span></dt>
+                     
+                     <dd>
+                        
+                        <p>AWS CloudFormation keeps the resource without deleting the resource or its contents
+                           when
+                           its stack is deleted. You can add this deletion policy to any resource type. Note
+                           that when AWS CloudFormation completes the stack deletion, the stack will be in
+                           <code class="code">Delete_Complete</code> state; however, resources that are retained
+                           continue to exist and continue to incur applicable charges until you delete those
+                           resources.
+                        </p>
                         
                         
+                        <p>For update operations, the following considerations apply:</p>
                         
+                        <div class="itemizedlist">
+                            
+                            
+                           
+                           <ul class="itemizedlist" type="disc">
+                              <li class="listitem">
+                                 
+                                 <p>If a resource is deleted, the DeletionPolicy retains the physical resource but 
+                                    ensures that it&apos;s deleted from AWS CloudFormation&apos;s scope.
+                                 </p>
+                                 
+                              </li>
+                              <li class="listitem">
+                                 
+                                 <p>If a resource is updated such that a new physical resource is created to replace 
+                                    
+                                    the old resource, then the old resource is completely deleted, including from AWS
+                                    CloudFormation&apos;s scope.
+                                 </p>
+                                 
+                              </li>
+                           </ul>
+                        </div>
                         
-                        <dl>
+                     </dd>
+                      
+                     
+                     <dt><span class="term">Snapshot</span></dt>
+                     
+                     <dd>
+                        
+                        <p>For resources that support snapshots, AWS CloudFormation creates a snapshot for the
+                           resource
+                           before deleting it. Note that when AWS CloudFormation completes the stack deletion,
+                           the stack
+                           will be in the <code class="code">Delete_Complete</code> state; however, the snapshots that are
+                           created with this policy continue to exist and continue to incur applicable
+                           charges until you delete those snapshots.
+                        </p>
+                        
+                        <p>Resources that support snapshots include:</p>
+                        
+                        <div class="itemizedlist">
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                            
-                           <dt><span class="term">Delete</span></dt>
-                           
-                           <dd>
-                              
-                              <p>AWS CloudFormation deletes the resource and all its content if applicable during stack
-                                 deletion. You can add this deletion policy to any resource type. By default, if
-                                 you don&apos;t specify a DeletionPolicy, AWS CloudFormation deletes your resources. However,
-                                 be aware 
-                                 of the following considerations:
-                              </p>
-                              
-                              <div class="itemizedlist">
-                                 
-                                 
-                                 
-                                 
-                                 <ul class="itemizedlist" type="disc">
-                                    <li class="listitem">
-                                       <p>For <code class="code">AWS::RDS::DBCluster</code> resources, the default policy is <code class="code">Snapshot</code>.
-                                       </p>
-                                    </li>
-                                    <li class="listitem">
-                                       <p>For <code class="code">AWS::RDS::DBInstance</code> resources that don&apos;t specify the <code class="code">DBClusterIdentifier</code> 
-                                          property, the default policy is <code class="code">Snapshot</code>.
-                                       </p>
-                                    </li>
-                                    <li class="listitem">
-                                       <p>For Amazon S3 buckets, you must delete all objects in the bucket for deletion to succeed.</p>
-                                    </li>
-                                 </ul>
-                              </div>
-                              
-                           </dd>
-                           
-                           
-                           <dt><span class="term">Retain</span></dt>
-                           
-                           <dd>
-                              
-                              <p>AWS CloudFormation keeps the resource without deleting the resource or its contents
-                                 when
-                                 its stack is deleted. You can add this deletion policy to any resource type. Note
-                                 that when AWS CloudFormation completes the stack deletion, the stack will be in
-                                 <code class="code">Delete_Complete</code> state; however, resources that are retained
-                                 continue to exist and continue to incur applicable charges until you delete those
-                                 resources.
-                              </p>
-                              
-                              
-                              <p>For update operations, the following considerations apply:</p>
-                              
-                              <div class="itemizedlist">
-                                 
-                                 
-                                 
-                                 <ul class="itemizedlist" type="disc">
-                                    <li class="listitem">
-                                       
-                                       <p>If a resource is deleted, the DeletionPolicy retains the physical resource but 
-                                          ensures that it&apos;s deleted from AWS CloudFormation&apos;s scope.
-                                       </p>
-                                       
-                                    </li>
-                                    <li class="listitem">
-                                       
-                                       <p>If a resource is updated such that a new physical resource is created to replace 
-                                          
-                                          the old resource, then the old resource is completely deleted, including from AWS
-                                          CloudFormation&apos;s scope.
-                                       </p>
-                                       
-                                    </li>
-                                 </ul>
-                              </div>
-                              
-                           </dd>
-                           
-                           
-                           <dt><span class="term">Snapshot</span></dt>
-                           
-                           <dd>
-                              
-                              <p>For resources that support snapshots, AWS CloudFormation creates a snapshot for the
-                                 resource
-                                 before deleting it. Note that when AWS CloudFormation completes the stack deletion,
-                                 the stack
-                                 will be in the <code class="code">Delete_Complete</code> state; however, the snapshots that are
-                                 created with this policy continue to exist and continue to incur applicable
-                                 charges until you delete those snapshots.
-                              </p>
-                              
-                              <p>Resources that support snapshots include:</p>
-                              
-                              <div class="itemizedlist">
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 <ul class="itemizedlist" type="disc">
-                                    <li class="listitem">
-                                       <p><code class="code"><a href="aws-properties-ec2-ebs-volume.html">AWS::EC2::Volume</a></code></p>
-                                    </li>
-                                    <li class="listitem">
-                                       <p><code class="code"><a href="aws-properties-elasticache-cache-cluster.html">AWS::ElastiCache::CacheCluster</a></code></p>
-                                    </li>
-                                    <li class="listitem">
-                                       <p><code class="code"><a href="aws-resource-elasticache-replicationgroup.html">AWS::ElastiCache::ReplicationGroup</a></code></p>
-                                    </li>
-                                    <li class="listitem">
-                                       <p><code class="code"><a href="aws-resource-neptune-dbcluster.html">AWS::Neptune::DBCluster</a></code></p>
-                                    </li>
-                                    <li class="listitem">
-                                       <p><code class="code"><a href="aws-resource-rds-dbcluster.html">AWS::RDS::DBCluster</a></code></p>
-                                    </li>
-                                    <li class="listitem">
-                                       <p><code class="code"><a href="aws-properties-rds-database-instance.html">AWS::RDS::DBInstance</a></code></p>
-                                    </li>
-                                    <li class="listitem">
-                                       <p><code class="code"><a href="aws-resource-redshift-cluster.html">AWS::Redshift::Cluster</a></code></p>
-                                    </li>
-                                 </ul>
-                              </div>
-                              
-                           </dd>
-                           
-                        </dl>
-                     </div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
-                        <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
-                     </div></div>
+                           <ul class="itemizedlist" type="disc">
+                              <li class="listitem">
+                                 <p><code class="code"><a href="aws-properties-ec2-ebs-volume.html">AWS::EC2::Volume</a></code></p>
+                              </li>
+                              <li class="listitem">
+                                 <p><code class="code"><a href="aws-properties-elasticache-cache-cluster.html">AWS::ElastiCache::CacheCluster</a></code></p>
+                              </li>
+                              <li class="listitem">
+                                 <p><code class="code"><a href="aws-resource-elasticache-replicationgroup.html">AWS::ElastiCache::ReplicationGroup</a></code></p>
+                              </li>
+                              <li class="listitem">
+                                 <p><code class="code"><a href="aws-resource-neptune-dbcluster.html">AWS::Neptune::DBCluster</a></code></p>
+                              </li>
+                              <li class="listitem">
+                                 <p><code class="code"><a href="aws-resource-rds-dbcluster.html">AWS::RDS::DBCluster</a></code></p>
+                              </li>
+                              <li class="listitem">
+                                 <p><code class="code"><a href="aws-properties-rds-database-instance.html">AWS::RDS::DBInstance</a></code></p>
+                              </li>
+                              <li class="listitem">
+                                 <p><code class="code"><a href="aws-resource-redshift-cluster.html">AWS::Redshift::Cluster</a></code></p>
+                              </li>
+                           </ul>
+                        </div>
+                        
+                     </dd>
+                     
+                  </dl>
+               </div>
+               
+               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+            </div>
+            <noscript>
+               <div>
+                  <div>
+                     <div>
+                        <div id="js_error_message">
+                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                 browser.</strong></p>
+                           <p>To use the AWS Documentation, Javascript must be
+                              enabled. Please refer to your browser&apos;s Help pages for instructions.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </noscript>
+            
+            <awsdocs-page-utilities></awsdocs-page-utilities>
+         </div></div>
 </body>
 </html>

@@ -8,228 +8,255 @@
 </head>
 <body>
     <div id="content" style="padding: 10px 30px;">
-    <h1 class="topictitle" id="aws-resource-datapipeline-pipeline">AWS::DataPipeline::Pipeline</h1><p>The AWS::DataPipeline::Pipeline resource specifies a data pipeline that you can use
-                        to
-                        automate the movement and transformation of data. In each pipeline, you define pipeline
-                        objects, such as activities, schedules, data nodes, and resources. For information
-                        about
-                        pipeline objects and components that you can use, see <a href="https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-pipeline-objects.html">Pipeline Object
-                           Reference</a> in the <em>AWS Data Pipeline Developer
-                           Guide</em>.
-                     </p><p>The <code class="code">AWS::DataPipeline::Pipeline</code> resource adds tasks, schedules, and
-                        preconditions to the specified pipeline. You can use <code class="code">PutPipelineDefinition</code> to
-                        populate a new pipeline.
-                     </p><p>
-                        <code class="code">PutPipelineDefinition</code> also validates the configuration as it adds it to the pipeline. Changes to the pipeline
-                        are saved unless one 
-                        of the following validation errors exist in the pipeline.
+    <div id="main-content" class="awsui-util-container">
+            <div id="main-col-body">
+               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
+               <h1 class="topictitle" id="aws-resource-datapipeline-pipeline">AWS::DataPipeline::Pipeline</h1>
+               <div class="awsdocs-page-header-container">
+                  <awsdocs-page-header></awsdocs-page-header>
+                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+               </div>
+               <p>The AWS::DataPipeline::Pipeline resource specifies a data pipeline that you can use
+                  to
+                  automate the movement and transformation of data. In each pipeline, you define pipeline
+                  objects, such as activities, schedules, data nodes, and resources. For information
+                  about
+                  pipeline objects and components that you can use, see <a href="https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-pipeline-objects.html">Pipeline Object
+                     Reference</a> in the <em>AWS Data Pipeline Developer
+                     Guide</em>.
+               </p>
+               <p>The <code class="code">AWS::DataPipeline::Pipeline</code> resource adds tasks, schedules, and
+                  preconditions to the specified pipeline. You can use <code class="code">PutPipelineDefinition</code> to
+                  populate a new pipeline.
+               </p>
+               <p>
+                  <code class="code">PutPipelineDefinition</code> also validates the configuration as it adds it to the pipeline. Changes to the pipeline
+                  are saved unless one 
+                  of the following validation errors exist in the pipeline.
+                  
+               </p>
+               <div class="itemizedlist">
+                   
+                   
+                   
+                   
+                  
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
                         
-                     </p><div class="itemizedlist">
+                        <p>An object is missing a name or identifier field.</p>
                         
+                     </li>
+                     <li class="listitem">
                         
+                        <p>A string or reference field is empty.</p>
                         
+                     </li>
+                     <li class="listitem">
                         
+                        <p>The number of objects in the pipeline exceeds the allowed maximum number of objects.</p>
                         
-                        <ul class="itemizedlist" type="disc">
-                           <li class="listitem">
-                              
-                              <p>An object is missing a name or identifier field.</p>
-                              
-                           </li>
-                           <li class="listitem">
-                              
-                              <p>A string or reference field is empty.</p>
-                              
-                           </li>
-                           <li class="listitem">
-                              
-                              <p>The number of objects in the pipeline exceeds the allowed maximum number of objects.</p>
-                              
-                           </li>
-                           <li class="listitem">
-                              
-                              <p>The pipeline is in a FINISHED state.</p>
-                              
-                           </li>
-                        </ul>
-                     </div><p> Pipeline object definitions are passed to the <a href="https://docs.aws.amazon.com/datapipeline/latest/APIReference/API_PutPipelineDefinition.html">PutPipelineDefinition</a> action and returned by the <a href="https://docs.aws.amazon.com/datapipeline/latest/APIReference/API_GetPipelineDefinition.html">GetPipelineDefinition</a> action. 
-                     </p><h2 id="aws-resource-datapipeline-pipeline-syntax">Syntax</h2><p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p><div id="JSON" name="JSON" class="section langfilter">
-                        <h3 id="aws-resource-datapipeline-pipeline-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+                     </li>
+                     <li class="listitem">
+                        
+                        <p>The pipeline is in a FINISHED state.</p>
+                        
+                     </li>
+                  </ul>
+               </div>
+               <p> Pipeline object definitions are passed to the <a href="https://docs.aws.amazon.com/datapipeline/latest/APIReference/API_PutPipelineDefinition.html">PutPipelineDefinition</a> action and returned by the <a href="https://docs.aws.amazon.com/datapipeline/latest/APIReference/API_GetPipelineDefinition.html">GetPipelineDefinition</a> action. 
+               </p>
+               <h2 id="aws-resource-datapipeline-pipeline-syntax">Syntax</h2>
+               <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h3 id="aws-resource-datapipeline-pipeline-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::DataPipeline::Pipeline&quot;,
-  &quot;Properties&quot; : {
-      &quot;<a href="#cfn-datapipeline-pipeline-activate">Activate</a>&quot; : <em class="replaceable"><code>Boolean</code></em>,
-      &quot;<a href="#cfn-datapipeline-pipeline-description">Description</a>&quot; : <em class="replaceable"><code>String</code></em>,
-      &quot;<a href="#cfn-datapipeline-pipeline-name">Name</a>&quot; : <em class="replaceable"><code>String</code></em>,
-      &quot;<a href="#cfn-datapipeline-pipeline-parameterobjects">ParameterObjects</a>&quot; : <em class="replaceable"><code>[ <a href="aws-properties-datapipeline-pipeline-parameterobjects.html">ParameterObject</a>, ... ]</code></em>,
-      &quot;<a href="#cfn-datapipeline-pipeline-parametervalues">ParameterValues</a>&quot; : <em class="replaceable"><code>[ <a href="aws-properties-datapipeline-pipeline-parametervalues.html">ParameterValue</a>, ... ]</code></em>,
-      &quot;<a href="#cfn-datapipeline-pipeline-pipelineobjects">PipelineObjects</a>&quot; : <em class="replaceable"><code>[ <a href="aws-properties-datapipeline-pipeline-pipelineobjects.html">PipelineObject</a>, ... ]</code></em>,
-      &quot;<a href="#cfn-datapipeline-pipeline-pipelinetags">PipelineTags</a>&quot; : <em class="replaceable"><code>[ <a href="aws-properties-datapipeline-pipeline-pipelinetags.html">PipelineTag</a>, ... ]</code></em>
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-datapipeline-pipeline-activate">Activate</a>&quot; : <code class="replaceable">Boolean</code>,
+      &quot;<a href="#cfn-datapipeline-pipeline-description">Description</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-datapipeline-pipeline-name">Name</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-datapipeline-pipeline-parameterobjects">ParameterObjects</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-datapipeline-pipeline-parameterobjects.html">ParameterObject</a>, ... ]</code>,
+      &quot;<a href="#cfn-datapipeline-pipeline-parametervalues">ParameterValues</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-datapipeline-pipeline-parametervalues.html">ParameterValue</a>, ... ]</code>,
+      &quot;<a href="#cfn-datapipeline-pipeline-pipelineobjects">PipelineObjects</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-datapipeline-pipeline-pipelineobjects.html">PipelineObject</a>, ... ]</code>,
+      &quot;<a href="#cfn-datapipeline-pipeline-pipelinetags">PipelineTags</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-datapipeline-pipeline-pipelinetags.html">PipelineTag</a>, ... ]</code>
     }
 }
-</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
-                        <h3 id="aws-resource-datapipeline-pipeline-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Type: AWS::DataPipeline::Pipeline
+</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h3 id="aws-resource-datapipeline-pipeline-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::DataPipeline::Pipeline
 Properties: 
-  <a href="#cfn-datapipeline-pipeline-activate">Activate</a>: <em class="replaceable"><code>Boolean</code></em>
-  <a href="#cfn-datapipeline-pipeline-description">Description</a>: <em class="replaceable"><code>String</code></em>
-  <a href="#cfn-datapipeline-pipeline-name">Name</a>: <em class="replaceable"><code>String</code></em>
-  <a href="#cfn-datapipeline-pipeline-parameterobjects">ParameterObjects</a>: <em class="replaceable"><code>
-    - <a href="aws-properties-datapipeline-pipeline-parameterobjects.html">ParameterObject</a></code></em>
-  <a href="#cfn-datapipeline-pipeline-parametervalues">ParameterValues</a>: <em class="replaceable"><code>
-    - <a href="aws-properties-datapipeline-pipeline-parametervalues.html">ParameterValue</a></code></em>
-  <a href="#cfn-datapipeline-pipeline-pipelineobjects">PipelineObjects</a>: <em class="replaceable"><code>
-    - <a href="aws-properties-datapipeline-pipeline-pipelineobjects.html">PipelineObject</a></code></em>
-  <a href="#cfn-datapipeline-pipeline-pipelinetags">PipelineTags</a>: <em class="replaceable"><code>
-    - <a href="aws-properties-datapipeline-pipeline-pipelinetags.html">PipelineTag</a></code></em>
-</code></pre></div><h2 id="aws-resource-datapipeline-pipeline-properties">Properties</h2><div class="variablelist">
-                        <dl>
-                           <dt><a id="cfn-datapipeline-pipeline-activate"></a><span class="term"><code class="code">Activate</code></span></dt>
-                           <dd>
-                              
-                              <p>Indicates whether to validate and start the pipeline or stop an active pipeline. By
-                                 default, the value is set to <code class="code">true</code>.
-                              </p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: Boolean
-                              </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-datapipeline-pipeline-description"></a><span class="term"><code class="code">Description</code></span></dt>
-                           <dd>
-                              
-                              <p>A description of the pipeline.</p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Minimum</em>: <code class="code">0</code></p>
-                              <p><em>Maximum</em>: <code class="code">1024</code></p>
-                              <p><em>Pattern</em>: <code class="code">[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*</code></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                           </dd>
-                           <dt><a id="cfn-datapipeline-pipeline-name"></a><span class="term"><code class="code">Name</code></span></dt>
-                           <dd>
-                              
-                              <p>The name of the pipeline.</p>
-                              
-                              <p><em>Required</em>: Yes
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Minimum</em>: <code class="code">1</code></p>
-                              <p><em>Maximum</em>: <code class="code">1024</code></p>
-                              <p><em>Pattern</em>: <code class="code">[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\n\t]*</code></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                           </dd>
-                           <dt><a id="cfn-datapipeline-pipeline-parameterobjects"></a><span class="term"><code class="code">ParameterObjects</code></span></dt>
-                           <dd>
-                              
-                              <p>The parameter objects used with the pipeline.</p>
-                              
-                              <p><em>Required</em>: Yes
-                              </p>
-                              <p><em>Type</em>: List of <a href="aws-properties-datapipeline-pipeline-parameterobjects.html">ParameterObject</a></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-datapipeline-pipeline-parametervalues"></a><span class="term"><code class="code">ParameterValues</code></span></dt>
-                           <dd>
-                              
-                              <p>The parameter values used with the pipeline.</p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: List of <a href="aws-properties-datapipeline-pipeline-parametervalues.html">ParameterValue</a></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-datapipeline-pipeline-pipelineobjects"></a><span class="term"><code class="code">PipelineObjects</code></span></dt>
-                           <dd>
-                              
-                              <p>The objects that define the pipeline. These objects overwrite the existing pipeline
-                                 definition. Not all objects, fields, and values
-                                 can be updated. For information about restrictions, see 
-                                 <a href="https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-manage-pipeline-modify-console.html">Editing Your Pipeline</a> 
-                                 in the <em>AWS Data Pipeline Developer Guide</em>.
-                              </p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: List of <a href="aws-properties-datapipeline-pipeline-pipelineobjects.html">PipelineObject</a></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-datapipeline-pipeline-pipelinetags"></a><span class="term"><code class="code">PipelineTags</code></span></dt>
-                           <dd>
-                              
-                              <p>A list of arbitrary tags (key-value pairs) to associate with the pipeline, which you
-                                 can use to control permissions. For more information, see <a href="https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling Access to
-                                    Pipelines and Resources</a> in the
-                                 <em>AWS Data Pipeline Developer Guide</em>.
-                              </p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: List of <a href="aws-properties-datapipeline-pipeline-pipelinetags.html">PipelineTag</a></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                        </dl>
-                     </div><h2 id="aws-resource-datapipeline-pipeline-return-values">Return Values</h2><h3 id="aws-resource-datapipeline-pipeline-return-values-ref">Ref</h3><p>
-                        When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the pipeline ID.
-                     </p><p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
-                     </p><h2 id="aws-resource-datapipeline-pipeline--examples">Examples</h2><p>The following data pipeline backs up data from an Amazon DynamoDB table to an Amazon
-                        S3 bucket. The pipeline uses the <code class="code">HiveCopyActivity</code> activity to copy the data,
-                        and runs it once a day. The <a href="https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html">roles</a> for the
-                        pipeline and the pipeline resource are declared elsewhere in the same template.
-                     </p><h3 id="aws-resource-datapipeline-pipeline--examples--"></h3><div id="JSON" name="JSON" class="section langfilter">
-                        <h4 id="aws-resource-datapipeline-pipeline--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;DynamoDBInputS3OutputHive&quot;: {
+  <a href="#cfn-datapipeline-pipeline-activate">Activate</a>: <code class="replaceable">Boolean</code>
+  <a href="#cfn-datapipeline-pipeline-description">Description</a>: <code class="replaceable">String</code>
+  <a href="#cfn-datapipeline-pipeline-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-datapipeline-pipeline-parameterobjects">ParameterObjects</a>: <code class="replaceable">
+    - <a href="./aws-properties-datapipeline-pipeline-parameterobjects.html">ParameterObject</a></code>
+  <a href="#cfn-datapipeline-pipeline-parametervalues">ParameterValues</a>: <code class="replaceable">
+    - <a href="./aws-properties-datapipeline-pipeline-parametervalues.html">ParameterValue</a></code>
+  <a href="#cfn-datapipeline-pipeline-pipelineobjects">PipelineObjects</a>: <code class="replaceable">
+    - <a href="./aws-properties-datapipeline-pipeline-pipelineobjects.html">PipelineObject</a></code>
+  <a href="#cfn-datapipeline-pipeline-pipelinetags">PipelineTags</a>: <code class="replaceable">
+    - <a href="./aws-properties-datapipeline-pipeline-pipelinetags.html">PipelineTag</a></code>
+</code></pre></div>
+               <h2 id="aws-resource-datapipeline-pipeline-properties">Properties</h2>
+               <div class="variablelist">
+                  <dl>
+                     <dt><a id="cfn-datapipeline-pipeline-activate"></a><span class="term"><code class="code">Activate</code></span></dt>
+                     <dd>
+                        
+                        <p>Indicates whether to validate and start the pipeline or stop an active pipeline. By
+                           default, the value is set to <code class="code">true</code>.
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: Boolean
+                        </p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-datapipeline-pipeline-description"></a><span class="term"><code class="code">Description</code></span></dt>
+                     <dd>
+                        
+                        <p>A description of the pipeline.</p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Minimum</em>: <code class="code">0</code></p>
+                        <p><em>Maximum</em>: <code class="code">1024</code></p>
+                        <p><em>Pattern</em>: <code class="code">[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                     </dd>
+                     <dt><a id="cfn-datapipeline-pipeline-name"></a><span class="term"><code class="code">Name</code></span></dt>
+                     <dd>
+                        
+                        <p>The name of the pipeline.</p>
+                        
+                        <p><em>Required</em>: Yes
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Minimum</em>: <code class="code">1</code></p>
+                        <p><em>Maximum</em>: <code class="code">1024</code></p>
+                        <p><em>Pattern</em>: <code class="code">[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\n\t]*</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                     </dd>
+                     <dt><a id="cfn-datapipeline-pipeline-parameterobjects"></a><span class="term"><code class="code">ParameterObjects</code></span></dt>
+                     <dd>
+                        
+                        <p>The parameter objects used with the pipeline.</p>
+                        
+                        <p><em>Required</em>: Yes
+                        </p>
+                        <p><em>Type</em>: List of <a href="./aws-properties-datapipeline-pipeline-parameterobjects.html">ParameterObject</a></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-datapipeline-pipeline-parametervalues"></a><span class="term"><code class="code">ParameterValues</code></span></dt>
+                     <dd>
+                        
+                        <p>The parameter values used with the pipeline.</p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: List of <a href="./aws-properties-datapipeline-pipeline-parametervalues.html">ParameterValue</a></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-datapipeline-pipeline-pipelineobjects"></a><span class="term"><code class="code">PipelineObjects</code></span></dt>
+                     <dd>
+                        
+                        <p>The objects that define the pipeline. These objects overwrite the existing pipeline
+                           definition. Not all objects, fields, and values
+                           can be updated. For information about restrictions, see 
+                           <a href="https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-manage-pipeline-modify-console.html">Editing Your Pipeline</a> 
+                           in the <em>AWS Data Pipeline Developer Guide</em>.
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: List of <a href="./aws-properties-datapipeline-pipeline-pipelineobjects.html">PipelineObject</a></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-datapipeline-pipeline-pipelinetags"></a><span class="term"><code class="code">PipelineTags</code></span></dt>
+                     <dd>
+                        
+                        <p>A list of arbitrary tags (key-value pairs) to associate with the pipeline, which you
+                           can use to control permissions. For more information, see <a href="https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling Access to
+                              Pipelines and Resources</a> in the
+                           <em>AWS Data Pipeline Developer Guide</em>.
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: List of <a href="./aws-properties-datapipeline-pipeline-pipelinetags.html">PipelineTag</a></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                  </dl>
+               </div>
+               <h2 id="aws-resource-datapipeline-pipeline-return-values">Return Values</h2>
+               <h3 id="aws-resource-datapipeline-pipeline-return-values-ref">Ref</h3>
+               <p>
+                  When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the pipeline ID.
+               </p>
+               <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+               </p>
+               <h2 id="aws-resource-datapipeline-pipeline--examples">Examples</h2>
+               <p>The following data pipeline backs up data from an Amazon DynamoDB table to an Amazon
+                  S3 bucket. The pipeline uses the <code class="code">HiveCopyActivity</code> activity to copy the data,
+                  and runs it once a day. The <a href="https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html">roles</a> for the
+                  pipeline and the pipeline resource are declared elsewhere in the same template.
+               </p>
+               <h3 id="aws-resource-datapipeline-pipeline--examples--"></h3>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h4 id="aws-resource-datapipeline-pipeline--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;DynamoDBInputS3OutputHive&quot;: <span>{</span>
   &quot;Type&quot;: &quot;AWS::DataPipeline::Pipeline&quot;,
-  &quot;Properties&quot;: {
+  &quot;Properties&quot;: <span>{</span>
     &quot;Name&quot;: &quot;DynamoDBInputS3OutputHive&quot;,
     &quot;Description&quot;: &quot;Pipeline to backup DynamoDB data to S3&quot;,
     &quot;Activate&quot;: &quot;true&quot;,
     &quot;ParameterObjects&quot;: [
-      {
+      <span>{</span>
         &quot;Id&quot;: &quot;myDDBReadThroughputRatio&quot;,
         &quot;Attributes&quot;: [
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;description&quot;,
             &quot;StringValue&quot;: &quot;DynamoDB read throughput ratio&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;type&quot;,
             &quot;StringValue&quot;: &quot;Double&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;default&quot;,
             &quot;StringValue&quot;: &quot;0.2&quot;
           }
         ]
       },
-      {
+      <span>{</span>
         &quot;Id&quot;: &quot;myOutputS3Loc&quot;,
         &quot;Attributes&quot;: [
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;description&quot;,
             &quot;StringValue&quot;: &quot;S3 output bucket&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;type&quot;,
             &quot;StringValue&quot;: &quot;AWS::S3::ObjectKey&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;default&quot;,
-            &quot;StringValue&quot;: { &quot;Fn::Join&quot; : [ &quot;&quot;, [ &quot;s3://&quot;, { &quot;Ref&quot;: &quot;S3OutputLoc&quot; } ] ] }
+            &quot;StringValue&quot;: <span>{</span> &quot;Fn::Join&quot; : [ &quot;&quot;, [ &quot;s3://&quot;, <span>{</span> &quot;Ref&quot;: &quot;S3OutputLoc&quot; } ] ] }
           }
         ]
       },
-      {
+      <span>{</span>
         &quot;Id&quot;: &quot;myDDBTableName&quot;,
         &quot;Attributes&quot;: [
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;description&quot;,
             &quot;StringValue&quot;: &quot;DynamoDB Table Name &quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;type&quot;,
             &quot;StringValue&quot;: &quot;String&quot;
           }
@@ -237,165 +264,165 @@ Properties:
       }
     ],
     &quot;ParameterValues&quot;: [
-      {
+      <span>{</span>
         &quot;Id&quot;: &quot;myDDBTableName&quot;,
-        &quot;StringValue&quot;: { &quot;Ref&quot;: &quot;TableName&quot; }
+        &quot;StringValue&quot;: <span>{</span> &quot;Ref&quot;: &quot;TableName&quot; }
       }
     ],
     &quot;PipelineObjects&quot;: [
-      {
+      <span>{</span>
         &quot;Id&quot;: &quot;S3BackupLocation&quot;,
         &quot;Name&quot;: &quot;Copy data to this S3 location&quot;,
         &quot;Fields&quot;: [
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;type&quot;,
             &quot;StringValue&quot;: &quot;S3DataNode&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;dataFormat&quot;,
             &quot;RefValue&quot;: &quot;DDBExportFormat&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;directoryPath&quot;,
-            &quot;StringValue&quot;: &quot;#{myOutputS3Loc}/#{format(@scheduledStartTime, &apos;YYYY-MM-dd-HH-mm-ss&apos;)}&quot;
+            &quot;StringValue&quot;: &quot;#<span>{</span>myOutputS3Loc}/#<span>{</span>format(@scheduledStartTime, &apos;YYYY-MM-dd-HH-mm-ss&apos;)}&quot;
           }
         ]
       },
-      {
+      <span>{</span>
         &quot;Id&quot;: &quot;DDBSourceTable&quot;,
         &quot;Name&quot;: &quot;DDBSourceTable&quot;,
         &quot;Fields&quot;: [
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;tableName&quot;,
-            &quot;StringValue&quot;: &quot;#{myDDBTableName}&quot;
+            &quot;StringValue&quot;: &quot;#<span>{</span>myDDBTableName}&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;type&quot;,
             &quot;StringValue&quot;: &quot;DynamoDBDataNode&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;dataFormat&quot;,
             &quot;RefValue&quot;: &quot;DDBExportFormat&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;readThroughputPercent&quot;,
-            &quot;StringValue&quot;: &quot;#{myDDBReadThroughputRatio}&quot;
+            &quot;StringValue&quot;: &quot;#<span>{</span>myDDBReadThroughputRatio}&quot;
           }
         ]
       },
-      {
+      <span>{</span>
         &quot;Id&quot;: &quot;DDBExportFormat&quot;,
         &quot;Name&quot;: &quot;DDBExportFormat&quot;,
         &quot;Fields&quot;: [
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;type&quot;,
             &quot;StringValue&quot;: &quot;DynamoDBExportDataFormat&quot;
           }
         ]
       },
-      {
+      <span>{</span>
         &quot;Id&quot;: &quot;TableBackupActivity&quot;,
         &quot;Name&quot;: &quot;TableBackupActivity&quot;,
         &quot;Fields&quot;: [
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;resizeClusterBeforeRunning&quot;,
             &quot;StringValue&quot;: &quot;true&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;type&quot;,
             &quot;StringValue&quot;: &quot;HiveCopyActivity&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;input&quot;,
             &quot;RefValue&quot;: &quot;DDBSourceTable&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;runsOn&quot;,
             &quot;RefValue&quot;: &quot;EmrClusterForBackup&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;output&quot;,
             &quot;RefValue&quot;: &quot;S3BackupLocation&quot;
           }
         ]
       },
-      {
+      <span>{</span>
         &quot;Id&quot;: &quot;DefaultSchedule&quot;,
         &quot;Name&quot;: &quot;RunOnce&quot;,
         &quot;Fields&quot;: [
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;occurrences&quot;,
             &quot;StringValue&quot;: &quot;1&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;startAt&quot;,
             &quot;StringValue&quot;: &quot;FIRST_ACTIVATION_DATE_TIME&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;type&quot;,
             &quot;StringValue&quot;: &quot;Schedule&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;period&quot;,
             &quot;StringValue&quot;: &quot;1 Day&quot;
           }
         ]
       },
-      {
+      <span>{</span>
         &quot;Id&quot;: &quot;Default&quot;,
         &quot;Name&quot;: &quot;Default&quot;,
         &quot;Fields&quot;: [
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;type&quot;,
             &quot;StringValue&quot;: &quot;Default&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;scheduleType&quot;,
             &quot;StringValue&quot;: &quot;cron&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;failureAndRerunMode&quot;,
             &quot;StringValue&quot;: &quot;CASCADE&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;role&quot;,
             &quot;StringValue&quot;: &quot;DataPipelineDefaultRole&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;resourceRole&quot;,
             &quot;StringValue&quot;: &quot;DataPipelineDefaultResourceRole&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;schedule&quot;,
             &quot;RefValue&quot;: &quot;DefaultSchedule&quot;
           }
         ]
       },
-      {
+      <span>{</span>
         &quot;Id&quot;: &quot;EmrClusterForBackup&quot;,
         &quot;Name&quot;: &quot;EmrClusterForBackup&quot;,
         &quot;Fields&quot;: [
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;terminateAfter&quot;,
             &quot;StringValue&quot;: &quot;2 Hours&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;amiVersion&quot;,
             &quot;StringValue&quot;: &quot;3.3.2&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;masterInstanceType&quot;,
             &quot;StringValue&quot;: &quot;m1.medium&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;coreInstanceType&quot;,
             &quot;StringValue&quot;: &quot;m1.medium&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;coreInstanceCount&quot;,
             &quot;StringValue&quot;: &quot;1&quot;
           },
-          {
+          <span>{</span>
             &quot;Key&quot;: &quot;type&quot;,
             &quot;StringValue&quot;: &quot;EmrCluster&quot;
           }
@@ -403,8 +430,10 @@ Properties:
       }
     ]
   }
-}</code></pre></div><h3 id="aws-resource-datapipeline-pipeline--examples--"></h3><div id="YAML" name="YAML" class="section langfilter">
-                        <h4 id="aws-resource-datapipeline-pipeline--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">DynamoDBInputS3OutputHive: 
+}</code></pre></div>
+               <h3 id="aws-resource-datapipeline-pipeline--examples--"></h3>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h4 id="aws-resource-datapipeline-pipeline--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">DynamoDBInputS3OutputHive: 
   Type: AWS::DataPipeline::Pipeline
   Properties: 
     Name: DynamoDBInputS3OutputHive
@@ -468,14 +497,14 @@ Properties:
             RefValue: &quot;DDBExportFormat&quot;
           - 
             Key: &quot;directoryPath&quot;
-            StringValue: &quot;#{myOutputS3Loc}/#{format(@scheduledStartTime, &apos;YYYY-MM-dd-HH-mm-ss&apos;)}&quot;
+            StringValue: &quot;#<span>{</span>myOutputS3Loc}/#<span>{</span>format(@scheduledStartTime, &apos;YYYY-MM-dd-HH-mm-ss&apos;)}&quot;
       - 
         Id: &quot;DDBSourceTable&quot;
         Name: &quot;DDBSourceTable&quot;
         Fields: 
           - 
             Key: &quot;tableName&quot;
-            StringValue: &quot;#{myDDBTableName}&quot;
+            StringValue: &quot;#<span>{</span>myDDBTableName}&quot;
           - 
             Key: &quot;type&quot;
             StringValue: &quot;DynamoDBDataNode&quot;
@@ -484,7 +513,7 @@ Properties:
             RefValue: &quot;DDBExportFormat&quot;
           - 
             Key: &quot;readThroughputPercent&quot;
-            StringValue: &quot;#{myDDBReadThroughputRatio}&quot;
+            StringValue: &quot;#<span>{</span>myDDBReadThroughputRatio}&quot;
       - 
         Id: &quot;DDBExportFormat&quot;
         Name: &quot;DDBExportFormat&quot;
@@ -570,31 +599,51 @@ Properties:
             StringValue: &quot;1&quot;
           - 
             Key: &quot;type&quot;
-            StringValue: &quot;EmrCluster&quot;</code></pre></div><h2 id="aws-resource-datapipeline-pipeline--seealso">See Also</h2><div class="itemizedlist">
+            StringValue: &quot;EmrCluster&quot;</code></pre></div>
+               <h2 id="aws-resource-datapipeline-pipeline--seealso">See Also</h2>
+               <div class="itemizedlist">
+                   
+                   
+                  
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
                         
+                        <p>
+                           <a href="https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-pipeline-objects.html">Pipeline Object
+                              Reference</a> in the <em>AWS Data Pipeline Developer
+                              Guide</em>.
+                        </p>
                         
+                     </li>
+                     <li class="listitem">
                         
-                        <ul class="itemizedlist" type="disc">
-                           <li class="listitem">
-                              
-                              <p>
-                                 <a href="https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-pipeline-objects.html">Pipeline Object
-                                    Reference</a> in the <em>AWS Data Pipeline Developer
-                                    Guide</em>.
-                              </p>
-                              
-                           </li>
-                           <li class="listitem">
-                              
-                              <p>
-                                 <a href="https://docs.aws.amazon.com/datapipeline/latest/APIReference/API_PutPipelineDefinition.html">PutPipelineDefinition</a> in the
-                                 <em>AWS Data Pipeline API Reference</em>.
-                              </p>
-                              
-                           </li>
-                        </ul>
-                     </div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
-                        <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
-                     </div></div>
+                        <p>
+                           <a href="https://docs.aws.amazon.com/datapipeline/latest/APIReference/API_PutPipelineDefinition.html">PutPipelineDefinition</a> in the
+                           <em>AWS Data Pipeline API Reference</em>.
+                        </p>
+                        
+                     </li>
+                  </ul>
+               </div>
+               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+            </div>
+            <noscript>
+               <div>
+                  <div>
+                     <div>
+                        <div id="js_error_message">
+                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                 browser.</strong></p>
+                           <p>To use the AWS Documentation, Javascript must be
+                              enabled. Please refer to your browser&apos;s Help pages for instructions.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </noscript>
+            
+            <awsdocs-page-utilities></awsdocs-page-utilities>
+         </div></div>
 </body>
 </html>

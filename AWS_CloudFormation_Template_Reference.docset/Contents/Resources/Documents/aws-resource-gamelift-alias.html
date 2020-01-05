@@ -8,108 +8,208 @@
 </head>
 <body>
     <div id="content" style="padding: 10px 30px;">
-    <h1 class="topictitle" id="aws-resource-gamelift-alias">AWS::GameLift::Alias</h1><p>The <code class="code">AWS::GameLift::Alias</code> resource creates an alias for an Amazon GameLift (GameLift) fleet, which you can
-                        use to anonymize your fleet. You can reference the alias instead of a specific fleet
-                        when you create game sessions. For more information, see the <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateAlias.html">CreateAlias</a> action in the <em>Amazon GameLift API Reference</em>.
-                     </p><h2 id="aws-resource-gamelift-alias-syntax">Syntax</h2><p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p><div id="JSON" name="JSON" class="section langfilter">
-                        <h3 id="aws-resource-gamelift-alias-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+    <div id="main-content" class="awsui-util-container">
+            <div id="main-col-body">
+               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
+               <h1 class="topictitle" id="aws-resource-gamelift-alias">AWS::GameLift::Alias</h1>
+               <div class="awsdocs-page-header-container">
+                  <awsdocs-page-header></awsdocs-page-header>
+                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+               </div>
+               <p>The <code class="code">AWS::GameLift::Alias</code> resource creates an alias for an Amazon GameLift
+                  (GameLift) fleet destination. There are two types of routing strategies for aliases:
+                  simple
+                  and terminal. A simple alias points to an active fleet. A terminal alias displays
+                  a message
+                  instead of routing players to an active fleet. For example, a terminal alias might
+                  display a
+                  URL link that directs players to an upgrade site. You can use aliases to define destinations
+                  in a game session queue or when requesting new game sessions. 
+               </p>
+               <h2 id="aws-resource-gamelift-alias-syntax">Syntax</h2>
+               <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h3 id="aws-resource-gamelift-alias-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::GameLift::Alias&quot;,
-  &quot;Properties&quot; : {
-      &quot;<a href="#cfn-gamelift-alias-description">Description</a>&quot; : <em class="replaceable"><code>String</code></em>,
-      &quot;<a href="#cfn-gamelift-alias-name">Name</a>&quot; : <em class="replaceable"><code>String</code></em>,
-      &quot;<a href="#cfn-gamelift-alias-routingstrategy">RoutingStrategy</a>&quot; : <em class="replaceable"><code><a href="aws-properties-gamelift-alias-routingstrategy.html">RoutingStrategy</a></code></em>
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-gamelift-alias-description">Description</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-gamelift-alias-name">Name</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-gamelift-alias-routingstrategy">RoutingStrategy</a>&quot; : <code class="replaceable"><a href="./aws-properties-gamelift-alias-routingstrategy.html">RoutingStrategy</a></code>
     }
 }
-</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
-                        <h3 id="aws-resource-gamelift-alias-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Type: AWS::GameLift::Alias
+</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h3 id="aws-resource-gamelift-alias-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::GameLift::Alias
 Properties: 
-  <a href="#cfn-gamelift-alias-description">Description</a>: <em class="replaceable"><code>String</code></em>
-  <a href="#cfn-gamelift-alias-name">Name</a>: <em class="replaceable"><code>String</code></em>
-  <a href="#cfn-gamelift-alias-routingstrategy">RoutingStrategy</a>: <em class="replaceable"><code>
-    <a href="aws-properties-gamelift-alias-routingstrategy.html">RoutingStrategy</a></code></em>
-</code></pre></div><h2 id="aws-resource-gamelift-alias-properties">Properties</h2><div class="variablelist">
-                        <dl>
-                           <dt><a id="cfn-gamelift-alias-description"></a><span class="term"><code class="code">Description</code></span></dt>
-                           <dd>
-                              
-                              <p>Human-readable description of an alias.</p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Minimum</em>: <code class="code">1</code></p>
-                              <p><em>Maximum</em>: <code class="code">1024</code></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-gamelift-alias-name"></a><span class="term"><code class="code">Name</code></span></dt>
-                           <dd>
-                              
-                              <p>Descriptive label that is associated with an alias. Alias names do not need to be
-                                 unique.
-                              </p>
-                              
-                              <p><em>Required</em>: Yes
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Minimum</em>: <code class="code">1</code></p>
-                              <p><em>Maximum</em>: <code class="code">1024</code></p>
-                              <p><em>Pattern</em>: <code class="code">.*\S.*</code></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-gamelift-alias-routingstrategy"></a><span class="term"><code class="code">RoutingStrategy</code></span></dt>
-                           <dd>
-                              
-                              <p>A routing configuration that specifies where traffic is directed for this alias, such
-                                 as to a fleet or to a message.
-                              </p>
-                              
-                              <p><em>Required</em>: Yes
-                              </p>
-                              <p><em>Type</em>: <a href="aws-properties-gamelift-alias-routingstrategy.html">RoutingStrategy</a></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                        </dl>
-                     </div><h2 id="aws-resource-gamelift-alias-return-values">Return Values</h2><h3 id="aws-resource-gamelift-alias-return-values-ref">Ref</h3><p>
-                        When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the alias ID, such as <code class="code">myalias-a01234b56-7890-1de2-f345-g67h8i901j2k</code>.
-                     </p><p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
-                     </p><h2 id="aws-resource-gamelift-alias--examples">Examples</h2><h3 id="aws-resource-gamelift-alias--examples--Create_terminal_alias">Create terminal alias</h3><p>The following example creates a terminal alias named <code class="code">TerminalAlias</code> with a
-                        generic terminal message.
-                     </p><div id="JSON" name="JSON" class="section langfilter">
-                        <h4 id="aws-resource-gamelift-alias--examples--Create_terminal_alias--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;AliasResource&quot;: {
-  &quot;Type&quot;: &quot;AWS::GameLift::Alias&quot;,
-  &quot;Properties&quot;: {
-    &quot;Name&quot;: &quot;TerminalAlias&quot;,
-    &quot;Description&quot;: &quot;A terminal alias&quot;,
-    &quot;RoutingStrategy&quot;: {
-      &quot;Type&quot;: &quot;TERMINAL&quot;,
-      &quot;Message&quot;: &quot;Terminal routing strategy message&quot;
+  <a href="#cfn-gamelift-alias-description">Description</a>: <code class="replaceable">String</code>
+  <a href="#cfn-gamelift-alias-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-gamelift-alias-routingstrategy">RoutingStrategy</a>: <code class="replaceable">
+    <a href="./aws-properties-gamelift-alias-routingstrategy.html">RoutingStrategy</a></code>
+</code></pre></div>
+               <h2 id="aws-resource-gamelift-alias-properties">Properties</h2>
+               <div class="variablelist">
+                  <dl>
+                     <dt><a id="cfn-gamelift-alias-description"></a><span class="term"><code class="code">Description</code></span></dt>
+                     <dd>
+                        
+                        <p>A human-readable description of the alias.</p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Minimum</em>: <code class="code">1</code></p>
+                        <p><em>Maximum</em>: <code class="code">1024</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-gamelift-alias-name"></a><span class="term"><code class="code">Name</code></span></dt>
+                     <dd>
+                        
+                        <p>A descriptive label that is associated with an alias. Alias names do not need to be
+                           unique.
+                        </p>
+                        
+                        <p><em>Required</em>: Yes
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Minimum</em>: <code class="code">1</code></p>
+                        <p><em>Maximum</em>: <code class="code">1024</code></p>
+                        <p><em>Pattern</em>: <code class="code">.*\S.*</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-gamelift-alias-routingstrategy"></a><span class="term"><code class="code">RoutingStrategy</code></span></dt>
+                     <dd>
+                        
+                        <p>A routing configuration that specifies where traffic is directed for this alias, such
+                           as to a fleet or to a message.
+                        </p>
+                        
+                        <p><em>Required</em>: Yes
+                        </p>
+                        <p><em>Type</em>: <a href="./aws-properties-gamelift-alias-routingstrategy.html">RoutingStrategy</a></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                  </dl>
+               </div>
+               <h2 id="aws-resource-gamelift-alias-return-values">Return Values</h2>
+               <h3 id="aws-resource-gamelift-alias-return-values-ref">Ref</h3>
+               <p>
+                  When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the alias ID, such as
+                  <code class="code">alias-1111aaaa-22bb-33cc-44dd-5555eeee66ff</code>.
+               </p>
+               <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+               </p>
+               <h2 id="aws-resource-gamelift-alias--examples">Examples</h2>
+               <h3 id="aws-resource-gamelift-alias--examples--Create_a_Simple_Alias">Create a Simple Alias</h3>
+               <p>The following example creates a simple alias for a fleet. The template uses <code class="code">!Ref</code>
+                  to reference a fleet resource, which can be declared elsewhere in the same
+                  template.
+               </p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h4 id="aws-resource-gamelift-alias--examples--Create_a_Simple_Alias--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Resources&quot;: <span>{</span>
+        &quot;AliasResource&quot;: <span>{</span>
+            &quot;Properties&quot;: <span>{</span>
+                &quot;Name&quot;: &quot;MyAlias&quot;,
+                &quot;Description&quot;: &quot;My Alias Description&quot;,
+                &quot;RoutingStrategy&quot;: <span>{</span>
+                    &quot;Type&quot;: &quot;SIMPLE&quot;,
+                    &quot;FleetId&quot;: <span>{</span>
+                        &quot;Ref&quot;: &quot;FleetResource&quot;
+                    }
+                }
+            },
+            &quot;Type&quot;: &quot;AWS::GameLift::Alias&quot;
+        }
     }
-  }
-}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
-                        <h4 id="aws-resource-gamelift-alias--examples--Create_terminal_alias--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">AliasResource: 
-  Type: AWS::GameLift::Alias
-  Properties: 
-    Name: &quot;TerminalAlias&quot;
-    Description: &quot;A terminal alias&quot;
-    RoutingStrategy: 
-      Type: &quot;TERMINAL&quot;
-      Message: &quot;Terminal routing strategy message&quot;</code></pre></div><h2 id="aws-resource-gamelift-alias--seealso">See Also</h2><div class="itemizedlist">
+}</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h4 id="aws-resource-gamelift-alias--examples--Create_a_Simple_Alias--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:  
+  AliasResource:
+    Properties:
+      Name: MyAlias
+      Description: My Alias Description
+      RoutingStrategy:
+        Type: SIMPLE
+        FleetId: !Ref FleetResource
+    Type: AWS::GameLift::Alias</code></pre></div>
+               <h3 id="aws-resource-gamelift-alias--examples--Create_terminal_alias">Create terminal alias</h3>
+               <p>The following example creates a terminal alias with a
+                  generic terminal message.
+               </p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h4 id="aws-resource-gamelift-alias--examples--Create_terminal_alias--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Resources&quot;: <span>{</span>
+        &quot;AliasResource&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::GameLift::Alias&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;Name&quot;: &quot;MyTerminalAlias&quot;,
+                &quot;Description&quot;: &quot;A terminal alias&quot;,
+                &quot;RoutingStrategy&quot;: <span>{</span>
+                    &quot;Type&quot;: &quot;TERMINAL&quot;,
+                    &quot;Message&quot;: &quot;Terminal routing strategy message&quot;
+                }
+            }
+        }
+    }
+}</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h4 id="aws-resource-gamelift-alias--examples--Create_terminal_alias--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  AliasResource:
+    Type: AWS::GameLift::Alias
+    Properties:
+      Name: MyTerminalAlias
+      Description: A terminal alias
+      RoutingStrategy:
+        Type: TERMINAL
+        Message: Terminal routing strategy message</code></pre></div>
+               <h2 id="aws-resource-gamelift-alias--seealso">See Also</h2>
+               <div class="itemizedlist">
+                   
+                   
+                   
+                  
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/resources-cloudformation.html"> Create GameLift Resources Using AWS CloudFormation</a> in the <em>Amazon
+                              GameLift Developer Guide</em></p>
                         
-                        
-                        <ul class="itemizedlist" type="disc">
-                           <li class="listitem">
-                              
-                              <p>
-                                 <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateAlias.html">CreateAlias</a> in the <em>Amazon GameLift API Reference</em>
-                                 
-                              </p>
-                              
-                           </li>
-                        </ul>
-                     </div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
-                        <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
-                     </div></div>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/aliases-creating.html">Add an Alias to a GameLift Fleet</a> in the <em>Amazon GameLift Developer Guide</em>
+                           
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateAlias.html">CreateAlias</a> in the <em>Amazon GameLift API Reference</em>
+                           
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+            </div>
+            <noscript>
+               <div>
+                  <div>
+                     <div>
+                        <div id="js_error_message">
+                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                 browser.</strong></p>
+                           <p>To use the AWS Documentation, Javascript must be
+                              enabled. Please refer to your browser&apos;s Help pages for instructions.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </noscript>
+            
+            <awsdocs-page-utilities></awsdocs-page-utilities>
+         </div></div>
 </body>
 </html>

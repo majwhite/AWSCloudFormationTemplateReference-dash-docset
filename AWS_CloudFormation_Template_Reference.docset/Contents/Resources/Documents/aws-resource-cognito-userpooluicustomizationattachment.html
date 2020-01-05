@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+            <div id="main-col-body">
+               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
+               <h1 class="topictitle" id="aws-resource-cognito-userpooluicustomizationattachment">AWS::Cognito::UserPoolUICustomizationAttachment</h1>
+               <div class="awsdocs-page-header-container">
+                  <awsdocs-page-header></awsdocs-page-header>
+                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+               </div>
+               <p>The <code class="code">AWS::Cognito::UserPoolUICustomizationAttachment</code> resource sets the UI
+                  customization information for a user pool&apos;s built-in app UI.
+               </p>
+               <p>You can specify app UI customization settings for a single client (with a specific
+                  <code class="code">clientId</code>) or for all clients (by setting the <code class="code">clientId</code> to
+                  <code class="code">ALL</code>). If you specify <code class="code">ALL</code>, the default configuration is used for
+                  every client that has had no UI customization set previously. If you specify UI customization
+                  settings for a particular client, it no longer falls back to the <code class="code">ALL</code>
+                  configuration. 
+               </p>
+               <div class="awsdocs-note">
+                  <div class="awsdocs-note-title">
+                     <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                  <div class="awsdocs-note-text">
+                     <p>Before you create this resource, your user pool must have a domain associated with
+                        it.
+                        You can create an <code class="code">AWS::Cognito::UserPoolDomain</code> resource first in this user
+                        pool. 
+                     </p>
+                  </div>
+               </div>
+               <p>Setting a logo image isn&apos;t supported from AWS CloudFormation. Use the Amazon Cognito
+                  <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cognito-user-identity-pools/latest/APIReference/API_SetUICustomization.html#API_SetUICustomization_RequestSyntax" target="_blank">SetUICustomization</a> API operation to set the image.
+               </p>
+               <h2 id="aws-resource-cognito-userpooluicustomizationattachment-syntax">Syntax</h2>
+               <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h3 id="aws-resource-cognito-userpooluicustomizationattachment-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::Cognito::UserPoolUICustomizationAttachment&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-cognito-userpooluicustomizationattachment-clientid">ClientId</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-cognito-userpooluicustomizationattachment-css">CSS</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-cognito-userpooluicustomizationattachment-userpoolid">UserPoolId</a>&quot; : <code class="replaceable">String</code>
+    }
+}
+</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h3 id="aws-resource-cognito-userpooluicustomizationattachment-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Cognito::UserPoolUICustomizationAttachment
+Properties: 
+  <a href="#cfn-cognito-userpooluicustomizationattachment-clientid">ClientId</a>: <code class="replaceable">String</code>
+  <a href="#cfn-cognito-userpooluicustomizationattachment-css">CSS</a>: <code class="replaceable">String</code>
+  <a href="#cfn-cognito-userpooluicustomizationattachment-userpoolid">UserPoolId</a>: <code class="replaceable">String</code>
+</code></pre></div>
+               <h2 id="aws-resource-cognito-userpooluicustomizationattachment-properties">Properties</h2>
+               <div class="variablelist">
+                  <dl>
+                     <dt><a id="cfn-cognito-userpooluicustomizationattachment-clientid"></a><span class="term"><code class="code">ClientId</code></span></dt>
+                     <dd>
+                        
+                        <p>The client ID for the client app. You can specify the UI customization settings for
+                           a
+                           single client (with a specific clientId) or for all clients (by setting the clientId
+                           to
+                           <code class="code">ALL</code>).
+                        </p>
+                        
+                        <p><em>Required</em>: Yes
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Minimum</em>: <code class="code">1</code></p>
+                        <p><em>Maximum</em>: <code class="code">128</code></p>
+                        <p><em>Pattern</em>: <code class="code">[\w+]+</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                     </dd>
+                     <dt><a id="cfn-cognito-userpooluicustomizationattachment-css"></a><span class="term"><code class="code">CSS</code></span></dt>
+                     <dd>
+                        
+                        
+                        <p>The CSS values in the UI customization.</p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-cognito-userpooluicustomizationattachment-userpoolid"></a><span class="term"><code class="code">UserPoolId</code></span></dt>
+                     <dd>
+                        
+                        <p>The user pool ID for the user pool.</p>
+                        
+                        <p><em>Required</em>: Yes
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Minimum</em>: <code class="code">1</code></p>
+                        <p><em>Maximum</em>: <code class="code">55</code></p>
+                        <p><em>Pattern</em>: <code class="code">[\w-]+_[0-9a-zA-Z]+</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                     </dd>
+                  </dl>
+               </div>
+               <h2 id="aws-resource-cognito-userpooluicustomizationattachment-return-values">Return Values</h2>
+               <h3 id="aws-resource-cognito-userpooluicustomizationattachment-return-values-ref">Ref</h3>
+               <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the physicalResourceId, which is
+                  &#x201C;UserPoolUICustomizationAttachment-UserPoolId-ClientId&quot;. For example:
+               </p>
+               <p>
+                  <code class="code"><span>{</span> &quot;Ref&quot;:
+                     &quot;UserPoolUICustomizationAttachment-us-east-1_FAKEPOOLID-2asc123fakeclientidajjulj6bh&quot;
+                     }</code>
+                  
+               </p>
+               <p>For the Amazon Cognito user pool domain
+                  <code class="code">UserPoolUICustomizationAttachment-us-east-1_FAKEPOOLID-2asc123fakeclientidajjulj6bh</code>,
+                  Ref returns the name of the UI customization attachment.
+               </p>
+               <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+               </p>
+               <h2 id="aws-resource-cognito-userpooluicustomizationattachment--examples">Examples</h2>
+               <h3 id="aws-resource-cognito-userpooluicustomizationattachment--examples--Creating_a_new_UI_customization_attachment_for_a_user_pool">Creating a new UI customization attachment for a user pool</h3>
+               <p>The following example sets UI customization settings in the referenced user pool and
+                  client.
+               </p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h4 id="aws-resource-cognito-userpooluicustomizationattachment--examples--Creating_a_new_UI_customization_attachment_for_a_user_pool--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+        &quot;UserPoolUICustomization&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::Cognito::UserPoolUICustomizationAttachment&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;UserPoolId&quot;: <span>{</span>&quot;Ref&quot;: &quot;UserPool&quot;},
+                &quot;ClientId&quot;: <span>{</span>&quot;Ref&quot;: &quot;Client&quot;},
+                &quot;CSS&quot;: &quot;.banner-customizable <span>{</span>\nbackground: linear-gradient(#9940B8, #C27BDB)\n}&quot;
+              }
+            }
+      }</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h4 id="aws-resource-cognito-userpooluicustomizationattachment--examples--Creating_a_new_UI_customization_attachment_for_a_user_pool--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">UserPoolUICustomization:
+        Type: AWS::Cognito::UserPoolUICustomizationAttachment
+        Properties:
+          UserPoolId: !Ref UserPool
+          ClientId: !Ref Client
+          CSS: &quot;.banner-customizable <span>{</span>
+                     background: linear-gradient(#9940B8, #C27BDB) 
+                }&quot;</code></pre></div>
+               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+            </div>
+            <noscript>
+               <div>
+                  <div>
+                     <div>
+                        <div id="js_error_message">
+                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                 browser.</strong></p>
+                           <p>To use the AWS Documentation, Javascript must be
+                              enabled. Please refer to your browser&apos;s Help pages for instructions.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </noscript>
+            
+            <awsdocs-page-utilities></awsdocs-page-utilities>
+         </div></div>
+</body>
+</html>

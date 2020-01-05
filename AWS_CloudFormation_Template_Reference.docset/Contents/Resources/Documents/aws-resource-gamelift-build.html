@@ -8,175 +8,286 @@
 </head>
 <body>
     <div id="content" style="padding: 10px 30px;">
-    <h1 class="topictitle" id="aws-resource-gamelift-build">AWS::GameLift::Build</h1><p>The <code class="code">AWS::GameLift::Build</code> resource creates a build that includes all of the components to run your game server
-                        in an Amazon GameLift (GameLift) fleet.
-                     </p><h2 id="aws-resource-gamelift-build-syntax">Syntax</h2><p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p><div id="JSON" name="JSON" class="section langfilter">
-                        <h3 id="aws-resource-gamelift-build-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+    <div id="main-content" class="awsui-util-container">
+            <div id="main-col-body">
+               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
+               <h1 class="topictitle" id="aws-resource-gamelift-build">AWS::GameLift::Build</h1>
+               <div class="awsdocs-page-header-container">
+                  <awsdocs-page-header></awsdocs-page-header>
+                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+               </div>
+               <p>The <code class="code">AWS::GameLift::Build</code> resource creates a game server build that is
+                  installed and run on instances in an Amazon GameLift fleet. This resource points to
+                  an Amazon
+                  S3 location that contains a zip file with all of the components of the game server
+                  build.
+               </p>
+               <h2 id="aws-resource-gamelift-build-syntax">Syntax</h2>
+               <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h3 id="aws-resource-gamelift-build-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::GameLift::Build&quot;,
-  &quot;Properties&quot; : {
-      &quot;<a href="#cfn-gamelift-build-name">Name</a>&quot; : <em class="replaceable"><code>String</code></em>,
-      &quot;<a href="#cfn-gamelift-build-storagelocation">StorageLocation</a>&quot; : <em class="replaceable"><code><a href="aws-properties-gamelift-build-storagelocation.html">S3Location</a></code></em>,
-      &quot;<a href="#cfn-gamelift-build-version">Version</a>&quot; : <em class="replaceable"><code>String</code></em>
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-gamelift-build-name">Name</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-gamelift-build-operatingsystem">OperatingSystem</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-gamelift-build-storagelocation">StorageLocation</a>&quot; : <code class="replaceable"><a href="./aws-properties-gamelift-build-storagelocation.html">S3Location</a></code>,
+      &quot;<a href="#cfn-gamelift-build-version">Version</a>&quot; : <code class="replaceable">String</code>
     }
 }
-</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
-                        <h3 id="aws-resource-gamelift-build-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Type: AWS::GameLift::Build
+</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h3 id="aws-resource-gamelift-build-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::GameLift::Build
 Properties: 
-  <a href="#cfn-gamelift-build-name">Name</a>: <em class="replaceable"><code>String</code></em>
-  <a href="#cfn-gamelift-build-storagelocation">StorageLocation</a>: <em class="replaceable"><code>
-    <a href="aws-properties-gamelift-build-storagelocation.html">S3Location</a></code></em>
-  <a href="#cfn-gamelift-build-version">Version</a>: <em class="replaceable"><code>String</code></em>
-</code></pre></div><h2 id="aws-resource-gamelift-build-properties">Properties</h2><div class="variablelist">
-                        <dl>
-                           <dt><a id="cfn-gamelift-build-name"></a><span class="term"><code class="code">Name</code></span></dt>
-                           <dd>
-                              
-                              <p>Descriptive label that is associated with a build. Build names do not need to be unique.</p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Minimum</em>: <code class="code">1</code></p>
-                              <p><em>Maximum</em>: <code class="code">1024</code></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-gamelift-build-storagelocation"></a><span class="term"><code class="code">StorageLocation</code></span></dt>
-                           <dd>
-                              
-                              <p>Information indicating where your game build files are stored. Use this parameter
-                                 only when creating a build with files stored in an Amazon S3 bucket that you own.
-                                 The storage
-                                 location must specify an Amazon S3 bucket name and key, as well as a the ARN for a
-                                 role that you set up
-                                 to allow Amazon GameLift to access your Amazon S3 bucket. The S3 bucket must be in
-                                 the same region
-                                 that you want to create a new build in.
-                              </p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: <a href="aws-properties-gamelift-build-storagelocation.html">S3Location</a></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                           </dd>
-                           <dt><a id="cfn-gamelift-build-version"></a><span class="term"><code class="code">Version</code></span></dt>
-                           <dd>
-                              
-                              <p>Version that is associated with this build. Version strings do not need to be unique.</p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Minimum</em>: <code class="code">1</code></p>
-                              <p><em>Maximum</em>: <code class="code">1024</code></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                        </dl>
-                     </div><h2 id="aws-resource-gamelift-build-return-values">Return Values</h2><h3 id="aws-resource-gamelift-build-return-values-ref">Ref</h3><p>
-                        When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the build ID, such as <code class="code">mybuild-a01234b56-7890-1de2-f345-g67h8i901j2k</code>.
-                     </p><p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
-                     </p><h2 id="aws-resource-gamelift-build--examples">Examples</h2><h3 id="aws-resource-gamelift-build--examples--Create_GameLift_build">Create GameLift build</h3><p>The following example creates a GameLift build named <code class="code">MyGameServerBuild</code>. The
-                        build package is located in an S3 bucket, specified by the <code class="code">S3Bucket</code> and
-                        <code class="code">S3Key</code> input parameters. The example also creates the AWS Identity and Access Management
-                        (IAM) role
-                        that GameLift assumes so that it has permissions to download the build package files.
-                     </p><div id="JSON" name="JSON" class="section langfilter">
-                        <h4 id="aws-resource-gamelift-build--examples--Create_GameLift_build--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;BuildResource&quot;: {
-  &quot;Type&quot;: &quot;AWS::GameLift::Build&quot;,
-  &quot;Properties&quot;: {
-    &quot;Name&quot;: &quot;MyGameServerBuild&quot;,
-    &quot;Version&quot;: &quot;v15&quot;,
-    &quot;StorageLocation&quot;: {
-      &quot;Bucket&quot;: &quot;mybucket&quot;,
-      &quot;Key&quot;: &quot;buildpackagefiles/&quot;,
-      &quot;RoleArn&quot;: { &quot;Fn::GetAtt&quot;: [ &quot;IAMRole&quot;, &quot;Arn&quot; ] }
-    }
-  }
-},
-&quot;IAMRole&quot;: {
-  &quot;Type&quot;: &quot;AWS::IAM::Role&quot;,
-  &quot;Properties&quot;: {
-    &quot;AssumeRolePolicyDocument&quot;: {
-      &quot;Version&quot;: &quot;2012-10-17&quot;,
-      &quot;Statement&quot;: [
-        {
-          &quot;Effect&quot;: &quot;Allow&quot;,
-          &quot;Principal&quot;: { &quot;Service&quot;: [ &quot;gamelift.amazonaws.com&quot; ] },
-          &quot;Action&quot;: [ &quot;sts:AssumeRole&quot; ]
-        }
-      ]
-    },
-    &quot;Path&quot;: &quot;/&quot;,
-    &quot;Policies&quot;: [
-      {
-        &quot;PolicyName&quot;: &quot;gamelift-s3-access-policy&quot;,
-        &quot;PolicyDocument&quot;: {
-          &quot;Version&quot;: &quot;2012-10-17&quot;,
-          &quot;Statement&quot;: [
-            {
-              &quot;Effect&quot;: &quot;Allow&quot;,
-              &quot;Action&quot;: [ &quot;s3:GetObject&quot; ],
-              &quot;Resource&quot;: [ &quot;arn:aws:s3:::mybucket/*&quot; ]
+  <a href="#cfn-gamelift-build-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-gamelift-build-operatingsystem">OperatingSystem</a>: <code class="replaceable">String</code>
+  <a href="#cfn-gamelift-build-storagelocation">StorageLocation</a>: <code class="replaceable">
+    <a href="./aws-properties-gamelift-build-storagelocation.html">S3Location</a></code>
+  <a href="#cfn-gamelift-build-version">Version</a>: <code class="replaceable">String</code>
+</code></pre></div>
+               <h2 id="aws-resource-gamelift-build-properties">Properties</h2>
+               <div class="variablelist">
+                  <dl>
+                     <dt><a id="cfn-gamelift-build-name"></a><span class="term"><code class="code">Name</code></span></dt>
+                     <dd>
+                        
+                        
+                        <p>A descriptive label that is associated with a build. Build names do not need to be
+                           unique.
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Minimum</em>: <code class="code">1</code></p>
+                        <p><em>Maximum</em>: <code class="code">1024</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-gamelift-build-operatingsystem"></a><span class="term"><code class="code">OperatingSystem</code></span></dt>
+                     <dd>
+                        
+                        <p>The operating system that the game server binaries are built to run on. This value
+                           determines the type of fleet resources that you can use for this build. If your game
+                           build contains multiple executables, they all must run on the same operating system.
+                           If
+                           an operating system is not specified when creating a build, Amazon GameLift uses the
+                           default value (WINDOWS_2012). This value cannot be changed later.
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Allowed Values</em>: <code class="code">AMAZON_LINUX | AMAZON_LINUX_2 | WINDOWS_2012</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                     </dd>
+                     <dt><a id="cfn-gamelift-build-storagelocation"></a><span class="term"><code class="code">StorageLocation</code></span></dt>
+                     <dd>
+                        
+                        <p>Information indicating where your game build files are stored. Use this parameter
+                           only
+                           when creating a build with files stored in an Amazon S3 bucket that you own. The storage
+                           location must specify an Amazon S3 bucket name and key. The location must also specify
+                           a role
+                           ARN that you set up to allow Amazon GameLift to access your Amazon S3 bucket. The
+                           S3 bucket and your
+                           new build must be in the same Region.
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: <a href="./aws-properties-gamelift-build-storagelocation.html">S3Location</a></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                     </dd>
+                     <dt><a id="cfn-gamelift-build-version"></a><span class="term"><code class="code">Version</code></span></dt>
+                     <dd>
+                        
+                        
+                        <p>Version information that is associated with this build. Version strings do not need
+                           to be unique.
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Minimum</em>: <code class="code">1</code></p>
+                        <p><em>Maximum</em>: <code class="code">1024</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                  </dl>
+               </div>
+               <h2 id="aws-resource-gamelift-build-return-values">Return Values</h2>
+               <h3 id="aws-resource-gamelift-build-return-values-ref">Ref</h3>
+               <p>
+                  When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the build ID, such as
+                  <code class="code">build-1111aaaa-22bb-33cc-44dd-5555eeee66ff</code>.
+               </p>
+               <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+               </p>
+               <h2 id="aws-resource-gamelift-build--examples">Examples</h2>
+               <h3 id="aws-resource-gamelift-build--examples--Create_a_Custom_Game_Server_Build">Create a Custom Game Server Build</h3>
+               <p>The following example creates a GameLift build named <code class="code">MyGameServerBuild</code>. The
+                  build package is located in an S3 bucket, specified by the <code class="code">S3Bucket</code> and
+                  <code class="code">S3Key</code> input parameters. The example also creates the AWS Identity and Access Management
+                  (IAM) role
+                  that GameLift assumes so that it has permissions to download the build package files.
+               </p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h4 id="aws-resource-gamelift-build--examples--Create_a_Custom_Game_Server_Build--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Resources&quot;: <span>{</span>
+        &quot;IAMRole&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::IAM::Role&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;AssumeRolePolicyDocument&quot;: <span>{</span>
+                    &quot;Version&quot;: &quot;2012-10-17&quot;,
+                    &quot;Statement&quot;: [
+                        <span>{</span>
+                            &quot;Effect&quot;: &quot;Allow&quot;,
+                            &quot;Principal&quot;: <span>{</span>
+                                &quot;Service&quot;: [
+                                    &quot;cloudformation.amazonaws.com&quot;,
+                                    &quot;gamelift.amazonaws.com&quot;
+                                ]
+                            },
+                            &quot;Action&quot;: &quot;sts:AssumeRole&quot;
+                        }
+                    ]
+                },
+                &quot;RoleName&quot;: &quot;BuildIAMRole&quot;,
+                &quot;Policies&quot;: [
+                    <span>{</span>
+                        &quot;PolicyName&quot;: &quot;gamelift-s3-access-policy&quot;,
+                        &quot;PolicyDocument&quot;: <span>{</span>
+                            &quot;Version&quot;: &quot;2012-10-17&quot;,
+                            &quot;Statement&quot;: [
+                                <span>{</span>
+                                    &quot;Effect&quot;: &quot;Allow&quot;,
+                                    &quot;Action&quot;: [
+                                        &quot;s3:GetObject&quot;,
+                                        &quot;s3:GetObjectVersion&quot;,
+                                        &quot;s3:GetObjectMetadata&quot;,
+                                        &quot;s3:*Object*&quot;
+                                    ],
+                                    &quot;Resource&quot;: [
+                                        &quot;arn:aws:s3:::MyBucketName/*&quot;
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
-          ]
+        },
+        &quot;BuildResource&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::GameLift::Build&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;Name&quot;: &quot;MyGameServerBuild&quot;,
+                &quot;Version&quot;: &quot;v1.0&quot;,
+                &quot;OperatingSystem&quot;: &quot;WINDOWS_2012&quot;,
+                &quot;StorageLocation&quot;: <span>{</span>
+                    &quot;Bucket&quot;: &quot;MyBucketName&quot;,
+                    &quot;Key&quot;: &quot;MyGameBuildFiles.zip&quot;,
+                    &quot;RoleArn&quot;: <span>{</span>
+                        &quot;Fn::GetAtt&quot;: [
+                            &quot;IAMRole&quot;,
+                            &quot;Arn&quot;
+                        ]
+                    }
+                }
+            }
         }
-      }
-    ]
-  }
-}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
-                        <h4 id="aws-resource-gamelift-build--examples--Create_GameLift_build--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">BuildResource: 
-  Type: AWS::GameLift::Build
-  Properties: 
-    Name: &quot;MyGameServerBuild&quot;
-    Version: &quot;v15&quot;
-    StorageLocation: 
-      Bucket: &quot;mybucket&quot;
-      Key: &quot;buildpackagefiles/&quot;
-      RoleArn: 
-        Fn::GetAtt: 
-          - &quot;IAMRole&quot;
-          - &quot;Arn&quot;
-IAMRole: 
-  Type: AWS::IAM::Role
-  Properties: 
-    AssumeRolePolicyDocument: 
-      Version: &quot;2012-10-17&quot;
-      Statement: 
-        - 
-          Effect: &quot;Allow&quot;
-          Principal: 
-            Service: 
-              - &quot;gamelift.amazonaws.com&quot;
-          Action: 
-            - &quot;sts:AssumeRole&quot;
-    Path: &quot;/&quot;
-    Policies: 
-      - 
-        PolicyName: &quot;gamelift-s3-access-policy&quot;
-        PolicyDocument: 
-          Version: &quot;2012-10-17&quot;
-          Statement: 
-            - 
-              Effect: &quot;Allow&quot;
-              Action: 
-                - &quot;s3:GetObject&quot;
-              Resource: 
-                - &quot;arn:aws:s3:::mybucket/*&quot;</code></pre></div><h2 id="aws-resource-gamelift-build--seealso">See Also</h2><div class="itemizedlist">
+    }
+}</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h4 id="aws-resource-gamelift-build--examples--Create_a_Custom_Game_Server_Build--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  IAMRole:
+    Type: &quot;AWS::IAM::Role&quot;
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: &quot;2012-10-17&quot;
+        Statement:
+          - Effect: &quot;Allow&quot;
+            Principal:
+              Service: [&quot;cloudformation.amazonaws.com&quot;, &quot;gamelift.amazonaws.com&quot;]
+            Action: &quot;sts:AssumeRole&quot;
+      RoleName: &quot;BuildIAMRole&quot;
+      Policies:
+        - PolicyName: gamelift-s3-access-policy
+          PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+              - Effect: Allow
+                Action:
+                  - &quot;s3:GetObject&quot;
+                  - &quot;s3:GetObjectVersion&quot;
+                  - &quot;s3:GetObjectMetadata&quot;
+                  - &quot;s3:*Object*&quot;
+                Resource:
+                  - &quot;arn:aws:s3:::MyBucketName/*&quot;
+  BuildResource:
+    Type: AWS::GameLift::Build
+    Properties:
+      Name: MyGameServerBuild
+      Version: v1.0
+      OperatingSystem: WINDOWS_2012
+      StorageLocation:
+        Bucket: &quot;MyBucketName&quot;
+        Key: &quot;MyGameBuildFiles.zip&quot;        
+        RoleArn: !GetAtt IAMRole.Arn</code></pre></div>
+               <h2 id="aws-resource-gamelift-build--seealso">See Also</h2>
+               <div class="itemizedlist">
+                   
+                   
+                   
+                   
+                  
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/resources-cloudformation.html"> Create GameLift Resources Using AWS CloudFormation</a> in the <em>Amazon
+                              GameLift Developer Guide</em></p>
                         
+                     </li>
+                     <li class="listitem">
                         
-                        <ul class="itemizedlist" type="disc">
-                           <li class="listitem">
-                              
-                              <p>
-                                 <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateBuild.html">CreateBuild</a> in the <em>Amazon GameLift API Reference</em>
-                                 
-                              </p>
-                              
-                           </li>
-                        </ul>
-                     </div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
-                        <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
-                     </div></div>
+                        <p><a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build">
+                              Create a Build with Files in Amazon S3</a> in the <em>Amazon GameLift Developer Guide</em></p>
+                        
+                     </li>
+                     <li class="listitem">
+                        
+                        <p><a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-script-uploading.html#realtime-script-uploading-s3">
+                              Upload Script Files in Amazon S3</a> in the <em>Amazon GameLift Developer Guide</em></p>
+                        
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateBuild.html">CreateBuild</a> in the <em>Amazon GameLift API Reference</em>
+                           
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+            </div>
+            <noscript>
+               <div>
+                  <div>
+                     <div>
+                        <div id="js_error_message">
+                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                 browser.</strong></p>
+                           <p>To use the AWS Documentation, Javascript must be
+                              enabled. Please refer to your browser&apos;s Help pages for instructions.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </noscript>
+            
+            <awsdocs-page-utilities></awsdocs-page-utilities>
+         </div></div>
 </body>
 </html>

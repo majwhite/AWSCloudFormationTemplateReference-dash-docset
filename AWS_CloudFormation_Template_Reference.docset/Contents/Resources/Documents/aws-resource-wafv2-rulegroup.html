@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+            <div id="main-col-body">
+               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
+               <h1 class="topictitle" id="aws-resource-wafv2-rulegroup">AWS::WAFv2::RuleGroup</h1>
+               <div class="awsdocs-page-header-container">
+                  <awsdocs-page-header></awsdocs-page-header>
+                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+               </div>
+               <div class="awsdocs-note">
+                  <div class="awsdocs-note-title">
+                     <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                  <div class="awsdocs-note-text">
+                     <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate
+                        your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  
+                     </p>
+                  </div>
+               </div>
+               <p>Use an AWS::WAFv2::RuleGroup to define a collection of rules for inspecting and controlling web requests. You
+                  use a rule group in an <a href="./aws-resource-wafv2-webacl.html">AWS::WAFv2::WebACL</a> by providing its Amazon Resource Name (ARN) to the rule statement <code class="code">RuleGroupReferenceStatement</code>, when you add rules to the web ACL.  
+               </p>
+               <p>When you create a rule group, you define an immutable capacity limit. If you update
+                  a rule group, you must stay within the capacity. This allows others to reuse the rule
+                  group with confidence in its capacity requirements. 
+               </p>
+               <h2 id="aws-resource-wafv2-rulegroup-syntax">Syntax</h2>
+               <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h3 id="aws-resource-wafv2-rulegroup-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::WAFv2::RuleGroup&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-wafv2-rulegroup-capacity">Capacity</a>&quot; : <code class="replaceable">Integer</code>,
+      &quot;<a href="#cfn-wafv2-rulegroup-description">Description</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-wafv2-rulegroup-name">Name</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-wafv2-rulegroup-rules">Rules</a>&quot; : <code class="replaceable"><a href="./aws-properties-wafv2-rulegroup-rules.html">Rules</a></code>,
+      &quot;<a href="#cfn-wafv2-rulegroup-scope">Scope</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-wafv2-rulegroup-tags">Tags</a>&quot; : <code class="replaceable"><a href="./aws-properties-wafv2-rulegroup-taglist.html">TagList</a></code>,
+      &quot;<a href="#cfn-wafv2-rulegroup-visibilityconfig">VisibilityConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-wafv2-rulegroup-visibilityconfig.html">VisibilityConfig</a></code>
+    }
+}
+</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h3 id="aws-resource-wafv2-rulegroup-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::WAFv2::RuleGroup
+Properties: 
+  <a href="#cfn-wafv2-rulegroup-capacity">Capacity</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-wafv2-rulegroup-description">Description</a>: <code class="replaceable">String</code>
+  <a href="#cfn-wafv2-rulegroup-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-wafv2-rulegroup-rules">Rules</a>: <code class="replaceable">
+    <a href="./aws-properties-wafv2-rulegroup-rules.html">Rules</a></code>
+  <a href="#cfn-wafv2-rulegroup-scope">Scope</a>: <code class="replaceable">String</code>
+  <a href="#cfn-wafv2-rulegroup-tags">Tags</a>: <code class="replaceable">
+    <a href="./aws-properties-wafv2-rulegroup-taglist.html">TagList</a></code>
+  <a href="#cfn-wafv2-rulegroup-visibilityconfig">VisibilityConfig</a>: <code class="replaceable">
+    <a href="./aws-properties-wafv2-rulegroup-visibilityconfig.html">VisibilityConfig</a></code>
+</code></pre></div>
+               <h2 id="aws-resource-wafv2-rulegroup-properties">Properties</h2>
+               <div class="variablelist">
+                  <dl>
+                     <dt><a id="cfn-wafv2-rulegroup-capacity"></a><span class="term"><code class="code">Capacity</code></span></dt>
+                     <dd>
+                        
+                        <p>The web ACL capacity units (WCUs) required for this rule group.</p>
+                        
+                        <p>When you create your own rule group, you define this, and you cannot change it after
+                           creation. 
+                           When you add or modify the rules in a rule group, AWS WAF enforces this limit. You
+                           can check the capacity 
+                           for a set of rules using CheckCapacity.
+                        </p>
+                        
+                        <p>AWS WAF uses WCUs to calculate and control the operating
+                           resources that are used to run your rules, rule groups, and web ACLs. AWS WAF
+                           calculates capacity differently for each rule type, to reflect the relative cost of
+                           each rule. 
+                           Simple rules that cost little to run use fewer WCUs than more complex rules
+                           				that use more processing power. 
+                           				Rule group capacity is fixed at creation, which helps users plan their  
+                           web ACL WCU usage when they use a rule group. 
+                           The WCU limit for web ACLs is 1,500.  
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: Integer
+                        </p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-wafv2-rulegroup-description"></a><span class="term"><code class="code">Description</code></span></dt>
+                     <dd>
+                        
+                        <p>A friendly description of the rule group. You cannot change the description of a rule
+                           group after you create it.
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Minimum</em>: <code class="code">1</code></p>
+                        <p><em>Maximum</em>: <code class="code">256</code></p>
+                        <p><em>Pattern</em>: <code class="code">^[\w+=:#@/\-,\.][\w+=:#@/\-,\.\s]+[\w+=:#@/\-,\.]$</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-wafv2-rulegroup-name"></a><span class="term"><code class="code">Name</code></span></dt>
+                     <dd>
+                        
+                        <p>A friendly name of the rule group. You cannot change the name of a rule group after
+                           you create it.
+                        </p>
+                        
+                        <p><em>Required</em>: Yes
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Minimum</em>: <code class="code">1</code></p>
+                        <p><em>Maximum</em>: <code class="code">128</code></p>
+                        <p><em>Pattern</em>: <code class="code">^[\w\-]+$</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-wafv2-rulegroup-rules"></a><span class="term"><code class="code">Rules</code></span></dt>
+                     <dd>
+                        
+                        <p>The Rule statements used to identify the web requests that you 
+                           want to allow, block, or count. Each rule includes one top-level statement that AWS
+                           WAF uses to identify matching  
+                           web requests, and parameters that govern how AWS WAF handles them. 
+                           
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: <a href="./aws-properties-wafv2-rulegroup-rules.html">Rules</a></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-wafv2-rulegroup-scope"></a><span class="term"><code class="code">Scope</code></span></dt>
+                     <dd>
+                        
+                        <p>Specifies whether this is for an AWS CloudFront distribution or for a regional application.
+                           A regional
+                           application can be an Application Load Balancer (ALB) or an API Gateway stage. Valid
+                           Values are <code class="code">CLOUDFRONT</code> and <code class="code">REGIONAL</code>.
+                        </p>
+                        
+                        <p><em>Required</em>: Yes
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-wafv2-rulegroup-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                     <dd>
+                        
+                        <p>Key:value pairs associated with an AWS resource. The key:value pair can be anything
+                           you define. Typically, the tag key represents a category (such as &quot;environment&quot;) and
+                           the tag value represents a specific value within that category (such as &quot;test,&quot; &quot;development,&quot;
+                           or &quot;production&quot;). You can add up to 50 tags to each AWS resource.
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: <a href="./aws-properties-wafv2-rulegroup-taglist.html">TagList</a></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-wafv2-rulegroup-visibilityconfig"></a><span class="term"><code class="code">VisibilityConfig</code></span></dt>
+                     <dd>
+                        
+                        <p>Defines and enables Amazon CloudWatch metrics and web request sample collection. 
+                           
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: <a href="./aws-properties-wafv2-rulegroup-visibilityconfig.html">VisibilityConfig</a></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                  </dl>
+               </div>
+               <h2 id="aws-resource-wafv2-rulegroup-return-values">Return Values</h2>
+               <h3 id="aws-resource-wafv2-rulegroup-return-values-ref">Ref</h3>
+               <p>The <code class="code">Ref</code> for the resource, containing the resource name, physical ID, and scope, formatted
+                  as follows: <code class="code">name|id|scope</code>.
+               </p>
+               <p>For example: <code class="code">my-webacl-name|1234a1a-a1b1-12a1-abcd-a123b123456|REGIONAL</code></p>
+               <h3 id="aws-resource-wafv2-rulegroup-return-values-fn--getatt">Fn::GetAtt</h3>
+               <h4 id="aws-resource-wafv2-rulegroup-return-values-fn--getatt-fn--getatt"></h4>
+               <div class="variablelist">
+                  <dl>
+                     <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
+                     <dd>
+                        
+                        <p>The Amazon Resource Name (ARN) of the rule group.</p>
+                     </dd>
+                     <dt><a id="Id-fn::getatt"></a><span class="term"><code class="code">Id</code></span></dt>
+                     <dd>
+                        
+                        <p>The ID of the rule group.</p>
+                     </dd>
+                  </dl>
+               </div>
+               <h2 id="aws-resource-wafv2-rulegroup--examples">Examples</h2>
+               <h3 id="aws-resource-wafv2-rulegroup--examples--Create_a_rule_group">Create a rule group</h3>
+               <p>The following shows an example rule group specification. </p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h4 id="aws-resource-wafv2-rulegroup--examples--Create_a_rule_group--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Description&quot;: &quot;Create RuleGroups&quot;,
+  &quot;Resources&quot;: <span>{</span>
+      &quot;SampleRuleGroup&quot;: <span>{</span>
+          &quot;Type&quot;: &quot;AWS::WAFv2::RuleGroup&quot;,
+          &quot;Properties&quot;: <span>{</span>
+              &quot;Name&quot;: &quot;SampleRuleGroup&quot;,
+              &quot;Scope&quot;: &quot;REGIONAL&quot;,
+              &quot;Description&quot;: &quot;SampleRuleGroup&quot;,
+              &quot;VisibilityConfig&quot;: <span>{</span>
+                  &quot;SampledRequestsEnabled&quot;: true,
+                  &quot;CloudWatchMetricsEnabled&quot;: true,
+                  &quot;MetricName&quot;: &quot;SampleRuleGroupMetrics&quot;
+              },
+              &quot;Capacity&quot;: 1000,
+              &quot;Rules&quot;: [
+                  <span>{</span>
+                      &quot;Name&quot;: &quot;RuleOne&quot;,
+                      &quot;Priority&quot;: 1,
+                      &quot;Action&quot;: <span>{</span>
+                          &quot;Allow&quot;: <span>{</span>}
+                      },
+                      &quot;VisibilityConfig&quot;: <span>{</span>
+                          &quot;SampledRequestsEnabled&quot;: true,
+                          &quot;CloudWatchMetricsEnabled&quot;: true,
+                          &quot;MetricName&quot;: &quot;RuleOneMetric&quot;
+                      },
+                      &quot;Statement&quot;: <span>{</span>
+                          &quot;ByteMatchStatement&quot;: <span>{</span>
+                              &quot;FieldToMatch&quot;: <span>{</span>
+                                  &quot;AllQueryArguments&quot;: <span>{</span>}
+                              },
+                              &quot;PositionalConstraint&quot;: &quot;CONTAINS&quot;,
+                              &quot;SearchString&quot;: &quot;testagent&quot;,
+                              &quot;TextTransformations&quot;: [
+                                  <span>{</span>
+                                      &quot;Priority&quot;: 1,
+                                      &quot;Type&quot;: &quot;HTML_ENTITY_DECODE&quot;
+                                  }
+                              ]
+                          }
+                      }
+                  },
+                  <span>{</span>
+                      &quot;Name&quot;: &quot;RuleTwo&quot;,
+                      &quot;Priority&quot;: 2,
+                      &quot;Action&quot;: <span>{</span>
+                          &quot;Block&quot;: <span>{</span>}
+                      },
+                      &quot;VisibilityConfig&quot;: <span>{</span>
+                          &quot;SampledRequestsEnabled&quot;: true,
+                          &quot;CloudWatchMetricsEnabled&quot;: true,
+                          &quot;MetricName&quot;: &quot;RuleTwoMetric&quot;
+                      },
+                      &quot;Statement&quot;: <span>{</span>
+                          &quot;ByteMatchStatement&quot;: <span>{</span>
+                              &quot;FieldToMatch&quot;: <span>{</span>
+                                  &quot;SingleHeader&quot;: <span>{</span>
+                                      &quot;Name&quot;: &quot;haystack&quot;
+                                  }
+                              },
+                              &quot;PositionalConstraint&quot;: &quot;CONTAINS&quot;,
+                              &quot;SearchString&quot;: &quot;badbot&quot;,
+                              &quot;TextTransformations&quot;: [
+                                  <span>{</span>
+                                      &quot;Priority&quot;: 0,
+                                      &quot;Type&quot;: &quot;NONE&quot;
+                                  }
+                              ]
+                          }
+                      }
+                  },
+                  <span>{</span>
+                      &quot;Name&quot;: &quot;RuleThree&quot;,
+                      &quot;Priority&quot;: 3,
+                      &quot;Action&quot;: <span>{</span>
+                          &quot;Count&quot;: <span>{</span>}
+                      },
+                      &quot;VisibilityConfig&quot;: <span>{</span>
+                          &quot;SampledRequestsEnabled&quot;: true,
+                          &quot;CloudWatchMetricsEnabled&quot;: true,
+                          &quot;MetricName&quot;: &quot;RuleThreeMetric&quot;
+                      },
+                      &quot;Statement&quot;: <span>{</span>
+                          &quot;ByteMatchStatement&quot;: <span>{</span>
+                              &quot;FieldToMatch&quot;: <span>{</span>
+                                  &quot;Body&quot;: <span>{</span>}
+                              },
+                              &quot;PositionalConstraint&quot;: &quot;CONTAINS&quot;,
+                              &quot;SearchString&quot;: &quot;RegionOne&quot;,
+                              &quot;TextTransformations&quot;: [
+                                  <span>{</span>
+                                      &quot;Priority&quot;: 0,
+                                      &quot;Type&quot;: &quot;HTML_ENTITY_DECODE&quot;
+                                  }
+                              ]
+                          }
+                      }
+                  },
+                  <span>{</span>
+                      &quot;Name&quot;: &quot;RuleFour&quot;,
+                      &quot;Priority&quot;: 4,
+                      &quot;Action&quot;: <span>{</span>
+                          &quot;Allow&quot;: <span>{</span>}
+                      },
+                      &quot;VisibilityConfig&quot;: <span>{</span>
+                          &quot;SampledRequestsEnabled&quot;: true,
+                          &quot;CloudWatchMetricsEnabled&quot;: true,
+                          &quot;MetricName&quot;: &quot;RuleFourMetric&quot;
+                      },
+                      &quot;Statement&quot;: <span>{</span>
+                          &quot;SizeConstraintStatement&quot;: <span>{</span>
+                              &quot;ComparisonOperator&quot;: &quot;GT&quot;,
+                              &quot;Size&quot;: 1000,
+                              &quot;FieldToMatch&quot;: <span>{</span>
+                                  &quot;UriPath&quot;: <span>{</span>}
+                              },
+                              &quot;TextTransformations&quot;: [
+                                  <span>{</span>
+                                      &quot;Priority&quot;: 0,
+                                      &quot;Type&quot;: &quot;NONE&quot;
+                                  }
+                              ]
+                          }
+                      }
+                  }
+              ]
+          }
+      }
+  }
+}</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h4 id="aws-resource-wafv2-rulegroup--examples--Create_a_rule_group--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: Create RuleGroups
+  Resources:
+    SampleRuleGroup:
+      Type: &apos;AWS::WAFv2::RuleGroup&apos;
+      Properties:
+        Name: SampleRuleGroup
+        Scope: REGIONAL
+        Description: SampleRuleGroup
+        VisibilityConfig:
+          SampledRequestsEnabled: true
+          CloudWatchMetricsEnabled: true
+          MetricName: SampleRuleGroupMetrics
+        Capacity: 1000
+        Rules:
+          - Name: RuleOne
+            Priority: 1
+            Action:
+              Allow: <span>{</span>}
+            VisibilityConfig:
+              SampledRequestsEnabled: true
+              CloudWatchMetricsEnabled: true
+              MetricName: RuleOneMetric
+            Statement:
+              ByteMatchStatement:
+                FieldToMatch:
+                  AllQueryArguments:
+                    <span>{</span>}
+                PositionalConstraint: CONTAINS
+                SearchString: testagent
+                TextTransformations:
+                  - Priority: 1
+                    Type: HTML_ENTITY_DECODE
+          - Name: RuleTwo
+            Priority: 2
+            Action:
+              Block: <span>{</span>}
+            VisibilityConfig:
+              SampledRequestsEnabled: true
+              CloudWatchMetricsEnabled: true
+              MetricName: RuleTwoMetric
+            Statement:
+              ByteMatchStatement:
+                FieldToMatch:
+                  SingleHeader:
+                    Name: haystack
+                PositionalConstraint: CONTAINS
+                SearchString: badbot
+                TextTransformations:
+                  - Priority: 0
+                    Type: NONE
+          - Name: RuleThree
+            Priority: 3
+            Action:
+              Count: <span>{</span>}
+            VisibilityConfig:
+              SampledRequestsEnabled: true
+              CloudWatchMetricsEnabled: true
+              MetricName: RuleThreeMetric
+            Statement:
+              ByteMatchStatement:
+                FieldToMatch:
+                  Body: <span>{</span>}
+                PositionalConstraint: CONTAINS
+                SearchString: RegionOne
+                TextTransformations:
+                  - Priority: 0
+                    Type: HTML_ENTITY_DECODE
+          - Name: RuleFour
+            Priority: 4
+            Action:
+              Allow: <span>{</span>}
+            VisibilityConfig:
+              SampledRequestsEnabled: true
+              CloudWatchMetricsEnabled: true
+              MetricName: RuleFourMetric
+            Statement:
+              SizeConstraintStatement:
+                ComparisonOperator: GT
+                Size: 1000
+                FieldToMatch:
+                  UriPath: <span>{</span>}
+                TextTransformations:
+                  - Priority: 0
+                    Type: NONE</code></pre></div>
+               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+            </div>
+            <noscript>
+               <div>
+                  <div>
+                     <div>
+                        <div id="js_error_message">
+                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                 browser.</strong></p>
+                           <p>To use the AWS Documentation, Javascript must be
+                              enabled. Please refer to your browser&apos;s Help pages for instructions.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </noscript>
+            
+            <awsdocs-page-utilities></awsdocs-page-utilities>
+         </div></div>
+</body>
+</html>

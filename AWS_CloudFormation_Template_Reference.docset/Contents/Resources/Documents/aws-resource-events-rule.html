@@ -8,207 +8,281 @@
 </head>
 <body>
     <div id="content" style="padding: 10px 30px;">
-    <h1 class="topictitle" id="aws-resource-events-rule">AWS::Events::Rule</h1><p>The <code class="code">AWS::Events::Rule</code> resource creates a rule that matches incoming events and routes 
-                        them to one or more targets for processing. For more information, see 
-                        <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html">What Is Amazon CloudWatch Events?</a>.
-                        
-                        
-                     </p><p>A rule must contain at least an <code class="code">EventPattern</code> or <code class="code">ScheduleExpression</code>. Rules with 
-                        <code class="code">EventPattern</code> are triggered when a matching event is observed. 
-                        Rules with <code class="code">ScheduleExpression</code> self-trigger based on the given schedule. 
-                        A rule can have both an <code class="code">EventPattern</code> and a <code class="code">ScheduleExpression</code>, in which case the rule 
-                        triggers on matching events as well as on a schedule.
-                     </p><p>Most services in AWS treat <code class="code">:</code> or <code class="code">/</code> as the same character in Amazon Resource Names (ARNs). 
-                        However, CloudWatch Events uses an exact match in event patterns and rules. Be sure
-                        to use the
-                        correct ARN characters when creating event patterns so that they match the ARN
-                        syntax in the event that you want to match.
-                     </p><h2 id="aws-resource-events-rule-syntax">Syntax</h2><p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p><div id="JSON" name="JSON" class="section langfilter">
-                        <h3 id="aws-resource-events-rule-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+    <div id="main-content" class="awsui-util-container">
+            <div id="main-col-body">
+               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
+               <h1 class="topictitle" id="aws-resource-events-rule">AWS::Events::Rule</h1>
+               <div class="awsdocs-page-header-container">
+                  <awsdocs-page-header></awsdocs-page-header>
+                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+               </div>
+               <p>The <code class="code">AWS::Events::Rule</code> resource creates a rule that matches incoming events and routes 
+                  them to one or more targets for processing. For more information, see 
+                  <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/what-is-amazon-eventbridge.html">What Is Amazon Eventbridge?</a>.
+                  
+                  
+               </p>
+               <p>A rule must contain at least an <code class="code">EventPattern</code> or <code class="code">ScheduleExpression</code>. Rules with 
+                  <code class="code">EventPattern</code> are triggered when a matching event is observed. 
+                  Rules with <code class="code">ScheduleExpression</code> self-trigger based on the given schedule. 
+                  A rule can have both an <code class="code">EventPattern</code> and a <code class="code">ScheduleExpression</code>, in which case the rule 
+                  triggers on matching events as well as on a schedule.
+               </p>
+               <p>Most services in AWS treat <code class="code">:</code> or <code class="code">/</code> as the same character in Amazon Resource Names (ARNs). 
+                  However, EventBridge uses an exact match in event patterns and rules. Be sure to use
+                  the
+                  correct ARN characters when creating event patterns so that they match the ARN
+                  syntax in the event that you want to match.
+               </p>
+               <h2 id="aws-resource-events-rule-syntax">Syntax</h2>
+               <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h3 id="aws-resource-events-rule-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::Events::Rule&quot;,
-  &quot;Properties&quot; : {
-      &quot;<a href="#cfn-events-rule-description">Description</a>&quot; : <em class="replaceable"><code>String</code></em>,
-      &quot;<a href="#cfn-events-rule-eventpattern">EventPattern</a>&quot; : <em class="replaceable"><code>Json</code></em>,
-      &quot;<a href="#cfn-events-rule-name">Name</a>&quot; : <em class="replaceable"><code>String</code></em>,
-      &quot;<a href="#cfn-events-rule-rolearn">RoleArn</a>&quot; : <em class="replaceable"><code>String</code></em>,
-      &quot;<a href="#cfn-events-rule-scheduleexpression">ScheduleExpression</a>&quot; : <em class="replaceable"><code>String</code></em>,
-      &quot;<a href="#cfn-events-rule-state">State</a>&quot; : <em class="replaceable"><code>String</code></em>,
-      &quot;<a href="#cfn-events-rule-targets">Targets</a>&quot; : <em class="replaceable"><code>[ <a href="aws-properties-events-rule-target.html">Target</a>, ... ]</code></em>
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-events-rule-description">Description</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-events-rule-eventbusname">EventBusName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-events-rule-eventpattern">EventPattern</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-events-rule-name">Name</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-events-rule-rolearn">RoleArn</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-events-rule-scheduleexpression">ScheduleExpression</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-events-rule-state">State</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-events-rule-targets">Targets</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-events-rule-target.html">Target</a>, ... ]</code>
     }
 }
-</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
-                        <h3 id="aws-resource-events-rule-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Type: AWS::Events::Rule
+</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h3 id="aws-resource-events-rule-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Events::Rule
 Properties: 
-  <a href="#cfn-events-rule-description">Description</a>: <em class="replaceable"><code>String</code></em>
-  <a href="#cfn-events-rule-eventpattern">EventPattern</a>: <em class="replaceable"><code>Json</code></em>
-  <a href="#cfn-events-rule-name">Name</a>: <em class="replaceable"><code>String</code></em>
-  <a href="#cfn-events-rule-rolearn">RoleArn</a>: <em class="replaceable"><code>String</code></em>
-  <a href="#cfn-events-rule-scheduleexpression">ScheduleExpression</a>: <em class="replaceable"><code>String</code></em>
-  <a href="#cfn-events-rule-state">State</a>: <em class="replaceable"><code>String</code></em>
-  <a href="#cfn-events-rule-targets">Targets</a>: <em class="replaceable"><code>
-    - <a href="aws-properties-events-rule-target.html">Target</a></code></em>
-</code></pre></div><h2 id="aws-resource-events-rule-properties">Properties</h2><div class="variablelist">
-                        <dl>
-                           <dt><a id="cfn-events-rule-description"></a><span class="term"><code class="code">Description</code></span></dt>
-                           <dd>
-                              
-                              <p>The description of the rule.</p>
-                              
-                              <p><em>Required</em>: No
+  <a href="#cfn-events-rule-description">Description</a>: <code class="replaceable">String</code>
+  <a href="#cfn-events-rule-eventbusname">EventBusName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-events-rule-eventpattern">EventPattern</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-events-rule-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-events-rule-rolearn">RoleArn</a>: <code class="replaceable">String</code>
+  <a href="#cfn-events-rule-scheduleexpression">ScheduleExpression</a>: <code class="replaceable">String</code>
+  <a href="#cfn-events-rule-state">State</a>: <code class="replaceable">String</code>
+  <a href="#cfn-events-rule-targets">Targets</a>: <code class="replaceable">
+    - <a href="./aws-properties-events-rule-target.html">Target</a></code>
+</code></pre></div>
+               <h2 id="aws-resource-events-rule-properties">Properties</h2>
+               <div class="variablelist">
+                  <dl>
+                     <dt><a id="cfn-events-rule-description"></a><span class="term"><code class="code">Description</code></span></dt>
+                     <dd>
+                        
+                        <p>The description of the rule.</p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Maximum</em>: <code class="code">512</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-events-rule-eventbusname"></a><span class="term"><code class="code">EventBusName</code></span></dt>
+                     <dd>
+                        
+                        <p>The event bus to associate with this rule. If you omit this, the default event bus
+                           is used.
+                        </p>
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Minimum</em>: <code class="code">1</code></p>
+                        <p><em>Maximum</em>: <code class="code">256</code></p>
+                        <p><em>Pattern</em>: <code class="code">[/\.\-_A-Za-z0-9]+</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                     </dd>
+                     <dt><a id="cfn-events-rule-eventpattern"></a><span class="term"><code class="code">EventPattern</code></span></dt>
+                     <dd>
+                        
+                        
+                        <p>Describes which events are routed to the specified target. For more information, see
+                           <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html">Events and Event Patterns in EventBridge</a> in the 
+                           <em>Amazon EventBridge User Guide</em>.
+                        </p>
+                        
+                        <p>When using CloudFormation, you must enclose each part of the event pattern in square
+                           brackets, as follows:
+                        </p>
+                        
+                        <p><code class="code">&quot;EventPattern&quot;: <span>{</span>
+                              &quot;source&quot;: [
+                              &quot;aws.ec2&quot;
+                              ],
+                              &quot;detail-type&quot;: [
+                              &quot;EC2 Instance State-change Notification&quot;
+                              ]
+                              }</code></p>
+                        
+                        <p>A rule must contain either <code class="code">EventPattern</code> or <code class="code">ScheduleExpression</code>.
+                        </p>
+                        
+                        
+                        <p><em>Required</em>: Conditional
+                        </p>
+                        <p><em>Type</em>: Json
+                        </p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-events-rule-name"></a><span class="term"><code class="code">Name</code></span></dt>
+                     <dd>
+                        
+                        <p>The name of the rule. If you don&apos;t specify a name, AWS CloudFormation generates a
+                           unique physical 
+                           ID and uses that ID for the rule name. 
+                        </p>
+                        
+                        <div class="awsdocs-note">
+                           <div class="awsdocs-note-title">
+                              <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                           <div class="awsdocs-note-text">
+                              <p>If you specify a name, you can&apos;t perform updates 
+                                 that require replacement of this resource. You can perform updates 
+                                 that require no or some interruption. If you must replace the resource, 
+                                 specify a new name.
                               </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Maximum</em>: <code class="code">512</code></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-events-rule-eventpattern"></a><span class="term"><code class="code">EventPattern</code></span></dt>
-                           <dd>
-                              
-                              <p>Describes which events CloudWatch Events routes to the specified target. For more
-                                 information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html">Event Patterns in CloudWatch Events</a> in the 
-                                 <em>Amazon CloudWatch Events User Guide</em>.
-                              </p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: Json
-                              </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-events-rule-name"></a><span class="term"><code class="code">Name</code></span></dt>
-                           <dd>
-                              
-                              <p>The name of the rule. If you don&apos;t specify a name, AWS CloudFormation generates a
-                                 unique physical 
-                                 ID and uses that ID for the rule name. 
-                              </p>
-                              
-                              <div class="aws-note">
-                                 <p class="aws-note">Important</p>
-                                 <p>If you specify a name, you can&apos;t perform updates 
-                                    that require replacement of this resource. You can perform updates 
-                                    that require no or some interruption. If you must replace the resource, 
-                                    specify a new name.
-                                 </p>
-                              </div>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Minimum</em>: <code class="code">1</code></p>
-                              <p><em>Maximum</em>: <code class="code">64</code></p>
-                              <p><em>Pattern</em>: <code class="code">[\.\-_A-Za-z0-9]+</code></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                           </dd>
-                           <dt><a id="cfn-events-rule-rolearn"></a><span class="term"><code class="code">RoleArn</code></span></dt>
-                           <dd>
-                              
-                              <p>The Amazon Resource Name (ARN) of the role that is used for target invocation.</p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Minimum</em>: <code class="code">1</code></p>
-                              <p><em>Maximum</em>: <code class="code">1600</code></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-events-rule-scheduleexpression"></a><span class="term"><code class="code">ScheduleExpression</code></span></dt>
-                           <dd>
-                              
-                              <p>The scheduling expression that determines when and how often the rule runs. 
-                                 For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html">Schedule Expressions for Rules</a>.
-                              </p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Maximum</em>: <code class="code">256</code></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-events-rule-state"></a><span class="term"><code class="code">State</code></span></dt>
-                           <dd>
-                              
-                              <p>Indicates whether the rule is enabled. </p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Allowed Values</em>: <code class="code">DISABLED | ENABLED</code></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-events-rule-targets"></a><span class="term"><code class="code">Targets</code></span></dt>
-                           <dd>
-                              
-                              
-                              <p>The resources that CloudWatch Events routes events to and invokes when the rule is
-                                 triggered.
-                                 For information about valid targets, see <a href="https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutTargets.html">PutTargets</a>.
-                              </p>
-                              
-                              
-                              
-                              <p>If you&apos;re setting the event bus of another account as the target and 
-                                 that account granted permission to your account through an organization instead of
-                                 
-                                 directly by the account ID, you must specify a <code class="code">RoleArn</code> with proper 
-                                 permissions in the <code class="code">Target</code> structure. For more information, see 
-                                 <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html">Sending and Receiving Events Between AWS Accounts</a> in the <em>Amazon CloudWatch Events User Guide</em>.
-                              </p>
-                              
-                              
-                              
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: List of <a href="aws-properties-events-rule-target.html">Target</a></p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                        </dl>
-                     </div><h2 id="aws-resource-events-rule-return-values">Return Values</h2><h3 id="aws-resource-events-rule-return-values-ref">Ref</h3><p>
-                        When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns event rule ID, such as <code class="code">mystack-ScheduledRule-ABCDEFGHIJK</code>. 
-                     </p><p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
-                     </p><h3 id="aws-resource-events-rule-return-values-fn--getatt">Fn::GetAtt</h3><h4 id="aws-resource-events-rule-return-values-fn--getatt-fn--getatt"></h4><div class="variablelist">
-                        <dl>
-                           <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
-                           <dd>
-                              
-                              <p>The ARN of the rule, such as 
-                                 <code class="code">arn:aws:events:us-east-2:123456789012:rule/example</code>.
-                              </p>
-                              
-                              
-                           </dd>
-                        </dl>
-                     </div><h2 id="aws-resource-events-rule--examples">Examples</h2><h3 id="aws-resource-events-rule--examples--Regularly_Invoke_Lambda_Function">Regularly Invoke Lambda Function</h3><p>The following example creates a rule that invokes the specified Lambda function every
-                        10 minutes. 
-                        The <code class="code">PermissionForEventsToInvokeLambda</code> resource grants CloudWatch Events permission to invoke the associated function. 
-                     </p><div id="JSON" name="JSON" class="section langfilter">
-                        <h4 id="aws-resource-events-rule--examples--Regularly_Invoke_Lambda_Function--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;ScheduledRule&quot;: {
+                           </div>
+                        </div>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Minimum</em>: <code class="code">1</code></p>
+                        <p><em>Maximum</em>: <code class="code">64</code></p>
+                        <p><em>Pattern</em>: <code class="code">[\.\-_A-Za-z0-9]+</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                     </dd>
+                     <dt><a id="cfn-events-rule-rolearn"></a><span class="term"><code class="code">RoleArn</code></span></dt>
+                     <dd>
+                        
+                        <p>The Amazon Resource Name (ARN) of the role that is used for target invocation.</p>
+                        
+                        <p>If you&apos;re setting an event bus in another account as the target and that account granted
+                           permission to your account through an organization 
+                           instead of directly by the account ID, you must specify a <code class="code">RoleArn</code> with proper permissions in the <code class="code">Target</code> structure, instead
+                           of here in this parameter.
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Minimum</em>: <code class="code">1</code></p>
+                        <p><em>Maximum</em>: <code class="code">1600</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-events-rule-scheduleexpression"></a><span class="term"><code class="code">ScheduleExpression</code></span></dt>
+                     <dd>
+                        
+                        <p>The scheduling expression that determines when and how often the rule runs. 
+                           For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/scheduled-events.html">Schedule Expressions for Rules</a>.
+                        </p>
+                        
+                        <p>A rule must contain either <code class="code">ScheduleExpression</code> or <code class="code">EventPattern</code>.
+                        </p>
+                        
+                        
+                        <p><em>Required</em>: Conditional
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Maximum</em>: <code class="code">256</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-events-rule-state"></a><span class="term"><code class="code">State</code></span></dt>
+                     <dd>
+                        
+                        <p>Indicates whether the rule is enabled. </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Allowed Values</em>: <code class="code">DISABLED | ENABLED</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-events-rule-targets"></a><span class="term"><code class="code">Targets</code></span></dt>
+                     <dd>
+                        
+                        
+                        <p>The AWS resources that are invoked when the rule is triggered.
+                           For information about valid targets, see <a href="https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutTargets.html">PutTargets</a>.
+                        </p>
+                        
+                        
+                        
+                        <p>If you&apos;re setting the event bus of another account as the target and 
+                           that account granted permission to your account through an organization instead of
+                           
+                           directly by the account ID, you must specify a <code class="code">RoleArn</code> with proper 
+                           permissions in the <code class="code">Target</code> structure. For more information, see 
+                           <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html">Sending and Receiving Events Between AWS Accounts</a> in the <em>Amazon EventBridge User Guide</em>.
+                        </p>
+                        
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: List of <a href="./aws-properties-events-rule-target.html">Target</a></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                  </dl>
+               </div>
+               <h2 id="aws-resource-events-rule-return-values">Return Values</h2>
+               <h3 id="aws-resource-events-rule-return-values-ref">Ref</h3>
+               <p>
+                  When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns event rule ID, such as <code class="code">mystack-ScheduledRule-ABCDEFGHIJK</code>. 
+               </p>
+               <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+               </p>
+               <h3 id="aws-resource-events-rule-return-values-fn--getatt">Fn::GetAtt</h3>
+               <h4 id="aws-resource-events-rule-return-values-fn--getatt-fn--getatt"></h4>
+               <div class="variablelist">
+                  <dl>
+                     <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
+                     <dd>
+                        
+                        <p>The ARN of the rule, such as 
+                           <code class="code">arn:aws:events:us-east-2:123456789012:rule/example</code>.
+                        </p>
+                        
+                        
+                     </dd>
+                  </dl>
+               </div>
+               <h2 id="aws-resource-events-rule--examples">Examples</h2>
+               <h3 id="aws-resource-events-rule--examples--Regularly_Invoke_Lambda_Function">Regularly Invoke Lambda Function</h3>
+               <p>The following example creates a rule that invokes the specified Lambda function every
+                  10 minutes. 
+                  The <code class="code">PermissionForEventsToInvokeLambda</code> resource grants EventBridge permission to invoke the associated function. 
+               </p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h4 id="aws-resource-events-rule--examples--Regularly_Invoke_Lambda_Function--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;ScheduledRule&quot;: <span>{</span>
   &quot;Type&quot;: &quot;AWS::Events::Rule&quot;,
-  &quot;Properties&quot;: {
+  &quot;Properties&quot;: <span>{</span>
     &quot;Description&quot;: &quot;ScheduledRule&quot;,
     &quot;ScheduleExpression&quot;: &quot;rate(10 minutes)&quot;,
     &quot;State&quot;: &quot;ENABLED&quot;,
-    &quot;Targets&quot;: [{
-      &quot;Arn&quot;: { &quot;Fn::GetAtt&quot;: [&quot;LambdaFunction&quot;, &quot;Arn&quot;] },
+    &quot;Targets&quot;: [<span>{</span>
+      &quot;Arn&quot;: <span>{</span> &quot;Fn::GetAtt&quot;: [&quot;LambdaFunction&quot;, &quot;Arn&quot;] },
       &quot;Id&quot;: &quot;TargetFunctionV1&quot;
     }]
   }
 },
-&quot;PermissionForEventsToInvokeLambda&quot;: {
+&quot;PermissionForEventsToInvokeLambda&quot;: <span>{</span>
   &quot;Type&quot;: &quot;AWS::Lambda::Permission&quot;,
-  &quot;Properties&quot;: {
-    &quot;FunctionName&quot;: { &quot;Ref&quot;: &quot;LambdaFunction&quot; },
+  &quot;Properties&quot;: <span>{</span>
+    &quot;FunctionName&quot;: <span>{</span> &quot;Ref&quot;: &quot;LambdaFunction&quot; },
     &quot;Action&quot;: &quot;lambda:InvokeFunction&quot;,
     &quot;Principal&quot;: &quot;events.amazonaws.com&quot;,
-    &quot;SourceArn&quot;: { &quot;Fn::GetAtt&quot;: [&quot;ScheduledRule&quot;, &quot;Arn&quot;] }
+    &quot;SourceArn&quot;: <span>{</span> &quot;Fn::GetAtt&quot;: [&quot;ScheduledRule&quot;, &quot;Arn&quot;] }
   }
-}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
-                        <h4 id="aws-resource-events-rule--examples--Regularly_Invoke_Lambda_Function--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">ScheduledRule: 
+}</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h4 id="aws-resource-events-rule--examples--Regularly_Invoke_Lambda_Function--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ScheduledRule: 
   Type: AWS::Events::Rule
   Properties: 
     Description: &quot;ScheduledRule&quot;
@@ -231,43 +305,47 @@ PermissionForEventsToInvokeLambda:
     SourceArn: 
       Fn::GetAtt: 
         - &quot;ScheduledRule&quot;
-        - &quot;Arn&quot;</code></pre></div><h3 id="aws-resource-events-rule--examples--Invoke_Lambda_Function_in_Response_to_an_Event">Invoke Lambda Function in Response to an Event</h3><p>The following example creates a rule that invokes the specified Lambda function when
-                        any EC2 instance&apos;s state changes to stopping.
-                     </p><div id="JSON" name="JSON" class="section langfilter">
-                        <h4 id="aws-resource-events-rule--examples--Invoke_Lambda_Function_in_Response_to_an_Event--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;EventRule&quot;: {
+        - &quot;Arn&quot;</code></pre></div>
+               <h3 id="aws-resource-events-rule--examples--Invoke_Lambda_Function_in_Response_to_an_Event">Invoke Lambda Function in Response to an Event</h3>
+               <p>The following example creates a rule that invokes the specified Lambda function when
+                  any EC2 instance&apos;s state changes to stopping.
+               </p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h4 id="aws-resource-events-rule--examples--Invoke_Lambda_Function_in_Response_to_an_Event--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;EventRule&quot;: <span>{</span>
   &quot;Type&quot;: &quot;AWS::Events::Rule&quot;,
-  &quot;Properties&quot;: {
+  &quot;Properties&quot;: <span>{</span>
     &quot;Description&quot;: &quot;EventRule&quot;,
-    &quot;EventPattern&quot;: {
+    &quot;EventPattern&quot;: <span>{</span>
       &quot;source&quot;: [
         &quot;aws.ec2&quot;
       ],
       &quot;detail-type&quot;: [
         &quot;EC2 Instance State-change Notification&quot;
       ],
-      &quot;detail&quot;: {
+      &quot;detail&quot;: <span>{</span>
         &quot;state&quot;: [
           &quot;stopping&quot;
         ]
       }
     },
     &quot;State&quot;: &quot;ENABLED&quot;,
-    &quot;Targets&quot;: [{
-      &quot;Arn&quot;: { &quot;Fn::GetAtt&quot;: [&quot;LambdaFunction&quot;, &quot;Arn&quot;] },
+    &quot;Targets&quot;: [<span>{</span>
+      &quot;Arn&quot;: <span>{</span> &quot;Fn::GetAtt&quot;: [&quot;LambdaFunction&quot;, &quot;Arn&quot;] },
       &quot;Id&quot;: &quot;TargetFunctionV1&quot;
     }]
   }
 },
-&quot;PermissionForEventsToInvokeLambda&quot;: {
+&quot;PermissionForEventsToInvokeLambda&quot;: <span>{</span>
   &quot;Type&quot;: &quot;AWS::Lambda::Permission&quot;,
-  &quot;Properties&quot;: {
-    &quot;FunctionName&quot;: { &quot;Ref&quot;: &quot;LambdaFunction&quot; },
+  &quot;Properties&quot;: <span>{</span>
+    &quot;FunctionName&quot;: <span>{</span> &quot;Ref&quot;: &quot;LambdaFunction&quot; },
     &quot;Action&quot;: &quot;lambda:InvokeFunction&quot;,
     &quot;Principal&quot;: &quot;events.amazonaws.com&quot;,
-    &quot;SourceArn&quot;: { &quot;Fn::GetAtt&quot;: [&quot;EventRule&quot;, &quot;Arn&quot;] }
+    &quot;SourceArn&quot;: <span>{</span> &quot;Fn::GetAtt&quot;: [&quot;EventRule&quot;, &quot;Arn&quot;] }
   }
-}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
-                        <h4 id="aws-resource-events-rule--examples--Invoke_Lambda_Function_in_Response_to_an_Event--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">EventRule: 
+}</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h4 id="aws-resource-events-rule--examples--Invoke_Lambda_Function_in_Response_to_an_Event--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">EventRule: 
   Type: AWS::Events::Rule
   Properties: 
     Description: &quot;EventRule&quot;
@@ -297,50 +375,54 @@ PermissionForEventsToInvokeLambda:
     SourceArn: 
       Fn::GetAtt: 
         - &quot;EventRule&quot;
-        - &quot;Arn&quot;</code></pre></div><h3 id="aws-resource-events-rule--examples--Notify_a_Topic_in_Response_to_a_Log_Entry">Notify a Topic in Response to a Log Entry</h3><p>The following example creates a rule that notifies an Amazon Simple Notification Service
-                        
-                        topic if an AWS CloudTrail log entry contains a call by the Root user. The <code class="code">EventTopicPolicy </code>
-                        resource grants Amazon CloudWatch Events permission to notify the associated Amazon
-                        SNS topic. 
-                     </p><div id="JSON" name="JSON" class="section langfilter">
-                        <h4 id="aws-resource-events-rule--examples--Notify_a_Topic_in_Response_to_a_Log_Entry--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">&quot;OpsEventRule&quot;: {
+        - &quot;Arn&quot;</code></pre></div>
+               <h3 id="aws-resource-events-rule--examples--Notify_a_Topic_in_Response_to_a_Log_Entry">Notify a Topic in Response to a Log Entry</h3>
+               <p>The following example creates a rule that notifies an Amazon Simple Notification Service
+                  
+                  topic if an AWS CloudTrail log entry contains a call by the Root user. The <code class="code">EventTopicPolicy </code>
+                  resource grants Amazon EventBridge permission to notify the associated Amazon SNS
+                  topic. 
+               </p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h4 id="aws-resource-events-rule--examples--Notify_a_Topic_in_Response_to_a_Log_Entry--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;OpsEventRule&quot;: <span>{</span>
   &quot;Type&quot;: &quot;AWS::Events::Rule&quot;,
-  &quot;Properties&quot;: {
+  &quot;Properties&quot;: <span>{</span>
     &quot;Description&quot;: &quot;EventRule&quot;,
-    &quot;EventPattern&quot;: {
+    &quot;EventPattern&quot;: <span>{</span>
       &quot;detail-type&quot;: [ &quot;AWS API Call via CloudTrail&quot; ],
-      &quot;detail&quot;: { 
-        &quot;userIdentity&quot;: { 
+      &quot;detail&quot;: <span>{</span> 
+        &quot;userIdentity&quot;: <span>{</span> 
           &quot;type&quot;: [ &quot;Root&quot; ]
         }
       }
     },
     &quot;State&quot;: &quot;ENABLED&quot;,
     &quot;Targets&quot;: [
-      {
-        &quot;Arn&quot;: { &quot;Ref&quot;: &quot;MySNSTopic&quot; },
+      <span>{</span>
+        &quot;Arn&quot;: <span>{</span> &quot;Ref&quot;: &quot;MySNSTopic&quot; },
         &quot;Id&quot;: &quot;OpsTopic&quot;
       }
     ]
   }
 }
-&quot;EventTopicPolicy&quot;: {
+&quot;EventTopicPolicy&quot;: <span>{</span>
   &quot;Type&quot;: &quot;AWS::SNS::TopicPolicy&quot;,
-  &quot;Properties&quot;: {
-    &quot;PolicyDocument&quot;: {
+  &quot;Properties&quot;: <span>{</span>
+    &quot;PolicyDocument&quot;: <span>{</span>
       &quot;Statement&quot;: [
-        {
+        <span>{</span>
           &quot;Effect&quot;: &quot;Allow&quot;,
-          &quot;Principal&quot;: { &quot;Service&quot;: &quot;events.amazonaws.com&quot; },
+          &quot;Principal&quot;: <span>{</span> &quot;Service&quot;: &quot;events.amazonaws.com&quot; },
           &quot;Action&quot;: &quot;sns:Publish&quot;,
           &quot;Resource&quot;: &quot;*&quot;
         }
       ]
     },
-    &quot;Topics&quot;: [ { &quot;Ref&quot;: &quot;MySNSTopic&quot; } ]
+    &quot;Topics&quot;: [ <span>{</span> &quot;Ref&quot;: &quot;MySNSTopic&quot; } ]
   }
-}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
-                        <h4 id="aws-resource-events-rule--examples--Notify_a_Topic_in_Response_to_a_Log_Entry--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">OpsEventRule: 
+}</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h4 id="aws-resource-events-rule--examples--Notify_a_Topic_in_Response_to_a_Log_Entry--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">OpsEventRule: 
   Type: AWS::Events::Rule
   Properties: 
     Description: &quot;EventRule&quot;
@@ -368,8 +450,26 @@ EventTopicPolicy:
           Action: &apos;sns:Publish&apos;
           Resource: &apos;*&apos;
     Topics:
-      - !Ref MySNSTopic</code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
-                        <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
-                     </div></div>
+      - !Ref MySNSTopic</code></pre></div>
+               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+            </div>
+            <noscript>
+               <div>
+                  <div>
+                     <div>
+                        <div id="js_error_message">
+                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                 browser.</strong></p>
+                           <p>To use the AWS Documentation, Javascript must be
+                              enabled. Please refer to your browser&apos;s Help pages for instructions.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </noscript>
+            
+            <awsdocs-page-utilities></awsdocs-page-utilities>
+         </div></div>
 </body>
 </html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+            <div id="main-col-body">
+               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
+               <h1 class="topictitle" id="aws-properties-gamelift-fleet-runtimeconfiguration">AWS::GameLift::Fleet RuntimeConfiguration</h1>
+               <div class="awsdocs-page-header-container">
+                  <awsdocs-page-header></awsdocs-page-header>
+                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+               </div>
+               <p>A collection of server process configurations that describe the processes to run
+                  on each instance in a fleet. All fleets must have a runtime configuration. Each
+                  instance in the fleet maintains server processes as specified in the runtime
+                  configuration, launching new ones as existing processes end. Each instance regularly
+                  checks for an updated runtime configuration makes adjustments as called for. 
+               </p>
+               <p>The runtime configuration enables the instances in a fleet to run multiple processes
+                  simultaneously. Potential scenarios are as follows: (1) Run multiple processes of
+                  a single
+                  game server executable to maximize usage of your hosting resources. (2) Run one or
+                  more
+                  processes of different executables, such as your game server and a metrics tracking
+                  program.
+                  (3) Run multiple processes of a single game server but with different launch parameters,
+                  for
+                  example to run one process on each instance in debug mode.
+               </p>
+               <p>An Amazon GameLift instance is limited to 50 processes running simultaneously. A runtime
+                  configuration must specify fewer than this limit. To calculate the total number of
+                  processes
+                  specified in a runtime configuration, add the values of the <code class="code">ConcurrentExecutions</code>
+                  parameter for each <code class="code">ServerProcess</code> object in the runtime configuration.
+               </p>
+               <h2 id="aws-properties-gamelift-fleet-runtimeconfiguration-syntax">Syntax</h2>
+               <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h3 id="aws-properties-gamelift-fleet-runtimeconfiguration-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-gamelift-fleet-runtimeconfiguration-gamesessionactivationtimeoutseconds">GameSessionActivationTimeoutSeconds</a>&quot; : <code class="replaceable">Integer</code>,
+  &quot;<a href="#cfn-gamelift-fleet-runtimeconfiguration-maxconcurrentgamesessionactivations">MaxConcurrentGameSessionActivations</a>&quot; : <code class="replaceable">Integer</code>,
+  &quot;<a href="#cfn-gamelift-fleet-runtimeconfiguration-serverprocesses">ServerProcesses</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-gamelift-fleet-serverprocess.html">ServerProcess</a>, ... ]</code>
+}
+</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h3 id="aws-properties-gamelift-fleet-runtimeconfiguration-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-gamelift-fleet-runtimeconfiguration-gamesessionactivationtimeoutseconds">GameSessionActivationTimeoutSeconds</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-gamelift-fleet-runtimeconfiguration-maxconcurrentgamesessionactivations">MaxConcurrentGameSessionActivations</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-gamelift-fleet-runtimeconfiguration-serverprocesses">ServerProcesses</a>: <code class="replaceable">
+    - <a href="./aws-properties-gamelift-fleet-serverprocess.html">ServerProcess</a></code>
+</code></pre></div>
+               <h2 id="aws-properties-gamelift-fleet-runtimeconfiguration-properties">Properties</h2>
+               <div class="variablelist">
+                  <dl>
+                     <dt><a id="cfn-gamelift-fleet-runtimeconfiguration-gamesessionactivationtimeoutseconds"></a><span class="term"><code class="code">GameSessionActivationTimeoutSeconds</code></span></dt>
+                     <dd>
+                        
+                        <p>The maximum amount of time (in seconds) that a game session can remain in status
+                           <code class="code">ACTIVATING</code>. If the game session is not active before the timeout,
+                           activation is terminated and the game session status is changed to
+                           <code class="code">TERMINATED</code>.
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: Integer
+                        </p>
+                        <p><em>Minimum</em>: <code class="code">1</code></p>
+                        <p><em>Maximum</em>: <code class="code">600</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-gamelift-fleet-runtimeconfiguration-maxconcurrentgamesessionactivations"></a><span class="term"><code class="code">MaxConcurrentGameSessionActivations</code></span></dt>
+                     <dd>
+                        
+                        <p>The maximum number of game sessions with status <code class="code">ACTIVATING</code> to allow on an
+                           instance simultaneously. This setting limits the amount of instance resources that
+                           can
+                           be used for new game activations at any one time.
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: Integer
+                        </p>
+                        <p><em>Minimum</em>: <code class="code">1</code></p>
+                        <p><em>Maximum</em>: <code class="code">2147483647</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-gamelift-fleet-runtimeconfiguration-serverprocesses"></a><span class="term"><code class="code">ServerProcesses</code></span></dt>
+                     <dd>
+                        
+                        <p>A collection of server process configurations that describe which server processes
+                           to
+                           run on each instance in a fleet.
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: List of <a href="./aws-properties-gamelift-fleet-serverprocess.html">ServerProcess</a></p>
+                        <p><em>Maximum</em>: <code class="code">50</code></p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                  </dl>
+               </div>
+               <h2 id="aws-properties-gamelift-fleet-runtimeconfiguration--seealso">See Also</h2>
+               <div class="itemizedlist">
+                   
+                   
+                   
+                   
+                   
+                  
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/resources-cloudformation.html"> Create GameLift Resources Using AWS CloudFormation</a> in the <em>Amazon
+                              GameLift Developer Guide</em></p>
+                        
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating.html">Deploy a GameLift Fleet for a Custom Game Build</a> in the <em>Amazon GameLift Developer Guide</em>
+                           
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-fleets-creating.html">Deploy a Realtime Servers Fleet</a> in the <em>Amazon GameLift Developer Guide</em>
+                           
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html">Run Multiple Processes on a Fleet</a> in the <em>Amazon GameLift Developer Guide</em>
+                           
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>
+                           <a href="https://docs.aws.amazon.com/gamelift/latest/apireference/API_RuntimeConfiguration.html">RuntimeConfiguration</a> in the <em>Amazon GameLift API Reference</em>
+                           
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+            </div>
+            <noscript>
+               <div>
+                  <div>
+                     <div>
+                        <div id="js_error_message">
+                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                 browser.</strong></p>
+                           <p>To use the AWS Documentation, Javascript must be
+                              enabled. Please refer to your browser&apos;s Help pages for instructions.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </noscript>
+            
+            <awsdocs-page-utilities></awsdocs-page-utilities>
+         </div></div>
+</body>
+</html>

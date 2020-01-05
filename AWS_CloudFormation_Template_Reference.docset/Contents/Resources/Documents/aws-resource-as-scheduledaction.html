@@ -8,202 +8,232 @@
 </head>
 <body>
     <div id="content" style="padding: 10px 30px;">
-    <h1 class="topictitle" id="aws-resource-as-scheduledaction">AWS::AutoScaling::ScheduledAction</h1><p>Specifies a scheduled scaling action for an Amazon EC2 Auto Scaling group, changing
-                        the
-                        number of servers available for your application in response to predictable load changes.
-                        
-                     </p><div class="aws-note">
-                        <p class="aws-note">Important</p>
-                        <p>When you update a stack with an Auto Scaling group and scheduled action, AWS
-                           CloudFormation always sets the min size, max size, and desired capacity properties
-                           of your
-                           group to the values that are defined in the <code class="code">AWS::AutoScaling::AutoScalingGroup</code>
-                           section of your template. However, you might not want CloudFormation to do that when
-                           you
-                           have a scheduled action in effect. You can use an <a href="aws-attribute-updatepolicy.html">UpdatePolicy
-                              attribute</a> to prevent CloudFormation from changing the min size, max size, or
-                           desired capacity property values during a stack update unless you modified the individual
-                           values in your template. 
-                        </p>
-                        <p>If you have rolling updates enabled, before you can update the Auto Scaling group,
-                           you
-                           must suspend scheduled actions by specifying an <a href="aws-attribute-updatepolicy.html">UpdatePolicy
-                              attribute</a> for the Auto Scaling group. You can find sample update policies for
-                           rolling updates in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#aws-properties-as-group--examples">Examples</a> section of the <code class="code">AWS::AutoScaling::AutoScalingGroup</code>
-                           documentation. 
-                        </p>
-                     </div><p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html">Scheduled Scaling</a> and <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html">Suspending and Resuming Scaling Processes</a> in the <em>Amazon EC2 Auto Scaling
-                           User Guide</em>.
-                     </p><h2 id="aws-resource-as-scheduledaction-syntax">Syntax</h2><p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p><div id="JSON" name="JSON" class="section langfilter">
-                        <h3 id="aws-resource-as-scheduledaction-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
+    <div id="main-content" class="awsui-util-container">
+            <div id="main-col-body">
+               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
+               <h1 class="topictitle" id="aws-resource-as-scheduledaction">AWS::AutoScaling::ScheduledAction</h1>
+               <div class="awsdocs-page-header-container">
+                  <awsdocs-page-header></awsdocs-page-header>
+                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+               </div>
+               <p>Specifies a scheduled scaling action for an Amazon EC2 Auto Scaling group, changing
+                  the
+                  number of servers available for your application in response to predictable load changes.
+                  
+               </p>
+               <div class="awsdocs-note">
+                  <div class="awsdocs-note-title">
+                     <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                  <div class="awsdocs-note-text">
+                     <p>When you update a stack with an Auto Scaling group and scheduled action, AWS
+                        CloudFormation always sets the min size, max size, and desired capacity properties
+                        of your
+                        group to the values that are defined in the <code class="code">AWS::AutoScaling::AutoScalingGroup</code>
+                        section of your template. However, you might not want CloudFormation to do that when
+                        you
+                        have a scheduled action in effect. You can use an <a href="aws-attribute-updatepolicy.html">UpdatePolicy
+                           attribute</a> to prevent CloudFormation from changing the min size, max size, or
+                        desired capacity property values during a stack update unless you modified the individual
+                        values in your template. 
+                     </p>
+                     <p>If you have rolling updates enabled, before you can update the Auto Scaling group,
+                        you
+                        must suspend scheduled actions by specifying an <a href="aws-attribute-updatepolicy.html">UpdatePolicy
+                           attribute</a> for the Auto Scaling group. You can find sample update policies for
+                        rolling updates in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#aws-properties-as-group--examples">Examples</a> section of the <code class="code">AWS::AutoScaling::AutoScalingGroup</code>
+                        documentation. 
+                     </p>
+                  </div>
+               </div>
+               <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html">Scheduled Scaling</a> and <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html">Suspending and Resuming Scaling Processes</a> in the <em>Amazon EC2 Auto Scaling
+                     User Guide</em>.
+               </p>
+               <h2 id="aws-resource-as-scheduledaction-syntax">Syntax</h2>
+               <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h3 id="aws-resource-as-scheduledaction-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::AutoScaling::ScheduledAction&quot;,
-  &quot;Properties&quot; : {
-      &quot;<a href="#cfn-as-scheduledaction-asgname">AutoScalingGroupName</a>&quot; : <em class="replaceable"><code>String</code></em>,
-      &quot;<a href="#cfn-as-scheduledaction-desiredcapacity">DesiredCapacity</a>&quot; : <em class="replaceable"><code>Integer</code></em>,
-      &quot;<a href="#cfn-as-scheduledaction-endtime">EndTime</a>&quot; : <em class="replaceable"><code>String</code></em>,
-      &quot;<a href="#cfn-as-scheduledaction-maxsize">MaxSize</a>&quot; : <em class="replaceable"><code>Integer</code></em>,
-      &quot;<a href="#cfn-as-scheduledaction-minsize">MinSize</a>&quot; : <em class="replaceable"><code>Integer</code></em>,
-      &quot;<a href="#cfn-as-scheduledaction-recurrence">Recurrence</a>&quot; : <em class="replaceable"><code>String</code></em>,
-      &quot;<a href="#cfn-as-scheduledaction-starttime">StartTime</a>&quot; : <em class="replaceable"><code>String</code></em>
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-as-scheduledaction-asgname">AutoScalingGroupName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-as-scheduledaction-desiredcapacity">DesiredCapacity</a>&quot; : <code class="replaceable">Integer</code>,
+      &quot;<a href="#cfn-as-scheduledaction-endtime">EndTime</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-as-scheduledaction-maxsize">MaxSize</a>&quot; : <code class="replaceable">Integer</code>,
+      &quot;<a href="#cfn-as-scheduledaction-minsize">MinSize</a>&quot; : <code class="replaceable">Integer</code>,
+      &quot;<a href="#cfn-as-scheduledaction-recurrence">Recurrence</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-as-scheduledaction-starttime">StartTime</a>&quot; : <code class="replaceable">String</code>
     }
 }
-</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
-                        <h3 id="aws-resource-as-scheduledaction-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">Type: AWS::AutoScaling::ScheduledAction
+</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h3 id="aws-resource-as-scheduledaction-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::AutoScaling::ScheduledAction
 Properties: 
-  <a href="#cfn-as-scheduledaction-asgname">AutoScalingGroupName</a>: <em class="replaceable"><code>String</code></em>
-  <a href="#cfn-as-scheduledaction-desiredcapacity">DesiredCapacity</a>: <em class="replaceable"><code>Integer</code></em>
-  <a href="#cfn-as-scheduledaction-endtime">EndTime</a>: <em class="replaceable"><code>String</code></em>
-  <a href="#cfn-as-scheduledaction-maxsize">MaxSize</a>: <em class="replaceable"><code>Integer</code></em>
-  <a href="#cfn-as-scheduledaction-minsize">MinSize</a>: <em class="replaceable"><code>Integer</code></em>
-  <a href="#cfn-as-scheduledaction-recurrence">Recurrence</a>: <em class="replaceable"><code>String</code></em>
-  <a href="#cfn-as-scheduledaction-starttime">StartTime</a>: <em class="replaceable"><code>String</code></em>
-</code></pre></div><h2 id="aws-resource-as-scheduledaction-properties">Properties</h2><div class="variablelist">
-                        <dl>
-                           <dt><a id="cfn-as-scheduledaction-asgname"></a><span class="term"><code class="code">AutoScalingGroupName</code></span></dt>
-                           <dd>
-                              
-                              <p>The name or Amazon Resource Name (ARN) of the Auto Scaling group.</p>
-                              
-                              <p><em>Required</em>: Yes
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                           </dd>
-                           <dt><a id="cfn-as-scheduledaction-desiredcapacity"></a><span class="term"><code class="code">DesiredCapacity</code></span></dt>
-                           <dd>
-                              
-                              <p>The number of Amazon EC2 instances that should be running in the Auto Scaling
-                                 group.
-                              </p>
-                              
-                              <p>You must specify at least one of the following properties: <code class="code">MaxSize</code>,
-                                 <code class="code">MinSize</code>, or <code class="code">DesiredCapacity</code>. 
-                              </p>
-                              
-                              <p><em>Required</em>: Conditional
-                              </p>
-                              <p><em>Type</em>: Integer
-                              </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-as-scheduledaction-endtime"></a><span class="term"><code class="code">EndTime</code></span></dt>
-                           <dd>
-                              
-                              <p>The date and time in UTC for the recurring schedule to end. For example,
-                                 <code class="code">&quot;2019-06-01T00:00:00Z&quot;</code>. 
-                              </p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-as-scheduledaction-maxsize"></a><span class="term"><code class="code">MaxSize</code></span></dt>
-                           <dd>
-                              
-                              <p>The maximum number of Amazon EC2 instances in the Auto Scaling group.</p>
-                              
-                              <p>You must specify at least one of the following properties: <code class="code">MaxSize</code>,
-                                 <code class="code">MinSize</code>, or <code class="code">DesiredCapacity</code>. 
-                              </p>
-                              
-                              <p><em>Required</em>: Conditional
-                              </p>
-                              <p><em>Type</em>: Integer
-                              </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-as-scheduledaction-minsize"></a><span class="term"><code class="code">MinSize</code></span></dt>
-                           <dd>
-                              
-                              <p>The minimum number of Amazon EC2 instances in the Auto Scaling group.</p>
-                              
-                              <p>You must specify at least one of the following properties: <code class="code">MaxSize</code>,
-                                 <code class="code">MinSize</code>, or <code class="code">DesiredCapacity</code>. 
-                              </p>
-                              
-                              <p><em>Required</em>: Conditional
-                              </p>
-                              <p><em>Type</em>: Integer
-                              </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-as-scheduledaction-recurrence"></a><span class="term"><code class="code">Recurrence</code></span></dt>
-                           <dd>
-                              
-                              <p>The recurring schedule for this action, in Unix cron syntax format. For more information
-                                 about cron syntax, see <a href="http://crontab.org/" target="_blank">Crontab</a>. 
-                              </p>
-                              
-                              <p>Specifying the <code class="code">StartTime</code> and <code class="code">EndTime</code> properties with
-                                 <code class="code">Recurrence</code> property forms the start and stop boundaries of the recurring
-                                 action. 
-                              </p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                           <dt><a id="cfn-as-scheduledaction-starttime"></a><span class="term"><code class="code">StartTime</code></span></dt>
-                           <dd>
-                              
-                              <p>The date and time in UTC for this action to start. For example,
-                                 <code class="code">&quot;2019-06-01T00:00:00Z&quot;</code>. 
-                              </p>
-                              
-                              <p><em>Required</em>: No
-                              </p>
-                              <p><em>Type</em>: String
-                              </p>
-                              <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                           </dd>
-                        </dl>
-                     </div><h2 id="aws-resource-as-scheduledaction-return-values">Return Values</h2><h3 id="aws-resource-as-scheduledaction-return-values-ref">Ref</h3><p>When the logical ID of this resource is provided to the <code class="code">Ref</code> intrinsic
-                        function, <code class="code">Ref</code> returns the resource name. For example:
-                        <code class="code">mystack-myscheduledaction-NT5EUXTNTXXD</code>.
-                     </p><p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+  <a href="#cfn-as-scheduledaction-asgname">AutoScalingGroupName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-as-scheduledaction-desiredcapacity">DesiredCapacity</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-as-scheduledaction-endtime">EndTime</a>: <code class="replaceable">String</code>
+  <a href="#cfn-as-scheduledaction-maxsize">MaxSize</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-as-scheduledaction-minsize">MinSize</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-as-scheduledaction-recurrence">Recurrence</a>: <code class="replaceable">String</code>
+  <a href="#cfn-as-scheduledaction-starttime">StartTime</a>: <code class="replaceable">String</code>
+</code></pre></div>
+               <h2 id="aws-resource-as-scheduledaction-properties">Properties</h2>
+               <div class="variablelist">
+                  <dl>
+                     <dt><a id="cfn-as-scheduledaction-asgname"></a><span class="term"><code class="code">AutoScalingGroupName</code></span></dt>
+                     <dd>
                         
-                     </p><h2 id="aws-resource-as-scheduledaction--examples">Examples</h2><p>The following example schedule scaling actions for an Auto Scaling group.</p><h3 id="aws-resource-as-scheduledaction--examples--Scheduled_Scaling_Action">Scheduled Scaling Action</h3><p>The following template snippet includes two scheduled actions that scale the number
-                        of
-                        instances in an Auto Scaling group. The <code class="code">ScheduledActionOut</code> action starts at 7
-                        AM every day and sets the Auto Scaling group to a minimum of five Amazon EC2 instances
-                        with a maximum of 10. The <code class="code">ScheduledActionIn</code> action starts at 7 PM every day
-                        and sets the Auto Scaling group to a minimum and maximum of one Amazon EC2 instance.
+                        <p>The name or Amazon Resource Name (ARN) of the Auto Scaling group.</p>
                         
-                     </p><div id="JSON" name="JSON" class="section langfilter">
-                        <h4 id="aws-resource-as-scheduledaction--examples--Scheduled_Scaling_Action--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="json ">{
-  &quot;ScheduledActionOut&quot;:{
+                        <p><em>Required</em>: Yes
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                     </dd>
+                     <dt><a id="cfn-as-scheduledaction-desiredcapacity"></a><span class="term"><code class="code">DesiredCapacity</code></span></dt>
+                     <dd>
+                        
+                        <p>The number of Amazon EC2 instances that should be running in the Auto Scaling
+                           group.
+                        </p>
+                        
+                        <p>You must specify at least one of the following properties: <code class="code">MaxSize</code>,
+                           <code class="code">MinSize</code>, or <code class="code">DesiredCapacity</code>. 
+                        </p>
+                        
+                        <p><em>Required</em>: Conditional
+                        </p>
+                        <p><em>Type</em>: Integer
+                        </p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-as-scheduledaction-endtime"></a><span class="term"><code class="code">EndTime</code></span></dt>
+                     <dd>
+                        
+                        <p>The date and time in UTC for the recurring schedule to end. For example,
+                           <code class="code">&quot;2019-06-01T00:00:00Z&quot;</code>. 
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-as-scheduledaction-maxsize"></a><span class="term"><code class="code">MaxSize</code></span></dt>
+                     <dd>
+                        
+                        <p>The maximum number of Amazon EC2 instances in the Auto Scaling group.</p>
+                        
+                        <p>You must specify at least one of the following properties: <code class="code">MaxSize</code>,
+                           <code class="code">MinSize</code>, or <code class="code">DesiredCapacity</code>. 
+                        </p>
+                        
+                        <p><em>Required</em>: Conditional
+                        </p>
+                        <p><em>Type</em>: Integer
+                        </p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-as-scheduledaction-minsize"></a><span class="term"><code class="code">MinSize</code></span></dt>
+                     <dd>
+                        
+                        <p>The minimum number of Amazon EC2 instances in the Auto Scaling group.</p>
+                        
+                        <p>You must specify at least one of the following properties: <code class="code">MaxSize</code>,
+                           <code class="code">MinSize</code>, or <code class="code">DesiredCapacity</code>. 
+                        </p>
+                        
+                        <p><em>Required</em>: Conditional
+                        </p>
+                        <p><em>Type</em>: Integer
+                        </p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-as-scheduledaction-recurrence"></a><span class="term"><code class="code">Recurrence</code></span></dt>
+                     <dd>
+                        
+                        <p>The recurring schedule for this action, in Unix cron syntax format. For more information
+                           about cron syntax, see <a href="http://crontab.org/" target="_blank"><span>Crontab</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>. 
+                        </p>
+                        
+                        <p>Specifying the <code class="code">StartTime</code> and <code class="code">EndTime</code> properties with
+                           <code class="code">Recurrence</code> property forms the start and stop boundaries of the recurring
+                           action. 
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                     <dt><a id="cfn-as-scheduledaction-starttime"></a><span class="term"><code class="code">StartTime</code></span></dt>
+                     <dd>
+                        
+                        <p>The date and time in UTC for this action to start. For example,
+                           <code class="code">&quot;2019-06-01T00:00:00Z&quot;</code>. 
+                        </p>
+                        
+                        <p><em>Required</em>: No
+                        </p>
+                        <p><em>Type</em>: String
+                        </p>
+                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                     </dd>
+                  </dl>
+               </div>
+               <h2 id="aws-resource-as-scheduledaction-return-values">Return Values</h2>
+               <h3 id="aws-resource-as-scheduledaction-return-values-ref">Ref</h3>
+               <p>When the logical ID of this resource is provided to the <code class="code">Ref</code> intrinsic
+                  function, <code class="code">Ref</code> returns the resource name. For example:
+                  <code class="code">mystack-myscheduledaction-NT5EUXTNTXXD</code>.
+               </p>
+               <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                  
+               </p>
+               <h2 id="aws-resource-as-scheduledaction--examples">Examples</h2>
+               <p>The following example schedule scaling actions for an Auto Scaling group.</p>
+               <h3 id="aws-resource-as-scheduledaction--examples--Scheduled_Scaling_Action">Scheduled Scaling Action</h3>
+               <p>The following template snippet includes two scheduled actions that scale the number
+                  of
+                  instances in an Auto Scaling group. The <code class="code">ScheduledActionOut</code> action starts at 7
+                  AM every day and sets the Auto Scaling group to a minimum of five Amazon EC2 instances
+                  with a maximum of 10. The <code class="code">ScheduledActionIn</code> action starts at 7 PM every day
+                  and sets the Auto Scaling group to a minimum and maximum of one Amazon EC2 instance.
+                  
+               </p>
+               <div id="JSON" name="JSON" class="section langfilter">
+                  <h4 id="aws-resource-as-scheduledaction--examples--Scheduled_Scaling_Action--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;ScheduledActionOut&quot;:<span>{</span>
     &quot;Type&quot;:&quot;AWS::AutoScaling::ScheduledAction&quot;,
-    &quot;Properties&quot;:{
-      &quot;AutoScalingGroupName&quot;:{
-        &quot;Ref&quot;:&quot;myASGroup&quot;
+    &quot;Properties&quot;:<span>{</span>
+      &quot;AutoScalingGroupName&quot;:<span>{</span>
+        &quot;Ref&quot;:&quot;myASG&quot;
       },
       &quot;MaxSize&quot;:&quot;10&quot;,
       &quot;MinSize&quot;:&quot;5&quot;,
       &quot;Recurrence&quot;:&quot;0 7 * * *&quot;
     }
   },
-  &quot;ScheduledActionIn&quot;:{
+  &quot;ScheduledActionIn&quot;:<span>{</span>
     &quot;Type&quot;:&quot;AWS::AutoScaling::ScheduledAction&quot;,
-    &quot;Properties&quot;:{
-      &quot;AutoScalingGroupName&quot;:{
-        &quot;Ref&quot;:&quot;myASGroup&quot;
+    &quot;Properties&quot;:<span>{</span>
+      &quot;AutoScalingGroupName&quot;:<span>{</span>
+        &quot;Ref&quot;:&quot;myASG&quot;
       },
       &quot;MaxSize&quot;:&quot;1&quot;,
       &quot;MinSize&quot;:&quot;1&quot;,
       &quot;Recurrence&quot;:&quot;0 19 * * *&quot;
     }
   }
-}</code></pre></div><div id="YAML" name="YAML" class="section langfilter">
-                        <h4 id="aws-resource-as-scheduledaction--examples--Scheduled_Scaling_Action--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="yaml ">ScheduledActionOut: 
+}</code></pre></div>
+               <div id="YAML" name="YAML" class="section langfilter">
+                  <h4 id="aws-resource-as-scheduledaction--examples--Scheduled_Scaling_Action--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ScheduledActionOut: 
   Type: AWS::AutoScaling::ScheduledAction
   Properties:
     AutoScalingGroupName: 
-      Ref: &quot;myASGroup&quot;
+      Ref: &quot;myASG&quot;
     MaxSize: 10
     MinSize: 5
     Recurrence: &quot;0 7 * * *&quot;
@@ -211,11 +241,29 @@ ScheduledActionIn:
   Type: AWS::AutoScaling::ScheduledAction
   Properties:
     AutoScalingGroupName: 
-      Ref: &quot;myASGroup&quot;
+      Ref: &quot;myASG&quot;
     MaxSize: 1
     MinSize: 1
-    Recurrence: &quot;0 19 * * *&quot;</code></pre></div><div id="marketing-target"><span class="close-button"></span><div class="marketing-title" id="marketing-title"></div>
-                        <div class="marketing-description"><span id="marketing-description"></span><span id="marketing-cta"></span></div>
-                     </div></div>
+    Recurrence: &quot;0 19 * * *&quot;</code></pre></div>
+               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+            </div>
+            <noscript>
+               <div>
+                  <div>
+                     <div>
+                        <div id="js_error_message">
+                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                 browser.</strong></p>
+                           <p>To use the AWS Documentation, Javascript must be
+                              enabled. Please refer to your browser&apos;s Help pages for instructions.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </noscript>
+            
+            <awsdocs-page-utilities></awsdocs-page-utilities>
+         </div></div>
 </body>
 </html>
