@@ -1,0 +1,31 @@
+name: Dash DocSet - AWS CloudFormation Template Reference
+
+on:
+  push:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    
+    - name: Use Node.js 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+
+    - name: Build DocSet
+      run: | 
+        yarn
+        npm run build
+        npm package
+    
+    - name: Archive DocSet Artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: AWS_CloudFormation_Template_Reference
+        path: AWS_CloudFormation_Template_Reference.tgz
