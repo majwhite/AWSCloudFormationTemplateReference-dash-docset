@@ -9,148 +9,147 @@
 <body>
     <div id="content" style="padding: 10px 30px;">
     <div id="main-content" class="awsui-util-container">
-            <div id="main-col-body">
-               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
-               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
-               <h1 class="topictitle" id="intrinsic-function-reference-findinmap"><code class="code">Fn::FindInMap</code></h1>
-               <div class="awsdocs-page-header-container">
-                  <awsdocs-page-header></awsdocs-page-header>
-                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
-               </div>
-               <p>The intrinsic function <code class="code">Fn::FindInMap</code> returns the value corresponding
-                  to keys in a two-level map that is declared in the <code class="code">Mappings</code> section.
-               </p>
-               <h2 id="w2ab1c26c24c26b5">Declaration</h2>
-               
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h3 id="intrinsic-function-reference-findinmap-syntax.json">JSON</h3>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight"><span>{</span> &quot;Fn::FindInMap&quot; : [ &quot;<code class="replaceable">MapName</code>&quot;, &quot;<code class="replaceable">TopLevelKey</code>&quot;, &quot;<code class="replaceable">SecondLevelKey</code>&quot;] }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h3 id="intrinsic-function-reference-findinmap-syntax.yaml">YAML</h3>
-                  
-                  
-                  <p>Syntax for the full function name:</p>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">Fn::FindInMap: [ <code class="replaceable">MapName</code>, <code class="replaceable">TopLevelKey</code>, <code class="replaceable">SecondLevelKey</code> ]</code></pre>
-                  <p>Syntax for the short form:</p>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">!FindInMap [ <code class="replaceable">MapName</code>, <code class="replaceable">TopLevelKey</code>, <code class="replaceable">SecondLevelKey</code> ]</code></pre>
-                  <div class="awsdocs-note">
-                     <div class="awsdocs-note-title">
-                        <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
-                     <div class="awsdocs-note-text">
-                        <p>You can&apos;t nest two instances of two functions in short form.</p>
-                     </div>
-                  </div>
-                  
-               </div>
-               
-               <h2 id="w2ab1c26c24c26b7">Parameters</h2>
-               
-               
-               <div class="variablelist">
-                   
-                   
-                   
-                  
-                  <dl>
-                     
-                     <dt><span class="term">MapName</span></dt>
-                     
-                     <dd>
-                        
-                        <p>The logical name of a mapping declared in the Mappings section that contains
-                           the keys and values.
-                        </p>
-                        
-                     </dd>
-                      
-                     
-                     <dt><span class="term">TopLevelKey</span></dt>
-                     
-                     <dd>
-                        
-                        <p>The top-level key name. Its value is a list of key-value pairs.</p>
-                        
-                     </dd>
-                      
-                     
-                     <dt><span class="term">SecondLevelKey</span></dt>
-                     
-                     <dd>
-                        
-                        <p>The second-level key name, which is set to one of the keys from the list
-                           assigned to <code class="code">TopLevelKey</code>.
-                        </p>
-                        
-                     </dd>
-                     
-                  </dl>
-               </div>
-               
-               <h2 id="w2ab1c26c24c26b9">Return Value:</h2>
-               
-               
-               <p>The value that is assigned to <code class="code">SecondLevelKey</code>. 
-               </p>
-               
-               <h2 id="w2ab1c26c24c26c11">Example</h2>
-               
-               
-               <p>The following example shows how to use <code class="code">Fn::FindInMap</code> for a template
-                  with a <code class="code">Mappings</code> section that contains a single map, <code class="code">RegionMap</code>,
-                  that associates AMIs with AWS regions. 
-               </p>
-               
-               <div class="itemizedlist">
-                   
-                   
-                   
-                  
-                  <ul class="itemizedlist" type="disc">
-                     <li class="listitem">
-                        
-                        <p>The map has 5 top-level keys that correspond to various AWS regions.</p>
-                        
-                     </li>
-                     <li class="listitem">
-                        
-                        <p>Each top-level key is assigned a list with two second level keys,
-                           <code class="code">&quot;HVM64&quot;</code> and <code class="code">&quot;HVMG2&quot;</code>, that correspond to the AMI&apos;s
-                           architecture.
-                        </p>
-                        
-                     </li>
-                     <li class="listitem">
-                        
-                        <p>Each of the second-level keys is assigned an appropriate AMI name.</p>
-                        
-                     </li>
-                  </ul>
-               </div>
-               
-               <p>The example template contains an <code class="code">AWS::EC2::Instance</code> resource whose
-                  <code class="code">ImageId</code> property is set by the <code class="code">FindInMap</code> function. 
-               </p>
-               
-               <p><code class="code">MapName</code> is set to the map of interest, <code class="code">&quot;RegionMap&quot;</code> in this
-                  example. <code class="code">TopLevelKey</code> is set to the region where the stack is created, which is
-                  determined by using the <code class="code">&quot;AWS::Region&quot;</code> pseudo parameter.
-                  <code class="code">SecondLevelKey</code> is set to the desired architecture, <code class="code">&quot;HVM64&quot;</code> for
-                  this example.
-               </p>
-               
-               <p><code class="code">FindInMap</code> returns the AMI assigned to <code class="code">FindInMap</code>. For a HVM64
-                  instance in us-east-1, <code class="code">FindInMap</code> would return
-                  <code class="code">&quot;ami-0ff8a91507f77f867&quot;</code>.
-               </p>
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h3 id="intrinsic-function-reference-findinmap-example.json">JSON</h3>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class=""><span>{</span>
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="intrinsic-function-reference-findinmap"><code class="code">Fn::FindInMap</code></h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The intrinsic function <code class="code">Fn::FindInMap</code> returns the value corresponding
+                                    to keys in a two-level map that is declared in the <code class="code">Mappings</code> section.
+                                 </p>
+                                 <h2 id="w2ab1c25c28c26b5">Declaration</h2>
+                                 
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="intrinsic-function-reference-findinmap-syntax.json">JSON</h3>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight"><span>{</span> &quot;Fn::FindInMap&quot; : [ &quot;<code class="replaceable">MapName</code>&quot;, &quot;<code class="replaceable">TopLevelKey</code>&quot;, &quot;<code class="replaceable">SecondLevelKey</code>&quot;] }</code></pre>
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="intrinsic-function-reference-findinmap-syntax.yaml">YAML</h3>
+                                    
+                                    
+                                    <p>Syntax for the full function name:</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">Fn::FindInMap: [ <code class="replaceable">MapName</code>, <code class="replaceable">TopLevelKey</code>, <code class="replaceable">SecondLevelKey</code> ]</code></pre>
+                                    <p>Syntax for the short form:</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">!FindInMap [ <code class="replaceable">MapName</code>, <code class="replaceable">TopLevelKey</code>, <code class="replaceable">SecondLevelKey</code> ]</code></pre>
+                                    <div class="awsdocs-note">
+                                       <div class="awsdocs-note-title">
+                                          <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                       <div class="awsdocs-note-text">
+                                          <p>You can&apos;t nest two instances of two functions in short form.</p>
+                                       </div>
+                                    </div>
+                                    
+                                 </div>
+                                 
+                                 <h2 id="w2ab1c25c28c26b7">Parameters</h2>
+                                 
+                                 
+                                 <div class="variablelist">
+                                     
+                                     
+                                     
+                                    
+                                    <dl>
+                                       
+                                       <dt><span class="term">MapName</span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>The logical name of a mapping declared in the Mappings section that contains
+                                             the keys and values.
+                                          </p>
+                                          
+                                       </dd>
+                                        
+                                       
+                                       <dt><span class="term">TopLevelKey</span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>The top-level key name. Its value is a list of key-value pairs.</p>
+                                          
+                                       </dd>
+                                        
+                                       
+                                       <dt><span class="term">SecondLevelKey</span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>The second-level key name, which is set to one of the keys from the list
+                                             assigned to <code class="code">TopLevelKey</code>.
+                                          </p>
+                                          
+                                       </dd>
+                                       
+                                    </dl>
+                                 </div>
+                                 
+                                 <h2 id="w2ab1c25c28c26b9">Return Value:</h2>
+                                 
+                                 
+                                 <p>The value that is assigned to <code class="code">SecondLevelKey</code>. 
+                                 </p>
+                                 
+                                 <h2 id="w2ab1c25c28c26c11">Example</h2>
+                                 
+                                 
+                                 <p>The following example shows how to use <code class="code">Fn::FindInMap</code> for a template
+                                    with a <code class="code">Mappings</code> section that contains a single map, <code class="code">RegionMap</code>,
+                                    that associates AMIs with AWS regions. 
+                                 </p>
+                                 
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p>The map has 5 top-level keys that correspond to various AWS regions.</p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>Each top-level key is assigned a list with two second level keys,
+                                             <code class="code">&quot;HVM64&quot;</code> and <code class="code">&quot;HVMG2&quot;</code>, that correspond to the AMI&apos;s
+                                             architecture.
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>Each of the second-level keys is assigned an appropriate AMI name.</p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 
+                                 <p>The example template contains an <code class="code">AWS::EC2::Instance</code> resource whose
+                                    <code class="code">ImageId</code> property is set by the <code class="code">FindInMap</code> function. 
+                                 </p>
+                                 
+                                 <p><code class="code">MapName</code> is set to the map of interest, <code class="code">&quot;RegionMap&quot;</code> in this
+                                    example. <code class="code">TopLevelKey</code> is set to the region where the stack is created, which is
+                                    determined by using the <code class="code">&quot;AWS::Region&quot;</code> pseudo parameter.
+                                    <code class="code">SecondLevelKey</code> is set to the desired architecture, <code class="code">&quot;HVM64&quot;</code> for
+                                    this example.
+                                 </p>
+                                 
+                                 <p><code class="code">FindInMap</code> returns the AMI assigned to <code class="code">FindInMap</code>. For a HVM64
+                                    instance in us-east-1, <code class="code">FindInMap</code> would return
+                                    <code class="code">&quot;ami-0ff8a91507f77f867&quot;</code>.
+                                 </p>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="intrinsic-function-reference-findinmap-example.json">JSON</h3>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class=""><span>{</span>
   ...
   &quot;Mappings&quot; : <span>{</span>
     &quot;RegionMap&quot; : <span>{</span>
@@ -190,12 +189,12 @@
     }
   }
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h3 id="intrinsic-function-reference-findinmap-example.yaml">YAML</h3>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">Mappings: 
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="intrinsic-function-reference-findinmap-example.yaml">YAML</h3>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">Mappings: 
   RegionMap: 
     us-east-1: 
       HVM64: &quot;ami-0ff8a91507f77f867&quot;
@@ -221,50 +220,50 @@ Resources:
         - !Ref &apos;AWS::Region&apos;
         - HVM64
       InstanceType: m1.small</code></pre>
-                  </div>
-               
-               <h2 id="w2ab1c26c24c26c13">Supported Functions</h2>
-               
-               
-               <p>You can use the following functions in a <code class="code">Fn::FindInMap</code> function:
-               </p>
-               <div class="itemizedlist">
-                   
-                   
-                  
-                  <ul class="itemizedlist" type="disc">
-                     <li class="listitem">
-                        
-                        <p><code class="code">Fn::FindInMap</code></p>
-                        
-                     </li>
-                     <li class="listitem">
-                        
-                        <p><code class="code">Ref</code></p>
-                        
-                     </li>
-                  </ul>
-               </div>
-               
-               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
-            </div>
-            <noscript>
-               <div>
-                  <div>
-                     <div>
-                        <div id="js_error_message">
-                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
-                                 browser.</strong></p>
-                           <p>To use the AWS Documentation, Javascript must be
-                              enabled. Please refer to your browser&apos;s Help pages for instructions.
-                           </p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </noscript>
-            
-            <awsdocs-page-utilities></awsdocs-page-utilities>
-         </div></div>
+                                    </div>
+                                 
+                                 <h2 id="w2ab1c25c28c26c13">Supported Functions</h2>
+                                 
+                                 
+                                 <p>You can use the following functions in a <code class="code">Fn::FindInMap</code> function:
+                                 </p>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p><code class="code">Fn::FindInMap</code></p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p><code class="code">Ref</code></p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
 </body>
 </html>

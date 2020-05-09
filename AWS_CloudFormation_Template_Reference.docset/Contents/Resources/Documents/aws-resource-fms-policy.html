@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-fms-policy">AWS::FMS::Policy</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>An AWS Firewall Manager policy.</p>
+                                 <p>Firewall Manager provides the following types of policies: </p>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p>A Shield Advanced policy, which applies Shield Advanced protection to specified
+                                             accounts and resources.
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>An AWS WAF policy (type WAFV2), which defines rule groups to run first in the corresponding
+                                             AWS WAF
+                                             web ACL and rule groups to run last in the web ACL. 
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>An AWS WAF Classic policy, which defines a rule group. AWS WAF Classic doesn&apos;t support
+                                             rule groups in CloudFormation, so, to create 
+                                             WAF Classic policies through CloudFormation, you first need to create your rule groups
+                                             outside of CloudFormation. 
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>A security group policy, which manages VPC security groups across your AWS
+                                             organization. 
+                                          </p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <p>Each policy is specific to one of the types. If you want to enforce more than one
+                                    policy type across accounts, create multiple policies. You can create multiple
+                                    policies for each type.
+                                 </p>
+                                 <p>These policies require some setup to use. For more information, see the sections on
+                                    prerequisites and getting started
+                                    under <a href="https://docs.aws.amazon.com/waf/latest/developerguide/fms-prereq.html">AWS Firewall Manager</a>.
+                                 </p>
+                                 <h2 id="aws-resource-fms-policy-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-fms-policy-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::FMS::Policy&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-fms-policy-deleteallpolicyresources">DeleteAllPolicyResources</a>&quot; : <code class="replaceable">Boolean</code>,
+      &quot;<a href="#cfn-fms-policy-excludemap">ExcludeMap</a>&quot; : <code class="replaceable"><a href="./aws-properties-fms-policy-iemap.html">IEMap</a></code>,
+      &quot;<a href="#cfn-fms-policy-excluderesourcetags">ExcludeResourceTags</a>&quot; : <code class="replaceable">Boolean</code>,
+      &quot;<a href="#cfn-fms-policy-includemap">IncludeMap</a>&quot; : <code class="replaceable"><a href="./aws-properties-fms-policy-iemap.html">IEMap</a></code>,
+      &quot;<a href="#cfn-fms-policy-policyname">PolicyName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-fms-policy-remediationenabled">RemediationEnabled</a>&quot; : <code class="replaceable">Boolean</code>,
+      &quot;<a href="#cfn-fms-policy-resourcetags">ResourceTags</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-fms-policy-resourcetag.html">ResourceTag</a>, ... ]</code>,
+      &quot;<a href="#cfn-fms-policy-resourcetype">ResourceType</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-fms-policy-resourcetypelist">ResourceTypeList</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+      &quot;<a href="#cfn-fms-policy-securityservicepolicydata">SecurityServicePolicyData</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-fms-policy-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-fms-policy-policytag.html">PolicyTag</a>, ... ]</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-fms-policy-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::FMS::Policy
+Properties: 
+  <a href="#cfn-fms-policy-deleteallpolicyresources">DeleteAllPolicyResources</a>: <code class="replaceable">Boolean</code>
+  <a href="#cfn-fms-policy-excludemap">ExcludeMap</a>: <code class="replaceable">
+    <a href="./aws-properties-fms-policy-iemap.html">IEMap</a></code>
+  <a href="#cfn-fms-policy-excluderesourcetags">ExcludeResourceTags</a>: <code class="replaceable">Boolean</code>
+  <a href="#cfn-fms-policy-includemap">IncludeMap</a>: <code class="replaceable">
+    <a href="./aws-properties-fms-policy-iemap.html">IEMap</a></code>
+  <a href="#cfn-fms-policy-policyname">PolicyName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-fms-policy-remediationenabled">RemediationEnabled</a>: <code class="replaceable">Boolean</code>
+  <a href="#cfn-fms-policy-resourcetags">ResourceTags</a>: <code class="replaceable">
+    - <a href="./aws-properties-fms-policy-resourcetag.html">ResourceTag</a></code>
+  <a href="#cfn-fms-policy-resourcetype">ResourceType</a>: <code class="replaceable">String</code>
+  <a href="#cfn-fms-policy-resourcetypelist">ResourceTypeList</a>: <code class="replaceable">
+    - String</code>
+  <a href="#cfn-fms-policy-securityservicepolicydata">SecurityServicePolicyData</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-fms-policy-tags">Tags</a>: <code class="replaceable">
+    - <a href="./aws-properties-fms-policy-policytag.html">PolicyTag</a></code>
+</code></pre></div>
+                                 <h2 id="aws-resource-fms-policy-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-fms-policy-deleteallpolicyresources"></a><span class="term"><code class="code">DeleteAllPolicyResources</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Used when deleting a policy. If <code class="code">true</code>, Firewall Manager performs cleanup according to the policy type.
+                                          </p>
+                                          
+                                          <p>For AWS WAF and Shield Advanced policies, Firewall Manager does the following:</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   <p>Deletes rule groups created by AWS Firewall Manager</p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p>Removes web ACLs from in-scope resources </p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p>Deletes web ACLs that contain no rules or rule groups </p>
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>For security group policies, Firewall Manager does the following for each security
+                                             group in the policy:
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   <p>Disassociates the security group from in-scope resources </p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p>Deletes the security group if it was created through Firewall Manager and if it&apos;s
+                                                      no longer associated with any resources through another policy 
+                                                   </p>
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>After the cleanup, in-scope resources are no longer protected by web ACLs in this
+                                             policy. Protection of out-of-scope resources remains unchanged. Scope is determined
+                                             by tags that you create and accounts that you associate with the policy. When creating
+                                             the policy, if you specify that only resources in specific accounts or with specific
+                                             tags are in scope of the policy, those accounts and resources are handled by the policy.
+                                             All others are out of scope. If you don&apos;t specify tags or accounts, all resources
+                                             are in scope.  
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fms-policy-excludemap"></a><span class="term"><code class="code">ExcludeMap</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies the AWS account IDs and AWS Organizations organizational units (OUs) to
+                                             exclude from the policy. 
+                                             Specifying an OU is the equivalent of specifying all accounts in the OU and in any
+                                             of its child OUs, including any child OUs and accounts that are added at a later time.
+                                          </p>
+                                          
+                                          <p>You can specify inclusions or exclusions, but not both. If you specify an <code class="code">IncludeMap</code>, AWS Firewall Manager 
+                                             applies the policy to all accounts specified by the <code class="code">IncludeMap</code>, and 
+                                             does not evaluate any <code class="code">ExcludeMap</code> specifications. If you do not specify an <code class="code">IncludeMap</code>, then Firewall Manager 
+                                             applies the policy to all accounts except for those specified by the <code class="code">ExcludeMap</code>.
+                                          </p>
+                                          
+                                          <p>You can specify account IDs, OUs, or a combination: </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>Specify account IDs by setting the key to <code class="code">ACCOUNT</code>. For example, the following is a valid map:  
+                                                      <code class="code"><span>{</span>&#x201C;ACCOUNT&#x201D; : [&#x201C;accountID1&#x201D;, &#x201C;accountID2&#x201D;]}</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Specify OUs by setting the key to <code class="code">ORG_UNIT</code>. For example, the following is a valid map: 
+                                                      <code class="code"><span>{</span>&#x201C;ORG_UNIT&#x201D; : [&#x201C;ouid111&#x201D;, &#x201C;ouid112&#x201D;]}</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Specify accounts and OUs together in a single map, separated with a comma. For example,
+                                                      the following is a valid map:
+                                                      <code class="code"><span>{</span>&#x201C;ACCOUNT&#x201D; : [&#x201C;accountID1&#x201D;, &#x201C;accountID2&#x201D;], &#x201C;ORG_UNIT&#x201D; : [&#x201C;ouid111&#x201D;, &#x201C;ouid112&#x201D;]}</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-fms-policy-iemap.html">IEMap</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fms-policy-excluderesourcetags"></a><span class="term"><code class="code">ExcludeResourceTags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Used only when tags are specified in the <code class="code">ResourceTags</code> property. If this property 
+                                             is <code class="code">True</code>, resources with the specified tags are not in scope of the policy. If it&apos;s <code class="code">False</code>, 
+                                             only resources with the specified tags are in scope of the policy. 
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fms-policy-includemap"></a><span class="term"><code class="code">IncludeMap</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies the AWS account IDs to include in the policy. If <code class="code">IncludeMap</code> is
+                                             not set, all accounts in the organization in AWS Organizations are included in the
+                                             policy. If
+                                             <code class="code">IncludeMap</code> is set, only values listed in <code class="code">IncludeMap</code> are
+                                             included in the policy.
+                                          </p>
+                                          
+                                          <p>The key to the map is <code class="code">ACCOUNT</code>. For example, a valid <code class="code">IncludeMap</code>
+                                             would be <code class="code"><span>{</span>&#x201C;ACCOUNT&#x201D; : [&#x201C;accountID1&#x201D;, &#x201C;accountID2&#x201D;]}</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-fms-policy-iemap.html">IEMap</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fms-policy-policyname"></a><span class="term"><code class="code">PolicyName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The friendly name of the AWS Firewall Manager policy.</p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">128</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^([\p<span>{</span>L}\p<span>{</span>Z}\p<span>{</span>N}_.:/=+\-@]*)$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fms-policy-remediationenabled"></a><span class="term"><code class="code">RemediationEnabled</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Indicates if the policy should be automatically applied to new resources.</p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fms-policy-resourcetags"></a><span class="term"><code class="code">ResourceTags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>An array of <code class="code">ResourceTag</code> objects, used to explicitly include resources in the 
+                                             policy scope or explicitly exclude them. If this isn&apos;t set, then tags aren&apos;t used
+                                             to modify policy scope. See 
+                                             also <code class="code">ExcludeResourceTags</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-fms-policy-resourcetag.html">ResourceTag</a></p>
+                                          <p><em>Maximum</em>: <code class="code">8</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fms-policy-resourcetype"></a><span class="term"><code class="code">ResourceType</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The type of resource protected by or in scope of the policy. This is in the format
+                                             shown
+                                             in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a>.
+                                             For AWS WAF and Shield Advanced, examples include
+                                             <code class="code">AWS::ElasticLoadBalancingV2::LoadBalancer</code> and
+                                             <code class="code">AWS::CloudFront::Distribution</code>. For a security group common policy, valid values
+                                             are <code class="code">AWS::EC2::NetworkInterface</code> and <code class="code">AWS::EC2::Instance</code>. For a
+                                             security group content audit policy, valid values are <code class="code">AWS::EC2::SecurityGroup</code>,
+                                             <code class="code">AWS::EC2::NetworkInterface</code>, and <code class="code">AWS::EC2::Instance</code>. For a security
+                                             group usage audit policy, the value is <code class="code">AWS::EC2::SecurityGroup</code>. 
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">128</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^([\p<span>{</span>L}\p<span>{</span>Z}\p<span>{</span>N}_.:/=+\-@]*)$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fms-policy-resourcetypelist"></a><span class="term"><code class="code">ResourceTypeList</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>An array of <code class="code">ResourceType</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fms-policy-securityservicepolicydata"></a><span class="term"><code class="code">SecurityServicePolicyData</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Details about the security service that is being used to protect the resources.</p>
+                                          
+                                          <p>This contains the following settings: </p>
+                                          
+                                          <div class="itemizedlist">
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   <p>Type - Indicates the service type that the policy uses to protect the resource.
+                                                      For security group policies, Firewall Manager supports one security group for 
+                                                      each common policy and for each content audit policy. This is an adjustable limit
+                                                      that you 
+                                                      can increase by contacting AWS Support. 
+                                                   </p>
+                                                   
+                                                   <p>Valid values: <code class="code">WAFV2</code> | <code class="code">WAF</code> |<code class="code">SHIELD_ADVANCED</code> | <code class="code">SECURITY_GROUPS_COMMON</code> | <code class="code">SECURITY_GROUPS_CONTENT_AUDIT</code> | <code class="code">SECURITY_GROUPS_USAGE_AUDIT</code>.  
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   <p>ManagedServiceData - Details about the service that are specific to the service type,
+                                                      in JSON format. For <code class="code">SHIELD_ADVANCED</code>, this is an empty string.
+                                                   </p>
+                                                   
+                                                   <div class="itemizedlist">
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                      
+                                                      <ul class="itemizedlist" type="disc">
+                                                         <li class="listitem">
+                                                            
+                                                            <p>Example: <code class="code">WAFV2</code>
+                                                               
+                                                            </p>
+                                                            
+                                                            <p><code class="code">&quot;ManagedServiceData&quot;: &quot;<span>{</span>\&quot;type\&quot;:\&quot;WAFV2\&quot;,\&quot;defaultAction\&quot;:<span>{</span>\&quot;type\&quot;:\&quot;ALLOW\&quot;},\&quot;preProcessRuleGroups\&quot;:[<span>{</span>\&quot;managedRuleGroupIdentifier\&quot;:null,\&quot;ruleGroupArn\&quot;:\&quot;rulegrouparn\&quot;,\&quot;overrideAction\&quot;:<span>{</span>\&quot;type\&quot;:\&quot;COUNT\&quot;},\&quot;excludedRules\&quot;:[<span>{</span>\&quot;name\&quot;:\&quot;EntityName\&quot;}],\&quot;ruleGroupType\&quot;:\&quot;RuleGroup\&quot;}],\&quot;postProcessRuleGroups\&quot;:[<span>{</span>\&quot;managedRuleGroupIdentifier\&quot;:<span>{</span>\&quot;managedRuleGroupName\&quot;:\&quot;AWSManagedRulesAdminProtectionRuleSet\&quot;,\&quot;vendor\&quot;:\&quot;AWS\&quot;},\&quot;ruleGroupArn\&quot;:\&quot;rulegrouparn\&quot;,\&quot;overrideAction\&quot;:<span>{</span>\&quot;type\&quot;:\&quot;NONE\&quot;},\&quot;excludedRules\&quot;:[],\&quot;ruleGroupType\&quot;:\&quot;ManagedRuleGroup\&quot;}],\&quot;overrideCustomerWebACLAssociation\&quot;:false}&quot;</code></p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p>Example: <code class="code">WAF Classic</code>
+                                                               
+                                                            </p>
+                                                            
+                                                            <p><code class="code">&quot;ManagedServiceData&quot;: &quot;<span>{</span>\&quot;type\&quot;: \&quot;WAF\&quot;, \&quot;ruleGroups\&quot;: [<span>{</span>\&quot;id\&quot;:\&quot;12345678-1bcd-9012-efga-0987654321ab\&quot;, \&quot;overrideAction\&quot; : <span>{</span>\&quot;type\&quot;: \&quot;COUNT\&quot;}}],\&quot;defaultAction\&quot;: <span>{</span>\&quot;type\&quot;: \&quot;BLOCK\&quot;}}</code></p>
+                                                            
+                                                            <p>AWS WAF Classic doesn&apos;t support rule groups in CloudFormation. To create a WAF Classic
+                                                               policy through CloudFormation, create your rule groups outside of CloudFormation,
+                                                               then provide the rule group IDs in the WAF managed service data specification.
+                                                            </p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p>Example: <code class="code">SECURITY_GROUPS_COMMON</code>
+                                                               
+                                                            </p>
+                                                            
+                                                            <p><code class="code">&quot;SecurityServicePolicyData&quot;:<span>{</span>&quot;Type&quot;:&quot;SECURITY_GROUPS_COMMON&quot;,&quot;ManagedServiceData&quot;:&quot;<span>{</span>\&quot;type\&quot;:\&quot;SECURITY_GROUPS_COMMON\&quot;,\&quot;revertManualSecurityGroupChanges\&quot;:false,\&quot;exclusiveResourceSecurityGroupManagement\&quot;:false,\&quot;securityGroups\&quot;:[<span>{</span>\&quot;id\&quot;:\&quot;
+                                                                  sg-000e55995d61a06bd\&quot;}]}&quot;},&quot;RemediationEnabled&quot;:false,&quot;ResourceType&quot;:&quot;AWS::EC2::NetworkInterface&quot;}</code></p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p>Example: <code class="code">SECURITY_GROUPS_CONTENT_AUDIT</code></p>
+                                                            
+                                                            <p><code class="code">&quot;SecurityServicePolicyData&quot;:<span>{</span>&quot;Type&quot;:&quot;SECURITY_GROUPS_CONTENT_AUDIT&quot;,&quot;ManagedServiceData&quot;:&quot;<span>{</span>\&quot;type\&quot;:\&quot;SECURITY_GROUPS_CONTENT_AUDIT\&quot;,\&quot;securityGroups\&quot;:[<span>{</span>\&quot;id\&quot;:\&quot;
+                                                                  sg-000e55995d61a06bd
+                                                                  \&quot;}],\&quot;securityGroupAction\&quot;:<span>{</span>\&quot;type\&quot;:\&quot;ALLOW\&quot;}}&quot;},&quot;RemediationEnabled&quot;:false,&quot;ResourceType&quot;:&quot;AWS::EC2::NetworkInterface&quot;}</code></p>
+                                                            
+                                                            <p>The security group action for content audit can be <code class="code">ALLOW</code> or
+                                                               <code class="code">DENY</code>. For <code class="code">ALLOW</code>, all in-scope security group rules must be
+                                                               within the allowed range of the policy&apos;s security group rules. For <code class="code">DENY</code>, all
+                                                               in-scope security group rules must not contain a value or a range that matches a rule
+                                                               value or range in the policy security group.
+                                                            </p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p>Example: <code class="code">SECURITY_GROUPS_USAGE_AUDIT</code></p>
+                                                            
+                                                            <p><code class="code">&quot;SecurityServicePolicyData&quot;:<span>{</span>&quot;Type&quot;:&quot;SECURITY_GROUPS_USAGE_AUDIT&quot;,&quot;ManagedServiceData&quot;:&quot;<span>{</span>\&quot;type\&quot;:\&quot;SECURITY_GROUPS_USAGE_AUDIT\&quot;,\&quot;deleteUnusedSecurityGroups\&quot;:true,\&quot;coalesceRedundantSecurityGroups\&quot;:true}&quot;},&quot;RemediationEnabled&quot;:false,&quot;Resou
+                                                                  rceType&quot;:&quot;AWS::EC2::SecurityGroup&quot;}</code></p>
+                                                            
+                                                         </li>
+                                                      </ul>
+                                                   </div>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: Json
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fms-policy-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A collection of key:value pairs associated with an AWS resource. The key:value pair
+                                             can be anything you define. Typically, the tag key represents a category (such as
+                                             &quot;environment&quot;) and the tag value represents a specific value within that category
+                                             (such as &quot;test,&quot; &quot;development,&quot; or &quot;production&quot;). You can add up to 50 tags to each
+                                             AWS resource.  
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-fms-policy-policytag.html">PolicyTag</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-fms-policy-return-values">Return Values</h2>
+                                 <h3 id="aws-resource-fms-policy-return-values-ref">Ref</h3>
+                                 <p>The <code class="code">Ref</code> for this resource returns the <code class="code">PolicyId</code>. 
+                                 </p>
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the resource physical ID, such as 1234a1a-a1b1-12a1-abcd-a123b123456.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-fms-policy-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <h4 id="aws-resource-fms-policy-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the policy.</p>
+                                          
+                                       </dd>
+                                       <dt><a id="Id-fn::getatt"></a><span class="term"><code class="code">Id</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ID of the policy.</p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-fms-policy--examples">Examples</h2>
+                                 <h3 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_AWS_WAF_Policy">Create a Firewall Manager AWS WAF Policy</h3>
+                                 <p>The following shows an example Firewall Manager WAF policy for the latest version
+                                    of AWS WAF.  
+                                 </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_AWS_WAF_Policy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">PolicyWAFv2:
+    Type: AWS::FMS::Policy
+    Properties:
+      ExcludeResourceTags: false
+      PolicyName: Policy
+      RemediationEnabled: false 
+      ResourceType: AWS::ElasticLoadBalancingV2::LoadBalancer 
+      SecurityServicePolicyData: 
+        Type: WAFV2
+        ManagedServiceData: !Sub &apos;<span>{</span>&quot;type&quot;:&quot;WAFV2&quot;, 
+                                  &quot;preProcessRuleGroups&quot;:[<span>{</span> 
+                                  &quot;ruleGroupType&quot;:&quot;RuleGroup&quot;,
+                                  &quot;ruleGroupArn&quot;:&quot;$<span>{</span>RuleGroup.Arn}&quot;,
+                                  &quot;overrideAction&quot;:<span>{</span>&quot;type&quot;:&quot;NONE&quot;}}],
+                                  &quot;postProcessRuleGroups&quot;:[],
+                                  &quot;defaultAction&quot;:<span>{</span>&quot;type&quot;:&quot;BLOCK&quot;}}&apos; </code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_AWS_WAF_Policy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;PolicyWAFv2&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::FMS::Policy&quot;,
+    &quot;Properties&quot;: <span>{</span>
+        &quot;ExcludeResourceTags&quot;: false,
+        &quot;PolicyName&quot;: &quot;Policy&quot;,
+        &quot;RemediationEnabled&quot;: false,
+        &quot;ResourceType&quot;: &quot;AWS::ElasticLoadBalancingV2::LoadBalancer&quot;,
+        &quot;SecurityServicePolicyData&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;WAFV2&quot;,
+            &quot;ManagedServiceData&quot;: <span>{</span>
+                &quot;Fn::Sub&quot;: &quot;<span>{</span>\&quot;type\&quot;:\&quot;WAFV2\&quot;,\&quot;preProcessRuleGroups\&quot;:[<span>{</span>\&quot;ruleGroupType\&quot;:\&quot;RuleGroup,\&quot;ruleGroupArn\&quot;:\&quot;$<span>{</span>RuleGroup.Arn}\&quot;,\&quot;overrideAction\&quot;:<span>{</span>\&quot;type\&quot;:\&quot;NONE\&quot;}}],\&quot;postProcessRuleGroups\&quot;:[],\&quot;defaultAction\&quot;:<span>{</span>\&quot;type\&quot;:\&quot;BLOCK\&quot;}}&quot;
+            }
+        }
+    }
+} </code></pre></div>
+                                 <h3 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_AWS_WAF_Classic_Policy">Create a Firewall Manager AWS WAF Classic Policy</h3>
+                                 <p>The following shows an example Firewall Manager AWS WAF Classic policy.  </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_AWS_WAF_Classic_Policy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">PolicyWAF:
+    Type: AWS::FMS::Policy
+    Properties:
+      ExcludeResourceTags: false
+      PolicyName: Policy
+      RemediationEnabled: false
+      ResourceType: AWS::ElasticLoadBalancingV2::LoadBalancer
+      SecurityServicePolicyData:
+        Type: WAF
+        ManagedServiceData: !Sub &apos;<span>{</span>&quot;type&quot;:&quot;WAF&quot;,
+                                  &quot;defaultAction&quot;:<span>{</span>&quot;type&quot;:&quot;BLOCK&quot;},
+                                  &quot;overrideCustomerWebACLAssociation&quot;:false,
+                                  &quot;ruleGroups&quot;:[
+                                    <span>{</span>
+                                      &quot;id&quot;:&quot;$<span>{</span>RuleGroupId}&quot;,
+                                      &quot;overrideAction&quot;:<span>{</span>&quot;type&quot;:&quot;NONE&quot;}
+                                    }
+                                  ]}&apos; </code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_AWS_WAF_Classic_Policy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;PolicyWAF&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::FMS::Policy&quot;,
+    &quot;Properties&quot;: <span>{</span>
+        &quot;ExcludeResourceTags&quot;: false,
+        &quot;PolicyName&quot;: &quot;Policy&quot;,
+        &quot;RemediationEnabled&quot;: false,
+        &quot;ResourceType&quot;: &quot;AWS::ElasticLoadBalancingV2::LoadBalancer&quot;,
+        &quot;SecurityServicePolicyData&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;WAF&quot;,
+            &quot;ManagedServiceData&quot;: <span>{</span>
+                &quot;Fn::Sub&quot;: &quot;<span>{</span>\&quot;type\&quot;:\&quot;WAF\&quot;,\&quot;defaultAction\&quot;:<span>{</span>\&quot;type\&quot;:\&quot;BLOCK\&quot;},\&quot;overrideCustomerWebACLAssociation\&quot;:false,\&quot;ruleGroups\&quot;:[<span>{</span>\&quot;id\&quot;:\&quot;$<span>{</span>RuleGroupId}\&quot;,\&quot;overrideAction\&quot;:<span>{</span>\&quot;type\&quot;:\&quot;NONE\&quot;}}]}&quot;
+            }
+        }
+    }
+} </code></pre></div>
+                                 <h3 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_Shield_Advanced_policy">Create a Firewall Manager Shield Advanced policy</h3>
+                                 <p>The following shows an example Firewall Manager Shield Advanced policy. This example
+                                    uses account and resource tag specifications to limit the scope of the policy.  
+                                 </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_Shield_Advanced_policy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Policy:
+    Type: AWS::FMS::Policy
+    Properties:
+      ExcludeResourceTags: true
+      ResourceTags:
+        - Key: resourceTag1
+          Value: value
+        - Key: resourceTag2
+          Value: value
+      IncludeMap:
+        ACCOUNT:
+          - !Ref AWS::AccountId
+      PolicyName: TaggedPolicy
+      RemediationEnabled: false
+      ResourceType: ResourceTypeList
+      ResourceTypeList:
+        - AWS::ElasticLoadBalancingV2::LoadBalancer
+        - AWS::EC2::EIP
+      SecurityServicePolicyData:
+        Type: SHIELD_ADVANCED
+      DeleteAllPolicyResources: false
+      Tags:
+        - Key: tag1
+          Value: value
+        - Key: tag2
+          Value: value </code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_Shield_Advanced_policy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Policy&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::FMS::Policy&quot;,
+    &quot;Properties&quot;: <span>{</span>
+        &quot;ExcludeResourceTags&quot;: true,
+        &quot;ResourceTags&quot;: [
+            <span>{</span>
+                &quot;Key&quot;: &quot;resourceTag1&quot;,
+                &quot;Value&quot;: &quot;value&quot;
+            },
+            <span>{</span>
+                &quot;Key&quot;: &quot;resourceTag2&quot;,
+                &quot;Value&quot;: &quot;value&quot;
+            }
+          ],
+          &quot;IncludeMap&quot;: <span>{</span>
+              &quot;ACCOUNT&quot;: [
+                <span>{</span>
+                  &quot;Ref&quot;: &quot;AWS::AccountId&quot;
+                }
+              ]
+          },
+          &quot;PolicyName&quot;: &quot;TaggedPolicy&quot;,
+          &quot;RemediationEnabled&quot;: false,
+          &quot;ResourceType&quot;: &quot;ResourceTypeList&quot;,
+          &quot;ResourceTypeList&quot;: [
+              &quot;AWS::ElasticLoadBalancingV2::LoadBalancer&quot;,
+              &quot;AWS::EC2::EIP&quot;
+          ],
+          &quot;SecurityServicePolicyData&quot;: <span>{</span>
+              &quot;Type&quot;: &quot;SHIELD_ADVANCED&quot;
+          },
+          &quot;Tags&quot;: [
+              <span>{</span>
+                &quot;Key&quot;: &quot;tag1&quot;,
+                &quot;Value&quot;: &quot;value&quot;
+              },
+              <span>{</span>
+              &quot;Key&quot;: &quot;tag2&quot;,
+              &quot;Value&quot;: &quot;value&quot;
+            }
+        ]
+    }
+} </code></pre></div>
+                                 <h3 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_common_security_group_policy_">Create a Firewall Manager common security group policy </h3>
+                                 <p>The following shows an example Firewall Manager common security group policy.  </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_common_security_group_policy_--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Policy:
+    Type: AWS::FMS::Policy
+    Properties:
+      ExcludeResourceTags: false
+      PolicyName: SecurityGroupsCommonsPolicy
+      RemediationEnabled: false
+      ResourceType: AWS::EC2::Instance
+      SecurityServicePolicyData:
+        Type: SECURITY_GROUPS_COMMON
+        ManagedServiceData: !Sub &apos;<span>{</span>&quot;type&quot;:&quot;SECURITY_GROUPS_COMMON&quot;,
+                                  &quot;revertManualSecurityGroupChanges&quot;:true,
+                                  &quot;securityGroups&quot;:[<span>{</span>&quot;id&quot;:&quot;$<span>{</span>SecurityGroup.GroupId}&quot;}]}&apos; </code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_common_security_group_policy_--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Policy&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::FMS::Policy&quot;,
+    &quot;Properties&quot;: <span>{</span>
+        &quot;ExcludeResourceTags&quot;: false,
+        &quot;PolicyName&quot;: &quot;SecurityGroupsCommonsPolicy&quot;,
+        &quot;RemediationEnabled&quot;: false,
+        &quot;ResourceType&quot;: &quot;AWS::EC2::Instance&quot;,
+        &quot;SecurityServicePolicyData&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;SECURITY_GROUPS_COMMON&quot;,
+            &quot;ManagedServiceData&quot;: <span>{</span>
+                &quot;Fn::Sub&quot;: &quot;<span>{</span>\&quot;type\&quot;:\&quot;SECURITY_GROUPS_COMMON\&quot;,\&quot;revertManualSecurityGroupChanges\&quot;:true,\&quot;securityGroups\&quot;:[<span>{</span>\&quot;id\&quot;:\&quot;$<span>{</span>SecurityGroup.GroupId}\&quot;}]}&quot;
+            }
+        }
+    }
+} </code></pre></div>
+                                 <h3 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_content_audit_security_group_policy">Create a Firewall Manager content audit security group policy</h3>
+                                 <p>The following shows an example Firewall Manager usage audit security group policy.
+                                    
+                                 </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_content_audit_security_group_policy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">PolicySGContentAudit:
+    Type: AWS::FMS::Policy
+    Properties:
+      ExcludeResourceTags: false
+      PolicyName: Policy
+      RemediationEnabled: false
+      ResourceType: AWS::EC2::Instance
+      SecurityServicePolicyData:
+        Type: SECURITY_GROUPS_CONTENT_AUDIT
+        ManagedServiceData: !Sub &apos;<span>{</span>&quot;type&quot;:&quot;SECURITY_GROUPS_CONTENT_AUDIT&quot;,
+                                  &quot;securityGroupAction&quot;:<span>{</span>&quot;type&quot;:&quot;ALLOW&quot;},
+                                  &quot;securityGroups&quot;:[
+                                    <span>{</span>&quot;id&quot;:&quot;$<span>{</span>SecurityGroup.GroupId}&quot;}
+                                  ]}&apos; </code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_content_audit_security_group_policy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;PolicySGContentAudit&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::FMS::Policy&quot;,
+    &quot;Properties&quot;: <span>{</span>
+            &quot;ExcludeResourceTags&quot;: false,
+            &quot;PolicyName&quot;: &quot;Policy&quot;,
+            &quot;RemediationEnabled&quot;: false,
+            &quot;ResourceType&quot;: &quot;AWS::EC2::Instance&quot;,
+            &quot;SecurityServicePolicyData&quot;: <span>{</span>
+                &quot;Type&quot;: &quot;SECURITY_GROUPS_CONTENT_AUDIT&quot;,
+                &quot;ManagedServiceData&quot;: <span>{</span>
+                    &quot;Fn::Sub&quot;: &quot;<span>{</span>\&quot;type\&quot;:\&quot;SECURITY_GROUPS_CONTENT_AUDIT\&quot;,\&quot;securityGroupAction\&quot;:<span>{</span>\&quot;type\&quot;:\&quot;ALLOW\&quot;},\&quot;securityGroups\&quot;:[<span>{</span>\&quot;id\&quot;:\&quot;$<span>{</span>SecurityGroup.GroupId}\&quot;}]}&quot;
+                }
+            }
+        }
+    } </code></pre></div>
+                                 <h3 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_usage_audit_security_group_policy">Create a Firewall Manager usage audit security group policy</h3>
+                                 <p>The following shows an example Firewall Manager usage audit security group policy.
+                                    
+                                 </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_usage_audit_security_group_policy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">PolicySGUsageAudit:
+    Type: AWS::FMS::Policy
+    Properties:
+      ExcludeResourceTags: false
+      PolicyName: Policy
+      RemediationEnabled: false
+      ResourceType: AWS::EC2::SecurityGroup
+      SecurityServicePolicyData:
+        Type: SECURITY_GROUPS_USAGE_AUDIT
+        ManagedServiceData: !Sub &apos;<span>{</span>&quot;type&quot;:&quot;SECURITY_GROUPS_USAGE_AUDIT&quot;,
+                                  &quot;deleteUnusedSecurityGroups&quot;:false,
+                                  &quot;coalesceRedundantSecurityGroups&quot;:false,
+                                  &quot;optionalDelayForUnusedInMinutes&quot;:null}&apos; </code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_usage_audit_security_group_policy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;PolicySGUsageAudit&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::FMS::Policy&quot;,
+    &quot;Properties&quot;: <span>{</span>
+        &quot;ExcludeResourceTags&quot;: false,
+        &quot;PolicyName&quot;: &quot;PolicySGUsageAudit&quot;,
+        &quot;RemediationEnabled&quot;: false,
+        &quot;ResourceType&quot;: &quot;AWS::EC2::SecurityGroup&quot;,
+        &quot;SecurityServicePolicyData&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;SECURITY_GROUPS_USAGE_AUDIT&quot;,
+            &quot;ManagedServiceData&quot;: <span>{</span>
+                &quot;Fn::Sub&quot;: &quot;<span>{</span>\&quot;type\&quot;:\&quot;SECURITY_GROUPS_USAGE_AUDIT\&quot;,\&quot;deleteUnusedSecurityGroups\&quot;:false,\&quot;coalesceRedundantSecurityGroups\&quot;:false,\&quot;optionalDelayForUnusedInMinutes\&quot;:null}&quot;
+            }
+        }
+    }
+} </code></pre></div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

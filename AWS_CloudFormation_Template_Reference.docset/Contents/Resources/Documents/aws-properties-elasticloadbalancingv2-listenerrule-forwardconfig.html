@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-properties-elasticloadbalancingv2-listenerrule-forwardconfig">AWS::ElasticLoadBalancingV2::ListenerRule ForwardConfig</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>Information for creating an action that distributes requests among one or more target
+                                    groups.
+                                    For Network Load Balancers, you can specify a single target group.
+                                    Specify only when <code class="code">Type</code> is <code class="code">forward</code>.
+                                    If you specify both <code class="code">ForwardConfig</code> and <code class="code">TargetGroupArn</code>, you can specify only one target group
+                                    using <code class="code">ForwardConfig</code> and it must be the same target group specified in <code class="code">TargetGroupArn</code>.
+                                 </p>
+                                 <h2 id="aws-properties-elasticloadbalancingv2-listenerrule-forwardconfig-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-properties-elasticloadbalancingv2-listenerrule-forwardconfig-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-elasticloadbalancingv2-listenerrule-forwardconfig-targetgroups">TargetGroups</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-elasticloadbalancingv2-listenerrule-targetgrouptuple.html">TargetGroupTuple</a>, ... ]</code>,
+  &quot;<a href="#cfn-elasticloadbalancingv2-listenerrule-forwardconfig-targetgroupstickinessconfig">TargetGroupStickinessConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-elasticloadbalancingv2-listenerrule-targetgroupstickinessconfig.html">TargetGroupStickinessConfig</a></code>
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-properties-elasticloadbalancingv2-listenerrule-forwardconfig-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-elasticloadbalancingv2-listenerrule-forwardconfig-targetgroups">TargetGroups</a>: <code class="replaceable">
+    - <a href="./aws-properties-elasticloadbalancingv2-listenerrule-targetgrouptuple.html">TargetGroupTuple</a></code>
+  <a href="#cfn-elasticloadbalancingv2-listenerrule-forwardconfig-targetgroupstickinessconfig">TargetGroupStickinessConfig</a>: <code class="replaceable">
+    <a href="./aws-properties-elasticloadbalancingv2-listenerrule-targetgroupstickinessconfig.html">TargetGroupStickinessConfig</a></code>
+</code></pre></div>
+                                 <h2 id="aws-properties-elasticloadbalancingv2-listenerrule-forwardconfig-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-elasticloadbalancingv2-listenerrule-forwardconfig-targetgroups"></a><span class="term"><code class="code">TargetGroups</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Information about how traffic will be distributed between multiple target groups in
+                                             a forward rule.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-elasticloadbalancingv2-listenerrule-targetgrouptuple.html">TargetGroupTuple</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-elasticloadbalancingv2-listenerrule-forwardconfig-targetgroupstickinessconfig"></a><span class="term"><code class="code">TargetGroupStickinessConfig</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Information about the target group stickiness for a rule.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-elasticloadbalancingv2-listenerrule-targetgroupstickinessconfig.html">TargetGroupStickinessConfig</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-properties-elasticloadbalancingv2-listenerrule-forwardconfig--examples">Examples</h2>
+                                 <h3 id="aws-properties-elasticloadbalancingv2-listenerrule-forwardconfig--examples--Weighted_Target_Groups_Example">Weighted Target Groups Example</h3>
+                                 <p>The following example sets the relative weight of traffic between two traffic groups.
+                                    Since the <code class="code">weight</code> property of each group is set to the same value, <code class="code">1</code>, traffic is split 50/50 between the two groups.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-elasticloadbalancingv2-listenerrule-forwardconfig--examples--Weighted_Target_Groups_Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;ListenerRule1&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::ElasticLoadBalancingV2::ListenerRule&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Actions&quot;: [<span>{</span>
+          &quot;Type&quot;: &quot;forward&quot;,
+          &quot;ForwardConfig&quot;: <span>{</span>
+            &quot;TargetGroups&quot;: [<span>{</span>
+              &quot;TargetGroupArn&quot;: <span>{</span> &quot;Ref&quot;: &quot;TargetGroup1&quot; },
+              &quot;Weight&quot;: 1
+            }, <span>{</span>
+              &quot;TargetGroupArn&quot;: <span>{</span> &quot;Ref&quot;: &quot;TargetGroup2&quot; },
+              &quot;Weight&quot;: 1
+            }]
+          }
+        }],
+        &quot;Conditions&quot;: [<span>{</span>
+          &quot;Field&quot;: &quot;path-pattern&quot;,
+          &quot;Values&quot;: [&quot;foo&quot;]
+        }],
+        &quot;ListenerArn&quot;: <span>{</span> &quot;Ref&quot;: &quot;Listener&quot; },
+        &quot;Priority&quot;: 1
+      }
+    }</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-elasticloadbalancingv2-listenerrule-forwardconfig--examples--Weighted_Target_Groups_Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ListenerRule1:
+  Type: &apos;AWS::ElasticLoadBalancingV2::ListenerRule&apos;
+  Properties:
+    Actions:
+      - Type: forward
+        ForwardConfig:
+          TargetGroups:
+            - TargetGroupArn: !Ref TargetGroup1
+              Weight: 1
+            - TargetGroupArn: !Ref TargetGroup2
+              Weight: 1
+    Conditions:
+      - Field: path-pattern
+        Values:
+          - foo
+    ListenerArn: !Ref Listener
+    Priority: 1</code></pre></div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

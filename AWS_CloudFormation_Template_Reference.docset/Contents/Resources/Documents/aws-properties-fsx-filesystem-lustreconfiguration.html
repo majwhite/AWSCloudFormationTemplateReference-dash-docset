@@ -9,147 +9,218 @@
 <body>
     <div id="content" style="padding: 10px 30px;">
     <div id="main-content" class="awsui-util-container">
-            <div id="main-col-body">
-               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
-               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
-               <h1 class="topictitle" id="aws-properties-fsx-filesystem-lustreconfiguration">AWS::FSx::FileSystem LustreConfiguration</h1>
-               <div class="awsdocs-page-header-container">
-                  <awsdocs-page-header></awsdocs-page-header>
-                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
-               </div>
-               <p>The configuration for the Amazon FSx for Lustre file system.</p>
-               <h2 id="aws-properties-fsx-filesystem-lustreconfiguration-syntax">Syntax</h2>
-               <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h3 id="aws-properties-fsx-filesystem-lustreconfiguration-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-properties-fsx-filesystem-lustreconfiguration">AWS::FSx::FileSystem LustreConfiguration</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The configuration for the Amazon FSx for Lustre file system.</p>
+                                 <h2 id="aws-properties-fsx-filesystem-lustreconfiguration-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-properties-fsx-filesystem-lustreconfiguration-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-fsx-filesystem-lustreconfiguration-deploymenttype">DeploymentType</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-fsx-filesystem-lustreconfiguration-exportpath">ExportPath</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-fsx-filesystem-lustreconfiguration-importedfilechunksize">ImportedFileChunkSize</a>&quot; : <code class="replaceable">Integer</code>,
   &quot;<a href="#cfn-fsx-filesystem-lustreconfiguration-importpath">ImportPath</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-fsx-filesystem-lustreconfiguration-perunitstoragethroughput">PerUnitStorageThroughput</a>&quot; : <code class="replaceable">Integer</code>,
   &quot;<a href="#cfn-fsx-filesystem-lustreconfiguration-weeklymaintenancestarttime">WeeklyMaintenanceStartTime</a>&quot; : <code class="replaceable">String</code>
 }
 </code></pre></div>
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h3 id="aws-properties-fsx-filesystem-lustreconfiguration-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-fsx-filesystem-lustreconfiguration-exportpath">ExportPath</a>: <code class="replaceable">String</code>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-properties-fsx-filesystem-lustreconfiguration-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-fsx-filesystem-lustreconfiguration-deploymenttype">DeploymentType</a>: <code class="replaceable">String</code>
+  <a href="#cfn-fsx-filesystem-lustreconfiguration-exportpath">ExportPath</a>: <code class="replaceable">String</code>
   <a href="#cfn-fsx-filesystem-lustreconfiguration-importedfilechunksize">ImportedFileChunkSize</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-fsx-filesystem-lustreconfiguration-importpath">ImportPath</a>: <code class="replaceable">String</code>
+  <a href="#cfn-fsx-filesystem-lustreconfiguration-perunitstoragethroughput">PerUnitStorageThroughput</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-fsx-filesystem-lustreconfiguration-weeklymaintenancestarttime">WeeklyMaintenanceStartTime</a>: <code class="replaceable">String</code>
 </code></pre></div>
-               <h2 id="aws-properties-fsx-filesystem-lustreconfiguration-properties">Properties</h2>
-               <div class="variablelist">
-                  <dl>
-                     <dt><a id="cfn-fsx-filesystem-lustreconfiguration-exportpath"></a><span class="term"><code class="code">ExportPath</code></span></dt>
-                     <dd>
-                        
-                        <p>(Optional) The path in Amazon S3 where the root of your Amazon FSx file system is
-                           exported. 
-                           The path must use the same Amazon S3 bucket as specified in ImportPath. You can provide
-                           an optional prefix to which
-                           new and changed data is to be exported from your Amazon FSx for Lustre file system.
-                           If
-                           an <code class="code">ExportPath</code> value is not provided, Amazon FSx sets a default export path,
-                           <code class="code">s3://import-bucket/FSxLustre[creation-timestamp]</code>. The timestamp is in
-                           UTC format, for example
-                           <code class="code">s3://import-bucket/FSxLustre20181105T222312Z</code>.
-                        </p>
-                        
-                        
-                        <p>The Amazon S3 export bucket must be the same as the import bucket specified by
-                           <code class="code">ImportPath</code>. If you only specify a bucket name, such as
-                           <code class="code">s3://import-bucket</code>, you get a 1:1 mapping of file system objects to S3
-                           bucket objects. This mapping means that the input data in S3 is overwritten on export.
-                           If you provide a custom prefix in the export path, such as
-                           <code class="code">s3://import-bucket/[custom-optional-prefix]</code>, Amazon FSx exports the contents of your file 
-                           system to that export prefix in the Amazon S3 bucket.
-                        </p>
-                        
-                        <p><em>Required</em>: No
-                        </p>
-                        <p><em>Type</em>: String
-                        </p>
-                        <p><em>Minimum</em>: <code class="code">3</code></p>
-                        <p><em>Maximum</em>: <code class="code">900</code></p>
-                        <p><em>Pattern</em>: <code class="code">^.<span>{</span>3,900}$</code></p>
-                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                     </dd>
-                     <dt><a id="cfn-fsx-filesystem-lustreconfiguration-importedfilechunksize"></a><span class="term"><code class="code">ImportedFileChunkSize</code></span></dt>
-                     <dd>
-                        
-                        <p>(Optional) For files imported from a data repository, this value determines the stripe
-                           count and maximum amount of data per file (in MiB) stored on a single physical disk.
-                           The
-                           maximum number of disks that a single file can be striped across is limited by the
-                           total
-                           number of disks that make up the file system.
-                        </p>
-                        
-                        
-                        <p>The chunk size default is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500
-                           GiB). Amazon S3 objects have a maximum size of 5 TB.
-                        </p>
-                        
-                        
-                        <p><em>Required</em>: No
-                        </p>
-                        <p><em>Type</em>: Integer
-                        </p>
-                        <p><em>Minimum</em>: <code class="code">1</code></p>
-                        <p><em>Maximum</em>: <code class="code">512000</code></p>
-                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                     </dd>
-                     <dt><a id="cfn-fsx-filesystem-lustreconfiguration-importpath"></a><span class="term"><code class="code">ImportPath</code></span></dt>
-                     <dd>
-                        
-                        <p>(Optional) The path to the Amazon S3 bucket (including the optional prefix) that
-                           you&apos;re using as the data repository for your Amazon FSx for Lustre file system. 
-                           The root of your FSx for Lustre file system will 
-                           be mapped to the root of the Amazon S3 bucket you select. An
-                           example is <code class="code">s3://import-bucket/optional-prefix</code>. If you specify a prefix
-                           after the Amazon S3 bucket name, only object keys with that prefix are loaded into
-                           the
-                           file system.
-                        </p>
-                        
-                        <p><em>Required</em>: No
-                        </p>
-                        <p><em>Type</em>: String
-                        </p>
-                        <p><em>Minimum</em>: <code class="code">3</code></p>
-                        <p><em>Maximum</em>: <code class="code">900</code></p>
-                        <p><em>Pattern</em>: <code class="code">^.<span>{</span>3,900}$</code></p>
-                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                     </dd>
-                     <dt><a id="cfn-fsx-filesystem-lustreconfiguration-weeklymaintenancestarttime"></a><span class="term"><code class="code">WeeklyMaintenanceStartTime</code></span></dt>
-                     <dd>
-                        
-                        <p>The preferred time to perform weekly maintenance, in the UTC time zone.</p>
-                        
-                        <p><em>Required</em>: No
-                        </p>
-                        <p><em>Type</em>: String
-                        </p>
-                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                     </dd>
-                  </dl>
-               </div>
-               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
-            </div>
-            <noscript>
-               <div>
-                  <div>
-                     <div>
-                        <div id="js_error_message">
-                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
-                                 browser.</strong></p>
-                           <p>To use the AWS Documentation, Javascript must be
-                              enabled. Please refer to your browser&apos;s Help pages for instructions.
-                           </p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </noscript>
-            
-            <awsdocs-page-utilities></awsdocs-page-utilities>
-         </div></div>
+                                 <h2 id="aws-properties-fsx-filesystem-lustreconfiguration-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-fsx-filesystem-lustreconfiguration-deploymenttype"></a><span class="term"><code class="code">DeploymentType</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>(Optional)  
+                                             Choose <code class="code">SCRATCH_1</code> and <code class="code">SCRATCH_2</code> deployment 
+                                             types when you need temporary storage and shorter-term processing of data. 
+                                             The <code class="code">SCRATCH_2</code> deployment type provides in-transit encryption of data and higher burst 
+                                             throughput capacity than <code class="code">SCRATCH_1</code>.
+                                          </p> 
+                                          
+                                          <p>Choose <code class="code">PERSISTENT_1</code> deployment type for longer-term storage 
+                                             and workloads and encryption of data in transit. To learn more about deployment types,
+                                             see 
+                                             <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html">
+                                                FSx for Lustre Deployment Options</a>.
+                                          </p>
+                                          
+                                          <p>Encryption of data in-transit is automatically 
+                                             enabled when you access a <code class="code">SCRATCH_2</code> or <code class="code">PERSISTENT_1</code>
+                                             file system from Amazon EC2 instances that <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-                 protection.html">support this feature</a>.
+                                             (Default = <code class="code">SCRATCH_1</code>)
+                                             
+                                          </p>
+                                          
+                                          
+                                          <p>Encryption of data in-transit for <code class="code">SCRATCH_2</code> and <code class="code">PERSISTENT_1</code> 
+                                             deployment types is supported when accessed from supported instance types in supported
+                                             AWS Regions. To learn more, 
+                                             <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html">Encrypting Data in Transit</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed Values</em>: <code class="code">PERSISTENT_1 | SCRATCH_1 | SCRATCH_2</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fsx-filesystem-lustreconfiguration-exportpath"></a><span class="term"><code class="code">ExportPath</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>(Optional) The path in Amazon S3 where the root of your Amazon FSx file system is
+                                             exported. 
+                                             The path must use the same Amazon S3 bucket as specified in ImportPath. You can provide
+                                             an optional prefix to which
+                                             new and changed data is to be exported from your Amazon FSx for Lustre file system.
+                                             If
+                                             an <code class="code">ExportPath</code> value is not provided, Amazon FSx sets a default export path,
+                                             <code class="code">s3://import-bucket/FSxLustre[creation-timestamp]</code>. The timestamp is in
+                                             UTC format, for example
+                                             <code class="code">s3://import-bucket/FSxLustre20181105T222312Z</code>.
+                                          </p>
+                                          
+                                          
+                                          <p>The Amazon S3 export bucket must be the same as the import bucket specified by
+                                             <code class="code">ImportPath</code>. If you only specify a bucket name, such as
+                                             <code class="code">s3://import-bucket</code>, you get a 1:1 mapping of file system objects to S3
+                                             bucket objects. This mapping means that the input data in S3 is overwritten on export.
+                                             If you provide a custom prefix in the export path, such as
+                                             <code class="code">s3://import-bucket/[custom-optional-prefix]</code>, Amazon FSx exports the contents of your file 
+                                             system to that export prefix in the Amazon S3 bucket.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">3</code></p>
+                                          <p><em>Maximum</em>: <code class="code">900</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^.<span>{</span>3,900}$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fsx-filesystem-lustreconfiguration-importedfilechunksize"></a><span class="term"><code class="code">ImportedFileChunkSize</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>(Optional) For files imported from a data repository, this value determines the stripe
+                                             count and maximum amount of data per file (in MiB) stored on a single physical disk.
+                                             The
+                                             maximum number of disks that a single file can be striped across is limited by the
+                                             total
+                                             number of disks that make up the file system.
+                                          </p>
+                                          
+                                          
+                                          <p>The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500
+                                             GiB). Amazon S3 objects have a maximum size of 5 TB.
+                                          </p>
+                                          
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">512000</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fsx-filesystem-lustreconfiguration-importpath"></a><span class="term"><code class="code">ImportPath</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>(Optional) The path to the Amazon S3 bucket (including the optional prefix) that
+                                             you&apos;re using as the data repository for your Amazon FSx for Lustre file system. 
+                                             The root of your FSx for Lustre file system will 
+                                             be mapped to the root of the Amazon S3 bucket you select. An
+                                             example is <code class="code">s3://import-bucket/optional-prefix</code>. If you specify a prefix
+                                             after the Amazon S3 bucket name, only object keys with that prefix are loaded into
+                                             the
+                                             file system.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">3</code></p>
+                                          <p><em>Maximum</em>: <code class="code">900</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^.<span>{</span>3,900}$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fsx-filesystem-lustreconfiguration-perunitstoragethroughput"></a><span class="term"><code class="code">PerUnitStorageThroughput</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>
+                                             Required for the <code class="code">PERSISTENT_1</code> deployment type, describes the amount of read and write 
+                                             throughput for each 1 tebibyte of storage, in MB/s/TiB. 
+                                             File system throughput capacity is calculated by multiplying &#xFB01;le system storage capacity
+                                             (TiB) by the PerUnitStorageThroughput
+                                             (MB/s/TiB). For a 2.4 TiB &#xFB01;le system, provisioning 50 MB/s/TiB of PerUnitStorageThroughput
+                                             yields 117 MB/s of &#xFB01;le system throughput. You pay for the amount of throughput that
+                                             you
+                                             provision.
+                                             
+                                          </p>
+                                          
+                                          <p>Valid values are 50, 100, 200.</p>
+                                          
+                                          
+                                          <p><em>Required</em>: Conditional
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">50</code></p>
+                                          <p><em>Maximum</em>: <code class="code">200</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fsx-filesystem-lustreconfiguration-weeklymaintenancestarttime"></a><span class="term"><code class="code">WeeklyMaintenanceStartTime</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC
+                                             time zone, where d is the weekday number, from 1 through 7, beginning with Monday
+                                             and ending with Sunday.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
 </body>
 </html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-cloudwatch-compositealarm">AWS::CloudWatch::CompositeAlarm</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The <code class="code">AWS::CloudWatch::CompositeAlarm</code> type creates or updates a composite alarm. When you create 
+                                    a composite alarm, you specify a rule expression for the alarm that takes into 
+                                    account the alarm states of other alarms that you have created. The composite alarm
+                                    goes into ALARM state 
+                                    only if all conditions of the rule are met.
+                                 </p>
+                                 <p>The alarms specified in a composite alarm&apos;s rule expression can include metric alarms
+                                    and other composite alarms.
+                                 </p>
+                                 <p>Using composite alarms can reduce alarm noise. You can create multiple metric alarms,
+                                    and also create a composite alarm and set 
+                                    up alerts only for the composite alarm. For example, you could create a composite
+                                    alarm that goes into ALARM state 
+                                    only when more than one of the underlying metric alarms are in ALARM state.
+                                 </p>
+                                 <p>Currently, the only alarm actions that can be taken by composite alarms are notifying
+                                    SNS topics.
+                                 </p>
+                                 <p>When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA.
+                                    The alarm is then evaluated and 
+                                    its state is set appropriately. Any actions associated with the new state are then
+                                    executed. For a composite alarm, this initial
+                                    time after creation is the only time that the alarm can be in INSUFFICIENT_DATA state.
+                                 </p>
+                                 <p>When you update an existing alarm, its state is left unchanged, but the update completely
+                                    overwrites the previous configuration of the alarm.
+                                 </p>
+                                 <h2 id="aws-resource-cloudwatch-compositealarm-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-cloudwatch-compositealarm-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::CloudWatch::CompositeAlarm&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-cloudwatch-compositealarm-actionsenabled">ActionsEnabled</a>&quot; : <code class="replaceable">Boolean</code>,
+      &quot;<a href="#cfn-cloudwatch-compositealarm-alarmactions">AlarmActions</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+      &quot;<a href="#cfn-cloudwatch-compositealarm-alarmdescription">AlarmDescription</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-cloudwatch-compositealarm-alarmname">AlarmName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-cloudwatch-compositealarm-alarmrule">AlarmRule</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-cloudwatch-compositealarm-insufficientdataactions">InsufficientDataActions</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+      &quot;<a href="#cfn-cloudwatch-compositealarm-okactions">OKActions</a>&quot; : <code class="replaceable">[ String, ... ]</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-cloudwatch-compositealarm-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::CloudWatch::CompositeAlarm
+Properties: 
+  <a href="#cfn-cloudwatch-compositealarm-actionsenabled">ActionsEnabled</a>: <code class="replaceable">Boolean</code>
+  <a href="#cfn-cloudwatch-compositealarm-alarmactions">AlarmActions</a>: <code class="replaceable">
+    - String</code>
+  <a href="#cfn-cloudwatch-compositealarm-alarmdescription">AlarmDescription</a>: <code class="replaceable">String</code>
+  <a href="#cfn-cloudwatch-compositealarm-alarmname">AlarmName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-cloudwatch-compositealarm-alarmrule">AlarmRule</a>: <code class="replaceable">String</code>
+  <a href="#cfn-cloudwatch-compositealarm-insufficientdataactions">InsufficientDataActions</a>: <code class="replaceable">
+    - String</code>
+  <a href="#cfn-cloudwatch-compositealarm-okactions">OKActions</a>: <code class="replaceable">
+    - String</code>
+</code></pre></div>
+                                 <h2 id="aws-resource-cloudwatch-compositealarm-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-cloudwatch-compositealarm-actionsenabled"></a><span class="term"><code class="code">ActionsEnabled</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Indicates whether actions should be executed during any changes to the alarm state
+                                             of the composite alarm. The default is TRUE.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudwatch-compositealarm-alarmactions"></a><span class="term"><code class="code">AlarmActions</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The actions to execute when this alarm transitions to the ALARM state from any other
+                                             state. Each action is specified as an Amazon Resource Name (ARN). 
+                                             For more information about creating alarms and the actions 
+                                             that you can specify, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutCompositeAlarm.html">PutCompositeAlarm</a> in the 
+                                             <em>Amazon CloudWatch API Reference</em>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudwatch-compositealarm-alarmdescription"></a><span class="term"><code class="code">AlarmDescription</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The description for the composite alarm.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudwatch-compositealarm-alarmname"></a><span class="term"><code class="code">AlarmName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name for the composite alarm. This name must be unique within your AWS account.</p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudwatch-compositealarm-alarmrule"></a><span class="term"><code class="code">AlarmRule</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>An expression that specifies which other alarms are to be evaluated to determine this
+                                             composite alarm&apos;s state. For each 
+                                             alarm that you reference, you designate a function that specifies whether that alarm
+                                             needs to be in ALARM state, OK state, 
+                                             or INSUFFICIENT_DATA state. You can use operators (AND, OR and NOT) to combine multiple
+                                             functions in a 
+                                             single expression. You can use parenthesis to logically group the functions in your
+                                             expression.
+                                          </p>
+                                          
+                                          
+                                          <p>You can use either alarm names or ARNs to reference the other alarms that are to be
+                                             evaluated.
+                                          </p>
+                                          
+                                          
+                                          <p>Functions can include the following:</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      ALARM(&quot;alarm-name or alarm-ARN&quot;) is TRUE if the named alarm is in ALARM state.
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      OK(&quot;alarm-name or alarm-ARN&quot;) is TRUE if the named alarm is in OK state.
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      INSUFFICIENT_DATA(&quot;alarm-name or alarm-ARN&quot;) is TRUE if the named alarm is in INSUFFICIENT_DATA
+                                                      state.
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>TRUE always evaluates to TRUE.</p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>FALSE always evaluates to FALSE.</p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          
+                                          <p> TRUE and FALSE are useful for testing a complex AlarmRule structure, and for testing
+                                             your alarm actions.
+                                          </p>
+                                          
+                                          
+                                          
+                                          
+                                          <p>For more information about <code class="code">AlarmRule</code> syntax, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutCompositeAlarm.html">PutCompositeAlarm</a> in the 
+                                             <em>Amazon CloudWatch API Reference</em>.
+                                          </p> 
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudwatch-compositealarm-insufficientdataactions"></a><span class="term"><code class="code">InsufficientDataActions</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state
+                                             from any other state. Each action is specified as an Amazon Resource Name (ARN). 
+                                             For more information about creating alarms and the actions 
+                                             that you can specify, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutCompositeAlarm.html">PutCompositeAlarm</a> in the 
+                                             <em>Amazon CloudWatch API Reference</em>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudwatch-compositealarm-okactions"></a><span class="term"><code class="code">OKActions</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The actions to execute when this alarm transitions to the OK state from any other
+                                             state. Each action is specified as an Amazon Resource Name (ARN). 
+                                             For more information about creating alarms and the actions 
+                                             that you can specify, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutCompositeAlarm.html">PutCompositeAlarm</a> in the 
+                                             <em>Amazon CloudWatch API Reference</em>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-cloudwatch-compositealarm-return-values">Return Values</h2>
+                                 <h3 id="aws-resource-cloudwatch-compositealarm-return-values-ref">Ref</h3>
+                                 <p>
+                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the alarm name, such as <code class="code">MyCompositeAlarm</code>.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-cloudwatch-compositealarm-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-cloudwatch-compositealarm-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ARN of the composite alarm, such as <code class="code">arn:aws:cloudwatch:us-west-2:123456789012:alarm/CompositeAlarmName</code>.
+                                          </p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-cloudwatch-compositealarm--examples">Examples</h2>
+                                 <h3 id="aws-resource-cloudwatch-compositealarm--examples--Composite_alarm_based_on_two_metric_alarms_and_another_composite_alarm">Composite alarm based on two metric alarms and another composite alarm</h3>
+                                 <p>This example creates composite alarms named &quot;HighResourceUsage&quot; and &quot;DeploymentInProgress&quot;,
+                                    and also creates metrics alarms named
+                                    &quot;HighCPUUsage&quot; and &quot;HighMemoryUsage&quot;.  &quot;DeploymentInProgress&quot; is an alarm that must
+                                    be manually set to TRUE or FALSE. The &quot;HighResourceUsage&quot;
+                                    alarm goes into ALARM state only if both &quot;HighCPUUsage&quot; and &quot;HighMemoryUsage&quot; are
+                                    in ALARM state, and if &quot;DeploymentInProgress&quot; is FALSE. Only
+                                    &quot;HighResourceUsage&quot; has the alarm action of notifying SNS. This reduces alarm noise,
+                                    so that you are alerted only if both CPU usage and memory usage
+                                    are high, and a deployment is not currently in progress.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-cloudwatch-compositealarm--examples--Composite_alarm_based_on_two_metric_alarms_and_another_composite_alarm--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Resources&quot;: <span>{</span>
+    &quot;HighResourceUsage&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::CloudWatch::CompositeAlarm&quot;,
+        &quot;Properties&quot;: <span>{</span>
+            &quot;AlarmName&quot;: &quot;HighResourceUsage&quot;,
+            &quot;AlarmRule&quot;: &quot;(ALARM(HighCPUUsage) OR ALARM(HighMemoryUsage)) AND NOT ALARM(DeploymentInProgress)&quot;,
+            &quot;AlarmActions&quot;: &quot;arn:aws:sns:us-west-2:123456789012:my-sns-topic&quot;,
+            &quot;AlarmDescription&quot;: &quot;Indicates that the system resource usage is high while no known 
+            deployment is in progress&quot;
+        },
+        &quot;DependsOn&quot;: [
+            &quot;DeploymentInProgress&quot;,
+            &quot;HighCPUUsage&quot;,
+            &quot;HighMemoryUsage&quot;
+        ]
+    },
+    &quot;DeploymentInProgress&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::CloudWatch::CompositeAlarm&quot;,
+        &quot;Properties&quot;: <span>{</span>
+            &quot;AlarmName&quot;: &quot;DeploymentInProgress&quot;,
+            &quot;AlarmRule&quot;: &quot;FALSE&quot;,
+            &quot;AlarmDescription&quot;: &quot;Manually updated to TRUE/FALSE to disable other alarms&quot;
+        }
+    },
+    &quot;HighCPUUsage&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::CloudWatch::Alarm&quot;,
+        &quot;Properties&quot;: <span>{</span>
+            &quot;AlarmDescription&quot;: &quot;CPUusageishigh&quot;,
+            &quot;AlarmName&quot;: &quot;HighCPUUsage&quot;,
+            &quot;ComparisonOperator&quot;: &quot;GreaterThanThreshold&quot;,
+            &quot;EvaluationPeriods&quot;: 1,
+            &quot;MetricName&quot;: &quot;CPUUsage&quot;,
+            &quot;Namespace&quot;: &quot;CustomNamespace&quot;,
+            &quot;Period&quot;: 60,
+            &quot;Statistic&quot;: &quot;Average&quot;,
+            &quot;Threshold&quot;: 70,
+            &quot;TreatMissingData&quot;: &quot;notBreaching&quot;
+        }
+    },
+    &quot;HighMemoryUsage&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::CloudWatch::Alarm&quot;,
+        &quot;Properties&quot;: <span>{</span>
+            &quot;AlarmDescription&quot;: &quot;Memoryusageishigh&quot;,
+            &quot;AlarmName&quot;: &quot;HighMemoryUsage&quot;,
+            &quot;ComparisonOperator&quot;: &quot;GreaterThanThreshold&quot;,
+            &quot;EvaluationPeriods&quot;: 1,
+            &quot;MetricName&quot;: &quot;MemoryUsage&quot;,
+            &quot;Namespace&quot;: &quot;CustomNamespace&quot;,
+            &quot;Period&quot;: 60,
+            &quot;Statistic&quot;: &quot;Average&quot;,
+            &quot;Threshold&quot;: 65,
+            &quot;TreatMissingData&quot;: &quot;Breaching&quot;
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-cloudwatch-compositealarm--examples--Composite_alarm_based_on_two_metric_alarms_and_another_composite_alarm--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  HighResourceUsage:
+    Type: AWS::CloudWatch::CompositeAlarm
+    Properties:
+      AlarmName: HighResourceUsage
+      AlarmRule: (ALARM(HighCPUUsage) OR ALARM(HighMemoryUsage)) AND NOT ALARM(DeploymentInProgress)
+      AlarmActions: arn:aws:sns:us-west-2:123456789012:my-sns-topic
+      AlarmDescription: Indicates that the system resource usage is high while no known deployment is in progress
+    DependsOn:
+    - DeploymentInProgress
+    - HighCPUUsage
+    - HighMemoryUsage
+  DeploymentInProgress:
+    Type: AWS::CloudWatch::CompositeAlarm
+    Properties:
+      AlarmName: DeploymentInProgress
+      AlarmRule: FALSE
+      AlarmDescription: Manually updated to TRUE/FALSE to disable other alarms
+  HighCPUUsage: 
+    Type: AWS::CloudWatch::Alarm
+    Properties: 
+      AlarmDescription: CPU usage is high
+      AlarmName: HighCPUUsage
+      ComparisonOperator: GreaterThanThreshold
+      EvaluationPeriods: 1
+      MetricName: CPUUsage
+      Namespace: CustomNamespace
+      Period: 60
+      Statistic: Average
+      Threshold: 70
+      TreatMissingData: notBreaching
+  HighMemoryUsage: 
+    Type: AWS::CloudWatch::Alarm
+    Properties: 
+      AlarmDescription: Memory usage is high
+      AlarmName: HighMemoryUsage
+      ComparisonOperator: GreaterThanThreshold
+      EvaluationPeriods: 1
+      MetricName: MemoryUsage
+      Namespace: CustomNamespace
+      Period: 60
+      Statistic: Average
+      Threshold: 65
+      TreatMissingData: breaching</code></pre></div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

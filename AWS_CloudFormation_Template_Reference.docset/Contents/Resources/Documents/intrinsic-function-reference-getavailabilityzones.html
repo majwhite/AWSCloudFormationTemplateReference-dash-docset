@@ -9,137 +9,136 @@
 <body>
     <div id="content" style="padding: 10px 30px;">
     <div id="main-content" class="awsui-util-container">
-            <div id="main-col-body">
-               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
-               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
-               <h1 class="topictitle" id="intrinsic-function-reference-getavailabilityzones"><code class="code">Fn::GetAZs</code></h1>
-               <div class="awsdocs-page-header-container">
-                  <awsdocs-page-header></awsdocs-page-header>
-                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
-               </div>
-               <p>The intrinsic function <code class="code">Fn::GetAZs</code> returns an array that lists Availability
-                  Zones for a specified region. Because customers have access to different Availability
-                  Zones,
-                  the intrinsic function <code class="code">Fn::GetAZs</code> enables template authors to write templates
-                  that adapt to the calling user&apos;s access. That way you don&apos;t have to hard-code a full
-                  list of
-                  Availability Zones for a specified region.
-               </p>
-               <div class="awsdocs-note">
-                  <div class="awsdocs-note-title">
-                     <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
-                  <div class="awsdocs-note-text">
-                     <p>For the EC2-Classic platform, the <code class="code">Fn::GetAZs</code> function returns all
-                        Availability Zones for a region. For the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html">EC2-VPC</a> platform, the
-                        <code class="code">Fn::GetAZs</code> function returns only Availability Zones that have a default
-                        subnet unless none of the Availability Zones has a default subnet; in that case, all
-                        Availability Zones are returned.
-                     </p>
-                     <p>Similarly to the response from the <code class="code">describe-availability-zones</code> AWS CLI
-                        command, the order of the results from the <code class="code">Fn::GetAZs</code> function is not
-                        guaranteed and can change when new Availability Zones are added.
-                     </p>
-                  </div>
-               </div>
-               <p>IAM permissions</p>
-               <p>The permissions that you need in order to use the <code class="code">Fn::GetAZs</code> function depend
-                  on the platform in which you&apos;re launching Amazon EC2 instances. For both platforms,
-                  you need
-                  permissions to the Amazon EC2 <code class="code">DescribeAvailabilityZones</code> and
-                  <code class="code">DescribeAccountAttributes</code> actions. For EC2-VPC, you also need permissions to
-                  the Amazon EC2 <code class="code">DescribeSubnets</code> action.
-               </p>
-               <h2 id="w2ab1c26c24c36c11">Declaration</h2>
-               
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h3 id="intrinsic-function-reference-getazs-syntax.json">JSON</h3>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight"><span>{</span> &quot;Fn::GetAZs&quot; : &quot;<code class="replaceable">region</code>&quot; }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h3 id="intrinsic-function-reference-getazs-syntax.yaml">YAML</h3>
-                  
-                  
-                  <p>Syntax for the full function name:</p>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">Fn::GetAZs: <code class="replaceable">region</code></code></pre>
-                  <p>Syntax for the short form:</p>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">!GetAZs <code class="replaceable">region</code></code></pre>
-                  </div>
-               
-               <h2 id="w2ab1c26c24c36c13">Parameters</h2>
-               
-               
-               <div class="variablelist">
-                   
-                  
-                  <dl>
-                     
-                     <dt><span class="term">region</span></dt>
-                     
-                     <dd>
-                        
-                        <p>The name of the region for which you want to get the Availability Zones.</p>
-                        
-                        <p>You can use the <code class="code">AWS::Region</code> pseudo parameter to
-                           specify the region in which the stack is created. Specifying an empty string is
-                           equivalent to specifying <code class="code">AWS::Region</code>.
-                        </p>
-                        
-                     </dd>
-                     
-                  </dl>
-               </div>
-               
-               <h2 id="w2ab1c26c24c36c15">Return Value</h2>
-               
-               
-               <p>The list of Availability Zones for the region.</p>
-               
-               <h2 id="w2ab1c26c24c36c17">Examples</h2>
-               
-               
-               <h3 id="w2ab1c26c24c36c17b2">Evaluate a Region</h3>
-               
-               
-               <p>For these examples, AWS CloudFormation evaluates <code class="code">Fn::GetAZs</code> to the
-                  following array&#x2014;assuming that the user has created the stack in the
-                  <code class="code">us-east-1</code> region:
-               </p>
-               
-               <p><code class="code">[ &quot;us-east-1a&quot;, &quot;us-east-1b&quot;, &quot;us-east-1c&quot;, &quot;us-east-1d&quot; ]</code></p>
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-getazs-example1.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class=""><span>{</span> &quot;Fn::GetAZs&quot; : &quot;&quot; }
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="intrinsic-function-reference-getavailabilityzones"><code class="code">Fn::GetAZs</code></h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The intrinsic function <code class="code">Fn::GetAZs</code> returns an array that lists Availability
+                                    Zones for a specified region. Because customers have access to different Availability
+                                    Zones,
+                                    the intrinsic function <code class="code">Fn::GetAZs</code> enables template authors to write templates
+                                    that adapt to the calling user&apos;s access. That way you don&apos;t have to hard-code a full
+                                    list of
+                                    Availability Zones for a specified region.
+                                 </p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>For the EC2-Classic platform, the <code class="code">Fn::GetAZs</code> function returns all
+                                          Availability Zones for a region. For the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html">EC2-VPC</a> platform, the
+                                          <code class="code">Fn::GetAZs</code> function returns only Availability Zones that have a default
+                                          subnet unless none of the Availability Zones has a default subnet; in that case, all
+                                          Availability Zones are returned.
+                                       </p>
+                                       <p>Similarly to the response from the <code class="code">describe-availability-zones</code> AWS CLI
+                                          command, the order of the results from the <code class="code">Fn::GetAZs</code> function is not
+                                          guaranteed and can change when new Availability Zones are added.
+                                       </p>
+                                    </div>
+                                 </div>
+                                 <p>IAM permissions</p>
+                                 <p>The permissions that you need in order to use the <code class="code">Fn::GetAZs</code> function depend
+                                    on the platform in which you&apos;re launching Amazon EC2 instances. For both platforms,
+                                    you need
+                                    permissions to the Amazon EC2 <code class="code">DescribeAvailabilityZones</code> and
+                                    <code class="code">DescribeAccountAttributes</code> actions. For EC2-VPC, you also need permissions to
+                                    the Amazon EC2 <code class="code">DescribeSubnets</code> action.
+                                 </p>
+                                 <h2 id="w2ab1c25c28c36c11">Declaration</h2>
+                                 
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="intrinsic-function-reference-getazs-syntax.json">JSON</h3>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight"><span>{</span> &quot;Fn::GetAZs&quot; : &quot;<code class="replaceable">region</code>&quot; }</code></pre>
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="intrinsic-function-reference-getazs-syntax.yaml">YAML</h3>
+                                    
+                                    
+                                    <p>Syntax for the full function name:</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">Fn::GetAZs: <code class="replaceable">region</code></code></pre>
+                                    <p>Syntax for the short form:</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">!GetAZs <code class="replaceable">region</code></code></pre>
+                                    </div>
+                                 
+                                 <h2 id="w2ab1c25c28c36c13">Parameters</h2>
+                                 
+                                 
+                                 <div class="variablelist">
+                                     
+                                    
+                                    <dl>
+                                       
+                                       <dt><span class="term">region</span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>The name of the region for which you want to get the Availability Zones.</p>
+                                          
+                                          <p>You can use the <code class="code">AWS::Region</code> pseudo parameter to
+                                             specify the region in which the stack is created. Specifying an empty string is
+                                             equivalent to specifying <code class="code">AWS::Region</code>.
+                                          </p>
+                                          
+                                       </dd>
+                                       
+                                    </dl>
+                                 </div>
+                                 
+                                 <h2 id="w2ab1c25c28c36c15">Return Value</h2>
+                                 
+                                 
+                                 <p>The list of Availability Zones for the region.</p>
+                                 
+                                 <h2 id="w2ab1c25c28c36c17">Examples</h2>
+                                 
+                                 
+                                 <h3 id="w2ab1c25c28c36c17b2">Evaluate a Region</h3>
+                                 
+                                 
+                                 <p>For these examples, AWS CloudFormation evaluates <code class="code">Fn::GetAZs</code> to the
+                                    following array&#x2014;assuming that the user has created the stack in the
+                                    <code class="code">us-east-1</code> region:
+                                 </p>
+                                 
+                                 <p><code class="code">[ &quot;us-east-1a&quot;, &quot;us-east-1b&quot;, &quot;us-east-1c&quot;, &quot;us-east-1d&quot; ]</code></p>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-getazs-example1.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class=""><span>{</span> &quot;Fn::GetAZs&quot; : &quot;&quot; }
 <span>{</span> &quot;Fn::GetAZs&quot; : <span>{</span> &quot;Ref&quot; : &quot;AWS::Region&quot; } }
 <span>{</span> &quot;Fn::GetAZs&quot; : &quot;us-east-1&quot; }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-getazs-example1.yaml">YAML</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">Fn::GetAZs: &quot;&quot;
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-getazs-example1.yaml">YAML</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">Fn::GetAZs: &quot;&quot;
 Fn::GetAZs:
   Ref: &quot;AWS::Region&quot;
 Fn::GetAZs: us-east-1</code></pre>
-                  </div>         
-               
-               <p>&#xA0;</p>
-                
-               
-               <h3 id="w2ab1c26c24c36c17b4">Specify a Subnet&apos;s Availability Zone</h3>
-               
-               
-               <p>The following example uses <code class="code">Fn::GetAZs</code> to specify a subnet&apos;s Availability Zone:
-               </p>
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-getazs-example.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;mySubnet&quot; : <span>{</span>
+                                    </div>         
+                                 
+                                 <p>&#xA0;</p>
+                                  
+                                 
+                                 <h3 id="w2ab1c25c28c36c17b4">Specify a Subnet&apos;s Availability Zone</h3>
+                                 
+                                 
+                                 <p>The following example uses <code class="code">Fn::GetAZs</code> to specify a subnet&apos;s Availability Zone:
+                                 </p>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-getazs-example.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;mySubnet&quot; : <span>{</span>
   &quot;Type&quot; : &quot;AWS::EC2::Subnet&quot;,
   &quot;Properties&quot; : <span>{</span>
     &quot;VpcId&quot; : <span>{</span> 
@@ -156,12 +155,12 @@ Fn::GetAZs: us-east-1</code></pre>
     }
   }
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-getazs-example.yaml">YAML</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">mySubnet: 
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-getazs-example.yaml">YAML</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">mySubnet: 
   Type: &quot;AWS::EC2::Subnet&quot;
   Properties: 
     VpcId: 
@@ -171,62 +170,62 @@ Fn::GetAZs: us-east-1</code></pre>
       Fn::Select: 
         - 0
         - Fn::GetAZs: &quot;&quot;</code></pre>
-                  </div>
-                
-               
-               <p>&#xA0;</p>
-               
-               <h3 id="w2ab1c26c24c36c17b8">Nested Functions with Short Form YAML</h3>
-               
-               <p>The following examples show valid patterns for using nested intrinsic functions using
-                  short form YAML. 
-                  You can&apos;t nest short form functions consecutively, so a pattern like <code class="code">!GetAZs !Ref</code> is invalid.
-               </p>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  
-                  <h4 id="intrinsic-function-reference-select-example3.yaml">YAML</h4>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">AvailabilityZone: !Select 
+                                    </div>
+                                  
+                                 
+                                 <p>&#xA0;</p>
+                                 
+                                 <h3 id="w2ab1c25c28c36c17b8">Nested Functions with Short Form YAML</h3>
+                                 
+                                 <p>The following examples show valid patterns for using nested intrinsic functions using
+                                    short form YAML. 
+                                    You can&apos;t nest short form functions consecutively, so a pattern like <code class="code">!GetAZs !Ref</code> is invalid.
+                                 </p>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    
+                                    <h4 id="intrinsic-function-reference-select-example3.yaml">YAML</h4>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">AvailabilityZone: !Select 
   - 0
   - !GetAZs 
     Ref: &apos;AWS::Region&apos;</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  
-                  <h4 id="intrinsic-function-reference-select-example4.yaml">YAML</h4>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">AvailabilityZone: !Select 
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    
+                                    <h4 id="intrinsic-function-reference-select-example4.yaml">YAML</h4>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">AvailabilityZone: !Select 
   - 0
   - Fn::GetAZs: !Ref &apos;AWS::Region&apos;</code></pre>
-                  </div>
-                
-               
-               <h2 id="w2ab1c26c24c36c19">Supported Functions</h2>
-               
-               
-               <p>You can use the <code class="code">Ref</code> function in the <code class="code">Fn::GetAZs</code>
-                  function.
-               </p>
-               
-               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
-            </div>
-            <noscript>
-               <div>
-                  <div>
-                     <div>
-                        <div id="js_error_message">
-                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
-                                 browser.</strong></p>
-                           <p>To use the AWS Documentation, Javascript must be
-                              enabled. Please refer to your browser&apos;s Help pages for instructions.
-                           </p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </noscript>
-            
-            <awsdocs-page-utilities></awsdocs-page-utilities>
-         </div></div>
+                                    </div>
+                                  
+                                 
+                                 <h2 id="w2ab1c25c28c36c19">Supported Functions</h2>
+                                 
+                                 
+                                 <p>You can use the <code class="code">Ref</code> function in the <code class="code">Fn::GetAZs</code>
+                                    function.
+                                 </p>
+                                 
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
 </body>
 </html>

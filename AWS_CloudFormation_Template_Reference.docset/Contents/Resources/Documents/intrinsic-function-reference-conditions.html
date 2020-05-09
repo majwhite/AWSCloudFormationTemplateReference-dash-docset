@@ -9,87 +9,86 @@
 <body>
     <div id="content" style="padding: 10px 30px;">
     <div id="main-content" class="awsui-util-container">
-            <div id="main-col-body">
-               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
-               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
-               <h1 class="topictitle" id="intrinsic-function-reference-conditions">Condition Functions</h1>
-               <div class="awsdocs-page-header-container">
-                  <awsdocs-page-header></awsdocs-page-header>
-                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
-               </div>
-               <p>You can use intrinsic functions, such as <code class="code">Fn::If</code>, <code class="code">Fn::Equals</code>, and
-                  <code class="code">Fn::Not</code>, to conditionally create stack resources. These conditions are
-                  evaluated based on input parameters that you declare when you create or update a stack.
-                  After
-                  you define all your conditions, you can associate them with resources or resource
-                  properties
-                  in the Resources and Outputs sections of a template.
-               </p>
-               <p>You define all conditions in the Conditions section of a template except for
-                  <code class="code">Fn::If</code> conditions. You can use the <code class="code">Fn::If</code> condition in the metadata
-                  attribute, update policy attribute, and property values in the Resources section and
-                  Outputs
-                  sections of a template.
-               </p>
-               <p>You might use conditions when you want to reuse a template that can create resources
-                  in
-                  different contexts, such as a test environment versus a production environment. In
-                  your
-                  template, you can add an <code class="code">EnvironmentType</code> input parameter, which accepts either
-                  <code class="userinput">prod</code> or <code class="userinput">test</code> as inputs. For the production
-                  environment, you might include Amazon EC2 instances with certain capabilities; however,
-                  for the test
-                  environment, you want to use less capabilities to save costs. With conditions, you
-                  can define
-                  which resources are created and how they&apos;re configured for each environment type.
-               </p>
-               <p>For more information about the Conditions section, see <a href="./conditions-section-structure.html">Conditions</a>.
-               </p>
-               <div class="awsdocs-note">
-                  <div class="awsdocs-note-title">
-                     <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
-                  <div class="awsdocs-note-text">
-                     <p>You can only reference other conditions and values from the Parameters and Mappings
-                        sections of a template. For example, you can reference a value from an input parameter,
-                        but
-                        you cannot reference the logical ID of a resource in a condition.
-                     </p>
-                  </div>
-               </div>
-               <div class="highlights">
-                  <p><strong>Topics</strong></p>
-                  <ul>
-                     <li><a href="#intrinsic-function-reference-conditions-and">Fn::And</a></li>
-                     <li><a href="#intrinsic-function-reference-conditions-equals">Fn::Equals</a></li>
-                     <li><a href="#intrinsic-function-reference-conditions-if">Fn::If</a></li>
-                     <li><a href="#intrinsic-function-reference-conditions-not">Fn::Not</a></li>
-                     <li><a href="#intrinsic-function-reference-conditions-or">Fn::Or</a></li>
-                     <li><a href="#w2ab1c26c24c21c45">Supported Functions</a></li>
-                     <li><a href="./conditions-sample-templates.html">Sample Templates</a></li>
-                  </ul>
-               </div>
-               <p>Associating a Condition</p>
-               <p>To conditionally create resources, resource properties, or outputs, you must associate
-                  a
-                  condition with them. Add the <code class="code">Condition:</code> key and the logical ID of the condition as
-                  an attribute to associate a condition, as shown in the following snippet. AWS CloudFormation
-                  creates the
-                  <code class="code">NewVolume</code> resource only when the <code class="code">CreateProdResources</code> condition
-                  evaluates to true.
-               </p>
-               <div class="example">
-                  <p class="title"><b>Example JSON</b></p>
-                  <div class="example-contents"><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;NewVolume&quot; : <span>{</span>
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="intrinsic-function-reference-conditions">Condition Functions</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>You can use intrinsic functions, such as <code class="code">Fn::If</code>, <code class="code">Fn::Equals</code>, and
+                                    <code class="code">Fn::Not</code>, to conditionally create stack resources. These conditions are
+                                    evaluated based on input parameters that you declare when you create or update a stack.
+                                    After
+                                    you define all your conditions, you can associate them with resources or resource
+                                    properties
+                                    in the Resources and Outputs sections of a template.
+                                 </p>
+                                 <p>You define all conditions in the Conditions section of a template except for
+                                    <code class="code">Fn::If</code> conditions. You can use the <code class="code">Fn::If</code> condition in the metadata
+                                    attribute, update policy attribute, and property values in the Resources section and
+                                    Outputs
+                                    sections of a template.
+                                 </p>
+                                 <p>You might use conditions when you want to reuse a template that can create resources
+                                    in
+                                    different contexts, such as a test environment versus a production environment. In
+                                    your
+                                    template, you can add an <code class="code">EnvironmentType</code> input parameter, which accepts either
+                                    <code class="userinput">prod</code> or <code class="userinput">test</code> as inputs. For the production
+                                    environment, you might include Amazon EC2 instances with certain capabilities; however,
+                                    for the test
+                                    environment, you want to use less capabilities to save costs. With conditions, you
+                                    can define
+                                    which resources are created and how they&apos;re configured for each environment type.
+                                 </p>
+                                 <p>For more information about the Conditions section, see <a href="./conditions-section-structure.html">Conditions</a>.
+                                 </p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>You can only reference other conditions and values from the Parameters and Mappings
+                                          sections of a template. For example, you can reference a value from an input parameter,
+                                          but
+                                          you cannot reference the logical ID of a resource in a condition.
+                                       </p>
+                                    </div>
+                                 </div>
+                                 <div class="highlights">
+                                    <p><strong>Topics</strong></p>
+                                    <ul>
+                                       <li><a href="#intrinsic-function-reference-conditions-and">Fn::And</a></li>
+                                       <li><a href="#intrinsic-function-reference-conditions-equals">Fn::Equals</a></li>
+                                       <li><a href="#intrinsic-function-reference-conditions-if">Fn::If</a></li>
+                                       <li><a href="#intrinsic-function-reference-conditions-not">Fn::Not</a></li>
+                                       <li><a href="#intrinsic-function-reference-conditions-or">Fn::Or</a></li>
+                                       <li><a href="#w2ab1c25c28c21c45">Supported Functions</a></li>
+                                       <li><a href="./conditions-sample-templates.html">Sample Templates</a></li>
+                                    </ul>
+                                 </div>
+                                 <p>Associating a Condition</p>
+                                 <p>To conditionally create resources, resource properties, or outputs, you must associate
+                                    a
+                                    condition with them. Add the <code class="code">Condition:</code> key and the logical ID of the condition as
+                                    an attribute to associate a condition, as shown in the following snippet. AWS CloudFormation
+                                    creates the
+                                    <code class="code">NewVolume</code> resource only when the <code class="code">CreateProdResources</code> condition
+                                    evaluates to true.
+                                 </p>
+                                 <div class="example">
+                                    <p class="title"><b>Example JSON</b></p>
+                                    <div class="example-contents"><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;NewVolume&quot; : <span>{</span>
   &quot;Type&quot; : &quot;AWS::EC2::Volume&quot;,
   &quot;Condition&quot; : &quot;CreateProdResources&quot;,
   &quot;Properties&quot; : <span>{</span>
      &quot;Size&quot; : &quot;100&quot;,
      &quot;AvailabilityZone&quot; : <span>{</span> &quot;Fn::GetAtt&quot; : [ &quot;EC2Instance&quot;, &quot;AvailabilityZone&quot; ]}
 }</code></pre></div>
-               </div>
-               <div class="example">
-                  <p class="title"><b>Example YAML</b></p>
-                  <div class="example-contents"><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">
+                                 </div>
+                                 <div class="example">
+                                    <p class="title"><b>Example YAML</b></p>
+                                    <div class="example-contents"><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">
 NewVolume:
   Type: &quot;AWS::EC2::Volume&quot;
   Condition: CreateProdResources
@@ -97,13 +96,13 @@ NewVolume:
     Size: 100
     AvailabilityZone: !GetAtt EC2Instance.AvailabilityZone
 </code></pre></div>
-               </div>
-               <p>For the <code class="code">Fn::If</code> function, you only need to specify the condition name. The following snippet shows
-                  how to use <code class="code">Fn::If</code> to conditionally specify a resource property. If the <code class="code">CreateLargeSize</code> condition is true, AWS CloudFormation sets the volume size to <code class="code">100</code>. If the condition is false, AWS CloudFormation sets the volume size to <code class="code">10</code>.
-               </p>
-               <div class="example">
-                  <p class="title"><b>Example JSON</b></p>
-                  <div class="example-contents"><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;NewVolume&quot; : <span>{</span>
+                                 </div>
+                                 <p>For the <code class="code">Fn::If</code> function, you only need to specify the condition name. The following snippet shows
+                                    how to use <code class="code">Fn::If</code> to conditionally specify a resource property. If the <code class="code">CreateLargeSize</code> condition is true, AWS CloudFormation sets the volume size to <code class="code">100</code>. If the condition is false, AWS CloudFormation sets the volume size to <code class="code">10</code>.
+                                 </p>
+                                 <div class="example">
+                                    <p class="title"><b>Example JSON</b></p>
+                                    <div class="example-contents"><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;NewVolume&quot; : <span>{</span>
   &quot;Type&quot; : &quot;AWS::EC2::Volume&quot;,
   &quot;Properties&quot; : <span>{</span>
     &quot;Size&quot; : <span>{</span>
@@ -116,10 +115,10 @@ NewVolume:
   },
   &quot;DeletionPolicy&quot; : &quot;Snapshot&quot;
 }</code></pre></div>
-               </div>
-               <div class="example">
-                  <p class="title"><b>Example YAML</b></p>
-                  <div class="example-contents"><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">
+                                 </div>
+                                 <div class="example">
+                                    <p class="title"><b>Example YAML</b></p>
+                                    <div class="example-contents"><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">
 NewVolume:
   Type: &quot;AWS::EC2::Volume&quot;
   Properties: 
@@ -128,299 +127,299 @@ NewVolume:
     AvailabilityZone: !GetAtt: Ec2Instance.AvailabilityZone
   DeletionPolicy: Snapshot
 </code></pre></div>
-               </div>
-               <p>You can also use conditions inside other conditions. The following snippet is from
-                  the
-                  <code class="code">Conditions</code> section of a template. The <code class="code">MyAndCondition</code> condition
-                  includes the <code class="code">SomeOtherCondition</code> condition:
-               </p>
-               <div class="example">
-                  <p class="title"><b>Example JSON</b></p>
-                  <div class="example-contents"><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;MyAndCondition&quot;: <span>{</span>
+                                 </div>
+                                 <p>You can also use conditions inside other conditions. The following snippet is from
+                                    the
+                                    <code class="code">Conditions</code> section of a template. The <code class="code">MyAndCondition</code> condition
+                                    includes the <code class="code">SomeOtherCondition</code> condition:
+                                 </p>
+                                 <div class="example">
+                                    <p class="title"><b>Example JSON</b></p>
+                                    <div class="example-contents"><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;MyAndCondition&quot;: <span>{</span>
    &quot;Fn::And&quot;: [
       <span>{</span>&quot;Fn::Equals&quot;: [&quot;sg-mysggroup&quot;, <span>{</span>&quot;Ref&quot;: &quot;ASecurityGroup&quot;}]},
       <span>{</span>&quot;Condition&quot;: &quot;SomeOtherCondition&quot;}
    ]
 }</code></pre></div>
-               </div>
-               <div class="example">
-                  <p class="title"><b>Example YAML</b></p>
-                  <div class="example-contents"><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">
+                                 </div>
+                                 <div class="example">
+                                    <p class="title"><b>Example YAML</b></p>
+                                    <div class="example-contents"><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">
 MyAndCondition: !And
   - !Equals [&quot;sg-mysggroup&quot;, !Ref &quot;ASecurityGroup&quot;]
   - !Condition SomeOtherCondition
 </code></pre></div>
-               </div>
-               <h2 id="intrinsic-function-reference-conditions-and">Fn::And</h2>
-               
-               
-               <p>Returns <code class="code">true</code> if all the specified conditions evaluate to true, or returns <code class="code">false</code> if any one of the conditions evaluates to false. <code class="code">Fn::And</code> acts as an AND operator. The minimum number of conditions that you can include is
-                  2, and the maximum is 10.
-               </p>
-               
-               <h3 id="intrinsic-function-reference-conditions-and-syntax">Declaration</h3>
-               
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-and-syntax.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;Fn::And&quot;: [<span>{</span><code class="replaceable">condition</code>}, <span>{</span><code class="replaceable">...</code>}]</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-and-syntax.yaml">YAML</h4>
-                  
-                  
-                  <p>Syntax for the full function name:</p>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">Fn::And: [<code class="replaceable">condition</code>]</code></pre>
-                  <p>Syntax for the short form:</p>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">!And [<code class="replaceable">condition</code>]</code></pre>
-                  </div>
-                
-               
-               <h3 id="w2ab1c26c24c21c33b6">Parameters</h3>
-               
-               
-               <div class="variablelist">
-                   
-                  
-                  <dl>
-                     
-                     <dt><span class="term"><code class="code">condition</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>A condition that evaluates to <code class="code">true</code> or <code class="code">false</code>.
-                        </p>
-                        
-                     </dd>
-                     
-                  </dl>
-               </div>
-                
-               
-               <h3 id="w2ab1c26c24c21c33b8">Example</h3>
-               
-               
-               <p>The following <code class="code">MyAndCondition</code> evaluates to true if the referenced security group name is equal to <code class="code">sg-mysggroup</code> and if <code class="code">SomeOtherCondition</code> evaluates to true:
-               </p>
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-and-example.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;MyAndCondition&quot;: <span>{</span>
+                                 </div>
+                                 <h2 id="intrinsic-function-reference-conditions-and">Fn::And</h2>
+                                 
+                                 
+                                 <p>Returns <code class="code">true</code> if all the specified conditions evaluate to true, or returns <code class="code">false</code> if any one of the conditions evaluates to false. <code class="code">Fn::And</code> acts as an AND operator. The minimum number of conditions that you can include is
+                                    2, and the maximum is 10.
+                                 </p>
+                                 
+                                 <h3 id="intrinsic-function-reference-conditions-and-syntax">Declaration</h3>
+                                 
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-and-syntax.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;Fn::And&quot;: [<span>{</span><code class="replaceable">condition</code>}, <span>{</span><code class="replaceable">...</code>}]</code></pre>
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-and-syntax.yaml">YAML</h4>
+                                    
+                                    
+                                    <p>Syntax for the full function name:</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">Fn::And: [<code class="replaceable">condition</code>]</code></pre>
+                                    <p>Syntax for the short form:</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">!And [<code class="replaceable">condition</code>]</code></pre>
+                                    </div>
+                                  
+                                 
+                                 <h3 id="w2ab1c25c28c21c33b6">Parameters</h3>
+                                 
+                                 
+                                 <div class="variablelist">
+                                     
+                                    
+                                    <dl>
+                                       
+                                       <dt><span class="term"><code class="code">condition</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>A condition that evaluates to <code class="code">true</code> or <code class="code">false</code>.
+                                          </p>
+                                          
+                                       </dd>
+                                       
+                                    </dl>
+                                 </div>
+                                  
+                                 
+                                 <h3 id="w2ab1c25c28c21c33b8">Example</h3>
+                                 
+                                 
+                                 <p>The following <code class="code">MyAndCondition</code> evaluates to true if the referenced security group name is equal to <code class="code">sg-mysggroup</code> and if <code class="code">SomeOtherCondition</code> evaluates to true:
+                                 </p>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-and-example.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;MyAndCondition&quot;: <span>{</span>
    &quot;Fn::And&quot;: [
       <span>{</span>&quot;Fn::Equals&quot;: [&quot;sg-mysggroup&quot;, <span>{</span>&quot;Ref&quot;: &quot;ASecurityGroup&quot;}]},
       <span>{</span>&quot;Condition&quot;: &quot;SomeOtherCondition&quot;}
    ]
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-and-example.yaml">YAML</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">MyAndCondition: !And
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-and-example.yaml">YAML</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">MyAndCondition: !And
   - !Equals [&quot;sg-mysggroup&quot;, !Ref ASecurityGroup]
   - !Condition SomeOtherCondition
 </code></pre>
-                  </div>
-                
-               
-               <h2 id="intrinsic-function-reference-conditions-equals">Fn::Equals</h2>
-               
-               
-               <p>Compares if two values are equal. Returns <code class="code">true</code> if the two values are equal or <code class="code">false</code> if they aren&apos;t.
-               </p>
-               
-               <h3 id="intrinsic-function-reference-conditions-equals-syntax">Declaration</h3>
-               
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-equals-syntax.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;Fn::Equals&quot;&#xA0;: [&quot;<code class="replaceable">value_1</code>&quot;, &quot;<code class="replaceable">value_2</code>&quot;]</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-equals-syntax.yaml">YAML</h4>
-                  
-                  
-                  <p>Syntax for the full function name:</p>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">Fn::Equals: [<code class="replaceable">value_1</code>, <code class="replaceable">value_2</code>]</code></pre>
-                  <p>Syntax for the short form:</p>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">!Equals [<code class="replaceable">value_1</code>, <code class="replaceable">value_2</code>]</code></pre>
-                  </div>
-                
-               
-               <h3 id="w2ab1c26c24c21c35b6">Parameters</h3>
-               
-               
-               <div class="variablelist">
-                   
-                  
-                  <dl>
-                     
-                     <dt><span class="term"><code class="code">value</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>A value of any type that you want to compare.</p>
-                        
-                     </dd>
-                     
-                  </dl>
-               </div>
-                
-               
-               <h3 id="w2ab1c26c24c21c35b8">Example</h3>
-               
-               
-               <p>The following <code class="code">UseProdCondition</code> condition evaluates to true if the value for the <code class="code">EnvironmentType</code> parameter is equal to <code class="code">prod</code>:
-               </p>
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-equals-example.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;UseProdCondition&quot; : <span>{</span>
+                                    </div>
+                                  
+                                 
+                                 <h2 id="intrinsic-function-reference-conditions-equals">Fn::Equals</h2>
+                                 
+                                 
+                                 <p>Compares if two values are equal. Returns <code class="code">true</code> if the two values are equal or <code class="code">false</code> if they aren&apos;t.
+                                 </p>
+                                 
+                                 <h3 id="intrinsic-function-reference-conditions-equals-syntax">Declaration</h3>
+                                 
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-equals-syntax.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;Fn::Equals&quot;&#xA0;: [&quot;<code class="replaceable">value_1</code>&quot;, &quot;<code class="replaceable">value_2</code>&quot;]</code></pre>
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-equals-syntax.yaml">YAML</h4>
+                                    
+                                    
+                                    <p>Syntax for the full function name:</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">Fn::Equals: [<code class="replaceable">value_1</code>, <code class="replaceable">value_2</code>]</code></pre>
+                                    <p>Syntax for the short form:</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">!Equals [<code class="replaceable">value_1</code>, <code class="replaceable">value_2</code>]</code></pre>
+                                    </div>
+                                  
+                                 
+                                 <h3 id="w2ab1c25c28c21c35b6">Parameters</h3>
+                                 
+                                 
+                                 <div class="variablelist">
+                                     
+                                    
+                                    <dl>
+                                       
+                                       <dt><span class="term"><code class="code">value</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>A value of any type that you want to compare.</p>
+                                          
+                                       </dd>
+                                       
+                                    </dl>
+                                 </div>
+                                  
+                                 
+                                 <h3 id="w2ab1c25c28c21c35b8">Example</h3>
+                                 
+                                 
+                                 <p>The following <code class="code">UseProdCondition</code> condition evaluates to true if the value for the <code class="code">EnvironmentType</code> parameter is equal to <code class="code">prod</code>:
+                                 </p>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-equals-example.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;UseProdCondition&quot; : <span>{</span>
    &quot;Fn::Equals&quot;: [
       <span>{</span>&quot;Ref&quot;: &quot;EnvironmentType&quot;},
       &quot;prod&quot;
    ]
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-equals-example.yaml">YAML</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">UseProdCondition:
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-equals-example.yaml">YAML</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">UseProdCondition:
   !Equals [!Ref EnvironmentType, prod]
 </code></pre>
-                  </div>
-                
-               
-               <h2 id="intrinsic-function-reference-conditions-if">Fn::If</h2>
-               
-               
-               <p>Returns one value if the specified condition evaluates to <code class="code">true</code> and another
-                  value if the specified condition evaluates to <code class="code">false</code>. Currently, AWS CloudFormation supports
-                  the <code class="code">Fn::If</code> intrinsic function in the metadata attribute, update policy attribute,
-                  and property values in the Resources section and Outputs sections of a template. You
-                  can use
-                  the <code class="code">AWS::NoValue</code> pseudo parameter as a return value to remove the corresponding
-                  property.
-               </p>
-               
-               <h3 id="intrinsic-function-reference-conditions-if-syntax">Declaration</h3>
-               
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-if-syntax.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;Fn::If&quot;: [<code class="replaceable">condition_name</code>, <code class="replaceable">value_if_true</code>, <code class="replaceable">value_if_false</code>]</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-if-syntax.yaml">YAML</h4>
-                  
-                  
-                  <p>Syntax for the full function name:</p>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">Fn::If: [<code class="replaceable">condition_name</code>, <code class="replaceable">value_if_true</code>, <code class="replaceable">value_if_false</code>]</code></pre>
-                  <p>Syntax for the short form:</p>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">!If [<code class="replaceable">condition_name</code>, <code class="replaceable">value_if_true</code>, <code class="replaceable">value_if_false</code>]</code></pre>
-                  </div>
-                
-               
-               <h3 id="w2ab1c26c24c21c39b6">Parameters</h3>
-               
-               
-               <div class="variablelist">
-                   
-                   
-                   
-                  
-                  <dl>
-                     
-                     <dt><span class="term"><code class="code">condition_name</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>A reference to a condition in the Conditions section. Use the condition&apos;s
-                           name to reference it.
-                        </p>
-                        
-                     </dd>
-                      
-                     
-                     <dt><span class="term"><code class="code">value_if_true</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>A value to be returned if the specified condition evaluates to
-                           <code class="code">true</code>.
-                        </p>
-                        
-                     </dd>
-                      
-                     
-                     <dt><span class="term"><code class="code">value_if_false</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>A value to be returned if the specified condition evaluates to
-                           <code class="code">false</code>.
-                        </p>
-                        
-                     </dd>
-                     
-                  </dl>
-               </div>
-                
-               
-               <h3 id="w2ab1c26c24c21c39b8">Examples</h3>
-               
-               
-               <p>To view additional samples, see <a href="./conditions-sample-templates.html">Sample Templates</a>.
-               </p>
-               
-               <h4 id="w2ab1c26c24c21c39b8b4">Example 1</h4>
-               
-               
-               <p>The following snippet uses an <code class="code">Fn::If</code> function in the <code class="code">SecurityGroups</code> property for an Amazon EC2 resource. If the <code class="code">CreateNewSecurityGroup</code> condition evaluates to true, AWS CloudFormation uses the referenced value of <code class="code">NewSecurityGroup</code> to specify the <code class="code">SecurityGroups</code> property; otherwise, AWS CloudFormation uses the referenced value of <code class="code">ExistingSecurityGroup</code>.
-               </p>
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h5 id="intrinsic-function-reference-conditions-if-example1.json">JSON</h5>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;SecurityGroups&quot; : [<span>{</span>
+                                    </div>
+                                  
+                                 
+                                 <h2 id="intrinsic-function-reference-conditions-if">Fn::If</h2>
+                                 
+                                 
+                                 <p>Returns one value if the specified condition evaluates to <code class="code">true</code> and another
+                                    value if the specified condition evaluates to <code class="code">false</code>. Currently, AWS CloudFormation supports
+                                    the <code class="code">Fn::If</code> intrinsic function in the metadata attribute, update policy attribute,
+                                    and property values in the Resources section and Outputs sections of a template. You
+                                    can use
+                                    the <code class="code">AWS::NoValue</code> pseudo parameter as a return value to remove the corresponding
+                                    property.
+                                 </p>
+                                 
+                                 <h3 id="intrinsic-function-reference-conditions-if-syntax">Declaration</h3>
+                                 
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-if-syntax.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;Fn::If&quot;: [<code class="replaceable">condition_name</code>, <code class="replaceable">value_if_true</code>, <code class="replaceable">value_if_false</code>]</code></pre>
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-if-syntax.yaml">YAML</h4>
+                                    
+                                    
+                                    <p>Syntax for the full function name:</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">Fn::If: [<code class="replaceable">condition_name</code>, <code class="replaceable">value_if_true</code>, <code class="replaceable">value_if_false</code>]</code></pre>
+                                    <p>Syntax for the short form:</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">!If [<code class="replaceable">condition_name</code>, <code class="replaceable">value_if_true</code>, <code class="replaceable">value_if_false</code>]</code></pre>
+                                    </div>
+                                  
+                                 
+                                 <h3 id="w2ab1c25c28c21c39b6">Parameters</h3>
+                                 
+                                 
+                                 <div class="variablelist">
+                                     
+                                     
+                                     
+                                    
+                                    <dl>
+                                       
+                                       <dt><span class="term"><code class="code">condition_name</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>A reference to a condition in the Conditions section. Use the condition&apos;s
+                                             name to reference it.
+                                          </p>
+                                          
+                                       </dd>
+                                        
+                                       
+                                       <dt><span class="term"><code class="code">value_if_true</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>A value to be returned if the specified condition evaluates to
+                                             <code class="code">true</code>.
+                                          </p>
+                                          
+                                       </dd>
+                                        
+                                       
+                                       <dt><span class="term"><code class="code">value_if_false</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>A value to be returned if the specified condition evaluates to
+                                             <code class="code">false</code>.
+                                          </p>
+                                          
+                                       </dd>
+                                       
+                                    </dl>
+                                 </div>
+                                  
+                                 
+                                 <h3 id="w2ab1c25c28c21c39b8">Examples</h3>
+                                 
+                                 
+                                 <p>To view additional samples, see <a href="./conditions-sample-templates.html">Sample Templates</a>.
+                                 </p>
+                                 
+                                 <h4 id="w2ab1c25c28c21c39b8b4">Example 1</h4>
+                                 
+                                 
+                                 <p>The following snippet uses an <code class="code">Fn::If</code> function in the <code class="code">SecurityGroups</code> property for an Amazon EC2 resource. If the <code class="code">CreateNewSecurityGroup</code> condition evaluates to true, AWS CloudFormation uses the referenced value of <code class="code">NewSecurityGroup</code> to specify the <code class="code">SecurityGroups</code> property; otherwise, AWS CloudFormation uses the referenced value of <code class="code">ExistingSecurityGroup</code>.
+                                 </p>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h5 id="intrinsic-function-reference-conditions-if-example1.json">JSON</h5>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;SecurityGroups&quot; : [<span>{</span>
   &quot;Fn::If&quot; : [
     &quot;CreateNewSecurityGroup&quot;,
     <span>{</span>&quot;Ref&quot; : &quot;NewSecurityGroup&quot;},
     <span>{</span>&quot;Ref&quot; : &quot;ExistingSecurityGroup&quot;}
   ]
 }]</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h5 id="intrinsic-function-reference-conditions-if-example1.yaml">YAML</h5>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">SecurityGroups:
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h5 id="intrinsic-function-reference-conditions-if-example1.yaml">YAML</h5>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">SecurityGroups:
   - !If [CreateNewSecurityGroup, !Ref NewSecurityGroup, !Ref ExistingSecurityGroup]
 </code></pre>
-                  </div>
-                
-               
-               <h4 id="w2ab1c26c24c21c39b8b6">Example 2</h4>
-               
-               
-               <p>In the Output section of a template, you can use the <code class="code">Fn::If</code> function to conditionally output information. In the following snippet, if the <code class="code">CreateNewSecurityGroup</code> condition evaluates to true, AWS CloudFormation outputs the security group ID of
-                  the <code class="code">NewSecurityGroup</code> resource. If the condition is false, AWS CloudFormation outputs the security group
-                  ID of the <code class="code">ExistingSecurityGroup</code> resource.
-               </p>
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h5 id="intrinsic-function-reference-conditions-if-example2.json">JSON</h5>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;Outputs&quot; : <span>{</span>
+                                    </div>
+                                  
+                                 
+                                 <h4 id="w2ab1c25c28c21c39b8b6">Example 2</h4>
+                                 
+                                 
+                                 <p>In the Output section of a template, you can use the <code class="code">Fn::If</code> function to conditionally output information. In the following snippet, if the <code class="code">CreateNewSecurityGroup</code> condition evaluates to true, AWS CloudFormation outputs the security group ID of
+                                    the <code class="code">NewSecurityGroup</code> resource. If the condition is false, AWS CloudFormation outputs the security group
+                                    ID of the <code class="code">ExistingSecurityGroup</code> resource.
+                                 </p>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h5 id="intrinsic-function-reference-conditions-if-example2.json">JSON</h5>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;Outputs&quot; : <span>{</span>
   &quot;SecurityGroupId&quot; : <span>{</span>
     &quot;Description&quot; : &quot;Group ID of the security group used.&quot;,
     &quot;Value&quot; : <span>{</span>
@@ -432,30 +431,30 @@ MyAndCondition: !And
     }
   }
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h5 id="intrinsic-function-reference-conditions-if-example2.yaml">YAML</h5>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">Outputs:
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h5 id="intrinsic-function-reference-conditions-if-example2.yaml">YAML</h5>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">Outputs:
   SecurityGroupId: 
     Description: Group ID of the security group used.
     Value: !If [CreateNewSecurityGroup, !Ref NewSecurityGroup, !Ref ExistingSecurityGroup]
 </code></pre>
-                  </div>
-                
-               
-               <h4 id="w2ab1c26c24c21c39b8b8">Example 3</h4>
-               
-               
-               <p>The following snippet uses the <code class="code">AWS::NoValue</code> pseudo parameter in an <code class="code">Fn::If</code> function. The condition uses a snapshot for an Amazon RDS DB instance only if a snapshot
-                  ID is provided. If the <code class="code">UseDBSnapshot</code> condition evaluates to true, AWS CloudFormation uses the <code class="code">DBSnapshotName</code> parameter value for the <code class="code">DBSnapshotIdentifier</code> property. If the condition evaluates to false, AWS CloudFormation removes the <code class="code">DBSnapshotIdentifier</code> property.
-               </p>
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h5 id="intrinsic-function-reference-conditions-if-example3.json">JSON</h5>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;MyDB&quot; : <span>{</span>
+                                    </div>
+                                  
+                                 
+                                 <h4 id="w2ab1c25c28c21c39b8b8">Example 3</h4>
+                                 
+                                 
+                                 <p>The following snippet uses the <code class="code">AWS::NoValue</code> pseudo parameter in an <code class="code">Fn::If</code> function. The condition uses a snapshot for an Amazon RDS DB instance only if a snapshot
+                                    ID is provided. If the <code class="code">UseDBSnapshot</code> condition evaluates to true, AWS CloudFormation uses the <code class="code">DBSnapshotName</code> parameter value for the <code class="code">DBSnapshotIdentifier</code> property. If the condition evaluates to false, AWS CloudFormation removes the <code class="code">DBSnapshotIdentifier</code> property.
+                                 </p>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h5 id="intrinsic-function-reference-conditions-if-example3.json">JSON</h5>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;MyDB&quot; : <span>{</span>
   &quot;Type&quot; : &quot;AWS::RDS::DBInstance&quot;,
   &quot;Properties&quot; : <span>{</span>
     &quot;AllocatedStorage&quot; : &quot;5&quot;,
@@ -474,12 +473,12 @@ MyAndCondition: !And
     }
   }
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h5 id="intrinsic-function-reference-conditions-if-example3.yaml">YAML</h5>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">MyDB:
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h5 id="intrinsic-function-reference-conditions-if-example3.yaml">YAML</h5>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">MyDB:
   Type: &quot;AWS::RDS::DBInstance&quot;
   Properties: 
     AllocatedStorage: 5
@@ -492,20 +491,20 @@ MyAndCondition: !And
     DBSnapshotIdentifier:
       !If [UseDBSnapshot, !Ref DBSnapshotName, !Ref &quot;AWS::NoValue&quot;]
 </code></pre>
-                  </div>
-                
-               
-               <h4 id="w2ab1c26c24c21c39b8c10">Example 4</h4>
-               
-               
-               <p>The following snippet provides an auto scaling update policy only if the <code class="code">RollingUpdates</code> condition evaluates to true. If the condition evaluates to false, AWS CloudFormation
-                  removes the <code class="code">AutoScalingRollingUpdate</code> update policy.
-               </p>
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h5 id="intrinsic-function-reference-conditions-if-example4.json">JSON</h5>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;UpdatePolicy&quot;: <span>{</span>
+                                    </div>
+                                  
+                                 
+                                 <h4 id="w2ab1c25c28c21c39b8c10">Example 4</h4>
+                                 
+                                 
+                                 <p>The following snippet provides an auto scaling update policy only if the <code class="code">RollingUpdates</code> condition evaluates to true. If the condition evaluates to false, AWS CloudFormation
+                                    removes the <code class="code">AutoScalingRollingUpdate</code> update policy.
+                                 </p>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h5 id="intrinsic-function-reference-conditions-if-example4.json">JSON</h5>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;UpdatePolicy&quot;: <span>{</span>
   &quot;AutoScalingRollingUpdate&quot;: <span>{</span>
     &quot;Fn::If&quot;: [
       &quot;RollingUpdates&quot;,
@@ -520,12 +519,12 @@ MyAndCondition: !And
     ]
   }
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h5 id="intrinsic-function-reference-conditions-if-example4.yaml">YAML</h5>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">UpdatePolicy:
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h5 id="intrinsic-function-reference-conditions-if-example4.yaml">YAML</h5>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">UpdatePolicy:
   AutoScalingRollingUpdate:
     !If 
       - RollingUpdates
@@ -535,71 +534,71 @@ MyAndCondition: !And
         PauseTime: PT0M30S
       - !Ref &quot;AWS::NoValue&quot;
 </code></pre>
-                  </div>
-                
-                
-               
-               <h2 id="intrinsic-function-reference-conditions-not">Fn::Not</h2>
-               
-               
-               <p>Returns <code class="code">true</code> for a condition that evaluates to <code class="code">false</code> or
-                  returns <code class="code">false</code> for a condition that evaluates to <code class="code">true</code>.
-                  <code class="code">Fn::Not</code> acts as a NOT operator.
-               </p>
-               
-               <h3 id="intrinsic-function-reference-conditions-not-syntax">Declaration</h3>
-               
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-not-syntax.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;Fn::Not&quot;: [<span>{</span><code class="replaceable">condition</code>}]</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-not-syntax.yaml">YAML</h4>
-                  
-                  
-                  <p>Syntax for the full function name:</p>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">Fn::Not: [<code class="replaceable">condition</code>]</code></pre>
-                  <p>Syntax for the short form:</p>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">!Not [<code class="replaceable">condition</code>]</code></pre>
-                  </div>
-                
-               
-               <h3 id="w2ab1c26c24c21c41b6">Parameters</h3>
-               
-               
-               <div class="variablelist">
-                   
-                  
-                  <dl>
-                     
-                     <dt><span class="term"><code class="code">condition</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>A condition such as <code class="code">Fn::Equals</code> that evaluates to
-                           <code class="code">true</code> or <code class="code">false</code>.
-                        </p>
-                        
-                     </dd>
-                     
-                  </dl>
-               </div>
-                
-               
-               <h3 id="w2ab1c26c24c21c41b8">Example</h3>
-               
-               
-               <p>The following <code class="code">EnvCondition</code> condition evaluates to true if the value for
-                  the <code class="code">EnvironmentType</code> parameter is not equal to <code class="code">prod</code>:
-               </p>
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-not-example.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;MyNotCondition&quot; : <span>{</span>
+                                    </div>
+                                  
+                                  
+                                 
+                                 <h2 id="intrinsic-function-reference-conditions-not">Fn::Not</h2>
+                                 
+                                 
+                                 <p>Returns <code class="code">true</code> for a condition that evaluates to <code class="code">false</code> or
+                                    returns <code class="code">false</code> for a condition that evaluates to <code class="code">true</code>.
+                                    <code class="code">Fn::Not</code> acts as a NOT operator.
+                                 </p>
+                                 
+                                 <h3 id="intrinsic-function-reference-conditions-not-syntax">Declaration</h3>
+                                 
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-not-syntax.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;Fn::Not&quot;: [<span>{</span><code class="replaceable">condition</code>}]</code></pre>
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-not-syntax.yaml">YAML</h4>
+                                    
+                                    
+                                    <p>Syntax for the full function name:</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">Fn::Not: [<code class="replaceable">condition</code>]</code></pre>
+                                    <p>Syntax for the short form:</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">!Not [<code class="replaceable">condition</code>]</code></pre>
+                                    </div>
+                                  
+                                 
+                                 <h3 id="w2ab1c25c28c21c41b6">Parameters</h3>
+                                 
+                                 
+                                 <div class="variablelist">
+                                     
+                                    
+                                    <dl>
+                                       
+                                       <dt><span class="term"><code class="code">condition</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>A condition such as <code class="code">Fn::Equals</code> that evaluates to
+                                             <code class="code">true</code> or <code class="code">false</code>.
+                                          </p>
+                                          
+                                       </dd>
+                                       
+                                    </dl>
+                                 </div>
+                                  
+                                 
+                                 <h3 id="w2ab1c25c28c21c41b8">Example</h3>
+                                 
+                                 
+                                 <p>The following <code class="code">EnvCondition</code> condition evaluates to true if the value for
+                                    the <code class="code">EnvironmentType</code> parameter is not equal to <code class="code">prod</code>:
+                                 </p>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-not-example.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;MyNotCondition&quot; : <span>{</span>
    &quot;Fn::Not&quot; : [<span>{</span>
       &quot;Fn::Equals&quot; : [
          <span>{</span>&quot;Ref&quot; : &quot;EnvironmentType&quot;},
@@ -607,210 +606,210 @@ MyAndCondition: !And
       ]
    }]
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-not-example.yaml">YAML</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">MyNotCondition:
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-not-example.yaml">YAML</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">MyNotCondition:
   !Not [!Equals [!Ref EnvironmentType, prod]]
 </code></pre>
-                  </div>
-                
-               
-               <h2 id="intrinsic-function-reference-conditions-or">Fn::Or</h2>
-               
-               
-               <p>Returns <code class="code">true</code> if any one of the specified conditions evaluate to true, or
-                  returns <code class="code">false</code> if all of the conditions evaluates to false. <code class="code">Fn::Or</code>
-                  acts as an OR operator. The minimum number of conditions that you can include is 2,
-                  and the
-                  maximum is 10.
-               </p>
-               
-               <h3 id="intrinsic-function-reference-conditions-or-syntax">Declaration</h3>
-               
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-or-syntax.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;Fn::Or&quot;: [<span>{</span><code class="replaceable">condition</code>}, <span>{</span><code class="replaceable">...</code>}]</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-or-syntax.yaml">YAML</h4>
-                  
-                  
-                  <p>Syntax for the full function name:</p>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">Fn::Or: [<code class="replaceable">condition, ...</code>]</code></pre>
-                  <p>Syntax for the short form:</p>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">!Or [<code class="replaceable">condition, ...</code>]</code></pre>
-                  </div>
-                
-               
-               <h3 id="w2ab1c26c24c21c43b6">Parameters</h3>
-               
-               
-               <div class="variablelist">
-                   
-                  
-                  <dl>
-                     
-                     <dt><span class="term"><code class="code">condition</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>A condition that evaluates to <code class="code">true</code> or
-                           <code class="code">false</code>.
-                        </p>
-                        
-                     </dd>
-                     
-                  </dl>
-               </div>
-                
-               
-               <h3 id="w2ab1c26c24c21c43b8">Example</h3>
-               
-               
-               
-               <p>The following <code class="code">MyOrCondition</code> evaluates to true if the referenced security
-                  group name is equal to <code class="code">sg-mysggroup</code> or if <code class="code">SomeOtherCondition</code>
-                  evaluates to true:
-               </p>
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-or-example.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;MyOrCondition&quot; : <span>{</span>
+                                    </div>
+                                  
+                                 
+                                 <h2 id="intrinsic-function-reference-conditions-or">Fn::Or</h2>
+                                 
+                                 
+                                 <p>Returns <code class="code">true</code> if any one of the specified conditions evaluate to true, or
+                                    returns <code class="code">false</code> if all of the conditions evaluates to false. <code class="code">Fn::Or</code>
+                                    acts as an OR operator. The minimum number of conditions that you can include is 2,
+                                    and the
+                                    maximum is 10.
+                                 </p>
+                                 
+                                 <h3 id="intrinsic-function-reference-conditions-or-syntax">Declaration</h3>
+                                 
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-or-syntax.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;Fn::Or&quot;: [<span>{</span><code class="replaceable">condition</code>}, <span>{</span><code class="replaceable">...</code>}]</code></pre>
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-or-syntax.yaml">YAML</h4>
+                                    
+                                    
+                                    <p>Syntax for the full function name:</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">Fn::Or: [<code class="replaceable">condition, ...</code>]</code></pre>
+                                    <p>Syntax for the short form:</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">!Or [<code class="replaceable">condition, ...</code>]</code></pre>
+                                    </div>
+                                  
+                                 
+                                 <h3 id="w2ab1c25c28c21c43b6">Parameters</h3>
+                                 
+                                 
+                                 <div class="variablelist">
+                                     
+                                    
+                                    <dl>
+                                       
+                                       <dt><span class="term"><code class="code">condition</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>A condition that evaluates to <code class="code">true</code> or
+                                             <code class="code">false</code>.
+                                          </p>
+                                          
+                                       </dd>
+                                       
+                                    </dl>
+                                 </div>
+                                  
+                                 
+                                 <h3 id="w2ab1c25c28c21c43b8">Example</h3>
+                                 
+                                 
+                                 
+                                 <p>The following <code class="code">MyOrCondition</code> evaluates to true if the referenced security
+                                    group name is equal to <code class="code">sg-mysggroup</code> or if <code class="code">SomeOtherCondition</code>
+                                    evaluates to true:
+                                 </p>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-or-example.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;MyOrCondition&quot; : <span>{</span>
    &quot;Fn::Or&quot;&#xA0;: [
       <span>{</span>&quot;Fn::Equals&quot;&#xA0;: [&quot;sg-mysggroup&quot;, <span>{</span>&quot;Ref&quot;&#xA0;: &quot;ASecurityGroup&quot;}]},
       <span>{</span>&quot;Condition&quot;&#xA0;: &quot;SomeOtherCondition&quot;}
    ]
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="intrinsic-function-reference-conditions-or-example.yaml">YAML</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">MyOrCondition:
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="intrinsic-function-reference-conditions-or-example.yaml">YAML</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">MyOrCondition:
   !Or [!Equals [sg-mysggroup, !Ref ASecurityGroup], Condition: SomeOtherCondition]
 </code></pre>
-                  </div>
-               
-                
-               
-               <h2 id="w2ab1c26c24c21c45">Supported Functions</h2>
-               
-               
-               <p>You can use the following functions in the <code class="code">Fn::If</code> condition:
-               </p>
-               <div class="itemizedlist">
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                  
-                  <ul class="itemizedlist" type="disc">
-                     <li class="listitem">
-                        
-                        <p><code class="code">Fn::Base64</code></p>
-                        
-                     </li>
-                     <li class="listitem">
-                        
-                        <p><code class="code">Fn::FindInMap</code></p>
-                        
-                     </li>
-                     <li class="listitem">
-                        
-                        <p><code class="code">Fn::GetAtt</code></p>
-                        
-                     </li>
-                     <li class="listitem">
-                        
-                        <p><code class="code">Fn::GetAZs</code></p>
-                        
-                     </li>
-                     <li class="listitem">
-                        
-                        <p><code class="code">Fn::If</code></p>
-                        
-                     </li>
-                     <li class="listitem">
-                        
-                        <p><code class="code">Fn::Join</code></p>
-                        
-                     </li>
-                     <li class="listitem">
-                        
-                        <p><code class="code">Fn::Select</code></p>
-                        
-                     </li>
-                     <li class="listitem">
-                        
-                        <p><code class="code">Fn::Sub</code></p>
-                        
-                     </li>
-                     <li class="listitem">
-                        
-                        <p><code class="code">Ref</code></p>
-                        
-                     </li>
-                  </ul>
-               </div>
-               
-               <p>You can use the following functions in all other condition functions, such as
-                  <code class="code">Fn::Equals</code> and <code class="code">Fn::Or</code>:
-               </p>
-               <div class="itemizedlist">
-                   
-                   
-                   
-                  
-                  <ul class="itemizedlist" type="disc">
-                     <li class="listitem">
-                        
-                        <p><code class="code">Fn::FindInMap</code></p>
-                        
-                     </li>
-                     <li class="listitem">
-                        
-                        <p><code class="code">Ref</code></p>
-                        
-                     </li>
-                     <li class="listitem">
-                        
-                        <p>Other condition functions</p>
-                        
-                     </li>
-                  </ul>
-               </div>
-               
-               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
-            </div>
-            <noscript>
-               <div>
-                  <div>
-                     <div>
-                        <div id="js_error_message">
-                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
-                                 browser.</strong></p>
-                           <p>To use the AWS Documentation, Javascript must be
-                              enabled. Please refer to your browser&apos;s Help pages for instructions.
-                           </p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </noscript>
-            
-            <awsdocs-page-utilities></awsdocs-page-utilities>
-         </div></div>
+                                    </div>
+                                 
+                                  
+                                 
+                                 <h2 id="w2ab1c25c28c21c45">Supported Functions</h2>
+                                 
+                                 
+                                 <p>You can use the following functions in the <code class="code">Fn::If</code> condition:
+                                 </p>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p><code class="code">Fn::Base64</code></p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p><code class="code">Fn::FindInMap</code></p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p><code class="code">Fn::GetAtt</code></p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p><code class="code">Fn::GetAZs</code></p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p><code class="code">Fn::If</code></p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p><code class="code">Fn::Join</code></p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p><code class="code">Fn::Select</code></p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p><code class="code">Fn::Sub</code></p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p><code class="code">Ref</code></p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 
+                                 <p>You can use the following functions in all other condition functions, such as
+                                    <code class="code">Fn::Equals</code> and <code class="code">Fn::Or</code>:
+                                 </p>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p><code class="code">Fn::FindInMap</code></p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p><code class="code">Ref</code></p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>Other condition functions</p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
 </body>
 </html>

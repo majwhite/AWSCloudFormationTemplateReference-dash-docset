@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-cassandra-table">AWS::Cassandra::Table</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The <code class="code">AWS::Cassandra::Table</code> resource allows you to create a new table in
+                                    Amazon Keyspaces (for Apache Cassandra). For more information, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/getting-started.ddl.html">Create a
+                                       Keyspace and a Table</a> in the <em>Amazon Keyspaces Developer Guide</em>.
+                                 </p>
+                                 <h2 id="aws-resource-cassandra-table-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-cassandra-table-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::Cassandra::Table&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-cassandra-table-billingmode">BillingMode</a>&quot; : <code class="replaceable"><a href="./aws-properties-cassandra-table-billingmode.html">BillingMode</a></code>,
+      &quot;<a href="#cfn-cassandra-table-clusteringkeycolumns">ClusteringKeyColumns</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-cassandra-table-clusteringkeycolumn.html">ClusteringKeyColumn</a>, ... ]</code>,
+      &quot;<a href="#cfn-cassandra-table-keyspacename">KeyspaceName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-cassandra-table-partitionkeycolumns">PartitionKeyColumns</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-cassandra-table-column.html">Column</a>, ... ]</code>,
+      &quot;<a href="#cfn-cassandra-table-regularcolumns">RegularColumns</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-cassandra-table-column.html">Column</a>, ... ]</code>,
+      &quot;<a href="#cfn-cassandra-table-tablename">TableName</a>&quot; : <code class="replaceable">String</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-cassandra-table-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Cassandra::Table
+Properties: 
+  <a href="#cfn-cassandra-table-billingmode">BillingMode</a>: <code class="replaceable">
+    <a href="./aws-properties-cassandra-table-billingmode.html">BillingMode</a></code>
+  <a href="#cfn-cassandra-table-clusteringkeycolumns">ClusteringKeyColumns</a>: <code class="replaceable">
+    - <a href="./aws-properties-cassandra-table-clusteringkeycolumn.html">ClusteringKeyColumn</a></code>
+  <a href="#cfn-cassandra-table-keyspacename">KeyspaceName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-cassandra-table-partitionkeycolumns">PartitionKeyColumns</a>: <code class="replaceable">
+    - <a href="./aws-properties-cassandra-table-column.html">Column</a></code>
+  <a href="#cfn-cassandra-table-regularcolumns">RegularColumns</a>: <code class="replaceable">
+    - <a href="./aws-properties-cassandra-table-column.html">Column</a></code>
+  <a href="#cfn-cassandra-table-tablename">TableName</a>: <code class="replaceable">String</code>
+</code></pre></div>
+                                 <h2 id="aws-resource-cassandra-table-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-cassandra-table-billingmode"></a><span class="term"><code class="code">BillingMode</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The billing mode for the table, which determines how you&apos;ll be charged for reads and
+                                             writes:
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p><b>On-demand mode</b> (default) - you pay based on
+                                                      the actual reads and writes your application performs.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><b>Provisioned mode</b> - lets you specify the
+                                                      number of reads and writes per second that you need for your application.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>If you don&apos;t specify a value for this property, then the table will use on-demand
+                                             mode.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-cassandra-table-billingmode.html">BillingMode</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cassandra-table-clusteringkeycolumns"></a><span class="term"><code class="code">ClusteringKeyColumns</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>One or more columns that determine how the table data is sorted.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-cassandra-table-clusteringkeycolumn.html">ClusteringKeyColumn</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cassandra-table-keyspacename"></a><span class="term"><code class="code">KeyspaceName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name of the keyspace in which to create the table. The keyspace must already
+                                             exist.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cassandra-table-partitionkeycolumns"></a><span class="term"><code class="code">PartitionKeyColumns</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>One or more columns that uniquely identify every row in the table. Every table must
+                                             have a partition key.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-cassandra-table-column.html">Column</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cassandra-table-regularcolumns"></a><span class="term"><code class="code">RegularColumns</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>One or more columns that are not part of the primary key - that is, columns that are
+                                             <em>not</em> defined as partition key columns or clustering key
+                                             columns.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-cassandra-table-column.html">Column</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cassandra-table-tablename"></a><span class="term"><code class="code">TableName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name of the table to be created. If you don&apos;t specify a name, AWS CloudFormation
+                                             generates a unique ID and uses that ID for the table name. For more information, see
+                                             <a href="aws-properties-name.html">Name
+                                                Type</a>.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If you specify a name, you cannot perform updates that require replacement of this
+                                                   resource. You can perform updates that require no or some interruption. If you must
+                                                   replace the resource, specify a new name.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          
+                                          <p><em>Length Constraints:</em> Minimum length of 3. Maximum length of
+                                             255.
+                                          </p>
+                                          
+                                          
+                                          <p><em>Pattern:</em>
+                                             <code class="code">^[a-zA-Z0-9][a-zA-Z0-9_]<span>{</span>1,47}$</code></p>
+                                          
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-cassandra-table-return-values">Return Values</h2>
+                                 <h3 id="aws-resource-cassandra-table-return-values-ref">Ref</h3>
+                                 <p>
+                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the name of the table and the keyspace where the table exists (delimited
+                                    by &apos;|&apos;). For example:
+                                 </p>
+                                 <p>
+                                    <code class="code"><span>{</span> &quot;Ref&quot;: &quot;myKeyspace|myTable&quot; }</code>
+                                    
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h2 id="aws-resource-cassandra-table--examples">Examples</h2>
+                                 <h3 id="aws-resource-cassandra-table--examples--Create_a_Table_with_Minimal_Options">Create a Table with Minimal Options</h3>
+                                 <p>The following example creates a new table.
+                                    The table will have a system-generated name, and will use on-demand billing.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-cassandra-table--examples--Create_a_Table_with_Minimal_Options--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+  &quot;Resources&quot;: <span>{</span>
+    &quot;MyNewTable&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::Cassandra::Table&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;KeyspaceName&quot;: &quot;MyNewKeyspace&quot;,
+        &quot;PartitionKeyColumns&quot;: [
+          <span>{</span>
+            &quot;ColumnName&quot;: &quot;Message&quot;,
+            &quot;ColumnType&quot;: &quot;ASCII&quot;
+          }
+        ]
+      }
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-cassandra-table--examples--Create_a_Table_with_Minimal_Options--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  MyNewTable:
+    Type: &apos;AWS::Cassandra::Table&apos;
+    Properties:
+      KeyspaceName: MyNewKeyspace
+      PartitionKeyColumns:
+        - ColumnName: Message
+          ColumnType: ASCII</code></pre></div>
+                                 <h3 id="aws-resource-cassandra-table--examples--Create_a_Table_Using_Provisioned_Mode">Create a Table Using Provisioned Mode</h3>
+                                 <p>The following example creates a table with specific read and write capacity.</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-cassandra-table--examples--Create_a_Table_Using_Provisioned_Mode--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;AWSTemplateFormatVersion&quot;:&quot;2010-09-09&quot;,
+  &quot;Resources&quot;:<span>{</span>
+    &quot;mySecondTable&quot;:<span>{</span>
+      &quot;Type&quot;:&quot;AWS::Cassandra::Table&quot;,
+      &quot;Properties&quot;:<span>{</span>
+        &quot;KeyspaceName&quot;:&quot;MyNewKeyspace&quot;,
+        &quot;TableName&quot;:&quot;Employees&quot;,
+        &quot;PartitionKeyColumns&quot;:[
+          <span>{</span>
+            &quot;ColumnName&quot;:&quot;id&quot;,
+            &quot;ColumnType&quot;:&quot;ASCII&quot;
+          }
+        ],
+        &quot;ClusteringKeyColumns&quot;:[
+          <span>{</span>
+            &quot;Column&quot;:<span>{</span>
+              &quot;ColumnName&quot;:&quot;division&quot;,
+              &quot;ColumnType&quot;:&quot;ASCII&quot;
+            },
+            &quot;OrderBy&quot;:&quot;ASC&quot;
+          }
+        ],
+        &quot;RegularColumns&quot;:[
+          <span>{</span>
+            &quot;ColumnName&quot;:&quot;name&quot;,
+            &quot;ColumnType&quot;:&quot;TEXT&quot;
+          },
+          <span>{</span>
+            &quot;ColumnName&quot;:&quot;region&quot;,
+            &quot;ColumnType&quot;:&quot;TEXT&quot;
+          },
+          <span>{</span>
+            &quot;ColumnName&quot;:&quot;division&quot;,
+            &quot;ColumnType&quot;:&quot;TEXT&quot;
+          },
+          <span>{</span>
+            &quot;ColumnName&quot;:&quot;project&quot;,
+            &quot;ColumnType&quot;:&quot;TEXT&quot;
+          },
+          <span>{</span>
+            &quot;ColumnName&quot;:&quot;role&quot;,
+            &quot;ColumnType&quot;:&quot;TEXT&quot;
+          },
+          <span>{</span>
+            &quot;ColumnName&quot;:&quot;pay_scale&quot;,
+            &quot;ColumnType&quot;:&quot;TEXT&quot;
+          },
+          <span>{</span>
+            &quot;ColumnName&quot;:&quot;vacation_hrs&quot;,
+            &quot;ColumnType&quot;:&quot;FLOAT&quot;
+          },
+          <span>{</span>
+            &quot;ColumnName&quot;:&quot;manager_id&quot;,
+            &quot;ColumnType&quot;:&quot;TEXT&quot;
+          }
+        ],
+        &quot;BillingMode&quot;:<span>{</span>
+          &quot;Mode&quot;:&quot;PROVISIONED&quot;,
+          &quot;ProvisionedThroughput&quot;:<span>{</span>
+            &quot;ReadCapacityUnits&quot;:5,
+            &quot;WriteCapacityUnits&quot;:5
+          }
+        }
+      }
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-cassandra-table--examples--Create_a_Table_Using_Provisioned_Mode--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+Resources:
+  mySecondTable:
+    Type: AWS::Cassandra::Table
+    Properties:
+      KeyspaceName: MyNewKeyspace
+      TableName: Employees
+      PartitionKeyColumns:
+      - ColumnName: id
+        ColumnType: ASCII
+      ClusteringKeyColumns:
+      - Column:
+          ColumnName: division
+          ColumnType: ASCII
+        OrderBy: ASC
+      RegularColumns:
+      - ColumnName: name
+        ColumnType: TEXT
+      - ColumnName: region
+        ColumnType: TEXT
+      - ColumnName: division
+        ColumnType: TEXT
+      - ColumnName: project
+        ColumnType: TEXT
+      - ColumnName: role
+        ColumnType: TEXT
+      - ColumnName: pay_scale
+        ColumnType: TEXT
+      - ColumnName: vacation_hrs
+        ColumnType: FLOAT
+      - ColumnName: manager_id
+        ColumnType: TEXT
+      BillingMode:
+        Mode: PROVISIONED
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5</code></pre></div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>
