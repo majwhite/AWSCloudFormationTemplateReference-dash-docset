@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-synthetics-canary">AWS::Synthetics::Canary</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>Creates or updates a canary. Canaries are scripts that monitor your endpoints and
+                                    APIs from the
+                                    outside-in. Canaries help you check the availability and latency of your web services
+                                    and
+                                    troubleshoot anomalies by investigating load time data, screenshots of the UI, logs,
+                                    and
+                                    metrics. You can set up a canary to run continuously or just once. 
+                                 </p>
+                                 <p>To create canaries, you must have the <code class="code">CloudWatchSyntheticsFullAccess</code> policy.
+                                    If you are creating a new IAM role for the canary, you also need the
+                                    the <code class="code">iam:CreateRole</code>, <code class="code">iam:CreatePolicy</code> and
+                                    <code class="code">iam:AttachRolePolicy</code> permissions. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Roles">Necessary
+                                       Roles and Permissions</a>.
+                                 </p>
+                                 <p>Do not include secrets or proprietary information in your canary names. The canary
+                                    name
+                                    makes up part of the Amazon Resource Name (ARN) for the canary, and the ARN is included
+                                    in
+                                    outbound calls over the internet. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html">Security
+                                       Considerations for Synthetics Canaries</a>.
+                                 </p>
+                                 <h2 id="aws-resource-synthetics-canary-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-synthetics-canary-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::Synthetics::Canary&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-synthetics-canary-artifacts3location">ArtifactS3Location</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-synthetics-canary-code">Code</a>&quot; : <code class="replaceable"><a href="./aws-properties-synthetics-canary-code.html">Code</a></code>,
+      &quot;<a href="#cfn-synthetics-canary-executionrolearn">ExecutionRoleArn</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-synthetics-canary-failureretentionperiod">FailureRetentionPeriod</a>&quot; : <code class="replaceable">Integer</code>,
+      &quot;<a href="#cfn-synthetics-canary-name">Name</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-synthetics-canary-runconfig">RunConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-synthetics-canary-runconfig.html">RunConfig</a></code>,
+      &quot;<a href="#cfn-synthetics-canary-runtimeversion">RuntimeVersion</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-synthetics-canary-schedule">Schedule</a>&quot; : <code class="replaceable"><a href="./aws-properties-synthetics-canary-schedule.html">Schedule</a></code>,
+      &quot;<a href="#cfn-synthetics-canary-startcanaryaftercreation">StartCanaryAfterCreation</a>&quot; : <code class="replaceable">Boolean</code>,
+      &quot;<a href="#cfn-synthetics-canary-successretentionperiod">SuccessRetentionPeriod</a>&quot; : <code class="replaceable">Integer</code>,
+      &quot;<a href="#cfn-synthetics-canary-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
+      &quot;<a href="#cfn-synthetics-canary-vpcconfig">VPCConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-synthetics-canary-vpcconfig.html">VPCConfig</a></code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-synthetics-canary-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Synthetics::Canary
+Properties: 
+  <a href="#cfn-synthetics-canary-artifacts3location">ArtifactS3Location</a>: <code class="replaceable">String</code>
+  <a href="#cfn-synthetics-canary-code">Code</a>: <code class="replaceable">
+    <a href="./aws-properties-synthetics-canary-code.html">Code</a></code>
+  <a href="#cfn-synthetics-canary-executionrolearn">ExecutionRoleArn</a>: <code class="replaceable">String</code>
+  <a href="#cfn-synthetics-canary-failureretentionperiod">FailureRetentionPeriod</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-synthetics-canary-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-synthetics-canary-runconfig">RunConfig</a>: <code class="replaceable">
+    <a href="./aws-properties-synthetics-canary-runconfig.html">RunConfig</a></code>
+  <a href="#cfn-synthetics-canary-runtimeversion">RuntimeVersion</a>: <code class="replaceable">String</code>
+  <a href="#cfn-synthetics-canary-schedule">Schedule</a>: <code class="replaceable">
+    <a href="./aws-properties-synthetics-canary-schedule.html">Schedule</a></code>
+  <a href="#cfn-synthetics-canary-startcanaryaftercreation">StartCanaryAfterCreation</a>: <code class="replaceable">Boolean</code>
+  <a href="#cfn-synthetics-canary-successretentionperiod">SuccessRetentionPeriod</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-synthetics-canary-tags">Tags</a>: <code class="replaceable">
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
+  <a href="#cfn-synthetics-canary-vpcconfig">VPCConfig</a>: <code class="replaceable">
+    <a href="./aws-properties-synthetics-canary-vpcconfig.html">VPCConfig</a></code>
+</code></pre></div>
+                                 <h2 id="aws-resource-synthetics-canary-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-synthetics-canary-artifacts3location"></a><span class="term"><code class="code">ArtifactS3Location</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The location in Amazon S3 where Synthetics stores artifacts from the runs of this
+                                             canary. Artifacts include the log file, screenshots, and HAR files. 
+                                             Specify the full location path, including <code class="code">s3://</code> at the beginning
+                                             of the path.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">1024</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-synthetics-canary-code"></a><span class="term"><code class="code">Code</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Use this structure to input your script code for the canary. This structure contains
+                                             the
+                                             Lambda handler with the location where the canary should start running the script.
+                                             If the
+                                             script is stored in an S3 bucket, the bucket name, key, and version are also included.
+                                             If
+                                             the script is passed into the canary directly, the script code is contained in the
+                                             value
+                                             of <code class="code">Script</code>. 
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-synthetics-canary-code.html">Code</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-synthetics-canary-executionrolearn"></a><span class="term"><code class="code">ExecutionRoleArn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ARN of the IAM role to be used to run the canary. This role must already exist,
+                                             
+                                             and must include <code class="code">lambda.amazonaws.com</code> as a principal in the trust
+                                             policy. The role must also have the following permissions:
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                             
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">s3:PutObject</code>
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">s3:GetBucketLocation</code>
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">s3:ListAllMyBuckets</code>
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">cloudwatch:PutMetricData</code>
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">logs:CreateLogGroup</code>
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">logs:CreateLogStream</code>
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">logs:CreateLogStream</code>
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Pattern</em>: <code class="code">^arn:(aws|aws-cn|aws-us-gov|aws-iso-<span>{</span>0,1}[a-z]<span>{</span>0,1}):[A-Za-z0-9][A-Za-z0-9_/.-]<span>{</span>0,62}:[A-Za-z0-9_/.-]<span>{</span>0,63}:[A-Za-z0-9_/.-]<span>{</span>0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]<span>{</span>0,1023}$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-synthetics-canary-failureretentionperiod"></a><span class="term"><code class="code">FailureRetentionPeriod</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The number of days to retain data about failed runs of this canary. If you omit 
+                                             this field, the default of 31 days is used. The valid range is 1 to 455 days.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">1024</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-synthetics-canary-name"></a><span class="term"><code class="code">Name</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name for this canary. Be sure to give it a descriptive name 
+                                             that distinguishes it from other canaries in your account.
+                                          </p>
+                                          
+                                          <p>Do not include secrets or proprietary information in your canary names. The canary
+                                             name
+                                             makes up part of the canary ARN, and the ARN is included in outbound calls over the
+                                             internet. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html">Security
+                                                Considerations for Synthetics Canaries</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">21</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^[0-9a-z_\-]+$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-synthetics-canary-runconfig"></a><span class="term"><code class="code">RunConfig</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A structure that contains input information for a canary run.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-synthetics-canary-runconfig.html">RunConfig</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-synthetics-canary-runtimeversion"></a><span class="term"><code class="code">RuntimeVersion</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies the runtime version to use for the canary. Currently, the only valid 
+                                             value is <code class="code">syn-1.0</code>. For more information about
+                                             runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html">
+                                                Canary Runtime Versions</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">1024</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-synthetics-canary-schedule"></a><span class="term"><code class="code">Schedule</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A structure that contains information about how often the canary is to run, and when
+                                             these runs are to stop.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-synthetics-canary-schedule.html">Schedule</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-synthetics-canary-startcanaryaftercreation"></a><span class="term"><code class="code">StartCanaryAfterCreation</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specify TRUE to have the canary start making runs immediately after it is created.</p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-synthetics-canary-successretentionperiod"></a><span class="term"><code class="code">SuccessRetentionPeriod</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The number of days to retain data about successful runs of this canary. If you omit
+                                             
+                                             this field, the default of 31 days is used. The valid range is 1 to 455 days.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">1024</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-synthetics-canary-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The list of key-value pairs that are associated with the canary.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-synthetics-canary-vpcconfig"></a><span class="term"><code class="code">VPCConfig</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>If this canary is to test an endpoint in a VPC, this structure contains
+                                             information about the subnet and security groups of the VPC endpoint. 
+                                             For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html">
+                                                Running a Canary in a VPC</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-synthetics-canary-vpcconfig.html">VPCConfig</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-synthetics-canary-return-values">Return Values</h2>
+                                 <h3 id="aws-resource-synthetics-canary-return-values-ref">Ref</h3>
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the name of the canary, such as <code class="code">MyCanary</code>.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-synthetics-canary-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-synthetics-canary-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="Id-fn::getatt"></a><span class="term"><code class="code">Id</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ID of the canary.</p>
+                                          
+                                          
+                                       </dd>
+                                       <dt><a id="State-fn::getatt"></a><span class="term"><code class="code">State</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The state of the canary. For example, <code class="code">RUNNING</code>.
+                                          </p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-synthetics-canary--examples">Examples</h2>
+                                 <h3 id="aws-resource-synthetics-canary--examples--Canary_with_script_stored_in_an_Amazon_S3_bucket">Canary with script stored in an Amazon S3 bucket</h3>
+                                 <p>This example creates a canary that uses an existing script stored in 
+                                    an S3 bucket.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-synthetics-canary--examples--Canary_with_script_stored_in_an_Amazon_S3_bucket--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Description&quot;: &quot;AWS CloudFormation Sample Template for AWS Synthetics: Create a Canary using this template&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;SyntheticsCanary&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::Synthetics::Canary&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;Name&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;samplecanary&quot;
+                },
+                &quot;ExecutionRoleArn&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;arn:aws:iam::123456789012:role/my-lambda-execution-role-to-run-canary&quot;
+                },
+                &quot;Code&quot;: <span>{</span>
+                    &quot;Handler&quot;: &quot;pageLoadBlueprint.handler&quot;,
+                    &quot;S3Bucket&quot;: &quot;aws-synthetics-code-myaccount-canary1&quot;,
+                    &quot;S3Key&quot;: &quot;my-script-location&quot;
+                },
+                &quot;ArtifactS3Location&quot;: &quot;s3://my-results-bucket&quot;,
+                &quot;RuntimeVersion&quot;: &quot;syn-1.0&quot;,
+                &quot;Schedule&quot;: <span>{</span>
+                    &quot;Expression&quot;: &quot;rate(1 minute)&quot;,
+                    &quot;DurationInSeconds&quot;: 3600
+                },
+                &quot;RunConfig&quot;: <span>{</span>
+                    &quot;TimeoutInSeconds&quot;: 60
+                },
+                &quot;FailureRetentionPeriod&quot;: 30,
+                &quot;SuccessRetentionPeriod&quot;: 30,
+                &quot;Tags&quot;: [
+                    <span>{</span>
+                        &quot;Id&quot;: &quot;key00AtCreate&quot;,
+                        &quot;Value&quot;: &quot;value001AtCreate&quot;
+                    }
+                ]
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-synthetics-canary--examples--Canary_with_script_stored_in_an_Amazon_S3_bucket--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+    SyntheticsCanary:
+        Type: &apos;AWS::Synthetics::Canary&apos;
+        Properties:
+            Name: samplecanary
+            ExecutionRoleArn: &apos;arn:aws:iam::123456789012:role/my-lambda-execution-role-to-run-canary&apos;
+            Code: <span>{</span>Handler: pageLoadBlueprint.handler, S3Bucket: aws-synthetics-code-myaccount-canary1, S3Key: my-script-location}
+            ArtifactS3Location: s3://my-results-bucket
+            RuntimeVersion: syn-1.0
+            Schedule: <span>{</span>Expression: &apos;rate(1 minute)&apos;, DurationInSeconds: 3600}
+            RunConfig: <span>{</span>TimeoutInSeconds: 60}
+            FailureRetentionPeriod: 30
+            SuccessRetentionPeriod: 30
+            Tags: [<span>{</span>Key: key00AtCreate, Value: value001AtCreate}]
+            StartCanaryAfterCreation: false</code></pre></div>
+                                 <h3 id="aws-resource-synthetics-canary--examples--Canary_with_script_passed_through_CloudFormation">Canary with script passed through CloudFormation</h3>
+                                 <p>This example creates a canary and passes the script code directly
+                                    into the canary.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-synthetics-canary--examples--Canary_with_script_passed_through_CloudFormation--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Description&quot;: &quot;AWS CloudFormation Sample Template for AWS Synthetics: Create a Canary using this template&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;SyntheticsCanary&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::Synthetics::Canary&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;Name&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;samplecanary&quot;
+                },
+                &quot;ExecutionRoleArn&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;arn:aws:iam::123456789012:role/my-lambda-execution-role-to-run-canary&quot;
+                },
+                &quot;Code&quot;: <span>{</span>
+                    &quot;Handler&quot;: &quot;pageLoadBlueprint.handler&quot;,
+                    &quot;Script&quot;: &quot;var synthetics = require(&apos;Synthetics&apos;);\nconst log = require(&apos;SyntheticsLogger&apos;);\n\nconst pageLoadBlueprint = async function () <span>{</span>\n\n    // INSERT URL here\n    const URL = \&quot;https://amazon.com\&quot;;\n\n    let page = await synthetics.getPage();\n    const response = await page.goto(URL, <span>{</span>waitUntil: &apos;domcontentloaded&apos;, timeout: 30000});\n    //Wait for page to render.\n    //Increase or decrease wait time based on endpoint being monitored.\n    await page.waitFor(15000);\n    await synthetics.takeScreenshot(&apos;loaded&apos;, &apos;loaded&apos;);\n    let pageTitle = await page.title();\n    log.info(&apos;Page title: &apos; + pageTitle);\n    if (response.status() !== 200) <span>{</span>\n        throw \&quot;Failed to load page!\&quot;;\n    }\n};\n\nexports.handler = async () =&gt; <span>{</span>\n    return await pageLoadBlueprint();\n};\n&quot;
+                },
+                &quot;ArtifactS3Location&quot;: &quot;s3://my-results-bucket&quot;,
+                &quot;RuntimeVersion&quot;: &quot;syn-1.0&quot;,
+                &quot;Schedule&quot;: <span>{</span>
+                    &quot;Expression&quot;: &quot;rate(1 minute)&quot;,
+                    &quot;DurationInSeconds&quot;: 3600
+                },
+                &quot;RunConfig&quot;: <span>{</span>
+                    &quot;TimeoutInSeconds&quot;: 60
+                },
+                &quot;FailureRetentionPeriod&quot;: 30,
+                &quot;SuccessRetentionPeriod&quot;: 30
+            },
+            &quot;Tags&quot;: [
+                <span>{</span>
+                    &quot;Id&quot;: &quot;key00AtCreate&quot;,
+                    &quot;Value&quot;: &quot;value001AtCreate&quot;
+                }
+            ]
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-synthetics-canary--examples--Canary_with_script_passed_through_CloudFormation--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+    SyntheticsCanary:
+        Type: &apos;AWS::Synthetics::Canary&apos;
+        Properties:
+            Name: samplecanary
+            ExecutionRoleArn: &apos;arn:aws:iam::123456789012:role/my-lambda-execution-role-to-run-canary&apos;
+            Code: <span>{</span>Handler: pageLoadBlueprint.handler, Script: &quot;var synthetics = require(&apos;Synthetics&apos;);\nconst log = require(&apos;SyntheticsLogger&apos;);\nconst pageLoadBlueprint = async function () <span>{</span>\n// INSERT URL here\nconst URL = \&quot;https://amazon.com\&quot;;\n\nlet page = await synthetics.getPage();\nconst response = await page.goto(URL, <span>{</span>waitUntil: &apos;domcontentloaded&apos;, timeout: 30000});\n//Wait for page to render.\n//Increase or decrease wait time based on endpoint being monitored.\nawait page.waitFor(15000);\nawait synthetics.takeScreenshot(&apos;loaded&apos;, &apos;loaded&apos;);\nlet pageTitle = await page.title();\nlog.info(&apos;Page title: &apos; + pageTitle);\nif (response.status() !== 200) <span>{</span>\n     throw \&quot;Failed to load page!\&quot;;\n}\n};\n\nexports.handler = async () =&gt; <span>{</span>\nreturn await pageLoadBlueprint();\n};\n&quot;}
+            ArtifactS3Location: s3://my-results-bucket
+            RuntimeVersion: syn-1.0
+            Schedule: <span>{</span>Expression: &apos;rate(1 minute)&apos;, DurationInSeconds: 3600}
+            RunConfig: <span>{</span>TimeoutInSeconds: 60}
+            FailureRetentionPeriod: 30
+            SuccessRetentionPeriod: 30
+            Tags: [<span>{</span>Key: key00AtCreate, Value: value001AtCreate}]
+            StartCanaryAfterCreation: false</code></pre></div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

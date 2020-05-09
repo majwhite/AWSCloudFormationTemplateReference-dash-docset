@@ -9,238 +9,448 @@
 <body>
     <div id="content" style="padding: 10px 30px;">
     <div id="main-content" class="awsui-util-container">
-            <div id="main-col-body">
-               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
-               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
-               <h1 class="topictitle" id="aws-resource-ssm-resourcedatasync">AWS::SSM::ResourceDataSync</h1>
-               <div class="awsdocs-page-header-container">
-                  <awsdocs-page-header></awsdocs-page-header>
-                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
-               </div>
-               <p>The <code class="code">AWS::SSM::ResourceDataSync</code> resource creates or deletes a Resource Data
-                  Sync for AWS Systems Manager Inventory. You can use Resource Data Sync to send Inventory
-                  data collected from all of your Systems Manager managed instances to a single Amazon
-                  S3
-                  bucket that you have already created in your account. Resource Data Sync then automatically
-                  updates the centralized data when new Inventory data is collected. 
-               </p>
-               <p>For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-configuring.html#sysman-inventory-datasync">Configuring Inventory Collection</a> in the <em>AWS Systems Manager User
-                     Guide</em>.
-               </p>
-               <h2 id="aws-resource-ssm-resourcedatasync-syntax">Syntax</h2>
-               <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h3 id="aws-resource-ssm-resourcedatasync-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-ssm-resourcedatasync">AWS::SSM::ResourceDataSync</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The <code class="code">AWS::SSM::ResourceDataSync</code> resource creates, updates, or deletes a
+                                    Resource Data Sync for AWS Systems Manager. A resource data sync helps you view data
+                                    from
+                                    multiple sources in a single location. Systems Manager offers two types of resource
+                                    data
+                                    sync: <code class="code">SyncToDestination</code> and <code class="code">SyncFromSource</code>.
+                                 </p>
+                                 <p>You can configure Systems Manager Inventory to use the <code class="code">SyncToDestination</code>
+                                    type to synchronize Inventory data from multiple AWS Regions to a single Amazon S3
+                                    bucket. 
+                                 </p>
+                                 <p>You can configure Systems Manager Explorer to use the <code class="code">SyncFromSource</code> type to synchronize
+                                    operational work items (OpsItems) and operational data (OpsData) from multiple AWS
+                                    Regions.
+                                    This type can synchronize OpsItems and OpsData from multiple AWS accounts and Regions
+                                    or
+                                    from an <code class="code">EntireOrganization</code> by using AWS Organizations.
+                                 </p>
+                                 <p>A resource data sync is an asynchronous operation that returns immediately. After
+                                    a
+                                    successful initial sync is completed, the system continuously syncs data.
+                                 </p>
+                                 <p>By default, data is not encrypted in Amazon S3. We strongly recommend that you enable
+                                    encryption in Amazon S3 to ensure secure data storage. We also recommend that you
+                                    secure
+                                    access to the Amazon S3 bucket by creating a restrictive bucket policy. 
+                                 </p>
+                                 <p>For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-configuring.html#sysman-inventory-datasync">Configuring Inventory Collection</a> and <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html">Setting Up
+                                       Systems Manager Explorer to Display Data from Multiple Accounts and Regions</a> in
+                                    the <em>AWS Systems Manager User Guide</em>.
+                                 </p>
+                                 <p>Important: The following <em>Syntax</em> section shows all fields that are
+                                    supported for a resource data sync. The <em>Examples</em> section below shows
+                                    the recommended way to specify configurations for each sync type. Please see the
+                                    <em>Examples</em> section when you create your resource data sync.
+                                 </p>
+                                 <h2 id="aws-resource-ssm-resourcedatasync-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-ssm-resourcedatasync-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::SSM::ResourceDataSync&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-ssm-resourcedatasync-bucketname">BucketName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-resourcedatasync-bucketprefix">BucketPrefix</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-resourcedatasync-bucketregion">BucketRegion</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-resourcedatasync-kmskeyarn">KMSKeyArn</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ssm-resourcedatasync-s3destination">S3Destination</a>&quot; : <code class="replaceable"><a href="./aws-properties-ssm-resourcedatasync-s3destination.html">S3Destination</a></code>,
       &quot;<a href="#cfn-ssm-resourcedatasync-syncformat">SyncFormat</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-ssm-resourcedatasync-syncname">SyncName</a>&quot; : <code class="replaceable">String</code>
+      &quot;<a href="#cfn-ssm-resourcedatasync-syncname">SyncName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ssm-resourcedatasync-syncsource">SyncSource</a>&quot; : <code class="replaceable"><a href="./aws-properties-ssm-resourcedatasync-syncsource.html">SyncSource</a></code>,
+      &quot;<a href="#cfn-ssm-resourcedatasync-synctype">SyncType</a>&quot; : <code class="replaceable">String</code>
     }
 }
 </code></pre></div>
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h3 id="aws-resource-ssm-resourcedatasync-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::SSM::ResourceDataSync
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-ssm-resourcedatasync-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::SSM::ResourceDataSync
 Properties: 
   <a href="#cfn-ssm-resourcedatasync-bucketname">BucketName</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-resourcedatasync-bucketprefix">BucketPrefix</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-resourcedatasync-bucketregion">BucketRegion</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-resourcedatasync-kmskeyarn">KMSKeyArn</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ssm-resourcedatasync-s3destination">S3Destination</a>: <code class="replaceable">
+    <a href="./aws-properties-ssm-resourcedatasync-s3destination.html">S3Destination</a></code>
   <a href="#cfn-ssm-resourcedatasync-syncformat">SyncFormat</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-resourcedatasync-syncname">SyncName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ssm-resourcedatasync-syncsource">SyncSource</a>: <code class="replaceable">
+    <a href="./aws-properties-ssm-resourcedatasync-syncsource.html">SyncSource</a></code>
+  <a href="#cfn-ssm-resourcedatasync-synctype">SyncType</a>: <code class="replaceable">String</code>
 </code></pre></div>
-               <h2 id="aws-resource-ssm-resourcedatasync-properties">Properties</h2>
-               <div class="variablelist">
-                  <dl>
-                     <dt><a id="cfn-ssm-resourcedatasync-bucketname"></a><span class="term"><code class="code">BucketName</code></span></dt>
-                     <dd>
-                        
-                        
-                        <p>The name of the Amazon S3 bucket where the aggregated data is stored.</p>
-                        
-                        <p><em>Required</em>: Yes
-                        </p>
-                        <p><em>Type</em>: String
-                        </p>
-                        <p><em>Minimum</em>: <code class="code">1</code></p>
-                        <p><em>Maximum</em>: <code class="code">2048</code></p>
-                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                     </dd>
-                     <dt><a id="cfn-ssm-resourcedatasync-bucketprefix"></a><span class="term"><code class="code">BucketPrefix</code></span></dt>
-                     <dd>
-                        
-                        
-                        <p>An Amazon S3 prefix for the bucket.</p>
-                        
-                        <p><em>Required</em>: No
-                        </p>
-                        <p><em>Type</em>: String
-                        </p>
-                        <p><em>Minimum</em>: <code class="code">1</code></p>
-                        <p><em>Maximum</em>: <code class="code">256</code></p>
-                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                     </dd>
-                     <dt><a id="cfn-ssm-resourcedatasync-bucketregion"></a><span class="term"><code class="code">BucketRegion</code></span></dt>
-                     <dd>
-                        
-                        
-                        <p>The AWS Region with the Amazon S3 bucket targeted by the Resource Data Sync.</p>
-                        
-                        <p><em>Required</em>: Yes
-                        </p>
-                        <p><em>Type</em>: String
-                        </p>
-                        <p><em>Minimum</em>: <code class="code">1</code></p>
-                        <p><em>Maximum</em>: <code class="code">64</code></p>
-                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                     </dd>
-                     <dt><a id="cfn-ssm-resourcedatasync-kmskeyarn"></a><span class="term"><code class="code">KMSKeyArn</code></span></dt>
-                     <dd>
-                        
-                        <p>The ARN of an encryption key for a destination in Amazon S3. You can use a KMS key
-                           to
-                           encrypt inventory data in Amazon S3. You must specify a key that exist in the same
-                           region
-                           as the destination Amazon S3 bucket.
-                        </p>
-                        
-                        <p><em>Required</em>: No
-                        </p>
-                        <p><em>Type</em>: String
-                        </p>
-                        <p><em>Minimum</em>: <code class="code">1</code></p>
-                        <p><em>Maximum</em>: <code class="code">512</code></p>
-                        <p><em>Pattern</em>: <code class="code">arn:.*</code></p>
-                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                     </dd>
-                     <dt><a id="cfn-ssm-resourcedatasync-syncformat"></a><span class="term"><code class="code">SyncFormat</code></span></dt>
-                     <dd>
-                        
-                        
-                        <p>A supported sync format. The following format is currently supported: JsonSerDe</p>
-                        
-                        <p><em>Required</em>: Yes
-                        </p>
-                        <p><em>Type</em>: String
-                        </p>
-                        <p><em>Allowed Values</em>: <code class="code">JsonSerDe</code></p>
-                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                     </dd>
-                     <dt><a id="cfn-ssm-resourcedatasync-syncname"></a><span class="term"><code class="code">SyncName</code></span></dt>
-                     <dd>
-                        
-                        <p>A name for the Resource Data Sync.</p>
-                        
-                        <p><em>Required</em>: Yes
-                        </p>
-                        <p><em>Type</em>: String
-                        </p>
-                        <p><em>Minimum</em>: <code class="code">1</code></p>
-                        <p><em>Maximum</em>: <code class="code">64</code></p>
-                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                     </dd>
-                  </dl>
-               </div>
-               <h2 id="aws-resource-ssm-resourcedatasync-return-values">Return Values</h2>
-               <h3 id="aws-resource-ssm-resourcedatasync-return-values-ref">Ref</h3>
-               <p>
-                  When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the name of the Resource Data Sync, such as
-                  <code class="code">TestResourceDataSync</code>.
-               </p>
-               <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
-               </p>
-               <h2 id="aws-resource-ssm-resourcedatasync--examples">Examples</h2>
-               <h3 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync">AWS Systems Manager Resource Data Sync</h3>
-               <p>The following examples send Inventory data collected from all of your managed
-                  instances in the US East (Ohio) Region (us-east-2) to a single Amazon S3 bucket.
-                  Resource Data Sync then automatically updates the centralized data when new Inventory
-                  data is collected.
-               </p>
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Description&quot;: &quot;Create a Resource Data Sync for Systems Manager Inventory&quot;,
-  &quot;Resources&quot;: <span>{</span>
-    &quot;BasicResourceDataSync&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;AWS::SSM::ResourceDataSync&quot;,
-      &quot;Properties&quot;: <span>{</span>
-        &quot;SyncName&quot;: &quot;My-USEAST2-Resource-Data-Sync&quot;,
-        &quot;BucketName&quot;: &quot;my-us-east-2-rds-bucket&quot;,
-        &quot;BucketRegion&quot;: &quot;us-east-2&quot;,
-        &quot;SyncFormat&quot;: &quot;JsonSerDe&quot;,
-        &quot;BucketPrefix&quot;: &quot;rds&quot;
-      }
+                                 <h2 id="aws-resource-ssm-resourcedatasync-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-ssm-resourcedatasync-bucketname"></a><span class="term"><code class="code">BucketName</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>The name of the S3 bucket where the aggregated data is stored.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">2048</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ssm-resourcedatasync-bucketprefix"></a><span class="term"><code class="code">BucketPrefix</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>An Amazon S3 prefix for the bucket.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">256</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ssm-resourcedatasync-bucketregion"></a><span class="term"><code class="code">BucketRegion</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>The AWS Region with the S3 bucket targeted by the Resource Data Sync.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">64</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ssm-resourcedatasync-kmskeyarn"></a><span class="term"><code class="code">KMSKeyArn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ARN of an encryption key for a destination in Amazon S3. You can use a KMS key
+                                             to
+                                             encrypt inventory data in Amazon S3. You must specify a key that exist in the same
+                                             region
+                                             as the destination Amazon S3 bucket.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">512</code></p>
+                                          <p><em>Pattern</em>: <code class="code">arn:.*</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ssm-resourcedatasync-s3destination"></a><span class="term"><code class="code">S3Destination</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Configuration information for the target S3 bucket.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-ssm-resourcedatasync-s3destination.html">S3Destination</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ssm-resourcedatasync-syncformat"></a><span class="term"><code class="code">SyncFormat</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>A supported sync format. The following format is currently supported: JsonSerDe</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed Values</em>: <code class="code">JsonSerDe</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ssm-resourcedatasync-syncname"></a><span class="term"><code class="code">SyncName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A name for the Resource Data Sync.</p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">64</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ssm-resourcedatasync-syncsource"></a><span class="term"><code class="code">SyncSource</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Information about the source where the data was synchronized. </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-ssm-resourcedatasync-syncsource.html">SyncSource</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ssm-resourcedatasync-synctype"></a><span class="term"><code class="code">SyncType</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The type of resource data sync. If <code class="code">SyncType</code> is <code class="code">SyncToDestination</code>,
+                                             then the resource data sync synchronizes data to an S3 bucket. If the <code class="code">SyncType</code> is
+                                             <code class="code">SyncFromSource</code> then the resource data sync synchronizes data from AWS Organizations or from
+                                             multiple AWS Regions.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">64</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-ssm-resourcedatasync-return-values">Return Values</h2>
+                                 <h3 id="aws-resource-ssm-resourcedatasync-return-values-ref">Ref</h3>
+                                 <p>
+                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the name of the Resource Data Sync, such as
+                                    <code class="code">TestResourceDataSync</code>.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h2 id="aws-resource-ssm-resourcedatasync--examples">Examples</h2>
+                                 <h3 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncToDestination">AWS Systems Manager Resource Data Sync - SyncToDestination</h3>
+                                 <p>The following example synchronizes Systems Manager Inventory metadata in the US
+                                    East (Ohio) Region (us-east-2) to a single Amazon S3 bucket. Resource Data Sync then
+                                    automatically updates the centralized data when new data is collected.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncToDestination--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Description&quot;: &quot;Create a Resource Data Sync for Systems Manager&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;BasicResourceDataSync&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::SSM::ResourceDataSync&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;SyncName&quot;: &quot;test-sync&quot;,
+                &quot;SyncType&quot;: &quot;SyncToDestination&quot;,
+                &quot;S3Destination&quot;: <span>{</span>
+                    &quot;BucketName&quot;: &quot;test-bucket&quot;,
+                    &quot;BucketRegion&quot;: &quot;us-east-2&quot;,
+                    &quot;SyncFormat&quot;: &quot;JsonSerDe&quot;,
+                    &quot;BucketPrefix&quot;: &quot;cfn&quot;,
+                    &quot;KMSKeyArn&quot;: &quot;kmsKeyARN&quot;
+                }
+            }
+        }
     }
-  }
 }</code></pre></div>
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
-Description: &quot;Create a Resource Data Sync for Systems Manager Inventory&quot;
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncToDestination--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml "> ---
+Description: Create a Resource Data Sync for Systems Manager
 Resources:
   BasicResourceDataSync:
-    Type: &quot;AWS::SSM::ResourceDataSync&quot;
+    Type: AWS::SSM::ResourceDataSync
     Properties:
-      SyncName: &quot;My-USEAST2-Resource-Data-Sync&quot;
-      BucketName: &quot;my-us-east-2-rds-bucket&quot;
-      BucketRegion: &quot;us-east-2&quot;
-      SyncFormat: &quot;JsonSerDe&quot;
-      BucketPrefix: &quot;rds&quot;</code></pre></div>
-               <h2 id="aws-resource-ssm-resourcedatasync--seealso">See Also</h2>
-               <div class="itemizedlist">
-                   
-                   
-                   
-                  
-                  <ul class="itemizedlist" type="disc">
-                     <li class="listitem">
-                        
-                        <p>
-                           <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html">What is
-                              Systems Manager?</a>
-                           
-                        </p>
-                        
-                     </li>
-                     <li class="listitem">
-                        
-                        <p>
-                           <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-inventory.html">AWS
-                              Systems Manager Inventory</a>
-                           
-                        </p>
-                        
-                     </li>
-                     <li class="listitem">
-                        
-                        <p>
-                           <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-configuring.html">Configuring Inventory Collection</a>
-                           
-                        </p>
-                        
-                     </li>
-                  </ul>
-               </div>
-               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
-            </div>
-            <noscript>
-               <div>
-                  <div>
-                     <div>
-                        <div id="js_error_message">
-                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
-                                 browser.</strong></p>
-                           <p>To use the AWS Documentation, Javascript must be
-                              enabled. Please refer to your browser&apos;s Help pages for instructions.
-                           </p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </noscript>
-            
-            <awsdocs-page-utilities></awsdocs-page-utilities>
-         </div></div>
+      SyncName: test-sync
+      SyncType: SyncToDestination
+      S3Destination:
+        BucketName: test-bucket
+        BucketRegion: us-east-2
+        SyncFormat: JsonSerDe
+        BucketPrefix: cfn
+        KMSKeyArn: kmsKeyARN</code></pre></div>
+                                 <h3 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_SingleAccountMultipleRegions">AWS Systems Manager Resource Data Sync - SyncFromSource - SingleAccountMultipleRegions</h3>
+                                 <p>The following example synchronizes Systems Manager Explorer OpsData and OpsItems
+                                    from multiple AWS Regions in a single AWS account.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_SingleAccountMultipleRegions--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Description&quot;: &quot;Create a Resource Data Sync for Systems Manager Explorer&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;BasicResourceDataSync&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;Dev::SSM::ResourceDataSync&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;SyncName&quot;: &quot;test-sync&quot;,
+                &quot;SyncType&quot;: &quot;SyncFromSource&quot;,
+                &quot;SyncSource&quot;: <span>{</span>
+                    &quot;SourceType&quot;: &quot;SingleAccountMultiRegions&quot;,
+                    &quot;SourceRegions&quot;: [
+                        &quot;us-east-1&quot;,
+                        &quot;us-west-1&quot;,
+                        &quot;us-west-2&quot;
+                    ],
+                    &quot;IncludeFutureRegions&quot;: false
+                }
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_SingleAccountMultipleRegions--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Description: Create a Resource Data Sync for Systems Manager Explorer
+Resources:
+  BasicResourceDataSync:
+    Type: Dev::SSM::ResourceDataSync
+    Properties:
+      SyncName: test-sync
+      SyncType: SyncFromSource
+      SyncSource:
+        SourceType: SingleAccountMultiRegions
+        SourceRegions:
+        - us-east-1
+        - us-west-1
+        - us-west-2
+        IncludeFutureRegions: false
+         </code></pre></div>
+                                 <h3 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_EntireOrganization">AWS Systems Manager Resource Data Sync - SyncFromSource - EntireOrganization</h3>
+                                 <p>The following example synchronizes Systems Manager Explorer OpsData and OpsItems
+                                    from your entire organization in AWS Organizations in the us-west-1 Region. 
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_EntireOrganization--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Description&quot;: &quot;Create a Resource Data Sync for Systems Manager Explorer&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;BasicResourceDataSync&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;Dev::SSM::ResourceDataSync&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;SyncName&quot;: &quot;test-sync&quot;,
+                &quot;SyncType&quot;: &quot;SyncFromSource&quot;,
+                &quot;SyncSource&quot;: <span>{</span>
+                    &quot;SourceType&quot;: &quot;AwsOrganizations&quot;,
+                    &quot;AwsOrganizationsSource&quot;: <span>{</span>
+                        &quot;OrganizationSourceType&quot;: &quot;EntireOrganization&quot;
+                    },
+                    &quot;SourceRegions&quot;: [
+                        &quot;us-west-1&quot;
+                    ],
+                    &quot;IncludeFutureRegions&quot;: false
+                }
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_EntireOrganization--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Description: Create a Resource Data Sync for Systems Manager Explorer
+Resources:
+  BasicResourceDataSync:
+    Type: Dev::SSM::ResourceDataSync
+    Properties:
+      SyncName: test-sync
+      SyncType: SyncFromSource
+      SyncSource:
+        SourceType: AwsOrganizations
+        AwsOrganizationsSource:
+          OrganizationSourceType: EntireOrganization
+        SourceRegions:
+        - us-west-1
+        IncludeFutureRegions: false</code></pre></div>
+                                 <h3 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_OrganizationalUnits">AWS Systems Manager Resource Data Sync - SyncFromSource - OrganizationalUnits</h3>
+                                 <p>The following example synchronizes Systems Manager Explorer OpsData and OpsItems
+                                    from organization unit 12345 in AWS Organizations in the us-west-1 Region. 
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_OrganizationalUnits--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Description&quot;: &quot;Create a Resource Data Sync for Systems Manager Explorer&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;BasicResourceDataSync&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::SSM::ResourceDataSync&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;SyncName&quot;: &quot;test-sync&quot;,
+                &quot;SyncType&quot;: &quot;SyncFromSource&quot;,
+                &quot;SyncSource&quot;: <span>{</span>
+                    &quot;SourceType&quot;: &quot;AwsOrganizations&quot;,
+                    &quot;AwsOrganizationsSource&quot;: <span>{</span>
+                        &quot;OrganizationSourceType&quot;: &quot;OrganizationalUnits&quot;,
+                        &quot;OrganizationalUnits&quot;: [
+                            &quot;ou-12345&quot;
+                        ]
+                    },
+                    &quot;SourceRegions&quot;: [
+                        &quot;us-west-1&quot;
+                    ],
+                    &quot;IncludeFutureRegions&quot;: false
+                }
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_OrganizationalUnits--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Description: Create a Resource Data Sync for Systems Manager Explorer
+Resources:
+  BasicResourceDataSync:
+    Type: AWS::SSM::ResourceDataSync
+    Properties:
+      SyncName: test-sync
+      SyncType: SyncFromSource
+      SyncSource:
+        SourceType: AwsOrganizations
+        AwsOrganizationsSource:
+          OrganizationSourceType: OrganizationalUnits
+          OrganizationalUnits:
+          - ou-12345
+        SourceRegions:
+        - us-west-1
+        IncludeFutureRegions: false</code></pre></div>
+                                 <h2 id="aws-resource-ssm-resourcedatasync--seealso">See Also</h2>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p>
+                                             <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html">What is
+                                                Systems Manager?</a>
+                                             
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>
+                                             <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-inventory.html">AWS
+                                                Systems Manager Inventory</a>
+                                             
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>
+                                             <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-configuring.html">Configuring Inventory Collection</a>
+                                             
+                                          </p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
 </body>
 </html>

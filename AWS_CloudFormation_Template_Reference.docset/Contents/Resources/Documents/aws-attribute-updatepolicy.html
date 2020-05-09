@@ -9,240 +9,239 @@
 <body>
     <div id="content" style="padding: 10px 30px;">
     <div id="main-content" class="awsui-util-container">
-            <div id="main-col-body">
-               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
-               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
-               <h1 class="topictitle" id="aws-attribute-updatepolicy">UpdatePolicy Attribute</h1>
-               <div class="awsdocs-page-header-container">
-                  <awsdocs-page-header></awsdocs-page-header>
-                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
-               </div>
-               <p>Use the <code class="code">UpdatePolicy</code> attribute to specify how AWS CloudFormation handles updates to the
-                  <a href="aws-properties-as-group.html"><code class="code">AWS::AutoScaling::AutoScalingGroup</code></a>, <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup"><code class="code">AWS::ElastiCache::ReplicationGroup</code></a>, <a href="aws-resource-elasticsearch-domain.html"><code class="code">AWS::Elasticsearch::Domain</code></a>, or <a href="aws-resource-lambda-alias.html"><code class="code">AWS::Lambda::Alias</code></a> resources.
-               </p>
-               <div class="itemizedlist">
-                  
-                   
-                  
-                   
-                  
-                   
-                  
-                   
-                  
-                  <ul class="itemizedlist" type="disc">
-                     <li class="listitem">   
-                        
-                        <p>For <code class="code">AWS::AutoScaling::AutoScalingGroup</code> resources, AWS CloudFormation invokes one of three update policies depending on the
-                           type of change you make or whether a scheduled action is associated with the Auto
-                           Scaling group.
-                        </p>
-                        
-                        <div class="itemizedlist">
-                            
-                            
-                           
-                           <ul class="itemizedlist" type="disc">
-                              <li class="listitem">
-                                 
-                                 <p>The <code class="code">AutoScalingReplacingUpdate</code> and <code class="code">AutoScalingRollingUpdate</code>
-                                    policies apply <em>only</em> when you do one or more of the following:
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-attribute-updatepolicy">UpdatePolicy Attribute</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>Use the <code class="code">UpdatePolicy</code> attribute to specify how AWS CloudFormation handles updates to the
+                                    <a href="aws-properties-as-group.html"><code class="code">AWS::AutoScaling::AutoScalingGroup</code></a>, <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup"><code class="code">AWS::ElastiCache::ReplicationGroup</code></a>, <a href="aws-resource-elasticsearch-domain.html"><code class="code">AWS::Elasticsearch::Domain</code></a>, or <a href="aws-resource-lambda-alias.html"><code class="code">AWS::Lambda::Alias</code></a> resources.
                                  </p>
                                  <div class="itemizedlist">
+                                    
                                      
+                                    
                                      
+                                    
                                      
+                                    
                                      
                                     
                                     <ul class="itemizedlist" type="disc">
-                                       <li class="listitem">
+                                       <li class="listitem">   
                                           
-                                          <p>Change the Auto Scaling group&apos;s <code class="code"><a href="aws-properties-as-launchconfig.html">AWS::AutoScaling::LaunchConfiguration</a></code>.
+                                          <p>For <code class="code">AWS::AutoScaling::AutoScalingGroup</code> resources, AWS CloudFormation invokes one of three update policies depending on the
+                                             type of change you make or whether a scheduled action is associated with the Auto
+                                             Scaling group.
                                           </p>
                                           
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>The <code class="code">AutoScalingReplacingUpdate</code> and <code class="code">AutoScalingRollingUpdate</code>
+                                                      policies apply <em>only</em> when you do one or more of the following:
+                                                   </p>
+                                                   <div class="itemizedlist">
+                                                       
+                                                       
+                                                       
+                                                       
+                                                      
+                                                      <ul class="itemizedlist" type="disc">
+                                                         <li class="listitem">
+                                                            
+                                                            <p>Change the Auto Scaling group&apos;s <code class="code"><a href="aws-properties-as-launchconfig.html">AWS::AutoScaling::LaunchConfiguration</a></code>.
+                                                            </p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p>Change the Auto Scaling group&apos;s <code class="code">VPCZoneIdentifier</code> property
+                                                            </p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p>Change the Auto Scaling group&apos;s <code class="code">LaunchTemplate</code> property
+                                                            </p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p>Update an Auto Scaling group that contains instances that don&apos;t match the current
+                                                               <code class="code">LaunchConfiguration</code>.
+                                                            </p>
+                                                            
+                                                         </li>
+                                                      </ul>
+                                                   </div>
+                                                   
+                                                   <p>If both the <code class="code">AutoScalingReplacingUpdate</code> and <code class="code">AutoScalingRollingUpdate</code> policies are specified, setting the <code class="code">WillReplace</code> property to <code class="code">true</code> gives <code class="code">AutoScalingReplacingUpdate</code> precedence.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>The <code class="code">AutoScalingScheduledAction</code> policy applies when you update a stack that includes an Auto Scaling group with an
+                                                      associated scheduled action.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
                                        </li>
                                        <li class="listitem">
-                                          
-                                          <p>Change the Auto Scaling group&apos;s <code class="code">VPCZoneIdentifier</code> property
+                                          <p>For <code class="code">AWS::ElastiCache::ReplicationGroup</code> resources, AWS CloudFormation can modify a replication group&apos;s shards by adding or
+                                             removing shards, rather than replacing
+                                             the entire resource. For more information, see <a href="#cfn-attributes-updatepolicy-useonlineresharding">UseOnlineResharding Policy</a>. 
                                           </p>
-                                          
                                        </li>
                                        <li class="listitem">
-                                          
-                                          <p>Change the Auto Scaling group&apos;s <code class="code">LaunchTemplate</code> property
+                                          <p>For <code class="code">AWS::Elasticsearch::Domain</code> resources, AWS CloudFormation can upgrade an Amazon ES domain to a new version of
+                                             Elasticsearch without replacing the entire resource. For more information, see <a href="#cfn-attributes-updatepolicy-upgradeelasticsearchdomain">EnableVersionUpgrade
+                                                Policy</a>.
                                           </p>
-                                          
                                        </li>
                                        <li class="listitem">
-                                          
-                                          <p>Update an Auto Scaling group that contains instances that don&apos;t match the current
-                                             <code class="code">LaunchConfiguration</code>.
+                                          <p>For <code class="code">AWS::Lambda::Alias</code> resources, AWS CloudFormation performs an CodeDeploy deployment when the version
+                                             changes on the alias. 
+                                             For more information, see <a href="#cfn-attributes-updatepolicy-codedeploylambdaaliasupdate">CodeDeployLambdaAliasUpdate Policy</a>.
                                           </p>
-                                          
                                        </li>
                                     </ul>
                                  </div>
+                                 <h2 id="cfn-attributes-updatepolicy-replacingupdate">AutoScalingReplacingUpdate Policy</h2>
                                  
-                                 <p>If both the <code class="code">AutoScalingReplacingUpdate</code> and <code class="code">AutoScalingRollingUpdate</code> policies are specified, setting the <code class="code">WillReplace</code> property to <code class="code">true</code> gives <code class="code">AutoScalingReplacingUpdate</code> precedence.
+                                 
+                                 <p>To specify how AWS CloudFormation handles replacement updates for an Auto Scaling
+                                    group, use the <code class="code">AutoScalingReplacingUpdate</code> policy. This policy enables you to specify whether AWS CloudFormation replaces an
+                                    Auto Scaling group with a new one or replaces only the instances in the Auto Scaling
+                                    group.
                                  </p>
                                  
-                              </li>
-                              <li class="listitem">
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>Before attempting an update, ensure that you have sufficient Amazon EC2 capacity for
+                                          both your old and new Auto Scaling groups.
+                                       </p>
+                                    </div>
+                                 </div>
                                  
-                                 <p>The <code class="code">AutoScalingScheduledAction</code> policy applies when you update a stack that includes an Auto Scaling group with an
-                                    associated scheduled action.
-                                 </p>
                                  
-                              </li>
-                           </ul>
-                        </div>
-                     </li>
-                     <li class="listitem">
-                        <p>For <code class="code">AWS::ElastiCache::ReplicationGroup</code> resources, AWS CloudFormation can modify a replication group&apos;s shards by adding or
-                           removing shards, rather than replacing
-                           the entire resource. For more information, see <a href="#cfn-attributes-updatepolicy-useonlineresharding">UseOnlineResharding Policy</a>. 
-                        </p>
-                     </li>
-                     <li class="listitem">
-                        <p>For <code class="code">AWS::Elasticsearch::Domain</code> resources, AWS CloudFormation can upgrade an Amazon ES domain to a new version of
-                           Elasticsearch without replacing the entire resource. For more information, see <a href="#cfn-attributes-updatepolicy-upgradeelasticsearchdomain">EnableVersionUpgrade
-                              Policy</a>.
-                        </p>
-                     </li>
-                     <li class="listitem">
-                        <p>For <code class="code">AWS::Lambda::Alias</code> resources, AWS CloudFormation performs an CodeDeploy deployment when the version
-                           changes on the alias. 
-                           For more information, see <a href="#cfn-attributes-updatepolicy-codedeploylambdaaliasupdate">CodeDeployLambdaAliasUpdate Policy</a>.
-                        </p>
-                     </li>
-                  </ul>
-               </div>
-               <h2 id="cfn-attributes-updatepolicy-replacingupdate">AutoScalingReplacingUpdate Policy</h2>
-               
-               
-               <p>To specify how AWS CloudFormation handles replacement updates for an Auto Scaling
-                  group, use the <code class="code">AutoScalingReplacingUpdate</code> policy. This policy enables you to specify whether AWS CloudFormation replaces an
-                  Auto Scaling group with a new one or replaces only the instances in the Auto Scaling
-                  group.
-               </p>
-               
-               <div class="awsdocs-note">
-                  <div class="awsdocs-note-title">
-                     <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
-                  <div class="awsdocs-note-text">
-                     <p>Before attempting an update, ensure that you have sufficient Amazon EC2 capacity for
-                        both your old and new Auto Scaling groups.
-                     </p>
-                  </div>
-               </div>
-               
-               
-               <h3 id="cfn-attributes-updatepolicy-replacingupdate-syntax">Syntax</h3>
-               
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="aws-attribute-updatepolicy-replacingupdate-syntax.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;UpdatePolicy&quot; : <span>{</span>
+                                 <h3 id="cfn-attributes-updatepolicy-replacingupdate-syntax">Syntax</h3>
+                                 
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-attribute-updatepolicy-replacingupdate-syntax.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;UpdatePolicy&quot; : <span>{</span>
   &quot;<a href="#cfn-attributes-updatepolicy-replacingupdate">AutoScalingReplacingUpdate</a>&quot; : <span>{</span>
     &quot;<a href="#cfn-attributes-updatepolicy-replacingupdate-willreplace">WillReplace</a>&quot; : <code class="replaceable">Boolean</code>
   }
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="aws-attribute-updatepolicy-replacingupdate-syntax.yaml">YAML</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">UpdatePolicy:
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-attribute-updatepolicy-replacingupdate-syntax.yaml">YAML</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">UpdatePolicy:
   <a href="#cfn-attributes-updatepolicy-replacingupdate">AutoScalingReplacingUpdate</a>:
     <a href="#cfn-attributes-updatepolicy-replacingupdate-willreplace">WillReplace</a>: <code class="replaceable">Boolean</code></code></pre>
-                  </div>
-                
-               
-               <h3 id="cfn-attributes-updatepolicy-replacingupdate-properties">Properties</h3>
-               
-               
-               <div class="variablelist">
-                   
-                  
-                  <dl>
-                     
-                     <dt><a id="cfn-attributes-updatepolicy-replacingupdate-willreplace"></a><span class="term"><code class="code">WillReplace</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>Specifies whether an Auto Scaling group and the instances it contains are replaced
-                           during an update. During replacement, AWS CloudFormation retains the old group until
-                           it finishes creating the new one. If the update fails, AWS CloudFormation can roll
-                           back to the old Auto Scaling group and delete the new Auto Scaling group.
-                        </p>
-                        
-                        <p>While AWS CloudFormation creates the new group, it doesn&apos;t detach or attach any instances.
-                           After successfully creating the new Auto Scaling group, AWS CloudFormation deletes
-                           the old Auto Scaling group during the cleanup process.
-                        </p>
-                        
-                        <p>When you set the <code class="code">WillReplace</code> parameter, remember to specify a matching <code class="code"><a href="aws-attribute-creationpolicy.html">CreationPolicy</a></code>. If the minimum number of instances (specified by the <code class="code">MinSuccessfulInstancesPercent</code> property) don&apos;t signal success within the <code class="code">Timeout</code> period (specified in the <code class="code">CreationPolicy</code> policy), the replacement update fails and AWS CloudFormation rolls back to the old
-                           Auto Scaling group.
-                        </p>
-                        
-                        <p><em>Type</em>: Boolean
-                        </p>
-                        
-                        <p><em>Required</em>: No
-                        </p>
-                        
-                     </dd>
-                     
-                  </dl>
-               </div>
-                
-               
-               <h2 id="cfn-attributes-updatepolicy-rollingupdate">AutoScalingRollingUpdate Policy</h2>
-               
-               
-               <p>To specify how AWS CloudFormation handles rolling updates for an Auto Scaling group,
-                  use the <code class="code">AutoScalingRollingUpdate</code> policy. Rolling updates enable you to specify whether AWS CloudFormation updates
-                  instances that are in an Auto Scaling group in batches or all at once.
-               </p>
-               
-               <div class="awsdocs-note">
-                  <div class="awsdocs-note-title">
-                     <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
-                  <div class="awsdocs-note-text">
-                     <p>During a rolling update, some Auto Scaling processes might make changes to the Auto
-                        Scaling group before
-                        AWS CloudFormation completes the rolling update. These changes might cause the rolling
-                        update to fail. To
-                        prevent Auto Scaling from running processes during a rolling update, use the
-                        <code class="code">SuspendProcesses</code> property. For more information, see <a href="https://aws.amazon.com/premiumsupport/knowledge-center/auto-scaling-group-rolling-updates/" target="_blank"><span>What are some recommended best practices for performing Auto Scaling group rolling
-                              updates?</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></p>
-                  </div>
-               </div>
-               
-               
-               <p>Be aware that, during stack update rollback operations, CloudFormation uses the
-                  <code class="code">UpdatePolicy</code> configuration specified in the template before the current stack
-                  update operation. For example, suppose you have updated the <code class="code">MaxBatchSize</code> in your
-                  stack template&apos;s <code class="code">UpdatePolicy</code> from 1 to 10. You then perform a stack update, and
-                  that update fails and CloudFormation initiates an update rollback operation. In such
-                  a case,
-                  CloudFormation will use 1 as the maximum batch size, rather than 10. For this reason,
-                  we
-                  recommend you make changes to the <code class="code">UpdatePolicy</code> configuration in a stack update
-                  separate from, and prior to, any updates to the
-                  <code class="code">AWS::AutoScaling::AutoScalingGroup</code> resource that are likely to trigger rolling
-                  updates.
-               </p>
-               
-               
-               <h3 id="cfn-attributes-updatepolicy-replacingupdate-syntax">Syntax</h3>
-               
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="aws-attribute-updatepolicy-rollingupdate-syntax.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;UpdatePolicy&quot; : <span>{</span>
+                                    </div>
+                                  
+                                 
+                                 <h3 id="cfn-attributes-updatepolicy-replacingupdate-properties">Properties</h3>
+                                 
+                                 
+                                 <div class="variablelist">
+                                     
+                                    
+                                    <dl>
+                                       
+                                       <dt><a id="cfn-attributes-updatepolicy-replacingupdate-willreplace"></a><span class="term"><code class="code">WillReplace</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>Specifies whether an Auto Scaling group and the instances it contains are replaced
+                                             during an update. During replacement, AWS CloudFormation retains the old group until
+                                             it finishes creating the new one. If the update fails, AWS CloudFormation can roll
+                                             back to the old Auto Scaling group and delete the new Auto Scaling group.
+                                          </p>
+                                          
+                                          <p>While AWS CloudFormation creates the new group, it doesn&apos;t detach or attach any instances.
+                                             After successfully creating the new Auto Scaling group, AWS CloudFormation deletes
+                                             the old Auto Scaling group during the cleanup process.
+                                          </p>
+                                          
+                                          <p>When you set the <code class="code">WillReplace</code> parameter, remember to specify a matching <code class="code"><a href="aws-attribute-creationpolicy.html">CreationPolicy</a></code>. If the minimum number of instances (specified by the <code class="code">MinSuccessfulInstancesPercent</code> property) don&apos;t signal success within the <code class="code">Timeout</code> period (specified in the <code class="code">CreationPolicy</code> policy), the replacement update fails and AWS CloudFormation rolls back to the old
+                                             Auto Scaling group.
+                                          </p>
+                                          
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          
+                                       </dd>
+                                       
+                                    </dl>
+                                 </div>
+                                  
+                                 
+                                 <h2 id="cfn-attributes-updatepolicy-rollingupdate">AutoScalingRollingUpdate Policy</h2>
+                                 
+                                 
+                                 <p>To specify how AWS CloudFormation handles rolling updates for an Auto Scaling group,
+                                    use the <code class="code">AutoScalingRollingUpdate</code> policy. Rolling updates enable you to specify whether AWS CloudFormation updates
+                                    instances that are in an Auto Scaling group in batches or all at once.
+                                 </p>
+                                 
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>During a rolling update, some Auto Scaling processes might make changes to the Auto
+                                          Scaling group before
+                                          AWS CloudFormation completes the rolling update. These changes might cause the rolling
+                                          update to fail. To
+                                          prevent Auto Scaling from running processes during a rolling update, use the
+                                          <code class="code">SuspendProcesses</code> property. For more information, see <a href="https://aws.amazon.com/premiumsupport/knowledge-center/auto-scaling-group-rolling-updates/" target="_blank"><span>What are some recommended best practices for performing Auto Scaling group rolling
+                                                updates?</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></p>
+                                    </div>
+                                 </div>
+                                 
+                                 
+                                 <p>Be aware that, during stack update rollback operations, CloudFormation uses the
+                                    <code class="code">UpdatePolicy</code> configuration specified in the template before the current stack
+                                    update operation. For example, suppose you have updated the <code class="code">MaxBatchSize</code> in your
+                                    stack template&apos;s <code class="code">UpdatePolicy</code> from 1 to 10. You then perform a stack update, and
+                                    that update fails and CloudFormation initiates an update rollback operation. In such
+                                    a case,
+                                    CloudFormation will use 1 as the maximum batch size, rather than 10. For this reason,
+                                    we
+                                    recommend you make changes to the <code class="code">UpdatePolicy</code> configuration in a stack update
+                                    separate from, and prior to, any updates to the
+                                    <code class="code">AWS::AutoScaling::AutoScalingGroup</code> resource that are likely to trigger rolling
+                                    updates.
+                                 </p>
+                                 
+                                 
+                                 <h3 id="cfn-attributes-updatepolicy-replacingupdate-syntax">Syntax</h3>
+                                 
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-attribute-updatepolicy-rollingupdate-syntax.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;UpdatePolicy&quot; : <span>{</span>
   &quot;<a href="#cfn-attributes-updatepolicy-rollingupdate">AutoScalingRollingUpdate</a>&quot; : <span>{</span>
     &quot;<a href="#cfn-attributes-updatepolicy-rollingupdate-maxbatchsize">MaxBatchSize</a>&quot; : <code class="replaceable">Integer</code>,
     &quot;<a href="#cfn-attributes-updatepolicy-rollingupdate-mininstancesinservice">MinInstancesInService</a>&quot; : <code class="replaceable">Integer</code>,
@@ -252,12 +251,12 @@
     &quot;<a href="#cfn-attributes-updatepolicy-rollingupdate-waitonresourcesignals">WaitOnResourceSignals</a>&quot; : <code class="replaceable">Boolean</code>
   }
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="aws-attribute-updatepolicy-rollingupdate-syntax.yaml">YAML</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">UpdatePolicy:
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-attribute-updatepolicy-rollingupdate-syntax.yaml">YAML</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">UpdatePolicy:
   <a href="#cfn-attributes-updatepolicy-rollingupdate">AutoScalingRollingUpdate</a>:
     <a href="#cfn-attributes-updatepolicy-rollingupdate-maxbatchsize">MaxBatchSize</a>: <code class="replaceable">Integer</code>
     <a href="#cfn-attributes-updatepolicy-rollingupdate-mininstancesinservice">MinInstancesInService</a>: <code class="replaceable">Integer</code>
@@ -266,473 +265,473 @@
     <a href="#cfn-attributes-updatepolicy-rollingupdate-suspendprocesses">SuspendProcesses</a>:
       - <code class="replaceable">List of processes</code>
     <a href="#cfn-attributes-updatepolicy-rollingupdate-waitonresourcesignals">WaitOnResourceSignals</a>: <code class="replaceable">Boolean</code></code></pre>
-                  </div>
-                
-               
-               <h3 id="aws-attribute-updatepolicy-rollingupdate-properties">Properties</h3>
-               
-               
-               <div class="variablelist">
-                   
-                   
-                   
-                   
-                   
-                   
-                  
-                  <dl>
-                     
-                     <dt><a id="cfn-attributes-updatepolicy-rollingupdate-maxbatchsize"></a><span class="term"><code class="code">MaxBatchSize</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>Specifies the maximum number of instances that AWS CloudFormation updates.</p>
-                        
-                        <p><em>Default</em>: <code class="code">1</code></p>
-                        
-                        <p><em>Type</em>: Integer
-                        </p>
-                        
-                        <p><em>Required</em>: No
-                        </p>
-                        
-                     </dd>
-                      
-                     
-                     <dt><a id="cfn-attributes-updatepolicy-rollingupdate-mininstancesinservice"></a><span class="term"><code class="code">MinInstancesInService</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>Specifies the minimum number of instances that must be in service within the Auto
-                           Scaling group while AWS CloudFormation updates old instances. This value must be less
-                           than the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#cfn-as-group-maxsize">MaxSize</a> of
-                           the Auto Scaling group.
-                        </p>
-                        
-                        <p><em>Default</em>: <code class="code">0</code></p>
-                        
-                        <p><em>Type</em>: Integer
-                        </p>
-                        
-                        <p><em>Required</em>: No
-                        </p>
-                        
-                     </dd>
-                      
-                     
-                     <dt><a id="cfn-attributes-updatepolicy-rollingupdate-minsuccessfulinstancespercent"></a><span class="term"><code class="code">MinSuccessfulInstancesPercent</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>Specifies the percentage of instances in an Auto Scaling rolling update that must
-                           signal
-                           success for an update to succeed. You can specify a value from <code class="code">0</code> to
-                           <code class="code">100</code>. AWS CloudFormation rounds to the nearest tenth of a percent. For example, if
-                           you update five instances with a minimum successful percentage of <code class="code">50</code>,
-                           three instances must signal success.
-                        </p>
-                        
-                        <p>If an instance doesn&apos;t send a signal within the time specified in the <code class="code">PauseTime</code> property, AWS CloudFormation assumes that the instance wasn&apos;t updated.
-                        </p>
-                        
-                        <p>If you specify this property, you must also enable the
-                           <code class="code">WaitOnResourceSignals</code> and <code class="code">PauseTime</code> properties.
-                        </p>
-                        
-                        <p>The <code class="code">MinSuccessfulInstancesPercent</code> parameter applies only to instances only for signaling purpose. To specify the number
-                           of instances in your autoscaling group, see the <code class="code">MinSize</code>, <code class="code">MaxSize</code>, and <code class="code">DesiredCapacity</code> properties fo the <a href="aws-properties-as-group.html">AWS::AutoScaling::AutoScalingGroup</a> resource.
-                        </p>
-                        
-                        <p><em>Default</em>: <code class="code">100</code></p>
-                        
-                        <p><em>Type</em>: Integer
-                        </p>
-                        
-                        <p><em>Required</em>: No
-                        </p>
-                        
-                     </dd>
-                      
-                     
-                     <dt><a id="cfn-attributes-updatepolicy-rollingupdate-pausetime"></a><span class="term"><code class="code">PauseTime</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>The amount of time that AWS CloudFormation pauses after making a change to a batch
-                           of instances to give those instances time to start software applications. For example,
-                           you might need to specify <code class="code">PauseTime</code> when scaling up the number of instances in an Auto Scaling group. 
-                        </p>
-                        
-                        <p>If you enable the <code class="code">WaitOnResourceSignals</code> property, <code class="code">PauseTime</code> is the amount of time that AWS CloudFormation should wait for the Auto Scaling group
-                           to receive the required number of valid signals from added or replaced instances.
-                           If the <code class="code">PauseTime</code> is exceeded before the Auto Scaling group receives the required number of signals,
-                           the update fails. For best results, specify a time period that gives your applications
-                           sufficient time to get started. If the update needs to be
-                           rolled back, a short <code class="code">PauseTime</code> can cause the rollback to fail.
-                        </p>
-                        
-                        <p>Specify <code class="code">PauseTime</code> in the <a href="http://en.wikipedia.org/wiki/ISO_8601#Durations" target="_blank"><span>ISO8601 duration
-                                 format</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> (in the format
-                           <code class="code">PT<code class="replaceable">#</code>H<code class="replaceable">#</code>M<code class="replaceable">#</code>S</code>,
-                           where each <code class="replaceable">#</code> is the number of hours, minutes, and seconds,
-                           respectively). The maximum <code class="code">PauseTime</code> is one hour
-                           (<code class="code">PT1H</code>).
-                        </p>
-                        
-                        <p><em>Default</em>: <code class="code">PT0S</code> (zero seconds). If the
-                           <code class="code">WaitOnResourceSignals</code> property is set to <code class="code">true</code>, the default
-                           is <code class="code">PT5M</code>.
-                        </p>
-                        
-                        <p><em>Type</em>: String
-                        </p>
-                        
-                        <p><em>Required</em>: No
-                        </p>
-                        
-                     </dd>
-                      
-                     
-                     <dt><a id="cfn-attributes-updatepolicy-rollingupdate-suspendprocesses"></a><span class="term"><code class="code">SuspendProcesses</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>Specifies the Auto Scaling processes to suspend during a stack update. Suspending
-                           processes prevents Auto Scaling from interfering with a stack update. For example,
-                           you can
-                           suspend alarming so that Amazon EC2 Auto Scaling doesn&apos;t execute scaling policies
-                           associated with an
-                           alarm. For valid values, see the <code class="code">ScalingProcesses.member.N</code> parameter for
-                           the <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_SuspendProcesses.html">SuspendProcesses</a> action
-                           in the <em>Amazon EC2 Auto Scaling API Reference</em>.
-                        </p>
-                        
-                        <p><em>Default</em>: Not specified
-                        </p>
-                        
-                        <p><em>Type</em>: List of Auto Scaling processes
-                        </p>
-                        
-                        <p><em>Required</em>: No
-                        </p>
-                        
-                     </dd>
-                      
-                     
-                     <dt><a id="cfn-attributes-updatepolicy-rollingupdate-waitonresourcesignals"></a><span class="term"><code class="code">WaitOnResourceSignals</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>Specifies whether the Auto Scaling group waits on signals from new instances during
-                           an update. Use this property to ensure that instances have completed installing and
-                           configuring applications before the Auto Scaling group update proceeds. AWS CloudFormation
-                           suspends the update of an Auto Scaling group after new EC2 instances are launched
-                           into the group. AWS CloudFormation must receive a signal from each new instance within
-                           the specified <code class="code">PauseTime</code> before continuing the update. To signal the Auto Scaling group, use the
-                           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-signal.html">cfn-signal</a> helper script or <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SignalResource.html"><code class="code">SignalResource</code></a> API.
-                        </p>
-                        
-                        <p>To have instances wait for an Elastic Load Balancing health check before they signal
-                           success, add a
-                           health-check verification by using the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-init.html">cfn-init</a> helper script. For an example, see the
-                           <code class="code">verify_instance_health</code> command in the <a href="https://github.com/awslabs/aws-cloudformation-templates/blob/master/aws/services/AutoScaling/AutoScalingRollingUpdates.yaml" target="_blank"><span>Auto Scaling rolling updates</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> sample template.
-                        </p>
-                        
-                        <p><em>Default</em>: <code class="code">false</code></p>
-                        
-                        <p><em>Type</em>: Boolean
-                        </p>
-                        
-                        <p><em>Required</em>: Conditional. If you specify the
-                           <code class="code">MinSuccessfulInstancesPercent</code> property, you must also enable the
-                           <code class="code">WaitOnResourceSignals</code> and <code class="code">PauseTime</code> properties.
-                        </p>
-                        
-                     </dd>
-                     
-                  </dl>
-               </div>
-                
-               
-               <h2 id="cfn-attributes-updatepolicy-scheduledactions">AutoScalingScheduledAction Policy</h2>
-               
-               
-               <p>To specify how AWS CloudFormation handles updates for the <code class="code">MinSize</code>, <code class="code">MaxSize</code>,
-                  and <code class="code">DesiredCapacity</code> properties when the
-                  <code class="code">AWS::AutoScaling::AutoScalingGroup</code> resource has an associated scheduled action,
-                  use the <code class="code">AutoScalingScheduledAction</code> policy.
-               </p>
-               
-               <p>With scheduled actions, the group size properties of an Auto Scaling group can change
-                  at any time.
-                  When you update a stack with an Auto Scaling group and scheduled action, AWS CloudFormation
-                  always sets the group
-                  size property values of your Auto Scaling group to the values that are defined in
-                  the
-                  <code class="code">AWS::AutoScaling::AutoScalingGroup</code> resource of your template, even if a
-                  scheduled action is in effect. 
-               </p>
-               
-               <p>If you do not want AWS CloudFormation to change any of the group size property values
-                  when you have a
-                  scheduled action in effect, use the <code class="code">AutoScalingScheduledAction</code> update policy and set <code class="code">IgnoreUnmodifiedGroupSizeProperties</code> to <code class="code">true</code> to
-                  prevent AWS CloudFormation from changing the <code class="code">MinSize</code>, <code class="code">MaxSize</code>, or
-                  <code class="code">DesiredCapacity</code> properties unless you have modified these values in your
-                  template.
-               </p>
-               
-               <h3 id="cfn-attributes-updatepolicy-scheduledactions-syntax">Syntax</h3>
-               
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="aws-attribute-updatepolicy-scheduledactions-syntax.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;UpdatePolicy&quot; : <span>{</span>
+                                    </div>
+                                  
+                                 
+                                 <h3 id="aws-attribute-updatepolicy-rollingupdate-properties">Properties</h3>
+                                 
+                                 
+                                 <div class="variablelist">
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                    
+                                    <dl>
+                                       
+                                       <dt><a id="cfn-attributes-updatepolicy-rollingupdate-maxbatchsize"></a><span class="term"><code class="code">MaxBatchSize</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>Specifies the maximum number of instances that AWS CloudFormation updates.</p>
+                                          
+                                          <p><em>Default</em>: <code class="code">1</code></p>
+                                          
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          
+                                       </dd>
+                                        
+                                       
+                                       <dt><a id="cfn-attributes-updatepolicy-rollingupdate-mininstancesinservice"></a><span class="term"><code class="code">MinInstancesInService</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>Specifies the minimum number of instances that must be in service within the Auto
+                                             Scaling group while AWS CloudFormation updates old instances. This value must be less
+                                             than the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#cfn-as-group-maxsize">MaxSize</a> of
+                                             the Auto Scaling group.
+                                          </p>
+                                          
+                                          <p><em>Default</em>: <code class="code">0</code></p>
+                                          
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          
+                                       </dd>
+                                        
+                                       
+                                       <dt><a id="cfn-attributes-updatepolicy-rollingupdate-minsuccessfulinstancespercent"></a><span class="term"><code class="code">MinSuccessfulInstancesPercent</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>Specifies the percentage of instances in an Auto Scaling rolling update that must
+                                             signal
+                                             success for an update to succeed. You can specify a value from <code class="code">0</code> to
+                                             <code class="code">100</code>. AWS CloudFormation rounds to the nearest tenth of a percent. For example, if
+                                             you update five instances with a minimum successful percentage of <code class="code">50</code>,
+                                             three instances must signal success.
+                                          </p>
+                                          
+                                          <p>If an instance doesn&apos;t send a signal within the time specified in the <code class="code">PauseTime</code> property, AWS CloudFormation assumes that the instance wasn&apos;t updated.
+                                          </p>
+                                          
+                                          <p>If you specify this property, you must also enable the
+                                             <code class="code">WaitOnResourceSignals</code> and <code class="code">PauseTime</code> properties.
+                                          </p>
+                                          
+                                          <p>The <code class="code">MinSuccessfulInstancesPercent</code> parameter applies only to instances only for signaling purpose. To specify the number
+                                             of instances in your autoscaling group, see the <code class="code">MinSize</code>, <code class="code">MaxSize</code>, and <code class="code">DesiredCapacity</code> properties fo the <a href="aws-properties-as-group.html">AWS::AutoScaling::AutoScalingGroup</a> resource.
+                                          </p>
+                                          
+                                          <p><em>Default</em>: <code class="code">100</code></p>
+                                          
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          
+                                       </dd>
+                                        
+                                       
+                                       <dt><a id="cfn-attributes-updatepolicy-rollingupdate-pausetime"></a><span class="term"><code class="code">PauseTime</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>The amount of time that AWS CloudFormation pauses after making a change to a batch
+                                             of instances to give those instances time to start software applications. For example,
+                                             you might need to specify <code class="code">PauseTime</code> when scaling up the number of instances in an Auto Scaling group. 
+                                          </p>
+                                          
+                                          <p>If you enable the <code class="code">WaitOnResourceSignals</code> property, <code class="code">PauseTime</code> is the amount of time that AWS CloudFormation should wait for the Auto Scaling group
+                                             to receive the required number of valid signals from added or replaced instances.
+                                             If the <code class="code">PauseTime</code> is exceeded before the Auto Scaling group receives the required number of signals,
+                                             the update fails. For best results, specify a time period that gives your applications
+                                             sufficient time to get started. If the update needs to be
+                                             rolled back, a short <code class="code">PauseTime</code> can cause the rollback to fail.
+                                          </p>
+                                          
+                                          <p>Specify <code class="code">PauseTime</code> in the <a href="http://en.wikipedia.org/wiki/ISO_8601#Durations" target="_blank"><span>ISO8601 duration
+                                                   format</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> (in the format
+                                             <code class="code">PT<code class="replaceable">#</code>H<code class="replaceable">#</code>M<code class="replaceable">#</code>S</code>,
+                                             where each <code class="replaceable">#</code> is the number of hours, minutes, and seconds,
+                                             respectively). The maximum <code class="code">PauseTime</code> is one hour
+                                             (<code class="code">PT1H</code>).
+                                          </p>
+                                          
+                                          <p><em>Default</em>: <code class="code">PT0S</code> (zero seconds). If the
+                                             <code class="code">WaitOnResourceSignals</code> property is set to <code class="code">true</code>, the default
+                                             is <code class="code">PT5M</code>.
+                                          </p>
+                                          
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          
+                                       </dd>
+                                        
+                                       
+                                       <dt><a id="cfn-attributes-updatepolicy-rollingupdate-suspendprocesses"></a><span class="term"><code class="code">SuspendProcesses</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>Specifies the Auto Scaling processes to suspend during a stack update. Suspending
+                                             processes prevents Auto Scaling from interfering with a stack update. For example,
+                                             you can
+                                             suspend alarming so that Amazon EC2 Auto Scaling doesn&apos;t execute scaling policies
+                                             associated with an
+                                             alarm. For valid values, see the <code class="code">ScalingProcesses.member.N</code> parameter for
+                                             the <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_SuspendProcesses.html">SuspendProcesses</a> action
+                                             in the <em>Amazon EC2 Auto Scaling API Reference</em>.
+                                          </p>
+                                          
+                                          <p><em>Default</em>: Not specified
+                                          </p>
+                                          
+                                          <p><em>Type</em>: List of Auto Scaling processes
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          
+                                       </dd>
+                                        
+                                       
+                                       <dt><a id="cfn-attributes-updatepolicy-rollingupdate-waitonresourcesignals"></a><span class="term"><code class="code">WaitOnResourceSignals</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>Specifies whether the Auto Scaling group waits on signals from new instances during
+                                             an update. Use this property to ensure that instances have completed installing and
+                                             configuring applications before the Auto Scaling group update proceeds. AWS CloudFormation
+                                             suspends the update of an Auto Scaling group after new EC2 instances are launched
+                                             into the group. AWS CloudFormation must receive a signal from each new instance within
+                                             the specified <code class="code">PauseTime</code> before continuing the update. To signal the Auto Scaling group, use the
+                                             <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-signal.html">cfn-signal</a> helper script or <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SignalResource.html"><code class="code">SignalResource</code></a> API.
+                                          </p>
+                                          
+                                          <p>To have instances wait for an Elastic Load Balancing health check before they signal
+                                             success, add a
+                                             health-check verification by using the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-init.html">cfn-init</a> helper script. For an example, see the
+                                             <code class="code">verify_instance_health</code> command in the <a href="https://github.com/awslabs/aws-cloudformation-templates/blob/master/aws/services/AutoScaling/AutoScalingRollingUpdates.yaml" target="_blank"><span>Auto Scaling rolling updates</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> sample template.
+                                          </p>
+                                          
+                                          <p><em>Default</em>: <code class="code">false</code></p>
+                                          
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Conditional. If you specify the
+                                             <code class="code">MinSuccessfulInstancesPercent</code> property, you must also enable the
+                                             <code class="code">WaitOnResourceSignals</code> and <code class="code">PauseTime</code> properties.
+                                          </p>
+                                          
+                                       </dd>
+                                       
+                                    </dl>
+                                 </div>
+                                  
+                                 
+                                 <h2 id="cfn-attributes-updatepolicy-scheduledactions">AutoScalingScheduledAction Policy</h2>
+                                 
+                                 
+                                 <p>To specify how AWS CloudFormation handles updates for the <code class="code">MinSize</code>, <code class="code">MaxSize</code>,
+                                    and <code class="code">DesiredCapacity</code> properties when the
+                                    <code class="code">AWS::AutoScaling::AutoScalingGroup</code> resource has an associated scheduled action,
+                                    use the <code class="code">AutoScalingScheduledAction</code> policy.
+                                 </p>
+                                 
+                                 <p>With scheduled actions, the group size properties of an Auto Scaling group can change
+                                    at any time.
+                                    When you update a stack with an Auto Scaling group and scheduled action, AWS CloudFormation
+                                    always sets the group
+                                    size property values of your Auto Scaling group to the values that are defined in
+                                    the
+                                    <code class="code">AWS::AutoScaling::AutoScalingGroup</code> resource of your template, even if a
+                                    scheduled action is in effect. 
+                                 </p>
+                                 
+                                 <p>If you do not want AWS CloudFormation to change any of the group size property values
+                                    when you have a
+                                    scheduled action in effect, use the <code class="code">AutoScalingScheduledAction</code> update policy and set <code class="code">IgnoreUnmodifiedGroupSizeProperties</code> to <code class="code">true</code> to
+                                    prevent AWS CloudFormation from changing the <code class="code">MinSize</code>, <code class="code">MaxSize</code>, or
+                                    <code class="code">DesiredCapacity</code> properties unless you have modified these values in your
+                                    template.
+                                 </p>
+                                 
+                                 <h3 id="cfn-attributes-updatepolicy-scheduledactions-syntax">Syntax</h3>
+                                 
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-attribute-updatepolicy-scheduledactions-syntax.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;UpdatePolicy&quot; : <span>{</span>
   &quot;<a href="#cfn-attributes-updatepolicy-scheduledactions">AutoScalingScheduledAction</a>&quot; : <span>{</span>
     &quot;<a href="#cfn-attributes-updatepolicy-scheduledactions-ignoreunmodifiedgroupsizeproperties">IgnoreUnmodifiedGroupSizeProperties</a>&quot; : <code class="replaceable">Boolean</code>
   }
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="aws-attribute-updatepolicy-scheduledactions-syntax.yaml">YAML</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">UpdatePolicy:
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-attribute-updatepolicy-scheduledactions-syntax.yaml">YAML</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">UpdatePolicy:
   <a href="#cfn-attributes-updatepolicy-scheduledactions">AutoScalingScheduledAction</a>:
     <a href="#cfn-attributes-updatepolicy-scheduledactions-ignoreunmodifiedgroupsizeproperties">IgnoreUnmodifiedGroupSizeProperties</a>: <code class="replaceable">Boolean</code></code></pre>
-                  </div>
-                
-               
-               <h3 id="cfn-attributes-updatepolicy-scheduledactions-properties">Properties</h3>
-               
-               
-               <div class="variablelist">
-                   
-                  
-                  <dl>
-                     
-                     <dt><a id="cfn-attributes-updatepolicy-scheduledactions-ignoreunmodifiedgroupsizeproperties"></a><span class="term"><code class="code">IgnoreUnmodifiedGroupSizeProperties</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>If <code class="code">true</code>, AWS CloudFormation ignores differences in group size properties between your
-                           current Auto Scaling group and the Auto Scaling group described in the
-                           <code class="code">AWS::AutoScaling::AutoScalingGroup</code> resource of your template during a
-                           stack update. If you modify any of the group size property values in your template,
-                           AWS CloudFormation uses the modified values and updates your Auto Scaling group.
-                        </p>
-                        
-                        <p><em>Default</em>: <code class="code">false</code></p>
-                        
-                        <p><em>Type</em>: Boolean
-                        </p>
-                        
-                        <p><em>Required</em>: No
-                        </p>
-                        
-                     </dd>
-                     
-                  </dl>
-               </div>
-                
-                
-               
-               <h2 id="cfn-attributes-updatepolicy-useonlineresharding">UseOnlineResharding Policy</h2>
-               
-               <p>To modify a replication group&apos;s shards by adding or removing shards, rather than replacing
-                  the entire <a href="aws-resource-elasticache-replicationgroup.html">AWS::ElastiCache::ReplicationGroup</a> resource, use the
-                  <code class="code">UseOnlineResharding</code> update policy.
-               </p>
-               
-               <p>If <code class="code">UseOnlineResharding</code> is set to <code class="code">true</code>, you can update the
-                  <code class="code">NumNodeGroups</code> and <code class="code">NodeGroupConfiguration</code> properties of the
-                  <code class="code">AWS::ElastiCache::ReplicationGroup</code> resource, and CloudFormation will update those
-                  properties without interruption. When <code class="code">UseOnlineResharding</code> is set to
-                  <code class="code">false</code>, or not specified, updating the <code class="code">NumNodeGroups</code> and
-                  <code class="code">NodeGroupConfiguration</code> properties results in CloudFormation replacing the entire
-                  <code class="code">AWS::ElastiCache::ReplicationGroup</code> resource.
-               </p>
-               
-               <p>The <code class="code">UseOnlineResharding</code> update policy has no properties.
-               </p>
-               
-               <p>Things to consider when setting the <code class="code">UseOnlineResharding</code> update policy to
-                  <code class="code">true</code>:
-               </p>
-               
-               <div class="itemizedlist">
-                   
-                   
-                   
-                  
-                  <ul class="itemizedlist" type="disc">
-                     <li class="listitem">
-                        
-                        <p>We strongly recommend you perform updates to the <code class="code">NumNodeGroups</code> and
-                           <code class="code">NodeGroupConfiguration</code> properties as the only updates in a given stack
-                           update operation.
-                        </p>
-                        
-                        <p>Updating the node group configuration of a replication group is a resource-intensive
-                           operation. If a stack update fails, CloudFormation does not roll back changes to the
-                           node
-                           group configuration of a replication group. However, CloudFormation will roll back
-                           any
-                           other properties that were changed as part of the failed update operation.
-                        </p>
-                        
-                     </li>
-                     <li class="listitem">  
-                        
-                        <p>Any node group updates require identifying all node groups.</p>
-                        
-                        <p>If you specify the <code class="code">NodeGroupConfiguration</code> property, you must also specify
-                           the NodeGroupId for each node group configuration in order for CloudFormation to update
-                           the number of nodes without interruption. 
-                        </p>
-                        
-                        <p>When creating a replication group, if you do not specify an ID for each node group,
-                           ElastiCache automatically generates an ID for each node group. To update the replication
-                           group
-                           without interruption, use the ElastiCache console (<a href="https://console.aws.amazon.com/elasticache/" target="_blank"><span>https://console.aws.amazon.com/elasticache/</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>) or <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeReplicationGroups.html">DescribeReplicationGroups</a>
-                           to retrieve the IDs for all node groups in the replication group. Then specify the
-                           ID for
-                           each node group in your stack template before attempting to add or remove shards.
-                        </p>
-                        
-                        <div class="awsdocs-note">
-                           <div class="awsdocs-note-title">
-                              <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
-                           <div class="awsdocs-note-text">
-                              <p>As a best practice, when you create a replication group in a stack template, include
-                                 an
-                                 ID for each node group you specify.
-                              </p>
-                           </div>
-                        </div>
-                        
-                        <p>In addition, updating the number of nodes without interruption requires that you have
-                           accurately specified the <code class="code">PrimaryAvailabilityZone</code>, <code class="code">ReplicaAvailabilityZones</code>, and <code class="code">ReplicaCount</code> properties for each <code class="code">NodeGroupConfiguration</code> as well. Again, you can use the ElastiCache console (<a href="https://console.aws.amazon.com/elasticache/" target="_blank"><span>https://console.aws.amazon.com/elasticache/</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>) or <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeReplicationGroups.html">DescribeReplicationGroups</a> to retrieve the actual values for each node group and compare them to the values
-                           in your stack template. You can update the property values of the node groups as a
-                           separate stack update, or as part of the same stack update that changes the number
-                           of node groups.
-                        </p>
-                        
-                        <p>When you use an <code class="code">UseOnlineResharding</code> update policy to update the number
-                           of node groups without interruption, ElastiCache evenly distributes the keyspaces
-                           between the specified number of slots. This cannot be updated later. Therefore, after
-                           updating the number of node groups in this way, you should remove the value specified
-                           for the <code class="code">Slots</code> property of each <code class="code">NodeGroupConfiguration</code> from the stack template, as it no longer reflects the actual values in each node
-                           group.
-                        </p>
-                        
-                     </li>
-                     <li class="listitem">
-                        
-                        <p>Actual node group removal results may vary.</p>
-                        
-                        <p>When you specify a <code class="code">NumNodeGroups</code> value that is less than the current
-                           number of node groups, CloudFormation instructs ElastiCache to remove as many node
-                           groups as
-                           necessary to reach the specified number of nodes. However, ElastiCache may not always
-                           be able to
-                           remove the desired number of node groups. In the event ElastiCache cannot remove the
-                           desired
-                           number of node groups, CloudFormation generates a stack event alerting you to this.
-                           In
-                           cases where ElastiCache cannot remove <em>any</em> node groups, the CloudFormation
-                           resource update fails.
-                        </p>
-                        
-                     </li>
-                  </ul>
-               </div>
-               
-               <p>For more information on modifying replication groups, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html">ModifyReplicationGroupShardConfiguration</a> 
-                  in the <em>Amazon ElastiCache API Reference</em>.
-               </p>
-               
-               
-               <h3 id="cfn-attributes-updatepolicy-useonlineresharding-syntax">Syntax</h3>
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="cfn-attributes-updatepolicy-useonlineresharding-syntax.json">JSON</h4>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;UpdatePolicy&quot; : <span>{</span>
+                                    </div>
+                                  
+                                 
+                                 <h3 id="cfn-attributes-updatepolicy-scheduledactions-properties">Properties</h3>
+                                 
+                                 
+                                 <div class="variablelist">
+                                     
+                                    
+                                    <dl>
+                                       
+                                       <dt><a id="cfn-attributes-updatepolicy-scheduledactions-ignoreunmodifiedgroupsizeproperties"></a><span class="term"><code class="code">IgnoreUnmodifiedGroupSizeProperties</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>If <code class="code">true</code>, AWS CloudFormation ignores differences in group size properties between your
+                                             current Auto Scaling group and the Auto Scaling group described in the
+                                             <code class="code">AWS::AutoScaling::AutoScalingGroup</code> resource of your template during a
+                                             stack update. If you modify any of the group size property values in your template,
+                                             AWS CloudFormation uses the modified values and updates your Auto Scaling group.
+                                          </p>
+                                          
+                                          <p><em>Default</em>: <code class="code">false</code></p>
+                                          
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          
+                                       </dd>
+                                       
+                                    </dl>
+                                 </div>
+                                  
+                                  
+                                 
+                                 <h2 id="cfn-attributes-updatepolicy-useonlineresharding">UseOnlineResharding Policy</h2>
+                                 
+                                 <p>To modify a replication group&apos;s shards by adding or removing shards, rather than replacing
+                                    the entire <a href="aws-resource-elasticache-replicationgroup.html">AWS::ElastiCache::ReplicationGroup</a> resource, use the
+                                    <code class="code">UseOnlineResharding</code> update policy.
+                                 </p>
+                                 
+                                 <p>If <code class="code">UseOnlineResharding</code> is set to <code class="code">true</code>, you can update the
+                                    <code class="code">NumNodeGroups</code> and <code class="code">NodeGroupConfiguration</code> properties of the
+                                    <code class="code">AWS::ElastiCache::ReplicationGroup</code> resource, and CloudFormation will update those
+                                    properties without interruption. When <code class="code">UseOnlineResharding</code> is set to
+                                    <code class="code">false</code>, or not specified, updating the <code class="code">NumNodeGroups</code> and
+                                    <code class="code">NodeGroupConfiguration</code> properties results in CloudFormation replacing the entire
+                                    <code class="code">AWS::ElastiCache::ReplicationGroup</code> resource.
+                                 </p>
+                                 
+                                 <p>The <code class="code">UseOnlineResharding</code> update policy has no properties.
+                                 </p>
+                                 
+                                 <p>Things to consider when setting the <code class="code">UseOnlineResharding</code> update policy to
+                                    <code class="code">true</code>:
+                                 </p>
+                                 
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p>We strongly recommend you perform updates to the <code class="code">NumNodeGroups</code> and
+                                             <code class="code">NodeGroupConfiguration</code> properties as the only updates in a given stack
+                                             update operation.
+                                          </p>
+                                          
+                                          <p>Updating the node group configuration of a replication group is a resource-intensive
+                                             operation. If a stack update fails, CloudFormation does not roll back changes to the
+                                             node
+                                             group configuration of a replication group. However, CloudFormation will roll back
+                                             any
+                                             other properties that were changed as part of the failed update operation.
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">  
+                                          
+                                          <p>Any node group updates require identifying all node groups.</p>
+                                          
+                                          <p>If you specify the <code class="code">NodeGroupConfiguration</code> property, you must also specify
+                                             the NodeGroupId for each node group configuration in order for CloudFormation to update
+                                             the number of nodes without interruption. 
+                                          </p>
+                                          
+                                          <p>When creating a replication group, if you do not specify an ID for each node group,
+                                             ElastiCache automatically generates an ID for each node group. To update the replication
+                                             group
+                                             without interruption, use the ElastiCache console (<a href="https://console.aws.amazon.com/elasticache/" target="_blank"><span>https://console.aws.amazon.com/elasticache/</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>) or <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeReplicationGroups.html">DescribeReplicationGroups</a>
+                                             to retrieve the IDs for all node groups in the replication group. Then specify the
+                                             ID for
+                                             each node group in your stack template before attempting to add or remove shards.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>As a best practice, when you create a replication group in a stack template, include
+                                                   an
+                                                   ID for each node group you specify.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p>In addition, updating the number of nodes without interruption requires that you have
+                                             accurately specified the <code class="code">PrimaryAvailabilityZone</code>, <code class="code">ReplicaAvailabilityZones</code>, and <code class="code">ReplicaCount</code> properties for each <code class="code">NodeGroupConfiguration</code> as well. Again, you can use the ElastiCache console (<a href="https://console.aws.amazon.com/elasticache/" target="_blank"><span>https://console.aws.amazon.com/elasticache/</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>) or <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeReplicationGroups.html">DescribeReplicationGroups</a> to retrieve the actual values for each node group and compare them to the values
+                                             in your stack template. You can update the property values of the node groups as a
+                                             separate stack update, or as part of the same stack update that changes the number
+                                             of node groups.
+                                          </p>
+                                          
+                                          <p>When you use an <code class="code">UseOnlineResharding</code> update policy to update the number
+                                             of node groups without interruption, ElastiCache evenly distributes the keyspaces
+                                             between the specified number of slots. This cannot be updated later. Therefore, after
+                                             updating the number of node groups in this way, you should remove the value specified
+                                             for the <code class="code">Slots</code> property of each <code class="code">NodeGroupConfiguration</code> from the stack template, as it no longer reflects the actual values in each node
+                                             group.
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>Actual node group removal results may vary.</p>
+                                          
+                                          <p>When you specify a <code class="code">NumNodeGroups</code> value that is less than the current
+                                             number of node groups, CloudFormation instructs ElastiCache to remove as many node
+                                             groups as
+                                             necessary to reach the specified number of nodes. However, ElastiCache may not always
+                                             be able to
+                                             remove the desired number of node groups. In the event ElastiCache cannot remove the
+                                             desired
+                                             number of node groups, CloudFormation generates a stack event alerting you to this.
+                                             In
+                                             cases where ElastiCache cannot remove <em>any</em> node groups, the CloudFormation
+                                             resource update fails.
+                                          </p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 
+                                 <p>For more information on modifying replication groups, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html">ModifyReplicationGroupShardConfiguration</a> 
+                                    in the <em>Amazon ElastiCache API Reference</em>.
+                                 </p>
+                                 
+                                 
+                                 <h3 id="cfn-attributes-updatepolicy-useonlineresharding-syntax">Syntax</h3>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="cfn-attributes-updatepolicy-useonlineresharding-syntax.json">JSON</h4>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;UpdatePolicy&quot; : <span>{</span>
   &quot;<a href="#cfn-attributes-updatepolicy-useonlineresharding">UseOnlineResharding</a>&quot; : <code class="replaceable">Boolean</code>
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="cfn-attributes-updatepolicy-useonlineresharding-syntax.yaml">YAML</h4>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">UpdatePolicy:
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="cfn-attributes-updatepolicy-useonlineresharding-syntax.yaml">YAML</h4>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">UpdatePolicy:
   <a href="#cfn-attributes-updatepolicy-useonlineresharding">UseOnlineResharding</a>: <code class="replaceable">Boolean</code></code></pre>
-                  </div>
-                
-                
-               
-               <h2 id="cfn-attributes-updatepolicy-upgradeelasticsearchdomain">EnableVersionUpgrade
-                  Policy
-               </h2>
-               
-               
-               <p>To upgrade an Amazon ES domain to a new version of Elasticsearch rather than replacing
-                  the entire
-                  <a href="aws-resource-elasticsearch-domain.html">AWS::Elasticsearch::Domain</a> resource, use the <code class="code">EnableVersionUpgrade</code>
-                  update policy.
-               </p>
-               
-               <p>If <code class="code">EnableVersionUpgrade</code> is set to <code class="code">true</code>, you can update the
-                  <code class="code">ElasticsearchVersion</code> property of the <code class="code">AWS::Elasticsearch::Domain</code>
-                  resource, and CloudFormation will update that property without interruption. When
-                  <code class="code">EnableVersionUpgrade</code> is set to <code class="code">false</code>, or not specified, updating
-                  the <code class="code">ElasticsearchVersion</code> property results in CloudFormation replacing the entire
-                  <code class="code">AWS::Elasticsearch::Domain</code> resource.
-               </p>
-               
-               <p>The <code class="code">EnableVersionUpgrade</code> update policy has no properties.
-               </p>
-               
-               <p>For more information about upgrading Amazon ES domains, see <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-configuration-api.html#es-configuration-api-actions-upgrade-domain">UpgradeElasticsearchDomain</a> in the Amazon Elasticsearch Service Developer Guide.
-               </p>
-               
-                
-               
-               <h3 id="cfn-attributes-updatepolicy-upgradeelasticsearchdomain-syntax">Syntax</h3>
-               
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  
-                  <h4 id="cfn-attributes-updatepolicy-upgradeelasticsearchdomain-syntax.json">JSON</h4>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;UpdatePolicy&quot; : <span>{</span>
+                                    </div>
+                                  
+                                  
+                                 
+                                 <h2 id="cfn-attributes-updatepolicy-upgradeelasticsearchdomain">EnableVersionUpgrade
+                                    Policy
+                                 </h2>
+                                 
+                                 
+                                 <p>To upgrade an Amazon ES domain to a new version of Elasticsearch rather than replacing
+                                    the entire
+                                    <a href="aws-resource-elasticsearch-domain.html">AWS::Elasticsearch::Domain</a> resource, use the <code class="code">EnableVersionUpgrade</code>
+                                    update policy.
+                                 </p>
+                                 
+                                 <p>If <code class="code">EnableVersionUpgrade</code> is set to <code class="code">true</code>, you can update the
+                                    <code class="code">ElasticsearchVersion</code> property of the <code class="code">AWS::Elasticsearch::Domain</code>
+                                    resource, and CloudFormation will update that property without interruption. When
+                                    <code class="code">EnableVersionUpgrade</code> is set to <code class="code">false</code>, or not specified, updating
+                                    the <code class="code">ElasticsearchVersion</code> property results in CloudFormation replacing the entire
+                                    <code class="code">AWS::Elasticsearch::Domain</code> resource.
+                                 </p>
+                                 
+                                 <p>The <code class="code">EnableVersionUpgrade</code> update policy has no properties.
+                                 </p>
+                                 
+                                 <p>For more information about upgrading Amazon ES domains, see <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-configuration-api.html#es-configuration-api-actions-upgrade-domain">UpgradeElasticsearchDomain</a> in the Amazon Elasticsearch Service Developer Guide.
+                                 </p>
+                                 
+                                  
+                                 
+                                 <h3 id="cfn-attributes-updatepolicy-upgradeelasticsearchdomain-syntax">Syntax</h3>
+                                 
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    
+                                    <h4 id="cfn-attributes-updatepolicy-upgradeelasticsearchdomain-syntax.json">JSON</h4>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;UpdatePolicy&quot; : <span>{</span>
   &quot;<a href="#cfn-attributes-updatepolicy-upgradeelasticsearchdomain">EnableVersionUpgrade</a>&quot; : <code class="replaceable">Boolean</code>
 }</code></pre>
-                  </div>
-               
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  
-                  <h4 id="cfn-attributes-updatepolicy-upgradeelasticsearchdomain-syntax.yaml">YAML</h4>
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">UpdatePolicy:
+                                    </div>
+                                 
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    
+                                    <h4 id="cfn-attributes-updatepolicy-upgradeelasticsearchdomain-syntax.yaml">YAML</h4>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">UpdatePolicy:
   <a href="#cfn-attributes-updatepolicy-upgradeelasticsearchdomain">EnableVersionUpgrade</a>: <code class="replaceable">Boolean</code></code></pre>
-                  </div>
-               
-                
-               
-                
-               
-               <h2 id="cfn-attributes-updatepolicy-codedeploylambdaaliasupdate">CodeDeployLambdaAliasUpdate Policy</h2>
-               
-               
-               <p>To perform an CodeDeploy deployment when the version changes on an <code class="code">AWS::Lambda::Alias</code> resource, use the <code class="code">CodeDeployLambdaAliasUpdate</code> update policy.
-               </p>
-               
-               <h3 id="cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-syntax">Syntax</h3>
-               
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="aws-attribute-updatepolicy-codedeploylambdaaliasupdate-syntax.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;UpdatePolicy&quot; : <span>{</span>
+                                    </div>
+                                 
+                                  
+                                 
+                                  
+                                 
+                                 <h2 id="cfn-attributes-updatepolicy-codedeploylambdaaliasupdate">CodeDeployLambdaAliasUpdate Policy</h2>
+                                 
+                                 
+                                 <p>To perform an CodeDeploy deployment when the version changes on an <code class="code">AWS::Lambda::Alias</code> resource, use the <code class="code">CodeDeployLambdaAliasUpdate</code> update policy.
+                                 </p>
+                                 
+                                 <h3 id="cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-syntax">Syntax</h3>
+                                 
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-attribute-updatepolicy-codedeploylambdaaliasupdate-syntax.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;UpdatePolicy&quot; : <span>{</span>
   &quot;<a href="#cfn-attributes-updatepolicy-codedeploylambdaaliasupdate">CodeDeployLambdaAliasUpdate</a>&quot; : <span>{</span>
     &quot;<a href="#cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-afterallowtraffichook">AfterAllowTrafficHook</a>&quot; : <code class="replaceable">String</code>,
     &quot;<a href="#cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-applicationname">ApplicationName</a>&quot; : <code class="replaceable">String</code>,
@@ -740,124 +739,124 @@
     &quot;<a href="#cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-deploymentgroupname">DeploymentGroupName</a>&quot; : <code class="replaceable">String</code>
   }
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="aws-attribute-updatepolicy-codedeploylambdaaliasupdate-syntax.yaml">YAML</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">UpdatePolicy:
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-attribute-updatepolicy-codedeploylambdaaliasupdate-syntax.yaml">YAML</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">UpdatePolicy:
   <a href="#cfn-attributes-updatepolicy-codedeploylambdaaliasupdate">CodeDeployLambdaAliasUpdate</a>:
     <a href="#cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-afterallowtraffichook">AfterAllowTrafficHook</a>: <code class="replaceable">String</code>
     <a href="#cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-applicationname">ApplicationName</a>: <code class="replaceable">String</code>
     <a href="#cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-beforeallowtraffichook">BeforeAllowTrafficHook</a>: <code class="replaceable">String</code>
     <a href="#cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-deploymentgroupname">DeploymentGroupName</a>: <code class="replaceable">String</code></code></pre>
-                  </div>
-                
-                
-               
-               <h3 id="aws-attribute-updatepolicy-codedeploylambdaaliasupdate-properties">Properties</h3>
-               
-               
-               <div class="variablelist">
-                   
-                   
-                   
-                   
-                  
-                  <dl>
-                     
-                     <dt><a id="cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-afterallowtraffichook"></a><span class="term"><code class="code">AfterAllowTrafficHook</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>The name of the Lambda function to run after traffic routing completes.</p>
-                        
-                        <p><em>Required: </em>No
-                        </p>
-                        
-                        <p><em>Type: </em>String
-                        </p>
-                        
-                     </dd>
-                      
-                     
-                     <dt><a id="cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-applicationname"></a><span class="term"><code class="code">ApplicationName</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>The name of the CodeDeploy application.</p>
-                        
-                        <p><em>Required: </em>Yes
-                        </p>
-                        
-                        <p><em>Type: </em>String
-                        </p>
-                        
-                     </dd>
-                      
-                     
-                     <dt><a id="cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-beforeallowtraffichook"></a><span class="term"><code class="code">BeforeAllowTrafficHook</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>The name of the Lambda function to run before traffic routing starts.</p>
-                        
-                        <p><em>Required: </em>No
-                        </p>
-                        
-                        <p><em>Type: </em>String
-                        </p>
-                        
-                     </dd>
-                      
-                     
-                     <dt><a id="cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-deploymentgroupname"></a><span class="term"><code class="code">DeploymentGroupName</code></span></dt>
-                     
-                     <dd>
-                        
-                        <p>The name of the CodeDeploy deployment group. This is where the traffic-shifting policy
-                           is set.
-                        </p>
-                        
-                        <p><em>Required: </em>Yes
-                        </p>
-                        
-                        <p><em>Type: </em>String
-                        </p>
-                        
-                     </dd>
-                     
-                  </dl>
-               </div>
-               
-               <p>For an example that specifies the <code class="code">UpdatePolicy</code> attribute for an <code class="code">AWS::Lambda::Alias</code> resource, 
-                  see <a href="#aws-resource-lambda-alias-example">Lambda Alias Update Policy</a>.
-               </p>
-                
-               
-               <h2 id="aws-attribute-updatepolicy-examples">Examples</h2>      
-               
-               <p>The following examples show how to add an update policy to an Auto Scaling group and
-                  how to
-                  maintain availability when updating metadata.
-               </p>
-               
-               <h3 id="w2ab1c26c19c23c19b4">Add an UpdatePolicy to an Auto Scaling Group</h3>
-               
-               
-               <p>The following example shows how to add an update policy. During an update, the Auto
-                  Scaling
-                  group updates instances in batches of two and keeps a minimum of one instance in service.
-                  Because the <code class="code">WaitOnResourceSignals</code> flag is set, the Auto Scaling group waits for new
-                  instances that are added to the group. The new instances must signal the Auto Scaling
-                  group before
-                  it updates the next batch of instances.
-               </p>
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="attribute-updatepolicy-example-1.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;ASG&quot; : <span>{</span>
+                                    </div>
+                                  
+                                  
+                                 
+                                 <h3 id="aws-attribute-updatepolicy-codedeploylambdaaliasupdate-properties">Properties</h3>
+                                 
+                                 
+                                 <div class="variablelist">
+                                     
+                                     
+                                     
+                                     
+                                    
+                                    <dl>
+                                       
+                                       <dt><a id="cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-afterallowtraffichook"></a><span class="term"><code class="code">AfterAllowTrafficHook</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>The name of the Lambda function to run after traffic routing completes.</p>
+                                          
+                                          <p><em>Required: </em>No
+                                          </p>
+                                          
+                                          <p><em>Type: </em>String
+                                          </p>
+                                          
+                                       </dd>
+                                        
+                                       
+                                       <dt><a id="cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-applicationname"></a><span class="term"><code class="code">ApplicationName</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>The name of the CodeDeploy application.</p>
+                                          
+                                          <p><em>Required: </em>Yes
+                                          </p>
+                                          
+                                          <p><em>Type: </em>String
+                                          </p>
+                                          
+                                       </dd>
+                                        
+                                       
+                                       <dt><a id="cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-beforeallowtraffichook"></a><span class="term"><code class="code">BeforeAllowTrafficHook</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>The name of the Lambda function to run before traffic routing starts.</p>
+                                          
+                                          <p><em>Required: </em>No
+                                          </p>
+                                          
+                                          <p><em>Type: </em>String
+                                          </p>
+                                          
+                                       </dd>
+                                        
+                                       
+                                       <dt><a id="cfn-attributes-updatepolicy-codedeploylambdaaliasupdate-deploymentgroupname"></a><span class="term"><code class="code">DeploymentGroupName</code></span></dt>
+                                       
+                                       <dd>
+                                          
+                                          <p>The name of the CodeDeploy deployment group. This is where the traffic-shifting policy
+                                             is set.
+                                          </p>
+                                          
+                                          <p><em>Required: </em>Yes
+                                          </p>
+                                          
+                                          <p><em>Type: </em>String
+                                          </p>
+                                          
+                                       </dd>
+                                       
+                                    </dl>
+                                 </div>
+                                 
+                                 <p>For an example that specifies the <code class="code">UpdatePolicy</code> attribute for an <code class="code">AWS::Lambda::Alias</code> resource, 
+                                    see <a href="#aws-resource-lambda-alias-example">Lambda Alias Update Policy</a>.
+                                 </p>
+                                  
+                                 
+                                 <h2 id="aws-attribute-updatepolicy-examples">Examples</h2>      
+                                 
+                                 <p>The following examples show how to add an update policy to an Auto Scaling group and
+                                    how to
+                                    maintain availability when updating metadata.
+                                 </p>
+                                 
+                                 <h3 id="w2ab1c25c23c23c19b4">Add an UpdatePolicy to an Auto Scaling Group</h3>
+                                 
+                                 
+                                 <p>The following example shows how to add an update policy. During an update, the Auto
+                                    Scaling
+                                    group updates instances in batches of two and keeps a minimum of one instance in service.
+                                    Because the <code class="code">WaitOnResourceSignals</code> flag is set, the Auto Scaling group waits for new
+                                    instances that are added to the group. The new instances must signal the Auto Scaling
+                                    group before
+                                    it updates the next batch of instances.
+                                 </p>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="attribute-updatepolicy-example-1.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;ASG&quot; : <span>{</span>
    &quot;Type&quot; : &quot;AWS::AutoScaling::AutoScalingGroup&quot;,
    &quot;Properties&quot; : <span>{</span>
       &quot;AvailabilityZones&quot; : [
@@ -893,12 +892,12 @@
       &quot;StartTime&quot; : &quot;2017-06-02T20 : 00 : 00Z&quot;
    }
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="attribute-updatepolicy-example-1.yaml">YAML</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">ASG:
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="attribute-updatepolicy-example-1.yaml">YAML</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">ASG:
   Type: &apos;AWS::AutoScaling::AutoScalingGroup&apos;
   Properties:
     AvailabilityZones:
@@ -924,21 +923,21 @@ ScheduledAction:
       Ref: ASG
     DesiredCapacity: &apos;2&apos;
     StartTime: &apos;2017-06-02T20 : 00 : 00Z&apos;</code></pre>
-                  </div>
-                
-               
-               <h3 id="w2ab1c26c19c23c19b6">AutoScalingReplacingUpdate Policy</h3>
-               
-               
-               <p>The following example declares a policy that forces an associated Auto Scaling group
-                  to be replaced during an update. For the update to succeed, a percentage of instances
-                  (specified by the <code class="code">MinSuccessfulPercentParameter</code> parameter) must signal success within the <code class="code">Timeout</code> period.
-               </p>
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="attribute-updatepolicy-example-2.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;UpdatePolicy&quot; : <span>{</span>
+                                    </div>
+                                  
+                                 
+                                 <h3 id="w2ab1c25c23c23c19b6">AutoScalingReplacingUpdate Policy</h3>
+                                 
+                                 
+                                 <p>The following example declares a policy that forces an associated Auto Scaling group
+                                    to be replaced during an update. For the update to succeed, a percentage of instances
+                                    (specified by the <code class="code">MinSuccessfulPercentParameter</code> parameter) must signal success within the <code class="code">Timeout</code> period.
+                                 </p>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="attribute-updatepolicy-example-2.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;UpdatePolicy&quot; : <span>{</span>
   &quot;AutoScalingReplacingUpdate&quot; : <span>{</span>
     &quot;WillReplace&quot; : &quot;true&quot;
   }
@@ -952,12 +951,12 @@ ScheduledAction:
     &quot;MinSuccessfulInstancesPercent&quot; : <span>{</span> &quot;Ref&quot; : &quot;MinSuccessfulPercentParameter&quot; }
   }
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="attribute-updatepolicy-example-2.yaml">YAML</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">UpdatePolicy:
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="attribute-updatepolicy-example-2.yaml">YAML</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">UpdatePolicy:
   AutoScalingReplacingUpdate:
     WillReplace: &apos;true&apos;
 CreationPolicy:
@@ -966,51 +965,51 @@ CreationPolicy:
     Timeout: PT10M
   AutoScalingCreationPolicy:
     MinSuccessfulInstancesPercent: !Ref &apos;MinSuccessfulPercentParameter&apos;</code></pre>
-                  </div>
-                
-               
-               <h3 id="w2ab1c26c19c23c19b8">Maintain Availability When Updating the Metadata for the cfn-init Helper
-                  Script
-               </h3>
-               
-               
-               <p>When you install software applications on your instances, you might use the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-init.html"><code class="code">AWS::CloudFormation::Init</code></a>
-                  metadata key and the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-init.html"><code>cfn-init</code></a> helper script to bootstrap the instances in your
-                  Auto Scaling group. AWS CloudFormation installs the packages, runs the commands, and
-                  performs other bootstrapping
-                  actions described in the metadata.
-               </p>
-               
-               <p>When you update only the metadata (for example, when updating a package to another
-                  version), you can use the <code><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-hup.html">cfn-hup</a></code> helper daemon to detect and apply the updates. However, the
-                  <code>cfn-hup</code> daemon runs independently on each instance. If the daemon
-                  happens to runs at the same time on all instances, your application or service might
-                  be
-                  unavailable during the update. To guarantee availability, you can force a rolling
-                  update so
-                  that AWS CloudFormation updates your instances one batch at a time.
-               </p>
-               
-               <div class="awsdocs-note">
-                  <div class="awsdocs-note-title">
-                     <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
-                  <div class="awsdocs-note-text">
-                     <p>Forcing a rolling update requires AWS CloudFormation to create a new instance and
-                        then delete the old one. Any information stored on the old instance is lost.
-                     </p>
-                  </div>
-               </div>
-               
-               <p>To force a rolling update, change the logical ID of the launch configuration resource,
-                  and then update the stack and any references pointing to the original logic ID (such
-                  as the associated Auto Scaling group). AWS CloudFormation triggers a rolling update
-                  on the Auto Scaling group, replacing all instances.
-               </p>
-                
-               
-               <h3 id="w2ab1c26c19c23c19c10">Original Template</h3>
-               
-               <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;LaunchConfig&quot;: <span>{</span>
+                                    </div>
+                                  
+                                 
+                                 <h3 id="w2ab1c25c23c23c19b8">Maintain Availability When Updating the Metadata for the cfn-init Helper
+                                    Script
+                                 </h3>
+                                 
+                                 
+                                 <p>When you install software applications on your instances, you might use the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-init.html"><code class="code">AWS::CloudFormation::Init</code></a>
+                                    metadata key and the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-init.html"><code>cfn-init</code></a> helper script to bootstrap the instances in your
+                                    Auto Scaling group. AWS CloudFormation installs the packages, runs the commands, and
+                                    performs other bootstrapping
+                                    actions described in the metadata.
+                                 </p>
+                                 
+                                 <p>When you update only the metadata (for example, when updating a package to another
+                                    version), you can use the <code><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-hup.html">cfn-hup</a></code> helper daemon to detect and apply the updates. However, the
+                                    <code>cfn-hup</code> daemon runs independently on each instance. If the daemon
+                                    happens to runs at the same time on all instances, your application or service might
+                                    be
+                                    unavailable during the update. To guarantee availability, you can force a rolling
+                                    update so
+                                    that AWS CloudFormation updates your instances one batch at a time.
+                                 </p>
+                                 
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>Forcing a rolling update requires AWS CloudFormation to create a new instance and
+                                          then delete the old one. Any information stored on the old instance is lost.
+                                       </p>
+                                    </div>
+                                 </div>
+                                 
+                                 <p>To force a rolling update, change the logical ID of the launch configuration resource,
+                                    and then update the stack and any references pointing to the original logic ID (such
+                                    as the associated Auto Scaling group). AWS CloudFormation triggers a rolling update
+                                    on the Auto Scaling group, replacing all instances.
+                                 </p>
+                                  
+                                 
+                                 <h3 id="w2ab1c25c23c23c19c10">Original Template</h3>
+                                 
+                                 <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;LaunchConfig&quot;: <span>{</span>
   &quot;Type&quot; : &quot;AWS::AutoScaling::LaunchConfiguration&quot;,
   &quot;Metadata&quot; : <span>{</span>
     &quot;Comment&quot; : &quot;Install a simple PHP application&quot;,
@@ -1019,10 +1018,10 @@ CreationPolicy:
     }
   }
 }</code></pre>
-                
-               <h3 id="w2ab1c26c19c23c19c12">Updated Logical ID</h3>
-               
-               <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;<b>LaunchConfigUpdateRubygemsPkg</b>&quot;: <span>{</span>
+                                  
+                                 <h3 id="w2ab1c25c23c23c19c12">Updated Logical ID</h3>
+                                 
+                                 <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;<b>LaunchConfigUpdateRubygemsPkg</b>&quot;: <span>{</span>
   &quot;Type&quot; : &quot;AWS::AutoScaling::LaunchConfiguration&quot;,
   &quot;Metadata&quot; : <span>{</span>
     &quot;Comment&quot; : &quot;Install a simple PHP application&quot;,
@@ -1031,19 +1030,19 @@ CreationPolicy:
     }
   }
 }</code></pre>
-                
-               	 
-               	  <h3 id="aws-resource-lambda-alias-example">Lambda Alias Update Policy</h3>
-               
-               <p>The following example specifies the <code class="code">UpdatePolicy</code> attribute for an <code class="code">AWS::Lambda::Alias</code> resource. 
-                  	     All the details for the deployment are defined by the application and deployment
-                  group that are passed into the policy.
-               </p>
-               
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h4 id="aws-attribute-updatepolicy-codedeploylambda.json">JSON</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;Alias&quot;: <span>{</span>
+                                  
+                                 	 
+                                 	  <h3 id="aws-resource-lambda-alias-example">Lambda Alias Update Policy</h3>
+                                 
+                                 <p>The following example specifies the <code class="code">UpdatePolicy</code> attribute for an <code class="code">AWS::Lambda::Alias</code> resource. 
+                                    	     All the details for the deployment are defined by the application and deployment
+                                    group that are passed into the policy.
+                                 </p>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-attribute-updatepolicy-codedeploylambda.json">JSON</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;Alias&quot;: <span>{</span>
   &quot;Type&quot;: &quot;AWS::Lambda::Alias&quot;,
   &quot;Properties&quot;: <span>{</span>
     &quot;FunctionName&quot;: <span>{</span>
@@ -1074,12 +1073,12 @@ CreationPolicy:
     }
   }
 }</code></pre>
-                  </div>
-               
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h4 id="aws-attribute-updatepolicy-codedeploylambda-example.yaml">YAML</h4>
-                  
-                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">Alias:
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-attribute-updatepolicy-codedeploylambda-example.yaml">YAML</h4>
+                                    
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">Alias:
   Type: &apos;AWS::Lambda::Alias&apos;
   Properties:
     FunctionName: !Ref LambdaFunction
@@ -1091,28 +1090,28 @@ CreationPolicy:
       DeploymentGroupName: !Ref CodeDeployDeploymentGroup
       BeforeAllowTrafficHook: !Ref PreHookLambdaFunction
       AfterAllowTrafficHook: !Ref PreHookLambdaFunction</code></pre>
-                  </div>
-                
-               
-               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
-            </div>
-            <noscript>
-               <div>
-                  <div>
-                     <div>
-                        <div id="js_error_message">
-                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
-                                 browser.</strong></p>
-                           <p>To use the AWS Documentation, Javascript must be
-                              enabled. Please refer to your browser&apos;s Help pages for instructions.
-                           </p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </noscript>
-            
-            <awsdocs-page-utilities></awsdocs-page-utilities>
-         </div></div>
+                                    </div>
+                                  
+                                 
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
 </body>
 </html>

@@ -9,66 +9,174 @@
 <body>
     <div id="content" style="padding: 10px 30px;">
     <div id="main-content" class="awsui-util-container">
-            <div id="main-col-body">
-               <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
-               <awsdocs-table-manager id="awsdocs-table-manager"></awsdocs-table-manager>
-               <h1 class="topictitle" id="aws-properties-transfer-server-endpointdetails">AWS::Transfer::Server EndpointDetails</h1>
-               <div class="awsdocs-page-header-container">
-                  <awsdocs-page-header></awsdocs-page-header>
-                  <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
-               </div>
-               <p>The virtual private cloud (VPC) endpoint settings that you want to configure for your
-                  SFTP server. 
-                  This parameter is required when you specify a value for the <code class="code">EndpointType</code> parameter.
-               </p>
-               <h2 id="aws-properties-transfer-server-endpointdetails-syntax">Syntax</h2>
-               <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
-               <div id="JSON" name="JSON" class="section langfilter">
-                  <h3 id="aws-properties-transfer-server-endpointdetails-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;<a href="#cfn-transfer-server-endpointdetails-vpcendpointid">VpcEndpointId</a>&quot; : <code class="replaceable">String</code>
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-properties-transfer-server-endpointdetails">AWS::Transfer::Server EndpointDetails</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The virtual private cloud (VPC) endpoint settings that are configured for your server.
+                                    When you host your endpoint within your VPC, you can make it accessible only to resources
+                                    within your VPC, or you can attach Elastic IPs and make it accessible to clients over
+                                    the
+                                    internet. You VPC&apos;s default security groups are automatically assigned to your
+                                    endpoint.
+                                 </p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>It is recommended that you use <code class="code">VPC</code> as the <code class="code">EndpointType</code>.
+                                          With this endpoint type, you have the option to directly associate up to three Elastic
+                                          IPv4 addresses (BYO IP included) with your server&apos;s endpoint and use VPC security
+                                          groups
+                                          to restrict traffic by the client&apos;s public IP address. This is not possible with
+                                          <code class="code">EndpointType</code> set to <code class="code">VPC_ENDPOINT</code>.
+                                       </p>
+                                    </div>
+                                 </div>
+                                 <h2 id="aws-properties-transfer-server-endpointdetails-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-properties-transfer-server-endpointdetails-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-transfer-server-endpointdetails-addressallocationids">AddressAllocationIds</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+  &quot;<a href="#cfn-transfer-server-endpointdetails-subnetids">SubnetIds</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+  &quot;<a href="#cfn-transfer-server-endpointdetails-vpcendpointid">VpcEndpointId</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-transfer-server-endpointdetails-vpcid">VpcId</a>&quot; : <code class="replaceable">String</code>
 }
 </code></pre></div>
-               <div id="YAML" name="YAML" class="section langfilter">
-                  <h3 id="aws-properties-transfer-server-endpointdetails-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-transfer-server-endpointdetails-vpcendpointid">VpcEndpointId</a>: <code class="replaceable">String</code>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-properties-transfer-server-endpointdetails-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-transfer-server-endpointdetails-addressallocationids">AddressAllocationIds</a>: <code class="replaceable">
+    - String</code>
+  <a href="#cfn-transfer-server-endpointdetails-subnetids">SubnetIds</a>: <code class="replaceable">
+    - String</code>
+  <a href="#cfn-transfer-server-endpointdetails-vpcendpointid">VpcEndpointId</a>: <code class="replaceable">String</code>
+  <a href="#cfn-transfer-server-endpointdetails-vpcid">VpcId</a>: <code class="replaceable">String</code>
 </code></pre></div>
-               <h2 id="aws-properties-transfer-server-endpointdetails-properties">Properties</h2>
-               <div class="variablelist">
-                  <dl>
-                     <dt><a id="cfn-transfer-server-endpointdetails-vpcendpointid"></a><span class="term"><code class="code">VpcEndpointId</code></span></dt>
-                     <dd>
-                        
-                        <p>The ID of the VPC endpoint.</p>
-                        
-                        <p><em>Required</em>: Yes
-                        </p>
-                        <p><em>Type</em>: String
-                        </p>
-                        <p><em>Minimum</em>: <code class="code">22</code></p>
-                        <p><em>Maximum</em>: <code class="code">22</code></p>
-                        <p><em>Pattern</em>: <code class="code">^vpce-[0-9a-f]<span>{</span>17}$</code></p>
-                        <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                     </dd>
-                  </dl>
-               </div>
-               <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
-            </div>
-            <noscript>
-               <div>
-                  <div>
-                     <div>
-                        <div id="js_error_message">
-                           <p><img src="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/%0A                              https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png%0A                            " alt="Warning"> <strong>Javascript is disabled or is unavailable in your
-                                 browser.</strong></p>
-                           <p>To use the AWS Documentation, Javascript must be
-                              enabled. Please refer to your browser&apos;s Help pages for instructions.
-                           </p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </noscript>
-            
-            <awsdocs-page-utilities></awsdocs-page-utilities>
-         </div></div>
+                                 <h2 id="aws-properties-transfer-server-endpointdetails-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-transfer-server-endpointdetails-addressallocationids"></a><span class="term"><code class="code">AddressAllocationIds</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A list of address allocation IDs that are required to attach an Elastic IP address
+                                             to
+                                             your server&apos;s endpoint. This is only valid in the <code class="code">UpdateServer</code> API.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This property can only be used when <code class="code">EndpointType</code> is set to
+                                                   <code class="code">VPC</code>.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-transfer-server-endpointdetails-subnetids"></a><span class="term"><code class="code">SubnetIds</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A list of subnet IDs that are required to host your server endpoint in your VPC.</p>
+                                          
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This property can only be used when <code class="code">EndpointType</code> is set to
+                                                   <code class="code">VPC</code>.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-transfer-server-endpointdetails-vpcendpointid"></a><span class="term"><code class="code">VpcEndpointId</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ID of the VPC endpoint.</p>
+                                          
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This property can only be used when <code class="code">EndpointType</code> is set to
+                                                   <code class="code">VPC_ENDPOINT</code>.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">22</code></p>
+                                          <p><em>Maximum</em>: <code class="code">22</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^vpce-[0-9a-f]<span>{</span>17}$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-transfer-server-endpointdetails-vpcid"></a><span class="term"><code class="code">VpcId</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The VPC ID of the virtual private cloud in which the server&apos;s endpoint will be
+                                             hosted.
+                                          </p>
+                                          
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This property can only be used when <code class="code">EndpointType</code> is set to
+                                                   <code class="code">VPC</code>.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-properties-transfer-server-endpointdetails--seealso">See Also</h2>
+                                 <p><a href="https://docs.aws.amazon.com/transfer/latest/userguide/API_EndpointDetails.html">EndpointDetails</a> in the <em>AWS Transfer Family User
+                                       Guide</em>.
+                                 </p>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
 </body>
 </html>
