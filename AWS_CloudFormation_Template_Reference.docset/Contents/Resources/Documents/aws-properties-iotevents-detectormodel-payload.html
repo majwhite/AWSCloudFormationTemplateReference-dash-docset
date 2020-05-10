@@ -11,48 +11,63 @@
     <div id="main-content" class="awsui-util-container">
                               <div id="main-col-body">
                                  <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
-                                 <h1 class="topictitle" id="aws-properties-iotevents-detectormodel-iotevents">AWS::IoTEvents::DetectorModel IotEvents</h1>
+                                 <h1 class="topictitle" id="aws-properties-iotevents-detectormodel-payload">AWS::IoTEvents::DetectorModel Payload</h1>
                                  <div class="awsdocs-page-header-container">
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Sends an IoT Events input, passing in information about the detector model instance
-                                    and the event
-                                    which triggered the action.
+                                 <p>Information needed to configure the payload.</p>
+                                 <p>By default, AWS IoT Events generates a standard payload in JSON for any action. This
+                                    action payload
+                                    contains all attribute-value pairs that have the information about the detector model
+                                    instance
+                                    and the event triggered the action. To configure the action payload, you can use
+                                    <code class="code">contentExpression</code>.
                                  </p>
-                                 <h2 id="aws-properties-iotevents-detectormodel-iotevents-syntax">Syntax</h2>
+                                 <h2 id="aws-properties-iotevents-detectormodel-payload-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h3 id="aws-properties-iotevents-detectormodel-iotevents-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;<a href="#cfn-iotevents-detectormodel-iotevents-inputname">InputName</a>&quot; : <code class="replaceable">String</code>,
-  &quot;<a href="#cfn-iotevents-detectormodel-iotevents-payload">Payload</a>&quot; : <code class="replaceable"><a href="./aws-properties-iotevents-detectormodel-payload.html">Payload</a></code>
+                                    <h3 id="aws-properties-iotevents-detectormodel-payload-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-iotevents-detectormodel-payload-contentexpression">ContentExpression</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-iotevents-detectormodel-payload-type">Type</a>&quot; : <code class="replaceable">String</code>
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h3 id="aws-properties-iotevents-detectormodel-iotevents-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-iotevents-detectormodel-iotevents-inputname">InputName</a>: <code class="replaceable">String</code>
-  <a href="#cfn-iotevents-detectormodel-iotevents-payload">Payload</a>: <code class="replaceable">
-    <a href="./aws-properties-iotevents-detectormodel-payload.html">Payload</a></code>
+                                    <h3 id="aws-properties-iotevents-detectormodel-payload-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-iotevents-detectormodel-payload-contentexpression">ContentExpression</a>: <code class="replaceable">String</code>
+  <a href="#cfn-iotevents-detectormodel-payload-type">Type</a>: <code class="replaceable">String</code>
 </code></pre></div>
-                                 <h2 id="aws-properties-iotevents-detectormodel-iotevents-properties">Properties</h2>
+                                 <h2 id="aws-properties-iotevents-detectormodel-payload-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
-                                       <dt><a id="cfn-iotevents-detectormodel-iotevents-inputname"></a><span class="term"><code class="code">InputName</code></span></dt>
+                                       <dt><a id="cfn-iotevents-detectormodel-payload-contentexpression"></a><span class="term"><code class="code">ContentExpression</code></span></dt>
                                        <dd>
                                           
-                                          <p>The name of the AWS IoT Events input where the data is sent.</p>
+                                          <p>The content of the payload. You can use a string expression that includes quoted strings
+                                             (<code class="code">&apos;&lt;string&gt;&apos;</code>), variables (<code class="code">$variable.&lt;variable-name&gt;</code>),
+                                             input values (<code class="code">$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>), string
+                                             concatenations, and quoted strings that contain <code class="code">$<span>{</span>}</code> as the content. The
+                                             recommended maximum size of a content expression is 1 KB.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
-                                       <dt><a id="cfn-iotevents-detectormodel-iotevents-payload"></a><span class="term"><code class="code">Payload</code></span></dt>
+                                       <dt><a id="cfn-iotevents-detectormodel-payload-type"></a><span class="term"><code class="code">Type</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The value of the payload type can be either <code class="code">STRING</code> or
+                                             <code class="code">JSON</code>.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: <a href="./aws-properties-iotevents-detectormodel-payload.html">Payload</a></p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed Values</em>: <code class="code">JSON | STRING</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>

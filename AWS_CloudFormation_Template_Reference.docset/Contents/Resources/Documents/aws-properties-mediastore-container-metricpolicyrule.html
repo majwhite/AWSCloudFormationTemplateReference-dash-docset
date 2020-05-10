@@ -11,77 +11,59 @@
     <div id="main-content" class="awsui-util-container">
                               <div id="main-col-body">
                                  <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
-                                 <h1 class="topictitle" id="aws-properties-dynamodb-attributedef">AWS::DynamoDB::Table AttributeDefinition</h1>
+                                 <h1 class="topictitle" id="aws-properties-mediastore-container-metricpolicyrule">AWS::MediaStore::Container MetricPolicyRule</h1>
                                  <div class="awsdocs-page-header-container">
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Represents an attribute for describing the key schema for the table and indexes.</p>
-                                 <h2 id="aws-properties-dynamodb-attributedef-syntax">Syntax</h2>
+                                 <p>A setting that enables metrics at the object level. Each rule contains an object group
+                                    and an object group name. If the policy includes the MetricPolicyRules parameter,
+                                    you must include at least one rule. Each metric policy can include up to five rules
+                                    by default. You can also <a href="https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas" target="_blank"><span>request a quota increase</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> to allow up to 300 rules per policy.
+                                 </p>
+                                 <h2 id="aws-properties-mediastore-container-metricpolicyrule-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h3 id="aws-properties-dynamodb-attributedef-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;<a href="#cfn-dynamodb-attributedef-attributename">AttributeName</a>&quot; : <code class="replaceable">String</code>,
-  &quot;<a href="#cfn-dynamodb-attributedef-attributename-attributetype">AttributeType</a>&quot; : <code class="replaceable">String</code>
+                                    <h3 id="aws-properties-mediastore-container-metricpolicyrule-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-mediastore-container-metricpolicyrule-objectgroup">ObjectGroup</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-mediastore-container-metricpolicyrule-objectgroupname">ObjectGroupName</a>&quot; : <code class="replaceable">String</code>
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h3 id="aws-properties-dynamodb-attributedef-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-dynamodb-attributedef-attributename">AttributeName</a>: <code class="replaceable">String</code>
-  <a href="#cfn-dynamodb-attributedef-attributename-attributetype">AttributeType</a>: <code class="replaceable">String</code>
+                                    <h3 id="aws-properties-mediastore-container-metricpolicyrule-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-mediastore-container-metricpolicyrule-objectgroup">ObjectGroup</a>: <code class="replaceable">String</code>
+  <a href="#cfn-mediastore-container-metricpolicyrule-objectgroupname">ObjectGroupName</a>: <code class="replaceable">String</code>
 </code></pre></div>
-                                 <h2 id="aws-properties-dynamodb-attributedef-properties">Properties</h2>
+                                 <h2 id="aws-properties-mediastore-container-metricpolicyrule-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
-                                       <dt><a id="cfn-dynamodb-attributedef-attributename"></a><span class="term"><code class="code">AttributeName</code></span></dt>
+                                       <dt><a id="cfn-mediastore-container-metricpolicyrule-objectgroup"></a><span class="term"><code class="code">ObjectGroup</code></span></dt>
                                        <dd>
                                           
-                                          <p>A name for the attribute.</p>
+                                          <p>A path or file name that defines which objects to include in the group. Wildcards
+                                             (*) are acceptable.
+                                          </p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">900</code></p>
+                                          <p><em>Pattern</em>: <code class="code">/?(?:[A-Za-z0-9_=:\.\-\~\*]+/)<span>{</span>0,10}(?:[A-Za-z0-9_=:\.\-\~\*]+)?/?</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
-                                       <dt><a id="cfn-dynamodb-attributedef-attributename-attributetype"></a><span class="term"><code class="code">AttributeType</code></span></dt>
+                                       <dt><a id="cfn-mediastore-container-metricpolicyrule-objectgroupname"></a><span class="term"><code class="code">ObjectGroupName</code></span></dt>
                                        <dd>
                                           
-                                          <p>The data type for the attribute, where:</p>
-                                          
-                                          <div class="itemizedlist">
-                                              
-                                              
-                                              
-                                             
-                                             <ul class="itemizedlist" type="disc">
-                                                <li class="listitem"> 
-                                                   
-                                                   <p>
-                                                      <code class="code">S</code> - the attribute is of type String
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>
-                                                      <code class="code">N</code> - the attribute is of type Number
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>
-                                                      <code class="code">B</code> - the attribute is of type Binary
-                                                   </p>
-                                                   
-                                                </li>
-                                             </ul>
-                                          </div>
+                                          <p>A name that allows you to refer to the object group.</p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">30</code></p>
+                                          <p><em>Pattern</em>: <code class="code">[a-zA-Z0-9_]+</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>
