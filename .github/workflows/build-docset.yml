@@ -20,8 +20,10 @@ jobs:
 
     - name: Build DocSet
       run: |
-        brew install jq 
+        brew install jq
         yarn
+        file node_modules/node-jq/bin/jq
+        rm node_modules/node-jq/bin/jq && ln -s $(brew --prefix jq)/bin/jq node_modules/node-jq/bin/jq
         npm run build
         npm package
     
