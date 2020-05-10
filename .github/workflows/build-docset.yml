@@ -18,12 +18,18 @@ jobs:
       with:
         node-version: 12.x
 
-    - name: Build DocSet
+    - name: Install Dependencies
+      run: yarn
+
+    - name: Fix jq
+      working-directory: ${{ github.workspace }}
       run: |
-        brew install jq
-        yarn
+        pwd
         file node_modules/node-jq/bin/jq
         rm node_modules/node-jq/bin/jq && ln -s $(brew --prefix jq)/bin/jq node_modules/node-jq/bin/jq
+
+    - name: Build DocSet
+      run: |
         npm run build
         npm package
     
