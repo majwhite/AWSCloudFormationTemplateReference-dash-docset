@@ -29,6 +29,7 @@
   &quot;Type&quot; : &quot;AWS::ImageBuilder::Component&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-imagebuilder-component-changedescription">ChangeDescription</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-imagebuilder-component-data">Data</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-imagebuilder-component-description">Description</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-imagebuilder-component-kmskeyid">KmsKeyId</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-imagebuilder-component-name">Name</a>&quot; : <code class="replaceable">String</code>,
@@ -43,6 +44,7 @@
                                     <h3 id="aws-resource-imagebuilder-component-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::ImageBuilder::Component
 Properties: 
   <a href="#cfn-imagebuilder-component-changedescription">ChangeDescription</a>: <code class="replaceable">String</code>
+  <a href="#cfn-imagebuilder-component-data">Data</a>: <code class="replaceable">String</code>
   <a href="#cfn-imagebuilder-component-description">Description</a>: <code class="replaceable">String</code>
   <a href="#cfn-imagebuilder-component-kmskeyid">KmsKeyId</a>: <code class="replaceable">String</code>
   <a href="#cfn-imagebuilder-component-name">Name</a>: <code class="replaceable">String</code>
@@ -67,6 +69,17 @@ Properties:
                                           </p>
                                           <p><em>Minimum</em>: <code class="code">1</code></p>
                                           <p><em>Maximum</em>: <code class="code">1024</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-imagebuilder-component-data"></a><span class="term"><code class="code">Data</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The data of the component.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-imagebuilder-component-description"></a><span class="term"><code class="code">Description</code></span></dt>
@@ -201,38 +214,34 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-imagebuilder-component--examples">Examples</h2>
-                                 <h3 id="aws-resource-imagebuilder-component--examples--Creating_a_component">Creating a component</h3>
-                                 <p>The following example creates a component and includes the required
-                                    <code class="code">Data</code> field.
+                                 <h3 id="aws-resource-imagebuilder-component--examples--Component_creation_with_Data_field_details">Component creation with Data field details</h3>
+                                 <p>The following example shows the component creation document in YAML format with
+                                    details for the <code class="code">Data</code> field . You can use either the<code class="code">Data</code> or
+                                    <code class="code">Uri</code> fields to reference the component document.
                                  </p>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-imagebuilder-component--examples--Creating_a_component--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">       Data: |
-        name: HelloWorldTestingLinuxDoc - InlineData
-        description: This is hello world testing doc
-        schemaVersion: 1.0
- 
-        phases:
-          - name: build
-            steps:
-              - name: HelloWorldStep
-                action: ExecuteBash
-                inputs:
-                  commands:
-                    - echo &quot;Hello World! Build.&quot;
-          - name: validate
-            steps:
-              - name: HelloWorldStep
-                action: ExecuteBash
-                inputs:
-                  commands:
-                    - echo &quot;Hello World! Validate.&quot;
-          - name: test
-            steps:
-              - name: HelloWorldStep
-                action: ExecuteBash
-                inputs:
-                  commands:
-                    - echo &quot;Hello World! Test.&quot;</code></pre></div>
+                                    <h4 id="aws-resource-imagebuilder-component--examples--Component_creation_with_Data_field_details--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::ImageBuilder::Component
+Properties: 
+  ChangeDescription: String
+  Description: String
+  KmsKeyId: String
+  Name: String
+  Platform: String
+  Tags: 
+    Key : Value
+  Version: String
+  Data: |
+    name: Python 3
+    description: Install the latest version of Python 3.
+    schemaVersion: 1.0
+    phases:
+      - name: build
+        steps:
+          - name: InstallPython3
+            action: ExecuteBash
+            inputs:
+              commands:
+                - sudo yum install python3 -y</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                               </div>
                               <noscript>
