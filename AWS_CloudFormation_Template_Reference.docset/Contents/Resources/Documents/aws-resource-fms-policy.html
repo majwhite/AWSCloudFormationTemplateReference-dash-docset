@@ -173,11 +173,7 @@ Properties:
                                        <dt><a id="cfn-fms-policy-excludemap"></a><span class="term"><code class="code">ExcludeMap</code></span></dt>
                                        <dd>
                                           
-                                          <p>Specifies the AWS account IDs and AWS Organizations organizational units (OUs) to
-                                             exclude from the policy. 
-                                             Specifying an OU is the equivalent of specifying all accounts in the OU and in any
-                                             of its child OUs, including any child OUs and accounts that are added at a later time.
-                                          </p>
+                                          <p>Specifies the AWS account IDs to exclude from the policy. </p>
                                           
                                           <p>You can specify inclusions or exclusions, but not both. If you specify an <code class="code">IncludeMap</code>, AWS Firewall Manager 
                                              applies the policy to all accounts specified by the <code class="code">IncludeMap</code>, and 
@@ -185,38 +181,9 @@ Properties:
                                              applies the policy to all accounts except for those specified by the <code class="code">ExcludeMap</code>.
                                           </p>
                                           
-                                          <p>You can specify account IDs, OUs, or a combination: </p>
+                                          <p>The following example is a valid map: <code class="code"><span>{</span>&#x201C;ACCOUNT&#x201D; : [&#x201C;accountID1&#x201D;, &#x201C;accountID2&#x201D;]}</code>.
+                                          </p>
                                           
-                                          <div class="itemizedlist">
-                                              
-                                              
-                                              
-                                             
-                                             <ul class="itemizedlist" type="disc">
-                                                <li class="listitem">
-                                                   
-                                                   <p>Specify account IDs by setting the key to <code class="code">ACCOUNT</code>. For example, the following is a valid map:  
-                                                      <code class="code"><span>{</span>&#x201C;ACCOUNT&#x201D; : [&#x201C;accountID1&#x201D;, &#x201C;accountID2&#x201D;]}</code>.
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>Specify OUs by setting the key to <code class="code">ORG_UNIT</code>. For example, the following is a valid map: 
-                                                      <code class="code"><span>{</span>&#x201C;ORG_UNIT&#x201D; : [&#x201C;ouid111&#x201D;, &#x201C;ouid112&#x201D;]}</code>.
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>Specify accounts and OUs together in a single map, separated with a comma. For example,
-                                                      the following is a valid map:
-                                                      <code class="code"><span>{</span>&#x201C;ACCOUNT&#x201D; : [&#x201C;accountID1&#x201D;, &#x201C;accountID2&#x201D;], &#x201C;ORG_UNIT&#x201D; : [&#x201C;ouid111&#x201D;, &#x201C;ouid112&#x201D;]}</code>.
-                                                   </p>
-                                                   
-                                                </li>
-                                             </ul>
-                                          </div>
                                           
                                           
                                           <p><em>Required</em>: No
@@ -241,16 +208,18 @@ Properties:
                                        <dt><a id="cfn-fms-policy-includemap"></a><span class="term"><code class="code">IncludeMap</code></span></dt>
                                        <dd>
                                           
-                                          <p>Specifies the AWS account IDs to include in the policy. If <code class="code">IncludeMap</code> is
-                                             not set, all accounts in the organization in AWS Organizations are included in the
-                                             policy. If
-                                             <code class="code">IncludeMap</code> is set, only values listed in <code class="code">IncludeMap</code> are
-                                             included in the policy.
+                                          <p>Specifies the AWS account IDs to include in the policy. </p>
+                                          
+                                          <p>You can specify inclusions or exclusions, but not both. If you specify an <code class="code">IncludeMap</code>, AWS Firewall Manager 
+                                             applies the policy to all accounts specified by the <code class="code">IncludeMap</code>, and 
+                                             does not evaluate any <code class="code">ExcludeMap</code> specifications. If you do not specify an <code class="code">IncludeMap</code>, then Firewall Manager 
+                                             applies the policy to all accounts except for those specified by the <code class="code">ExcludeMap</code>.
                                           </p>
                                           
-                                          <p>The key to the map is <code class="code">ACCOUNT</code>. For example, a valid <code class="code">IncludeMap</code>
-                                             would be <code class="code"><span>{</span>&#x201C;ACCOUNT&#x201D; : [&#x201C;accountID1&#x201D;, &#x201C;accountID2&#x201D;]}</code>.
+                                          <p>The following is a valid map: <code class="code"><span>{</span>&#x201C;ACCOUNT&#x201D; : [&#x201C;accountID1&#x201D;, &#x201C;accountID2&#x201D;]}</code>.
                                           </p>
+                                          
+                                          
                                           
                                           <p><em>Required</em>: No
                                           </p>

@@ -16,8 +16,44 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">DynamoDB</code> property type specifies Not currently supported by AWS CloudFormation. for an <a href="./aws-resource-iotevents-detectormodel.html">AWS::IoTEvents::DetectorModel</a>.
+                                 <p>Defines an action to write to the Amazon DynamoDB table that you created. The standard
+                                    action
+                                    payload contains all attribute-value pairs that have the information about the detector
+                                    model
+                                    instance and the event that triggered the action. You can also customize the <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html">payload</a>.
+                                    One column of the DynamoDB table receives all attribute-value pairs in the payload
+                                    that you
+                                    specify.
                                  </p>
+                                 <p>The <code class="code">tableName</code> and <code class="code">hashKeyField</code> values must match the table name
+                                    and the partition key of the DynamoDB table. 
+                                 </p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>If the DynamoDB table also has a sort key, you must specify <code class="code">rangeKeyField</code>. The
+                                          <code class="code">rangeKeyField</code> value must match the sort key.
+                                       </p>
+                                    </div>
+                                 </div>
+                                 <p>The <code class="code">hashKeyValue</code> and <code class="code">rangeKeyValue</code> use substitution templates.
+                                    These templates provide data at runtime. The syntax is <code class="code">$<span>{</span>sql-expression}</code>.
+                                 </p>
+                                 <p>You can use expressions for parameters that are string data type. For more information,
+                                    see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html">Expressions</a> in the
+                                    <em>AWS IoT Events Developer Guide</em>.
+                                 </p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>If the defined payload type is a string, <code class="code">DynamoDBAction</code> writes non-JSON data
+                                          to the DynamoDB table as binary data. The DynamoDB console displays the data as Base64-encoded
+                                          text. The <code class="code">payloadField</code> is <code class="code">&lt;payload-field&gt;_raw</code>.
+                                       </p>
+                                    </div>
+                                 </div>
                                  <h2 id="aws-properties-iotevents-detectormodel-dynamodb-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -52,7 +88,9 @@
                                     <dl>
                                        <dt><a id="cfn-iotevents-detectormodel-dynamodb-hashkeyfield"></a><span class="term"><code class="code">HashKeyField</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The name of the hash key (also called the partition key).</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -61,7 +99,37 @@
                                        </dd>
                                        <dt><a id="cfn-iotevents-detectormodel-dynamodb-hashkeytype"></a><span class="term"><code class="code">HashKeyType</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The data type for the hash key (also called the partition key). You can specify the
+                                             following values:
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">STRING</code> - The hash key is a string.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">NUMBER</code> - The hash key is a number.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>If you don&apos;t specify <code class="code">hashKeyType</code>, the default value is
+                                             <code class="code">STRING</code>.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -70,7 +138,9 @@
                                        </dd>
                                        <dt><a id="cfn-iotevents-detectormodel-dynamodb-hashkeyvalue"></a><span class="term"><code class="code">HashKeyValue</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The value of the hash key (also called the partition key).</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -79,7 +149,52 @@
                                        </dd>
                                        <dt><a id="cfn-iotevents-detectormodel-dynamodb-operation"></a><span class="term"><code class="code">Operation</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The type of operation to perform. You can specify the following values: </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">INSERT</code> - Insert data as a new item into the DynamoDB table. This item uses
+                                                      the specified hash key as a partition key. If you specified a range key, the item
+                                                      uses the
+                                                      range key as a sort key.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">UPDATE</code> - Update an existing item of the DynamoDB table with new data. This
+                                                      item&apos;s partition key must match the specified hash key. If you specified a range key,
+                                                      the
+                                                      range key must match the item&apos;s sort key.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">DELETE</code> - Delete an existing item of the DynamoDB table. This item&apos;s
+                                                      partition key must match the specified hash key. If you specified a range key, the
+                                                      range
+                                                      key must match the item&apos;s sort key.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>If you don&apos;t specify this parameter, AWS IoT Events triggers the <code class="code">INSERT</code>
+                                             operation.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -88,7 +203,17 @@
                                        </dd>
                                        <dt><a id="cfn-iotevents-detectormodel-dynamodb-payload"></a><span class="term"><code class="code">Payload</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>Information needed to configure the payload.</p>
+                                          
+                                          <p>By default, AWS IoT Events generates a standard payload in JSON for any action. This
+                                             action payload
+                                             contains all attribute-value pairs that have the information about the detector model
+                                             instance
+                                             and the event triggered the action. To configure the action payload, you can use
+                                             <code class="code">contentExpression</code>.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-iotevents-detectormodel-payload.html">Payload</a></p>
@@ -96,7 +221,13 @@
                                        </dd>
                                        <dt><a id="cfn-iotevents-detectormodel-dynamodb-payloadfield"></a><span class="term"><code class="code">PayloadField</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The name of the DynamoDB column that receives the action payload.</p>
+                                          
+                                          <p>If you don&apos;t specify this parameter, the name of the DynamoDB column is
+                                             <code class="code">payload</code>.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -105,7 +236,9 @@
                                        </dd>
                                        <dt><a id="cfn-iotevents-detectormodel-dynamodb-rangekeyfield"></a><span class="term"><code class="code">RangeKeyField</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The name of the range key (also called the sort key).</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -114,7 +247,37 @@
                                        </dd>
                                        <dt><a id="cfn-iotevents-detectormodel-dynamodb-rangekeytype"></a><span class="term"><code class="code">RangeKeyType</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The data type for the range key (also called the sort key), You can specify the following
+                                             values:
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">STRING</code> - The range key is a string.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">NUMBER</code> - The range key is number.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>If you don&apos;t specify <code class="code">rangeKeyField</code>, the default value is
+                                             <code class="code">STRING</code>.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -123,7 +286,9 @@
                                        </dd>
                                        <dt><a id="cfn-iotevents-detectormodel-dynamodb-rangekeyvalue"></a><span class="term"><code class="code">RangeKeyValue</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The value of the range key (also called the sort key).</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -132,7 +297,9 @@
                                        </dd>
                                        <dt><a id="cfn-iotevents-detectormodel-dynamodb-tablename"></a><span class="term"><code class="code">TableName</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The name of the DynamoDB table.</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String

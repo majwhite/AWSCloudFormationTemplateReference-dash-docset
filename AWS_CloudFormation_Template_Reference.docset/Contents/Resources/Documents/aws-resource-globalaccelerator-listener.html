@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-globalaccelerator-listener">AWS::GlobalAccelerator::Listener</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The <code class="code">AWS::GlobalAccelerator::Listener</code> resource is a Global Accelerator resource type that contains information about 
+                                    	     		how you create a listener to process inbound connections from clients to an
+                                    accelerator. Connections arrive to assigned static
+                                    			IP addresses on a port, port range, or list of port ranges that you specify.
+                                 </p>
+                                 <h2 id="aws-resource-globalaccelerator-listener-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-globalaccelerator-listener-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::GlobalAccelerator::Listener&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-globalaccelerator-listener-acceleratorarn">AcceleratorArn</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-globalaccelerator-listener-clientaffinity">ClientAffinity</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-globalaccelerator-listener-portranges">PortRanges</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-globalaccelerator-listener-portrange.html">PortRange</a>, ... ]</code>,
+      &quot;<a href="#cfn-globalaccelerator-listener-protocol">Protocol</a>&quot; : <code class="replaceable">String</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-globalaccelerator-listener-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::GlobalAccelerator::Listener
+Properties: 
+  <a href="#cfn-globalaccelerator-listener-acceleratorarn">AcceleratorArn</a>: <code class="replaceable">String</code>
+  <a href="#cfn-globalaccelerator-listener-clientaffinity">ClientAffinity</a>: <code class="replaceable">String</code>
+  <a href="#cfn-globalaccelerator-listener-portranges">PortRanges</a>: <code class="replaceable">
+    - <a href="./aws-properties-globalaccelerator-listener-portrange.html">PortRange</a></code>
+  <a href="#cfn-globalaccelerator-listener-protocol">Protocol</a>: <code class="replaceable">String</code>
+</code></pre></div>
+                                 <h2 id="aws-resource-globalaccelerator-listener-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-globalaccelerator-listener-acceleratorarn"></a><span class="term"><code class="code">AcceleratorArn</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>The Amazon Resource Name (ARN) of your accelerator.</p>
+                                          	     
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Maximum</em>: <code class="code">255</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-globalaccelerator-listener-clientaffinity"></a><span class="term"><code class="code">ClientAffinity</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>Client affinity lets you direct all requests from a user to the same endpoint, if
+                                             you have stateful applications,
+                                             			regardless of the port and protocol of the client request. Client affinity gives
+                                             you control over whether to always
+                                             			route each client to the same specific endpoint.
+                                          </p>
+                                          		       
+                                          <p>AWS Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal
+                                             endpoint for a connection. If client
+                                             			affinity is <code class="code">NONE</code>, Global Accelerator uses the &quot;five-tuple&quot; (5-tuple) properties&#x2014;source IP address,
+                                             source port,
+                                             			destination IP address, destination port, and protocol&#x2014;to select the hash value,
+                                             and then chooses the best
+                                             			endpoint. However, with this setting, if someone uses different ports to connect
+                                             to Global Accelerator, their connections might not
+                                             			be always routed to the same endpoint because the hash value changes. 
+                                          </p>
+                                          		       
+                                          <p>If you want a given client to always be routed to the same endpoint, set client affinity
+                                             to <code class="code">SOURCE_IP</code>
+                                             			instead. When you use the <code class="code">SOURCE_IP</code> setting, Global Accelerator uses the &quot;two-tuple&quot; (2-tuple) properties&#x2014;
+                                             			source (client) IP address and destination IP address&#x2014;to select the hash value.
+                                          </p>
+                                          		       
+                                          <p>The default value is <code class="code">NONE</code>.
+                                          </p>
+                                          	     
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed Values</em>: <code class="code">NONE | SOURCE_IP</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-globalaccelerator-listener-portranges"></a><span class="term"><code class="code">PortRanges</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>The list of port ranges for the connections from clients to the accelerator.</p>
+                                          	     
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-globalaccelerator-listener-portrange.html">PortRange</a></p>
+                                          <p><em>Maximum</em>: <code class="code">10</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-globalaccelerator-listener-protocol"></a><span class="term"><code class="code">Protocol</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>The protocol for the connections from clients to the accelerator.</p>
+                                          	     
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed Values</em>: <code class="code">TCP | UDP</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-globalaccelerator-listener-return-values">Return Values</h2>
+                                 <h3 id="aws-resource-globalaccelerator-listener-return-values-ref">Ref</h3>
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the ARN of the listener, such as 
+                                    			<code class="code">arn:aws:globalaccelerator::012345678901:accelerator/1234abcd-abcd-1234-abcd-1234abcdefgh/listener/0123vxyz</code>.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-globalaccelerator-listener-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-globalaccelerator-listener-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="ListenerArn-fn::getatt"></a><span class="term"><code class="code">ListenerArn</code></span></dt>
+                                       <dd>
+                                          		
+                                          <p>The ARN of the listener, such as 
+                                             			<code class="code">arn:aws:globalaccelerator::012345678901:accelerator/1234abcd-abcd-1234-abcd-1234abcdefgh/listener/0123vxyz</code>.
+                                          </p>
+                                          	
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-globalaccelerator-listener--examples">Examples</h2>
+                                 <h3 id="aws-resource-globalaccelerator-listener--examples--Add_a_listener">Add a listener</h3>
+                                 <p>These are examples to specify a listener.</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-globalaccelerator-listener--examples--Add_a_listener--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Resources&quot;: <span>{</span>
+    &quot;Listener&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::GlobalAccelerator::Listener&quot;,
+        &quot;Properties&quot;: <span>{</span>
+            &quot;AcceleratorArn&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;Accelerator&quot;
+            },
+            &quot;Protocol&quot;: &quot;TCP&quot;,
+            &quot;PortRanges&quot;: [
+                <span>{</span>
+                    &quot;FromPort&quot;: 80,
+                    &quot;ToPort&quot;: 80
+                }
+            ]
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-globalaccelerator-listener--examples--Add_a_listener--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Listener:
+  Type: AWS::GlobalAccelerator::Listener
+  Properties:
+    AcceleratorArn:
+      Ref: Accelerator
+    Protocol: TCP
+    PortRanges:
+    - FromPort: 80
+      ToPort: 80</code></pre></div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

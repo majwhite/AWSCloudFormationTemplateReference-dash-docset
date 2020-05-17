@@ -35,7 +35,8 @@
       &quot;<a href="#cfn-dms-replicationtask-sourceendpointarn">SourceEndpointArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-dms-replicationtask-tablemappings">TableMappings</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-dms-replicationtask-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
-      &quot;<a href="#cfn-dms-replicationtask-targetendpointarn">TargetEndpointArn</a>&quot; : <code class="replaceable">String</code>
+      &quot;<a href="#cfn-dms-replicationtask-targetendpointarn">TargetEndpointArn</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-dms-replicationtask-taskdata">TaskData</a>&quot; : <code class="replaceable">String</code>
     }
 }
 </code></pre></div>
@@ -54,6 +55,7 @@ Properties:
   <a href="#cfn-dms-replicationtask-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
   <a href="#cfn-dms-replicationtask-targetendpointarn">TargetEndpointArn</a>: <code class="replaceable">String</code>
+  <a href="#cfn-dms-replicationtask-taskdata">TaskData</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-resource-dms-replicationtask-properties">Properties</h2>
                                  <div class="variablelist">
@@ -165,7 +167,7 @@ Properties:
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
                                                    
-                                                   <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p>
+                                                   <p>Must contain 1-255 alphanumeric characters or hyphens.</p>
                                                    
                                                 </li>
                                                 <li class="listitem">
@@ -218,7 +220,7 @@ Properties:
                                        <dd>
                                           
                                           <p>The table mappings for the task, in JSON format. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html">Using Table
-                                                Mapping to Specify Task Settings</a> in the <em>AWS Database Migration User
+                                                Mapping to Specify Task Settings</a> in the <em>AWS Database Migration Service User
                                                 Guide.</em>
                                              
                                           </p>
@@ -250,6 +252,22 @@ Properties:
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
+                                       <dt><a id="cfn-dms-replicationtask-taskdata"></a><span class="term"><code class="code">TaskData</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Supplemental information that the task requires to migrate the data for certain source
+                                             and target endpoints. 
+                                             For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html">Specifying Supplemental Data for Task Settings</a> in the
+                                             <em>AWS Database Migration Service User Guide.</em>
+                                             
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-dms-replicationtask-return-values">Return Values</h2>
@@ -262,33 +280,21 @@ Properties:
                                  <h2 id="aws-resource-dms-replicationtask--examples">Examples</h2>
                                  <h3 id="aws-resource-dms-replicationtask--examples--"></h3>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-dms-replicationtask--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
-    &quot;Resources&quot;: <span>{</span>
-        &quot;myReplicationTask&quot;: <span>{</span>
-            &quot;Type&quot;: &quot;AWS::DMS::ReplicationTask&quot;,
-            &quot;Properties&quot;: <span>{</span>
-                &quot;SourceEndpointArn&quot;: 11,
-                &quot;TargetEndpointArn&quot;: &quot;12ff&quot;,
-                &quot;ReplicationInstanceArn&quot;: &quot;ert1&quot;,
-                &quot;MigrationType&quot;: &quot;full-load&quot;,
-                &quot;TableMappings&quot;: &quot;<span>{</span> \&quot;rules\&quot;: [ <span>{</span> \&quot;rule-type\&quot;: \&quot;selection\&quot;, \&quot;rule-id\&quot;: \&quot;1\&quot;, \&quot;rule-name\&quot;: \&quot;1\&quot;, \&quot;object-locator\&quot;: <span>{</span> \&quot;schema-name\&quot;: \&quot;%\&quot;, \&quot;table-name\&quot;: \&quot;%\&quot; }, \&quot;rule-action\&quot;: \&quot;include\&quot; } ] }&quot;
-            }
-        }
-    }
-}</code></pre></div>
+                                    <h4 id="aws-resource-dms-replicationtask--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;, &quot;Resources&quot;: <span>{</span>
+                &quot;myReplicationTask&quot;: <span>{</span> &quot;Type&quot;: &quot;AWS::DMS::ReplicationTask&quot;, &quot;Properties&quot;: <span>{</span>
+                &quot;SourceEndpointArn&quot;: 11, &quot;TargetEndpointArn&quot;: &quot;12ff&quot;, &quot;ReplicationInstanceArn&quot;:
+                &quot;ert1&quot;, &quot;MigrationType&quot;: &quot;full-load&quot;, &quot;TableMappings&quot;: &quot;<span>{</span> \&quot;rules\&quot;: [ <span>{</span>
+                \&quot;rule-type\&quot;: \&quot;selection\&quot;, \&quot;rule-id\&quot;: \&quot;1\&quot;, \&quot;rule-name\&quot;: \&quot;1\&quot;,
+                \&quot;object-locator\&quot;: <span>{</span> \&quot;schema-name\&quot;: \&quot;%\&quot;, \&quot;table-name\&quot;: \&quot;%\&quot; },
+                \&quot;rule-action\&quot;: \&quot;include\&quot; } ] }&quot; } } } }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-dms-replicationtask--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
-Resources: 
-  myReplicationTask: 
-    Properties: 
-      MigrationType: full-load
-      ReplicationInstanceArn: ReplicationInstance
-      SourceEndpointArn: SourceEndpoint
-      TableMappings: &quot;<span>{</span> \&quot;rules\&quot;: [ <span>{</span> \&quot;rule-type\&quot;: \&quot;selection\&quot;, \&quot;rule-id\&quot;: \&quot;1\&quot;, \&quot;rule-name\&quot;: \&quot;1\&quot;, \&quot;object-locator\&quot;: <span>{</span> \&quot;schema-name\&quot;: \&quot;%\&quot;, \&quot;table-name\&quot;: \&quot;%\&quot; }, \&quot;rule-action\&quot;: \&quot;include\&quot; } ] }&quot;
-      TargetEndpointArn: TargetEndpoint
-    Type: &quot;AWS::DMS::ReplicationTask&quot;
-</code></pre></div>
+                                    <h4 id="aws-resource-dms-replicationtask--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09 Resources:
+                myReplicationTask: Properties: MigrationType: full-load ReplicationInstanceArn:
+                ReplicationInstance SourceEndpointArn: SourceEndpoint TableMappings: &quot;<span>{</span> \&quot;rules\&quot;: [
+                <span>{</span> \&quot;rule-type\&quot;: \&quot;selection\&quot;, \&quot;rule-id\&quot;: \&quot;1\&quot;, \&quot;rule-name\&quot;: \&quot;1\&quot;,
+                \&quot;object-locator\&quot;: <span>{</span> \&quot;schema-name\&quot;: \&quot;%\&quot;, \&quot;table-name\&quot;: \&quot;%\&quot; },
+                \&quot;rule-action\&quot;: \&quot;include\&quot; } ] }&quot; TargetEndpointArn: TargetEndpoint Type:
+                &quot;AWS::DMS::ReplicationTask&quot; </code></pre></div>
                                  <h2 id="aws-resource-dms-replicationtask--seealso">See Also</h2>
                                  <div class="itemizedlist">
                                      
@@ -298,8 +304,8 @@ Resources:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html">CreateReplicationTask</a> in the <em>AWS Database
-                                                Migration Service API Reference</em>
+                                             <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html">CreateReplicationTask</a> in the <em>AWS Database Migration
+                                                Service API Reference</em>
                                              
                                           </p>
                                           

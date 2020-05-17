@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-macie-customdataidentifier">AWS::Macie::CustomDataIdentifier</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The <code class="code">AWS::Macie::CustomDataIdentifier</code> resource is a set of criteria that
+                                    you define to detect sensitive data in one or more data sources. Each identifier
+                                    specifies a regular expression (regex) that defines a text pattern to match in the
+                                    data.
+                                    It can also specify character sequences, such as words and phrases, and a proximity
+                                    rule
+                                    that refine the analysis of a data source. By using custom data identifiers, you can
+                                    tailor your analysis to meet your organization&apos;s specific needs, and supplement the
+                                    built-in data identifiers that Amazon Macie provides.
+                                 </p>
+                                 <p>A <code class="code">Session</code> must exist in the account before you can create a
+                                    <code class="code">FindingsFilter</code>. Use a <a href="aws-attribute-dependson.html">DependsOn
+                                       attribute</a> to ensure that the <code class="code">Session</code> is created before the
+                                    other resources. For example, <code class="code">&quot;DependsOn: Session&quot;</code>.
+                                 </p>
+                                 <h2 id="aws-resource-macie-customdataidentifier-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-macie-customdataidentifier-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::Macie::CustomDataIdentifier&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-macie-customdataidentifier-description">Description</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-macie-customdataidentifier-ignorewords">IgnoreWords</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+      &quot;<a href="#cfn-macie-customdataidentifier-keywords">Keywords</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+      &quot;<a href="#cfn-macie-customdataidentifier-maximummatchdistance">MaximumMatchDistance</a>&quot; : <code class="replaceable">Integer</code>,
+      &quot;<a href="#cfn-macie-customdataidentifier-name">Name</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-macie-customdataidentifier-regex">Regex</a>&quot; : <code class="replaceable">String</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-macie-customdataidentifier-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Macie::CustomDataIdentifier
+Properties: 
+  <a href="#cfn-macie-customdataidentifier-description">Description</a>: <code class="replaceable">String</code>
+  <a href="#cfn-macie-customdataidentifier-ignorewords">IgnoreWords</a>: <code class="replaceable">
+    - String</code>
+  <a href="#cfn-macie-customdataidentifier-keywords">Keywords</a>: <code class="replaceable">
+    - String</code>
+  <a href="#cfn-macie-customdataidentifier-maximummatchdistance">MaximumMatchDistance</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-macie-customdataidentifier-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-macie-customdataidentifier-regex">Regex</a>: <code class="replaceable">String</code>
+</code></pre></div>
+                                 <h2 id="aws-resource-macie-customdataidentifier-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-macie-customdataidentifier-description"></a><span class="term"><code class="code">Description</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The description of the custom data identifier.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-macie-customdataidentifier-ignorewords"></a><span class="term"><code class="code">IgnoreWords</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>An array that lists specific character sequences (ignore words) to exclude from the
+                                             results. If the text matched by the regular expression is the same as any string in
+                                             this
+                                             array, Amazon Macie ignores it. The array can contain as many as 10 ignore words.
+                                             Each
+                                             ignore word can contain 4 - 90 characters.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-macie-customdataidentifier-keywords"></a><span class="term"><code class="code">Keywords</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>An array that lists specific character sequences (keywords), one of which must be
+                                             within proximity (<code class="code">maximumMatchDistance</code>) of the regular expression to match.
+                                             The array can contain as many as 50 keywords. Each keyword can contain 4 - 90
+                                             characters. 
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-macie-customdataidentifier-maximummatchdistance"></a><span class="term"><code class="code">MaximumMatchDistance</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The maximum number of characters that can exist between text that matches the regex
+                                             pattern and the character sequences specified by the keywords array. Macie includes
+                                             or
+                                             excludes a result based on the proximity of a keyword to text that matches the regex
+                                             pattern. The distance can be 1 - 300 characters. The default value is 50.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-macie-customdataidentifier-name"></a><span class="term"><code class="code">Name</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A custom name for the custom data identifier. The name can contain as many as 120
+                                             characters.
+                                          </p>
+                                          
+                                          <p>We strongly recommend that you avoid including any sensitive data in the name of a
+                                             custom data identifier. Other users of your account might be able to see the
+                                             identifier&apos;s name, depending on the actions that they&apos;re allowed to perform in Amazon
+                                             Macie.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-macie-customdataidentifier-regex"></a><span class="term"><code class="code">Regex</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The regular expression (regex) that defines the pattern to match. The expression can
+                                             contain as many as 500 characters.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-macie-customdataidentifier-return-values">Return Values</h2>
+                                 <h3 id="aws-resource-macie-customdataidentifier-return-values-ref">Ref</h3>
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the ID of the <code class="code">CustomDataIdentifier</code>. For
+                                    example, <code class="code"><span>{</span> &quot;Ref&quot;: &quot;CustomDataIdentifier&quot; }</code></p>
+                                 <h3 id="aws-resource-macie-customdataidentifier-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-macie-customdataidentifier-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the custom data identifier.</p>
+                                          
+                                       </dd>
+                                       <dt><a id="CreatedAt-fn::getatt"></a><span class="term"><code class="code">CreatedAt</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The date and time, in UTC and extended ISO 8601 format, when the custom data
+                                             identifier was created.
+                                          </p>
+                                          
+                                       </dd>
+                                       <dt><a id="Deleted-fn::getatt"></a><span class="term"><code class="code">Deleted</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies whether the custom data identifier was deleted. If you delete a custom data
+                                             identifier, Amazon Macie doesn&apos;t delete it permanently. Instead, it soft deletes the
+                                             identifier. 
+                                          </p>
+                                          
+                                       </dd>
+                                       <dt><a id="Id-fn::getatt"></a><span class="term"><code class="code">Id</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The unique identifier for the custom data identifier that was created.</p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-macie-customdataidentifier--examples">Examples</h2>
+                                 <p>The following examples demonstrates how to declare an
+                                    <code class="code">AWS::Macie::CustomDataIdentifier</code> resource:
+                                 </p>
+                                 <h3 id="aws-resource-macie-customdataidentifier--examples--Creating_a_Macie_CustomDataIdentifier">Creating a Macie CustomDataIdentifier</h3>
+                                 <p>This example creates a custom data identifier that matches 6 digit employee IDs that
+                                    are located
+                                    near the specified keywords. If the match is a sample value, such as those provided
+                                    in the
+                                    ignore words, it is skipped.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-macie-customdataidentifier--examples--Creating_a_Macie_CustomDataIdentifier--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;MyCustomDataIdentifier&quot;: <span>{</span>
+  &quot;Type&quot; : &quot;AWS::Macie::CustomDataIdentifier&quot;,
+  &quot;DependsOn&quot; : <span>{</span>&quot;Session&quot;},
+  &quot;Properties&quot; : <span>{</span>
+      &quot;Description&quot; : &quot;My custom data identifier&quot;,
+      &quot;IgnoreWords&quot; : [ 000000, 123456 ],
+      &quot;Keywords&quot; : [ employeeID, &quot;employee ID&quot; ],
+      &quot;MaximumMatchDistance&quot; : 20,
+      &quot;Name&quot; : EmployeeIDCustomDataIdentifier,
+      &quot;Regex&quot; : \d<span>{</span>6}
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-macie-customdataidentifier--examples--Creating_a_Macie_CustomDataIdentifier--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyCustomDataIdentifier
+Type: AWS::Macie::CustomDataIdentifier
+DependsOn: &quot;Session&quot;
+Properties: 
+  Description: &quot;My custom data identifier&quot;
+  IgnoreWords: 
+    - 000000
+    - 123456
+  Keywords: 
+    - employeeID
+    - &quot;Employee ID&quot;
+  MaximumMatchDistance: 20
+  Name: EmployeeIDCustomDataIdentifier
+  Regex: \d<span>{</span>6}</code></pre></div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

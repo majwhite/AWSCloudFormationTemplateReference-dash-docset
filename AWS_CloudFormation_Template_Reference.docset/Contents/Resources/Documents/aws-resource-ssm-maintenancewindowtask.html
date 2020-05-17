@@ -318,46 +318,122 @@ Properties:
                                     using a maintenance window target ID.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-maintenancewindowtask--examples--AWS_Systems_Manager_Maintenance_Window_Task_Window_Target_ID_Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;Resources&quot;: <span>{</span> &quot;MaintenanceWindowStepFunctionsTask&quot;: <span>{</span> &quot;Type&quot;:
-            &quot;AWS::SSM::MaintenanceWindowTask&quot;, &quot;Properties&quot;: <span>{</span> &quot;WindowId&quot;: &quot;MaintenanceWindow&quot;,
-            &quot;Targets&quot;: [ <span>{</span> &quot;Key&quot;: &quot;WindowTargetIds&quot;, &quot;Values&quot;: [ &quot;MaintenanceWindowTarget&quot; ] } ],
-            &quot;TaskArn&quot;: &quot;SSMStepFunctionDemo&quot;, &quot;ServiceRoleArn&quot;: &quot;StepFunctionRole.Arn&quot;, &quot;TaskType&quot;:
-            &quot;STEP_FUNCTIONS&quot;, &quot;TaskInvocationParameters&quot;: <span>{</span>
-            &quot;MaintenanceWindowStepFunctionsParameters&quot;: <span>{</span> &quot;Input&quot;:
-            &quot;<span>{</span>\&quot;instanceId\&quot;:\&quot;<span>{</span><span>{</span>TARGET_ID}}\&quot;, \&quot;wait_time\&quot;: 20}&quot;, &quot;Name&quot;: &quot;<span>{</span><span>{</span>INVOCATION_ID}}&quot; }
-            }, &quot;Priority&quot;: 1, &quot;MaxConcurrency&quot;: 5, &quot;MaxErrors&quot;: 5, &quot;Name&quot;: &quot;StepFunctionsTask&quot; },
-            &quot;DependsOn&quot;: &quot;MaintenanceWindowTarget&quot; } } }</code></pre></div>
+                                    <h4 id="aws-resource-ssm-maintenancewindowtask--examples--AWS_Systems_Manager_Maintenance_Window_Task_Window_Target_ID_Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Resources&quot;: <span>{</span>
+        &quot;MaintenanceWindowStepFunctionsTask&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::SSM::MaintenanceWindowTask&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;WindowId&quot;: &quot;MaintenanceWindow&quot;,
+                &quot;Targets&quot;: [
+                    <span>{</span>
+                        &quot;Key&quot;: &quot;WindowTargetIds&quot;,
+                        &quot;Values&quot;: [
+                            &quot;MaintenanceWindowTarget&quot;
+                        ]
+                    }
+                ],
+                &quot;TaskArn&quot;: &quot;SSMStepFunctionDemo&quot;,
+                &quot;ServiceRoleArn&quot;: &quot;StepFunctionRole.Arn&quot;,
+                &quot;TaskType&quot;: &quot;STEP_FUNCTIONS&quot;,
+                &quot;TaskInvocationParameters&quot;: <span>{</span>
+                    &quot;MaintenanceWindowStepFunctionsParameters&quot;: <span>{</span>
+                        &quot;Input&quot;: &quot;<span>{</span>\&quot;instanceId\&quot;:\&quot;<span>{</span><span>{</span>TARGET_ID}}\&quot;, \&quot;wait_time\&quot;: 20}&quot;,
+                        &quot;Name&quot;: &quot;<span>{</span><span>{</span>INVOCATION_ID}}&quot;
+                    }
+                },
+                &quot;Priority&quot;: 1,
+                &quot;MaxConcurrency&quot;: 5,
+                &quot;MaxErrors&quot;: 5,
+                &quot;Name&quot;: &quot;StepFunctionsTask&quot;
+            },
+            &quot;DependsOn&quot;: &quot;MaintenanceWindowTarget&quot;
+        }
+    }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-maintenancewindowtask--examples--AWS_Systems_Manager_Maintenance_Window_Task_Window_Target_ID_Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- Resources: MaintenanceWindowStepFunctionsTask: Type:
-            AWS::SSM::MaintenanceWindowTask Properties: WindowId: MaintenanceWindow Targets: - Key:
-            WindowTargetIds Values: - MaintenanceWindowTarget TaskArn: SSMStepFunctionDemo
-            ServiceRoleArn: StepFunctionRole.Arn TaskType: STEP_FUNCTIONS TaskInvocationParameters:
-            MaintenanceWindowStepFunctionsParameters: Input: &apos;<span>{</span>&quot;instanceId&quot;:&quot;<span>{</span><span>{</span>TARGET_ID}}&quot;,
-            &quot;wait_time&quot;: 20}&apos; Name: &quot;<span>{</span><span>{</span>INVOCATION_ID}}&quot; Priority: 1 MaxConcurrency: 5 MaxErrors: 5
-            Name: StepFunctionsTask DependsOn: MaintenanceWindowTarget </code></pre></div>
+                                    <h4 id="aws-resource-ssm-maintenancewindowtask--examples--AWS_Systems_Manager_Maintenance_Window_Task_Window_Target_ID_Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Resources:
+  MaintenanceWindowStepFunctionsTask:
+    Type: AWS::SSM::MaintenanceWindowTask
+    Properties:
+      WindowId: MaintenanceWindow
+      Targets:
+      - Key: WindowTargetIds
+        Values:
+        - MaintenanceWindowTarget
+      TaskArn: SSMStepFunctionDemo
+      ServiceRoleArn: StepFunctionRole.Arn
+      TaskType: STEP_FUNCTIONS
+      TaskInvocationParameters:
+        MaintenanceWindowStepFunctionsParameters:
+          Input: &apos;<span>{</span>&quot;instanceId&quot;:&quot;<span>{</span><span>{</span>TARGET_ID}}&quot;, &quot;wait_time&quot;: 20}&apos;
+          Name: &quot;<span>{</span><span>{</span>INVOCATION_ID}}&quot;
+      Priority: 1
+      MaxConcurrency: 5
+      MaxErrors: 5
+      Name: StepFunctionsTask
+    DependsOn: MaintenanceWindowTarget </code></pre></div>
                                  <h3 id="aws-resource-ssm-maintenancewindowtask--examples--AWS_Systems_Manager_Maintenance_Window_Task_Instance_ID_Target_Example">AWS Systems Manager Maintenance Window Task Instance ID Target Example</h3>
                                  <p>The following example creates a Systems Manager maintenance window task that runs
                                     the specified Step Function. The maintenance window task targets the specified
                                     instance IDs.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-maintenancewindowtask--examples--AWS_Systems_Manager_Maintenance_Window_Task_Instance_ID_Target_Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;Resources&quot;: <span>{</span> &quot;StepFunctionsTask&quot;: <span>{</span> &quot;Type&quot;:
-            &quot;AWS::SSM::MaintenanceWindowTask&quot;, &quot;Properties&quot;: <span>{</span> &quot;WindowId&quot;: &quot;MaintenanceWindow&quot;,
-            &quot;Targets&quot;: [ <span>{</span> &quot;Key&quot;: &quot;InstanceIds&quot;, &quot;Values&quot;: [ &quot;i-012345678912345678&quot; ] } ],
-            &quot;TaskArn&quot;: &quot;SSMStepFunctionDemo&quot;, &quot;ServiceRoleArn&quot;: &quot;StepFunctionRole.Arn&quot;, &quot;TaskType&quot;:
-            &quot;STEP_FUNCTIONS&quot;, &quot;TaskInvocationParameters&quot;: <span>{</span>
-            &quot;MaintenanceWindowStepFunctionsParameters&quot;: <span>{</span> &quot;Input&quot;:
-            &quot;<span>{</span>\&quot;instanceId\&quot;:\&quot;<span>{</span><span>{</span>TARGET_ID}}\&quot;, \&quot;wait_time\&quot;: 20}&quot;, &quot;Name&quot;: &quot;<span>{</span><span>{</span>INVOCATION_ID}}&quot; }
-            }, &quot;Priority&quot;: 1, &quot;MaxConcurrency&quot;: 5, &quot;MaxErrors&quot;: 5, &quot;Name&quot;: &quot;StepFunctionsTask&quot; },
-            &quot;DependsOn&quot;: &quot;MaintenanceWindowTarget&quot; } } }</code></pre></div>
+                                    <h4 id="aws-resource-ssm-maintenancewindowtask--examples--AWS_Systems_Manager_Maintenance_Window_Task_Instance_ID_Target_Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Resources&quot;: <span>{</span>
+        &quot;StepFunctionsTask&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::SSM::MaintenanceWindowTask&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;WindowId&quot;: &quot;MaintenanceWindow&quot;,
+                &quot;Targets&quot;: [
+                    <span>{</span>
+                        &quot;Key&quot;: &quot;InstanceIds&quot;,
+                        &quot;Values&quot;: [
+                            &quot;i-012345678912345678&quot;
+                        ]
+                    }
+                ],
+                &quot;TaskArn&quot;: &quot;SSMStepFunctionDemo&quot;,
+                &quot;ServiceRoleArn&quot;: &quot;StepFunctionRole.Arn&quot;,
+                &quot;TaskType&quot;: &quot;STEP_FUNCTIONS&quot;,
+                &quot;TaskInvocationParameters&quot;: <span>{</span>
+                    &quot;MaintenanceWindowStepFunctionsParameters&quot;: <span>{</span>
+                        &quot;Input&quot;: &quot;<span>{</span>\&quot;instanceId\&quot;:\&quot;<span>{</span><span>{</span>TARGET_ID}}\&quot;, \&quot;wait_time\&quot;: 20}&quot;,
+                        &quot;Name&quot;: &quot;<span>{</span><span>{</span>INVOCATION_ID}}&quot;
+                    }
+                },
+                &quot;Priority&quot;: 1,
+                &quot;MaxConcurrency&quot;: 5,
+                &quot;MaxErrors&quot;: 5,
+                &quot;Name&quot;: &quot;StepFunctionsTask&quot;
+            },
+            &quot;DependsOn&quot;: &quot;MaintenanceWindowTarget&quot;
+        }
+    }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-maintenancewindowtask--examples--AWS_Systems_Manager_Maintenance_Window_Task_Instance_ID_Target_Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- Resources: StepFunctionsTask: Type:
-            AWS::SSM::MaintenanceWindowTask Properties: WindowId: MaintenanceWindow Targets: - Key:
-            InstanceIds Values: - i-012345678912345678 TaskArn: SSMStepFunctionDemo ServiceRoleArn:
-            StepFunctionRole.Arn TaskType: STEP_FUNCTIONS TaskInvocationParameters:
-            MaintenanceWindowStepFunctionsParameters: Input: &apos;<span>{</span>&quot;instanceId&quot;:&quot;<span>{</span><span>{</span>TARGET_ID}}&quot;,
-            &quot;wait_time&quot;: 20}&apos; Name: &quot;<span>{</span><span>{</span>INVOCATION_ID}}&quot; Priority: 1 MaxConcurrency: 5 MaxErrors: 5
-            Name: StepFunctionsTask DependsOn: MaintenanceWindowTarget</code></pre></div>
+                                    <h4 id="aws-resource-ssm-maintenancewindowtask--examples--AWS_Systems_Manager_Maintenance_Window_Task_Instance_ID_Target_Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Resources:
+  StepFunctionsTask:
+    Type: AWS::SSM::MaintenanceWindowTask
+    Properties:
+      WindowId: MaintenanceWindow
+      Targets:
+      - Key: InstanceIds
+        Values:
+        - i-012345678912345678
+      TaskArn: SSMStepFunctionDemo
+      ServiceRoleArn: StepFunctionRole.Arn
+      TaskType: STEP_FUNCTIONS
+      TaskInvocationParameters:
+        MaintenanceWindowStepFunctionsParameters:
+          Input: &apos;<span>{</span>&quot;instanceId&quot;:&quot;<span>{</span><span>{</span>TARGET_ID}}&quot;, &quot;wait_time&quot;: 20}&apos;
+          Name: &quot;<span>{</span><span>{</span>INVOCATION_ID}}&quot;
+      Priority: 1
+      MaxConcurrency: 5
+      MaxErrors: 5
+      Name: StepFunctionsTask
+    DependsOn: MaintenanceWindowTarget</code></pre></div>
                                  <h2 id="aws-resource-ssm-maintenancewindowtask--seealso">See Also</h2>
                                  <div class="itemizedlist">
                                      

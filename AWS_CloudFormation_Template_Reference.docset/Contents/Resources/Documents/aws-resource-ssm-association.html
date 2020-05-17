@@ -28,13 +28,19 @@
   &quot;Type&quot; : &quot;AWS::SSM::Association&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-ssm-association-associationname">AssociationName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ssm-association-automationtargetparametername">AutomationTargetParameterName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ssm-association-complianceseverity">ComplianceSeverity</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-association-documentversion">DocumentVersion</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-association-instanceid">InstanceId</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ssm-association-maxconcurrency">MaxConcurrency</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ssm-association-maxerrors">MaxErrors</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-association-name">Name</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-association-outputlocation">OutputLocation</a>&quot; : <code class="replaceable"><a href="./aws-properties-ssm-association-instanceassociationoutputlocation.html">InstanceAssociationOutputLocation</a></code>,
       &quot;<a href="#cfn-ssm-association-parameters">Parameters</a>&quot; : <code class="replaceable"><span>{</span><code class="replaceable">Key</code> : <code class="replaceable">Value</code>, ...}</code>,
       &quot;<a href="#cfn-ssm-association-scheduleexpression">ScheduleExpression</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-ssm-association-targets">Targets</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-ssm-association-target.html">Target</a>, ... ]</code>
+      &quot;<a href="#cfn-ssm-association-synccompliance">SyncCompliance</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ssm-association-targets">Targets</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-ssm-association-target.html">Target</a>, ... ]</code>,
+      &quot;<a href="#cfn-ssm-association-waitforsuccesstimeoutseconds">WaitForSuccessTimeoutSeconds</a>&quot; : <code class="replaceable">Integer</code>
     }
 }
 </code></pre></div>
@@ -42,16 +48,22 @@
                                     <h3 id="aws-resource-ssm-association-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::SSM::Association
 Properties: 
   <a href="#cfn-ssm-association-associationname">AssociationName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ssm-association-automationtargetparametername">AutomationTargetParameterName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ssm-association-complianceseverity">ComplianceSeverity</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-association-documentversion">DocumentVersion</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-association-instanceid">InstanceId</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ssm-association-maxconcurrency">MaxConcurrency</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ssm-association-maxerrors">MaxErrors</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-association-name">Name</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-association-outputlocation">OutputLocation</a>: <code class="replaceable">
     <a href="./aws-properties-ssm-association-instanceassociationoutputlocation.html">InstanceAssociationOutputLocation</a></code>
   <a href="#cfn-ssm-association-parameters">Parameters</a>: <code class="replaceable">
     <code class="replaceable">Key</code> : <code class="replaceable">Value</code></code>
   <a href="#cfn-ssm-association-scheduleexpression">ScheduleExpression</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ssm-association-synccompliance">SyncCompliance</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-association-targets">Targets</a>: <code class="replaceable">
     - <a href="./aws-properties-ssm-association-target.html">Target</a></code>
+  <a href="#cfn-ssm-association-waitforsuccesstimeoutseconds">WaitForSuccessTimeoutSeconds</a>: <code class="replaceable">Integer</code>
 </code></pre></div>
                                  <h2 id="aws-resource-ssm-association-properties">Properties</h2>
                                  <div class="variablelist">
@@ -66,6 +78,34 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Pattern</em>: <code class="code">^[a-zA-Z0-9_\-.]<span>{</span>3,128}$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ssm-association-automationtargetparametername"></a><span class="term"><code class="code">AutomationTargetParameterName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specify the target for the association. This target is required for associations that
+                                             use an
+                                             Automation document and target resources by using rate controls.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">50</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ssm-association-complianceseverity"></a><span class="term"><code class="code">ComplianceSeverity</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The severity level that is assigned to the association.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed Values</em>: <code class="code">CRITICAL | HIGH | LOW | MEDIUM | UNSPECIFIED</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-ssm-association-documentversion"></a><span class="term"><code class="code">DocumentVersion</code></span></dt>
@@ -107,7 +147,70 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Pattern</em>: <code class="code">(^i-(\w<span>{</span>8}|\w<span>{</span>17})$)|(^mi-\w<span>{</span>17}$)</code></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ssm-association-maxconcurrency"></a><span class="term"><code class="code">MaxConcurrency</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The maximum number of targets allowed to run the association at the same time. You
+                                             can
+                                             specify a number, for example 10, or a percentage of the target set, for example 10%.
+                                             The default
+                                             value is 100%, which means all targets run the association at the same time.
+                                          </p>
+                                          
+                                          <p>If a new instance starts and attempts to run an association while Systems Manager
+                                             is running
+                                             MaxConcurrency associations, the association is allowed to run. During the next association
+                                             interval, the new instance will process its association within the limit specified
+                                             for
+                                             MaxConcurrency.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">7</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^([1-9][0-9]*|[1-9][0-9]%|[1-9]%|100%)$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ssm-association-maxerrors"></a><span class="term"><code class="code">MaxErrors</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The number of errors that are allowed before the system stops sending requests to
+                                             run the
+                                             association on additional targets. You can specify either an absolute number of errors,
+                                             for
+                                             example 10, or a percentage of the target set, for example 10%. If you specify 3,
+                                             for example,
+                                             the system stops sending requests when the fourth error is received. If you specify
+                                             0, then the
+                                             system stops sending requests after the first error is returned. If you run an association
+                                             on 50
+                                             instances and set MaxError to 10%, then the system stops sending the request when
+                                             the sixth error
+                                             is received.
+                                          </p>
+                                          
+                                          <p>Executions that are already running an association when MaxErrors is reached are allowed
+                                             to
+                                             complete, but some of these executions may fail as well. If you need to ensure that
+                                             there won&apos;t
+                                             be more than max-errors failed executions, set MaxConcurrency to 1 so that executions
+                                             proceed one
+                                             at a time.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">7</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^([1-9][0-9]*|[0]|[1-9][0-9]%|[0-9]%|100%)$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-ssm-association-name"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
@@ -120,7 +223,7 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Pattern</em>: <code class="code">^[a-zA-Z0-9_\-.:/]<span>{</span>3,128}$</code></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-ssm-association-outputlocation"></a><span class="term"><code class="code">OutputLocation</code></span></dt>
                                        <dd>
@@ -159,6 +262,33 @@ Properties:
                                           <p><em>Maximum</em>: <code class="code">256</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-ssm-association-synccompliance"></a><span class="term"><code class="code">SyncCompliance</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>The mode for generating association compliance. You can specify <code class="code">AUTO</code> or
+                                             <code class="code">MANUAL</code>. In <code class="code">AUTO</code> mode, the system uses the status of the association
+                                             execution to determine the compliance status. If the association execution runs successfully,
+                                             then the association is <code class="code">COMPLIANT</code>. If the association execution doesn&apos;t run
+                                             successfully, the association is <code class="code">NON-COMPLIANT</code>.
+                                          </p>
+                                          
+                                          <p>In <code class="code">MANUAL</code> mode, you must specify the <code class="code">AssociationId</code> as a parameter
+                                             for the PutComplianceItems API action. In this case, compliance data is not
+                                             managed by State Manager. It is managed by your direct call to the PutComplianceItems
+                                             API action.
+                                          </p>
+                                          
+                                          <p>By default, all associations use <code class="code">AUTO</code> mode.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed Values</em>: <code class="code">AUTO | MANUAL</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-ssm-association-targets"></a><span class="term"><code class="code">Targets</code></span></dt>
                                        <dd>
                                           
@@ -170,50 +300,311 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: List of <a href="./aws-properties-ssm-association-target.html">Target</a></p>
                                           <p><em>Maximum</em>: <code class="code">5</code></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ssm-association-waitforsuccesstimeoutseconds"></a><span class="term"><code class="code">WaitForSuccessTimeoutSeconds</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The number of seconds the service should wait for the association status to show
+                                             &quot;Success&quot; before proceeding with the stack execution. If the association status doesn&apos;t
+                                             show &quot;Success&quot; after the specified number of seconds, then stack creation fails.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-ssm-association-return-values">Return Values</h2>
+                                 <h3 id="aws-resource-ssm-association-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <h4 id="aws-resource-ssm-association-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="AssociationId-fn::getatt"></a><span class="term"><code class="code">AssociationId</code></span></dt>
+                                       <dd>
+                                          <p>Not currently supported by AWS CloudFormation.</p>
                                        </dd>
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-ssm-association--examples">Examples</h2>
-                                 <h3 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_a_specific_instance">Associate a Systems Manager document with a specific instance</h3>
-                                 <p>The following example associates an SSM document with a specific instance. The ID
-                                    of the instance is specified by the <code class="code">myInstanceId</code> parameter.
+                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_for_a_specific_instance">Create an association for a specific instance</h3>
+                                 <p>The following example creates an association that uses the AWS-RunShellScript SSM
+                                    document. The association runs a simple command on a specific instance.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_a_specific_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;Resources&quot;: <span>{</span> &quot;Association&quot;: <span>{</span> &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
-            &quot;Properties&quot;: <span>{</span> &quot;Name&quot;: <span>{</span> &quot;Ref&quot;: &quot;document&quot; }, &quot;Parameters&quot;: <span>{</span> &quot;Directory&quot;:
-            [&quot;myWorkSpace&quot;] }, &quot;Targets&quot;: [<span>{</span> &quot;Key&quot;: &quot;InstanceIds&quot;, &quot;Values&quot;: [<span>{</span> &quot;Ref&quot;:
-            &quot;myInstanceId&quot; }] }] } } } }</code></pre></div>
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_for_a_specific_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Resources&quot;: <span>{</span>
+    &quot;SpecificInstanceIdAssociation&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Name&quot;: &quot;AWS-RunShellScript&quot;,
+        &quot;Targets&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;InstanceIds&quot;,
+            &quot;Values&quot;: [
+              &quot;i-1234567890abcdef0&quot;
+            ]
+          }
+        ],
+        &quot;Parameters&quot;: <span>{</span>
+          &quot;commands&quot;: [
+            &quot;ls&quot;
+          ],
+          &quot;workingDirectory&quot;: [
+            &quot;/&quot;
+          ],
+        &quot;WaitForSuccessTimeoutSeconds&quot;: 300
+        }
+      }
+    }
+  }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_a_specific_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- Resources: Association: Type: AWS::SSM::Association
-            Properties: Name: Ref: document Parameters: Directory: - myWorkSpace Targets: - Key:
-            InstanceIds Values: - Ref: myInstanceId</code></pre></div>
-                                 <h3 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_all_managed_instances">Associate a Systems Manager document with all managed instances</h3>
-                                 <p>The following example associates the document <code class="code">AWS-UpdateSSMAgent</code> with
-                                    all instances registered with Systems Manager.
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_for_a_specific_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Resources:
+  SpecificInstanceIdAssociation:
+    Type: AWS::SSM::Association
+    Properties:
+      Name: AWS-RunShellScript
+      Targets:
+      - Key: InstanceIds
+        Values:
+        - i-1234567890abcdef0
+      Parameters:
+        commands:
+        - ls
+        workingDirectory:
+        - &quot;/&quot;
+        WaitForSuccessTimeoutSeconds: 300</code></pre></div>
+                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_for_all_managed_instances_in_your_AWS_account">Create an association for all managed instances in your AWS account</h3>
+                                 <p>The following example creates an association that uses the AWS-UpdateSSMAgent SSM
+                                    document. The association updates SSM Agent on all managed instances (instances configured
+                                    for Systems Manager) in the user&apos;s AWS account according to the specified CRON schedule.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_all_managed_instances--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;Resources&quot;: <span>{</span> &quot;UpdateSSMAgent&quot;: <span>{</span> &quot;Type&quot;:
-            &quot;AWS::SSM::Association&quot;, &quot;Properties&quot;: <span>{</span> &quot;AssociationName&quot;: &quot;UpdateSSMAgent&quot;, &quot;Name&quot;:
-            &quot;AWS-UpdateSSMAgent&quot;, &quot;ScheduleExpression&quot;: &quot;cron(0 2 ? * SUN *)&quot;, &quot;Targets&quot;: [ <span>{</span> &quot;Key&quot;:
-            &quot;InstanceIds&quot;, &quot;Values&quot;: [ &quot;*&quot; ] } ] } } } }</code></pre></div>
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_for_all_managed_instances_in_your_AWS_account--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Resources&quot;: <span>{</span>
+    &quot;AllInstanceIdsAssociation&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;AssociationName&quot;: &quot;UpdateSSMAgent&quot;,
+        &quot;Name&quot;: &quot;AWS-UpdateSSMAgent&quot;,
+        &quot;ScheduleExpression&quot;: &quot;cron(0 2 ? * SUN *)&quot;,
+        &quot;Targets&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;InstanceIds&quot;,
+            &quot;Values&quot;: [
+              &quot;*&quot;
+            ],
+        &quot;WaitForSuccessTimeoutSeconds&quot;: 300
+          }
+        ]
+      }
+    }
+  }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_all_managed_instances--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- Resources: UpdateSSMAgent: Type: AWS::SSM::Association
-            Properties: AssociationName: UpdateSSMAgent Name: AWS-UpdateSSMAgent ScheduleExpression:
-            cron(0 2 ? * SUN *) Targets: - Key: InstanceIds Values: - &quot;*&quot;</code></pre></div>
-                                 <h3 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_a_specific_tag">Associate a Systems Manager document with a specific tag</h3>
-                                 <p>The following example associates the document <code class="code">AWS-UpdateSSMAgent</code> with
-                                    instances that have the tag key <code class="code">ENV</code> and value <code class="code">DEV</code>.
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_for_all_managed_instances_in_your_AWS_account--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Resources:
+  AllInstanceIdsAssociation:
+    Type: AWS::SSM::Association
+    Properties:
+      AssociationName: UpdateSSMAgent
+      Name: AWS-UpdateSSMAgent
+      ScheduleExpression: cron(0 2 ? * SUN *)
+      Targets:
+      - Key: InstanceIds
+        Values:
+        - &quot;*&quot;
+        WaitForSuccessTimeoutSeconds: 300
+      </code></pre></div>
+                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_for_a_specific_tag">Create an association for a specific tag</h3>
+                                 <p>The following example creates an association that uses the AWS-UpdateSSMAgent SSM
+                                    document. The association updates SSM Agent on all managed instances that are assigned
+                                    a tag key of <code class="code">Environment</code> and value of <code class="code">Production</code>. The association runs every seven days according to the specified rate expression.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_a_specific_tag--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;Resources&quot;: <span>{</span> &quot;UpdateSSMAgent&quot;: <span>{</span> &quot;Type&quot;:
-            &quot;AWS::SSM::Association&quot;, &quot;Properties&quot;: <span>{</span> &quot;AssociationName&quot;: &quot;UpdateSSMAgent&quot;, &quot;Name&quot;:
-            &quot;AWS-UpdateSSMAgent&quot;, &quot;ScheduleExpression&quot;: &quot;cron(0 2 ? * SUN *)&quot;, &quot;Targets&quot;: [ <span>{</span> &quot;Key&quot;:
-            &quot;tag:ENV&quot;, &quot;Values&quot;: [ &quot;DEV&quot; ] } ] } } } }</code></pre></div>
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_for_a_specific_tag--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Resources&quot;: <span>{</span>
+    &quot;TaggedInstancesAssociation&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;AssociationName&quot;: &quot;UpdateSSMAgent&quot;,
+        &quot;Name&quot;: &quot;AWS-UpdateSSMAgent&quot;,
+        &quot;ScheduleExpression&quot;: &quot;rate(7 days)&quot;,
+        &quot;Targets&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;tag:Environment&quot;,
+            &quot;Values&quot;: [
+              &quot;Production&quot;
+            ]
+          }
+        ],
+        &quot;WaitForSuccessTimeoutSeconds&quot;: 300
+      }
+    }
+  }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Associate_a_Systems_Manager_document_with_a_specific_tag--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- Resources: UpdateSSMAgent: Type: AWS::SSM::Association
-            Properties: AssociationName: UpdateSSMAgent Name: AWS-UpdateSSMAgent ScheduleExpression:
-            cron(0 2 ? * SUN *) Targets: - Key: tag:ENV Values: - DEV</code></pre></div>
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_for_a_specific_tag--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Resources:
+  TaggedInstancesAssociation:
+    Type: AWS::SSM::Association
+    Properties:
+      AssociationName: UpdateSSMAgent
+      Name: AWS-UpdateSSMAgent
+      ScheduleExpression: rate(7 days)
+      Targets:
+      - Key: tag:Environment
+        Values:
+        - Production
+      WaitForSuccessTimeoutSeconds: 300</code></pre></div>
+                                 <h3 id="aws-resource-ssm-association--examples--Associate_an_automation_document_with_an_instance">Associate an automation document with an instance</h3>
+                                 <p>The following example creates an association that assigns the AWS-StopEC2Instance
+                                    automation document to a specific instance. 
+                                 </p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>This example specifies the following Amazon Resource Name (ARN): <code class="code">arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonEC2FullAccess</code>. This policy provides more than the required permissions to stop the instance. We
+                                          recommend that you use a policy with more restrictive permissions.
+                                       </p>
+                                    </div>
+                                 </div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-association--examples--Associate_an_automation_document_with_an_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Resources&quot;: <span>{</span>
+    &quot;AutomationExecutionRole&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::IAM::Role&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;AssumeRolePolicyDocument&quot;: <span>{</span>
+          &quot;Version&quot;: &quot;2012-10-17&quot;,
+          &quot;Statement&quot;: [
+            <span>{</span>
+              &quot;Effect&quot;: &quot;Allow&quot;,
+              &quot;Principal&quot;: <span>{</span>
+                &quot;Service&quot;: &quot;ssm.amazonaws.com&quot;
+              },
+              &quot;Action&quot;: [
+                &quot;sts:AssumeRole&quot;
+              ]
+            }
+          ]
+        },
+        &quot;Path&quot;: &quot;/&quot;,
+        &quot;ManagedPolicyArns&quot;: [
+          &quot;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonEC2FullAccess&quot;
+        ]
+      }
+    },
+    &quot;AutomationAssociation&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Name&quot;: &quot;AWS-StopEC2Instance&quot;,
+        &quot;Parameters&quot;: <span>{</span>
+          &quot;AutomationAssumeRole&quot;: [
+            &quot;AutomationExecutionRole.Arn&quot;
+          ]
+        },
+        &quot;Targets&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;ParameterValues&quot;,
+            &quot;Values&quot;: [
+              &quot;i-1234567890abcdef0&quot;
+            ]
+          }
+        ],
+        &quot;AutomationTargetParameterName&quot;: &quot;InstanceId&quot;
+      }
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-association--examples--Associate_an_automation_document_with_an_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Resources:
+  AutomationExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ssm.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: /
+      ManagedPolicyArns:
+        - !Sub arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonEC2FullAccess
+  AutomationAssociation:
+    Type: AWS::SSM::Association
+    Properties:
+      Name: AWS-StopEC2Instance
+      Parameters:
+        AutomationAssumeRole:
+          - !GetAtt AutomationExecutionRole.Arn
+      Targets:
+        - Key: ParameterValues
+          Values:
+            - i-1234567890abcdef0
+      AutomationTargetParameterName: InstanceId</code></pre></div>
+                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_that_uses_rate_controls_and_logs_output_to_Amazon_S3">Create an association that uses rate controls and logs output to Amazon S3</h3>
+                                 <p>The following example creates an association that uses rate controls. The association
+                                    attempts to update SSM Agent on only 20% of instances at one time. Systems Manager
+                                    stops the association from running on any additional instances if the execution fails
+                                    on 5% of the total number of instances. System Manager also logs the association output
+                                    to Amazon S3.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_uses_rate_controls_and_logs_output_to_Amazon_S3--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Resources&quot;: <span>{</span>
+    &quot;RateControlAssociation&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Name&quot;: &quot;AWS-UpdateSSMAgent&quot;,
+        &quot;Targets&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;InstanceIds&quot;,
+            &quot;Values&quot;: [
+              &quot;*&quot;
+            ]
+          }
+        ],
+        &quot;MaxConcurrency&quot;: &quot;20%&quot;,
+        &quot;MaxErrors&quot;: &quot;5%&quot;
+      },
+      &quot;OutputLocation&quot;: <span>{</span>
+        &quot;S3Location&quot;: <span>{</span>
+          &quot;OutputS3BucketName&quot;: &quot;MyAssociationOutputBucket&quot;,
+          &quot;OutputS3KeyPrefix&quot;: &quot;my-agent-update-output&quot;
+        }
+      },
+      &quot;WaitForSuccessTimeoutSeconds&quot;: 300
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_uses_rate_controls_and_logs_output_to_Amazon_S3--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Resources:
+  RateControlAssociation:
+    Type: AWS::SSM::Association
+    Properties:
+      Name: AWS-UpdateSSMAgent
+      Targets:
+        - Key: InstanceIds
+          Values:
+            - &quot;*&quot;
+      MaxConcurrency: 20%
+      MaxErrors: 5%
+	  OutputLocation:
+        S3Location:
+          OutputS3BucketName: MyAssociationOutputBucket
+          OutputS3KeyPrefix: my-agent-update-output
+		WaitForSuccessTimeoutSeconds: 300</code></pre></div>
                                  <h2 id="aws-resource-ssm-association--seealso">See Also</h2>
                                  <div class="itemizedlist">
                                      

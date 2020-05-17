@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-globalaccelerator-accelerator">AWS::GlobalAccelerator::Accelerator</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The <code class="code">AWS::GlobalAccelerator::Accelerator</code> resource is a Global Accelerator resource type that contains information about 
+                                    	     		how you create an accelerator. An accelerator includes one or more listeners
+                                    that process inbound connections and direct traffic
+                                    	     		to one or more endpoint groups, each of which includes endpoints, such as
+                                    Application Load Balancers, Network Load Balancers,
+                                    	     		and Amazon EC2 instances.
+                                 </p>
+                                 <h2 id="aws-resource-globalaccelerator-accelerator-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-globalaccelerator-accelerator-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::GlobalAccelerator::Accelerator&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-globalaccelerator-accelerator-enabled">Enabled</a>&quot; : <code class="replaceable">Boolean</code>,
+      &quot;<a href="#cfn-globalaccelerator-accelerator-ipaddresses">IpAddresses</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+      &quot;<a href="#cfn-globalaccelerator-accelerator-ipaddresstype">IpAddressType</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-globalaccelerator-accelerator-name">Name</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-globalaccelerator-accelerator-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-globalaccelerator-accelerator-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::GlobalAccelerator::Accelerator
+Properties: 
+  <a href="#cfn-globalaccelerator-accelerator-enabled">Enabled</a>: <code class="replaceable">Boolean</code>
+  <a href="#cfn-globalaccelerator-accelerator-ipaddresses">IpAddresses</a>: <code class="replaceable">
+    - String</code>
+  <a href="#cfn-globalaccelerator-accelerator-ipaddresstype">IpAddressType</a>: <code class="replaceable">String</code>
+  <a href="#cfn-globalaccelerator-accelerator-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-globalaccelerator-accelerator-tags">Tags</a>: <code class="replaceable">
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
+</code></pre></div>
+                                 <h2 id="aws-resource-globalaccelerator-accelerator-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-globalaccelerator-accelerator-enabled"></a><span class="term"><code class="code">Enabled</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>Indicates whether the accelerator is enabled. The value is true or false. The default
+                                             value is true. 
+                                          </p>
+                                          		       
+                                          <p>If the value is set to true, the accelerator cannot be deleted. If set to false, accelerator
+                                             can be deleted.
+                                          </p>
+                                          	     
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-globalaccelerator-accelerator-ipaddresses"></a><span class="term"><code class="code">IpAddresses</code></span></dt>
+                                       <dd>
+                                          		
+                                          <p>Optionally, if you&apos;ve added your own IP address pool to Global Accelerator (BYOIP),
+                                             you can choose IP addresses 
+                                             			from your own pool to use for the accelerator&apos;s static IP addresses when you create
+                                             an accelerator. You can 
+                                             			specify one or two addresses, separated by a comma. Do not include the /32 suffix.
+                                          </p>
+                                          		
+                                          <p>Only one IP address from each of your IP address ranges can be used for each accelerator.
+                                             If you specify only 
+                                             			one IP address from your IP address range, Global Accelerator assigns a second
+                                             static IP address for the 
+                                             			accelerator from the AWS IP address pool.
+                                          </p>
+                                          		
+                                          <p> Note that you can&apos;t update IP addresses for an existing accelerator. To change them,
+                                             you must create a new 
+                                             			accelerator with the new addresses.
+                                          </p>
+                                          		
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring Your Own 
+                                                			IP Addresses (BYOIP)</a> in the <em>AWS Global Accelerator Developer Guide</em>.
+                                          </p>
+                                          	
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-globalaccelerator-accelerator-ipaddresstype"></a><span class="term"><code class="code">IpAddressType</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>The value for the address type must be IPv4.
+                                             			
+                                          </p>
+                                          		    
+                                          	     
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed Values</em>: <code class="code">IPV4</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-globalaccelerator-accelerator-name"></a><span class="term"><code class="code">Name</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>The name of the accelerator. The name must contain only alphanumeric characters or
+                                             			hyphens (-), and must not begin or end with a hyphen.
+                                          </p>
+                                          	     
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Maximum</em>: <code class="code">255</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-globalaccelerator-accelerator-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>Create tags for an accelerator.</p>
+                                          		       
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html">Tagging
+                                                			in AWS Global Accelerator</a> in the <em>AWS Global Accelerator Developer Guide</em>.
+                                          </p>
+                                          	     
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-globalaccelerator-accelerator-return-values">Return Values</h2>
+                                 <h3 id="aws-resource-globalaccelerator-accelerator-return-values-ref">Ref</h3>
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the ARN of the accelerator, such as 
+                                    			<code class="code">arn:aws:globalaccelerator::012345678901:accelerator/1234abcd-abcd-1234-abcd-1234abcdefgh</code>.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-globalaccelerator-accelerator-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-globalaccelerator-accelerator-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="AcceleratorArn-fn::getatt"></a><span class="term"><code class="code">AcceleratorArn</code></span></dt>
+                                       <dd>
+                                          		
+                                          <p>The ARN of the accelerator, such as 
+                                             			<code class="code">arn:aws:globalaccelerator::012345678901:accelerator/1234abcd-abcd-1234-abcd-1234abcdefgh</code>.
+                                          </p>
+                                          	
+                                       </dd>
+                                       <dt><a id="DnsName-fn::getatt"></a><span class="term"><code class="code">DnsName</code></span></dt>
+                                       <dd>
+                                          		
+                                          <p>The Domain Name System (DNS) name that Global Accelerator creates that points to your
+                                             accelerator&apos;s static IP addresses.
+                                          </p>
+                                          	
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-globalaccelerator-accelerator--examples">Examples</h2>
+                                 <h3 id="aws-resource-globalaccelerator-accelerator--examples--Add_an_accelerator">Add an accelerator</h3>
+                                 <p>These are examples to specify an accelerator.</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-globalaccelerator-accelerator--examples--Add_an_accelerator--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Resources&quot;: <span>{</span>
+    &quot;Accelerator&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::GlobalAccelerator::Accelerator&quot;,
+        &quot;Properties&quot;: <span>{</span>
+            &quot;Name&quot;: &quot;SampleAccelerator&quot;,
+            &quot;Enabled&quot;: true
+        }
+    },
+    &quot;Outputs&quot;: <span>{</span>
+        &quot;AcceleratorDnsName&quot;: <span>{</span>
+            &quot;Description&quot;: &quot;Accelerator DNS Name&quot;,
+            &quot;Value&quot;: <span>{</span>
+                &quot;Fn::GetAtt&quot;: [
+                    &quot;Accelerator&quot;,
+                    &quot;DnsName&quot;
+                ]
+            }
+        }
+    }      
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-globalaccelerator-accelerator--examples--Add_an_accelerator--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Accelerator:
+  Type: AWS::GlobalAccelerator::Accelerator
+  Properties:
+    Name: SampleAccelerator
+    Enabled: true
+Outputs:
+  AcceleratorDnsName:
+    Description: Accelerator DNS Name
+    Value:
+      Fn::GetAtt:
+      - Accelerator
+      - DnsName</code></pre></div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>
