@@ -229,70 +229,173 @@ Properties:
                                     automatically updates the centralized data when new data is collected.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncToDestination--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;Description&quot;: &quot;Create a Resource Data Sync for Systems
-            Manager&quot;, &quot;Resources&quot;: <span>{</span> &quot;BasicResourceDataSync&quot;: <span>{</span> &quot;Type&quot;:
-            &quot;AWS::SSM::ResourceDataSync&quot;, &quot;Properties&quot;: <span>{</span> &quot;SyncName&quot;: &quot;test-sync&quot;, &quot;SyncType&quot;:
-            &quot;SyncToDestination&quot;, &quot;S3Destination&quot;: <span>{</span> &quot;BucketName&quot;: &quot;test-bucket&quot;, &quot;BucketRegion&quot;:
-            &quot;us-east-2&quot;, &quot;SyncFormat&quot;: &quot;JsonSerDe&quot;, &quot;BucketPrefix&quot;: &quot;cfn&quot;, &quot;KMSKeyArn&quot;: &quot;kmsKeyARN&quot;
-            } } } } }</code></pre></div>
+                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncToDestination--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Description&quot;: &quot;Create a Resource Data Sync for Systems Manager&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;BasicResourceDataSync&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::SSM::ResourceDataSync&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;SyncName&quot;: &quot;test-sync&quot;,
+                &quot;SyncType&quot;: &quot;SyncToDestination&quot;,
+                &quot;S3Destination&quot;: <span>{</span>
+                    &quot;BucketName&quot;: &quot;test-bucket&quot;,
+                    &quot;BucketRegion&quot;: &quot;us-east-2&quot;,
+                    &quot;SyncFormat&quot;: &quot;JsonSerDe&quot;,
+                    &quot;BucketPrefix&quot;: &quot;cfn&quot;,
+                    &quot;KMSKeyArn&quot;: &quot;kmsKeyARN&quot;
+                }
+            }
+        }
+    }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncToDestination--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml "> --- Description: Create a Resource Data Sync for Systems Manager
-            Resources: BasicResourceDataSync: Type: AWS::SSM::ResourceDataSync Properties: SyncName:
-            test-sync SyncType: SyncToDestination S3Destination: BucketName: test-bucket
-            BucketRegion: us-east-2 SyncFormat: JsonSerDe BucketPrefix: cfn KMSKeyArn:
-            kmsKeyARN</code></pre></div>
+                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncToDestination--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Description: Create a Resource Data Sync for Systems Manager
+Resources:
+  BasicResourceDataSync:
+    Type: AWS::SSM::ResourceDataSync
+    Properties:
+      SyncName: test-sync
+      SyncType: SyncToDestination
+      S3Destination:
+        BucketName: test-bucket
+        BucketRegion: us-east-2
+        SyncFormat: JsonSerDe
+        BucketPrefix: cfn
+        KMSKeyArn: kmsKeyARN</code></pre></div>
                                  <h3 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_SingleAccountMultipleRegions">AWS Systems Manager Resource Data Sync - SyncFromSource - SingleAccountMultipleRegions</h3>
                                  <p>The following example synchronizes Systems Manager Explorer OpsData and OpsItems
                                     from multiple AWS Regions in a single AWS account.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_SingleAccountMultipleRegions--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;Description&quot;: &quot;Create a Resource Data Sync for Systems Manager
-            Explorer&quot;, &quot;Resources&quot;: <span>{</span> &quot;BasicResourceDataSync&quot;: <span>{</span> &quot;Type&quot;:
-            &quot;Dev::SSM::ResourceDataSync&quot;, &quot;Properties&quot;: <span>{</span> &quot;SyncName&quot;: &quot;test-sync&quot;, &quot;SyncType&quot;:
-            &quot;SyncFromSource&quot;, &quot;SyncSource&quot;: <span>{</span> &quot;SourceType&quot;: &quot;SingleAccountMultiRegions&quot;,
-            &quot;SourceRegions&quot;: [ &quot;us-east-1&quot;, &quot;us-west-1&quot;, &quot;us-west-2&quot; ], &quot;IncludeFutureRegions&quot;:
-            false } } } } }</code></pre></div>
+                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_SingleAccountMultipleRegions--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Description&quot;: &quot;Create a Resource Data Sync for Systems Manager Explorer&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;BasicResourceDataSync&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;Dev::SSM::ResourceDataSync&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;SyncName&quot;: &quot;test-sync&quot;,
+                &quot;SyncType&quot;: &quot;SyncFromSource&quot;,
+                &quot;SyncSource&quot;: <span>{</span>
+                    &quot;SourceType&quot;: &quot;SingleAccountMultiRegions&quot;,
+                    &quot;SourceRegions&quot;: [
+                        &quot;us-east-1&quot;,
+                        &quot;us-west-1&quot;,
+                        &quot;us-west-2&quot;
+                    ],
+                    &quot;IncludeFutureRegions&quot;: false
+                }
+            }
+        }
+    }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_SingleAccountMultipleRegions--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- Description: Create a Resource Data Sync for Systems Manager
-            Explorer Resources: BasicResourceDataSync: Type: Dev::SSM::ResourceDataSync Properties:
-            SyncName: test-sync SyncType: SyncFromSource SyncSource: SourceType:
-            SingleAccountMultiRegions SourceRegions: - us-east-1 - us-west-1 - us-west-2
-            IncludeFutureRegions: false </code></pre></div>
+                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_SingleAccountMultipleRegions--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Description: Create a Resource Data Sync for Systems Manager Explorer
+Resources:
+  BasicResourceDataSync:
+    Type: Dev::SSM::ResourceDataSync
+    Properties:
+      SyncName: test-sync
+      SyncType: SyncFromSource
+      SyncSource:
+        SourceType: SingleAccountMultiRegions
+        SourceRegions:
+        - us-east-1
+        - us-west-1
+        - us-west-2
+        IncludeFutureRegions: false </code></pre></div>
                                  <h3 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_EntireOrganization">AWS Systems Manager Resource Data Sync - SyncFromSource - EntireOrganization</h3>
                                  <p>The following example synchronizes Systems Manager Explorer OpsData and OpsItems
                                     from your entire organization in AWS Organizations in the us-west-1 Region. 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_EntireOrganization--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;Description&quot;: &quot;Create a Resource Data Sync for Systems Manager
-            Explorer&quot;, &quot;Resources&quot;: <span>{</span> &quot;BasicResourceDataSync&quot;: <span>{</span> &quot;Type&quot;:
-            &quot;Dev::SSM::ResourceDataSync&quot;, &quot;Properties&quot;: <span>{</span> &quot;SyncName&quot;: &quot;test-sync&quot;, &quot;SyncType&quot;:
-            &quot;SyncFromSource&quot;, &quot;SyncSource&quot;: <span>{</span> &quot;SourceType&quot;: &quot;AwsOrganizations&quot;,
-            &quot;AwsOrganizationsSource&quot;: <span>{</span> &quot;OrganizationSourceType&quot;: &quot;EntireOrganization&quot; },
-            &quot;SourceRegions&quot;: [ &quot;us-west-1&quot; ], &quot;IncludeFutureRegions&quot;: false } } } } }</code></pre></div>
+                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_EntireOrganization--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Description&quot;: &quot;Create a Resource Data Sync for Systems Manager Explorer&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;BasicResourceDataSync&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;Dev::SSM::ResourceDataSync&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;SyncName&quot;: &quot;test-sync&quot;,
+                &quot;SyncType&quot;: &quot;SyncFromSource&quot;,
+                &quot;SyncSource&quot;: <span>{</span>
+                    &quot;SourceType&quot;: &quot;AwsOrganizations&quot;,
+                    &quot;AwsOrganizationsSource&quot;: <span>{</span>
+                        &quot;OrganizationSourceType&quot;: &quot;EntireOrganization&quot;
+                    },
+                    &quot;SourceRegions&quot;: [
+                        &quot;us-west-1&quot;
+                    ],
+                    &quot;IncludeFutureRegions&quot;: false
+                }
+            }
+        }
+    }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_EntireOrganization--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- Description: Create a Resource Data Sync for Systems Manager
-            Explorer Resources: BasicResourceDataSync: Type: Dev::SSM::ResourceDataSync Properties:
-            SyncName: test-sync SyncType: SyncFromSource SyncSource: SourceType: AwsOrganizations
-            AwsOrganizationsSource: OrganizationSourceType: EntireOrganization SourceRegions: -
-            us-west-1 IncludeFutureRegions: false</code></pre></div>
+                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_EntireOrganization--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Description: Create a Resource Data Sync for Systems Manager Explorer
+Resources:
+  BasicResourceDataSync:
+    Type: Dev::SSM::ResourceDataSync
+    Properties:
+      SyncName: test-sync
+      SyncType: SyncFromSource
+      SyncSource:
+        SourceType: AwsOrganizations
+        AwsOrganizationsSource:
+          OrganizationSourceType: EntireOrganization
+        SourceRegions:
+        - us-west-1
+        IncludeFutureRegions: false</code></pre></div>
                                  <h3 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_OrganizationalUnits">AWS Systems Manager Resource Data Sync - SyncFromSource - OrganizationalUnits</h3>
                                  <p>The following example synchronizes Systems Manager Explorer OpsData and OpsItems
                                     from organization unit 12345 in AWS Organizations in the us-west-1 Region. 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_OrganizationalUnits--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;Description&quot;: &quot;Create a Resource Data Sync for Systems Manager
-            Explorer&quot;, &quot;Resources&quot;: <span>{</span> &quot;BasicResourceDataSync&quot;: <span>{</span> &quot;Type&quot;:
-            &quot;AWS::SSM::ResourceDataSync&quot;, &quot;Properties&quot;: <span>{</span> &quot;SyncName&quot;: &quot;test-sync&quot;, &quot;SyncType&quot;:
-            &quot;SyncFromSource&quot;, &quot;SyncSource&quot;: <span>{</span> &quot;SourceType&quot;: &quot;AwsOrganizations&quot;,
-            &quot;AwsOrganizationsSource&quot;: <span>{</span> &quot;OrganizationSourceType&quot;: &quot;OrganizationalUnits&quot;,
-            &quot;OrganizationalUnits&quot;: [ &quot;ou-12345&quot; ] }, &quot;SourceRegions&quot;: [ &quot;us-west-1&quot; ],
-            &quot;IncludeFutureRegions&quot;: false } } } } }</code></pre></div>
+                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_OrganizationalUnits--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Description&quot;: &quot;Create a Resource Data Sync for Systems Manager Explorer&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;BasicResourceDataSync&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::SSM::ResourceDataSync&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;SyncName&quot;: &quot;test-sync&quot;,
+                &quot;SyncType&quot;: &quot;SyncFromSource&quot;,
+                &quot;SyncSource&quot;: <span>{</span>
+                    &quot;SourceType&quot;: &quot;AwsOrganizations&quot;,
+                    &quot;AwsOrganizationsSource&quot;: <span>{</span>
+                        &quot;OrganizationSourceType&quot;: &quot;OrganizationalUnits&quot;,
+                        &quot;OrganizationalUnits&quot;: [
+                            &quot;ou-12345&quot;
+                        ]
+                    },
+                    &quot;SourceRegions&quot;: [
+                        &quot;us-west-1&quot;
+                    ],
+                    &quot;IncludeFutureRegions&quot;: false
+                }
+            }
+        }
+    }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_OrganizationalUnits--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- Description: Create a Resource Data Sync for Systems Manager
-            Explorer Resources: BasicResourceDataSync: Type: AWS::SSM::ResourceDataSync Properties:
-            SyncName: test-sync SyncType: SyncFromSource SyncSource: SourceType: AwsOrganizations
-            AwsOrganizationsSource: OrganizationSourceType: OrganizationalUnits OrganizationalUnits:
-            - ou-12345 SourceRegions: - us-west-1 IncludeFutureRegions: false</code></pre></div>
+                                    <h4 id="aws-resource-ssm-resourcedatasync--examples--AWS_Systems_Manager_Resource_Data_Sync_-_SyncFromSource_-_OrganizationalUnits--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Description: Create a Resource Data Sync for Systems Manager Explorer
+Resources:
+  BasicResourceDataSync:
+    Type: AWS::SSM::ResourceDataSync
+    Properties:
+      SyncName: test-sync
+      SyncType: SyncFromSource
+      SyncSource:
+        SourceType: AwsOrganizations
+        AwsOrganizationsSource:
+          OrganizationSourceType: OrganizationalUnits
+          OrganizationalUnits:
+          - ou-12345
+        SourceRegions:
+        - us-west-1
+        IncludeFutureRegions: false</code></pre></div>
                                  <h2 id="aws-resource-ssm-resourcedatasync--seealso">See Also</h2>
                                  <div class="itemizedlist">
                                      

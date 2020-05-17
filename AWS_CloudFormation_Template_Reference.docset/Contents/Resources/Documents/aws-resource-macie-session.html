@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-macie-session">AWS::Macie::Session</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The <code class="code">AWS::Macie::Session</code> resource represents the Macie service and
+                                    configuration settings in your account. A <code class="code">Session</code> is created for each
+                                    Region in which you enable Macie. 
+                                 </p>
+                                 <p>You must create a <code class="code">Session</code> in an account before you can create a
+                                    <code class="code">AWS::Macie::FindingsFilter</code> or
+                                    <code class="code">AWS::Macie::CustomDataIdentifier</code> resource. Use a <a href="aws-attribute-dependson.html">DependsOn
+                                       attribute</a> to ensure that the <code class="code">Session</code> is created before the
+                                    other resources. For example, <code class="code">&quot;DependsOn: Session&quot;</code>.
+                                 </p>
+                                 <h2 id="aws-resource-macie-session-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-macie-session-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::Macie::Session&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-macie-session-findingpublishingfrequency">FindingPublishingFrequency</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-macie-session-status">Status</a>&quot; : <code class="replaceable">String</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-macie-session-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Macie::Session
+Properties: 
+  <a href="#cfn-macie-session-findingpublishingfrequency">FindingPublishingFrequency</a>: <code class="replaceable">String</code>
+  <a href="#cfn-macie-session-status">Status</a>: <code class="replaceable">String</code>
+</code></pre></div>
+                                 <h2 id="aws-resource-macie-session-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-macie-session-findingpublishingfrequency"></a><span class="term"><code class="code">FindingPublishingFrequency</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The frequency with which Amazon Macie publishes findings for an account. This includes
+                                             adding findings to AWS Security Hub and exporting finding events to Amazon CloudWatch.
+                                             Valid values are:
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>FIFTEEN_MINUTES</p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>ONE_HOUR</p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>SIX_HOURS</p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-macie-session-status"></a><span class="term"><code class="code">Status</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The <code class="code">MacieStatus</code> of the <code class="code">Session</code>. Values include <code class="code">ENABLED</code> or <code class="code">PAUSED</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-macie-session-return-values">Return Values</h2>
+                                 <h3 id="aws-resource-macie-session-return-values-ref">Ref</h3>
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the AWS Account ID for the account in which the Macie
+                                    session is created. For example, <code class="code"><span>{</span> &quot;Ref&quot;: &quot;Session&quot; }</code>.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-macie-session-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-macie-session-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="AwsAccountId-fn::getatt"></a><span class="term"><code class="code">AwsAccountId</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The account ID of the account in which the <code class="code">Session</code> is created.
+                                          </p>
+                                          
+                                       </dd>
+                                       <dt><a id="ServiceRole-fn::getatt"></a><span class="term"><code class="code">ServiceRole</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the service-level role that allows Amazon Macie
+                                             to
+                                             monitor and analyze data in AWS resources for the account.
+                                          </p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-macie-session--examples">Examples</h2>
+                                 <p>The following examples demonstrates how to declare an
+                                    <code class="code">AWS::Macie::Session</code> resource:
+                                 </p>
+                                 <h3 id="aws-resource-macie-session--examples--Creating_a_Macie_Session">Creating a Macie Session</h3>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-macie-session--examples--Creating_a_Macie_Session--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;EnableMacie&quot;: <span>{</span>
+  &quot;Type&quot; : &quot;AWS::Macie::Session&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;FindingPublishingFrequency&quot; : ONE_HOUR,
+      &quot;Status&quot; : ENABLED
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-macie-session--examples--Creating_a_Macie_Session--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">
+EnableMacie:
+    Type: AWS::Macie::Session
+    Properties: 
+      FindingPublishingFrequency: ONE_HOUR
+      Status: ENABLED</code></pre></div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

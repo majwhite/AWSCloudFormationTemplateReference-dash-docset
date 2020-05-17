@@ -36,6 +36,7 @@
       &quot;<a href="#cfn-dms-endpoint-kinesissettings">KinesisSettings</a>&quot; : <code class="replaceable"><a href="./aws-properties-dms-endpoint-kinesissettings.html">KinesisSettings</a></code>,
       &quot;<a href="#cfn-dms-endpoint-kmskeyid">KmsKeyId</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-dms-endpoint-mongodbsettings">MongoDbSettings</a>&quot; : <code class="replaceable"><a href="./aws-properties-dms-endpoint-mongodbsettings.html">MongoDbSettings</a></code>,
+      &quot;<a href="#cfn-dms-endpoint-neptunesettings">NeptuneSettings</a>&quot; : <code class="replaceable"><a href="./aws-properties-dms-endpoint-neptunesettings.html">NeptuneSettings</a></code>,
       &quot;<a href="#cfn-dms-endpoint-password">Password</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-dms-endpoint-port">Port</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-dms-endpoint-s3settings">S3Settings</a>&quot; : <code class="replaceable"><a href="./aws-properties-dms-endpoint-s3settings.html">S3Settings</a></code>,
@@ -66,6 +67,8 @@ Properties:
   <a href="#cfn-dms-endpoint-kmskeyid">KmsKeyId</a>: <code class="replaceable">String</code>
   <a href="#cfn-dms-endpoint-mongodbsettings">MongoDbSettings</a>: <code class="replaceable">
     <a href="./aws-properties-dms-endpoint-mongodbsettings.html">MongoDbSettings</a></code>
+  <a href="#cfn-dms-endpoint-neptunesettings">NeptuneSettings</a>: <code class="replaceable">
+    <a href="./aws-properties-dms-endpoint-neptunesettings.html">NeptuneSettings</a></code>
   <a href="#cfn-dms-endpoint-password">Password</a>: <code class="replaceable">String</code>
   <a href="#cfn-dms-endpoint-port">Port</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-dms-endpoint-s3settings">S3Settings</a>: <code class="replaceable">
@@ -122,8 +125,7 @@ Properties:
                                           
                                           <p>Settings in JSON format for the target Elasticsearch endpoint. For more information
                                              about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in
-                                             the <em>AWS Database Migration User Guide.</em>
-                                             
+                                             the <em>AWS Database Migration Service User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -203,7 +205,7 @@ Properties:
                                           <p>Settings in JSON format for the target Apache Kafka endpoint. For more information
                                              about
                                              the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html">Using Apache Kafka as a Target for 
-                                                AWS Database Migration Service</a> in the <em>AWS Database Migration User
+                                                AWS Database Migration Service</a> in the <em>AWS Database Migration Service User
                                                 Guide.</em>
                                              
                                           </p>
@@ -218,7 +220,7 @@ Properties:
                                           
                                           <p>Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For
                                              more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html">Using Amazon Kinesis Data Streams 
-                                                as a Target for AWS Database Migration Service</a> in the <em>AWS Database Migration User
+                                                as a Target for AWS Database Migration Service</a> in the <em>AWS Database Migration Service User
                                                 Guide.</em>
                                              
                                           </p>
@@ -263,6 +265,21 @@ Properties:
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-dms-endpoint-mongodbsettings.html">MongoDbSettings</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-dms-endpoint-neptunesettings"></a><span class="term"><code class="code">NeptuneSettings</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Settings in JSON format for the target Amazon Neptune endpoint.
+                                             For more information
+                                             about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings">Specifying Endpoint Settings for Amazon Neptune as a Target</a> 
+                                             in the <em>AWS Database Migration Service User Guide.</em>
+                                             
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-dms-endpoint-neptunesettings.html">NeptuneSettings</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-dms-endpoint-password"></a><span class="term"><code class="code">Password</code></span></dt>
@@ -379,44 +396,17 @@ Properties:
                                  <h2 id="aws-resource-dms-endpoint--examples">Examples</h2>
                                  <h3 id="aws-resource-dms-endpoint--examples--"></h3>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-dms-endpoint--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
-  &quot;Resources&quot;: <span>{</span>
-    &quot;myBasicEndpoint&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;AWS::DMS::Endpoint&quot;,
-      &quot;Properties&quot;: <span>{</span>
-        &quot;EngineName&quot;: &quot;mysql&quot;,
-        &quot;EndpointType&quot;: &quot;source&quot;,
-        &quot;Username&quot;: &quot;username&quot;,
-        &quot;Password&quot;: <span>{</span>
-          &quot;Ref&quot;: &quot;PasswordParameter&quot;
-        },
-        &quot;ServerName&quot;: &quot;source.db.amazon.com&quot;,
-        &quot;Port&quot;: 1234,
-        &quot;DatabaseName&quot;: &quot;source-db&quot;
-      }
-    }
-  }
-}</code></pre></div>
+                                    <h4 id="aws-resource-dms-endpoint--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;, &quot;Resources&quot;: <span>{</span>
+                &quot;myBasicEndpoint&quot;: <span>{</span> &quot;Type&quot;: &quot;AWS::DMS::Endpoint&quot;, &quot;Properties&quot;: <span>{</span> &quot;EngineName&quot;:
+                &quot;mysql&quot;, &quot;EndpointType&quot;: &quot;source&quot;, &quot;Username&quot;: &quot;username&quot;, &quot;Password&quot;: <span>{</span> &quot;Ref&quot;:
+                &quot;PasswordParameter&quot; }, &quot;ServerName&quot;: &quot;source.db.amazon.com&quot;, &quot;Port&quot;: 1234,
+                &quot;DatabaseName&quot;: &quot;source-db&quot; } } } }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-dms-endpoint--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
-Description: &quot;Endpoint test&quot;
-Resources: 
-  BasicEndpoint: 
-    Properties: 
-      DatabaseName: my-db
-      EndpointType: target
-      EngineName: mysql
-      Password: PasswordParameter
-      Port: 1234
-      ServerName: server.db.amazon.com
-      Tags: 
-        - 
-          Key: type
-          Value: new
-      Username: username
-    Type: &quot;AWS::DMS::Endpoint&quot;
-</code></pre></div>
+                                    <h4 id="aws-resource-dms-endpoint--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09 Description: &quot;Endpoint
+                test&quot; Resources: BasicEndpoint: Properties: DatabaseName: my-db EndpointType: target
+                EngineName: mysql Password: PasswordParameter Port: 1234 ServerName:
+                server.db.amazon.com Tags: - Key: type Value: new Username: username Type:
+                &quot;AWS::DMS::Endpoint&quot; </code></pre></div>
                                  <h2 id="aws-resource-dms-endpoint--seealso">See Also</h2>
                                  <div class="itemizedlist">
                                      

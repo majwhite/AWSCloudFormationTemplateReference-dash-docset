@@ -11,7 +11,7 @@
     <div id="main-content" class="awsui-util-container">
                               <div id="main-col-body">
                                  <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
-                                 <h1 class="topictitle" id="aws-resource-servicecatalog-cloudformationproduct">AWS::ServiceCatalog::CloudFormationProduct</h1>
+                                 <h1 class="topictitle" id="aws-resource-servicecatalog-cloudformationproduct">AWS::ServiceCatalog::CloudformationProduct</h1>
                                  <div class="awsdocs-page-header-container">
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
@@ -21,7 +21,7 @@
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-resource-servicecatalog-cloudformationproduct-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Type&quot; : &quot;AWS::ServiceCatalog::CloudFormationProduct&quot;,
+  &quot;Type&quot; : &quot;AWS::ServiceCatalog::CloudformationProduct&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-servicecatalog-cloudformationproduct-acceptlanguage">AcceptLanguage</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-servicecatalog-cloudformationproduct-description">Description</a>&quot; : <code class="replaceable">String</code>,
@@ -29,6 +29,7 @@
       &quot;<a href="#cfn-servicecatalog-cloudformationproduct-name">Name</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-servicecatalog-cloudformationproduct-owner">Owner</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-servicecatalog-cloudformationproduct-provisioningartifactparameters">ProvisioningArtifactParameters</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-servicecatalog-cloudformationproduct-provisioningartifactproperties.html">ProvisioningArtifactProperties</a>, ... ]</code>,
+      &quot;<a href="#cfn-servicecatalog-cloudformationproduct-replaceprovisioningartifacts">ReplaceProvisioningArtifacts</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-servicecatalog-cloudformationproduct-supportdescription">SupportDescription</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-servicecatalog-cloudformationproduct-supportemail">SupportEmail</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-servicecatalog-cloudformationproduct-supporturl">SupportUrl</a>&quot; : <code class="replaceable">String</code>,
@@ -37,7 +38,7 @@
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h3 id="aws-resource-servicecatalog-cloudformationproduct-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::ServiceCatalog::CloudFormationProduct
+                                    <h3 id="aws-resource-servicecatalog-cloudformationproduct-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::ServiceCatalog::CloudformationProduct
 Properties: 
   <a href="#cfn-servicecatalog-cloudformationproduct-acceptlanguage">AcceptLanguage</a>: <code class="replaceable">String</code>
   <a href="#cfn-servicecatalog-cloudformationproduct-description">Description</a>: <code class="replaceable">String</code>
@@ -46,6 +47,7 @@ Properties:
   <a href="#cfn-servicecatalog-cloudformationproduct-owner">Owner</a>: <code class="replaceable">String</code>
   <a href="#cfn-servicecatalog-cloudformationproduct-provisioningartifactparameters">ProvisioningArtifactParameters</a>: <code class="replaceable">
     - <a href="./aws-properties-servicecatalog-cloudformationproduct-provisioningartifactproperties.html">ProvisioningArtifactProperties</a></code>
+  <a href="#cfn-servicecatalog-cloudformationproduct-replaceprovisioningartifacts">ReplaceProvisioningArtifacts</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-servicecatalog-cloudformationproduct-supportdescription">SupportDescription</a>: <code class="replaceable">String</code>
   <a href="#cfn-servicecatalog-cloudformationproduct-supportemail">SupportEmail</a>: <code class="replaceable">String</code>
   <a href="#cfn-servicecatalog-cloudformationproduct-supporturl">SupportUrl</a>: <code class="replaceable">String</code>
@@ -156,6 +158,29 @@ Properties:
                                           <p><em>Type</em>: List of <a href="./aws-properties-servicecatalog-cloudformationproduct-provisioningartifactproperties.html">ProvisioningArtifactProperties</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-servicecatalog-cloudformationproduct-replaceprovisioningartifacts"></a><span class="term"><code class="code">ReplaceProvisioningArtifacts</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>This property is turned off by default. If turned off, you can update provisioning
+                                             artifacts or product attributes (such as description, distributor, name, owner, and
+                                             more) 
+                                             and the associated provisioning artifacts will retain the same unique identifier.
+                                             Provisioning artifacts are matched within the CloudFormationProduct resource, and
+                                             only those that have been updated will be 
+                                             changed. Provisioning artifacts are matched by a combinaton of provisioning artifact
+                                             template URL and name.
+                                          </p>
+                                          
+                                          <p>If turned on, provisioning artifacts will be given a new unique identifier when you
+                                             update the product or provisioning artifacts.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-servicecatalog-cloudformationproduct-supportdescription"></a><span class="term"><code class="code">SupportDescription</code></span></dt>
                                        <dd>
                                           
@@ -241,19 +266,6 @@ Properties:
                                           
                                        </dd>
                                     </dl>
-                                 </div>
-                                 <h2 id="aws-resource-servicecatalog-cloudformationproduct--seealso">See Also</h2>
-                                 <div class="itemizedlist">
-                                     
-                                    
-                                    <ul class="itemizedlist" type="disc">
-                                       <li class="listitem">
-                                          
-                                          <p><a href="https://docs.aws.amazon.com/servicecatalog/latest/dg/API_CreateProduct.html">CreateProduct</a> in
-                                             the <em>AWS Service Catalog API Reference</em></p>
-                                          
-                                       </li>
-                                    </ul>
                                  </div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                               </div>
