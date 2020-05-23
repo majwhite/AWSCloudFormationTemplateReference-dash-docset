@@ -29,9 +29,12 @@
                                     <h3 id="aws-resource-stepfunctions-statemachine-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::StepFunctions::StateMachine&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-stepfunctions-statemachine-definitions3location">DefinitionS3Location</a>&quot; : <code class="replaceable"><a href="./aws-properties-stepfunctions-statemachine-s3location.html">S3Location</a></code>,
       &quot;<a href="#cfn-stepfunctions-statemachine-definitionstring">DefinitionString</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-stepfunctions-statemachine-definitionsubstitutions">DefinitionSubstitutions</a>&quot; : <code class="replaceable"><a href="./aws-properties-stepfunctions-statemachine-definitionsubstitutions.html">DefinitionSubstitutions</a></code>,
       &quot;<a href="#cfn-stepfunctions-statemachine-loggingconfiguration">LoggingConfiguration</a>&quot; : <code class="replaceable"><a href="./aws-properties-stepfunctions-statemachine-loggingconfiguration.html">LoggingConfiguration</a></code>,
       &quot;<a href="#cfn-stepfunctions-statemachine-rolearn">RoleArn</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#AWS::StepFunctions::StateMachine.RoleARN"><span>RoleARN</span></a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-stepfunctions-statemachine-statemachinename">StateMachineName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-stepfunctions-statemachine-statemachinetype">StateMachineType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-stepfunctions-statemachine-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-stepfunctions-statemachine-tagsentry.html">TagsEntry</a>, ... ]</code>
@@ -41,11 +44,16 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-stepfunctions-statemachine-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::StepFunctions::StateMachine
 Properties: 
+  <a href="#cfn-stepfunctions-statemachine-definitions3location">DefinitionS3Location</a>: <code class="replaceable">
+    <a href="./aws-properties-stepfunctions-statemachine-s3location.html">S3Location</a></code>
   <a href="#cfn-stepfunctions-statemachine-definitionstring">DefinitionString</a>: <code class="replaceable">
     String</code>
+  <a href="#cfn-stepfunctions-statemachine-definitionsubstitutions">DefinitionSubstitutions</a>: <code class="replaceable">
+    <a href="./aws-properties-stepfunctions-statemachine-definitionsubstitutions.html">DefinitionSubstitutions</a></code>
   <a href="#cfn-stepfunctions-statemachine-loggingconfiguration">LoggingConfiguration</a>: <code class="replaceable">
     <a href="./aws-properties-stepfunctions-statemachine-loggingconfiguration.html">LoggingConfiguration</a></code>
   <a href="#cfn-stepfunctions-statemachine-rolearn">RoleArn</a>: <code class="replaceable">String</code>
+  <a href="#AWS::StepFunctions::StateMachine.RoleARN"><span>RoleARN</span></a>: <code class="replaceable">String</code>
   <a href="#cfn-stepfunctions-statemachine-statemachinename">StateMachineName</a>: <code class="replaceable">String</code>
   <a href="#cfn-stepfunctions-statemachine-statemachinetype">StateMachineType</a>: <code class="replaceable">String</code>
   <a href="#cfn-stepfunctions-statemachine-tags">Tags</a>: <code class="replaceable">
@@ -54,16 +62,45 @@ Properties:
                                  <h2 id="aws-resource-stepfunctions-statemachine-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-stepfunctions-statemachine-definitions3location"></a><span class="term"><code class="code">DefinitionS3Location</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name of the S3 bucket where the state machine definition is stored. The state
+                                             machine definition must be a JSON file.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-stepfunctions-statemachine-s3location.html">S3Location</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-stepfunctions-statemachine-definitionstring"></a><span class="term"><code class="code">DefinitionString</code></span></dt>
                                        <dd> 
                                           
                                           <p>The Amazon States Language definition of the state machine. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.
                                           </p> 
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-stepfunctions-statemachine-definitionsubstitutions"></a><span class="term"><code class="code">DefinitionSubstitutions</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Substitute variables in a state machine defined by a DefinitionS3Location. Variables
+                                             can
+                                             be template parameter names, resource logical IDs, resource attributes, or a variable
+                                             in a
+                                             key-value map. Substitutions can be made with a map of strings, and should be of the
+                                             form
+                                             $<span>{</span>variable_1,variable_2,...}. There can be no spaces between the brackets <code class="code"><span>{</span>,}</code> and the variables.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-stepfunctions-statemachine-definitionsubstitutions.html">DefinitionSubstitutions</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-stepfunctions-statemachine-loggingconfiguration"></a><span class="term"><code class="code">LoggingConfiguration</code></span></dt>
@@ -75,8 +112,7 @@ Properties:
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>The <code class="code">loggingConfiguration</code> parameter is only valid when
-                                                   <code class="code">StateMachineType</code> is set to <code class="code">EXPRESS</code>. By default, the
+                                                <p>By default, the
                                                    <code class="code">level</code> is set to <code class="code">OFF</code>. For more information see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html">Log
                                                       Levels</a> in the AWS Step Functions User Guide.
                                                 </p>
@@ -98,6 +134,16 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="AWS::StepFunctions::StateMachine.RoleARN"></a><span class="term"><code class="code">RoleARN</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the IAM role to use for this state machine.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
                                        </dd>
                                        <dt><a id="cfn-stepfunctions-statemachine-statemachinename"></a><span class="term"><code class="code">StateMachineName</code></span></dt>
                                        <dd>

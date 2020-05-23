@@ -147,7 +147,7 @@ Properties:
                     &quot;default&quot;: &quot;Aggregator account&quot;
                 },
                 &quot;AggregatorRegion&quot;: <span>{</span>
-                    &quot;default&quot;: &quot;Aggregator account&quot;
+                    &quot;default&quot;: &quot;Aggregator region&quot;
                 },
                 &quot;SourceAccounts&quot;: <span>{</span>
                     &quot;default&quot;: &quot;Source accounts&quot;
@@ -362,10 +362,10 @@ Properties:
             }
         },
         &quot;ConfigAggregator&quot;: <span>{</span>
-            &quot;Type&quot;: &quot;AWS::Config::ConfigurationAggregator&quot;,
+            &quot;Type&quot;: &quot;AWS::Config::ConfigurationAggregatorName&quot;,
             &quot;Condition&quot;: &quot;CreateAggregator&quot;,
             &quot;Properties&quot;: <span>{</span>
-                &quot;Name&quot;: &quot;default&quot;,
+                &quot;Name&quot;: &quot;name&quot;,
                 &quot;AccountAggregationSources&quot;: [
                     <span>{</span>
                         &quot;AccountIds&quot;: <span>{</span>
@@ -540,10 +540,10 @@ Resources:
         SourceIdentifier: S3_BUCKET_PUBLIC_READ_PROHIBITED
 
   ConfigAggregator:
-    Type: AWS::Config::ConfigurationAggregator
+    Type: AWS::Config::ConfigurationAggregatorName
     Condition: CreateAggregator
     Properties:
-    ConfigurationAggregatorName: default
+    ConfigurationAggregatorName: name
       AccountAggregationSources:
         - AccountIds: !Ref SourceAccounts
           AwsRegions: !Ref SourceRegions

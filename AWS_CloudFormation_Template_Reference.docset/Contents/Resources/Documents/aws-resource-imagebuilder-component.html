@@ -74,7 +74,12 @@ Properties:
                                        <dt><a id="cfn-imagebuilder-component-data"></a><span class="term"><code class="code">Data</code></span></dt>
                                        <dd>
                                           
-                                          <p>The data of the component.</p>
+                                          <p>The data of the component. For example, <code class="code">name:
+                                                HelloWorldTestingDocument\ndescription: This is hello world testing
+                                                document.\nschemaVersion: 1.0\n\nphases:\n - name: test\n steps:\n - name:
+                                                HelloWorldStep\n action: ExecuteBash\n inputs:\n commands:\n - echo \&quot;Hello World!
+                                                Test.\&quot;\n</code>. See Examples below for the schema for creating a component using Data. 
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -214,51 +219,118 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-imagebuilder-component--examples">Examples</h2>
-                                 <h3 id="aws-resource-imagebuilder-component--examples--Component_creation_with_Data_field_details">Component creation with Data field details</h3>
-                                 <p>The following example shows the component creation document in both YAML and JSON
-                                    format with
-                                    details for the <code class="code">Data</code> field . You can use either the<code class="code">Data</code> or
-                                    <code class="code">Uri</code> fields to reference the component document.
+                                 <h3 id="aws-resource-imagebuilder-component--examples--Create_a_component_using_Data_">Create a component using Data </h3>
+                                 <p>The following example shows the schema for the Component resource document in both
+                                    YAML and JSON format. This example includes details for the <code class="code">Data</code> field .
+                                    You can use either the <code class="code">Data</code> or <code class="code">Uri</code> fields to reference the
+                                    component document.
                                  </p>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-imagebuilder-component--examples--Component_creation_with_Data_field_details--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::ImageBuilder::Component
-Properties: 
-  ChangeDescription: String
-  Description: String
-  KmsKeyId: String
-  Name: String
-  Platform: String
-  Tags: 
-    Key : Value
-  Version: String
-  Data: |
-    name: Python 3
-    description: Install the latest version of Python 3.
-    schemaVersion: 1.0
-    phases:
-      - name: build
-        steps:
-          - name: InstallPython3
-            action: ExecuteBash
-            inputs:
-              commands:
-                - sudo yum install python3 -y</code></pre></div>
+                                    <h4 id="aws-resource-imagebuilder-component--examples--Create_a_component_using_Data_--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  ComponentAllParameters:
+    Type: &apos;AWS::ImageBuilder::Component&apos;
+    Properties:
+      Name: &apos;component-name&apos;
+      Platform: &apos;Linux&apos;
+      Version: &quot;1.0.0&quot;
+      Description: &apos;description&apos;
+      ChangeDescription: &apos;change-description&apos;
+      KmsKeyId: &apos;customer-kms-key-id&apos;
+      Tags:
+        CustomerComponentTagKey1: &apos;CustomerComponentTagValue1&apos;
+        CustomerComponentTagKey2: &apos;CustomerComponentTagValue2&apos;
+      # Require one of &apos;Data&apos; or &apos;Uri&apos; for Component template
+      Data: |
+        name: HelloWorldTestingLinuxDoc - InlineData
+        description: This is hello world testing doc
+        schemaVersion: 1.0
+
+        phases:
+          - name: build
+            steps:
+              - name: HelloWorldStep
+                action: ExecuteBash
+                inputs:
+                  commands:
+                    - echo &quot;Hello World! Build.&quot;
+          - name: validate
+            steps:
+              - name: HelloWorldStep
+                action: ExecuteBash
+                inputs:
+                  commands:
+                    - echo &quot;Hello World! Validate.&quot;
+          - name: test
+            steps:
+              - name: HelloWorldStep
+                action: ExecuteBash
+                inputs:
+                  commands:
+                    - echo &quot;Hello World! Test.&quot;</code></pre></div>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-imagebuilder-component--examples--Component_creation_with_Data_field_details--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-    &quot;Type&quot;: &quot;AWS::ImageBuilder::Component&quot;,
-    &quot;Properties&quot;: <span>{</span>
-        &quot;ChangeDescription&quot;: &quot;String&quot;,
-        &quot;Description&quot;: &quot;String&quot;,
-        &quot;KmsKeyId&quot;: &quot;String&quot;,
-        &quot;Name&quot;: &quot;String&quot;,
-        &quot;Platform&quot;: &quot;String&quot;,
-        &quot;Tags&quot;: <span>{</span>
-            &quot;Key&quot;: &quot;Value&quot;
-        },
-        &quot;Version&quot;: &quot;String&quot;,
-        &quot;Data&quot;: &quot;name: Python 3\ndescription: Install the latest version of Python 3.\nschemaVersion: 1.0\nphases:\n  - name: build\n    steps:\n      - name: InstallPython3\n        action: ExecuteBash\n        inputs:\n          commands:\n            - sudo yum install python3 -y\n&quot;
+                                    <h4 id="aws-resource-imagebuilder-component--examples--Create_a_component_using_Data_--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Resources&quot;: <span>{</span>
+        &quot;ComponentAllParameters&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::ImageBuilder::Component&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;Name&quot;: &quot;component-name&quot;,
+                &quot;Platform&quot;: &quot;Linux&quot;,
+                &quot;Version&quot;: &quot;1.0.0&quot;,
+                &quot;Description&quot;: &quot;description&quot;,
+                &quot;ChangeDescription&quot;: &quot;change-description&quot;,
+                &quot;KmsKeyId&quot;: &quot;customer-kms-key-id&quot;,
+                &quot;Tags&quot;: <span>{</span>
+                    &quot;CustomerComponentTagKey1&quot;: &quot;CustomerComponentTagValue1&quot;,
+                    &quot;CustomerComponentTagKey2&quot;: &quot;CustomerComponentTagValue2&quot;
+                },
+                &quot;Data&quot;: &quot;name: HelloWorldTestingLinuxDoc - InlineData\ndescription: This is hello world testing doc\nschemaVersion: 1.0\n\nphases:\n  - name: build\n    steps:\n      - name: HelloWorldStep\n        action: ExecuteBash\n        inputs:\n          commands:\n            - echo \&quot;Hello World! Build.\&quot;\n  - name: validate\n    steps:\n      - name: HelloWorldStep\n        action: ExecuteBash\n        inputs:\n          commands:\n            - echo \&quot;Hello World! Validate.\&quot;\n  - name: test\n    steps:\n      - name: HelloWorldStep\n        action: ExecuteBash\n        inputs:\n          commands:\n            - echo \&quot;Hello World! Test.\&quot;\n&quot;
+            }
+        }
     }
-}    </code></pre></div>
+} </code></pre></div>
+                                 <h3 id="aws-resource-imagebuilder-component--examples--Create_a_component_using_a_Uri">Create a component using a Uri</h3>
+                                 <p>The following example shows the schema for the Component resource document in both
+                                    YAML and JSON format. This example includes details for the <code class="code">Uri</code> field .
+                                    You can use either the <code class="code">Data</code> or <code class="code">Uri</code> fields to reference the
+                                    component document.
+                                 </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-imagebuilder-component--examples--Create_a_component_using_a_Uri--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  ComponentAllParameters:
+    Type: &apos;AWS::ImageBuilder::Component&apos;
+    Properties:
+      Name: &apos;component-name&apos;
+      Platform: &apos;Linux&apos;
+      Version: &quot;1.0.0&quot;
+      # Require one of &apos;Data&apos; or &apos;Uri&apos; for Component template
+      Uri: &apos;s3://imagebuilder/component_document.yml&apos;
+      Description: &apos;description&apos;
+      ChangeDescription: &apos;change-description&apos;
+      KmsKeyId: &apos;customer-kms-key-id&apos;
+      Tags:
+        CustomerComponentTagKey1: &apos;CustomerComponentTagValue1&apos;
+        CustomerComponentTagKey2: &apos;CustomerComponentTagValue2&apos;</code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-imagebuilder-component--examples--Create_a_component_using_a_Uri--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Resources&quot;: <span>{</span>
+        &quot;ComponentAllParameters&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::ImageBuilder::Component&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;Name&quot;: &quot;component-name&quot;,
+                &quot;Platform&quot;: &quot;Linux&quot;,
+                &quot;Version&quot;: &quot;1.0.0&quot;,
+                &quot;Uri&quot;: &quot;s3://imagebuilder/component_document.yml&quot;,
+                &quot;Description&quot;: &quot;description&quot;,
+                &quot;ChangeDescription&quot;: &quot;change-description&quot;,
+                &quot;KmsKeyId&quot;: &quot;customer-kms-key-id&quot;,
+                &quot;Tags&quot;: <span>{</span>
+                    &quot;CustomerComponentTagKey1&quot;: &quot;CustomerComponentTagValue1&quot;,
+                    &quot;CustomerComponentTagKey2&quot;: &quot;CustomerComponentTagValue2&quot;
+                }
+            }
+        }
+    }
+}</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                               </div>
                               <noscript>
