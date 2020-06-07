@@ -19,7 +19,7 @@
                                  <p>The <code class="code">AWS::EFS::FileSystem</code> resource creates a new, empty file system in
                                     Amazon Elastic File System (Amazon EFS). You must create a mount target 
                                     (<a href="aws-resource-efs-mounttarget.html">AWS::EFS::MountTarget</a>) to mount your EFS file system on an Amazon Elastic
-                                    Compute Cloud (Amazon EC2) instance or another resource.
+                                    Compute Cloud (Amazon EC2) instance or another compute resource.
                                     
                                  </p>
                                  <h2 id="aws-resource-efs-filesystem-syntax">Syntax</h2>
@@ -89,7 +89,8 @@ Properties:
                                        <dt><a id="cfn-efs-filesystem-kmskeyid"></a><span class="term"><code class="code">KmsKeyId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This
+                                          <p>The ID of the AWS KMS customer master key (CMK) to be used to protect the encrypted
+                                             file system. This
                                              parameter is only required if you want to use a nondefault CMK. If this parameter
                                              is not
                                              specified, the default CMK for Amazon EFS is used. This ID can be in one of the following
@@ -233,18 +234,62 @@ Properties:
                                  <h3 id="aws-resource-efs-filesystem--examples--Create_an_Encrypted_File_System">Create an Encrypted File System</h3>
                                  <p>The following example declares an encrypted Amazon EFS file system.</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-efs-filesystem--examples--Create_an_Encrypted_File_System--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Resources&quot;: <span>{</span>
-        &quot;filesystem&quot;: <span>{</span>
+                                    <h4 id="aws-resource-efs-filesystem--examples--Create_an_Encrypted_File_System--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;<span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;MountTargetVPC&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::EC2::VPC&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;CidrBlock&quot;: &quot;172.31.0.0/16&quot;
+            }
+        },
+        &quot;MountTargetSubnetOne&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::EC2::Subnet&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;CidrBlock&quot;: &quot;172.31.1.0/24&quot;,
+                &quot;VpcId&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;MountTargetVPC&quot;
+                },
+                &quot;AvailabilityZone&quot;: &quot;us-east-1a&quot;
+            }
+        },
+        &quot;MountTargetSubnetTwo&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::EC2::Subnet&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;CidrBlock&quot;: &quot;172.31.2.0/24&quot;,
+                &quot;VpcId&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;MountTargetVPC&quot;
+                },
+                &quot;AvailabilityZone&quot;: &quot;us-east-1a&quot;
+            }
+        },
+        &quot;MountTargetSubnetThree&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::EC2::Subnet&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;CidrBlock&quot;: &quot;172.31.3.0/24&quot;,
+                &quot;VpcId&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;MountTargetVPC&quot;
+                },
+                &quot;AvailabilityZone&quot;: &quot;us-east-1a&quot;
+            }
+        },
+       &quot;FileSystemResource&quot;: <span>{</span>
             &quot;Type&quot;: &quot;AWS::EFS::FileSystem&quot;,
             &quot;Properties&quot;: <span>{</span>
+                &quot;PerformanceMode&quot;: &quot;maxIO&quot;,
+                &quot;LifecyclePolicies&quot;:[
+                    <span>{</span>
+                        &quot;TransitionToIA&quot; : &quot;AFTER_30_DAYS&quot;
+                    }
+                ],    
                 &quot;Encrypted&quot;: true,
-                &quot;KmsKeyId&quot;: <span>{</span>
-                    &quot;Fn::GetAtt&quot;: [
-                        &quot;key&quot;,
-                        &quot;Arn&quot;
-                    ]
-                }
-            }
+                &quot;FileSystemTags&quot;: [
+                    <span>{</span>
+                        &quot;Key&quot;: &quot;Name&quot;,
+                        &quot;Value&quot;: &quot;TestFileSystem&quot;
+                    }
+                ]
+            }  
         },
         &quot;key&quot;: <span>{</span>
             &quot;Type&quot;: &quot;AWS::KMS::Key&quot;,
@@ -273,30 +318,136 @@ Properties:
                             &quot;Action&quot;: [
                                 &quot;kms:*&quot;
                             ],
-                            &quot;Resource&quot;: &quot;*&quot;
+                            &quot;Resource&quot;: &quot;*&quot;,
+                            &quot;AWS&quot;: &quot;*&quot;
                         }
                     ]
                 }
             }
-        }
-    },
-    &quot;Outputs&quot;: <span>{</span>
-        &quot;KeyId&quot;: <span>{</span>
-            &quot;Value&quot;: <span>{</span>
-                &quot;Fn::GetAtt&quot;: [
-                    &quot;key&quot;,
-                    &quot;Arn&quot;
+        },
+        &quot;MountTargetResource1&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::EFS::MountTarget&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;FileSystemId&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;FileSystemResource&quot;
+                },
+                &quot;SubnetId&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;MountTargetSubnetOne&quot;
+                },
+                &quot;SecurityGroups&quot;: [
+                    <span>{</span>
+                        &quot;Fn::GetAtt&quot;: [
+                            &quot;MountTargetVPC&quot;,
+                            &quot;DefaultSecurityGroup&quot;
+                        ]
+                    }
                 ]
+            }
+        },
+        &quot;MountTargetResource2&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::EFS::MountTarget&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;FileSystemId&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;FileSystemResource&quot;
+                },
+                &quot;SubnetId&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;MountTargetSubnetTwo&quot;
+                },
+                &quot;SecurityGroups&quot;: [
+                    <span>{</span>
+                        &quot;Fn::GetAtt&quot;: [
+                            &quot;MountTargetVPC&quot;,
+                            &quot;DefaultSecurityGroup&quot;
+                        ]
+                    }
+                ]
+            }
+        },
+        &quot;MountTargetResource3&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::EFS::MountTarget&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;FileSystemId&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;FileSystemResource&quot;
+                },
+                &quot;SubnetId&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;MountTargetSubnetThree&quot;
+                },
+                &quot;SecurityGroups&quot;: [
+                    <span>{</span>
+                        &quot;Fn::GetAtt&quot;: [
+                            &quot;MountTargetVPC&quot;,
+                            &quot;DefaultSecurityGroup&quot;
+                        ]
+                    }
+                ]
+            }
+        },
+        &quot;AccessPointResource&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::EFS::AccessPoint&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;FileSystemId&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;FileSystemResource&quot;
+                },
+                &quot;PosixUser&quot;: <span>{</span>
+                    &quot;Uid&quot;: &quot;13234&quot;,
+                    &quot;Gid&quot;: &quot;1322&quot;,
+                    &quot;SecondaryGids&quot;: [
+                        &quot;1344&quot;,
+                        &quot;1452&quot;
+                    ]
+                },
+                &quot;RootDirectory&quot;: <span>{</span>
+                    &quot;CreationInfo&quot;: <span>{</span>
+                        &quot;OwnerGid&quot;: &quot;708798&quot;,
+                        &quot;OwnerUid&quot;: &quot;7987987&quot;,
+                        &quot;Permissions&quot;: &quot;0755&quot;
+                    },
+                    &quot;Path&quot;: &quot;/testcfn/abc&quot;
+                }
             }
         }
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-efs-filesystem--examples--Create_an_Encrypted_File_System--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
-  filesystem:
-    Type: AWS::EFS::FileSystem
+                                    <h4 id="aws-resource-efs-filesystem--examples--Create_an_Encrypted_File_System--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  MountTargetVPC:
+    Type: AWS::EC2::VPC
     Properties:
+      CidrBlock: 172.31.0.0/16
+ 
+  MountTargetSubnetOne:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: 172.31.1.0/24
+      VpcId: !Ref MountTargetVPC
+      AvailabilityZone: &quot;us-east-1a&quot;
+
+  MountTargetSubnetTwo:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: 172.31.2.0/24
+      VpcId: !Ref MountTargetVPC
+      AvailabilityZone: &quot;us-east-1a&quot;
+
+  MountTargetSubnetThree:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: 172.31.3.0/24
+      VpcId: !Ref MountTargetVPC
+      AvailabilityZone: &quot;us-east-1a&quot;
+ 
+  FileSystemResource:
+    Type: &apos;AWS::EFS::FileSystem&apos;
+    Properties:
+      PerformanceMode: maxIO
       Encrypted: true
+      LifecyclePolicies:
+        - TransitionToIA: AFTER_30_DAYS
+      FileSystemTags:
+        - Key: Name
+          Value: TestFileSystem
+      
       KmsKeyId: !GetAtt 
         - key
         - Arn
@@ -318,11 +469,48 @@ Properties:
             Action:
               - &apos;kms:*&apos;
             Resource: &apos;*&apos;
-Outputs:
-  KeyId:
-    Value: !GetAtt 
-      - key
-- Arn</code></pre></div>
+            AWS: &quot;*&quot;
+
+  MountTargetResource1:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !Ref FileSystemResource
+      SubnetId: !Ref MountTargetSubnetOne
+      SecurityGroups:
+      - !GetAtt MountTargetVPC.DefaultSecurityGroup
+
+  MountTargetResource2:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !Ref FileSystemResource
+      SubnetId: !Ref MountTargetSubnetTwo
+      SecurityGroups:
+      - !GetAtt MountTargetVPC.DefaultSecurityGroup
+
+  MountTargetResource3:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !Ref FileSystemResource
+      SubnetId: !Ref MountTargetSubnetThree
+      SecurityGroups:
+      - !GetAtt MountTargetVPC.DefaultSecurityGroup
+ 
+  AccessPointResource:
+    Type: &apos;AWS::EFS::AccessPoint&apos;
+    Properties:
+      FileSystemId: !Ref FileSystemResource
+      PosixUser:
+        Uid: &quot;13234&quot;
+        Gid: &quot;1322&quot;
+        SecondaryGids:
+          - &quot;1344&quot;
+          - &quot;1452&quot;
+      RootDirectory:
+        CreationInfo:
+          OwnerGid: &quot;708798&quot;
+          OwnerUid: &quot;7987987&quot;
+          Permissions: &quot;0755&quot;
+        Path: &quot;/testcfn/abc&quot;</code></pre></div>
                                  <h2 id="aws-resource-efs-filesystem--seealso">See Also</h2>
                                  <div class="itemizedlist">
                                      

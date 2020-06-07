@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-properties-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat">AWS::RDS::DBProxyTargetGroup ConnectionPoolConfigurationInfoFormat</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>This is prerelease documentation for the RDS Database Proxy feature in preview release.
+                                          It is subject to change.
+                                       </p>
+                                    </div>
+                                 </div>
+                                 <p>Specifies the settings that control the size and behavior of the connection pool associated
+                                    with a <code class="code">DBProxyTargetGroup</code>.
+                                 </p>
+                                 <h2 id="aws-properties-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-properties-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-connectionborrowtimeout">ConnectionBorrowTimeout</a>&quot; : <code class="replaceable">Integer</code>,
+  &quot;<a href="#cfn-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-initquery">InitQuery</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-maxconnectionspercent">MaxConnectionsPercent</a>&quot; : <code class="replaceable">Integer</code>,
+  &quot;<a href="#cfn-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-maxidleconnectionspercent">MaxIdleConnectionsPercent</a>&quot; : <code class="replaceable">Integer</code>,
+  &quot;<a href="#cfn-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-sessionpinningfilters">SessionPinningFilters</a>&quot; : <code class="replaceable">[ String, ... ]</code>
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-properties-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-connectionborrowtimeout">ConnectionBorrowTimeout</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-initquery">InitQuery</a>: <code class="replaceable">String</code>
+  <a href="#cfn-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-maxconnectionspercent">MaxConnectionsPercent</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-maxidleconnectionspercent">MaxIdleConnectionsPercent</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-sessionpinningfilters">SessionPinningFilters</a>: <code class="replaceable">
+    - String</code>
+</code></pre></div>
+                                 <h2 id="aws-properties-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-connectionborrowtimeout"></a><span class="term"><code class="code">ConnectionBorrowTimeout</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The number of seconds for a proxy to wait for a connection to become available in
+                                             the connection pool. Only applies when the
+                                             proxy has opened its maximum number of connections and all connections are busy with
+                                             client sessions.
+                                          </p>
+                                          
+                                          <p>Default: 120</p>
+                                          
+                                          <p>Constraints: between 1 and 3600, or 0 representing unlimited</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-initquery"></a><span class="term"><code class="code">InitQuery</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>
+                                             One or more SQL statements for the proxy to run when opening each new database connection.
+                                             Typically used with <code class="code">SET</code> statements to make sure that each connection has identical
+                                             settings such as time zone and character set. For multiple statements, use semicolons
+                                             as the separator.
+                                             You can also include multiple variables in a single <code class="code">SET</code> statement, such as
+                                             <code class="code">SET x=1, y=2</code>.
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <code class="code">InitQuery</code> is not currently supported for PostgreSQL.
+                                          </p>
+                                          
+                                          <p>Default: no initialization query</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-maxconnectionspercent"></a><span class="term"><code class="code">MaxConnectionsPercent</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The maximum size of the connection pool for each target in a target group. For Aurora
+                                             MySQL, it is expressed as a percentage of the
+                                             <code class="code">max_connections</code> setting for the RDS DB instance or Aurora DB cluster used by the target group.
+                                          </p>
+                                          
+                                          <p>Default: 100</p>
+                                          
+                                          <p>Constraints: between 1 and 100</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-maxidleconnectionspercent"></a><span class="term"><code class="code">MaxIdleConnectionsPercent</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>
+                                             Controls how actively the proxy closes idle database connections in the connection
+                                             pool.
+                                             A high value enables the proxy to leave a high percentage of idle connections open.
+                                             A low value causes the proxy to close idle client connections and return the underlying
+                                             database connections to the connection pool. For Aurora MySQL, it is expressed as
+                                             a percentage of the
+                                             <code class="code">max_connections</code> setting for the RDS DB instance or Aurora DB cluster used by the target group.
+                                             
+                                          </p>
+                                          
+                                          <p>Default: 50</p>
+                                          
+                                          <p>Constraints: between 0 and <code class="code">MaxConnectionsPercent</code>
+                                             
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-rds-dbproxytargetgroup-connectionpoolconfigurationinfoformat-sessionpinningfilters"></a><span class="term"><code class="code">SessionPinningFilters</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Each item in the list represents a class of SQL operations that normally cause all
+                                             later statements
+                                             in a session using a proxy to be pinned to the same underlying database connection.
+                                             Including an item
+                                             in the list exempts that class of SQL operations from the pinning behavior.
+                                          </p>
+                                          
+                                          <p>Default: no session pinning filters</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

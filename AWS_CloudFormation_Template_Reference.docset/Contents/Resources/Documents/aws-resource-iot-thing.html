@@ -46,7 +46,7 @@ Properties:
                                        <dt><a id="cfn-iot-thing-attributepayload"></a><span class="term"><code class="code">AttributePayload</code></span></dt>
                                        <dd>
                                           
-                                          <p>A string that contains up to three key&#x2013;value pairs. Maximum length of 800. Duplicates
+                                          <p>A string that contains up to three key value pairs. Maximum length of 800. Duplicates
                                              not allowed.
                                           </p>
                                           
@@ -92,22 +92,77 @@ Properties:
                                  <h3 id="aws-resource-iot-thing--examples--"></h3>
                                  <p>The following example declares a thing and the values of its attributes.</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-iot-thing--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;, &quot;Resources&quot;: <span>{</span>
-            &quot;MyThing&quot;: <span>{</span> &quot;Type&quot;: &quot;AWS::IoT::Thing&quot;, &quot;Properties&quot;: <span>{</span> &quot;ThingName&quot;: <span>{</span> &quot;Ref&quot;:
-            &quot;NameParameter&quot; }, &quot;AttributePayload&quot;: <span>{</span> &quot;Attributes&quot;: <span>{</span> &quot;myAttributeA&quot;: <span>{</span> &quot;Ref&quot;:
-            &quot;MyAttributeValueA&quot; }, &quot;myAttributeB&quot;: <span>{</span> &quot;Ref&quot;: &quot;MyAttributeValueB&quot; }, &quot;myAttributeC&quot;: <span>{</span>
-            &quot;Ref&quot;: &quot;MyAttributeValueC&quot; } } } } } }, &quot;Parameters&quot;: <span>{</span> &quot;NameParameter&quot;: <span>{</span> &quot;Type&quot;:
-            &quot;String&quot; }, &quot;MyAttributeValueA&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot;, &quot;Default&quot;: &quot;myStringA123&quot; },
-            &quot;MyAttributeValueB&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot;, &quot;Default&quot;: &quot;myStringB123&quot; },
-            &quot;MyAttributeValueC&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot;, &quot;Default&quot;: &quot;myStringC123&quot; } } }</code></pre></div>
+                                    <h4 id="aws-resource-iot-thing--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+   &quot;AWSTemplateFormatVersion&quot;:&quot;2010-09-09&quot;,
+   &quot;Resources&quot;:<span>{</span>
+      &quot;MyThing&quot;:<span>{</span>
+         &quot;Type&quot;:&quot;AWS::IoT::Thing&quot;,
+         &quot;Properties&quot;:<span>{</span>
+            &quot;ThingName&quot;:<span>{</span>
+               &quot;Ref&quot;:&quot;NameParameter&quot;
+            },
+            &quot;AttributePayload&quot;:<span>{</span>
+               &quot;Attributes&quot;:<span>{</span>
+                  &quot;myAttributeA&quot;:<span>{</span>
+                     &quot;Ref&quot;:&quot;MyAttributeValueA&quot;
+                  },
+                  &quot;myAttributeB&quot;:<span>{</span>
+                     &quot;Ref&quot;:&quot;MyAttributeValueB&quot;
+                  },
+                  &quot;myAttributeC&quot;:<span>{</span>
+                     &quot;Ref&quot;:&quot;MyAttributeValueC&quot;
+                  }
+               }
+            }
+         }
+      }
+   },
+   &quot;Parameters&quot;:<span>{</span>
+      &quot;NameParameter&quot;:<span>{</span>
+         &quot;Type&quot;:&quot;String&quot;
+      },
+      &quot;MyAttributeValueA&quot;:<span>{</span>
+         &quot;Type&quot;:&quot;String&quot;,
+         &quot;Default&quot;:&quot;myStringA123&quot;
+      },
+      &quot;MyAttributeValueB&quot;:<span>{</span>
+         &quot;Type&quot;:&quot;String&quot;,
+         &quot;Default&quot;:&quot;myStringB123&quot;
+      },
+      &quot;MyAttributeValueC&quot;:<span>{</span>
+         &quot;Type&quot;:&quot;String&quot;,
+         &quot;Default&quot;:&quot;myStringC123&quot;
+      }
+   }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-iot-thing--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &quot;2010-09-09&quot; Resources: MyThing: Type:
-            AWS::IoT::Thing Properties: ThingName: Ref: &quot;NameParameter&quot; AttributePayload:
-            Attributes: myAttributeA: Ref: &quot;MyAttributeValueA&quot; myAttributeB: Ref:
-            &quot;MyAttributeValueB&quot; myAttributeC: Ref: &quot;MyAttributeValueC&quot; Parameters: NameParameter:
-            Type: &quot;String&quot; MyAttributeValueA: Type: &quot;String&quot; Default: &quot;myStringA123&quot;
-            MyAttributeValueB: Type: &quot;String&quot; Default: &quot;myStringB123&quot; MyAttributeValueC: Type:
-            &quot;String&quot; Default: &quot;myStringC123&quot;</code></pre></div>
+                                    <h4 id="aws-resource-iot-thing--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+Resources:
+  MyThing:
+    Type: AWS::IoT::Thing
+    Properties:
+      ThingName:
+        Ref: NameParameter
+      AttributePayload:
+        Attributes:
+          myAttributeA:
+            Ref: MyAttributeValueA
+          myAttributeB:
+            Ref: MyAttributeValueB
+          myAttributeC:
+            Ref: MyAttributeValueC
+Parameters:
+  NameParameter:
+    Type: String
+  MyAttributeValueA:
+    Type: String
+    Default: myStringA123
+  MyAttributeValueB:
+    Type: String
+    Default: myStringB123
+  MyAttributeValueC:
+    Type: String
+    Default: myStringC123</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                               </div>
                               <noscript>
