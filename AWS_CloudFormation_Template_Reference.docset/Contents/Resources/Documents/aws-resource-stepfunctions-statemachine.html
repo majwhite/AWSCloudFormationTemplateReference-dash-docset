@@ -34,7 +34,6 @@
       &quot;<a href="#cfn-stepfunctions-statemachine-definitionsubstitutions">DefinitionSubstitutions</a>&quot; : <code class="replaceable"><a href="./aws-properties-stepfunctions-statemachine-definitionsubstitutions.html">DefinitionSubstitutions</a></code>,
       &quot;<a href="#cfn-stepfunctions-statemachine-loggingconfiguration">LoggingConfiguration</a>&quot; : <code class="replaceable"><a href="./aws-properties-stepfunctions-statemachine-loggingconfiguration.html">LoggingConfiguration</a></code>,
       &quot;<a href="#cfn-stepfunctions-statemachine-rolearn">RoleArn</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#AWS::StepFunctions::StateMachine.RoleARN"><span>RoleARN</span></a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-stepfunctions-statemachine-statemachinename">StateMachineName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-stepfunctions-statemachine-statemachinetype">StateMachineType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-stepfunctions-statemachine-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-stepfunctions-statemachine-tagsentry.html">TagsEntry</a>, ... ]</code>
@@ -53,7 +52,6 @@ Properties:
   <a href="#cfn-stepfunctions-statemachine-loggingconfiguration">LoggingConfiguration</a>: <code class="replaceable">
     <a href="./aws-properties-stepfunctions-statemachine-loggingconfiguration.html">LoggingConfiguration</a></code>
   <a href="#cfn-stepfunctions-statemachine-rolearn">RoleArn</a>: <code class="replaceable">String</code>
-  <a href="#AWS::StepFunctions::StateMachine.RoleARN"><span>RoleARN</span></a>: <code class="replaceable">String</code>
   <a href="#cfn-stepfunctions-statemachine-statemachinename">StateMachineName</a>: <code class="replaceable">String</code>
   <a href="#cfn-stepfunctions-statemachine-statemachinetype">StateMachineType</a>: <code class="replaceable">String</code>
   <a href="#cfn-stepfunctions-statemachine-tags">Tags</a>: <code class="replaceable">
@@ -89,13 +87,14 @@ Properties:
                                        <dt><a id="cfn-stepfunctions-statemachine-definitionsubstitutions"></a><span class="term"><code class="code">DefinitionSubstitutions</code></span></dt>
                                        <dd>
                                           
-                                          <p>Substitute variables in a state machine defined by a DefinitionS3Location. Variables
-                                             can
+                                          <p>A map (string to string) that specifies the mappings for placeholder variables in
+                                             the 
+                                             state machine definition. This enables the customer to inject values obtained at runtime,
+                                             for example from intrinsic functions, in the state machine definition.         
+                                             Variables can
                                              be template parameter names, resource logical IDs, resource attributes, or a variable
                                              in a
-                                             key-value map. Substitutions can be made with a map of strings, and should be of the
-                                             form
-                                             $<span>{</span>variable_1,variable_2,...}. There can be no spaces between the brackets <code class="code"><span>{</span>,}</code> and the variables.
+                                             key-value map. 
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -134,16 +133,6 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                                       </dd>
-                                       <dt><a id="AWS::StepFunctions::StateMachine.RoleARN"></a><span class="term"><code class="code">RoleARN</code></span></dt>
-                                       <dd>
-                                          
-                                          <p>The Amazon Resource Name (ARN) of the IAM role to use for this state machine.</p>
-                                          
-                                          <p><em>Required</em>: No
-                                          </p>
-                                          <p><em>Type</em>: String
-                                          </p>
                                        </dd>
                                        <dt><a id="cfn-stepfunctions-statemachine-statemachinename"></a><span class="term"><code class="code">StateMachineName</code></span></dt>
                                        <dd>
@@ -389,6 +378,45 @@ Resources:
         -
           Key: &quot;keyname2&quot;
           Value: &quot;value2&quot;</code></pre></div>
+                                 <h3 id="aws-resource-stepfunctions-statemachine--examples--Using_DefinitionSubstitutions">Using DefinitionSubstitutions</h3>
+                                 <p>In this example template, <code class="code">HelloFunction:</code> is defined 
+                                    for the <code class="code">DefinitionSubstitutions</code> property.
+                                    In the <code class="code">hello_world.json</code>
+                                    definition file, that follows<code class="code">$<span>{</span>HelloFunction}</code> will be replaced by 
+                                    <code class="code">arn:aws:lambda:us-east-1:111122223333:function:HelloFunction</code>.
+                                 </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-stepfunctions-statemachine--examples--Using_DefinitionSubstitutions--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &quot;2010-09-09&quot;
+Description: An example template for a Step Functions state machine.
+  Resources:
+    MyStateMachine:
+      Type: AWS::StepFunctions::StateMachine
+      Properties:
+        StateMachineName: HelloWorld-StateMachine
+        DefinitionS3Location:
+          Bucket: example_bucket
+          Key: hello_world.json
+        DefinitionSubstitutions:
+          HelloFunction: arn:aws:lambda:us-east-1:111122223333:function:HelloFunction
+        RoleArn: arn:aws:iam::111122223333:role/service-role/StatesExecutionRole-us-east-1
+         </code></pre></div>
+                                 <h3 id="aws-resource-stepfunctions-statemachine--examples--hello_world.json">hello_world.json</h3>
+                                 <p>
+                                    A definition file where <code class="code">$<span>{</span>HelloFunction}</code> will be replaced by 
+                                    <code class="code">arn:aws:lambda:us-east-1:111122223333:function:HelloFunction</code>.
+                                    from the preceding example template.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-stepfunctions-statemachine--examples--hello_world.json--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;StartAt&quot;: &quot;HelloWorld&quot;,
+  &quot;States&quot;: <span>{</span>
+    &quot;HelloWorld&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;Task&quot;,
+      &quot;Resource&quot;: &quot;$<span>{</span>HelloFunction}&quot;,
+      &quot;End&quot;: true
+    }
+  }
+}</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                               </div>
                               <noscript>

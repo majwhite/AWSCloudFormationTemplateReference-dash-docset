@@ -285,12 +285,13 @@ Properties:
                                        <dt><a id="cfn-rds-dbinstance-allowmajorversionupgrade"></a><span class="term"><code class="code">AllowMajorVersionUpgrade</code></span></dt>
                                        <dd>
                                           
-                                          <p>Indicates that major version upgrades are allowed. Changing this parameter does not
-                                             result in an outage and the change is asynchronously applied as soon as possible.
+                                          <p>A value that indicates whether major version upgrades are allowed. Changing this parameter
+                                             doesn&apos;t result in an outage and the change is asynchronously applied as soon as possible.
                                           </p>
                                           
-                                          <p>Constraints: This parameter must be set to true when specifying a value for the EngineVersion
-                                             parameter that is a different major version than the DB Instance&apos;s current version.
+                                          <p>Constraints: Major version upgrades must be allowed when specifying a value for the
+                                             EngineVersion parameter that is a different major version than the DB instance&apos;s current
+                                             version.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -315,12 +316,9 @@ Properties:
                                        <dt><a id="cfn-rds-dbinstance-autominorversionupgrade"></a><span class="term"><code class="code">AutoMinorVersionUpgrade</code></span></dt>
                                        <dd>
                                           
-                                          <p>Indicates that minor engine upgrades will be applied automatically to the DB Instance
-                                             during the maintenance window.
-                                          </p>
-                                          
-                                          <p>Default: <code class="code">true</code>
-                                             
+                                          <p>A value that indicates whether minor engine upgrades are applied automatically to
+                                             the DB instance during the maintenance window. 
+                                             By default, minor engine upgrades are applied automatically.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -332,9 +330,15 @@ Properties:
                                        <dt><a id="cfn-rds-dbinstance-availabilityzone"></a><span class="term"><code class="code">AvailabilityZone</code></span></dt>
                                        <dd>
                                           
-                                          <p>The Availability Zone that the database instance will be created in.</p>
+                                          <p>
+                                             The Availability Zone (AZ) where the database will be created. For information on
+                                             AWS Regions and Availability Zones, see 
+                                             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html">Regions
+                                                and Availability Zones</a>.
+                                             
+                                          </p>
                                           
-                                          <p>Default: A random, system-chosen Availability Zone in the endpoint&apos;s region.</p>
+                                          <p>Default: A random, system-chosen Availability Zone in the endpoint&apos;s AWS Region.</p>
                                           
                                           <p>
                                              Example: <code class="code">us-east-1d</code>
@@ -342,11 +346,27 @@ Properties:
                                           </p>
                                           
                                           <p>
-                                             Constraint: The AvailabilityZone parameter cannot be specified if the MultiAZ parameter
-                                             is set to <code class="code">true</code>. 
-                                             The specified Availability Zone must be in the same region as the current endpoint.
+                                             Constraint: The <code class="code">AvailabilityZone</code> parameter can&apos;t be specified if the DB instance is a Multi-AZ deployment. 
+                                             The specified Availability Zone must be in the same AWS Region as the current endpoint.
                                              
                                           </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If you&apos;re creating a DB instance in an RDS on VMware environment,
+                                                   specify the identifier of the custom Availability Zone to create the DB instance
+                                                   in.
+                                                </p>
+                                                <p>For more information about RDS on VMware, see the 
+                                                   <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html">
+                                                      <em>RDS on VMware User Guide.</em>
+                                                      </a>
+                                                   
+                                                </p>
+                                             </div>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -420,6 +440,7 @@ Properties:
                                                 Rotating Your SSL/TLS Certificate</a> in the <em>Amazon Aurora User Guide</em>.
                                           </p>
                                           
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -429,9 +450,20 @@ Properties:
                                        <dt><a id="cfn-rds-dbinstance-charactersetname"></a><span class="term"><code class="code">CharacterSetName</code></span></dt>
                                        <dd>
                                           
-                                          <p>For supported engines, indicates that the DB Instance should be associated with the
+                                          <p>For supported engines, indicates that the DB instance should be associated with the
                                              specified CharacterSet.
                                           </p>
+                                          
+                                          
+                                          <p>
+                                             <b>Amazon Aurora</b>
+                                             
+                                          </p>
+                                          
+                                          <p>Not applicable. The character set is managed by
+                                             the DB cluster. For more information, see <code class="code">CreateDBCluster</code>.
+                                          </p>
+                                          
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -1303,16 +1335,59 @@ Properties:
                                           
                                           <p>The version number of the database engine to use.</p>
                                           
+                                          <p>For a list of valid engine versions, use the  <code class="code">DescribeDBEngineVersions</code> action.
+                                          </p>
+                                          
+                                          <p>The following are the database engines and links to information about the major and
+                                             minor versions that are available with 
+                                             Amazon RDS. Not every database engine is available for every AWS Region.
+                                          </p>
+                                          
+                                          
+                                          <p>
+                                             <b>Amazon Aurora</b>
+                                             
+                                          </p>
+                                          
+                                          <p>Not applicable. The version number of the database engine to be used by the DB
+                                             instance is managed by the DB cluster.
+                                          </p>
+                                          
+                                          
+                                          <p>
+                                             <b>MariaDB</b>
+                                             
+                                          </p>
+                                          
+                                          
+                                          <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt">MariaDB on Amazon RDS Versions</a> in the 
+                                             <em>Amazon RDS User Guide.</em>
+                                             
+                                          </p>
+                                          
+                                          
+                                          <p>
+                                             <b>Microsoft SQL Server</b>
+                                             
+                                          </p>
+                                          
+                                          
+                                          <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport">Version and Feature Support on Amazon RDS</a> in the 
+                                             <em>Amazon RDS User Guide.</em>
+                                             
+                                          </p>
+                                          
+                                          
                                           <p>
                                              <b>MySQL</b>
                                              
                                           </p>
                                           
-                                          <p>Example: <code class="code">5.1.42</code>
-                                             
-                                          </p> 
                                           
-                                          <p>Type: String</p>
+                                          <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt">MySQL on Amazon RDS Versions</a> in the 
+                                             <em>Amazon RDS User Guide.</em>
+                                             
+                                          </p>     
                                           
                                           
                                           <p>
@@ -1320,19 +1395,21 @@ Properties:
                                              
                                           </p>
                                           
-                                          <p>Example: <code class="code">11.2.0.2.v2</code>
+                                          
+                                          <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html">Oracle Database Engine Release Notes</a> in the 
+                                             <em>Amazon RDS User Guide.</em>
                                              
                                           </p>
-                                          
-                                          <p>Type: String</p>
                                           
                                           
                                           <p>
-                                             <b>SQL Server</b>
+                                             <b>PostgreSQL</b>
                                              
                                           </p>
                                           
-                                          <p>Example: <code class="code">10.50.2789.0.v1</code>
+                                          
+                                          <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions">Supported PostgreSQL Database Versions</a> in the 
+                                             <em>Amazon RDS User Guide.</em>
                                              
                                           </p>
                                           
@@ -1592,7 +1669,12 @@ Properties:
                                        <dt><a id="cfn-rds-dbinstance-optiongroupname"></a><span class="term"><code class="code">OptionGroupName</code></span></dt>
                                        <dd>
                                           
-                                          <p>Indicates that the DB Instance should be associated with the specified option group.</p>
+                                          <p>Indicates that the DB instance should be associated with the specified option group.</p>
+                                          
+                                          <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can&apos;t
+                                             be removed from an option group. Also, that option group can&apos;t be removed from a DB
+                                             instance once it is associated with a DB instance
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -1654,16 +1736,34 @@ Properties:
                                              The daily time range during which automated backups are created
                                              if automated backups are enabled,
                                              using the <code class="code">BackupRetentionPeriod</code> parameter.
+                                             For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow">The Backup Window</a> in the <em>Amazon RDS User Guide</em>.
                                              
                                           </p>
                                           
-                                          <p>Default: A 30-minute window selected at random from an 8-hour block of time per region.
-                                             The following list shows the time blocks for each region from which the default backup
-                                             windows are assigned.
+                                          
+                                          <p>
+                                             <b>Amazon Aurora</b>
+                                             
                                           </p>
                                           
+                                          <p>Not applicable. The daily time range for creating automated backups is managed by
+                                             the DB cluster.
+                                          </p>
+                                          
+                                          
+                                          <p>
+                                             The default is a 30-minute window selected at random from an
+                                             8-hour block of time for each AWS Region. 
+                                             To see the time blocks available, see 
+                                             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow">
+                                                Adjusting the Preferred DB Instance Maintenance Window</a> in the <em>Amazon RDS User Guide</em>.
+                                             
+                                          </p>
+                                          
+                                          
+                                          <p>Constraints:</p>
+                                          
                                           <div class="itemizedlist">
-                                              
                                               
                                               
                                               
@@ -1672,49 +1772,28 @@ Properties:
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
                                                    
-                                                   <p>
-                                                      <b>US-East (Northern Virginia) Region:</b> 03:00-11:00 UTC
+                                                   <p>Must be in the format <code class="code">hh24:mi-hh24:mi</code>.
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>
-                                                      <b>US-West (Northern California) Region:</b> 06:00-14:00 UTC
-                                                   </p>
+                                                   <p>Must be in Universal Coordinated Time (UTC).</p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>
-                                                      <b>EU (Ireland) Region:</b> 22:00-06:00 UTC
-                                                   </p>
+                                                   <p>Must not conflict with the preferred maintenance window.</p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>
-                                                      <b>Asia Pacific (Singapore) Region:</b> 14:00-22:00 UTC
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>
-                                                      <b>Asia Pacific (Tokyo) Region: </b> 17:00-03:00 UTC
-                                                   </p>
+                                                   <p>Must be at least 30 minutes.</p>
                                                    
                                                 </li>
                                              </ul>
                                           </div>
                                           
-                                          
-                                          <p>
-                                             Constraints: Must be in the format <code class="code">hh24:mi-hh24:mi</code>. 
-                                             Times should be Universal Time Coordinated (UTC). 
-                                             Must not conflict with the preferred maintenance window. Must be at least 30 minutes.
-                                             
-                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>

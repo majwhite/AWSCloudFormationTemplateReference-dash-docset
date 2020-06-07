@@ -16,7 +16,9 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Configuration information for delivery of dataset contents to Amazon S3.</p>
+                                 <p>Configuration information for delivery of dataset contents to Amazon Simple Storage
+                                    Service (Amazon S3).
+                                 </p>
                                  <h2 id="aws-properties-iotanalytics-dataset-s3destinationconfiguration-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -66,14 +68,59 @@
                                        <dt><a id="cfn-iotanalytics-dataset-s3destinationconfiguration-key"></a><span class="term"><code class="code">Key</code></span></dt>
                                        <dd>
                                           
-                                          <p>The key of the dataset contents object. Each object in an S3 bucket has a key that
-                                             is
-                                             its unique identifier in the bucket. Each object in a bucket has exactly one key.
-                                             To produce a
-                                             unique key, you can use !<span>{</span>iotanalytics:scheduleTime} to insert the time of the scheduled SQL
-                                             query run, or !<span>{</span>iotanalytics:versionId} to insert a unique hash identifying the dataset (for
-                                             example, /DataSet/!<span>{</span>iotanalytics:scheduleTime}/!<span>{</span>iotanalytics:versionId}.csv).
+                                          <p>The key of the dataset contents object in an S3 bucket. Each object has a key that
+                                             is a
+                                             unique identifier. Each object has exactly one key.
                                           </p>
+                                          
+                                          <p>You can create a unique key with the following options:</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>Use <code class="code">!<span>{</span>iotanalytics:scheduleTime}</code> to insert the time of a scheduled SQL
+                                                      query run.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Use <code class="code">!<span>{</span>iotanalytics:versionId}</code> to insert a unique hash that identifies a
+                                                      dataset content.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Use <code class="code">!<span>{</span>iotanalytics:creationTime}</code> to insert the creation time of a dataset
+                                                      content.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>The following example creates a unique key for a CSV file:
+                                             <code class="code">dataset/mydataset/!<span>{</span>iotanalytics:scheduleTime}/!<span>{</span>iotanalytics:versionId}.csv</code>
+                                             
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If you don&apos;t use <code class="code">!<span>{</span>iotanalytics:versionId}</code> to specify the key, you might
+                                                   get duplicate keys. For example, you might have two dataset contents with the same
+                                                   <code class="code">scheduleTime</code> but different <code class="code">versionId</code>s. 
+                                                   This means that one dataset content overwrites the other. 
+                                                </p>
+                                             </div>
+                                          </div>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>

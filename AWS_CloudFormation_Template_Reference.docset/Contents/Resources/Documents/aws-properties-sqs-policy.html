@@ -74,17 +74,18 @@ Properties:
                                  <h2 id="aws-properties-sqs-policy--examples">Examples</h2>
                                  <h3 id="aws-properties-sqs-policy--examples--Amazon_SQS_Queue_Policy">Amazon SQS Queue Policy</h3>
                                  <p>The following sample is a queue policy that allows AWS
-                                    account 111122223333 to send and receive messages on queue queue2.
+                                    account 111122223333 to send and receive messages on queue queue2. You add the policy
+                                    to the resources section of your template.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-properties-sqs-policy--examples--Amazon_SQS_Queue_Policy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "> 
 &quot;SampleSQSPolicy&quot; : <span>{</span>
-  &quot;Type&quot; : &quot;AWS::S3::QueuePolicy&quot;,
+  &quot;Type&quot; : &quot;AWS::SQS::QueuePolicy&quot;,
   &quot;Properties&quot; : <span>{</span>
-    &quot;Queues&quot; :  &quot;arn:aws:sqs:us-east-2:444455556666:queue2&quot;,
+    &quot;Queues&quot; :  [&quot;https://sqs:us-east-2.amazonaws.com/444455556666/queue2&quot;],
     &quot;PolicyDocument&quot;: <span>{</span>
       &quot;Statement&quot;:[<span>{</span>
-        &quot;Action&quot;:[&quot;sqs:SendMessage&quot;, &quot;sqs:ReceiveMessage&quot;],
+        &quot;Action&quot;:[&quot;SQS:SendMessage&quot;, &quot;SQS:ReceiveMessage&quot;],
         &quot;Effect&quot;:&quot;Allow&quot;,
         &quot;Resource&quot;: &quot;arn:aws:sqs:us-east-2:444455556666:queue2&quot;,
         &quot;Principal&quot;: <span>{</span>
@@ -98,22 +99,22 @@ Properties:
       </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h4 id="aws-properties-sqs-policy--examples--Amazon_SQS_Queue_Policy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml "> 
-SampleBucketPolicy: 
-  Type: AWS::S3::QueuePolicy
+SampleSQSPolicy: 
+  Type: AWS::SQS::QueuePolicy
   Properties: 
     Queues: 
-      Ref: &quot;arn:aws:sqs:us-east-2:444455556666:queue2&quot;
+      - &quot;https://sqs:us-east-2.amazonaws.com/444455556666/queue2&quot;
     PolicyDocument: 
       Statement: 
         - 
           Action: 
-            - &quot;sqs:SendMessage&quot; 
-            - &quot;sqs:ReceiveMessage&quot;
+            - &quot;SQS:SendMessage&quot; 
+            - &quot;SQS:ReceiveMessage&quot;
           Effect: &quot;Allow&quot;
-          Resource: 
-            Ref: &quot;arn:aws:sqs:us-east-2:444455556666:queue2&quot;
+          Resource: &quot;arn:aws:sqs:us-east-2:444455556666:queue2&quot;
           Principal:  
-            - AWS: &quot;111122223333&quot;        
+            AWS: 
+              - &quot;111122223333&quot;        
       </code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                               </div>

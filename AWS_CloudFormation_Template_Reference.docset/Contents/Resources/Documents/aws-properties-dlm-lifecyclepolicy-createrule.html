@@ -17,17 +17,23 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>Specifies when to create snapshots of EBS volumes.</p>
+                                 <p>You must specify either a Cron expression or an interval, interval unit, and start
+                                    time.
+                                    You cannot specify both.
+                                 </p>
                                  <h2 id="aws-properties-dlm-lifecyclepolicy-createrule-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-properties-dlm-lifecyclepolicy-createrule-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-dlm-lifecyclepolicy-createrule-cronexpression">CronExpression</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-dlm-lifecyclepolicy-createrule-interval">Interval</a>&quot; : <code class="replaceable">Integer</code>,
   &quot;<a href="#cfn-dlm-lifecyclepolicy-createrule-intervalunit">IntervalUnit</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-dlm-lifecyclepolicy-createrule-times">Times</a>&quot; : <code class="replaceable">[ String, ... ]</code>
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h3 id="aws-properties-dlm-lifecyclepolicy-createrule-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-dlm-lifecyclepolicy-createrule-interval">Interval</a>: <code class="replaceable">Integer</code>
+                                    <h3 id="aws-properties-dlm-lifecyclepolicy-createrule-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-dlm-lifecyclepolicy-createrule-cronexpression">CronExpression</a>: <code class="replaceable">String</code>
+  <a href="#cfn-dlm-lifecyclepolicy-createrule-interval">Interval</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-dlm-lifecyclepolicy-createrule-intervalunit">IntervalUnit</a>: <code class="replaceable">String</code>
   <a href="#cfn-dlm-lifecyclepolicy-createrule-times">Times</a>: <code class="replaceable">
     - String</code>
@@ -35,6 +41,23 @@
                                  <h2 id="aws-properties-dlm-lifecyclepolicy-createrule-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-dlm-lifecyclepolicy-createrule-cronexpression"></a><span class="term"><code class="code">CronExpression</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The schedule, as a Cron expression. The schedule interval must be between 1 hour and
+                                             1 year. For 
+                                             more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron expressions</a> in the <em>Amazon CloudWatch User Guide</em>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">17</code></p>
+                                          <p><em>Maximum</em>: <code class="code">106</code></p>
+                                          <p><em>Pattern</em>: <code class="code">cron\([^\n]<span>{</span>11,100}\)</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-dlm-lifecyclepolicy-createrule-interval"></a><span class="term"><code class="code">Interval</code></span></dt>
                                        <dd>
                                           
@@ -42,7 +65,7 @@
                                              24.
                                           </p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
                                           </p>
@@ -54,7 +77,7 @@
                                           
                                           <p>The interval unit.</p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>

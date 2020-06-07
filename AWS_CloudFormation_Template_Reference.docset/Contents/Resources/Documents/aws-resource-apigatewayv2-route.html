@@ -171,7 +171,8 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>The route key for the route.</p>
+                                          <p>The route key for the route. For HTTP APIs, the route key can be either <code class="code">$default</code>, or a combination of an HTTP method and resource path, for example, <code class="code">GET /pets</code>.
+                                          </p>
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
@@ -212,7 +213,45 @@ Properties:
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
                                  <h2 id="aws-resource-apigatewayv2-route--examples">Examples</h2>
-                                 <h3 id="aws-resource-apigatewayv2-route--examples--Route_creation_example">Route creation example</h3>
+                                 <h3 id="aws-resource-apigatewayv2-route--examples--HTTP_API_route_creation_example">HTTP API route creation example</h3>
+                                 <p>The following example creates a <code class="code">route</code> resource called
+                                    <code class="code">MyRoute</code> for an HTTP API called
+                                    <code class="code">MyAPI</code> that already has an <code class="code">integration</code>
+                                    resource called <code class="code">MyIntegration</code>. The route accepts <code class="code">POST</code> requests to <code class="code">/signup</code>.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-apigatewayv2-route--examples--HTTP_API_route_creation_example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;MyRoute&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::ApiGatewayV2::Route&quot;,
+        &quot;Properties&quot;: <span>{</span>
+            &quot;ApiId&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;MyAPI&quot;
+            },
+            &quot;RouteKey&quot;: &quot;POST /signup&quot;,
+            &quot;Target&quot;: <span>{</span>
+                &quot;Fn::Join&quot;: [
+                    &quot;/&quot;,
+                    [
+                        &quot;integrations&quot;,
+                        <span>{</span>
+                            &quot;Ref&quot;: &quot;MyIntegration&quot;
+                        }
+                    ]
+                ]
+            }
+        }
+    }</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-apigatewayv2-route--examples--HTTP_API_route_creation_example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyRoute:
+  Type: AWS::ApiGatewayV2::Route
+  Properties:
+    ApiId: !Ref MyAPI
+    RouteKey: &apos;POST /signup&apos;
+    Target: !Join
+      - /
+      - - integrations
+      - !Ref MyIntegration
+              </code></pre></div>
+                                 <h3 id="aws-resource-apigatewayv2-route--examples--WebSocket_API_route_creation_example">WebSocket API route creation example</h3>
                                  <p>The following example creates a <code class="code">route</code> resource called
                                     <code class="code">MyRoute</code> for a WebSocket API called
                                     <code class="code">MyAPI</code> that already has an <code class="code">integration</code>
@@ -220,7 +259,7 @@ Properties:
                                     value of <code class="code">routekey1</code>.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-apigatewayv2-route--examples--Route_creation_example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-apigatewayv2-route--examples--WebSocket_API_route_creation_example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
     &quot;MyRoute&quot;: <span>{</span>
         &quot;Type&quot;: &quot;AWS::ApiGatewayV2::Route&quot;,
         &quot;DependsOn&quot;: [
@@ -247,7 +286,7 @@ Properties:
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-apigatewayv2-route--examples--Route_creation_example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyRoute:
+                                    <h4 id="aws-resource-apigatewayv2-route--examples--WebSocket_API_route_creation_example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyRoute:
   Type: &apos;AWS::ApiGatewayV2::Route&apos;
   DependsOn:
     - MyIntegration

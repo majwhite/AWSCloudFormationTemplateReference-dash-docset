@@ -19,6 +19,18 @@
                                  <p>The <code class="code">LoadBalancer</code> property specifies details on a load balancer that is
                                     used with a service.
                                  </p>
+                                 <p>If the service is using the <code class="code">ECS</code> deployment controller, you are limited to
+                                    one load balancer or target group.
+                                 </p>
+                                 <p>If the service is using the <code class="code">CODE_DEPLOY</code> deployment controller, the
+                                    service is required to use either an Application Load Balancer or Network Load Balancer.
+                                    When you are creating an AWS CodeDeploy deployment group, you specify two target groups
+                                    (referred to as a <code class="code">targetGroupPair</code>). Each target group binds to a separate
+                                    task set in the deployment. The load balancer can also have up to two listeners, a
+                                    required listener for production traffic and an optional listener that allows you
+                                    to
+                                    test new revisions of the service before routing production traffic to it.
+                                 </p>
                                  <p>Services with tasks that use the <code class="code">awsvpc</code> network mode (for example, those
                                     with the Fargate launch type) only support Application Load Balancers and Network
                                     Load
