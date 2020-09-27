@@ -24,7 +24,7 @@
                                     policy for your bucket. You can choose to <em>retain</em> the
                                     bucket or to <em>delete</em> the bucket. For more information, see <a href="aws-attribute-deletionpolicy.html">DeletionPolicy Attribute</a>.
                                  </p>
-                                 <div class="awsdocs-note">
+                                 <div class="awsdocs-note awsdocs-important">
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                     <div class="awsdocs-note-text">
@@ -170,7 +170,7 @@ Properties:
                                              (-).
                                           </p>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
@@ -335,7 +335,7 @@ Properties:
                                           </p>
                                           
                                           <p>Amazon S3 can store replicated objects in only one destination bucket. The destination
-                                             bucket must already exist and be in a different AWS Region than your source bucket.
+                                             bucket must already exist.
                                           </p> 
                                           
                                           <p><em>Required</em>: No
@@ -382,12 +382,12 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-properties-s3-bucket-return-values">Return Values</h2>
+                                 <h2 id="aws-properties-s3-bucket-return-values">Return values</h2>
                                  <h3 id="aws-properties-s3-bucket-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the bucket name.
                                  </p>
-                                 <p>Example: <code class="code">mystack-mybucket-kdwwxmddtr2g</code>
+                                 <p>Example: <code class="code">DOC-EXAMPLE-BUCKET</code>
                                     
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
@@ -407,7 +407,7 @@ Properties:
                                           
                                           <p>Returns the Amazon Resource Name (ARN) of the specified bucket.</p>
                                           
-                                          <p>Example: <code class="code">arn:aws:s3:::mybucket</code>
+                                          <p>Example: <code class="code">arn:aws:s3:::DOC-EXAMPLE-BUCKET</code>
                                              
                                           </p>
                                           
@@ -417,7 +417,7 @@ Properties:
                                           
                                           <p>Returns the IPv4 DNS name of the specified bucket.</p>
                                           
-                                          <p>Example: <code class="code">mystack-mybucket-kdwwxmddtr2g.s3.amazonaws.com</code>
+                                          <p>Example: <code class="code">DOC-EXAMPLE-BUCKET.s3.amazonaws.com</code>
                                              
                                           </p>
                                           
@@ -428,7 +428,7 @@ Properties:
                                           <p>Returns the IPv6 DNS name of the specified bucket.</p>
                                           
                                           <p>Example: <code class="code">
-                                                mystack-mybucket-kdwwxmddtr2g.s3.dualstack.us-east-2.amazonaws.com</code>
+                                                DOC-EXAMPLE-BUCKET.s3.dualstack.us-east-2.amazonaws.com</code>
                                              
                                           </p>
                                           
@@ -442,7 +442,7 @@ Properties:
                                           <p>Returns the regional domain name of the specified bucket.</p>
                                           
                                           <p>Example:
-                                             <code class="code">mystack-mybucket-kdwwxmddtr2g.s3.us-east-2.amazonaws.com</code>
+                                             <code class="code">DOC-EXAMPLE-BUCKET.s3.us-east-2.amazonaws.com</code>
                                              
                                           </p>  
                                           
@@ -455,12 +455,12 @@ Properties:
                                           </p>
                                           
                                           <p>Example (IPv4):
-                                             <code class="code">http://mystack-mybucket-kdwwxmddtr2g.s3-website-us-east-2.amazonaws.com</code>
+                                             <code class="code">http://DOC-EXAMPLE-BUCKET.s3-website.us-east-2.amazonaws.com</code>
                                              
                                           </p>
                                           
                                           <p>Example (IPv6):
-                                             <code class="code">http://mystack-mybucket-kdwwxmddtr2g.s3.dualstack.us-east-2.amazonaws.com</code>
+                                             <code class="code">http://DOC-EXAMPLE-BUCKET.s3.dualstack.us-east-2.amazonaws.com</code>
                                              
                                           </p>
                                           
@@ -478,7 +478,7 @@ Properties:
         &quot;Type&quot; : &quot;AWS::S3::Bucket&quot;,
 	&quot;DeletionPolicy&quot;: &quot;Retain&quot;,
         &quot;Properties&quot; : <span>{</span>
-           &quot;BucketName&quot; : &quot;my-bucket&quot;
+           &quot;BucketName&quot; : &quot;DOC-EXAMPLE-BUCKET&quot;
          }  
      }
 }</code></pre></div>
@@ -489,7 +489,7 @@ Resources:
     Type: AWS::S3::Bucket
     DeletionPolicy: Retain
     Properties:
-      BucketName: my-bucket
+      BucketName: DOC-EXAMPLE-BUCKET
 </code></pre></div>
                                  <h3 id="aws-properties-s3-bucket--examples--Associate_a_Replication_Configuration_IAM_Role_with_an_S3_Bucket">Associate a Replication Configuration IAM Role with an S3 Bucket</h3>
                                  <p>The following example creates an S3 bucket and grants it permission to write to a
@@ -789,8 +789,8 @@ Outputs:
                                 &quot;DELETE&quot;
                             ],
                             &quot;AllowedOrigins&quot;: [
-                                &quot;http://www.example1.com&quot;,
-                                &quot;http://www.example2.com&quot;
+                                &quot;http://www.example.com&quot;,
+                                &quot;http://www.example.net&quot;
                             ],
                             &quot;ExposedHeaders&quot;: [
                                 &quot;Connection&quot;,
@@ -832,7 +832,7 @@ Resources:
           MaxAge: &apos;3600&apos;
         - AllowedHeaders: [x-amz-*]
           AllowedMethods: [DELETE]
-          AllowedOrigins: [&apos;http://www.example1.com&apos;, &apos;http://www.example2.com&apos;]
+          AllowedOrigins: [&apos;http://www.example.com&apos;, &apos;http://www.example.net&apos;]
           ExposedHeaders: [Connection, Server, Date]
           Id: myCORSRuleId2
           MaxAge: &apos;1800&apos;
@@ -1221,7 +1221,7 @@ Resources:
           - ServerSideEncryptionByDefault:
               SSEAlgorithm: AES256
     DeletionPolicy: Delete</code></pre></div>
-                                 <h2 id="aws-properties-s3-bucket--seealso">See Also</h2>
+                                 <h2 id="aws-properties-s3-bucket--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
                                     

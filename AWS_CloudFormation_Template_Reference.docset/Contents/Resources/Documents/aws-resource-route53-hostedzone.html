@@ -16,33 +16,21 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::Route53::HostedZone</code> resource is a Route 53 resource type that contains information about 
-                                    			how you want to route traffic for a domain (example.com) and its subdomains (acme.example.com,
-                                    zenith.example.com):
+                                 <p>Creates a new public or private hosted zone. You create records in a public hosted
+                                    zone to define how you want to route traffic 
+                                    			on the internet for a domain, such as example.com, and its subdomains (apex.example.com,
+                                    acme.example.com). You create records in a 
+                                    			private hosted zone to define how you want to route traffic for a domain and its
+                                    subdomains within one or more 
+                                    			Amazon Virtual Private Clouds (Amazon VPCs). 
                                  </p>
-                                 <div class="itemizedlist">
-                                    			 
-                                    			 
-                                    		
-                                    <ul class="itemizedlist" type="disc">
-                                       <li class="listitem">
-                                          <p>Records in a public hosted zone define how you want to route traffic on the internet.</p>
-                                       </li>
-                                       <li class="listitem">
-                                          <p>Records in a private hosted zone define how you want to route traffic within one or
-                                             more 
-                                             				Amazon Virtual Private Clouds (Amazon VPCs). 
-                                          </p>
-                                       </li>
-                                    </ul>
-                                 </div>
-                                 <div class="awsdocs-note">
+                                 <div class="awsdocs-note awsdocs-important">
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                     <div class="awsdocs-note-text">
                                        <p>You can&apos;t convert a public hosted zone to a private hosted zone or vice versa. Instead,
                                           you must create a new hosted zone 
-                                          				with the same name and create new records.
+                                          				with the same name and create new resource record sets.
                                        </p>
                                     </div>
                                  </div>
@@ -50,68 +38,40 @@
                                  </p>
                                  <p>Note the following:</p>
                                  <div class="itemizedlist">
-                                    			 
-                                    			 
-                                    			 
-                                    			 
-                                    		
+                                    			          
+                                    			          
+                                    			          
+                                    		       
                                     <ul class="itemizedlist" type="disc">
                                        <li class="listitem">
-                                          				
+                                          				           
                                           <p>You can&apos;t create a hosted zone for a top-level domain (TLD) such as .com.</p>
-                                          			
+                                          			         
                                        </li>
                                        <li class="listitem">
-                                          				
-                                          <p>For public hosted zones, Amazon Route 53 automatically creates a default SOA record
-                                             and four NS records for the zone. 
+                                          				           
+                                          <p>For public hosted zones, Route 53 automatically creates a default SOA record and four
+                                             NS records for the zone. 
                                              					For more information about SOA and NS records, see 
                                              					<a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html">NS and SOA Records that Route 53 Creates for a Hosted Zone</a> in the 
                                              					<em>Amazon Route 53 Developer Guide</em>.
                                           </p>
-                                          				
+                                          				           
                                           <p>If you want to use the same name servers for multiple public hosted zones, you can
                                              optionally associate a reusable delegation set 
-                                             					with the hosted zone. Using CloudFormation to create reusable delegation sets
-                                             isn&apos;t supported, but you can create them 
-                                             					programmatically using other methods, such as 
-                                             					the <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html">Route 53 API</a>, 
-                                             					the <a href="https://docs.aws.amazon.com/cli/latest/reference/route53/create-reusable-delegation-set.html">AWS CLI</a>, or 
-                                             					<a href="https://docs.aws.amazon.com/">AWS SDKs</a> (see the &quot;SDKs &amp; Toolkits&quot; section). 
+                                             					with the hosted zone. See the <code class="code">DelegationSetId</code> element.
                                           </p>
-                                          			
+                                          			         
                                        </li>
                                        <li class="listitem">
-                                          				
-                                          <p>To create a private hosted zone, specify the VPC ID and Region for one VPC in the
-                                             
-                                             					<a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone.html#cfn-route53-hostedzone-vpcs">VPCs</a>
-                                             					object.
-                                          </p>
-                                          				
-                                          <div class="awsdocs-note">
-                                             <div class="awsdocs-note-title">
-                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
-                                             <div class="awsdocs-note-text">
-                                                <p>You can specify only one Amazon VPC when you create a private hosted zone. To associate
-                                                   additional Amazon VPCs 
-                                                   						with the hosted zone, use 
-                                                   						<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_AssociateVPCWithHostedZone.html">AssociateVPCWithHostedZone</a> 
-                                                   						after you create the hosted zone. 
-                                                </p>
-                                             </div>
-                                          </div>
-                                          			
-                                       </li>
-                                       <li class="listitem">
-                                          				
+                                          				           
                                           <p>If your domain is registered with a registrar other than Route 53, you must update
                                              the name servers with your registrar to make 
                                              					Route 53 the DNS service for the domain. For more information, see 
-                                             					<a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html">Making Amazon Route 53 the DNS Service for an Existing Domain</a> in the 
+                                             					<a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html">Migrating DNS Service for an Existing Domain to Amazon Route 53</a> in the 
                                              					<em>Amazon Route 53 Developer Guide</em>. 
                                           </p>
-                                          			
+                                          			         
                                        </li>
                                     </ul>
                                  </div>
@@ -127,10 +87,10 @@
   &quot;Type&quot; : &quot;AWS::Route53::HostedZone&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-route53-hostedzone-hostedzoneconfig">HostedZoneConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-route53-hostedzone-hostedzoneconfig.html">HostedZoneConfig</a></code>,
-      &quot;<a href="#cfn-route53-hostedzone-hostedzonetags">HostedZoneTags</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-route53-hostedzone-hostedzonetags.html">HostedZoneTag</a>, ... ]</code>,
+      &quot;<a href="#cfn-route53-hostedzone-hostedzonetags">HostedZoneTags</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-route53-hostedzone-hostedzonetag.html">HostedZoneTag</a>, ... ]</code>,
       &quot;<a href="#cfn-route53-hostedzone-name">Name</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-route53-hostedzone-queryloggingconfig">QueryLoggingConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-route53-hostedzone-queryloggingconfig.html">QueryLoggingConfig</a></code>,
-      &quot;<a href="#cfn-route53-hostedzone-vpcs">VPCs</a>&quot; : <code class="replaceable">[ <a href="./aws-resource-route53-hostedzone-hostedzonevpcs.html">VPC</a>, ... ]</code>
+      &quot;<a href="#cfn-route53-hostedzone-vpcs">VPCs</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-route53-hostedzone-vpc.html">VPC</a>, ... ]</code>
     }
 }
 </code></pre></div>
@@ -140,12 +100,12 @@ Properties:
   <a href="#cfn-route53-hostedzone-hostedzoneconfig">HostedZoneConfig</a>: <code class="replaceable">
     <a href="./aws-properties-route53-hostedzone-hostedzoneconfig.html">HostedZoneConfig</a></code>
   <a href="#cfn-route53-hostedzone-hostedzonetags">HostedZoneTags</a>: <code class="replaceable">
-    - <a href="./aws-properties-route53-hostedzone-hostedzonetags.html">HostedZoneTag</a></code>
+    - <a href="./aws-properties-route53-hostedzone-hostedzonetag.html">HostedZoneTag</a></code>
   <a href="#cfn-route53-hostedzone-name">Name</a>: <code class="replaceable">String</code>
   <a href="#cfn-route53-hostedzone-queryloggingconfig">QueryLoggingConfig</a>: <code class="replaceable">
     <a href="./aws-properties-route53-hostedzone-queryloggingconfig.html">QueryLoggingConfig</a></code>
   <a href="#cfn-route53-hostedzone-vpcs">VPCs</a>: <code class="replaceable">
-    - <a href="./aws-resource-route53-hostedzone-hostedzonevpcs.html">VPC</a></code>
+    - <a href="./aws-properties-route53-hostedzone-vpc.html">VPC</a></code>
 </code></pre></div>
                                  <h2 id="aws-resource-route53-hostedzone-properties">Properties</h2>
                                  <div class="variablelist">
@@ -177,7 +137,7 @@ Properties:
                                           	     
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: List of <a href="./aws-properties-route53-hostedzone-hostedzonetags.html">HostedZoneTag</a></p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-route53-hostedzone-hostedzonetag.html">HostedZoneTag</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-route53-hostedzone-name"></a><span class="term"><code class="code">Name</code></span></dt>
@@ -506,12 +466,12 @@ Properties:
                                           	
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: List of <a href="./aws-resource-route53-hostedzone-hostedzonevpcs.html">VPC</a></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-route53-hostedzone-vpc.html">VPC</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-route53-hostedzone-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-route53-hostedzone-return-values">Return values</h2>
                                  <h3 id="aws-resource-route53-hostedzone-return-values-ref">Ref</h3>
                                  <p>
                                     			When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the hosted zone ID, such as <code class="code">Z23ABC4XYZL05B</code>.
@@ -528,6 +488,10 @@ Properties:
                                  <h4 id="aws-resource-route53-hostedzone-return-values-fn--getatt-fn--getatt"></h4>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="Id-fn::getatt"></a><span class="term"><code class="code">Id</code></span></dt>
+                                       <dd>
+                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                       </dd>
                                        <dt><a id="NameServers-fn::getatt"></a><span class="term"><code class="code">NameServers</code></span></dt>
                                        <dd>
                                           		
@@ -595,7 +559,7 @@ Properties:
       - 
         Key: &apos;SampleKey2&apos;
         Value: &apos;SampleValue2&apos;</code></pre></div>
-                                 <h2 id="aws-resource-route53-hostedzone--seealso">See Also</h2>
+                                 <h2 id="aws-resource-route53-hostedzone--seealso">See also</h2>
                                  <div class="itemizedlist">
                                     				 
                                     			

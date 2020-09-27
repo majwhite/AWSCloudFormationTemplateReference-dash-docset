@@ -16,19 +16,13 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <div class="awsdocs-note">
-                                    <div class="awsdocs-note-title">
-                                       <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
-                                    <div class="awsdocs-note-text">
-                                       <p>The CodeStar Connections feature is in preview release and is subject to change.</p>
-                                    </div>
-                                 </div>
                                  <p>The AWS::CodeStarConnections::Connection resource can be used to connect external
                                     source providers with services like AWS CodePipeline.
                                  </p>
                                  <p>
-                                    <b>Note:</b> A connection created through CloudFormation is in <code class="code">PENDING</code> status by default. You can make its status <code class="code">AVAILABLE</code> by updating the 
-                                    connection in the console.
+                                    <b>Note:</b> A connection created through CloudFormation is in
+                                    <code class="code">PENDING</code> status by default. You can make its status
+                                    <code class="code">AVAILABLE</code> by updating the connection in the console.
                                  </p>
                                  <h2 id="aws-resource-codestarconnections-connection-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -37,6 +31,7 @@
   &quot;Type&quot; : &quot;AWS::CodeStarConnections::Connection&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-codestarconnections-connection-connectionname">ConnectionName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-codestarconnections-connection-hostarn">HostArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-codestarconnections-connection-providertype">ProviderType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-codestarconnections-connection-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
@@ -46,6 +41,7 @@
                                     <h3 id="aws-resource-codestarconnections-connection-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::CodeStarConnections::Connection
 Properties: 
   <a href="#cfn-codestarconnections-connection-connectionname">ConnectionName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-codestarconnections-connection-hostarn">HostArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-codestarconnections-connection-providertype">ProviderType</a>: <code class="replaceable">String</code>
   <a href="#cfn-codestarconnections-connection-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
@@ -66,18 +62,32 @@ Properties:
                                           <p><em>Maximum</em>: <code class="code">32</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
-                                       <dt><a id="cfn-codestarconnections-connection-providertype"></a><span class="term"><code class="code">ProviderType</code></span></dt>
+                                       <dt><a id="cfn-codestarconnections-connection-hostarn"></a><span class="term"><code class="code">HostArn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The name of the external provider where your third-party code repository is configured.
-                                             The valid provider type is Bitbucket.
-                                          </p>
+                                          <p>The Amazon Resource Name (ARN) of the host associated with the connection.</p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">Bitbucket</code></p>
+                                          <p><em>Minimum</em>: <code class="code">0</code></p>
+                                          <p><em>Maximum</em>: <code class="code">256</code></p>
+                                          <p><em>Pattern</em>: <code class="code">arn:aws(-[\w]+)*:codestar-connections:.+:[0-9]<span>{</span>12}:host\/.+</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-codestarconnections-connection-providertype"></a><span class="term"><code class="code">ProviderType</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name of the external provider where your third-party code repository is
+                                             configured.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">Bitbucket | GitHubEnterpriseServer</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-codestarconnections-connection-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
@@ -93,10 +103,11 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-codestarconnections-connection-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-codestarconnections-connection-return-values">Return values</h2>
                                  <h3 id="aws-resource-codestarconnections-connection-return-values-ref">Ref</h3>
-                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the Amazon Resource Name (ARN) of the connection. The ARN is used as 
-                                    the connection reference when the connection is shared between AWS services. For example:
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the Amazon Resource Name (ARN) of the connection. The ARN
+                                    is used as the connection reference when the connection is shared between AWS services.
+                                    For example:
                                  </p>
                                  <p>
                                     <code class="code">arn:aws:codestar-connections:us-west-2:123456789012:connection/39e4c34d-e13a-4e94-a886-ea67651bf042</code>
@@ -117,16 +128,17 @@ Properties:
                                        <dt><a id="ConnectionArn-fn::getatt"></a><span class="term"><code class="code">ConnectionArn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The Amazon Resource Name (ARN) of the  connection. The ARN is used as the connection
-                                             reference when the connection is shared between AWS services.
-                                             For example: <code class="code">arn:aws:codestar-connections:us-west-2:123456789012:connection/39e4c34d-e13a-4e94-a886-ea67651bf042</code>.
+                                          <p>The Amazon Resource Name (ARN) of the connection. The ARN is used as the connection
+                                             reference when the connection is shared between AWS services. For example:
+                                             <code class="code">arn:aws:codestar-connections:us-west-2:123456789012:connection/39e4c34d-e13a-4e94-a886-ea67651bf042</code>.
                                           </p>
                                           
                                        </dd>
                                        <dt><a id="ConnectionStatus-fn::getatt"></a><span class="term"><code class="code">ConnectionStatus</code></span></dt>
                                        <dd>
                                           
-                                          <p>The current status of the connection. For example: <code class="code">PENDING</code>, <code class="code">AVAILABLE</code>, or <code class="code">ERROR</code>.
+                                          <p>The current status of the connection. For example: <code class="code">PENDING</code>,
+                                             <code class="code">AVAILABLE</code>, or <code class="code">ERROR</code>.
                                           </p>
                                           
                                        </dd>
@@ -134,8 +146,8 @@ Properties:
                                        <dd>
                                           
                                           <p>The AWS account ID of the owner of the connection. For Bitbucket, this is the account
-                                             ID of the owner of the Bitbucket repository.
-                                             For example: <code class="code">123456789012</code>.
+                                             ID of the owner of the Bitbucket repository. For example:
+                                             <code class="code">123456789012</code>.
                                           </p>
                                           
                                        </dd>
@@ -143,7 +155,7 @@ Properties:
                                  </div>
                                  <h2 id="aws-resource-codestarconnections-connection--examples">Examples</h2>
                                  <h3 id="aws-resource-codestarconnections-connection--examples--Bitbucket_Connection_Configuration">Bitbucket Connection Configuration</h3>
-                                 <p>The following example creates a Connection with Bitbucket.</p>
+                                 <p>The following example creates a connection with Bitbucket.</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-codestarconnections-connection--examples--Bitbucket_Connection_Configuration--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
     &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
@@ -171,6 +183,43 @@ Resources:
     Properties:
       ConnectionName: MyConnection
       ProviderType: Bitbucket
+      Tags:
+        - Key: Project
+          Value: ProjectB
+      </code></pre></div>
+                                 <h3 id="aws-resource-codestarconnections-connection--examples--GitHub_Enterprise_Server_Connection_Configuration">GitHub Enterprise Server Connection Configuration</h3>
+                                 <p>The following example creates a connection with GitHub Enterprise
+                                    Server.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-codestarconnections-connection--examples--GitHub_Enterprise_Server_Connection_Configuration--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;SampleConnection&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::CodeStarConnections::Connection&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;ConnectionName&quot;: &quot;MyConnection&quot;,
+                &quot;ProviderType&quot;: &quot;GitHubEnterpriseServer&quot;,
+                &quot;HostArn&quot;: &quot;arn:aws:codestar-connections:us-west-2:123456789123:host/abc123-example&quot;,
+                &quot;Tags&quot;: [
+                    <span>{</span>
+                        &quot;Key&quot;: &quot;Project&quot;,
+                        &quot;Value&quot;: &quot;ProjectB&quot;
+                    }
+                ]
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-codestarconnections-connection--examples--GitHub_Enterprise_Server_Connection_Configuration--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  SampleConnection:
+    Type: &apos;AWS::CodeStarConnections::Connection&apos;
+    Properties:
+      ConnectionName: MyConnection
+      ProviderType: GitHubEnterpriseServer
+      HostArn: &apos;arn:aws:codestar-connections:us-west-2:123456789123:host/abc123-example&apos;
       Tags:
         - Key: Project
           Value: ProjectB

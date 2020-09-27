@@ -17,13 +17,13 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>The <code class="code">AWS::KMS::Alias</code> resource specifies a display name for a <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">customer
-                                       master key</a> (CMK) in AWS Key Management Service (AWS KMS). You can use an alias to
-                                    identify a CMK in cryptographic operations.
+                                       master key</a> (CMK) in AWS Key Management Service (AWS KMS). You can use an alias to identify a
+                                    CMK in the AWS KMS console, in the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html">DescribeKey</a> operation and in <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations">cryptographic operations</a>, such as <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html">Decrypt</a> and <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateDataKey.html">GenerateDataKey</a>.
                                  </p>
                                  <p>Using an alias to refer to a CMK can help you simplify key management. For example,
                                     an
                                     alias in your code can map to different CMKs in different AWS Regions. For more information,
-                                    see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-aliases.html">Working with Aliases</a> in the <em>AWS Key Management Service Developer
+                                    see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html">Using aliases</a> in the <em>AWS Key Management Service Developer
                                        Guide</em>.
                                  </p>
                                  <p>When specifying an alias, observe the following rules.</p>
@@ -92,30 +92,77 @@ Properties:
                                        <dt><a id="cfn-kms-alias-aliasname"></a><span class="term"><code class="code">AliasName</code></span></dt>
                                        <dd>
                                           
+                                          
                                           <p>Specifies the alias name. This value must begin with <code class="code">alias/</code> followed by a
-                                             name, such as <code class="code">alias/ExampleAlias</code>. The alias name cannot begin with
-                                             <code class="code">alias/aws/</code>. The <code class="code">alias/aws/</code> prefix is reserved for AWS managed
-                                             CMKs.
+                                             name, such as <code class="code">alias/ExampleAlias</code>. 
                                           </p>
+                                          
+                                          <p>The alias must be string of 1-256 characters. It can contain only alphanumeric characters,
+                                             forward slashes (/), underscores (_), and dashes (-). The alias name cannot begin
+                                             with <code class="code">alias/aws/</code>. The <code class="code">alias/aws/</code> prefix is reserved
+                                             for <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">AWS managed CMKs</a>.
+                                          </p>
+                                          
+                                          <p><em>Pattern</em>: <code class="code">alias/^[a-zA-Z0-9/_-]+$</code></p>
+                                          
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          
+                                          <p><em>Maximum</em>: <code class="code">256</code></p>
+                                          
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Minimum</em>: <code class="code">1</code></p>
-                                          <p><em>Maximum</em>: <code class="code">256</code></p>
-                                          <p><em>Pattern</em>: <code class="code">^[a-zA-Z0-9:/_-]+$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-kms-alias-targetkeyid"></a><span class="term"><code class="code">TargetKeyId</code></span></dt>
                                        <dd>
                                           
-                                          <p>Identifies the CMK to which the alias refers. Specify the key ID or the Amazon Resource
-                                             Name (ARN) of the CMK. You cannot specify another alias. For help finding the key
-                                             ID and ARN,
-                                             see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn">Finding the Key ID and
+                                          
+                                          <p>Associates the alias with the specified <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk">customer managed CMK</a>. The CMK must be
+                                             in the same AWS account and Region.
+                                          </p>
+                                          
+                                          <p>A valid CMK ID is required. If you supply a null or empty string value, this operation
+                                             returns an error.
+                                          </p>
+                                          
+                                          <p>For help finding the key ID and ARN, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn">Finding the key ID and
                                                 ARN</a> in the <em>AWS Key Management Service Developer Guide</em>.
                                           </p>
+                                          
+                                          
+                                          <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK.</p>
+                                          
+                                          <p>For example:</p>
+                                          
+                                          <div class="itemizedlist">
+                                             
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>Key ID: <code class="code">1234abcd-12ab-34cd-56ef-1234567890ab</code>
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Key ARN: <code class="code">arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>To get the key ID and key ARN for a CMK, use <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_ListKeys.html">ListKeys</a> or <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html">DescribeKey</a>.
+                                          </p>
+                                          
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -127,7 +174,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-kms-alias-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-kms-alias-return-values">Return values</h2>
                                  <h3 id="aws-resource-kms-alias-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the alias name, such as <code class="code">alias/exampleAlias</code>.
@@ -155,7 +202,7 @@ Properties:
     AliasName: alias/exampleAlias
     TargetKeyId:
       Ref: myKey</code></pre></div>
-                                 <h2 id="aws-resource-kms-alias--seealso">See Also</h2>
+                                 <h2 id="aws-resource-kms-alias--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
                                     

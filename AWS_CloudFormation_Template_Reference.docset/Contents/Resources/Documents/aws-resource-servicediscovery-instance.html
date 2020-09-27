@@ -68,25 +68,15 @@ Properties:
                                              </ul>
                                           </div>
                                           
-                                          
                                           <p>Supported attribute keys include the following:</p>
                                           
+                                          <p><b>AWS_ALIAS_DNS_NAME</b></p>
                                           
-                                          <p>
-                                             <b>AWS_ALIAS_DNS_NAME</b>
-                                             
-                                          </p>
-                                          
-                                          <p>
-                                             <b></b>
-                                             
-                                          </p>
-                                          
-                                          <p>If you want AWS Cloud Map to create a Route 53 alias record that routes traffic to
-                                             an Elastic Load Balancing load
-                                             balancer, specify the DNS name that is associated with the load balancer. For information
-                                             about how to get the DNS
-                                             name, see &quot;DNSName&quot; in the topic <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html">AliasTarget</a>.
+                                          <p>If you want AWS Cloud Map to create a Route&#xA0;53 alias record that routes traffic to
+                                             an Elastic Load Balancing
+                                             load balancer, specify the DNS name that is associated with the load balancer. For
+                                             information about how to get
+                                             the DNS name, see &quot;DNSName&quot; in the topic <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html">AliasTarget</a>.
                                           </p>
                                           
                                           <p>Note the following:</p>
@@ -101,31 +91,32 @@ Properties:
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
                                                    
-                                                   <p>The configuration for the service that is specified by <code class="code">ServiceId</code> must include settings for an A
-                                                      record, an AAAA record, or both.
+                                                   <p>The configuration for the service that is specified by <code class="code">ServiceId</code> must include
+                                                      settings for an <code class="code">A</code> record, an <code class="code">AAAA</code> record, or both.
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>In the service that is specified by <code class="code">ServiceId</code>, the value of <code class="code">RoutingPolicy</code> must be
-                                                      <code class="code">WEIGHTED</code>.
+                                                   <p>In the service that is specified by <code class="code">ServiceId</code>, the value of
+                                                      <code class="code">RoutingPolicy</code> must be <code class="code">WEIGHTED</code>.
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>If the service that is specified by <code class="code">ServiceId</code> includes <code class="code">HealthCheckConfig</code> settings,
-                                                      AWS Cloud Map will create the health check, but it won&apos;t associate the health check
-                                                      with the alias record.
+                                                   <p>If the service that is specified by <code class="code">ServiceId</code> includes <code class="code">HealthCheckConfig</code>
+                                                      settings, AWS Cloud Map will create the health check, but it won&apos;t associate the health
+                                                      check with the
+                                                      alias record.
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>Auto naming currently doesn&apos;t support creating alias records that route traffic to
-                                                      AWS resources other than
-                                                      ELB load balancers.
+                                                      AWS resources
+                                                      other than ELB load balancers.
                                                    </p>
                                                    
                                                 </li>
@@ -139,70 +130,69 @@ Properties:
                                              </ul>
                                           </div>
                                           
+                                          <p><b>AWS_EC2_INSTANCE_ID</b></p>
                                           
                                           <p>
-                                             <b>AWS_INSTANCE_CNAME</b>
-                                             
+                                             <em>HTTP namespaces only.</em> The Amazon EC2 instance ID for the instance. When creating resources
+                                             with a type of <a href="aws-resource-servicediscovery-instance.html">AWS::ServiceDiscovery::Instance</a>, if the <code class="code">AWS_EC2_INSTANCE_ID</code> attribute is specified, the
+                                             only other attribute that can be specified is <code class="code">AWS_INIT_HEALTH_STATUS</code>.  After the resource has been
+                                             created, the <code class="code">AWS_INSTANCE_IPV4</code> attribute contains the primary private IPv4 address.
                                           </p>
                                           
-                                          <p>If the service configuration includes a CNAME record, the domain name that you want
-                                             Route 53 to return in response
-                                             to DNS queries, for example, <code class="code">example.com</code>.
+                                          <p><b>AWS_INIT_HEALTH_STATUS</b></p>
+                                          
+                                          <p>If the service configuration includes <code class="code">HealthCheckCustomConfig</code>, when creating resources with a
+                                             type of <a href="aws-resource-servicediscovery-instance.html">AWS::ServiceDiscovery::Instance</a> you can optionally use <code class="code">AWS_INIT_HEALTH_STATUS</code> to specify
+                                             the initial status of the custom health check, <code class="code">HEALTHY</code> or <code class="code">UNHEALTHY</code>. If you don&apos;t
+                                             specify a value for <code class="code">AWS_INIT_HEALTH_STATUS</code>, the initial status is <code class="code">HEALTHY</code>. This
+                                             attribute can only be used when creating resources and will not be seen on existing
+                                             resources.
                                           </p>
                                           
-                                          <p>This value is required if the service specified by <code class="code">ServiceId</code> includes settings for an CNAME
-                                             record.
+                                          <p><b>AWS_INSTANCE_CNAME</b></p>
+                                          
+                                          <p>If the service configuration includes a <code class="code">CNAME</code> record, the domain name that you want Route&#xA0;53 to
+                                             return in response to DNS queries, for example, <code class="code">example.com</code>.
                                           </p>
                                           
-                                          
-                                          <p>
-                                             <b>AWS_INSTANCE_IPV4</b>
-                                             
+                                          <p>This value is required if the service specified by <code class="code">ServiceId</code> includes settings for an
+                                             <code class="code">CNAME</code> record.
                                           </p>
                                           
-                                          <p>If the service configuration includes an A record, the IPv4 address that you want
-                                             Route 53 to return in response to
-                                             DNS queries, for example, <code class="code">192.0.2.44</code>.
+                                          <p><b>AWS_INSTANCE_IPV4</b></p>
+                                          
+                                          <p>If the service configuration includes an <code class="code">A</code> record, the IPv4 address that you want Route&#xA0;53 to
+                                             return in response to DNS queries, for example, <code class="code">192.0.2.44</code>.
                                           </p>
                                           
-                                          <p>This value is required if the service specified by <code class="code">ServiceId</code> includes settings for an A record. If
-                                             the service includes settings for an SRV record, you must specify a value for <code class="code">AWS_INSTANCE_IPV4</code>,
-                                             <code class="code">AWS_INSTANCE_IPV6</code>, or both.
+                                          <p>This value is required if the service specified by <code class="code">ServiceId</code> includes settings for an
+                                             <code class="code">A</code> record. If the service includes settings for an <code class="code">SRV</code> record, you must specify
+                                             a value for <code class="code">AWS_INSTANCE_IPV4</code>, <code class="code">AWS_INSTANCE_IPV6</code>, or both.
                                           </p>
                                           
+                                          <p><b>AWS_INSTANCE_IPV6</b></p>
                                           
-                                          <p>
-                                             <b>AWS_INSTANCE_IPV6</b>
-                                             
+                                          <p>If the service configuration includes an <code class="code">AAAA</code> record, the IPv6 address that you want Route&#xA0;53 to
+                                             return in response to DNS queries, for example, <code class="code">2001:0db8:85a3:0000:0000:abcd:0001:2345</code>.
                                           </p>
                                           
-                                          <p>If the service configuration includes an AAAA record, the IPv6 address that you want
-                                             Route 53 to return in response
-                                             to DNS queries, for example, <code class="code">2001:0db8:85a3:0000:0000:abcd:0001:2345</code>.
+                                          <p>This value is required if the service specified by <code class="code">ServiceId</code> includes settings for an
+                                             <code class="code">AAAA</code> record. If the service includes settings for an <code class="code">SRV</code> record, you must
+                                             specify a value for <code class="code">AWS_INSTANCE_IPV4</code>, <code class="code">AWS_INSTANCE_IPV6</code>, or both.
                                           </p>
                                           
-                                          <p>This value is required if the service specified by <code class="code">ServiceId</code> includes settings for an AAAA record.
-                                             If the service includes settings for an SRV record, you must specify a value for <code class="code">AWS_INSTANCE_IPV4</code>,
-                                             <code class="code">AWS_INSTANCE_IPV6</code>, or both.
+                                          <p><b>AWS_INSTANCE_PORT</b></p>
+                                          
+                                          <p>If the service includes an <code class="code">SRV</code> record, the value that you want Route&#xA0;53 to return for the
+                                             port.
                                           </p>
                                           
-                                          
-                                          <p>
-                                             <b>AWS_INSTANCE_PORT</b>
-                                             
+                                          <p>If the service includes <code class="code">HealthCheckConfig</code>, the port on the endpoint that you want Route&#xA0;53 to
+                                             send requests to.
                                           </p>
                                           
-                                          <p>If the service includes an SRV record, the value that you want Route 53 to return
-                                             for the port.
-                                          </p>
-                                          
-                                          <p>If the service includes <code class="code">HealthCheckConfig</code>, the port on the endpoint that you want Route 53 to send
-                                             requests to. 
-                                          </p>
-                                          
-                                          <p>This value is required if you specified settings for an SRV record or a Route 53 health
-                                             check when you created the
-                                             service.
+                                          <p>This value is required if you specified settings for an <code class="code">SRV</code> record or a Route&#xA0;53 health check
+                                             when you created the service.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -225,9 +215,9 @@ Properties:
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
                                                    
-                                                   <p>If the service that is specified by <code class="code">ServiceId</code> includes settings for an SRV record, the value of
-                                                      <code class="code">InstanceId</code> is automatically included as part of the value for the SRV record. For more information,
-                                                      see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type">DnsRecord &gt; Type</a>.
+                                                   <p>If the service that is specified by <code class="code">ServiceId</code> includes settings for an <code class="code">SRV</code> record,
+                                                      the value of <code class="code">InstanceId</code> is automatically included as part of the value for the <code class="code">SRV</code>
+                                                      record. For more information, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type">DnsRecord &gt; Type</a>.
                                                    </p>
                                                    
                                                 </li>
@@ -288,7 +278,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-servicediscovery-instance-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-servicediscovery-instance-return-values">Return values</h2>
                                  <h3 id="aws-resource-servicediscovery-instance-return-values-ref">Ref</h3>
                                  <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the value of <code class="code">Id</code> for the instance, such as
                                     <code class="code">i-abcd1234</code>.
@@ -322,7 +312,7 @@ Properties:
     AWS_INSTANCE_IPV6: 2001:0db8:85a3:0000:0000:abcd:0001:2345
   InstanceId: i-abcd1234
   ServiceId: srv-e4anhexample0004</code></pre></div>
-                                 <h2 id="aws-resource-servicediscovery-instance--seealso">See Also</h2>
+                                 <h2 id="aws-resource-servicediscovery-instance--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
                                     

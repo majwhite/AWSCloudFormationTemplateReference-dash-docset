@@ -38,9 +38,12 @@
       &quot;<a href="#cfn-ec2-flowlog-deliverlogspermissionarn">DeliverLogsPermissionArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ec2-flowlog-logdestination">LogDestination</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ec2-flowlog-logdestinationtype">LogDestinationType</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ec2-flowlog-logformat">LogFormat</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ec2-flowlog-loggroupname">LogGroupName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ec2-flowlog-maxaggregationinterval">MaxAggregationInterval</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-ec2-flowlog-resourceid">ResourceId</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ec2-flowlog-resourcetype">ResourceType</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ec2-flowlog-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
       &quot;<a href="#cfn-ec2-flowlog-traffictype">TrafficType</a>&quot; : <code class="replaceable">String</code>
     }
 }
@@ -51,9 +54,13 @@ Properties:
   <a href="#cfn-ec2-flowlog-deliverlogspermissionarn">DeliverLogsPermissionArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-ec2-flowlog-logdestination">LogDestination</a>: <code class="replaceable">String</code>
   <a href="#cfn-ec2-flowlog-logdestinationtype">LogDestinationType</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ec2-flowlog-logformat">LogFormat</a>: <code class="replaceable">String</code>
   <a href="#cfn-ec2-flowlog-loggroupname">LogGroupName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ec2-flowlog-maxaggregationinterval">MaxAggregationInterval</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-ec2-flowlog-resourceid">ResourceId</a>: <code class="replaceable">String</code>
   <a href="#cfn-ec2-flowlog-resourcetype">ResourceType</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ec2-flowlog-tags">Tags</a>: <code class="replaceable">
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
   <a href="#cfn-ec2-flowlog-traffictype">TrafficType</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-resource-ec2-flowlog-properties">Properties</h2>
@@ -131,7 +138,25 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">cloud-watch-logs | s3</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">cloud-watch-logs | s3</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ec2-flowlog-logformat"></a><span class="term"><code class="code">LogFormat</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The fields to include in the flow log record, in the order in which they should
+                                             appear. For a list of available fields, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records">Flow Log Records</a>. If you
+                                             omit this parameter, the flow log is created using the default format. If you specify
+                                             this parameter, you must specify at least one field.
+                                          </p>
+                                          
+                                          <p>Specify the fields using the <code class="code">$<span>{</span>field-id}</code> format, separated by spaces.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-ec2-flowlog-loggroupname"></a><span class="term"><code class="code">LogGroupName</code></span></dt>
@@ -148,6 +173,26 @@ Properties:
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ec2-flowlog-maxaggregationinterval"></a><span class="term"><code class="code">MaxAggregationInterval</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The maximum interval of time during which a flow of packets is captured and aggregated
+                                             into a flow log record. You can specify 60 seconds (1 minute) or 600 seconds (10 minutes).
+                                          </p>
+                                          
+                                          <p>When a network interface is attached to a <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Nitro-based
+                                                instance</a>, the aggregation interval is always 60 seconds or less, regardless
+                                             of the value that you specify.
+                                          </p>
+                                          
+                                          <p>Default: 600</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
@@ -176,8 +221,18 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">NetworkInterface | Subnet | VPC</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">NetworkInterface | Subnet | VPC</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ec2-flowlog-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The tags for the flow log.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-ec2-flowlog-traffictype"></a><span class="term"><code class="code">TrafficType</code></span></dt>
                                        <dd>
@@ -190,35 +245,65 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">ACCEPT | ALL | REJECT</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">ACCEPT | ALL | REJECT</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-ec2-flowlog-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-ec2-flowlog-return-values">Return values</h2>
                                  <h3 id="aws-resource-ec2-flowlog-return-values-ref">Ref</h3>
-                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the flow log ID, such as <code class="code">fl-1a23b456</code>.
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the flow log ID, such as <code class="code">fl-123456abc123abc1</code>.
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
+                                 <h3 id="aws-resource-ec2-flowlog-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-ec2-flowlog-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="Id-fn::getatt"></a><span class="term"><code class="code">Id</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ID of the flow log. For example,
+                                             <code class="code">fl-123456abc123abc1</code>.
+                                          </p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
                                  <h2 id="aws-resource-ec2-flowlog--examples">Examples</h2>
-                                 <h3 id="aws-resource-ec2-flowlog--examples--Creating_a_flow_log_that_monitors_all_traffic_types">Creating a flow log that monitors all traffic types</h3>
-                                 <p>The following example creates a flow log for the VPC called MyVPC and logs all traffic
-                                    types. Amazon EC2 publishes the logs to the <code class="code">FlowLogsGroup</code> log group.
+                                 <h3 id="aws-resource-ec2-flowlog--examples--Publish_a_flow_log_to_CloudWatch_Logs_to_monitor_all_traffic">Publish a flow log to CloudWatch Logs to monitor all traffic</h3>
+                                 <p>The following example creates a flow log for the specified VPC, and captures
+                                    all traffic types. Amazon EC2 publishes the logs to the
+                                    <code class="code">FlowLogsGroup</code> log group.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ec2-flowlog--examples--Creating_a_flow_log_that_monitors_all_traffic_types--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;MyFlowLog&quot; : <span>{</span>
-  &quot;Type&quot; : &quot;AWS::EC2::FlowLog&quot;,
-  &quot;Properties&quot; : <span>{</span>
-    &quot;DeliverLogsPermissionArn&quot; : <span>{</span> &quot;Fn::GetAtt&quot; : [&quot;FlowLogRole&quot;, &quot;Arn&quot;] },
-    &quot;LogGroupName&quot; : &quot;FlowLogsGroup&quot;,
-    &quot;ResourceId&quot; : <span>{</span> &quot;Ref&quot; : &quot;MyVPC&quot; },
-    &quot;ResourceType&quot; : &quot;VPC&quot;,
-    &quot;TrafficType&quot; : &quot;ALL&quot;
+                                    <h4 id="aws-resource-ec2-flowlog--examples--Publish_a_flow_log_to_CloudWatch_Logs_to_monitor_all_traffic--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;MyFlowLog&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::EC2::FlowLog&quot;,
+    &quot;Properties&quot;: <span>{</span>
+      &quot;DeliverLogsPermissionArn&quot;: <span>{</span>
+        &quot;Fn::GetAtt&quot;: [
+          &quot;FlowLogRole&quot;,
+          &quot;Arn&quot;
+        ]
+      },
+      &quot;LogGroupName&quot;: &quot;FlowLogsGroup&quot;,
+      &quot;ResourceId&quot;: <span>{</span>
+        &quot;Ref&quot;: &quot;MyVPC&quot;
+      },
+      &quot;ResourceType&quot;: &quot;VPC&quot;,
+      &quot;TrafficType&quot;: &quot;ALL&quot;
+    }
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ec2-flowlog--examples--Creating_a_flow_log_that_monitors_all_traffic_types--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyFlowLog:
+                                    <h4 id="aws-resource-ec2-flowlog--examples--Publish_a_flow_log_to_CloudWatch_Logs_to_monitor_all_traffic--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyFlowLog:
   Type: AWS::EC2::FlowLog
   Properties:
     DeliverLogsPermissionArn: !GetAtt FlowLogRole.Arn
@@ -226,6 +311,122 @@ Properties:
     ResourceId: !Ref MyVPC
     ResourceType: VPC
     TrafficType: ALL</code></pre></div>
+                                 <h3 id="aws-resource-ec2-flowlog--examples--Publish_a_custom_format_flow_log_to_CloudWatch_Logs_for_REJECT_traffic">Publish a custom format flow log to CloudWatch Logs for REJECT traffic</h3>
+                                 <p>The following example creates a flow log for the specified subnet and captures
+                                    REJECT traffic. The flow log uses a custom log format (the
+                                    <code class="code">LogFormat</code> property uses the <code class="code">$<span>{</span>field-id}</code> format,
+                                    separated by spaces). Amazon EC2 aggregates the logs over 60 second intervals,
+                                    and publishes the logs to the <code class="code">FlowLogsGroup</code> log group. The flow log
+                                    is created with two tags.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ec2-flowlog--examples--Publish_a_custom_format_flow_log_to_CloudWatch_Logs_for_REJECT_traffic--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;MyDetailedFlowLogDeliveringToCloudWatchLogs&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::EC2::FlowLog&quot;,
+    &quot;Properties&quot;: <span>{</span>
+      &quot;ResourceId&quot;: <span>{</span>
+        &quot;Ref&quot;: &quot;MySubnet&quot;
+      },
+      &quot;ResourceType&quot;: &quot;Subnet&quot;,
+      &quot;TrafficType&quot;: &quot;REJECT&quot;,
+      &quot;LogGroupName&quot;: &quot;FlowLogsGroup&quot;,
+      &quot;DeliverLogsPermissionArn&quot;: <span>{</span>
+        &quot;Fn::GetAtt&quot;: [
+          &quot;FlowLogRole&quot;,
+          &quot;Arn&quot;
+        ]
+      },
+      &quot;LogFormat&quot;: &quot;$<span>{</span>version} $<span>{</span>vpc-id} $<span>{</span>subnet-id} $<span>{</span>instance-id} $<span>{</span>srcaddr} $<span>{</span>dstaddr} $<span>{</span>srcport} $<span>{</span>dstport} $<span>{</span>protocol} $<span>{</span>tcp-flags} $<span>{</span>type} $<span>{</span>pkt-srcaddr} $<span>{</span>pkt-dstaddr}&quot;,
+      &quot;MaxAggregationInterval&quot;: 60,
+      &quot;Tags&quot;: [
+        <span>{</span>
+          &quot;Key&quot;: &quot;Name&quot;,
+          &quot;Value&quot;: &quot;FlowLogForSubnetA&quot;
+        },
+        <span>{</span>
+          &quot;Key&quot;: &quot;Purpose&quot;,
+          &quot;Value&quot;: &quot;RejectTraffic&quot;
+        }
+      ]
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ec2-flowlog--examples--Publish_a_custom_format_flow_log_to_CloudWatch_Logs_for_REJECT_traffic--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyDetailedFlowLogDeliveringToCloudWatchLogs:
+  Type: AWS::EC2::FlowLog
+  Properties: 
+    ResourceId: !Ref MySubnet
+    ResourceType: Subnet
+    TrafficType: REJECT
+    LogGroupName: FlowLogsGroup
+    DeliverLogsPermissionArn: !GetAtt FlowLogRole.Arn
+    LogFormat: &apos;$<span>{</span>version} $<span>{</span>vpc-id} $<span>{</span>subnet-id} $<span>{</span>instance-id} $<span>{</span>srcaddr} $<span>{</span>dstaddr} $<span>{</span>srcport} $<span>{</span>dstport} $<span>{</span>protocol} $<span>{</span>tcp-flags} $<span>{</span>type} $<span>{</span>pkt-srcaddr} $<span>{</span>pkt-dstaddr}&apos;
+    MaxAggregationInterval: 60
+    Tags:
+      -
+        Key: Name
+        Value: FlowLogForSubnetA
+      -
+        Key: Purpose
+        Value: RejectTraffic</code></pre></div>
+                                 <h3 id="aws-resource-ec2-flowlog--examples--Publish_a_custom_format_flow_log_to_Amazon_S3_for_ACCEPT_traffic">Publish a custom format flow log to Amazon S3 for ACCEPT traffic</h3>
+                                 <p>The following example creates a flow log for the specified subnet and captures
+                                    ACCEPT traffic. The flow log uses a custom log format (the
+                                    <code class="code">LogFormat</code> property uses the <code class="code">$<span>{</span>field-id}</code> format,
+                                    separated by spaces). Amazon EC2 aggregates the logs over 60 second intervals,
+                                    and publishes the logs to an Amazon S3 bucket that&apos;s referenced by its ARN,
+                                    <code class="code">MyS3Bucket.Arn</code>. The flow log is created with two tags.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ec2-flowlog--examples--Publish_a_custom_format_flow_log_to_Amazon_S3_for_ACCEPT_traffic--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;MyFlowLogDeliveringToS3&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::EC2::FlowLog&quot;,
+    &quot;Properties&quot;: <span>{</span>
+      &quot;ResourceId&quot;: <span>{</span>
+        &quot;Ref&quot;: &quot;MySubnet&quot;
+      },
+      &quot;ResourceType&quot;: &quot;Subnet&quot;,
+      &quot;TrafficType&quot;: &quot;ACCEPT&quot;,
+      &quot;LogDestination&quot;: <span>{</span>
+        &quot;Fn::GetAtt&quot;: [
+          &quot;MyS3Bucket&quot;,
+          &quot;Arn&quot;
+        ]
+      },
+      &quot;LogDestinationType&quot;: &quot;s3&quot;,
+      &quot;LogFormat&quot;: &quot;$<span>{</span>version} $<span>{</span>vpc-id} $<span>{</span>subnet-id} $<span>{</span>instance-id} $<span>{</span>srcaddr} $<span>{</span>dstaddr} $<span>{</span>srcport} $<span>{</span>dstport} $<span>{</span>protocol} $<span>{</span>tcp-flags} $<span>{</span>type} $<span>{</span>pkt-srcaddr} $<span>{</span>pkt-dstaddr}&quot;,
+      &quot;MaxAggregationInterval&quot;: 60,
+      &quot;Tags&quot;: [
+        <span>{</span>
+          &quot;Key&quot;: &quot;Name&quot;,
+          &quot;Value&quot;: &quot;FlowLogForSubnetB&quot;
+        },
+        <span>{</span>
+          &quot;Key&quot;: &quot;Purpose&quot;,
+          &quot;Value&quot;: &quot;AcceptTraffic&quot;
+        }
+      ]
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ec2-flowlog--examples--Publish_a_custom_format_flow_log_to_Amazon_S3_for_ACCEPT_traffic--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyFlowLogDeliveringToS3:
+  Type: AWS::EC2::FlowLog
+  Properties: 
+    ResourceId: !Ref MySubnet
+    ResourceType: Subnet
+    TrafficType: ACCEPT
+    LogDestination: !GetAtt MyS3Bucket.Arn
+    LogDestinationType: s3
+    LogFormat: &apos;$<span>{</span>version} $<span>{</span>vpc-id} $<span>{</span>subnet-id} $<span>{</span>instance-id} $<span>{</span>srcaddr} $<span>{</span>dstaddr} $<span>{</span>srcport} $<span>{</span>dstport} $<span>{</span>protocol} $<span>{</span>tcp-flags} $<span>{</span>type} $<span>{</span>pkt-srcaddr} $<span>{</span>pkt-dstaddr}&apos;
+    MaxAggregationInterval: 60
+    Tags:
+      -
+        Key: Name
+        Value: FlowLogForSubnetB
+      -
+        Key: Purpose
+        Value: AcceptTraffic</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                               </div>
                               <noscript>

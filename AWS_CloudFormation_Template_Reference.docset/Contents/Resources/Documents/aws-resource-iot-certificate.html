@@ -26,6 +26,9 @@
                                     <h3 id="aws-resource-iot-certificate-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::IoT::Certificate&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-iot-certificate-cacertificatepem">CACertificatePem</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-iot-certificate-certificatemode">CertificateMode</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-iot-certificate-certificatepem">CertificatePem</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-iot-certificate-certificatesigningrequest">CertificateSigningRequest</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-iot-certificate-status">Status</a>&quot; : <code class="replaceable">String</code>
     }
@@ -34,18 +37,61 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-iot-certificate-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::IoT::Certificate
 Properties: 
+  <a href="#cfn-iot-certificate-cacertificatepem">CACertificatePem</a>: <code class="replaceable">String</code>
+  <a href="#cfn-iot-certificate-certificatemode">CertificateMode</a>: <code class="replaceable">String</code>
+  <a href="#cfn-iot-certificate-certificatepem">CertificatePem</a>: <code class="replaceable">String</code>
   <a href="#cfn-iot-certificate-certificatesigningrequest">CertificateSigningRequest</a>: <code class="replaceable">String</code>
   <a href="#cfn-iot-certificate-status">Status</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-resource-iot-certificate-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-iot-certificate-cacertificatepem"></a><span class="term"><code class="code">CACertificatePem</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The CA certificate used to sign the device certificate being registered, not available
+                                             when CertificateMode is SNI_ONLY.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-iot-certificate-certificatemode"></a><span class="term"><code class="code">CertificateMode</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies which mode of certificate registration to use with this resource. Valid
+                                             options are DEFAULT with CaCertificatePem and CertificatePem, SNI_ONLY with CertificatePem,
+                                             and Default with CertificateSigningRequest.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-iot-certificate-certificatepem"></a><span class="term"><code class="code">CertificatePem</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The certificate data in PEM format. Requires SNI_ONLY for the certificate mode or
+                                             the accompanying CACertificatePem for registration.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
                                        <dt><a id="cfn-iot-certificate-certificatesigningrequest"></a><span class="term"><code class="code">CertificateSigningRequest</code></span></dt>
                                        <dd>
                                           
                                           <p>The certificate signing request (CSR).</p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -70,7 +116,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-iot-certificate-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-iot-certificate-return-values">Return values</h2>
                                  <h3 id="aws-resource-iot-certificate-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the certificate ID. For example:
@@ -112,6 +158,12 @@ Properties:
                                              <code class="code">arn:aws:iot:ap-southeast-2:123456789012:cert/a1234567b89c012d3e4fg567hij8k9l01mno1p23q45678901rs234567890t1u2</code>
                                              
                                           </p>
+                                          
+                                       </dd>
+                                       <dt><a id="Id-fn::getatt"></a><span class="term"><code class="code">Id</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The certificate ID.</p>
                                           
                                        </dd>
                                     </dl>

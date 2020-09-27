@@ -149,14 +149,14 @@ Properties:
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-ecs-taskdefinition-executionrolearn"></a><span class="term"><code class="code">ExecutionRoleArn</code></span></dt>
-                                       <dd> 
+                                       <dd>
                                           
                                           <p>The Amazon Resource Name (ARN) of the task execution role that grants the Amazon ECS
                                              container agent
                                              permission to make AWS API calls on your behalf. The task execution IAM role is required
                                              depending on the requirements of your task. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html">Amazon ECS task
                                                 execution IAM role</a> in the <em>Amazon Elastic Container Service Developer Guide</em>.
-                                          </p> 
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -273,7 +273,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">host | none | task</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">host | none | task</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-ecs-taskdefinition-memory"></a><span class="term"><code class="code">Memory</code></span></dt>
@@ -281,10 +281,13 @@ Properties:
                                           
                                           <p>The amount (in MiB) of memory used by the task.</p>
                                           
-                                          <p>If using the EC2 launch type, this field is optional and any value can
+                                          <p>If using the EC2 launch type, you must specify either a task-level
+                                             memory value or a container-level memory value. This field is optional and any value
+                                             can
                                              be used. If a task-level memory value is specified then the container-level memory
                                              value
-                                             is optional.
+                                             is optional. For more information regarding container-level memory and memory
+                                             reservation, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html">ContainerDefinition</a>.
                                           </p>
                                           
                                           <p>If using the Fargate launch type, this field is required and you must
@@ -400,7 +403,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">awsvpc | bridge | host | none</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">awsvpc | bridge | host | none</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-ecs-taskdefinition-pidmode"></a><span class="term"><code class="code">PidMode</code></span></dt>
@@ -437,7 +440,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">host | task</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">host | task</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-ecs-taskdefinition-placementconstraints"></a><span class="term"><code class="code">PlacementConstraints</code></span></dt>
@@ -605,7 +608,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-ecs-taskdefinition-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-ecs-taskdefinition-return-values">Return values</h2>
                                  <h3 id="aws-resource-ecs-taskdefinition-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the Amazon Resource Name (ARN).
@@ -620,13 +623,23 @@ Properties:
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
+                                 <h3 id="aws-resource-ecs-taskdefinition-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <h4 id="aws-resource-ecs-taskdefinition-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="TaskDefinitionArn-fn::getatt"></a><span class="term"><code class="code">TaskDefinitionArn</code></span></dt>
+                                       <dd>
+                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                       </dd>
+                                    </dl>
+                                 </div>
                                  <h2 id="aws-resource-ecs-taskdefinition--examples">Examples</h2>
-                                 <h3 id="aws-resource-ecs-taskdefinition--examples--Creating_an_Amazon_ECS_task_definition">Creating an Amazon ECS task definition</h3>
+                                 <h3 id="aws-resource-ecs-taskdefinition--examples--Create_an_Amazon_ECS_task_definition">Create an Amazon ECS task definition</h3>
                                  <p>The following example defines an Amazon ECS task definition, which includes
                                     two container definitions and one volume definition.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ecs-taskdefinition--examples--Creating_an_Amazon_ECS_task_definition--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;taskdefinition&quot;: <span>{</span>
+                                    <h4 id="aws-resource-ecs-taskdefinition--examples--Create_an_Amazon_ECS_task_definition--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;taskdefinition&quot;: <span>{</span>
   &quot;Type&quot;: &quot;AWS::ECS::TaskDefinition&quot;,
   &quot;Properties&quot; : <span>{</span>
     &quot;ContainerDefinitions&quot; : [
@@ -639,7 +652,7 @@ Properties:
         }
       ],
       &quot;Image&quot;:&quot;amazon/amazon-ecs-sample&quot;,
-      &quot;Cpu&quot;: &quot;10&quot;,
+      &quot;Cpu&quot;: 256,
       &quot;PortMappings&quot;:[
         <span>{</span>
           &quot;ContainerPort&quot;: <span>{</span>&quot;Ref&quot;:&quot;AppContainerPort&quot;},
@@ -651,22 +664,22 @@ Properties:
         &quot;-D&quot;,
         &quot;FOREGROUND&quot;
       ],
-      &quot;Memory&quot;:&quot;0.5GB&quot;,
-      &quot;Essential&quot;: &quot;true&quot;
+      &quot;Memory&quot;: 512,
+      &quot;Essential&quot;: true
     },
     <span>{</span>
       &quot;Name&quot;: &quot;busybox&quot;,
       &quot;Image&quot;: &quot;busybox&quot;,
-      &quot;Cpu&quot;: &quot;10&quot;,
+      &quot;Cpu&quot;: 256,
       &quot;EntryPoint&quot;: [
         &quot;sh&quot;,
         &quot;-c&quot;
       ],
-      &quot;Memory&quot;: &quot;0.5GB&quot;,
+      &quot;Memory&quot;: 512,
       &quot;Command&quot;: [
         &quot;/bin/sh -c \&quot;while true; do /bin/date &gt; /var/www/my-vol/date; sleep 1; done\&quot;&quot;
       ],
-      &quot;Essential&quot; : &quot;false&quot;,
+      &quot;Essential&quot; : false,
       &quot;VolumesFrom&quot;: [
         <span>{</span>
           &quot;SourceContainer&quot;: <span>{</span>&quot;Ref&quot;:&quot;AppName&quot;}
@@ -683,7 +696,7 @@ Properties:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ecs-taskdefinition--examples--Creating_an_Amazon_ECS_task_definition--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">taskdefinition: 
+                                    <h4 id="aws-resource-ecs-taskdefinition--examples--Create_an_Amazon_ECS_task_definition--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">taskdefinition: 
   Type: AWS::ECS::TaskDefinition
   Properties: 
     ContainerDefinitions: 
@@ -695,7 +708,7 @@ Properties:
             SourceVolume: &quot;my-vol&quot;
             ContainerPath: &quot;/var/www/my-vol&quot;
         Image: &quot;amazon/amazon-ecs-sample&quot;
-        Cpu: &quot;10&quot;
+        Cpu: 256
         PortMappings: 
           - 
             ContainerPort: 
@@ -706,16 +719,16 @@ Properties:
           - &quot;/usr/sbin/apache2&quot;
           - &quot;-D&quot;
           - &quot;FOREGROUND&quot;
-        Memory: &quot;0.5GB&quot;
+        Memory: 512
         Essential: true
       - 
         Name: &quot;busybox&quot;
         Image: &quot;busybox&quot;
-        Cpu: &quot;10&quot;
+        Cpu: 256
         EntryPoint: 
           - &quot;sh&quot;
           - &quot;-c&quot;
-        Memory: &quot;0.5GB&quot;
+        Memory: 512
         Command: 
           - &quot;/bin/sh -c \&quot;while true; do /bin/date &gt; /var/www/my-vol/date; sleep 1; done\&quot;&quot;
         Essential: false
@@ -728,78 +741,80 @@ Properties:
         Host: 
           SourcePath: &quot;/var/lib/docker/vfs/dir/&quot;
         Name: &quot;my-vol&quot;</code></pre></div>
-                                 <h3 id="aws-resource-ecs-taskdefinition--examples--Creating_an_Amazon_ECS_task_definition">Creating an Amazon ECS task definition</h3>
+                                 <h3 id="aws-resource-ecs-taskdefinition--examples--Create_an_Amazon_ECS_task_definition">Create an Amazon ECS task definition</h3>
                                  <p>The following example defines an Amazon ECS task definition that specifies EC2
                                     and FARGATE as required compatibilities.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ecs-taskdefinition--examples--Creating_an_Amazon_ECS_task_definition--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
-  &quot;Resources&quot;: <span>{</span>
-    &quot;taskdefinition&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;AWS::ECS::TaskDefinition&quot;,
-      &quot;Properties&quot;: <span>{</span>
-        &quot;RequiresCompatibilities&quot;: [
-          &quot;EC2&quot;,
-          &quot;FARGATE&quot;
-        ],
-        &quot;ContainerDefinitions&quot;: [
-          <span>{</span>
-            &quot;Name&quot;: &quot;my-app&quot;,
-            &quot;MountPoints&quot;: [
-              <span>{</span>
-                &quot;SourceVolume&quot;: &quot;my-vol&quot;,
-                &quot;ContainerPath&quot;: &quot;/var/www/my-vol&quot;
-              }
-            ],
-            &quot;Image&quot;: &quot;amazon/amazon-ecs-sample&quot;,
-            &quot;Cpu&quot;: &quot;10&quot;,
-            &quot;EntryPoint&quot;: [
-              &quot;/usr/sbin/apache2&quot;,
-              &quot;-D&quot;,
-              &quot;FOREGROUND&quot;
-            ],
-            &quot;Memory&quot;: &quot;0.5GB&quot;,
-            &quot;Essential&quot;: &quot;true&quot;
-          },
-          <span>{</span>
-            &quot;Name&quot;: &quot;busybox&quot;,
-            &quot;Image&quot;: &quot;busybox&quot;,
-            &quot;Cpu&quot;: &quot;10&quot;,
-            &quot;EntryPoint&quot;: [
-              &quot;sh&quot;,
-              &quot;-c&quot;
-            ],
-            &quot;Memory&quot;: &quot;0.5GB&quot;,
-            &quot;Command&quot;: [
-              &quot;/bin/sh -c \&quot;while true; do /bin/date &gt; /var/www/my-vol/date; sleep 1; done\&quot;&quot;
-            ],
-            &quot;Essential&quot;: &quot;false&quot;,
-            &quot;DependsOn&quot;: [
-              &quot;ContainerName&quot;: &quot;my-app&quot;,
-              &quot;Condition&quot;: &quot;START&quot;
-            ],
-            &quot;VolumesFrom&quot;: [
-              <span>{</span>
-                &quot;SourceContainer&quot;: &quot;my-app&quot;
-              }
-            ]
-          }
-        ],
-        &quot;Volumes&quot;: [
-          <span>{</span>
-            &quot;Host&quot;: <span>{</span>
-              &quot;SourcePath&quot;: &quot;/var/lib/docker/vfs/dir/&quot;
-            },
-            &quot;Name&quot;: &quot;my-vol&quot;
-          }
-        ]
-      }
+                                    <h4 id="aws-resource-ecs-taskdefinition--examples--Create_an_Amazon_ECS_task_definition--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;taskdefinition&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::ECS::TaskDefinition&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;RequiresCompatibilities&quot;: [
+                    &quot;EC2&quot;,
+                    &quot;FARGATE&quot;
+                ],
+                &quot;ContainerDefinitions&quot;: [
+                    <span>{</span>
+                        &quot;Name&quot;: &quot;my-app&quot;,
+                        &quot;MountPoints&quot;: [
+                            <span>{</span>
+                                &quot;SourceVolume&quot;: &quot;my-vol&quot;,
+                                &quot;ContainerPath&quot;: &quot;/var/www/my-vol&quot;
+                            }
+                        ],
+                        &quot;Image&quot;: &quot;amazon/amazon-ecs-sample&quot;,
+                        &quot;Cpu&quot;: 256,
+                        &quot;EntryPoint&quot;: [
+                            &quot;/usr/sbin/apache2&quot;,
+                            &quot;-D&quot;,
+                            &quot;FOREGROUND&quot;
+                        ],
+                        &quot;Memory&quot;: 512,
+                        &quot;Essential&quot;: true
+                    },
+                    <span>{</span>
+                        &quot;Name&quot;: &quot;busybox&quot;,
+                        &quot;Image&quot;: &quot;busybox&quot;,
+                        &quot;Cpu&quot;: 256,
+                        &quot;EntryPoint&quot;: [
+                            &quot;sh&quot;,
+                            &quot;-c&quot;
+                        ],
+                        &quot;Memory&quot;: 512,
+                        &quot;Command&quot;: [
+                            &quot;/bin/sh -c \&quot;while true; do /bin/date &gt; /var/www/my-vol/date; sleep 1; done\&quot;&quot;
+                        ],
+                        &quot;Essential&quot;: false,
+                        &quot;DependsOn&quot;: [
+                            <span>{</span>
+                                &quot;ContainerName&quot;: &quot;my-app&quot;,
+                                &quot;Condition&quot;: &quot;START&quot;
+                            }
+                        ],
+                        &quot;VolumesFrom&quot;: [
+                            <span>{</span>
+                                &quot;SourceContainer&quot;: &quot;my-app&quot;
+                            }
+                        ]
+                    }
+                ],
+                &quot;Volumes&quot;: [
+                    <span>{</span>
+                        &quot;Host&quot;: <span>{</span>
+                            &quot;SourcePath&quot;: &quot;/var/lib/docker/vfs/dir/&quot;
+                        },
+                        &quot;Name&quot;: &quot;my-vol&quot;
+                    }
+                ]
+            }
+        }
     }
-  }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ecs-taskdefinition--examples--Creating_an_Amazon_ECS_task_definition--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+                                    <h4 id="aws-resource-ecs-taskdefinition--examples--Create_an_Amazon_ECS_task_definition--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Resources:
   taskdefinition: 
     Type: AWS::ECS::TaskDefinition
@@ -815,21 +830,21 @@ Resources:
               SourceVolume: &quot;my-vol&quot;
               ContainerPath: &quot;/var/www/my-vol&quot;
           Image: &quot;amazon/amazon-ecs-sample&quot;
-          Cpu: &quot;10&quot;
+          Cpu: 256
           EntryPoint: 
             - &quot;/usr/sbin/apache2&quot;
             - &quot;-D&quot;
             - &quot;FOREGROUND&quot;
-          Memory: &quot;0.5GB&quot;
+          Memory: 512
           Essential: true
         - 
           Name: &quot;busybox&quot;
           Image: &quot;busybox&quot;
-          Cpu: &quot;10&quot;
+          Cpu: 256
           EntryPoint: 
             - &quot;sh&quot;
             - &quot;-c&quot;
-          Memory: &quot;0.5GB&quot;
+          Memory: 512
           Command: 
             - &quot;/bin/sh -c \&quot;while true; do /bin/date &gt; /var/www/my-vol/date; sleep 1; done\&quot;&quot;
           Essential: false

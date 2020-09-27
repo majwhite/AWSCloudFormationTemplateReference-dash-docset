@@ -16,10 +16,25 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::SSM::Association</code> resource associates an SSM document in AWS
-                                    Systems Manager with managed instances that contain a configuration agent to process
-                                    the
-                                    document.
+                                 <p>The <code class="code">AWS::SSM::Association</code> resource creates a State Manager association for
+                                    your managed instances. A State Manager association defines the state that you want
+                                    to
+                                    maintain on your instances. For example, an association can specify that anti-virus
+                                    software
+                                    must be installed and running on your instances, or that certain ports must be closed.
+                                    For
+                                    static targets, the association specifies a schedule for when the configuration is
+                                    reapplied.
+                                    For dynamic targets, such as an AWS Resource Group or an AWS Autoscaling Group, State
+                                    Manager
+                                    applies the configuration when new instances are added to the group. The association
+                                    also
+                                    specifies actions to take when applying the configuration. For example, an association
+                                    for
+                                    anti-virus software might run once a day. If the software is not installed, then State
+                                    Manager
+                                    installs it. If the software is installed, but the service is not running, then the
+                                    association might instruct State Manager to start the service. 
                                  </p>
                                  <h2 id="aws-resource-ssm-association-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -27,6 +42,7 @@
                                     <h3 id="aws-resource-ssm-association-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::SSM::Association&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-ssm-association-applyonlyatcroninterval">ApplyOnlyAtCronInterval</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-ssm-association-associationname">AssociationName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-association-automationtargetparametername">AutomationTargetParameterName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-association-complianceseverity">ComplianceSeverity</a>&quot; : <code class="replaceable">String</code>,
@@ -47,6 +63,7 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-ssm-association-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::SSM::Association
 Properties: 
+  <a href="#cfn-ssm-association-applyonlyatcroninterval">ApplyOnlyAtCronInterval</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-ssm-association-associationname">AssociationName</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-association-automationtargetparametername">AutomationTargetParameterName</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-association-complianceseverity">ComplianceSeverity</a>: <code class="replaceable">String</code>
@@ -68,10 +85,26 @@ Properties:
                                  <h2 id="aws-resource-ssm-association-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-ssm-association-applyonlyatcroninterval"></a><span class="term"><code class="code">ApplyOnlyAtCronInterval</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>By default, when you create a new associations, the system runs it immediately after
+                                             it is
+                                             created and then according to the schedule you specified. Specify this option if you
+                                             don&apos;t
+                                             want an association to run immediately after you create it.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-ssm-association-associationname"></a><span class="term"><code class="code">AssociationName</code></span></dt>
                                        <dd>
                                           
-                                          <p>The name of the association.</p>
+                                          <p>Specify a descriptive name for the association.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -105,7 +138,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">CRITICAL | HIGH | LOW | MEDIUM | UNSPECIFIED</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">CRITICAL | HIGH | LOW | MEDIUM | UNSPECIFIED</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-ssm-association-documentversion"></a><span class="term"><code class="code">DocumentVersion</code></span></dt>
@@ -136,8 +169,8 @@ Properties:
                                                    association, use the <code class="code">Targets</code> parameter. If you use the parameter
                                                    <code class="code">InstanceId</code>, you cannot use the parameters <code class="code">AssociationName</code>,
                                                    <code class="code">DocumentVersion</code>, <code class="code">MaxErrors</code>, <code class="code">MaxConcurrency</code>,
-                                                   <code class="code">OutputLocation</code>, or <code class="code">ScheduleExpression</code>. To use these
-                                                   parameters, you must use the <code class="code">Targets</code> parameter.
+                                                   <code class="code">OutputLocation</code>, or <code class="code">ScheduleExpression</code>. To use these parameters,
+                                                   you must use the <code class="code">Targets</code> parameter.
                                                 </p>
                                              </div>
                                           </div>
@@ -215,8 +248,28 @@ Properties:
                                        <dt><a id="cfn-ssm-association-name"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
                                           
+                                          <p>The name of the SSM document that contains the configuration information for the instance.
+                                             You can specify <code class="code">Command</code> or <code class="code">Automation</code> documents. The documents can
+                                             be AWS-predefined documents, documents you created, or a document that is shared with
+                                             you from
+                                             another account. For SSM documents that are shared with you from other AWS accounts,
+                                             you must
+                                             specify the complete SSM document ARN, in the following format:
+                                          </p>
                                           
-                                          <p>The name of the Systems Manager document.</p>
+                                          
+                                          <p><code class="code">arn:partition:ssm:region:account-id:document/document-name</code></p>
+                                          
+                                          
+                                          <p>For example:
+                                             <code class="code">arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code></p>
+                                          
+                                          
+                                          <p>For AWS-predefined documents and SSM documents you created in your account, you only
+                                             need
+                                             to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
+                                             
+                                          </p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -265,18 +318,19 @@ Properties:
                                        <dt><a id="cfn-ssm-association-synccompliance"></a><span class="term"><code class="code">SyncCompliance</code></span></dt>
                                        <dd>
                                           
-                                          
                                           <p>The mode for generating association compliance. You can specify <code class="code">AUTO</code> or
-                                             <code class="code">MANUAL</code>. In <code class="code">AUTO</code> mode, the system uses the status of the association
-                                             execution to determine the compliance status. If the association execution runs successfully,
-                                             then the association is <code class="code">COMPLIANT</code>. If the association execution doesn&apos;t run
-                                             successfully, the association is <code class="code">NON-COMPLIANT</code>.
+                                             <code class="code">MANUAL</code>. In <code class="code">AUTO</code> mode, the system uses the status of the
+                                             association execution to determine the compliance status. If the association execution
+                                             runs
+                                             successfully, then the association is <code class="code">COMPLIANT</code>. If the association execution
+                                             doesn&apos;t run successfully, the association is <code class="code">NON-COMPLIANT</code>.
                                           </p>
                                           
-                                          <p>In <code class="code">MANUAL</code> mode, you must specify the <code class="code">AssociationId</code> as a parameter
-                                             for the PutComplianceItems API action. In this case, compliance data is not
-                                             managed by State Manager. It is managed by your direct call to the PutComplianceItems
-                                             API action.
+                                          <p>In <code class="code">MANUAL</code> mode, you must specify the <code class="code">AssociationId</code> as a
+                                             parameter for the PutComplianceItems API action. In this case, compliance data is
+                                             not managed
+                                             by State Manager. It is managed by your direct call to the PutComplianceItems API
+                                             action.
                                           </p>
                                           
                                           <p>By default, all associations use <code class="code">AUTO</code> mode.
@@ -286,7 +340,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">AUTO | MANUAL</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">AUTO | MANUAL</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-ssm-association-targets"></a><span class="term"><code class="code">Targets</code></span></dt>
@@ -305,9 +359,10 @@ Properties:
                                        <dt><a id="cfn-ssm-association-waitforsuccesstimeoutseconds"></a><span class="term"><code class="code">WaitForSuccessTimeoutSeconds</code></span></dt>
                                        <dd>
                                           
-                                          <p>The number of seconds the service should wait for the association status to show
-                                             &quot;Success&quot; before proceeding with the stack execution. If the association status doesn&apos;t
-                                             show &quot;Success&quot; after the specified number of seconds, then stack creation fails.
+                                          <p>The number of seconds the service should wait for the association status to show &quot;Success&quot;
+                                             before proceeding with the stack execution. If the association status doesn&apos;t show
+                                             &quot;Success&quot;
+                                             after the specified number of seconds, then stack creation fails.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -318,7 +373,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-ssm-association-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-ssm-association-return-values">Return values</h2>
                                  <h3 id="aws-resource-ssm-association-return-values-fn--getatt">Fn::GetAtt</h3>
                                  <h4 id="aws-resource-ssm-association-return-values-fn--getatt-fn--getatt"></h4>
                                  <div class="variablelist">
@@ -355,9 +410,9 @@ Properties:
           ],
           &quot;workingDirectory&quot;: [
             &quot;/&quot;
-          ],
+          ]
+        },
         &quot;WaitForSuccessTimeoutSeconds&quot;: 300
-        }
       }
     }
   }
@@ -378,14 +433,15 @@ Resources:
         - ls
         workingDirectory:
         - &quot;/&quot;
-        WaitForSuccessTimeoutSeconds: 300</code></pre></div>
-                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_for_all_managed_instances_in_your_AWS_account">Create an association for all managed instances in your AWS account</h3>
+      WaitForSuccessTimeoutSeconds: 300</code></pre></div>
+                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_for_all_managed_instances_in_an_AWS_account">Create an association for all managed instances in an AWS account</h3>
                                  <p>The following example creates an association that uses the AWS-UpdateSSMAgent SSM
                                     document. The association updates SSM Agent on all managed instances (instances configured
-                                    for Systems Manager) in the user&apos;s AWS account according to the specified CRON schedule.
+                                    for Systems Manager) in the user&apos;s AWS account according to the specified CRON
+                                    schedule.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_for_all_managed_instances_in_your_AWS_account--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_for_all_managed_instances_in_an_AWS_account--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Resources&quot;: <span>{</span>
     &quot;AllInstanceIdsAssociation&quot;: <span>{</span>
       &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
@@ -398,16 +454,16 @@ Resources:
             &quot;Key&quot;: &quot;InstanceIds&quot;,
             &quot;Values&quot;: [
               &quot;*&quot;
-            ],
-        &quot;WaitForSuccessTimeoutSeconds&quot;: 300
+            ]
           }
-        ]
+        ],
+        &quot;WaitForSuccessTimeoutSeconds&quot;: 300
       }
     }
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_for_all_managed_instances_in_your_AWS_account--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_for_all_managed_instances_in_an_AWS_account--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
 Resources:
   AllInstanceIdsAssociation:
     Type: AWS::SSM::Association
@@ -419,12 +475,13 @@ Resources:
       - Key: InstanceIds
         Values:
         - &quot;*&quot;
-        WaitForSuccessTimeoutSeconds: 300
-      </code></pre></div>
+      WaitForSuccessTimeoutSeconds: 300</code></pre></div>
                                  <h3 id="aws-resource-ssm-association--examples--Create_an_association_for_a_specific_tag">Create an association for a specific tag</h3>
                                  <p>The following example creates an association that uses the AWS-UpdateSSMAgent SSM
                                     document. The association updates SSM Agent on all managed instances that are assigned
-                                    a tag key of <code class="code">Environment</code> and value of <code class="code">Production</code>. The association runs every seven days according to the specified rate expression.
+                                    a
+                                    tag key of <code class="code">Environment</code> and value of <code class="code">Production</code>. The association
+                                    runs every seven days according to the specified rate expression.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-ssm-association--examples--Create_an_association_for_a_specific_tag--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -462,7 +519,7 @@ Resources:
         Values:
         - Production
       WaitForSuccessTimeoutSeconds: 300</code></pre></div>
-                                 <h3 id="aws-resource-ssm-association--examples--Associate_an_automation_document_with_an_instance">Associate an automation document with an instance</h3>
+                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_that_associates_an_automation_document_with_an_instance">Create an association that associates an automation document with an instance</h3>
                                  <p>The following example creates an association that assigns the AWS-StopEC2Instance
                                     automation document to a specific instance. 
                                  </p>
@@ -470,13 +527,16 @@ Resources:
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                     <div class="awsdocs-note-text">
-                                       <p>This example specifies the following Amazon Resource Name (ARN): <code class="code">arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonEC2FullAccess</code>. This policy provides more than the required permissions to stop the instance. We
-                                          recommend that you use a policy with more restrictive permissions.
+                                       <p>This example specifies the following Amazon Resource Name (ARN):
+                                          <code class="code">arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonEC2FullAccess</code>. This policy
+                                          provides more than the required permissions to stop the instance. We recommend that
+                                          you
+                                          use a policy with more restrictive permissions.
                                        </p>
                                     </div>
                                  </div>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Associate_an_automation_document_with_an_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_associates_an_automation_document_with_an_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Resources&quot;: <span>{</span>
     &quot;AutomationExecutionRole&quot;: <span>{</span>
       &quot;Type&quot;: &quot;AWS::IAM::Role&quot;,
@@ -524,7 +584,7 @@ Resources:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Associate_an_automation_document_with_an_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_associates_an_automation_document_with_an_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
 Resources:
   AutomationExecutionRole:
     Type: AWS::IAM::Role
@@ -552,15 +612,18 @@ Resources:
           Values:
             - i-1234567890abcdef0
       AutomationTargetParameterName: InstanceId</code></pre></div>
-                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_that_uses_rate_controls_and_logs_output_to_Amazon_S3">Create an association that uses rate controls and logs output to Amazon S3</h3>
+                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_that_uses_rate_controls_and_sends_log_output_to_Amazon_S3">Create an association that uses rate controls and sends log output to Amazon S3</h3>
                                  <p>The following example creates an association that uses rate controls. The association
                                     attempts to update SSM Agent on only 20% of instances at one time. Systems Manager
-                                    stops the association from running on any additional instances if the execution fails
-                                    on 5% of the total number of instances. System Manager also logs the association output
-                                    to Amazon S3.
+                                    stops
+                                    the association from running on any additional instances if the execution fails on
+                                    5% of
+                                    the total number of instances. System Manager also logs the association output to
+                                    Amazon
+                                    S3.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_uses_rate_controls_and_logs_output_to_Amazon_S3--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_uses_rate_controls_and_sends_log_output_to_Amazon_S3--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Resources&quot;: <span>{</span>
     &quot;RateControlAssociation&quot;: <span>{</span>
       &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
@@ -588,7 +651,7 @@ Resources:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_uses_rate_controls_and_logs_output_to_Amazon_S3--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_uses_rate_controls_and_sends_log_output_to_Amazon_S3--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
 Resources:
   RateControlAssociation:
     Type: AWS::SSM::Association
@@ -605,7 +668,2581 @@ Resources:
           OutputS3BucketName: MyAssociationOutputBucket
           OutputS3KeyPrefix: my-agent-update-output
 		WaitForSuccessTimeoutSeconds: 300</code></pre></div>
-                                 <h2 id="aws-resource-ssm-association--seealso">See Also</h2>
+                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_that_works_with_Ansible">Create an association that works with Ansible</h3>
+                                 <p>The following example creates an association that uses Ansible and Systems Manager
+                                    to
+                                    deploy Nginx. This template copies the Ansible Playbook from a Github repo. The target
+                                    is
+                                    based on instance ID.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_works_with_Ansible--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Description&quot;: &quot;Deploy Single EC2 Linux Instance&quot;,
+  &quot;Parameters&quot;: <span>{</span>
+    &quot;LatestAmiId&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::SSM::Parameter::Value&lt;AWS::EC2::Image::Id&gt;&quot;,
+      &quot;Default&quot;: &quot;/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2&quot;
+    },
+    &quot;GitHubOwner&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;String&quot;
+    },
+    &quot;GitHubRepo&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;String&quot;
+    },
+    &quot;GitHubBranch&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;String&quot;
+    }
+  },
+  &quot;Resources&quot;: <span>{</span>
+    &quot;SSMAssocLogs&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;
+    },
+    &quot;SSMInstanceRole&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::IAM::Role&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Policies&quot;: [
+          <span>{</span>
+            &quot;PolicyDocument&quot;: <span>{</span>
+              &quot;Version&quot;: &quot;2012-10-17&quot;,
+              &quot;Statement&quot;: [
+                <span>{</span>
+                  &quot;Action&quot;: [
+                    &quot;s3:GetObject&quot;
+                  ],
+                  &quot;Resource&quot;: [
+                    &quot;arn:aws:s3:::aws-ssm-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::aws-windows-downloads-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::amazon-ssm-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::amazon-ssm-packages-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::$<span>{</span>AWS::Region}-birdwatcher-prod/*&quot;,
+                    &quot;arn:aws:s3:::patch-baseline-snapshot-$<span>{</span>AWS::Region}/*&quot;
+                  ],
+                  &quot;Effect&quot;: &quot;Allow&quot;
+                }
+              ]
+            },
+            &quot;PolicyName&quot;: &quot;ssm-custom-s3-policy&quot;
+          },
+          <span>{</span>
+            &quot;PolicyDocument&quot;: <span>{</span>
+              &quot;Version&quot;: &quot;2012-10-17&quot;,
+              &quot;Statement&quot;: [
+                <span>{</span>
+                  &quot;Action&quot;: [
+                    &quot;s3:GetObject&quot;,
+                    &quot;s3:PutObject&quot;,
+                    &quot;s3:PutObjectAcl&quot;,
+                    &quot;s3:ListBucket&quot;
+                  ],
+                  &quot;Resource&quot;: [
+                    &quot;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>SSMAssocLogs}/*&quot;,
+                    &quot;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>SSMAssocLogs}&quot;
+                  ],
+                  &quot;Effect&quot;: &quot;Allow&quot;
+                }
+              ]
+            },
+            &quot;PolicyName&quot;: &quot;s3-instance-bucket-policy&quot;
+          }
+        ],
+        &quot;Path&quot;: &quot;/&quot;,
+        &quot;ManagedPolicyArns&quot;: [
+          &quot;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore&quot;
+        ],
+        &quot;AssumeRolePolicyDocument&quot;: <span>{</span>
+          &quot;Version&quot;: &quot;2012-10-17&quot;,
+          &quot;Statement&quot;: [
+            <span>{</span>
+              &quot;Effect&quot;: &quot;Allow&quot;,
+              &quot;Principal&quot;: <span>{</span>
+                &quot;Service&quot;: [
+                  &quot;ec2.amazonaws.com&quot;,
+                  &quot;ssm.amazonaws.com&quot;
+                ]
+              },
+              &quot;Action&quot;: &quot;sts:AssumeRole&quot;
+            }
+          ]
+        }
+      }
+    },
+    &quot;SSMInstanceProfile&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::IAM::InstanceProfile&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Roles&quot;: [
+          &quot;SSMInstanceRole&quot;
+        ]
+      }
+    },
+    &quot;EC2Instance&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::EC2::Instance&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;ImageId&quot;: &quot;LatestAmiId&quot;,
+        &quot;InstanceType&quot;: &quot;t3.small&quot;,
+        &quot;IamInstanceProfile&quot;: &quot;SSMInstanceProfile&quot;
+      }
+    },
+    &quot;AnsibleAssociation&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Name&quot;: &quot;AWS-ApplyAnsiblePlaybooks&quot;,
+        &quot;WaitForSuccessTimeoutSeconds&quot;: 300,
+        &quot;Targets&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;InstanceIds&quot;,
+            &quot;Values&quot;: [
+              &quot;EC2Instance&quot;
+            ]
+          }
+        ],
+        &quot;OutputLocation&quot;: <span>{</span>
+          &quot;S3Location&quot;: <span>{</span>
+            &quot;OutputS3BucketName&quot;: &quot;SSMAssocLogs&quot;,
+            &quot;OutputS3KeyPrefix&quot;: &quot;logs/&quot;
+          }
+        },
+        &quot;Parameters&quot;: <span>{</span>
+          &quot;SourceType&quot;: [
+            &quot;GitHub&quot;
+          ],
+          &quot;SourceInfo&quot;: [
+            &quot;<span>{</span>\&quot;owner\&quot;:\&quot;$<span>{</span>GitHubOwner}\&quot;,\n\&quot;repository\&quot;:\&quot;$<span>{</span>GitHubRepo}\&quot;,\n\&quot;path\&quot;:\&quot;\&quot;,\n\&quot;getOptions\&quot;:\&quot;branch:$<span>{</span>GitHubBranch}\&quot;}\n&quot;
+          ],
+          &quot;InstallDependencies&quot;: [
+            &quot;True&quot;
+          ],
+          &quot;PlaybookFile&quot;: [
+            &quot;playbook.yml&quot;
+          ],
+          &quot;ExtraVariables&quot;: [
+            &quot;SSM=True&quot;
+          ],
+          &quot;Check&quot;: [
+            &quot;False&quot;
+          ],
+          &quot;Verbose&quot;: [
+            &quot;-v&quot;
+          ]
+        }
+      }
+    }
+  },
+  &quot;Outputs&quot;: <span>{</span>
+    &quot;WebServerPublic&quot;: <span>{</span>
+      &quot;Value&quot;: &quot;EC2Instance.PublicDnsName&quot;,
+      &quot;Description&quot;: &quot;Public DNS for WebServer&quot;
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_works_with_Ansible--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Description: &quot;Deploy Single EC2 Linux Instance&quot;
+Parameters:
+  # Using SSM Parameter Store to fetch the Latest AMI for Amazon Linux, eliminates the need for AMI Mappings
+  LatestAmiId:
+    Type: &apos;AWS::SSM::Parameter::Value&lt;AWS::EC2::Image::Id&gt;&apos;
+    Default: &quot;/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2&quot;
+  GitHubOwner:
+    Type: &apos;String&apos;
+  GitHubRepo:
+    Type: &apos;String&apos;
+  GitHubBranch:
+    Type: &apos;String&apos;
+Resources:
+  SSMAssocLogs:
+    Type: AWS::S3::Bucket
+  SSMInstanceRole: 
+    Type : AWS::IAM::Role
+    Properties:
+      Policies:
+        - PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+              - Action:
+                  - s3:GetObject
+                Resource: 
+                  - !Sub &apos;arn:aws:s3:::aws-ssm-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::aws-windows-downloads-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::amazon-ssm-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::amazon-ssm-packages-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::$<span>{</span>AWS::Region}-birdwatcher-prod/*&apos;
+                  - !Sub &apos;arn:aws:s3:::patch-baseline-snapshot-$<span>{</span>AWS::Region}/*&apos;
+                Effect: Allow
+          PolicyName: ssm-custom-s3-policy
+        - PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+              - Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:PutObjectAcl
+                  - s3:ListBucket
+                Resource: 
+                  - !Sub &apos;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>SSMAssocLogs}/*&apos;
+                  - !Sub &apos;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>SSMAssocLogs}&apos;
+                Effect: Allow
+          PolicyName: s3-instance-bucket-policy
+      Path: /
+      ManagedPolicyArns:
+        - !Sub &apos;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore&apos;
+      AssumeRolePolicyDocument:
+        Version: &quot;2012-10-17&quot;
+        Statement:
+        - Effect: &quot;Allow&quot;
+          Principal:
+            Service:
+            - &quot;ec2.amazonaws.com&quot;
+            - &quot;ssm.amazonaws.com&quot;
+          Action: &quot;sts:AssumeRole&quot;
+  SSMInstanceProfile:
+    Type: &quot;AWS::IAM::InstanceProfile&quot;
+    Properties:
+      Roles:
+      - !Ref SSMInstanceRole
+  EC2Instance:
+    Type: &quot;AWS::EC2::Instance&quot;
+    Properties:
+      ImageId: !Ref LatestAmiId
+      InstanceType: &quot;t3.small&quot;
+      IamInstanceProfile: !Ref SSMInstanceProfile
+  AnsibleAssociation:
+    Type: AWS::SSM::Association
+    Properties:
+      # Here using the AWS-ApplyAnsiblePlaybooks
+      Name: AWS-ApplyAnsiblePlaybooks
+      WaitForSuccessTimeoutSeconds: 300
+      # Targeting Instance by InstanceId passed from the Logical ID of Instance being created 
+      # in CloudFormation
+      Targets:
+        - Key: InstanceIds
+          Values: [ !Ref EC2Instance ]
+      OutputLocation:
+        S3Location: 
+          OutputS3BucketName: !Ref SSMAssocLogs
+          OutputS3KeyPrefix: &apos;logs/&apos;
+      Parameters:
+        # Getting an Ansible Playbook from a GitHub Location
+        SourceType:
+          - &apos;GitHub&apos;
+        # At a minimum must include the following GitHub repo information, if using a private repo 
+        # would want to include the GitHub Token option
+        SourceInfo:
+          -  !Sub |
+              <span>{</span>&quot;owner&quot;:&quot;$<span>{</span>GitHubOwner}&quot;,
+              &quot;repository&quot;:&quot;$<span>{</span>GitHubRepo}&quot;,
+              &quot;path&quot;:&quot;&quot;,
+              &quot;getOptions&quot;:&quot;branch:$<span>{</span>GitHubBranch}&quot;}
+        # Installing Ansible and its dependencies
+        InstallDependencies:
+          - &apos;True&apos;
+        # Playbook file we want to run
+        PlaybookFile:
+          - &apos;playbook.yml&apos;
+        ExtraVariables:
+          - &apos;SSM=True&apos;
+        Check:
+          - &apos;False&apos;
+        Verbose:
+          - &apos;-v&apos;
+Outputs:
+  WebServerPublic:
+    Value: !GetAtt &apos;EC2Instance.PublicDnsName&apos;
+    Description: Public DNS for WebServer</code></pre></div>
+                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_that_runs_a_bash_script">Create an association that runs a bash script</h3>
+                                 <p>The following example creates an association that runs a bash script. Target is based
+                                    on tags.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_runs_a_bash_script--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Description&quot;: &quot;Deploy Single EC2 Linux Instance Install and Install Nginx by a State Manager Association&quot;,
+  &quot;Parameters&quot;: <span>{</span>
+    &quot;LatestAmiId&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::SSM::Parameter::Value&lt;AWS::EC2::Image::Id&gt;&quot;,
+      &quot;Default&quot;: &quot;/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2&quot;
+    }
+  },
+  &quot;Resources&quot;: <span>{</span>
+    &quot;SSMAssocLogs&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;
+    },
+    &quot;SSMInstanceRole&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::IAM::Role&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Policies&quot;: [
+          <span>{</span>
+            &quot;PolicyDocument&quot;: <span>{</span>
+              &quot;Version&quot;: &quot;2012-10-17&quot;,
+              &quot;Statement&quot;: [
+                <span>{</span>
+                  &quot;Action&quot;: [
+                    &quot;s3:GetObject&quot;
+                  ],
+                  &quot;Resource&quot;: [
+                    &quot;arn:aws:s3:::aws-ssm-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::aws-windows-downloads-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::amazon-ssm-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::amazon-ssm-packages-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::$<span>{</span>AWS::Region}-birdwatcher-prod/*&quot;,
+                    &quot;arn:aws:s3:::patch-baseline-snapshot-$<span>{</span>AWS::Region}/*&quot;
+                  ],
+                  &quot;Effect&quot;: &quot;Allow&quot;
+                }
+              ]
+            },
+            &quot;PolicyName&quot;: &quot;ssm-custom-s3-policy&quot;
+          },
+          <span>{</span>
+            &quot;PolicyDocument&quot;: <span>{</span>
+              &quot;Version&quot;: &quot;2012-10-17&quot;,
+              &quot;Statement&quot;: [
+                <span>{</span>
+                  &quot;Action&quot;: [
+                    &quot;s3:GetObject&quot;,
+                    &quot;s3:PutObject&quot;,
+                    &quot;s3:PutObjectAcl&quot;,
+                    &quot;s3:ListBucket&quot;
+                  ],
+                  &quot;Resource&quot;: [
+                    &quot;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>SSMAssocLogs}/*&quot;,
+                    &quot;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>SSMAssocLogs}&quot;
+                  ],
+                  &quot;Effect&quot;: &quot;Allow&quot;
+                }
+              ]
+            },
+            &quot;PolicyName&quot;: &quot;s3-instance-bucket-policy&quot;
+          }
+        ],
+        &quot;Path&quot;: &quot;/&quot;,
+        &quot;ManagedPolicyArns&quot;: [
+          &quot;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore&quot;,
+          &quot;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/CloudWatchAgentServerPolicy&quot;
+        ],
+        &quot;AssumeRolePolicyDocument&quot;: <span>{</span>
+          &quot;Version&quot;: &quot;2012-10-17&quot;,
+          &quot;Statement&quot;: [
+            <span>{</span>
+              &quot;Effect&quot;: &quot;Allow&quot;,
+              &quot;Principal&quot;: <span>{</span>
+                &quot;Service&quot;: [
+                  &quot;ec2.amazonaws.com&quot;,
+                  &quot;ssm.amazonaws.com&quot;
+                ]
+              },
+              &quot;Action&quot;: &quot;sts:AssumeRole&quot;
+            }
+          ]
+        }
+      }
+    },
+    &quot;SSMInstanceProfile&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::IAM::InstanceProfile&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Roles&quot;: [
+          &quot;SSMInstanceRole&quot;
+        ]
+      }
+    },
+    &quot;EC2Instance&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::EC2::Instance&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;ImageId&quot;: &quot;LatestAmiId&quot;,
+        &quot;InstanceType&quot;: &quot;t3.medium&quot;,
+        &quot;IamInstanceProfile&quot;: &quot;SSMInstanceProfile&quot;,
+        &quot;Tags&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;nginx&quot;,
+            &quot;Value&quot;: &quot;yes&quot;
+          }
+        ]
+      }
+    },
+    &quot;NginxAssociation&quot;: <span>{</span>
+      &quot;DependsOn&quot;: &quot;EC2Instance&quot;,
+      &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Name&quot;: &quot;AWS-RunShellScript&quot;,
+        &quot;WaitForSuccessTimeoutSeconds&quot;: 300,
+        &quot;Targets&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;tag:nginx&quot;,
+            &quot;Values&quot;: [
+              &quot;yes&quot;
+            ]
+          }
+        ],
+        &quot;OutputLocation&quot;: <span>{</span>
+          &quot;S3Location&quot;: <span>{</span>
+            &quot;OutputS3BucketName&quot;: &quot;SSMAssocLogs&quot;,
+            &quot;OutputS3KeyPrefix&quot;: &quot;logs/&quot;
+          }
+        },
+        &quot;Parameters&quot;: <span>{</span>
+          &quot;commands&quot;: [
+            &quot;sudo amazon-linux-extras install nginx1 -y\nsudo service nginx start\n&quot;
+          ]
+        }
+      }
+    }
+  },
+  &quot;Outputs&quot;: <span>{</span>
+    &quot;WebServerPublic&quot;: <span>{</span>
+      &quot;Value&quot;: &quot;EC2Instance.PublicDnsName&quot;,
+      &quot;Description&quot;: &quot;Public DNS for WebServer&quot;
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_runs_a_bash_script--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Description: &quot;Deploy Single EC2 Linux Instance Install and Install Nginx by a State Manager Association&quot;
+Parameters:
+  LatestAmiId:
+    Type: &apos;AWS::SSM::Parameter::Value*&lt;AWS::EC2::Image::Id&gt;&apos;
+    Default: &quot;/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2&quot;
+Resources:
+  SSMAssocLogs:
+    Type: AWS::S3::Bucket
+  # Role that allows SSM Agent to communicate with SSM and allows use of all features of SSM
+  SSMInstanceRole: 
+    Type : AWS::IAM::Role
+    Properties:
+      Policies:
+        - PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+              - Action:
+                  - s3:GetObject
+                Resource: 
+                  - !Sub &apos;arn:aws:s3:::aws-ssm-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::aws-windows-downloads-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::amazon-ssm-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::amazon-ssm-packages-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::$<span>{</span>AWS::Region}-birdwatcher-prod/*&apos;
+                  - !Sub &apos;arn:aws:s3:::patch-baseline-snapshot-$<span>{</span>AWS::Region}/*&apos;
+                Effect: Allow
+          PolicyName: ssm-custom-s3-policy
+        - PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+              - Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:PutObjectAcl
+                  - s3:ListBucket
+                Resource: 
+                  - !Sub &apos;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>SSMAssocLogs}/*&apos;
+                  - !Sub &apos;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>SSMAssocLogs}&apos;
+                Effect: Allow
+          PolicyName: s3-instance-bucket-policy
+      Path: /
+      ManagedPolicyArns:
+        - !Sub &apos;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore&apos;
+        - !Sub &apos;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/CloudWatchAgentServerPolicy&apos;
+      AssumeRolePolicyDocument:
+        Version: &quot;2012-10-17&quot;
+        Statement:
+        - Effect: &quot;Allow&quot;
+          Principal:
+            Service:
+            - &quot;ec2.amazonaws.com&quot;
+            - &quot;ssm.amazonaws.com&quot;
+          Action: &quot;sts:AssumeRole&quot;
+  SSMInstanceProfile:
+    Type: &quot;AWS::IAM::InstanceProfile&quot;
+    Properties:
+      Roles:
+      - !Ref SSMInstanceRole
+  EC2Instance:
+    Type: &quot;AWS::EC2::Instance&quot;
+    Properties:
+      ImageId: !Ref LatestAmiId
+      InstanceType: &quot;t3.medium&quot;
+      IamInstanceProfile: !Ref SSMInstanceProfile
+      Tags:
+      - Key: &apos;nginx&apos;
+        Value: &apos;yes&apos;
+  NginxAssociation:
+    DependsOn: EC2Instance
+    # CloudFormation Resource Type that creates State Manager Associations
+    Type: AWS::SSM::Association
+    Properties:
+      # Command Document that this Association will run
+      Name: AWS-RunShellScript
+      WaitForSuccessTimeoutSeconds: 300
+      # Targeting Instance by Tags
+      Targets:
+        - Key: tag:nginx
+          Values:
+            - &apos;yes&apos;
+      # The passing in the S3 Bucket that is created in the template that logs will be sent to
+      OutputLocation:
+        S3Location: 
+          OutputS3BucketName: !Ref SSMAssocLogs
+          OutputS3KeyPrefix: &apos;logs/&apos;
+      # Parameters for the AWS-RunShellScript, in this case commands to install nginx
+      Parameters:
+        commands: 
+          - |
+              sudo amazon-linux-extras install nginx1 -y
+              sudo service nginx start
+Outputs:
+  WebServerPublic:
+    Value: !GetAtt &apos;EC2Instance.PublicDnsName&apos;
+    Description: Public DNS for WebServer</code></pre></div>
+                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_that_runs_a_bash_script_with_Systems_Manager_Automation">Create an association that runs a bash script with Systems Manager Automation</h3>
+                                 <p>The following example creates an assocation that runs a bash script using State
+                                    Manager and Automation with multiple steps. Target is based on tags.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_runs_a_bash_script_with_Systems_Manager_Automation--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Description&quot;: &quot;Deploy Single EC2 Linux Instance&quot;,
+  &quot;Parameters&quot;: <span>{</span>
+    &quot;LatestAmiId&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::SSM::Parameter::Value&lt;AWS::EC2::Image::Id&gt;&quot;,
+      &quot;Default&quot;: &quot;/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2&quot;
+    }
+  },
+  &quot;Resources&quot;: <span>{</span>
+    &quot;SSMAssocLogs&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;
+    },
+    &quot;nginxInstallAutomation&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::SSM::Document&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;DocumentType&quot;: &quot;Automation&quot;,
+        &quot;Content&quot;: <span>{</span>
+          &quot;schemaVersion&quot;: &quot;0.3&quot;,
+          &quot;description&quot;: &quot;Updates AMI with Linux distribution packages and installs Nginx software&quot;,
+          &quot;assumeRole&quot;: &quot;<span>{</span><span>{</span>AutomationAssumeRole}}&quot;,
+          &quot;parameters&quot;: <span>{</span>
+            &quot;InstanceId&quot;: <span>{</span>
+              &quot;description&quot;: &quot;ID of the Instance.&quot;,
+              &quot;type&quot;: &quot;String&quot;
+            },
+            &quot;AutomationAssumeRole&quot;: <span>{</span>
+              &quot;default&quot;: &quot;&quot;,
+              &quot;description&quot;: &quot;(Optional) The ARN of the role that allows Automation to perform the actions on your behalf.&quot;,
+              &quot;type&quot;: &quot;String&quot;
+            }
+          },
+          &quot;mainSteps&quot;: [
+            <span>{</span>
+              &quot;name&quot;: &quot;updateOSSoftware&quot;,
+              &quot;action&quot;: &quot;aws:runCommand&quot;,
+              &quot;maxAttempts&quot;: 3,
+              &quot;timeoutSeconds&quot;: 3600,
+              &quot;inputs&quot;: <span>{</span>
+                &quot;DocumentName&quot;: &quot;AWS-RunShellScript&quot;,
+                &quot;InstanceIds&quot;: [
+                  &quot;<span>{</span><span>{</span>InstanceId}}&quot;
+                ],
+                &quot;CloudWatchOutputConfig&quot;: <span>{</span>
+                  &quot;CloudWatchOutputEnabled&quot;: &quot;true&quot;
+                },
+                &quot;Parameters&quot;: <span>{</span>
+                  &quot;commands&quot;: [
+                    &quot;#!/bin/bash\nsudo yum update -y\nneeds-restarting -r\nif [ $? -eq 1 ]\nthen\n        exit 194\nelse\n        exit 0\nfi\n&quot;
+                  ]
+                }
+              }
+            },
+            <span>{</span>
+              &quot;name&quot;: &quot;InstallNginx&quot;,
+              &quot;action&quot;: &quot;aws:runCommand&quot;,
+              &quot;inputs&quot;: <span>{</span>
+                &quot;DocumentName&quot;: &quot;AWS-RunShellScript&quot;,
+                &quot;InstanceIds&quot;: [
+                  &quot;<span>{</span><span>{</span>InstanceId}}&quot;
+                ],
+                &quot;CloudWatchOutputConfig&quot;: <span>{</span>
+                  &quot;CloudWatchOutputEnabled&quot;: &quot;true&quot;
+                },
+                &quot;Parameters&quot;: <span>{</span>
+                  &quot;commands&quot;: [
+                    &quot;sudo amazon-linux-extras install nginx1 -y\nsudo service nginx start\n&quot;
+                  ]
+                }
+              }
+            },
+            <span>{</span>
+              &quot;name&quot;: &quot;TestInstall&quot;,
+              &quot;action&quot;: &quot;aws:runCommand&quot;,
+              &quot;maxAttempts&quot;: 3,
+              &quot;timeoutSeconds&quot;: 3600,
+              &quot;onFailure&quot;: &quot;Abort&quot;,
+              &quot;inputs&quot;: <span>{</span>
+                &quot;DocumentName&quot;: &quot;AWS-RunShellScript&quot;,
+                &quot;InstanceIds&quot;: [
+                  &quot;<span>{</span><span>{</span>InstanceId}}&quot;
+                ],
+                &quot;Parameters&quot;: <span>{</span>
+                  &quot;commands&quot;: [
+                    &quot;curl localhost\n&quot;
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    &quot;SSMExecutionRole&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::IAM::Role&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Policies&quot;: [
+          <span>{</span>
+            &quot;PolicyDocument&quot;: <span>{</span>
+              &quot;Version&quot;: &quot;2012-10-17&quot;,
+              &quot;Statement&quot;: [
+                <span>{</span>
+                  &quot;Action&quot;: [
+                    &quot;ssm:StartAssociationsOnce&quot;,
+                    &quot;ssm:CreateAssociation&quot;,
+                    &quot;ssm:CreateAssociationBatch&quot;,
+                    &quot;ssm:UpdateAssociation&quot;
+                  ],
+                  &quot;Resource&quot;: &quot;*&quot;,
+                  &quot;Effect&quot;: &quot;Allow&quot;
+                }
+              ]
+            },
+            &quot;PolicyName&quot;: &quot;ssm-association&quot;
+          }
+        ],
+        &quot;Path&quot;: &quot;/&quot;,
+        &quot;ManagedPolicyArns&quot;: [
+          &quot;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/service-role/AmazonSSMAutomationRole&quot;
+        ],
+        &quot;AssumeRolePolicyDocument&quot;: <span>{</span>
+          &quot;Version&quot;: &quot;2012-10-17&quot;,
+          &quot;Statement&quot;: [
+            <span>{</span>
+              &quot;Effect&quot;: &quot;Allow&quot;,
+              &quot;Principal&quot;: <span>{</span>
+                &quot;Service&quot;: [
+                  &quot;ec2.amazonaws.com&quot;,
+                  &quot;ssm.amazonaws.com&quot;
+                ]
+              },
+              &quot;Action&quot;: &quot;sts:AssumeRole&quot;
+            }
+          ]
+        }
+      }
+    },
+    &quot;SSMInstanceRole&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::IAM::Role&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Policies&quot;: [
+          <span>{</span>
+            &quot;PolicyDocument&quot;: <span>{</span>
+              &quot;Version&quot;: &quot;2012-10-17&quot;,
+              &quot;Statement&quot;: [
+                <span>{</span>
+                  &quot;Action&quot;: [
+                    &quot;s3:GetObject&quot;
+                  ],
+                  &quot;Resource&quot;: [
+                    &quot;arn:aws:s3:::aws-ssm-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::aws-windows-downloads-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::amazon-ssm-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::amazon-ssm-packages-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::$<span>{</span>AWS::Region}-birdwatcher-prod/*&quot;,
+                    &quot;arn:aws:s3:::patch-baseline-snapshot-$<span>{</span>AWS::Region}/*&quot;
+                  ],
+                  &quot;Effect&quot;: &quot;Allow&quot;
+                }
+              ]
+            },
+            &quot;PolicyName&quot;: &quot;ssm-custom-s3-policy&quot;
+          },
+          <span>{</span>
+            &quot;PolicyDocument&quot;: <span>{</span>
+              &quot;Version&quot;: &quot;2012-10-17&quot;,
+              &quot;Statement&quot;: [
+                <span>{</span>
+                  &quot;Action&quot;: [
+                    &quot;s3:GetObject&quot;,
+                    &quot;s3:PutObject&quot;,
+                    &quot;s3:PutObjectAcl&quot;,
+                    &quot;s3:ListBucket&quot;
+                  ],
+                  &quot;Resource&quot;: [
+                    &quot;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>SSMAssocLogs}/*&quot;,
+                    &quot;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>SSMAssocLogs}&quot;
+                  ],
+                  &quot;Effect&quot;: &quot;Allow&quot;
+                }
+              ]
+            },
+            &quot;PolicyName&quot;: &quot;s3-instance-bucket-policy&quot;
+          }
+        ],
+        &quot;Path&quot;: &quot;/&quot;,
+        &quot;ManagedPolicyArns&quot;: [
+          &quot;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore&quot;,
+          &quot;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/CloudWatchAgentServerPolicy&quot;
+        ],
+        &quot;AssumeRolePolicyDocument&quot;: <span>{</span>
+          &quot;Version&quot;: &quot;2012-10-17&quot;,
+          &quot;Statement&quot;: [
+            <span>{</span>
+              &quot;Effect&quot;: &quot;Allow&quot;,
+              &quot;Principal&quot;: <span>{</span>
+                &quot;Service&quot;: [
+                  &quot;ec2.amazonaws.com&quot;,
+                  &quot;ssm.amazonaws.com&quot;
+                ]
+              },
+              &quot;Action&quot;: &quot;sts:AssumeRole&quot;
+            }
+          ]
+        }
+      }
+    },
+    &quot;SSMInstanceProfile&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::IAM::InstanceProfile&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Roles&quot;: [
+          &quot;SSMInstanceRole&quot;
+        ]
+      }
+    },
+    &quot;EC2Instance&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::EC2::Instance&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;ImageId&quot;: &quot;LatestAmiId&quot;,
+        &quot;InstanceType&quot;: &quot;t3.medium&quot;,
+        &quot;IamInstanceProfile&quot;: &quot;SSMInstanceProfile&quot;,
+        &quot;Tags&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;nginx&quot;,
+            &quot;Value&quot;: true
+          }
+        ]
+      }
+    },
+    &quot;NginxAssociation&quot;: <span>{</span>
+      &quot;DependsOn&quot;: &quot;EC2Instance&quot;,
+      &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Name&quot;: &quot;nginxInstallAutomation&quot;,
+        &quot;WaitForSuccessTimeoutSeconds&quot;: 300,
+        &quot;OutputLocation&quot;: <span>{</span>
+          &quot;S3Location&quot;: <span>{</span>
+            &quot;OutputS3BucketName&quot;: &quot;SSMAssocLogs&quot;,
+            &quot;OutputS3KeyPrefix&quot;: &quot;logs/&quot;
+          }
+        },
+        &quot;AutomationTargetParameterName&quot;: &quot;InstanceId&quot;,
+        &quot;Parameters&quot;: <span>{</span>
+          &quot;AutomationAssumeRole&quot;: [
+            &quot;SSMExecutionRole.Arn&quot;
+          ]
+        },
+        &quot;Targets&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;tag:nginx&quot;,
+            &quot;Values&quot;: [
+              true
+            ]
+          }
+        ]
+      }
+    }
+  },
+  &quot;Outputs&quot;: <span>{</span>
+    &quot;WebServerPublic&quot;: <span>{</span>
+      &quot;Value&quot;: &quot;EC2Instance.PublicDnsName&quot;,
+      &quot;Description&quot;: &quot;Public DNS for WebServer&quot;
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_runs_a_bash_script_with_Systems_Manager_Automation--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Description: &quot;Deploy Single EC2 Linux Instance&quot;
+Parameters:
+  LatestAmiId:
+    Type: &apos;AWS::SSM::Parameter::Value&lt;AWS::EC2::Image::Id&gt;&apos;
+    Default: &quot;/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2&quot;
+Resources:
+  SSMAssocLogs:
+    Type: AWS::S3::Bucket
+  nginxInstallAutomation:
+    Type: AWS::SSM::Document
+    Properties:
+      DocumentType: Automation
+      Content:
+        schemaVersion: &quot;0.3&quot;
+        description: &quot;Updates AMI with Linux distribution packages and installs Nginx software&quot;
+        assumeRole: &quot;<span>{</span><span>{</span>AutomationAssumeRole}}&quot;
+        parameters:
+          InstanceId:
+            description: &quot;ID of the Instance.&quot;
+            type: &quot;String&quot; 
+          AutomationAssumeRole:
+            default: &quot;&quot;
+            description: &quot;(Optional) The ARN of the role that allows Automation to perform the actions on your behalf.&quot;
+            type: &quot;String&quot; 
+        mainSteps:
+        - name: &quot;updateOSSoftware&quot;
+          action: &quot;aws:runCommand&quot;
+          maxAttempts: 3
+          timeoutSeconds: 3600
+          inputs:
+            DocumentName: &quot;AWS-RunShellScript&quot;
+            InstanceIds:
+            - &quot;<span>{</span><span>{</span>InstanceId}}&quot;
+            CloudWatchOutputConfig:
+              CloudWatchOutputEnabled: &quot;true&quot;
+            Parameters:
+              commands: 
+                - |
+                   #!/bin/bash
+                   sudo yum update -y
+                   needs-restarting -r
+                   if [ $? -eq 1 ]
+                   then
+                           exit 194
+                   else
+                           exit 0
+                   fi
+        - name: &quot;InstallNginx&quot;
+          action: &quot;aws:runCommand&quot;
+          inputs:
+            DocumentName: &quot;AWS-RunShellScript&quot;
+            InstanceIds:
+            - &quot;<span>{</span><span>{</span>InstanceId}}&quot;
+            CloudWatchOutputConfig:
+              CloudWatchOutputEnabled: &quot;true&quot;
+            Parameters:
+              commands:
+                - |
+                    sudo amazon-linux-extras install nginx1 -y
+                    sudo service nginx start
+        - name: &quot;TestInstall&quot;
+          action: &quot;aws:runCommand&quot;
+          maxAttempts: 3
+          timeoutSeconds: 3600
+          onFailure: &quot;Abort&quot;
+          inputs:
+           DocumentName: &quot;AWS-RunShellScript&quot;
+           InstanceIds:
+            - &quot;<span>{</span><span>{</span>InstanceId}}&quot;
+           Parameters: 
+            commands:
+                - |
+                   curl localhost
+  SSMExecutionRole: 
+    Type : AWS::IAM::Role
+    Properties:
+      Policies:
+        - PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+              - Action:
+                  - ssm:StartAssociationsOnce
+                  - ssm:CreateAssociation
+                  - ssm:CreateAssociationBatch
+                  - ssm:UpdateAssociation
+                Resource: &apos;*&apos;
+                Effect: Allow
+          PolicyName: ssm-association
+      Path: /
+      ManagedPolicyArns:
+        - !Sub &apos;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/service-role/AmazonSSMAutomationRole&apos;
+      AssumeRolePolicyDocument:
+        Version: &quot;2012-10-17&quot;
+        Statement:
+        - Effect: &quot;Allow&quot;
+          Principal:
+            Service:
+            - &quot;ec2.amazonaws.com&quot;
+            - &quot;ssm.amazonaws.com&quot;
+          Action: &quot;sts:AssumeRole&quot;
+  SSMInstanceRole: 
+    Type : AWS::IAM::Role
+    Properties:
+      Policies:
+        - PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+              - Action:
+                  - s3:GetObject
+                Resource: 
+                  - !Sub &apos;arn:aws:s3:::aws-ssm-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::aws-windows-downloads-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::amazon-ssm-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::amazon-ssm-packages-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::$<span>{</span>AWS::Region}-birdwatcher-prod/*&apos;
+                  - !Sub &apos;arn:aws:s3:::patch-baseline-snapshot-$<span>{</span>AWS::Region}/*&apos;
+                Effect: Allow
+          PolicyName: ssm-custom-s3-policy
+        - PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+              - Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:PutObjectAcl
+                  - s3:ListBucket
+                Resource: 
+                  - !Sub &apos;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>SSMAssocLogs}/*&apos;
+                  - !Sub &apos;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>SSMAssocLogs}&apos;
+                Effect: Allow
+          PolicyName: s3-instance-bucket-policy
+      Path: /
+      ManagedPolicyArns:
+        - !Sub &apos;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore&apos;
+        - !Sub &apos;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/CloudWatchAgentServerPolicy&apos;
+      AssumeRolePolicyDocument:
+        Version: &quot;2012-10-17&quot;
+        Statement:
+        - Effect: &quot;Allow&quot;
+          Principal:
+            Service:
+            - &quot;ec2.amazonaws.com&quot;
+            - &quot;ssm.amazonaws.com&quot;
+          Action: &quot;sts:AssumeRole&quot;
+  SSMInstanceProfile:
+    Type: &quot;AWS::IAM::InstanceProfile&quot;
+    Properties:
+      Roles:
+      - !Ref SSMInstanceRole
+  EC2Instance:
+    Type: &quot;AWS::EC2::Instance&quot;
+    Properties:
+      ImageId: !Ref LatestAmiId
+      InstanceType: &quot;t3.medium&quot;
+      IamInstanceProfile: !Ref SSMInstanceProfile
+      Tags:
+       - Key: nginx
+         Value: Yes
+  NginxAssociation:
+    DependsOn: EC2Instance
+    Type: AWS::SSM::Association
+    Properties:
+      Name: !Ref nginxInstallAutomation
+      WaitForSuccessTimeoutSeconds: 300
+      OutputLocation:
+        S3Location: 
+          OutputS3BucketName: !Ref SSMAssocLogs
+          OutputS3KeyPrefix: &apos;logs/&apos;
+      AutomationTargetParameterName: InstanceId
+      Parameters:
+        AutomationAssumeRole:
+          - !GetAtt &apos;SSMExecutionRole.Arn&apos;
+      Targets:
+        - Key: tag:nginx
+          Values:
+            - Yes     
+Outputs:
+  WebServerPublic:
+    Value: !GetAtt &apos;EC2Instance.PublicDnsName&apos;
+    Description: Public DNS for WebServer</code></pre></div>
+                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_that_joins_targets_to_a_Windows_Active_Directory_domain">Create an association that joins targets to a Windows Active Directory domain</h3>
+                                 <p>The following example creates an association that joins targets to a Windows Active
+                                    Directory domain by using State Manager. Target is based on tags.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_joins_targets_to_a_Windows_Active_Directory_domain--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Description&quot;: &quot;Deploy single windows EC2 Instance and join domain with SSM Association&quot;,
+  &quot;Parameters&quot;: <span>{</span>
+    &quot;DomainAdminPassword&quot;: <span>{</span>
+      &quot;AllowedPattern&quot;: &quot;(?=^.<span>{</span>6,255}$)((?=.*\\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[^A-Za-z0-9])(?=.*[a-z])|(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9]))^.*&quot;,
+      &quot;Description&quot;: &quot;Password for the domain admin user. Must be at least 8 characters, containing letters, numbers, and symbols.&quot;,
+      &quot;MaxLength&quot;: &quot;32&quot;,
+      &quot;MinLength&quot;: &quot;8&quot;,
+      &quot;NoEcho&quot;: &quot;true&quot;,
+      &quot;Type&quot;: &quot;String&quot;
+    },
+    &quot;DomainAdminUser&quot;: <span>{</span>
+      &quot;AllowedPattern&quot;: &quot;[a-zA-Z0-9]*&quot;,
+      &quot;Default&quot;: &quot;Admin&quot;,
+      &quot;Description&quot;: &quot;User name for the account that will be used as domain administrator. This is separate from the default \&quot;Administrator\&quot; account.&quot;,
+      &quot;MaxLength&quot;: &quot;25&quot;,
+      &quot;MinLength&quot;: &quot;5&quot;,
+      &quot;Type&quot;: &quot;String&quot;
+    },
+    &quot;DomainDNSName&quot;: <span>{</span>
+      &quot;AllowedPattern&quot;: &quot;[a-zA-Z0-9\\-]+\\..+&quot;,
+      &quot;Default&quot;: &quot;example.com&quot;,
+      &quot;Description&quot;: &quot;Fully qualified domain name (FQDN).&quot;,
+      &quot;MaxLength&quot;: &quot;255&quot;,
+      &quot;MinLength&quot;: &quot;2&quot;,
+      &quot;Type&quot;: &quot;String&quot;
+    },
+    &quot;DomainMemberSGID&quot;: <span>{</span>
+      &quot;Description&quot;: &quot;ID of the domain member security group (e.g., sg-7f16e910).&quot;,
+      &quot;Type&quot;: &quot;AWS::EC2::SecurityGroup::Id&quot;
+    },
+    &quot;DomainNetBIOSName&quot;: <span>{</span>
+      &quot;AllowedPattern&quot;: &quot;[a-zA-Z0-9\\-]+&quot;,
+      &quot;Default&quot;: &quot;EXAMPLE&quot;,
+      &quot;Description&quot;: &quot;NetBIOS name of the domain (up to 15 characters) for users of earlier versions of Windows.&quot;,
+      &quot;MaxLength&quot;: &quot;15&quot;,
+      &quot;MinLength&quot;: &quot;1&quot;,
+      &quot;Type&quot;: &quot;String&quot;
+    },
+    &quot;EC2InstanceType&quot;: <span>{</span>
+      &quot;AllowedValues&quot;: [
+        &quot;t3.nano&quot;,
+        &quot;t3.micro&quot;,
+        &quot;t3.small&quot;,
+        &quot;t3.medium&quot;,
+        &quot;t3.large&quot;,
+        &quot;t3.xlarge&quot;,
+        &quot;t3.2xlarge&quot;,
+        &quot;m5.large&quot;,
+        &quot;m5.xlarge&quot;,
+        &quot;m5.2xlarge&quot;
+      ],
+      &quot;Default&quot;: &quot;m5.large&quot;,
+      &quot;Description&quot;: &quot;Amazon EC2 instance type&quot;,
+      &quot;Type&quot;: &quot;String&quot;
+    },
+    &quot;LatestAmiId&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::SSM::Parameter::Value&lt;AWS::EC2::Image::Id&gt;&quot;,
+      &quot;Default&quot;: &quot;/aws/service/ami-windows-latest/Windows_Server-2019-English-Full-Base&quot;
+    },
+    &quot;SubnetID&quot;: <span>{</span>
+      &quot;Description&quot;: &quot;ID of a Subnet.&quot;,
+      &quot;Type&quot;: &quot;AWS::EC2::Subnet::Id&quot;
+    }
+  },
+  &quot;Resources&quot;: <span>{</span>
+    &quot;DSCBucket&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;LifecycleConfiguration&quot;: <span>{</span>
+          &quot;Rules&quot;: [
+            <span>{</span>
+              &quot;Id&quot;: &quot;DeleteAfter30Days&quot;,
+              &quot;ExpirationInDays&quot;: 30,
+              &quot;Status&quot;: &quot;Enabled&quot;,
+              &quot;Prefix&quot;: &quot;logs/&quot;
+            }
+          ]
+        }
+      }
+    },
+    &quot;DomainJoinSecrets&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::SecretsManager::Secret&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Name&quot;: &quot;DomainJoinSecrets-$<span>{</span>AWS::StackName}&quot;,
+        &quot;Description&quot;: &quot;Secrets to join AD domain&quot;,
+        &quot;SecretString&quot;: &quot;<span>{</span>\&quot;username\&quot;:\&quot;$<span>{</span>DomainNetBIOSName}\\\\$<span>{</span>DomainAdminUser}\&quot;,\&quot;password\&quot;:\&quot;$<span>{</span>DomainAdminPassword}\&quot;}&quot;
+      }
+    },
+    &quot;LambdaSSMRole&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::IAM::Role&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Policies&quot;: [
+          <span>{</span>
+            &quot;PolicyDocument&quot;: <span>{</span>
+              &quot;Version&quot;: &quot;2012-10-17&quot;,
+              &quot;Statement&quot;: [
+                <span>{</span>
+                  &quot;Effect&quot;: &quot;Allow&quot;,
+                  &quot;Action&quot;: [
+                    &quot;s3:PutObject&quot;
+                  ],
+                  &quot;Resource&quot;: [
+                    &quot;$<span>{</span>DSCBucket.Arn}&quot;,
+                    &quot;$<span>{</span>DSCBucket.Arn}/*&quot;
+                  ]
+                }
+              ]
+            },
+            &quot;PolicyName&quot;: &quot;write-mof-s3&quot;
+          }
+        ],
+        &quot;Path&quot;: &quot;/&quot;,
+        &quot;AssumeRolePolicyDocument&quot;: <span>{</span>
+          &quot;Version&quot;: &quot;2012-10-17&quot;,
+          &quot;Statement&quot;: [
+            <span>{</span>
+              &quot;Effect&quot;: &quot;Allow&quot;,
+              &quot;Principal&quot;: <span>{</span>
+                &quot;Service&quot;: [
+                  &quot;lambda.amazonaws.com&quot;
+                ]
+              },
+              &quot;Action&quot;: &quot;sts:AssumeRole&quot;
+            }
+          ]
+        },
+        &quot;ManagedPolicyArns&quot;: [
+          &quot;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole&quot;
+        ]
+      }
+    },
+    &quot;WriteMOFFunction&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::Lambda::Function&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Code&quot;: <span>{</span>
+          &quot;ZipFile&quot;: &quot;var AWS = require(&apos;aws-sdk&apos;), s3 = new AWS.S3(); const response = require(\&quot;cfn-response\&quot;); exports.handler = async (event, context) =&gt; <span>{</span>\n  console.log(JSON.stringify(event));\n  if (event.RequestType === &apos;Delete&apos;) <span>{</span>\n      await postResponse(event, context, response.SUCCESS, <span>{</span>})\n      return;\n  }\n  function postResponse(event, context, status, data)<span>{</span>\n      return new Promise((resolve, reject) =&gt; <span>{</span>\n          setTimeout(() =&gt; response.send(event, context, status, data), 5000)\n      });\n  }\n  await s3.putObject(<span>{</span>\n    Body: event.ResourceProperties.Body,\n    Bucket: event.ResourceProperties.Bucket,\n    Key: event.ResourceProperties.Key\n  }).promise();\n  await postResponse(event, context, response.SUCCESS, <span>{</span>});\n};\n&quot;
+        },
+        &quot;Handler&quot;: &quot;index.handler&quot;,
+        &quot;Role&quot;: &quot;LambdaSSMRole.Arn&quot;,
+        &quot;Runtime&quot;: &quot;nodejs10.x&quot;,
+        &quot;Timeout&quot;: 10
+      }
+    },
+    &quot;WriteDomainJoinMOF&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;Custom::WriteMOFFile&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;ServiceToken&quot;: &quot;WriteMOFFunction.Arn&quot;,
+        &quot;Bucket&quot;: &quot;DSCBucket&quot;,
+        &quot;Key&quot;: &quot;DomainJoin-$<span>{</span>AWS::StackName}.mof&quot;,
+        &quot;Body&quot;: &quot;/*\n@TargetNode=&apos;localhost&apos;\n*/\ninstance of MSFT_Credential as $MSFT_Credential1ref\n<span>{</span>\nPassword = \&quot;managementgovernancesample\&quot;;\n UserName = \&quot;$<span>{</span>DomainJoinSecrets}\&quot;;\n\n};\ninstance of DSC_Computer as $DSC_Computer1ref\n<span>{</span>\nResourceID = \&quot;[Computer]JoinDomain\&quot;;\n Credential = $MSFT_Credential1ref;\n DomainName = \&quot;<span>{</span>tag:DomainToJoin}\&quot;;\n Name = \&quot;<span>{</span>tag:Name}\&quot;;\n ModuleName = \&quot;ComputerManagementDsc\&quot;;\n ModuleVersion = \&quot;8.0.0\&quot;;\n ConfigurationName = \&quot;DomainJoin\&quot;;\n};\ninstance of OMI_ConfigurationDocument\n                    <span>{</span>\n Version=\&quot;2.0.0\&quot;;\n                        MinimumCompatibleVersion = \&quot;1.0.0\&quot;;\n                        CompatibleVersionAdditionalProperties= <span>{</span>\&quot;Omi_BaseResource:ConfigurationName\&quot;};\n                        Name=\&quot;DomainJoin\&quot;;\n                    };      \n&quot;
+      }
+    },
+    &quot;SSMInstanceRole&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::IAM::Role&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Policies&quot;: [
+          <span>{</span>
+            &quot;PolicyDocument&quot;: <span>{</span>
+              &quot;Version&quot;: &quot;2012-10-17&quot;,
+              &quot;Statement&quot;: [
+                <span>{</span>
+                  &quot;Action&quot;: [
+                    &quot;s3:GetObject&quot;
+                  ],
+                  &quot;Resource&quot;: [
+                    &quot;arn:aws:s3:::aws-ssm-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::aws-windows-downloads-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::amazon-ssm-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::amazon-ssm-packages-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::$<span>{</span>AWS::Region}-birdwatcher-prod/*&quot;,
+                    &quot;arn:aws:s3:::patch-baseline-snapshot-$<span>{</span>AWS::Region}/*&quot;
+                  ],
+                  &quot;Effect&quot;: &quot;Allow&quot;
+                }
+              ]
+            },
+            &quot;PolicyName&quot;: &quot;ssm-custom-s3-policy&quot;
+          },
+          <span>{</span>
+            &quot;PolicyDocument&quot;: <span>{</span>
+              &quot;Version&quot;: &quot;2012-10-17&quot;,
+              &quot;Statement&quot;: [
+                <span>{</span>
+                  &quot;Effect&quot;: &quot;Allow&quot;,
+                  &quot;Action&quot;: [
+                    &quot;secretsmanager:GetSecretValue&quot;,
+                    &quot;secretsmanager:DescribeSecret&quot;
+                  ],
+                  &quot;Resource&quot;: [
+                    &quot;DomainJoinSecrets&quot;
+                  ]
+                }
+              ]
+            },
+            &quot;PolicyName&quot;: &quot;ssm-secrets-policy&quot;
+          },
+          <span>{</span>
+            &quot;PolicyDocument&quot;: <span>{</span>
+              &quot;Version&quot;: &quot;2012-10-17&quot;,
+              &quot;Statement&quot;: [
+                <span>{</span>
+                  &quot;Action&quot;: [
+                    &quot;s3:GetObject&quot;,
+                    &quot;s3:PutObject&quot;,
+                    &quot;s3:PutObjectAcl&quot;,
+                    &quot;s3:ListBucket&quot;
+                  ],
+                  &quot;Resource&quot;: [
+                    &quot;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>DSCBucket}/*&quot;,
+                    &quot;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>DSCBucket}&quot;
+                  ],
+                  &quot;Effect&quot;: &quot;Allow&quot;
+                }
+              ]
+            },
+            &quot;PolicyName&quot;: &quot;s3-instance-bucket-policy&quot;
+          }
+        ],
+        &quot;Path&quot;: &quot;/&quot;,
+        &quot;ManagedPolicyArns&quot;: [
+          &quot;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore&quot;,
+          &quot;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonEC2ReadOnlyAccess&quot;
+        ],
+        &quot;AssumeRolePolicyDocument&quot;: <span>{</span>
+          &quot;Version&quot;: &quot;2012-10-17&quot;,
+          &quot;Statement&quot;: [
+            <span>{</span>
+              &quot;Effect&quot;: &quot;Allow&quot;,
+              &quot;Principal&quot;: <span>{</span>
+                &quot;Service&quot;: [
+                  &quot;ec2.amazonaws.com&quot;,
+                  &quot;ssm.amazonaws.com&quot;
+                ]
+              },
+              &quot;Action&quot;: &quot;sts:AssumeRole&quot;
+            }
+          ]
+        }
+      }
+    },
+    &quot;SSMInstanceProfile&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::IAM::InstanceProfile&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Roles&quot;: [
+          &quot;SSMInstanceRole&quot;
+        ]
+      }
+    },
+    &quot;WINEC2Instance&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::EC2::Instance&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;ImageId&quot;: &quot;LatestAmiId&quot;,
+        &quot;InstanceType&quot;: &quot;EC2InstanceType&quot;,
+        &quot;IamInstanceProfile&quot;: &quot;SSMInstanceProfile&quot;,
+        &quot;NetworkInterfaces&quot;: [
+          <span>{</span>
+            &quot;DeleteOnTermination&quot;: true,
+            &quot;DeviceIndex&quot;: &quot;0&quot;,
+            &quot;SubnetId&quot;: &quot;SubnetID&quot;,
+            &quot;GroupSet&quot;: [
+              &quot;DomainMemberSGID&quot;
+            ]
+          }
+        ],
+        &quot;Tags&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;Name&quot;,
+            &quot;Value&quot;: &quot;WindowsBox0&quot;
+          },
+          <span>{</span>
+            &quot;Key&quot;: &quot;DomainToJoin&quot;,
+            &quot;Value&quot;: &quot;DomainDNSName&quot;
+          }
+        ]
+      }
+    },
+    &quot;JoinDomainAssociation&quot;: <span>{</span>
+      &quot;DependsOn&quot;: [
+        &quot;WINEC2Instance&quot;,
+        &quot;WriteDomainJoinMOF&quot;
+      ],
+      &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;WaitForSuccessTimeoutSeconds&quot;: 300,
+        &quot;Name&quot;: &quot;AWS-ApplyDSCMofs&quot;,
+        &quot;Targets&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;tag:DomainToJoin&quot;,
+            &quot;Values&quot;: [
+              &quot;DomainDNSName&quot;
+            ]
+          }
+        ],
+        &quot;OutputLocation&quot;: <span>{</span>
+          &quot;S3Location&quot;: <span>{</span>
+            &quot;OutputS3BucketName&quot;: &quot;DSCBucket&quot;,
+            &quot;OutputS3KeyPrefix&quot;: &quot;logs/&quot;
+          }
+        },
+        &quot;ScheduleExpression&quot;: &quot;cron(30 23 * * ? *)&quot;,
+        &quot;MaxErrors&quot;: 1,
+        &quot;MaxConcurrency&quot;: 1,
+        &quot;Parameters&quot;: <span>{</span>
+          &quot;MofsToApply&quot;: [
+            &quot;s3:$<span>{</span>DSCBucket}:DomainJoin-$<span>{</span>AWS::StackName}.mof&quot;
+          ],
+          &quot;ServicePath&quot;: [
+            &quot;default&quot;
+          ],
+          &quot;MofOperationMode&quot;: [
+            &quot;Apply&quot;
+          ],
+          &quot;ComplianceType&quot;: [
+            &quot;Custom:DomainJoinSample&quot;
+          ],
+          &quot;ModuleSourceBucketName&quot;: [
+            &quot;NONE&quot;
+          ],
+          &quot;AllowPSGalleryModuleSource&quot;: [
+            &quot;True&quot;
+          ],
+          &quot;RebootBehavior&quot;: [
+            &quot;AfterMof&quot;
+          ],
+          &quot;UseComputerNameForReporting&quot;: [
+            &quot;False&quot;
+          ],
+          &quot;EnableVerboseLogging&quot;: [
+            &quot;False&quot;
+          ],
+          &quot;EnableDebugLogging&quot;: [
+            &quot;False&quot;
+          ]
+        }
+      }
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_joins_targets_to_a_Windows_Active_Directory_domain--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Description: &quot;Deploy single windows EC2 Instance and join domain with SSM Association&quot;
+Parameters:
+  DomainAdminPassword:
+    AllowedPattern: (?=^.<span>{</span>6,255}$)((?=.*\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[^A-Za-z0-9])(?=.*[a-z])|(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9]))^.*
+    Description: Password for the domain admin user. Must be at least 8 characters,
+      containing letters, numbers, and symbols.
+    MaxLength: &apos;32&apos;
+    MinLength: &apos;8&apos;
+    NoEcho: &apos;true&apos;
+    Type: String
+  DomainAdminUser:
+    AllowedPattern: &apos;[a-zA-Z0-9]*&apos;
+    Default: Admin
+    Description: User name for the account that will be used as domain administrator. This is separate from the default &quot;Administrator&quot; account.
+    MaxLength: &apos;25&apos;
+    MinLength: &apos;5&apos;
+    Type: String
+  DomainDNSName:
+    AllowedPattern: &apos;[a-zA-Z0-9\-]+\..+&apos;
+    Default: example.com
+    Description: Fully qualified domain name (FQDN).
+    MaxLength: &apos;255&apos;
+    MinLength: &apos;2&apos;
+    Type: String
+  DomainMemberSGID:
+    Description: ID of the domain member security group (e.g., sg-7f16e910).
+    Type: AWS::EC2::SecurityGroup::Id
+  DomainNetBIOSName:
+    AllowedPattern: &apos;[a-zA-Z0-9\-]+&apos;
+    Default: EXAMPLE
+    Description: NetBIOS name of the domain (up to 15 characters) for users of earlier
+      versions of Windows.
+    MaxLength: &apos;15&apos;
+    MinLength: &apos;1&apos;
+    Type: String
+  EC2InstanceType:
+    AllowedValues:
+      - t3.nano
+      - t3.micro
+      - t3.small
+      - t3.medium
+      - t3.large
+      - t3.xlarge
+      - t3.2xlarge
+      - m5.large
+      - m5.xlarge
+      - m5.2xlarge
+    Default: m5.large
+    Description: Amazon EC2 instance type
+    Type: String
+  LatestAmiId:
+    Type: &apos;AWS::SSM::Parameter::Value&lt;AWS::EC2::Image::Id&gt;&apos;
+    Default: &quot;/aws/service/ami-windows-latest/Windows_Server-2019-English-Full-Base&quot;
+  SubnetID:
+    Description: ID of a Subnet.
+    Type: AWS::EC2::Subnet::Id
+Resources:
+  DSCBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      LifecycleConfiguration:
+        Rules:
+          - Id: DeleteAfter30Days
+            ExpirationInDays: 30
+            Status: Enabled
+            Prefix: &apos;logs/&apos;
+  DomainJoinSecrets:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: !Sub &apos;DomainJoinSecrets-$<span>{</span>AWS::StackName}&apos;
+      Description: Secrets to join AD domain
+      SecretString: !Sub &apos;<span>{</span>&quot;username&quot;:&quot;$<span>{</span>DomainNetBIOSName}\\$<span>{</span>DomainAdminUser}&quot;,&quot;password&quot;:&quot;$<span>{</span>DomainAdminPassword}&quot;}&apos;
+  LambdaSSMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Policies:
+        - PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+            - Effect: Allow
+              Action:
+              - s3:PutObject
+              Resource:
+                - !Sub &quot;$<span>{</span>DSCBucket.Arn}&quot;
+                - !Sub &quot;$<span>{</span>DSCBucket.Arn}/*&quot;
+          PolicyName: write-mof-s3
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: &apos;2012-10-17&apos;
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: 
+                - lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - !Sub &apos;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole&apos;
+  WriteMOFFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        ZipFile: &gt;
+          var AWS = require(&apos;aws-sdk&apos;), s3 = new AWS.S3();
+          const response = require(&quot;cfn-response&quot;);
+          exports.handler = async (event, context) =&gt; <span>{</span>
+            console.log(JSON.stringify(event));
+            if (event.RequestType === &apos;Delete&apos;) <span>{</span>
+                await postResponse(event, context, response.SUCCESS, <span>{</span>})
+                return;
+            }
+            function postResponse(event, context, status, data)<span>{</span>
+                return new Promise((resolve, reject) =&gt; <span>{</span>
+                    setTimeout(() =&gt; response.send(event, context, status, data), 5000)
+                });
+            }
+            await s3.putObject(<span>{</span>
+              Body: event.ResourceProperties.Body,
+              Bucket: event.ResourceProperties.Bucket,
+              Key: event.ResourceProperties.Key
+            }).promise();
+            await postResponse(event, context, response.SUCCESS, <span>{</span>});
+          };
+      Handler: index.handler
+      Role: !GetAtt LambdaSSMRole.Arn
+      Runtime: nodejs10.x
+      Timeout: 10
+  WriteDomainJoinMOF:
+    Type: Custom::WriteMOFFile
+    Properties:
+      ServiceToken: !GetAtt WriteMOFFunction.Arn
+      Bucket: !Ref DSCBucket
+      Key: !Sub &quot;DomainJoin-$<span>{</span>AWS::StackName}.mof&quot;
+      Body: !Sub |
+        /*
+        @TargetNode=&apos;localhost&apos;
+        */
+        instance of MSFT_Credential as $MSFT_Credential1ref
+        <span>{</span>
+        Password = &quot;managementgovernancesample&quot;;
+         UserName = &quot;$<span>{</span>DomainJoinSecrets}&quot;;
+        
+        };
+        instance of DSC_Computer as $DSC_Computer1ref
+        <span>{</span>
+        ResourceID = &quot;[Computer]JoinDomain&quot;;
+         Credential = $MSFT_Credential1ref;
+         DomainName = &quot;<span>{</span>tag:DomainToJoin}&quot;;
+         Name = &quot;<span>{</span>tag:Name}&quot;;
+         ModuleName = &quot;ComputerManagementDsc&quot;;
+         ModuleVersion = &quot;8.0.0&quot;;
+         ConfigurationName = &quot;DomainJoin&quot;;
+        };
+        instance of OMI_ConfigurationDocument
+                            <span>{</span>
+         Version=&quot;2.0.0&quot;;
+                                MinimumCompatibleVersion = &quot;1.0.0&quot;;
+                                CompatibleVersionAdditionalProperties= <span>{</span>&quot;Omi_BaseResource:ConfigurationName&quot;};
+                                Name=&quot;DomainJoin&quot;;
+                            };      
+  SSMInstanceRole: 
+    Type : AWS::IAM::Role
+    Properties:
+      Policies:
+        - PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+              - Action:
+                  - s3:GetObject
+                Resource: 
+                  - !Sub &apos;arn:aws:s3:::aws-ssm-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::aws-windows-downloads-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::amazon-ssm-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::amazon-ssm-packages-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::$<span>{</span>AWS::Region}-birdwatcher-prod/*&apos;
+                  - !Sub &apos;arn:aws:s3:::patch-baseline-snapshot-$<span>{</span>AWS::Region}/*&apos;
+                Effect: Allow
+          PolicyName: ssm-custom-s3-policy
+        - PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+              - Effect: Allow
+                Action:
+                  - secretsmanager:GetSecretValue
+                  - secretsmanager:DescribeSecret
+                Resource: 
+                  - !Ref &apos;DomainJoinSecrets&apos;
+          PolicyName: ssm-secrets-policy
+        - PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+              - Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:PutObjectAcl
+                  - s3:ListBucket
+                Resource: 
+                  - !Sub &apos;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>DSCBucket}/*&apos;
+                  - !Sub &apos;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>DSCBucket}&apos;
+                Effect: Allow
+          PolicyName: s3-instance-bucket-policy
+      Path: /
+      ManagedPolicyArns:
+        - !Sub &apos;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore&apos;
+        - !Sub &apos;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonEC2ReadOnlyAccess&apos;
+      AssumeRolePolicyDocument:
+        Version: &quot;2012-10-17&quot;
+        Statement:
+        - Effect: &quot;Allow&quot;
+          Principal:
+            Service:
+            - &quot;ec2.amazonaws.com&quot;
+            - &quot;ssm.amazonaws.com&quot;
+          Action: &quot;sts:AssumeRole&quot;
+  SSMInstanceProfile:
+    Type: &quot;AWS::IAM::InstanceProfile&quot;
+    Properties:
+      Roles:
+      - !Ref SSMInstanceRole
+  WINEC2Instance:
+    Type: &quot;AWS::EC2::Instance&quot;
+    Properties:
+      ImageId: !Ref LatestAmiId
+      InstanceType: !Ref EC2InstanceType
+      IamInstanceProfile: !Ref SSMInstanceProfile
+      NetworkInterfaces:
+        - DeleteOnTermination: true
+          DeviceIndex: &apos;0&apos;
+          SubnetId: !Ref &apos;SubnetID&apos;
+          GroupSet:
+            - !Ref DomainMemberSGID
+      Tags:
+      - Key: &quot;Name&quot;
+        Value: &quot;WindowsBox0&quot;
+      - Key: &quot;DomainToJoin&quot;
+        Value: !Ref &quot;DomainDNSName&quot;
+  JoinDomainAssociation:
+    DependsOn: 
+      - WINEC2Instance
+      - WriteDomainJoinMOF
+    Type: AWS::SSM::Association
+    Properties:
+      WaitForSuccessTimeoutSeconds: 300
+      Name: AWS-ApplyDSCMofs
+      Targets:
+        - Key: &quot;tag:DomainToJoin&quot;
+          Values:
+           - !Ref &quot;DomainDNSName&quot;
+      OutputLocation:
+        S3Location: 
+          OutputS3BucketName: !Ref DSCBucket
+          OutputS3KeyPrefix: &apos;logs/&apos;
+      ScheduleExpression: &quot;cron(30 23 * * ? *)&quot;
+      MaxErrors: 1
+      MaxConcurrency: 1
+      Parameters:
+        MofsToApply:
+          - !Sub &quot;s3:$<span>{</span>DSCBucket}:DomainJoin-$<span>{</span>AWS::StackName}.mof&quot;
+        ServicePath:
+          - default
+        MofOperationMode:
+          - Apply
+        ComplianceType:
+          - Custom:DomainJoinSample
+        ModuleSourceBucketName:
+          - &quot;NONE&quot;
+        AllowPSGalleryModuleSource:
+          - &quot;True&quot;
+        RebootBehavior:
+          - &quot;AfterMof&quot;
+        UseComputerNameForReporting:
+          - &quot;False&quot;
+        EnableVerboseLogging:
+          - &quot;False&quot;
+        EnableDebugLogging:
+          - &quot;False&quot;
+</code></pre></div>
+                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_that_joins_targets_to_a_Windows_Active_Directory_domain_and_uses_Systems_Manager_Automation">Create an association that joins targets to a Windows Active Directory domain and
+                                    uses Systems Manager Automation
+                                 </h3>
+                                 <p>The following example creates an association that joins targets to a Windows Active
+                                    Directory domain by using State Manager and Automation. Target is based on tags.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_joins_targets_to_a_Windows_Active_Directory_domain_and_uses_Systems_Manager_Automation--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+  &quot;Description&quot;: &quot;Deploy single windows EC2 Instance and join domain with SSM Association&quot;,
+  &quot;Parameters&quot;: <span>{</span>
+    &quot;DomainAdminPassword&quot;: <span>{</span>
+      &quot;AllowedPattern&quot;: &quot;(?=^.<span>{</span>6,255}$)((?=.*\\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[^A-Za-z0-9])(?=.*[a-z])|(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9]))^.*&quot;,
+      &quot;Description&quot;: &quot;Password for the domain admin user. Must be at least 8 characters, containing letters, numbers, and symbols.&quot;,
+      &quot;MaxLength&quot;: &quot;32&quot;,
+      &quot;MinLength&quot;: &quot;8&quot;,
+      &quot;NoEcho&quot;: &quot;true&quot;,
+      &quot;Type&quot;: &quot;String&quot;
+    },
+    &quot;DomainAdminUser&quot;: <span>{</span>
+      &quot;AllowedPattern&quot;: &quot;[a-zA-Z0-9]*&quot;,
+      &quot;Default&quot;: &quot;Admin&quot;,
+      &quot;Description&quot;: &quot;User name for the account that will be used as domain administrator. This is separate from the default \&quot;Administrator\&quot; account.&quot;,
+      &quot;MaxLength&quot;: &quot;25&quot;,
+      &quot;MinLength&quot;: &quot;5&quot;,
+      &quot;Type&quot;: &quot;String&quot;
+    },
+    &quot;DomainDNSName&quot;: <span>{</span>
+      &quot;AllowedPattern&quot;: &quot;[a-zA-Z0-9\\-]+\\..+&quot;,
+      &quot;Default&quot;: &quot;example.com&quot;,
+      &quot;Description&quot;: &quot;Fully qualified domain name (FQDN).&quot;,
+      &quot;MaxLength&quot;: &quot;255&quot;,
+      &quot;MinLength&quot;: &quot;2&quot;,
+      &quot;Type&quot;: &quot;String&quot;
+    },
+    &quot;DomainMemberSGID&quot;: <span>{</span>
+      &quot;Description&quot;: &quot;ID of the domain member security group (e.g., sg-7f16e910).&quot;,
+      &quot;Type&quot;: &quot;AWS::EC2::SecurityGroup::Id&quot;
+    },
+    &quot;DomainNetBIOSName&quot;: <span>{</span>
+      &quot;AllowedPattern&quot;: &quot;[a-zA-Z0-9\\-]+&quot;,
+      &quot;Default&quot;: &quot;EXAMPLE&quot;,
+      &quot;Description&quot;: &quot;NetBIOS name of the domain (up to 15 characters) for users of earlier versions of Windows.&quot;,
+      &quot;MaxLength&quot;: &quot;15&quot;,
+      &quot;MinLength&quot;: &quot;1&quot;,
+      &quot;Type&quot;: &quot;String&quot;
+    },
+    &quot;EC2InstanceType&quot;: <span>{</span>
+      &quot;AllowedValues&quot;: [
+        &quot;t3.nano&quot;,
+        &quot;t3.micro&quot;,
+        &quot;t3.small&quot;,
+        &quot;t3.medium&quot;,
+        &quot;t3.large&quot;,
+        &quot;t3.xlarge&quot;,
+        &quot;t3.2xlarge&quot;,
+        &quot;m5.large&quot;,
+        &quot;m5.xlarge&quot;,
+        &quot;m5.2xlarge&quot;
+      ],
+      &quot;Default&quot;: &quot;m5.large&quot;,
+      &quot;Description&quot;: &quot;Amazon EC2 instance type&quot;,
+      &quot;Type&quot;: &quot;String&quot;
+    },
+    &quot;LatestAmiId&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::SSM::Parameter::Value&lt;AWS::EC2::Image::Id&gt;&quot;,
+      &quot;Default&quot;: &quot;/aws/service/ami-windows-latest/Windows_Server-2019-English-Full-Base&quot;
+    },
+    &quot;SubnetID&quot;: <span>{</span>
+      &quot;Description&quot;: &quot;ID of a Subnet.&quot;,
+      &quot;Type&quot;: &quot;AWS::EC2::Subnet::Id&quot;
+    }
+  },
+  &quot;Resources&quot;: <span>{</span>
+    &quot;DSCBucket&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;LifecycleConfiguration&quot;: <span>{</span>
+          &quot;Rules&quot;: [
+            <span>{</span>
+              &quot;Id&quot;: &quot;DeleteAfter30Days&quot;,
+              &quot;ExpirationInDays&quot;: 30,
+              &quot;Status&quot;: &quot;Enabled&quot;,
+              &quot;Prefix&quot;: &quot;logs/&quot;
+            }
+          ]
+        }
+      }
+    },
+    &quot;DomainJoinSecrets&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::SecretsManager::Secret&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Name&quot;: &quot;DomainJoinSecrets-$<span>{</span>AWS::StackName}&quot;,
+        &quot;Description&quot;: &quot;Secrets to join AD domain&quot;,
+        &quot;SecretString&quot;: &quot;<span>{</span>\&quot;username\&quot;:\&quot;$<span>{</span>DomainAdminUser}\&quot;,\&quot;password\&quot;:\&quot;$<span>{</span>DomainAdminPassword}\&quot;}&quot;
+      }
+    },
+    &quot;LambdaSSMRole&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::IAM::Role&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Policies&quot;: [
+          <span>{</span>
+            &quot;PolicyDocument&quot;: <span>{</span>
+              &quot;Version&quot;: &quot;2012-10-17&quot;,
+              &quot;Statement&quot;: [
+                <span>{</span>
+                  &quot;Effect&quot;: &quot;Allow&quot;,
+                  &quot;Action&quot;: [
+                    &quot;s3:PutObject&quot;
+                  ],
+                  &quot;Resource&quot;: [
+                    &quot;$<span>{</span>DSCBucket.Arn}&quot;,
+                    &quot;$<span>{</span>DSCBucket.Arn}/*&quot;
+                  ]
+                }
+              ]
+            },
+            &quot;PolicyName&quot;: &quot;write-mof-s3&quot;
+          }
+        ],
+        &quot;Path&quot;: &quot;/&quot;,
+        &quot;AssumeRolePolicyDocument&quot;: <span>{</span>
+          &quot;Version&quot;: &quot;2012-10-17&quot;,
+          &quot;Statement&quot;: [
+            <span>{</span>
+              &quot;Effect&quot;: &quot;Allow&quot;,
+              &quot;Principal&quot;: <span>{</span>
+                &quot;Service&quot;: [
+                  &quot;lambda.amazonaws.com&quot;
+                ]
+              },
+              &quot;Action&quot;: &quot;sts:AssumeRole&quot;
+            }
+          ]
+        },
+        &quot;ManagedPolicyArns&quot;: [
+          &quot;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole&quot;
+        ]
+      }
+    },
+    &quot;WriteScriptFunction&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::Lambda::Function&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Code&quot;: <span>{</span>
+          &quot;ZipFile&quot;: &quot;var AWS = require(&apos;aws-sdk&apos;), s3 = new AWS.S3(); const response = require(\&quot;cfn-response\&quot;); exports.handler = async (event, context) =&gt; <span>{</span>\n  console.log(JSON.stringify(event));\n  if (event.RequestType === &apos;Delete&apos;) <span>{</span>\n      await postResponse(event, context, response.SUCCESS, <span>{</span>})\n      return;\n  }\n  function postResponse(event, context, status, data)<span>{</span>\n      return new Promise((resolve, reject) =&gt; <span>{</span>\n          setTimeout(() =&gt; response.send(event, context, status, data), 5000)\n      });\n  }\n  await s3.putObject(<span>{</span>\n    Body: event.ResourceProperties.Body,\n    Bucket: event.ResourceProperties.Bucket,\n    Key: event.ResourceProperties.Key\n  }).promise();\n  await postResponse(event, context, response.SUCCESS, <span>{</span>});\n};\n&quot;
+        },
+        &quot;Handler&quot;: &quot;index.handler&quot;,
+        &quot;Role&quot;: &quot;LambdaSSMRole.Arn&quot;,
+        &quot;Runtime&quot;: &quot;nodejs10.x&quot;,
+        &quot;Timeout&quot;: 10
+      }
+    },
+    &quot;WriteDomainJoinScript&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;Custom::WriteScript&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;ServiceToken&quot;: &quot;WriteScriptFunction.Arn&quot;,
+        &quot;Bucket&quot;: &quot;DSCBucket&quot;,
+        &quot;Key&quot;: &quot;DomainJoin.ps1&quot;,
+        &quot;Body&quot;: &quot;[CmdletBinding()]\n# Incoming Parameters for Script, CloudFormation\\SSM Parameters being passed in\nparam(\n    [Parameter(Mandatory=$true)]\n    [string]$DomainNetBIOSName,\n\n    [Parameter(Mandatory=$true)]\n    [string]$DomainDNSName,\n\n    [Parameter(Mandatory=$true)]\n    [string]$AdminSecret\n)\n\n# Formatting AD Admin User to proper format for JoinDomain DSC Resources in this Script\n$DomainAdmin = &apos;Domain\\User&apos; -replace &apos;Domain&apos;,$DomainNetBIOSName -replace &apos;User&apos;,$UserName\n$Admin = ConvertFrom-Json -InputObject (Get-SECSecretValue -SecretId $AdminSecret).SecretString\n$AdminUser = $DomainNetBIOSName + &apos;\\&apos; + $Admin.UserName\n# Creating Credential Object for Administrator\n$Credentials = (New-Object PSCredential($AdminUser,(ConvertTo-SecureString $Admin.Password -AsPlainText -Force)))\n# Getting the DSC Cert Encryption Thumbprint to Secure the MOF File\n$DscCertThumbprint = (get-childitem -path cert:\\LocalMachine\\My | where <span>{</span> $_.subject -eq \&quot;CN=SampleDscEncryptCert\&quot; }).Thumbprint\n# Getting the Name Tag of the Instance\n$NameTag = (Get-EC2Tag -Filter @<span>{</span> Name=\&quot;resource-id\&quot;;Values=(Invoke-RestMethod -Method Get -Uri http://169.254.169.254/latest/meta-data/instance-id)}| Where-Object <span>{</span> $_.Key -eq \&quot;Name\&quot; })\n$NewName = $NameTag.Value\n\n# Creating Configuration Data Block that has the Certificate Information for DSC Configuration Processing\n$ConfigurationData = @<span>{</span>\n    AllNodes = @(\n        @<span>{</span>\n            NodeName=\&quot;*\&quot;\n            CertificateFile = \&quot;C:\\awssample\\publickeys\\SamplePublicKey.cer\&quot;\n            Thumbprint = $DscCertThumbprint\n            PSDscAllowDomainUser = $true\n        },\n        @<span>{</span>\n            NodeName = &apos;localhost&apos;\n        }\n    )\n}\n\nConfiguration DomainJoin <span>{</span>\n    param(\n        [PSCredential] $Credentials\n    )\n\n    Import-Module -Name PSDesiredStateConfiguration\n    Import-Module -Name ComputerManagementDsc\n    \n    Import-DscResource -Module PSDesiredStateConfiguration\n    Import-DscResource -Module ComputerManagementDsc\n\n    Node &apos;localhost&apos; <span>{</span>\n\n        Computer JoinDomain <span>{</span>\n            Name = $NewName\n            DomainName = $DomainDNSName\n            Credential = $Credentials\n        }\n    }\n}\n\nDomainJoin -OutputPath &apos;C:\\awssample\\DomainJoin&apos; -ConfigurationData $ConfigurationData -Credentials $Credentials\n&quot;
+      }
+    },
+    &quot;WriteInstallModuleScript&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;Custom::WriteScript&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;ServiceToken&quot;: &quot;WriteScriptFunction.Arn&quot;,
+        &quot;Bucket&quot;: &quot;DSCBucket&quot;,
+        &quot;Key&quot;: &quot;install-modules.ps1&quot;,
+        &quot;Body&quot;: &quot;[CmdletBinding()]\nparam()\n\n\&quot;Setting up Powershell Gallery to Install DSC Modules\&quot;\nInstall-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force\nSet-PSRepository -Name PSGallery -InstallationPolicy Trusted\n\n\&quot;Installing the needed Powershell DSC modules for this Quick Start\&quot;\nInstall-Module -Name ComputerManagementDsc\nInstall-Module -Name PSDscResources\n\n\&quot;Creating Directory for DSC Public Cert\&quot;\nNew-Item -Path C:\\awssample\\publickeys -ItemType directory -Force\n\n\&quot;Setting up DSC Certificate to Encrypt Credentials in MOF File\&quot;\n$cert = New-SelfSignedCertificate -Type DocumentEncryptionCertLegacyCsp -DnsName &apos;SampleDscEncryptCert&apos; -HashAlgorithm SHA256\n# Exporting the public key certificate\n$cert | Export-Certificate -FilePath \&quot;C:\\awssample\\publickeys\\SamplePublicKey.cer\&quot; -Force\n&quot;
+      }
+    },
+    &quot;WriteLCMConfigScript&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;Custom::WriteScript&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;ServiceToken&quot;: &quot;WriteScriptFunction.Arn&quot;,
+        &quot;Bucket&quot;: &quot;DSCBucket&quot;,
+        &quot;Key&quot;: &quot;LCM-Config.ps1&quot;,
+        &quot;Body&quot;: &quot;# This block sets the LCM configuration to what we need for QS\n[DSCLocalConfigurationManager()]\nconfiguration LCMConfig\n<span>{</span>\n    Node &apos;localhost&apos; <span>{</span>\n        Settings <span>{</span>\n            RefreshMode = &apos;Push&apos;\n            ActionAfterReboot = &apos;StopConfiguration&apos;                      \n            RebootNodeIfNeeded = $false\n            CertificateId = $DscCertThumbprint  \n        }\n    }\n}\n\n$DscCertThumbprint = [string](get-childitem -path cert:\\LocalMachine\\My | where <span>{</span> $_.subject -eq \&quot;CN=SampleDscEncryptCert\&quot; }).Thumbprint\n    \n#Generates MOF File for LCM\nLCMConfig -OutputPath &apos;C:\\awssample\\LCMConfig&apos;\n    \n# Sets LCM Configuration to MOF generated in previous command\nSet-DscLocalConfigurationManager -Path &apos;C:\\awssample\\LCMConfig&apos; \n&quot;
+      }
+    },
+    &quot;DomainJoinAutomation&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::SSM::Document&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;DocumentType&quot;: &quot;Automation&quot;,
+        &quot;Content&quot;: <span>{</span>
+          &quot;schemaVersion&quot;: &quot;0.3&quot;,
+          &quot;description&quot;: &quot;Join a Windows Domain&quot;,
+          &quot;assumeRole&quot;: &quot;<span>{</span><span>{</span>AutomationAssumeRole}}&quot;,
+          &quot;parameters&quot;: <span>{</span>
+            &quot;InstanceId&quot;: <span>{</span>
+              &quot;description&quot;: &quot;ID of the Instance.&quot;,
+              &quot;type&quot;: &quot;StringList&quot;
+            },
+            &quot;DomainDNSName&quot;: <span>{</span>
+              &quot;default&quot;: &quot;example.com&quot;,
+              &quot;description&quot;: &quot;Fully qualified domain name (FQDN) of the forest root domain e.g. example.com&quot;,
+              &quot;type&quot;: &quot;String&quot;
+            },
+            &quot;DomainNetBIOSName&quot;: <span>{</span>
+              &quot;default&quot;: &quot;example&quot;,
+              &quot;description&quot;: &quot;NetBIOS name of the domain (up to 15 characters) for users of earlier versions of Windows e.g. EXAMPLE&quot;,
+              &quot;type&quot;: &quot;String&quot;
+            },
+            &quot;AdminSecrets&quot;: <span>{</span>
+              &quot;description&quot;: &quot;AWS Secrets Parameter Name that has Password and User name for a domain administrator.&quot;,
+              &quot;type&quot;: &quot;String&quot;
+            },
+            &quot;S3BucketName&quot;: <span>{</span>
+              &quot;description&quot;: &quot;S3 bucket name for the Quick Start assets. Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).&quot;,
+              &quot;type&quot;: &quot;String&quot;
+            },
+            &quot;AutomationAssumeRole&quot;: <span>{</span>
+              &quot;default&quot;: &quot;&quot;,
+              &quot;description&quot;: &quot;(Optional) The ARN of the role that allows Automation to perform the actions on your behalf.&quot;,
+              &quot;type&quot;: &quot;String&quot;
+            }
+          },
+          &quot;mainSteps&quot;: [
+            <span>{</span>
+              &quot;name&quot;: &quot;InstallDSCModules&quot;,
+              &quot;action&quot;: &quot;aws:runCommand&quot;,
+              &quot;inputs&quot;: <span>{</span>
+                &quot;DocumentName&quot;: &quot;AWS-RunRemoteScript&quot;,
+                &quot;InstanceIds&quot;: [
+                  &quot;<span>{</span><span>{</span>InstanceId}}&quot;
+                ],
+                &quot;CloudWatchOutputConfig&quot;: <span>{</span>
+                  &quot;CloudWatchOutputEnabled&quot;: &quot;true&quot;,
+                  &quot;CloudWatchLogGroupName&quot;: &quot;/ssm/$<span>{</span>AWS::StackName}&quot;
+                },
+                &quot;Parameters&quot;: <span>{</span>
+                  &quot;sourceType&quot;: &quot;S3&quot;,
+                  &quot;sourceInfo&quot;: &quot;<span>{</span>\&quot;path\&quot;: \&quot;https://<span>{</span><span>{</span>S3BucketName}}.s3.amazonaws.com/install-modules.ps1\&quot;}&quot;,
+                  &quot;commandLine&quot;: &quot;./install-modules.ps1&quot;
+                }
+              }
+            },
+            <span>{</span>
+              &quot;name&quot;: &quot;ConfigureLCM&quot;,
+              &quot;action&quot;: &quot;aws:runCommand&quot;,
+              &quot;inputs&quot;: <span>{</span>
+                &quot;DocumentName&quot;: &quot;AWS-RunRemoteScript&quot;,
+                &quot;InstanceIds&quot;: [
+                  &quot;<span>{</span><span>{</span>InstanceId}}&quot;
+                ],
+                &quot;CloudWatchOutputConfig&quot;: <span>{</span>
+                  &quot;CloudWatchOutputEnabled&quot;: &quot;true&quot;,
+                  &quot;CloudWatchLogGroupName&quot;: &quot;/ssm/$<span>{</span>AWS::StackName}&quot;
+                },
+                &quot;Parameters&quot;: <span>{</span>
+                  &quot;sourceType&quot;: &quot;S3&quot;,
+                  &quot;sourceInfo&quot;: &quot;<span>{</span>\&quot;path\&quot;: \&quot;https://<span>{</span><span>{</span>S3BucketName}}.s3.amazonaws.com/LCM-Config.ps1\&quot;}&quot;,
+                  &quot;commandLine&quot;: &quot;./LCM-Config.ps1&quot;
+                }
+              }
+            },
+            <span>{</span>
+              &quot;name&quot;: &quot;GenerateDomainJoinMof&quot;,
+              &quot;action&quot;: &quot;aws:runCommand&quot;,
+              &quot;inputs&quot;: <span>{</span>
+                &quot;DocumentName&quot;: &quot;AWS-RunRemoteScript&quot;,
+                &quot;InstanceIds&quot;: [
+                  &quot;<span>{</span><span>{</span>InstanceId}}&quot;
+                ],
+                &quot;CloudWatchOutputConfig&quot;: <span>{</span>
+                  &quot;CloudWatchOutputEnabled&quot;: &quot;true&quot;,
+                  &quot;CloudWatchLogGroupName&quot;: &quot;/ssm/$<span>{</span>AWS::StackName}&quot;
+                },
+                &quot;Parameters&quot;: <span>{</span>
+                  &quot;sourceType&quot;: &quot;S3&quot;,
+                  &quot;sourceInfo&quot;: &quot;<span>{</span>\&quot;path\&quot;: \&quot;https://<span>{</span><span>{</span>S3BucketName}}.s3.amazonaws.com/DomainJoin.ps1\&quot;}&quot;,
+                  &quot;commandLine&quot;: &quot;./DomainJoin.ps1 -DomainNetBIOSName <span>{</span><span>{</span>DomainNetBIOSName}} -DomainDNSName <span>{</span><span>{</span>DomainDNSName}} -AdminSecret <span>{</span><span>{</span>AdminSecrets}}&quot;
+                }
+              }
+            },
+            <span>{</span>
+              &quot;name&quot;: &quot;DomainJoin&quot;,
+              &quot;action&quot;: &quot;aws:runCommand&quot;,
+              &quot;inputs&quot;: <span>{</span>
+                &quot;DocumentName&quot;: &quot;AWS-RunPowerShellScript&quot;,
+                &quot;InstanceIds&quot;: [
+                  &quot;<span>{</span><span>{</span>InstanceId}}&quot;
+                ],
+                &quot;CloudWatchOutputConfig&quot;: <span>{</span>
+                  &quot;CloudWatchOutputEnabled&quot;: &quot;true&quot;,
+                  &quot;CloudWatchLogGroupName&quot;: &quot;/ssm/$<span>{</span>AWS::StackName}&quot;
+                },
+                &quot;Parameters&quot;: <span>{</span>
+                  &quot;commands&quot;: [
+                    &quot;function DscStatusCheck () <span>{</span>\n    $LCMState = (Get-DscLocalConfigurationManager).LCMState\n    if ($LCMState -eq &apos;PendingConfiguration&apos; -Or $LCMState -eq &apos;PendingReboot&apos;) <span>{</span>\n        &apos;returning 3010, should continue after reboot&apos;\n        exit 3010\n    } else <span>{</span>\n      &apos;Completed&apos;\n    }\n}\n\nStart-DscConfiguration &apos;C:\\awssample\\DomainJoin&apos; -Wait -Verbose -Force\n\nDscStatusCheck\n&quot;
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    &quot;SSMExecutionRole&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::IAM::Role&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Policies&quot;: [
+          <span>{</span>
+            &quot;PolicyDocument&quot;: <span>{</span>
+              &quot;Version&quot;: &quot;2012-10-17&quot;,
+              &quot;Statement&quot;: [
+                <span>{</span>
+                  &quot;Action&quot;: [
+                    &quot;ssm:StartAssociationsOnce&quot;,
+                    &quot;ssm:CreateAssociation&quot;,
+                    &quot;ssm:CreateAssociationBatch&quot;,
+                    &quot;ssm:UpdateAssociation&quot;
+                  ],
+                  &quot;Resource&quot;: &quot;*&quot;,
+                  &quot;Effect&quot;: &quot;Allow&quot;
+                }
+              ]
+            },
+            &quot;PolicyName&quot;: &quot;ssm-association&quot;
+          }
+        ],
+        &quot;Path&quot;: &quot;/&quot;,
+        &quot;ManagedPolicyArns&quot;: [
+          &quot;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/service-role/AmazonSSMAutomationRole&quot;
+        ],
+        &quot;AssumeRolePolicyDocument&quot;: <span>{</span>
+          &quot;Version&quot;: &quot;2012-10-17&quot;,
+          &quot;Statement&quot;: [
+            <span>{</span>
+              &quot;Effect&quot;: &quot;Allow&quot;,
+              &quot;Principal&quot;: <span>{</span>
+                &quot;Service&quot;: [
+                  &quot;ec2.amazonaws.com&quot;,
+                  &quot;ssm.amazonaws.com&quot;
+                ]
+              },
+              &quot;Action&quot;: &quot;sts:AssumeRole&quot;
+            }
+          ]
+        }
+      }
+    },
+    &quot;SSMInstanceRole&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::IAM::Role&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Policies&quot;: [
+          <span>{</span>
+            &quot;PolicyDocument&quot;: <span>{</span>
+              &quot;Version&quot;: &quot;2012-10-17&quot;,
+              &quot;Statement&quot;: [
+                <span>{</span>
+                  &quot;Action&quot;: [
+                    &quot;s3:GetObject&quot;
+                  ],
+                  &quot;Resource&quot;: [
+                    &quot;arn:aws:s3:::aws-ssm-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::aws-windows-downloads-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::amazon-ssm-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::amazon-ssm-packages-$<span>{</span>AWS::Region}/*&quot;,
+                    &quot;arn:aws:s3:::$<span>{</span>AWS::Region}-birdwatcher-prod/*&quot;,
+                    &quot;arn:aws:s3:::patch-baseline-snapshot-$<span>{</span>AWS::Region}/*&quot;
+                  ],
+                  &quot;Effect&quot;: &quot;Allow&quot;
+                }
+              ]
+            },
+            &quot;PolicyName&quot;: &quot;ssm-custom-s3-policy&quot;
+          },
+          <span>{</span>
+            &quot;PolicyDocument&quot;: <span>{</span>
+              &quot;Version&quot;: &quot;2012-10-17&quot;,
+              &quot;Statement&quot;: [
+                <span>{</span>
+                  &quot;Effect&quot;: &quot;Allow&quot;,
+                  &quot;Action&quot;: [
+                    &quot;secretsmanager:GetSecretValue&quot;,
+                    &quot;secretsmanager:DescribeSecret&quot;
+                  ],
+                  &quot;Resource&quot;: [
+                    &quot;DomainJoinSecrets&quot;
+                  ]
+                }
+              ]
+            },
+            &quot;PolicyName&quot;: &quot;ssm-secrets-policy&quot;
+          },
+          <span>{</span>
+            &quot;PolicyDocument&quot;: <span>{</span>
+              &quot;Version&quot;: &quot;2012-10-17&quot;,
+              &quot;Statement&quot;: [
+                <span>{</span>
+                  &quot;Action&quot;: [
+                    &quot;s3:GetObject&quot;,
+                    &quot;s3:PutObject&quot;,
+                    &quot;s3:PutObjectAcl&quot;,
+                    &quot;s3:ListBucket&quot;
+                  ],
+                  &quot;Resource&quot;: [
+                    &quot;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>DSCBucket}/*&quot;,
+                    &quot;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>DSCBucket}&quot;
+                  ],
+                  &quot;Effect&quot;: &quot;Allow&quot;
+                }
+              ]
+            },
+            &quot;PolicyName&quot;: &quot;s3-instance-bucket-policy&quot;
+          }
+        ],
+        &quot;Path&quot;: &quot;/&quot;,
+        &quot;ManagedPolicyArns&quot;: [
+          &quot;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore&quot;,
+          &quot;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/CloudWatchAgentServerPolicy&quot;
+        ],
+        &quot;AssumeRolePolicyDocument&quot;: <span>{</span>
+          &quot;Version&quot;: &quot;2012-10-17&quot;,
+          &quot;Statement&quot;: [
+            <span>{</span>
+              &quot;Effect&quot;: &quot;Allow&quot;,
+              &quot;Principal&quot;: <span>{</span>
+                &quot;Service&quot;: [
+                  &quot;ec2.amazonaws.com&quot;,
+                  &quot;ssm.amazonaws.com&quot;
+                ]
+              },
+              &quot;Action&quot;: &quot;sts:AssumeRole&quot;
+            }
+          ]
+        }
+      }
+    },
+    &quot;SSMInstanceProfile&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::IAM::InstanceProfile&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Roles&quot;: [
+          &quot;SSMInstanceRole&quot;
+        ]
+      }
+    },
+    &quot;WINEC2Instance&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::EC2::Instance&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;ImageId&quot;: &quot;LatestAmiId&quot;,
+        &quot;InstanceType&quot;: &quot;EC2InstanceType&quot;,
+        &quot;IamInstanceProfile&quot;: &quot;SSMInstanceProfile&quot;,
+        &quot;NetworkInterfaces&quot;: [
+          <span>{</span>
+            &quot;DeleteOnTermination&quot;: true,
+            &quot;DeviceIndex&quot;: &quot;0&quot;,
+            &quot;SubnetId&quot;: &quot;SubnetID&quot;,
+            &quot;GroupSet&quot;: [
+              &quot;DomainMemberSGID&quot;
+            ]
+          }
+        ],
+        &quot;Tags&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;Name&quot;,
+            &quot;Value&quot;: &quot;WindowsBox1&quot;
+          }
+        ]
+      }
+    },
+    &quot;DomainAssociation&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;AssociationName&quot;: &quot;DomainJoin&quot;,
+        &quot;Name&quot;: &quot;DomainJoinAutomation&quot;,
+        &quot;WaitForSuccessTimeoutSeconds&quot;: 600,
+        &quot;AutomationTargetParameterName&quot;: &quot;InstanceId&quot;,
+        &quot;Targets&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;ParameterValues&quot;,
+            &quot;Values&quot;: [
+              &quot;WINEC2Instance&quot;
+            ]
+          }
+        ],
+        &quot;OutputLocation&quot;: <span>{</span>
+          &quot;S3Location&quot;: <span>{</span>
+            &quot;OutputS3BucketName&quot;: &quot;DSCBucket&quot;,
+            &quot;OutputS3KeyPrefix&quot;: &quot;logs/&quot;
+          }
+        },
+        &quot;Parameters&quot;: <span>{</span>
+          &quot;DomainDNSName&quot;: [
+            &quot;DomainDNSName&quot;
+          ],
+          &quot;DomainNetBIOSName&quot;: [
+            &quot;DomainNetBIOSName&quot;
+          ],
+          &quot;AdminSecrets&quot;: [
+            &quot;DomainJoinSecrets&quot;
+          ],
+          &quot;S3BucketName&quot;: [
+            &quot;DSCBucket&quot;
+          ],
+          &quot;AutomationAssumeRole&quot;: [
+            &quot;SSMExecutionRole.Arn&quot;
+          ]
+        }
+      }
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_joins_targets_to_a_Windows_Active_Directory_domain_and_uses_Systems_Manager_Automation--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Description: &quot;Deploy single windows EC2 Instance and join domain with SSM Association&quot;
+Parameters:
+  DomainAdminPassword:
+    AllowedPattern: (?=^.<span>{</span>6,255}$)((?=.*\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[^A-Za-z0-9])(?=.*[a-z])|(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9]))^.*
+    Description: Password for the domain admin user. Must be at least 8 characters,
+      containing letters, numbers, and symbols.
+    MaxLength: &apos;32&apos;
+    MinLength: &apos;8&apos;
+    NoEcho: &apos;true&apos;
+    Type: String
+  DomainAdminUser:
+    AllowedPattern: &apos;[a-zA-Z0-9]*&apos;
+    Default: Admin
+    Description: User name for the account that will be used as domain administrator. This is separate from the default &quot;Administrator&quot; account.
+    MaxLength: &apos;25&apos;
+    MinLength: &apos;5&apos;
+    Type: String
+  DomainDNSName:
+    AllowedPattern: &apos;[a-zA-Z0-9\-]+\..+&apos;
+    Default: example.com
+    Description: Fully qualified domain name (FQDN).
+    MaxLength: &apos;255&apos;
+    MinLength: &apos;2&apos;
+    Type: String
+  DomainMemberSGID:
+    Description: ID of the domain member security group (e.g., sg-7f16e910).
+    Type: AWS::EC2::SecurityGroup::Id
+  DomainNetBIOSName:
+    AllowedPattern: &apos;[a-zA-Z0-9\-]+&apos;
+    Default: EXAMPLE
+    Description: NetBIOS name of the domain (up to 15 characters) for users of earlier
+      versions of Windows.
+    MaxLength: &apos;15&apos;
+    MinLength: &apos;1&apos;
+    Type: String
+  EC2InstanceType:
+    AllowedValues:
+      - t3.nano
+      - t3.micro
+      - t3.small
+      - t3.medium
+      - t3.large
+      - t3.xlarge
+      - t3.2xlarge
+      - m5.large
+      - m5.xlarge
+      - m5.2xlarge
+    Default: m5.large
+    Description: Amazon EC2 instance type
+    Type: String
+  LatestAmiId:
+    Type: &apos;AWS::SSM::Parameter::Value&lt;AWS::EC2::Image::Id&gt;&apos;
+    Default: &quot;/aws/service/ami-windows-latest/Windows_Server-2019-English-Full-Base&quot;
+  SubnetID:
+    Description: ID of a Subnet.
+    Type: AWS::EC2::Subnet::Id
+Resources:
+  DSCBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      LifecycleConfiguration:
+        Rules:
+          - Id: DeleteAfter30Days
+            ExpirationInDays: 30
+            Status: Enabled
+            Prefix: &apos;logs/&apos;
+  DomainJoinSecrets:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: !Sub &apos;DomainJoinSecrets-$<span>{</span>AWS::StackName}&apos;
+      Description: Secrets to join AD domain
+      SecretString: !Sub &apos;<span>{</span>&quot;username&quot;:&quot;$<span>{</span>DomainAdminUser}&quot;,&quot;password&quot;:&quot;$<span>{</span>DomainAdminPassword}&quot;}&apos;
+  LambdaSSMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Policies:
+        - PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+            - Effect: Allow
+              Action:
+              - s3:PutObject
+              Resource:
+                - !Sub &quot;$<span>{</span>DSCBucket.Arn}&quot;
+                - !Sub &quot;$<span>{</span>DSCBucket.Arn}/*&quot;
+          PolicyName: write-mof-s3
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: &apos;2012-10-17&apos;
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: 
+                - lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - !Sub &apos;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole&apos;
+  WriteScriptFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        ZipFile: &gt;
+          var AWS = require(&apos;aws-sdk&apos;), s3 = new AWS.S3();
+          const response = require(&quot;cfn-response&quot;);
+          exports.handler = async (event, context) =&gt; <span>{</span>
+            console.log(JSON.stringify(event));
+            if (event.RequestType === &apos;Delete&apos;) <span>{</span>
+                await postResponse(event, context, response.SUCCESS, <span>{</span>})
+                return;
+            }
+            function postResponse(event, context, status, data)<span>{</span>
+                return new Promise((resolve, reject) =&gt; <span>{</span>
+                    setTimeout(() =&gt; response.send(event, context, status, data), 5000)
+                });
+            }
+            await s3.putObject(<span>{</span>
+              Body: event.ResourceProperties.Body,
+              Bucket: event.ResourceProperties.Bucket,
+              Key: event.ResourceProperties.Key
+            }).promise();
+            await postResponse(event, context, response.SUCCESS, <span>{</span>});
+          };
+      Handler: index.handler
+      Role: !GetAtt LambdaSSMRole.Arn
+      Runtime: nodejs10.x
+      Timeout: 10
+  WriteDomainJoinScript:
+    Type: Custom::WriteScript
+    Properties:
+      ServiceToken: !GetAtt WriteScriptFunction.Arn
+      Bucket: !Ref DSCBucket
+      Key: &quot;DomainJoin.ps1&quot;
+      Body: |
+        [CmdletBinding()]
+        # Incoming Parameters for Script, CloudFormation\SSM Parameters being passed in
+        param(
+            [Parameter(Mandatory=$true)]
+            [string]$DomainNetBIOSName,
+        
+            [Parameter(Mandatory=$true)]
+            [string]$DomainDNSName,
+        
+            [Parameter(Mandatory=$true)]
+            [string]$AdminSecret
+        )
+        
+        # Formatting AD Admin User to proper format for JoinDomain DSC Resources in this Script
+        $DomainAdmin = &apos;Domain\User&apos; -replace &apos;Domain&apos;,$DomainNetBIOSName -replace &apos;User&apos;,$UserName
+        $Admin = ConvertFrom-Json -InputObject (Get-SECSecretValue -SecretId $AdminSecret).SecretString
+        $AdminUser = $DomainNetBIOSName + &apos;\&apos; + $Admin.UserName
+        # Creating Credential Object for Administrator
+        $Credentials = (New-Object PSCredential($AdminUser,(ConvertTo-SecureString $Admin.Password -AsPlainText -Force)))
+        # Getting the DSC Cert Encryption Thumbprint to Secure the MOF File
+        $DscCertThumbprint = (get-childitem -path cert:\LocalMachine\My | where <span>{</span> $_.subject -eq &quot;CN=SampleDscEncryptCert&quot; }).Thumbprint
+        # Getting the Name Tag of the Instance
+        $NameTag = (Get-EC2Tag -Filter @<span>{</span> Name=&quot;resource-id&quot;;Values=(Invoke-RestMethod -Method Get -Uri http://169.254.169.254/latest/meta-data/instance-id)}| Where-Object <span>{</span> $_.Key -eq &quot;Name&quot; })
+        $NewName = $NameTag.Value
+        
+        # Creating Configuration Data Block that has the Certificate Information for DSC Configuration Processing
+        $ConfigurationData = @<span>{</span>
+            AllNodes = @(
+                @<span>{</span>
+                    NodeName=&quot;*&quot;
+                    CertificateFile = &quot;C:\awssample\publickeys\SamplePublicKey.cer&quot;
+                    Thumbprint = $DscCertThumbprint
+                    PSDscAllowDomainUser = $true
+                },
+                @<span>{</span>
+                    NodeName = &apos;localhost&apos;
+                }
+            )
+        }
+        
+        Configuration DomainJoin <span>{</span>
+            param(
+                [PSCredential] $Credentials
+            )
+        
+            Import-Module -Name PSDesiredStateConfiguration
+            Import-Module -Name ComputerManagementDsc
+            
+            Import-DscResource -Module PSDesiredStateConfiguration
+            Import-DscResource -Module ComputerManagementDsc
+        
+            Node &apos;localhost&apos; <span>{</span>
+        
+                Computer JoinDomain <span>{</span>
+                    Name = $NewName
+                    DomainName = $DomainDNSName
+                    Credential = $Credentials
+                }
+            }
+        }
+        
+        DomainJoin -OutputPath &apos;C:\awssample\DomainJoin&apos; -ConfigurationData $ConfigurationData -Credentials $Credentials
+  WriteInstallModuleScript:
+    Type: Custom::WriteScript
+    Properties:
+      ServiceToken: !GetAtt WriteScriptFunction.Arn
+      Bucket: !Ref DSCBucket
+      Key: &quot;install-modules.ps1&quot;
+      Body: |
+        [CmdletBinding()]
+        param()
+        
+        &quot;Setting up Powershell Gallery to Install DSC Modules&quot;
+        Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+        
+        &quot;Installing the needed Powershell DSC modules for this Quick Start&quot;
+        Install-Module -Name ComputerManagementDsc
+        Install-Module -Name PSDscResources
+        
+        &quot;Creating Directory for DSC Public Cert&quot;
+        New-Item -Path C:\awssample\publickeys -ItemType directory -Force
+        
+        &quot;Setting up DSC Certificate to Encrypt Credentials in MOF File&quot;
+        $cert = New-SelfSignedCertificate -Type DocumentEncryptionCertLegacyCsp -DnsName &apos;SampleDscEncryptCert&apos; -HashAlgorithm SHA256
+        # Exporting the public key certificate
+        $cert | Export-Certificate -FilePath &quot;C:\awssample\publickeys\SamplePublicKey.cer&quot; -Force
+  WriteLCMConfigScript:
+    Type: Custom::WriteScript
+    Properties:
+      ServiceToken: !GetAtt WriteScriptFunction.Arn
+      Bucket: !Ref DSCBucket
+      Key: &quot;LCM-Config.ps1&quot;
+      Body: |
+        # This block sets the LCM configuration to what we need for QS
+        [DSCLocalConfigurationManager()]
+        configuration LCMConfig
+        <span>{</span>
+            Node &apos;localhost&apos; <span>{</span>
+                Settings <span>{</span>
+                    RefreshMode = &apos;Push&apos;
+                    ActionAfterReboot = &apos;StopConfiguration&apos;                      
+                    RebootNodeIfNeeded = $false
+                    CertificateId = $DscCertThumbprint  
+                }
+            }
+        }
+        
+        $DscCertThumbprint = [string](get-childitem -path cert:\LocalMachine\My | where <span>{</span> $_.subject -eq &quot;CN=SampleDscEncryptCert&quot; }).Thumbprint
+            
+        #Generates MOF File for LCM
+        LCMConfig -OutputPath &apos;C:\awssample\LCMConfig&apos;
+            
+        # Sets LCM Configuration to MOF generated in previous command
+        Set-DscLocalConfigurationManager -Path &apos;C:\awssample\LCMConfig&apos; 
+  DomainJoinAutomation:
+    Type: AWS::SSM::Document
+    Properties:
+      DocumentType: Automation
+      Content:
+          schemaVersion: &quot;0.3&quot;
+          description: &quot;Join a Windows Domain&quot;
+          # Role that is utilized to perform the steps within the Automation Document.
+          assumeRole: &quot;<span>{</span><span>{</span>AutomationAssumeRole}}&quot;
+          # Gathering parameters needed to configure DCs in the Quick Start
+          parameters:
+            InstanceId:
+              description: &quot;ID of the Instance.&quot;
+              type: &quot;StringList&quot; 
+            DomainDNSName: 
+              default: &quot;example.com&quot;
+              description: &quot;Fully qualified domain name (FQDN) of the forest root domain e.g. example.com&quot;
+              type: &quot;String&quot;
+            DomainNetBIOSName: 
+              default: &quot;example&quot;
+              description: &quot;NetBIOS name of the domain (up to 15 characters) for users of earlier versions of Windows e.g. EXAMPLE&quot;
+              type: &quot;String&quot;
+            AdminSecrets:
+              description: &quot;AWS Secrets Parameter Name that has Password and User name for a domain administrator.&quot;
+              type: &quot;String&quot;
+            S3BucketName:
+              description: &quot;S3 bucket name for the Quick Start assets. Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).&quot;
+              type: &quot;String&quot;
+            AutomationAssumeRole:
+                default: &quot;&quot;
+                description: &quot;(Optional) The ARN of the role that allows Automation to perform the actions on your behalf.&quot;
+                type: &quot;String&quot; 
+          mainSteps:
+          # This step Demonstrates how to run a local script on an Instance. It can be defined or pointed to a local script. 
+          - name: &quot;InstallDSCModules&quot;
+            action: &quot;aws:runCommand&quot;
+            inputs:
+              DocumentName: &quot;AWS-RunRemoteScript&quot;
+              InstanceIds:
+              - &quot;<span>{</span><span>{</span>InstanceId}}&quot;
+              CloudWatchOutputConfig:
+                CloudWatchOutputEnabled: &quot;true&quot;
+                CloudWatchLogGroupName:  !Sub &apos;/ssm/$<span>{</span>AWS::StackName}&apos;
+              Parameters:
+                sourceType: &quot;S3&quot;
+                sourceInfo: &apos;<span>{</span>&quot;path&quot;: &quot;https://<span>{</span><span>{</span>S3BucketName}}.s3.amazonaws.com/install-modules.ps1&quot;}&apos;
+                commandLine: &quot;./install-modules.ps1&quot;
+          - name: &quot;ConfigureLCM&quot;
+            action: &quot;aws:runCommand&quot;
+            inputs:
+              DocumentName: &quot;AWS-RunRemoteScript&quot;
+              InstanceIds:
+              - &quot;<span>{</span><span>{</span>InstanceId}}&quot;
+              CloudWatchOutputConfig:
+                CloudWatchOutputEnabled: &quot;true&quot;
+                CloudWatchLogGroupName: !Sub &apos;/ssm/$<span>{</span>AWS::StackName}&apos;
+              Parameters:
+                sourceType: &quot;S3&quot;
+                sourceInfo: &apos;<span>{</span>&quot;path&quot;: &quot;https://<span>{</span><span>{</span>S3BucketName}}.s3.amazonaws.com/LCM-Config.ps1&quot;}&apos;
+                commandLine: &quot;./LCM-Config.ps1&quot;
+          - name: &quot;GenerateDomainJoinMof&quot;
+            action: &quot;aws:runCommand&quot;
+            inputs:
+              DocumentName: &quot;AWS-RunRemoteScript&quot;
+              InstanceIds:
+                - &quot;<span>{</span><span>{</span>InstanceId}}&quot;
+              CloudWatchOutputConfig:
+                CloudWatchOutputEnabled: &quot;true&quot;
+                CloudWatchLogGroupName: !Sub &apos;/ssm/$<span>{</span>AWS::StackName}&apos;
+              Parameters:
+                sourceType: &quot;S3&quot;
+                sourceInfo: &apos;<span>{</span>&quot;path&quot;: &quot;https://<span>{</span><span>{</span>S3BucketName}}.s3.amazonaws.com/DomainJoin.ps1&quot;}&apos;
+                commandLine: &quot;./DomainJoin.ps1 -DomainNetBIOSName <span>{</span><span>{</span>DomainNetBIOSName}} -DomainDNSName <span>{</span><span>{</span>DomainDNSName}} -AdminSecret <span>{</span><span>{</span>AdminSecrets}}&quot;
+          - name: &quot;DomainJoin&quot;
+            action: aws:runCommand
+            inputs:
+              DocumentName: AWS-RunPowerShellScript
+              InstanceIds: 
+                - &quot;<span>{</span><span>{</span>InstanceId}}&quot;
+              CloudWatchOutputConfig:
+                CloudWatchOutputEnabled: &quot;true&quot;
+                CloudWatchLogGroupName: !Sub &apos;/ssm/$<span>{</span>AWS::StackName}&apos;
+              Parameters:
+                commands: 
+                  - |     
+                     function DscStatusCheck () <span>{</span>
+                         $LCMState = (Get-DscLocalConfigurationManager).LCMState
+                         if ($LCMState -eq &apos;PendingConfiguration&apos; -Or $LCMState -eq &apos;PendingReboot&apos;) <span>{</span>
+                             &apos;returning 3010, should continue after reboot&apos;
+                             exit 3010
+                         } else <span>{</span>
+                           &apos;Completed&apos;
+                         }
+                     }
+                     
+                     Start-DscConfiguration &apos;C:\awssample\DomainJoin&apos; -Wait -Verbose -Force
+                     
+                     DscStatusCheck
+  SSMExecutionRole: 
+    Type : AWS::IAM::Role
+    Properties:
+      Policies:
+        - PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+              - Action:
+                  - ssm:StartAssociationsOnce
+                  - ssm:CreateAssociation
+                  - ssm:CreateAssociationBatch
+                  - ssm:UpdateAssociation
+                Resource: &apos;*&apos;
+                Effect: Allow
+          PolicyName: ssm-association
+      Path: /
+      ManagedPolicyArns:
+        - !Sub &apos;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/service-role/AmazonSSMAutomationRole&apos;
+      AssumeRolePolicyDocument:
+        Version: &quot;2012-10-17&quot;
+        Statement:
+        - Effect: &quot;Allow&quot;
+          Principal:
+            Service:
+            - &quot;ec2.amazonaws.com&quot;
+            - &quot;ssm.amazonaws.com&quot;
+          Action: &quot;sts:AssumeRole&quot;
+  SSMInstanceRole: 
+    Type : AWS::IAM::Role
+    Properties:
+      Policies:
+        - PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+              - Action:
+                  - s3:GetObject
+                Resource: 
+                  - !Sub &apos;arn:aws:s3:::aws-ssm-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::aws-windows-downloads-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::amazon-ssm-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::amazon-ssm-packages-$<span>{</span>AWS::Region}/*&apos;
+                  - !Sub &apos;arn:aws:s3:::$<span>{</span>AWS::Region}-birdwatcher-prod/*&apos;
+                  - !Sub &apos;arn:aws:s3:::patch-baseline-snapshot-$<span>{</span>AWS::Region}/*&apos;
+                Effect: Allow
+          PolicyName: ssm-custom-s3-policy
+        - PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+              - Effect: Allow
+                Action:
+                  - secretsmanager:GetSecretValue
+                  - secretsmanager:DescribeSecret
+                Resource: 
+                  - !Ref &apos;DomainJoinSecrets&apos;
+          PolicyName: ssm-secrets-policy
+        - PolicyDocument:
+            Version: &apos;2012-10-17&apos;
+            Statement:
+              - Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:PutObjectAcl
+                  - s3:ListBucket
+                Resource: 
+                  - !Sub &apos;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>DSCBucket}/*&apos;
+                  - !Sub &apos;arn:$<span>{</span>AWS::Partition}:s3:::$<span>{</span>DSCBucket}&apos;
+                Effect: Allow
+          PolicyName: s3-instance-bucket-policy
+      Path: /
+      ManagedPolicyArns:
+        - !Sub &apos;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore&apos;
+        - !Sub &apos;arn:$<span>{</span>AWS::Partition}:iam::aws:policy/CloudWatchAgentServerPolicy&apos;
+      AssumeRolePolicyDocument:
+        Version: &quot;2012-10-17&quot;
+        Statement:
+        - Effect: &quot;Allow&quot;
+          Principal:
+            Service:
+            - &quot;ec2.amazonaws.com&quot;
+            - &quot;ssm.amazonaws.com&quot;
+          Action: &quot;sts:AssumeRole&quot;
+  SSMInstanceProfile:
+    Type: &quot;AWS::IAM::InstanceProfile&quot;
+    Properties:
+      Roles:
+      - !Ref SSMInstanceRole
+  WINEC2Instance:
+    Type: &quot;AWS::EC2::Instance&quot;
+    Properties:
+      ImageId: !Ref LatestAmiId
+      InstanceType: !Ref EC2InstanceType
+      IamInstanceProfile: !Ref SSMInstanceProfile
+      NetworkInterfaces:
+        - DeleteOnTermination: true
+          DeviceIndex: &apos;0&apos;
+          SubnetId: !Ref &apos;SubnetID&apos;
+          GroupSet:
+            - !Ref DomainMemberSGID
+      Tags:
+      - Key: &quot;Name&quot;
+        Value: &quot;WindowsBox1&quot;
+  DomainAssociation:
+    Type: AWS::SSM::Association
+    Properties:
+      AssociationName: DomainJoin
+      # We are using the AWS-ApplyDSCMofs Document
+      Name: !Ref DomainJoinAutomation
+      WaitForSuccessTimeoutSeconds: 600
+      AutomationTargetParameterName: InstanceId
+      Targets:
+        - Key: ParameterValues
+          Values:
+            - !Ref WINEC2Instance
+      OutputLocation:
+        S3Location: 
+          OutputS3BucketName: !Ref DSCBucket
+          OutputS3KeyPrefix: &apos;logs/&apos;
+      Parameters:
+        DomainDNSName: 
+          - !Ref DomainDNSName
+        DomainNetBIOSName: 
+          - !Ref DomainNetBIOSName
+        AdminSecrets:
+          - !Ref DomainJoinSecrets
+        S3BucketName:
+          - !Ref DSCBucket
+        AutomationAssumeRole:
+          - !GetAtt &apos;SSMExecutionRole.Arn&apos;
+</code></pre></div>
+                                 <h2 id="aws-resource-ssm-association--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
                                     

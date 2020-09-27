@@ -16,13 +16,11 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::ApiGatewayV2::Authorizer</code> resource updates a Lambda
-                                    authorizer function for a WebSocket API or a JSON Web Token (JWT) authorizer for
-                                    an HTTP API. For more information about Lambda authorizer functions for WebSocket
-                                    APIs, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-lambda-auth.html">Create a Lambda REQUEST Authorizer Function</a> in the <em>API
-                                       Gateway Developer Guide</em>. For more information about JWT
-                                    authorizers for HTTP APIs, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-jwt-authorizer.html">JWT authorizers</a> in the <em>API Gateway Developer
-                                       Guide</em>.
+                                 <p>The <code class="code">AWS::ApiGatewayV2::Authorizer</code> resource creates an authorizer for a
+                                    WebSocket API or an HTTP API. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-control-access.html">Controlling and managing access to a WebSocket API in API Gateway</a> and
+                                    <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-access-control.html">Controlling and
+                                       managing access to an HTTP API in API Gateway</a> in the <em>API Gateway
+                                       Developer Guide</em>.
                                  </p>
                                  <h2 id="aws-resource-apigatewayv2-authorizer-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -32,9 +30,11 @@
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-apigatewayv2-authorizer-apiid">ApiId</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-apigatewayv2-authorizer-authorizercredentialsarn">AuthorizerCredentialsArn</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-apigatewayv2-authorizer-authorizerpayloadformatversion">AuthorizerPayloadFormatVersion</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-apigatewayv2-authorizer-authorizerresultttlinseconds">AuthorizerResultTtlInSeconds</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-apigatewayv2-authorizer-authorizertype">AuthorizerType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-apigatewayv2-authorizer-authorizeruri">AuthorizerUri</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-apigatewayv2-authorizer-enablesimpleresponses">EnableSimpleResponses</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-apigatewayv2-authorizer-identitysource">IdentitySource</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-apigatewayv2-authorizer-identityvalidationexpression">IdentityValidationExpression</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-apigatewayv2-authorizer-jwtconfiguration">JwtConfiguration</a>&quot; : <code class="replaceable"><a href="./aws-properties-apigatewayv2-authorizer-jwtconfiguration.html">JWTConfiguration</a></code>,
@@ -47,9 +47,11 @@
 Properties: 
   <a href="#cfn-apigatewayv2-authorizer-apiid">ApiId</a>: <code class="replaceable">String</code>
   <a href="#cfn-apigatewayv2-authorizer-authorizercredentialsarn">AuthorizerCredentialsArn</a>: <code class="replaceable">String</code>
+  <a href="#cfn-apigatewayv2-authorizer-authorizerpayloadformatversion">AuthorizerPayloadFormatVersion</a>: <code class="replaceable">String</code>
   <a href="#cfn-apigatewayv2-authorizer-authorizerresultttlinseconds">AuthorizerResultTtlInSeconds</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-apigatewayv2-authorizer-authorizertype">AuthorizerType</a>: <code class="replaceable">String</code>
   <a href="#cfn-apigatewayv2-authorizer-authorizeruri">AuthorizerUri</a>: <code class="replaceable">String</code>
+  <a href="#cfn-apigatewayv2-authorizer-enablesimpleresponses">EnableSimpleResponses</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-apigatewayv2-authorizer-identitysource">IdentitySource</a>: <code class="replaceable">
     - String</code>
   <a href="#cfn-apigatewayv2-authorizer-identityvalidationexpression">IdentityValidationExpression</a>: <code class="replaceable">String</code>
@@ -86,11 +88,29 @@ Properties:
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-apigatewayv2-authorizer-authorizerpayloadformatversion"></a><span class="term"><code class="code">AuthorizerPayloadFormatVersion</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies the format of the payload sent to an HTTP API Lambda authorizer. Required
+                                             for HTTP API Lambda authorizers. Supported values are <code class="code">1.0</code> and <code class="code">2.0</code>. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html">Working with AWS Lambda authorizers for HTTP APIs</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-apigatewayv2-authorizer-authorizerresultttlinseconds"></a><span class="term"><code class="code">AuthorizerResultTtlInSeconds</code></span></dt>
                                        <dd>
                                           
                                           
-                                          <p>Authorizer caching is not currently supported. Don&apos;t specify this value for authorizers.</p>
+                                          <p>The time to live (TTL) for cached authorizer results, in seconds. If it equals 0,
+                                             authorization
+                                             caching is disabled. If it is greater than 0, API Gateway caches authorizer
+                                             responses. The maximum value is 3600, or 1 hour. Supported only for HTTP API Lambda
+                                             authorizers.
+                                          </p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
@@ -101,7 +121,7 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>The authorizer type. For WebSocket APIs, specify <code class="code">REQUEST</code> for a Lambda function using incoming request parameters. For HTTP APIs, specify <code class="code">JWT</code> to use JSON Web Tokens.
+                                          <p>The authorizer type. Specify <code class="code">REQUEST</code> for a Lambda function using incoming request parameters. Specify <code class="code">JWT</code> to use JSON Web Tokens (supported only for HTTP APIs).
                                           </p>
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -131,6 +151,21 @@ Properties:
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-apigatewayv2-authorizer-enablesimpleresponses"></a><span class="term"><code class="code">EnableSimpleResponses</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies whether a Lambda authorizer returns a response in a simple format. By default,
+                                             a Lambda authorizer must return an IAM policy. If enabled, the Lambda authorizer can
+                                             return a boolean value instead of an IAM policy. Supported only for HTTP APIs. To
+                                             learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html">Working with AWS Lambda authorizers for HTTP APIs</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-apigatewayv2-authorizer-identitysource"></a><span class="term"><code class="code">IdentitySource</code></span></dt>
                                        <dd>
                                           
@@ -138,21 +173,26 @@ Properties:
                                           
                                           
                                           <p>The identity source for which authorization is requested.</p>
-                                          <p>For a <code class="code">REQUEST</code> authorizer, this is optional. The value is a set of one or more
-                                             mapping expressions of the specified request parameters. Currently, the identity source
-                                             can be headers, query string parameters, stage variables, and context parameters.
-                                             For
-                                             example, if an Auth header and a Name query string parameter are defined as identity
-                                             sources, this value is route.request.header.Auth, route.request.querystring.Name.
-                                             These parameters will be used to perform runtime validation for Lambda-based
-                                             authorizers by verifying all of the identity-related request parameters are present
-                                             in the request, not null, and non-empty. Only when this is true does the authorizer
-                                             invoke the authorizer Lambda function. Otherwise, it returns a 401 Unauthorized
-                                             response without calling the Lambda function.
+                                          <p>For a <code class="code">REQUEST</code> authorizer, this is optional. The value is a set of
+                                             one or more mapping expressions of the specified request parameters. The
+                                             identity source can be headers, query string parameters, stage variables, and
+                                             context parameters. For example, if an Auth header and a Name query string
+                                             parameter are defined as identity sources, this value is
+                                             route.request.header.Auth, route.request.querystring.Name for WebSocket APIs.
+                                             For HTTP APIs, use selection expressions prefixed with <code class="code">$</code>, for
+                                             example, <code class="code">$request.header.Auth</code>,
+                                             <code class="code">$request.querystring.Name</code>. These parameters are used to perform
+                                             runtime validation for Lambda-based authorizers by verifying all of the
+                                             identity-related request parameters are present in the request, not null, and
+                                             non-empty. Only when this is true does the authorizer invoke the authorizer
+                                             Lambda function. Otherwise, it returns a 401 Unauthorized response without
+                                             calling the Lambda function. For HTTP APIs, identity sources are also used as the
+                                             cache key when caching is enabled. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html">Working with AWS Lambda authorizers for HTTP APIs</a>.
                                           </p>
-                                          <p>For <code class="code">JWT</code>, a single entry that specifies where to extract the JSON Web Token (JWT) from inbound
-                                             requests. Currently only header-based and query parameter-based selections are supported,
-                                             for example <code class="code">&quot;$request.header.Authorization&quot;</code>.
+                                          <p>For <code class="code">JWT</code>, a single entry that specifies where to extract the JSON
+                                             Web Token (JWT) from inbound requests. Currently only header-based and query
+                                             parameter-based selections are supported, for example
+                                             <code class="code">$request.header.Authorization</code>.
                                           </p>
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -198,7 +238,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-apigatewayv2-authorizer-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-apigatewayv2-authorizer-return-values">Return values</h2>
                                  <h3 id="aws-resource-apigatewayv2-authorizer-return-values-ref">Ref</h3>
                                  <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the authorizer&apos;s ID, such as
                                     <code class="code">abcde1</code>.
@@ -264,7 +304,7 @@ Properties:
     AuthorizerResultTtlInSeconds: 500
     IdentitySource:
       - route.request.header.Auth</code></pre></div>
-                                 <h2 id="aws-resource-apigatewayv2-authorizer--seealso">See Also</h2>
+                                 <h2 id="aws-resource-apigatewayv2-authorizer--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
                                     

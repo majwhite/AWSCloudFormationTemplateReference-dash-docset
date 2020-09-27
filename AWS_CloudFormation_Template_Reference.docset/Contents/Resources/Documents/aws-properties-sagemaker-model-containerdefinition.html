@@ -25,7 +25,8 @@
   &quot;<a href="#cfn-sagemaker-model-containerdefinition-environment">Environment</a>&quot; : <code class="replaceable">Json</code>,
   &quot;<a href="#cfn-sagemaker-model-containerdefinition-image">Image</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-sagemaker-model-containerdefinition-mode">Mode</a>&quot; : <code class="replaceable">String</code>,
-  &quot;<a href="#cfn-sagemaker-model-containerdefinition-modeldataurl">ModelDataUrl</a>&quot; : <code class="replaceable">String</code>
+  &quot;<a href="#cfn-sagemaker-model-containerdefinition-modeldataurl">ModelDataUrl</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-sagemaker-model-containerdefinition-modelpackagename">ModelPackageName</a>&quot; : <code class="replaceable">String</code>
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
@@ -34,6 +35,7 @@
   <a href="#cfn-sagemaker-model-containerdefinition-image">Image</a>: <code class="replaceable">String</code>
   <a href="#cfn-sagemaker-model-containerdefinition-mode">Mode</a>: <code class="replaceable">String</code>
   <a href="#cfn-sagemaker-model-containerdefinition-modeldataurl">ModelDataUrl</a>: <code class="replaceable">String</code>
+  <a href="#cfn-sagemaker-model-containerdefinition-modelpackagename">ModelPackageName</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-properties-sagemaker-model-containerdefinition-properties">Properties</h2>
                                  <div class="variablelist">
@@ -83,8 +85,10 @@
                                        <dt><a id="cfn-sagemaker-model-containerdefinition-image"></a><span class="term"><code class="code">Image</code></span></dt>
                                        <dd>
                                           
-                                          <p>The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.
-                                             If you are using your
+                                          <p>The path where inference code is stored. This can be either in Amazon EC2 Container
+                                             Registry or in a
+                                             Docker registry that is accessible from the same VPC that you configure for your
+                                             endpoint. If you are using your
                                              own custom algorithm instead of an algorithm provided by Amazon SageMaker, the inference
                                              code must
                                              meet Amazon SageMaker requirements. Amazon SageMaker supports both <code class="code">registry/repository[:tag]</code> and
@@ -94,7 +98,7 @@
                                              
                                           </p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -111,7 +115,7 @@
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">MultiModel | SingleModel</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">MultiModel | SingleModel</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-sagemaker-model-containerdefinition-modeldataurl"></a><span class="term"><code class="code">ModelDataUrl</code></span></dt>
@@ -126,6 +130,16 @@
                                                 Parameters</a>. 
                                           </p>
                                           
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>The model artifacts must be in an S3 bucket that is in the same region as the
+                                                   model or endpoint you are creating.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
                                           <p>If you provide a value for this parameter, Amazon SageMaker uses AWS Security Token
                                              Service to
                                              download model artifacts from the S3 path you provide. AWS STS is activated in your
@@ -135,7 +149,7 @@
                                                 Guide</em>.
                                           </p>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
@@ -152,6 +166,22 @@
                                           </p>
                                           <p><em>Maximum</em>: <code class="code">1024</code></p>
                                           <p><em>Pattern</em>: <code class="code">^(https|s3)://([^/]+)/?(.*)$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-sagemaker-model-containerdefinition-modelpackagename"></a><span class="term"><code class="code">ModelPackageName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name or Amazon Resource Name (ARN) of the model package to use to create the
+                                             model.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">170</code></p>
+                                          <p><em>Pattern</em>: <code class="code">(arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]<span>{</span>12}:[a-z\-]*\/)?([a-zA-Z0-9]([a-zA-Z0-9-])<span>{</span>0,62})(?&lt;!-)$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                     </dl>

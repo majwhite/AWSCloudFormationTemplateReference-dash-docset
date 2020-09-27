@@ -35,6 +35,7 @@
       &quot;<a href="#cfn-transfer-server-identityprovidertype">IdentityProviderType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-transfer-server-loggingrole">LoggingRole</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-transfer-server-protocols">Protocols</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-transfer-server-protocol.html">Protocol</a>, ... ]</code>,
+      &quot;<a href="#cfn-transfer-server-securitypolicyname">SecurityPolicyName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-transfer-server-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
 }
@@ -52,6 +53,7 @@ Properties:
   <a href="#cfn-transfer-server-loggingrole">LoggingRole</a>: <code class="replaceable">String</code>
   <a href="#cfn-transfer-server-protocols">Protocols</a>: <code class="replaceable">
     - <a href="./aws-properties-transfer-server-protocol.html">Protocol</a></code>
+  <a href="#cfn-transfer-server-securitypolicyname">SecurityPolicyName</a>: <code class="replaceable">String</code>
   <a href="#cfn-transfer-server-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
 </code></pre></div>
@@ -185,7 +187,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">PUBLIC | VPC | VPC_ENDPOINT</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">PUBLIC | VPC | VPC_ENDPOINT</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-transfer-server-identityproviderdetails"></a><span class="term"><code class="code">IdentityProviderDetails</code></span></dt>
@@ -219,7 +221,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">API_GATEWAY | SERVICE_MANAGED</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">API_GATEWAY | SERVICE_MANAGED</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-transfer-server-loggingrole"></a><span class="term"><code class="code">LoggingRole</code></span></dt>
@@ -251,6 +253,19 @@ Properties:
                                           <p><em>Maximum</em>: <code class="code">3</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-transfer-server-securitypolicyname"></a><span class="term"><code class="code">SecurityPolicyName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies the name of the security policy that is attached to the server.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Maximum</em>: <code class="code">100</code></p>
+                                          <p><em>Pattern</em>: <code class="code">TransferSecurityPolicy-.+</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-transfer-server-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
                                           
@@ -266,7 +281,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-transfer-server-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-transfer-server-return-values">Return values</h2>
                                  <h3 id="aws-resource-transfer-server-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the ServerId, such as <code class="code">s-01234567890abcdef</code>, and
@@ -310,13 +325,14 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-transfer-server--examples">Examples</h2>
-                                 <h3 id="aws-resource-transfer-server--examples--Create_a_server_with_VPC_endpoint_type">Create a server with VPC endpoint type</h3>
-                                 <p>The following example creates a new file transfer protocol-enabled server using a
-                                    VPC endpoint type.
+                                 <h3 id="aws-resource-transfer-server--examples--Create_a_server_with_VPC_hosted_endpoint_type">Create a server with VPC hosted endpoint type</h3>
+                                 <p>The following example creates a Secure Shell (SSH) File Transfer Protocol
+                                    (SFTP)-enabled server using a VPC hosted endpoint type with a custom identity
+                                    provider, a CloudWatch logging role, security policy, and tags.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-transfer-server--examples--Create_a_server_with_VPC_endpoint_type--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-   &quot;MyTransferServer&quot;: <span>{</span>
+                                    <h4 id="aws-resource-transfer-server--examples--Create_a_server_with_VPC_hosted_endpoint_type--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;MyTransferServer&quot;: <span>{</span>
         &quot;Type&quot;: &quot;AWS::Transfer::Server&quot;,
         &quot;Properties&quot;: <span>{</span>
             &quot;EndpointDetails&quot;: <span>{</span>
@@ -348,19 +364,23 @@ Properties:
             },
             &quot;IdentityProviderType&quot;: &quot;API_GATEWAY&quot;,
             &quot;LoggingRole&quot;: <span>{</span>
-                &quot;Ref&quot;: &quot;MyTransferServerLoggingRole&quot;
+                &quot;Ref&quot;: &quot;AWSTransferLoggingAccess&quot;
+            },
+            &quot;Protocols&quot;: &quot;SFTP&quot;,
+            &quot;SecurityPolicy&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;TransferSecurityPolicy-2020-06&quot;
             },
             &quot;Tags&quot;: [
                 <span>{</span>
-                    &quot;Key&quot;: &quot;Name&quot;,
-                    &quot;Value&quot;: &quot;MyTransferServer&quot;
+                    &quot;Key&quot;: &quot;KeyName&quot;,
+                    &quot;Value&quot;: &quot;ValueName&quot;
                 }
             ]
         }
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-transfer-server--examples--Create_a_server_with_VPC_endpoint_type--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyTransferServer:
+                                    <h4 id="aws-resource-transfer-server--examples--Create_a_server_with_VPC_hosted_endpoint_type--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyTransferServer:
   Type : AWS::Transfer::Server
   Properties :
     EndpointDetails:
@@ -378,11 +398,14 @@ Properties:
         Ref: MyTransferServerIdentityProviderUrl
     IdentityProviderType: API_GATEWAY
     LoggingRole:
-      Ref: MyTransferServerLoggingRole
+      Ref: AWSTransferLoggingAccess
+    Protocols: SFTP
+    SecurityPolicy:
+      Ref: TransferSecurityPolicy-2020-06
     Tags: 
-      - Key: Name
-        Value: MyTransferServer</code></pre></div>
-                                 <h2 id="aws-resource-transfer-server--seealso">See Also</h2>
+      - Key: KeyName
+        Value: ValueName</code></pre></div>
+                                 <h2 id="aws-resource-transfer-server--seealso">See also</h2>
                                  <p><a href="https://docs.aws.amazon.com/transfer/latest/userguide/API_CreateServer.html">CreateServer</a> in the <em>AWS Transfer Family User
                                        Guide</em>.
                                  </p>

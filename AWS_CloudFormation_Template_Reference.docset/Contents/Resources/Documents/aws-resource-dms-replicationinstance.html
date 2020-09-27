@@ -136,6 +136,10 @@ Properties:
                                           
                                           <p>The engine version number of the replication instance.</p>
                                           
+                                          <p>If an engine version number is not specified when a replication 
+                                             instance is created, the default is the latest engine version available.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -222,12 +226,15 @@ Properties:
                                        <dt><a id="cfn-dms-replicationinstance-replicationinstanceclass"></a><span class="term"><code class="code">ReplicationInstanceClass</code></span></dt>
                                        <dd>
                                           
-                                          <p>The compute and memory capacity of the replication instance as specified by the
-                                             replication instance class.
+                                          <p>The compute and memory capacity of the replication instance as defined for the specified
+                                             replication instance class. For example to specify the instance class dms.c4.large,
+                                             set this parameter to <code class="code">&quot;dms.c4.large&quot;</code>.
                                           </p>
                                           
-                                          <p> Valid Values: <code class="code">dms.t2.micro | dms.t2.small | dms.t2.medium | dms.t2.large |
-                                                dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge | dms.c4.4xlarge </code>
+                                          <p>For more information on the settings and capacities for the available replication
+                                             instance classes, see 
+                                             <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth">
+                                                Selecting the right AWS DMS replication instance for your migration</a>.
                                              
                                           </p>
                                           
@@ -316,10 +323,11 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-dms-replicationinstance-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-dms-replicationinstance-return-values">Return values</h2>
                                  <h3 id="aws-resource-dms-replicationinstance-return-values-ref">Ref</h3>
                                  <p>
-                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the replication instance ARN. 
+                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the replication instance ARN.
+                                    
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
@@ -350,14 +358,26 @@ Properties:
                                  <h2 id="aws-resource-dms-replicationinstance--examples">Examples</h2>
                                  <h3 id="aws-resource-dms-replicationinstance--examples--"></h3>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-dms-replicationinstance--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;, &quot;Resources&quot;: <span>{</span>
-                &quot;BasicReplicationInstance&quot;: <span>{</span> &quot;Type&quot;: &quot;AWS::DMS::ReplicationInstance&quot;, &quot;Properties&quot;:
-                <span>{</span> &quot;ReplicationInstanceClass&quot;: &quot;dms.t2.small&quot; } } } }</code></pre></div>
+                                    <h4 id="aws-resource-dms-replicationinstance--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;BasicReplicationInstance&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::DMS::ReplicationInstance&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;ReplicationInstanceClass&quot;: &quot;dms.t2.small&quot;
+            }
+        }
+    }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-dms-replicationinstance--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09 Resources:
-                BasicReplicationInstance: Properties: ReplicationInstanceClass: dms.t2.small Type:
-                &quot;AWS::DMS::ReplicationInstance&quot; </code></pre></div>
-                                 <h2 id="aws-resource-dms-replicationinstance--seealso">See Also</h2>
+                                    <h4 id="aws-resource-dms-replicationinstance--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources: 
+  BasicReplicationInstance: 
+    Properties: 
+      ReplicationInstanceClass: dms.t2.small
+    Type: &quot;AWS::DMS::ReplicationInstance&quot;
+</code></pre></div>
+                                 <h2 id="aws-resource-dms-replicationinstance--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
                                      

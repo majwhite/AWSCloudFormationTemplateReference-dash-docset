@@ -24,7 +24,10 @@
   &quot;Type&quot; : &quot;AWS::CodeGuruProfiler::ProfilingGroup&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-codeguruprofiler-profilinggroup-agentpermissions">AgentPermissions</a>&quot; : <code class="replaceable">Json</code>,
-      &quot;<a href="#cfn-codeguruprofiler-profilinggroup-profilinggroupname">ProfilingGroupName</a>&quot; : <code class="replaceable">String</code>
+      &quot;<a href="#cfn-codeguruprofiler-profilinggroup-anomalydetectionnotificationconfiguration">AnomalyDetectionNotificationConfiguration</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-codeguruprofiler-profilinggroup-channel.html">Channel</a>, ... ]</code>,
+      &quot;<a href="#cfn-codeguruprofiler-profilinggroup-computeplatform">ComputePlatform</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-codeguruprofiler-profilinggroup-profilinggroupname">ProfilingGroupName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-codeguruprofiler-profilinggroup-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
 }
 </code></pre></div>
@@ -32,7 +35,12 @@
                                     <h3 id="aws-resource-codeguruprofiler-profilinggroup-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::CodeGuruProfiler::ProfilingGroup
 Properties: 
   <a href="#cfn-codeguruprofiler-profilinggroup-agentpermissions">AgentPermissions</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-codeguruprofiler-profilinggroup-anomalydetectionnotificationconfiguration">AnomalyDetectionNotificationConfiguration</a>: <code class="replaceable">
+    - <a href="./aws-properties-codeguruprofiler-profilinggroup-channel.html">Channel</a></code>
+  <a href="#cfn-codeguruprofiler-profilinggroup-computeplatform">ComputePlatform</a>: <code class="replaceable">String</code>
   <a href="#cfn-codeguruprofiler-profilinggroup-profilinggroupname">ProfilingGroupName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-codeguruprofiler-profilinggroup-tags">Tags</a>: <code class="replaceable">
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
 </code></pre></div>
                                  <h2 id="aws-resource-codeguruprofiler-profilinggroup-properties">Properties</h2>
                                  <div class="variablelist">
@@ -40,13 +48,57 @@ Properties:
                                        <dt><a id="cfn-codeguruprofiler-profilinggroup-agentpermissions"></a><span class="term"><code class="code">AgentPermissions</code></span></dt>
                                        <dd>
                                           
-                                          <p>The agent permissions attached to this profiling group.</p>
+                                          <p>The agent permissions attached to this profiling group. This action group grants
+                                             <code class="code">ConfigureAgent</code> and <code class="code">PostAgentProfile</code> permissions to perform
+                                             actions required by the profiling agent. The Json consists of key
+                                             <code class="code">Principals</code>.
+                                          </p>
+                                          
+                                          <p><em>Principals</em>: A list of string ARNs for the roles and users you want
+                                             to grant access to the profiling group. Wildcards are not supported in the ARNs. You
+                                             are
+                                             allowed to provide up to 50 ARNs. An empty list is not permitted. This is a required
+                                             key. 
+                                          </p>
+                                          
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-ug/resource-based-policies.html">Resource-based policies
+                                                in CodeGuru Profiler</a> in the <em>Amazon CodeGuru Profiler user
+                                                guide</em>, <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html">ConfigureAgent</a>, and
+                                             <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_PostAgentProfile.html">PostAgentProfile</a>.
+                                          </p>
+                                          
                                           
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Json
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-codeguruprofiler-profilinggroup-anomalydetectionnotificationconfiguration"></a><span class="term"><code class="code">AnomalyDetectionNotificationConfiguration</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Adds anomaly notifications for a profiling group.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-codeguruprofiler-profilinggroup-channel.html">Channel</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-codeguruprofiler-profilinggroup-computeplatform"></a><span class="term"><code class="code">ComputePlatform</code></span></dt>
+                                       <dd>
+                                          
+                                          <p> The compute platform of the profiling group. Use <code class="code">AWSLambda</code> if your
+                                             application runs on AWS Lambda. Use <code class="code">Default</code> if your application runs on a
+                                             compute platform that is not AWS Lambda, such an Amazon EC2 instance, an on-premises
+                                             server, or a different platform. If not specified, <code class="code">Default</code> is used. This
+                                             property is immutable.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-codeguruprofiler-profilinggroup-profilinggroupname"></a><span class="term"><code class="code">ProfilingGroupName</code></span></dt>
                                        <dd>
@@ -59,9 +111,22 @@ Properties:
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
+                                       <dt><a id="cfn-codeguruprofiler-profilinggroup-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>
+                                             A list of tags to add to the created profiling group.
+                                             
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-codeguruprofiler-profilinggroup-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-codeguruprofiler-profilinggroup-return-values">Return values</h2>
                                  <h3 id="aws-resource-codeguruprofiler-profilinggroup-return-values-ref">Ref</h3>
                                  <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the name of the profiling group.
                                  </p>
@@ -113,6 +178,87 @@ Properties:
       Principals:
         - &quot;arn:aws:iam::1233456789012:role/agent-permissions-role-1&quot;
         - &quot;arn:aws:iam::1233456789012:role/agent-permissions-role-2&quot;</code></pre></div>
+                                 <h3 id="aws-resource-codeguruprofiler-profilinggroup--examples--CodeGuru_Profiler_profiling_group_resource_with_compute_platform">CodeGuru Profiler profiling group resource with compute platform</h3>
+                                 <p>The following is an example of the profiling group resource that runs on AWS
+                                    Lambda.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-codeguruprofiler-profilinggroup--examples--CodeGuru_Profiler_profiling_group_resource_with_compute_platform--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;MyProfilingGroupWithComputePlatform&quot;: <span>{</span>
+  &quot;Type&quot;: &quot;AWS::CodeGuruProfiler::ProfilingGroup&quot;,
+  &quot;Properties&quot;: <span>{</span>
+    &quot;ProfilingGroupName&quot;: &quot;MyProfilingGroup&quot;,
+    &quot;ComputePlatform&quot;: &quot;AWSLambda&quot;
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-codeguruprofiler-profilinggroup--examples--CodeGuru_Profiler_profiling_group_resource_with_compute_platform--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyProfilingGroupWithComputePlatform:
+  Type: AWS::CodeGuruProfiler::ProfilingGroup
+  Properties:
+    ProfilingGroupName: &quot;MyProfilingGroup&quot;
+    ComputePlatform: &quot;AWSLambda&quot;</code></pre></div>
+                                 <h3 id="aws-resource-codeguruprofiler-profilinggroup--examples--CodeGuru_Profiler_profiling_group_resource_with_notifications">CodeGuru Profiler profiling group resource with notifications</h3>
+                                 <p>The following is an example of the a notification configuration for a profiling
+                                    group.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-codeguruprofiler-profilinggroup--examples--CodeGuru_Profiler_profiling_group_resource_with_notifications--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;MyProfilingGroupWithNotificationChannelConfiguration&quot;: <span>{</span>
+  &quot;Type&quot;: &quot;AWS::CodeGuruProfiler::ProfilingGroup&quot;,
+  &quot;Properties&quot;: <span>{</span>
+    &quot;ProfilingGroupName&quot;: &quot;MyProfilingGroup&quot;,
+    &quot;AnomalyDetectionNotificationConfiguration&quot;: [
+        <span>{</span>
+            &quot;channelUri&quot;: &quot;SOME_SNS_TOPIC_ARN&quot;,
+            &quot;channelId&quot;: &quot;aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee&quot;
+        }
+    ]
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-codeguruprofiler-profilinggroup--examples--CodeGuru_Profiler_profiling_group_resource_with_notifications--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyProfilingGroupWithNotificationChannelConfiguration:
+  Type: AWS::CodeGuruProfiler::ProfilingGroup
+  Properties:
+    ProfilingGroupName: MyProfilingGroup
+    AnomalyDetectionNotificationConfiguration:
+    - channelUri: SOME_SNS_TOPIC_ARN
+      channelId: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee</code></pre></div>
+                                 <h3 id="aws-resource-codeguruprofiler-profilinggroup--examples--CodeGuru_Profiler_profiling_group_configuration">CodeGuru Profiler profiling group configuration</h3>
+                                 <p>The following is an example of a profiling group that runs on AWS Lambda. This
+                                    profiling group has enabled agent permissions. Notifications have also been
+                                    configured with <code class="code">AnomalyDetectionConfiguration</code>.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-codeguruprofiler-profilinggroup--examples--CodeGuru_Profiler_profiling_group_configuration--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;MyProfilingGroupWithAgentPermissions&quot;: <span>{</span>
+  &quot;Type&quot;: &quot;AWS::CodeGuruProfiler::ProfilingGroup&quot;,
+  &quot;Properties&quot;: <span>{</span>
+    &quot;ProfilingGroupName&quot;: &quot;MyProfilingGroup&quot;,
+    &quot;ComputePlatform&quot;: &quot;AWSLambda&quot;,
+    &quot;AgentPermissions&quot;: <span>{</span>
+      &quot;Principals&quot;: [
+          &quot;arn:aws:iam::1233456789012:role/agent-permissions-role-1&quot;, 
+          &quot;arn:aws:iam::1233456789012:role/agent-permissions-role-2&quot;
+      ]
+    },
+    &quot;AnomalyDetectionNotificationConfiguration&quot;: [
+        <span>{</span>
+            &quot;channelUri&quot;: &quot;SOME_SNS_TOPIC_ARN&quot;,
+            &quot;channelId&quot;: &quot;aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee&quot;
+        }
+    ]
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-codeguruprofiler-profilinggroup--examples--CodeGuru_Profiler_profiling_group_configuration--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyProfilingGroup:
+  Type: AWS::CodeGuruProfiler::ProfilingGroup
+  Properties:
+    ProfilingGroupName: &quot;MyProfilingGroup&quot;
+    ComputePlatform: &quot;AWSLambda&quot;
+    AgentPermissions:
+      Principals:
+        - &quot;arn:aws:iam::1233456789012:role/agent-permissions-role-1&quot;
+        - &quot;arn:aws:iam::1233456789012:role/agent-permissions-role-2&quot;
+    AnomalyDetectionNotificationConfiguration:
+    - channelUri: SOME_SNS_TOPIC_ARN
+      channelId: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                               </div>
                               <noscript>

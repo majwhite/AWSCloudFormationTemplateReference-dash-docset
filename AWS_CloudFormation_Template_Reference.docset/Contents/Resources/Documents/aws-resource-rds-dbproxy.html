@@ -16,23 +16,33 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
+                                 <p>The <code class="code">AWS::RDS::DBProxy</code> resource creates or updates a DB proxy.
+                                 </p>
+                                 <p>For information about RDS Proxy for Amazon RDS, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html"> Managing Connections with Amazon
+                                       RDS Proxy</a> in the <em>Amazon RDS User Guide</em>.
+                                 </p>
+                                 <p>For information about RDS Proxy for Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy.html"> Managing Connections with
+                                       Amazon RDS Proxy</a> in the <em>Amazon Aurora User
+                                       Guide</em>.
+                                 </p>
                                  <div class="awsdocs-note">
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                     <div class="awsdocs-note-text">
-                                       <p>This is prerelease documentation for the RDS Database Proxy feature in preview release.
-                                          It is subject to change.
+                                       <p>Limitations apply to RDS Proxy, including DB engine version limitations and AWS
+                                          Region limitations.
+                                       </p>
+                                       <p>For information about limitations that apply to RDS Proxy for Amazon RDS, see
+                                          <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html#rds-proxy.limitations">
+                                             Limitations for RDS Proxy</a> in the <em>Amazon RDS User
+                                             Guide</em>.
+                                       </p>
+                                       <p>For information about that apply to RDS Proxy for Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy.html#rds-proxy.limitations">
+                                             Limitations for RDS Proxy</a> in the <em>Amazon Aurora User
+                                             Guide</em>.
                                        </p>
                                     </div>
                                  </div>
-                                 <p>The <code class="code">AWS::RDS::DBProxy</code> resource creates or updates a DB proxy.
-                                 </p>
-                                 <p>For information about RDS Proxy for Amazon RDS, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html">
-                                       Managing Connections with Amazon RDS Proxy</a> in the <em>Amazon RDS User Guide</em>.
-                                 </p>
-                                 <p>For information about RDS Proxy for Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy.html">
-                                       Managing Connections with Amazon RDS Proxy</a> in the <em>Amazon Aurora User Guide</em>.
-                                 </p>
                                  <h2 id="aws-resource-rds-dbproxy-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -119,11 +129,12 @@ Properties:
                                        <dt><a id="cfn-rds-dbproxy-enginefamily"></a><span class="term"><code class="code">EngineFamily</code></span></dt>
                                        <dd>
                                           
-                                          <p>The kinds of databases that the proxy can connect to. 
-                                             This value determines which database network protocol the proxy recognizes when it
-                                             interprets
-                                             network traffic to and from the database. 
-                                             The engine family applies to MySQL and PostgreSQL for both RDS and Aurora.
+                                          <p>The kinds of databases that the proxy can connect to. This value determines which
+                                             database network protocol the proxy recognizes when it interprets network traffic
+                                             to and
+                                             from the database. The engine family applies to MySQL and PostgreSQL for both RDS
+                                             and
+                                             Aurora.
                                           </p>
                                           
                                           <p><em>Valid values</em>: <code class="code">MYSQL</code> | <code class="code">POSTGRESQL</code></p>
@@ -192,6 +203,10 @@ Properties:
                                           
                                           <p>One or more VPC security group IDs to associate with the new proxy.</p>
                                           
+                                          <p>If you plan to update the resource, don&apos;t specify VPC security groups in a shared
+                                             VPC.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of String
@@ -211,8 +226,13 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-rds-dbproxy-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-rds-dbproxy-return-values">Return values</h2>
                                  <h3 id="aws-resource-rds-dbproxy-return-values-ref">Ref</h3>
+                                 <p>
+                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the name of the DB proxy.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
                                  <h3 id="aws-resource-rds-dbproxy-return-values-fn--getatt">Fn::GetAtt</h3>
                                  <h4 id="aws-resource-rds-dbproxy-return-values-fn--getatt-fn--getatt"></h4>
                                  <div class="variablelist">

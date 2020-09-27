@@ -16,19 +16,19 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::SSM::MaintenanceWindow</code> resource represents general information
-                                    about a maintenance window for AWS Systems Manager. Maintenance Windows let you define
-                                    a
-                                    schedule for when to perform potentially disruptive actions on your instances, such
-                                    as
-                                    patching an operating system (OS), updating drivers, or installing software. Each
-                                    maintenance window has a schedule, a duration, a set of registered targets, and a
-                                    set of
-                                    registered tasks. 
+                                 <p>The <code class="code">AWS::SSM::MaintenanceWindow</code> resource represents general information about
+                                    a maintenance window for AWS Systems Manager. Maintenance Windows let you define a
+                                    schedule
+                                    for when to perform potentially disruptive actions on your instances, such as patching
+                                    an
+                                    operating system (OS), updating drivers, or installing software. Each maintenance
+                                    window has a
+                                    schedule, a duration, a set of registered targets, and a set of registered tasks.
+                                    
                                  </p>
                                  <p>For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-maintenance.html">Systems Manager
-                                       Maintenance Windows</a> in the <em>AWS Systems Manager User Guide</em>
-                                    and <a href="https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateMaintenanceWindow.html">
+                                       Maintenance Windows</a> in the <em>AWS Systems Manager User Guide</em> and
+                                    <a href="https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_CreateMaintenanceWindow.html">
                                        CreateMaintenanceWindow</a> in the <em>AWS Systems Manager API
                                        Reference</em>.
                                  </p>
@@ -45,6 +45,7 @@
       &quot;<a href="#cfn-ssm-maintenancewindow-enddate">EndDate</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-maintenancewindow-name">Name</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-maintenancewindow-schedule">Schedule</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ssm-maintenancewindow-scheduleoffset">ScheduleOffset</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-ssm-maintenancewindow-scheduletimezone">ScheduleTimezone</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-maintenancewindow-startdate">StartDate</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-maintenancewindow-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
@@ -61,6 +62,7 @@ Properties:
   <a href="#cfn-ssm-maintenancewindow-enddate">EndDate</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-maintenancewindow-name">Name</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-maintenancewindow-schedule">Schedule</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ssm-maintenancewindow-scheduleoffset">ScheduleOffset</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-ssm-maintenancewindow-scheduletimezone">ScheduleTimezone</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-maintenancewindow-startdate">StartDate</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-maintenancewindow-tags">Tags</a>: <code class="replaceable">
@@ -172,6 +174,21 @@ Properties:
                                           <p><em>Maximum</em>: <code class="code">256</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-ssm-maintenancewindow-scheduleoffset"></a><span class="term"><code class="code">ScheduleOffset</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The number of days to wait to run a maintenance window after the scheduled CRON expression
+                                             date and time.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">6</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-ssm-maintenancewindow-scheduletimezone"></a><span class="term"><code class="code">ScheduleTimezone</code></span></dt>
                                        <dd>
                                           
@@ -191,7 +208,8 @@ Properties:
                                           
                                           <p>The date and time, in ISO-8601 Extended format, for when the maintenance window is
                                              scheduled to become active. StartDate allows you to delay activation of the Maintenance
-                                             Window until the specified future date. 
+                                             Window
+                                             until the specified future date. 
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -210,8 +228,8 @@ Properties:
                                              purpose, owner, or environment. For example, you might want to tag a maintenance window
                                              to
                                              identify the type of tasks it will run, the types of targets, and the environment
-                                             it will
-                                             run in.
+                                             it will run
+                                             in.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -222,7 +240,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-ssm-maintenancewindow-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-ssm-maintenancewindow-return-values">Return values</h2>
                                  <h3 id="aws-resource-ssm-maintenancewindow-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the maintenance window ID, such as
@@ -231,13 +249,13 @@ Properties:
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
                                  <h2 id="aws-resource-ssm-maintenancewindow--examples">Examples</h2>
-                                 <h3 id="aws-resource-ssm-maintenancewindow--examples--AWS_Systems_Manager_Maintenance_Window_Example">AWS Systems Manager Maintenance Window Example</h3>
-                                 <p>The following example creates a Systems Manager maintenance window that runs for
-                                    two hours with a one hour cutoff every Sunday at 04:00 AM US Eastern Time. The
-                                    maintenance window also doesn&apos;t allow unregistered targets.
+                                 <h3 id="aws-resource-ssm-maintenancewindow--examples--Create_a_maintenance_window_that_does_not_allow_unregistered_targets">Create a maintenance window that does not allow unregistered targets</h3>
+                                 <p>The following example creates a Systems Manager maintenance window that runs for two
+                                    hours with a one hour cutoff every Sunday at 04:00 AM US Eastern Time. The maintenance
+                                    window also doesn&apos;t allow unregistered targets.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-maintenancewindow--examples--AWS_Systems_Manager_Maintenance_Window_Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-ssm-maintenancewindow--examples--Create_a_maintenance_window_that_does_not_allow_unregistered_targets--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
     &quot;Resources&quot;: <span>{</span>
         &quot;MaintenanceWindow&quot;: <span>{</span>
             &quot;Type&quot;: &quot;AWS::SSM::MaintenanceWindow&quot;,
@@ -254,7 +272,7 @@ Properties:
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-maintenancewindow--examples--AWS_Systems_Manager_Maintenance_Window_Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+                                    <h4 id="aws-resource-ssm-maintenancewindow--examples--Create_a_maintenance_window_that_does_not_allow_unregistered_targets--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
 Resources:
   MaintenanceWindow:
     Type: AWS::SSM::MaintenanceWindow
@@ -266,7 +284,7 @@ Resources:
       Name: UpdateSSMAgentMaintenanceWindow
       Schedule: cron(0 4 ? * SUN *)
       ScheduleTimezone: US/Eastern</code></pre></div>
-                                 <h2 id="aws-resource-ssm-maintenancewindow--seealso">See Also</h2>
+                                 <h2 id="aws-resource-ssm-maintenancewindow--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
                                      

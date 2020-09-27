@@ -19,7 +19,7 @@
                                  <p>The <code class="code">AWS::RDS::DBInstance</code> resource creates an Amazon RDS DB
                                     instance.
                                  </p>
-                                 <div class="awsdocs-note">
+                                 <div class="awsdocs-note awsdocs-important">
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                     <div class="awsdocs-note-text">
@@ -32,13 +32,12 @@
                                     </div>
                                  </div>
                                  <p><b>Updating DB Instances</b></p>
-                                 <p>When properties labeled &quot;<em>Update requires:</em> 
-                                    <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a>&quot; are updated, AWS CloudFormation
-                                    first creates a replacement DB instance, then changes references from other dependent
-                                    resources to point to the replacement DB instance, and finally deletes the old DB
-                                    instance.
+                                 <p>When properties labeled &quot;<em>Update requires:</em>
+                                    <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a>&quot; are updated, AWS CloudFormation first creates a replacement DB
+                                    instance, then changes references from other dependent resources to point to the
+                                    replacement DB instance, and finally deletes the old DB instance.
                                  </p>
-                                 <div class="awsdocs-note">
+                                 <div class="awsdocs-note awsdocs-important">
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                     <div class="awsdocs-note-text">
@@ -66,7 +65,8 @@
                                              <li>
                                                 
                                                 <p>Create a snapshot of the DB instance. For more information about creating
-                                                   DB snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html">Creating a DB snapshot</a>.
+                                                   DB snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html">Creating a DB
+                                                      Snapshot</a>.
                                                 </p>
                                                 
                                              </li>
@@ -74,18 +74,21 @@
                                                 
                                                 <p>If you want to restore your instance using a DB snapshot, modify the
                                                    updated template with your DB instance changes and add the
-                                                   <code class="code">DBSnapshotIdentifier</code> property with the ID of the DB snapshot that you want
-                                                   to use.
+                                                   <code class="code">DBSnapshotIdentifier</code> property with the ID of the DB
+                                                   snapshot that you want to use.
                                                 </p>
                                                 
-                                                <p>After you restore a DB instance with a <code class="code">DBSnapshotIdentifier</code> property, you must 
-                                                   specify the same <code class="code">DBSnapshotIdentifier</code> property for any future updates to the DB instance. 
-                                                   When you specify this property for an update, the DB instance is not restored from
-                                                   the DB snapshot again, and 
-                                                   the data in the database is not changed. However, if you don&apos;t specify the <code class="code">DBSnapshotIdentifier</code> property, 
-                                                   an empty DB instance is created, and the original DB instance is deleted. If you specify
-                                                   a property that is different from the previous snapshot restore 
-                                                   property, the DB instance is restored from the specified <code class="code">DBSnapshotIdentifier</code> property, and the original DB instance is deleted.
+                                                <p>After you restore a DB instance with a <code class="code">DBSnapshotIdentifier</code>
+                                                   property, you must specify the same <code class="code">DBSnapshotIdentifier</code>
+                                                   property for any future updates to the DB instance. When you specify this
+                                                   property for an update, the DB instance is not restored from the DB snapshot
+                                                   again, and the data in the database is not changed. However, if you don&apos;t
+                                                   specify the <code class="code">DBSnapshotIdentifier</code> property, an empty DB instance
+                                                   is created, and the original DB instance is deleted. If you specify a
+                                                   property that is different from the previous snapshot restore property, a
+                                                   new DB instance is restored from the specified
+                                                   <code class="code">DBSnapshotIdentifier</code> property, and the original DB instance
+                                                   is deleted.
                                                 </p>
                                                 
                                              </li>
@@ -98,16 +101,19 @@
                                        </div>
                                     </div>
                                  </div>
-                                 <p>For more information about updating other properties of this resource, see
-                                    <code class="code">
-                                       <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html">ModifyDBInstance</a></code>. For more information about updating stacks, see 
-                                    <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">AWS CloudFormation Stacks Updates</a>.
+                                 <p>For more information about updating other properties of this resource, see <code class="code">
+                                       <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html">ModifyDBInstance</a></code>. For more information about updating stacks,
+                                    see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">AWS
+                                       CloudFormation Stacks Updates</a>.
                                  </p>
                                  <p><b>Deleting DB Instances</b></p>
-                                 <p>You can set a deletion policy for your DB instance to control how AWS CloudFormation
-                                    handles the instance when the stack is deleted. For Amazon RDS DB instances, you can
-                                    choose to <em>retain</em> the instance, to <em>delete</em> the instance, or to <em>create a snapshot</em> of the
-                                    instance. The default AWS CloudFormation behavior depends on the <code class="code">DBClusterIdentifier</code>
+                                 <p>For DB instances that are part of an Aurora DB cluster, you can set a deletion policy
+                                    for your DB instance to control how AWS CloudFormation handles the DB instance when
+                                    the
+                                    stack is deleted. For Amazon RDS DB instances, you can choose to
+                                    <em>retain</em> the DB instance, to <em>delete</em> the DB
+                                    instance, or to <em>create a snapshot</em> of the DB instance. The default
+                                    AWS CloudFormation behavior depends on the <code class="code">DBClusterIdentifier</code>
                                     property:
                                  </p>
                                  <div class="orderedlist">
@@ -118,16 +124,19 @@
                                     <ol>
                                        <li>
                                           
-                                          <p>For <code class="code">AWS::RDS::DBInstance</code> resources that don&apos;t specify the <code class="code">DBClusterIdentifier</code>
-                                             property, AWS CloudFormation saves a snapshot of the DB instance.
+                                          <p>For <code class="code">AWS::RDS::DBInstance</code> resources that don&apos;t specify the
+                                             <code class="code">DBClusterIdentifier</code> property, AWS CloudFormation saves a
+                                             snapshot of the DB instance.
                                           </p>
                                           
                                        </li>
                                        <li>
                                           
-                                          <p> For <code class="code">AWS::RDS::DBInstance</code> resources that do specify the <code class="code">DBClusterIdentifier</code>
-                                             property, AWS CloudFormation deletes the DB instance.
+                                          <p> For <code class="code">AWS::RDS::DBInstance</code> resources that do specify the
+                                             <code class="code">DBClusterIdentifier</code> property, AWS CloudFormation deletes the DB
+                                             instance.
                                           </p>
+                                          
                                        </li>
                                     </ol>
                                  </div>
@@ -262,19 +271,22 @@ Properties:
                                        <dt><a id="cfn-rds-dbinstance-allocatedstorage"></a><span class="term"><code class="code">AllocatedStorage</code></span></dt>
                                        <dd>
                                           
-                                          <p>The amount of storage (in gigabytes) to be initially allocated for the database instance.</p>
+                                          <p>The amount of storage (in gigabytes) to be initially allocated for the database
+                                             instance.
+                                          </p>
                                           
                                           <div class="awsdocs-note">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>If any value is set in the <code class="code">Iops</code> parameter, <code class="code">AllocatedStorage</code> must be at least 100
-                                                   GB, which corresponds to the minimum Iops value of 1,000. If you increase the <code class="code">Iops</code>
-                                                   value (in 1,000 IOPS increments), then you must also increase the <code class="code">AllocatedStorage</code>
+                                                <p>If any value is set in the <code class="code">Iops</code> parameter,
+                                                   <code class="code">AllocatedStorage</code> must be at least 100 GB, which corresponds to the
+                                                   minimum Iops value of 1,000. If you increase the <code class="code">Iops</code> value (in 1,000
+                                                   IOPS increments), then you must also increase the <code class="code">AllocatedStorage</code>
                                                    value (in 100-GB increments). 
                                                 </p>
                                              </div>
-                                          </div>   
+                                          </div>
                                           
                                           <p><em>Required</em>: Conditional
                                           </p>
@@ -285,13 +297,15 @@ Properties:
                                        <dt><a id="cfn-rds-dbinstance-allowmajorversionupgrade"></a><span class="term"><code class="code">AllowMajorVersionUpgrade</code></span></dt>
                                        <dd>
                                           
-                                          <p>A value that indicates whether major version upgrades are allowed. Changing this parameter
-                                             doesn&apos;t result in an outage and the change is asynchronously applied as soon as possible.
+                                          <p>A value that indicates whether major version upgrades are allowed. Changing this
+                                             parameter doesn&apos;t result in an outage and the change is asynchronously applied as
+                                             soon
+                                             as possible.
                                           </p>
                                           
                                           <p>Constraints: Major version upgrades must be allowed when specifying a value for the
-                                             EngineVersion parameter that is a different major version than the DB instance&apos;s current
-                                             version.
+                                             <code class="code">EngineVersion</code> parameter that is a different major version than the DB
+                                             instance&apos;s current version.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -317,8 +331,9 @@ Properties:
                                        <dd>
                                           
                                           <p>A value that indicates whether minor engine upgrades are applied automatically to
-                                             the DB instance during the maintenance window. 
-                                             By default, minor engine upgrades are applied automatically.
+                                             the
+                                             DB instance during the maintenance window. By default, minor engine upgrades are applied
+                                             automatically.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -378,8 +393,9 @@ Properties:
                                        <dd>
                                           
                                           <p>The number of days for which automated backups are retained. Setting this parameter
-                                             to a positive number enables backups. 
-                                             Setting this parameter to 0 disables automated backups.
+                                             to
+                                             a positive number enables backups. Setting this parameter to 0 disables automated
+                                             backups.
                                           </p>
                                           
                                           <p><b>Amazon Aurora</b></p>
@@ -430,14 +446,15 @@ Properties:
                                              </div>
                                           </div>
                                           
-                                          <p>For more information about CA certificate identifiers for RDS DB engines, see 
-                                             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html">
-                                                Rotating Your SSL/TLS Certificate</a> in the <em>Amazon RDS User Guide</em>.
+                                          <p>For more information about CA certificate identifiers for RDS DB engines, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html">
+                                                Rotating Your SSL/TLS Certificate</a> in the <em>Amazon RDS User
+                                                Guide</em>.
                                           </p>
                                           
-                                          <p>For more information about CA certificate identifiers for Aurora DB engines, see 
+                                          <p>For more information about CA certificate identifiers for Aurora DB engines, see
                                              <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html">
-                                                Rotating Your SSL/TLS Certificate</a> in the <em>Amazon Aurora User Guide</em>.
+                                                Rotating Your SSL/TLS Certificate</a> in the <em>Amazon Aurora User
+                                                Guide</em>.
                                           </p>
                                           
                                           
@@ -451,19 +468,17 @@ Properties:
                                        <dd>
                                           
                                           <p>For supported engines, indicates that the DB instance should be associated with the
-                                             specified CharacterSet.
+                                             specified character set.
                                           </p>
-                                          
                                           
                                           <p>
                                              <b>Amazon Aurora</b>
                                              
                                           </p>
                                           
-                                          <p>Not applicable. The character set is managed by
-                                             the DB cluster. For more information, see <code class="code">CreateDBCluster</code>.
+                                          <p>Not applicable. The character set is managed by the DB cluster. For more information,
+                                             see <a href="aws-resource-rds-dbcluster.html">AWS::RDS::DBCluster</a>.
                                           </p>
-                                          
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -507,13 +522,17 @@ Properties:
                                        <dt><a id="cfn-rds-dbinstance-dbinstanceclass"></a><span class="term"><code class="code">DBInstanceClass</code></span></dt>
                                        <dd>
                                           
-                                          <p>The compute and memory capacity of the DB instance, for example, <code class="code">db.m4.large</code>.
-                                             Not all DB instance classes are available in all AWS Regions, or for all database
-                                             engines.
-                                             For the full list of DB instance classes, and availability for your engine, see 
-                                             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html">DB Instance Class</a> in the <em>Amazon RDS User Guide.</em>
-                                             
+                                          <p>The compute and memory capacity of the DB instance, for example,
+                                             <code class="code">db.m4.large</code>. Not all DB instance classes are available in all AWS
+                                             Regions, or for all database engines.
                                           </p>
+                                          
+                                          <p>For the full list of DB instance classes, and availability for your engine, see 
+                                             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html">DB Instance
+                                                Class</a> in the <em>Amazon RDS User Guide.</em> For more information about DB instance class 
+                                             pricing and AWS Region support for DB instance classes, see 
+                                             <a href="http://aws.amazon.com/rds/pricing/" target="_blank"><span>Amazon RDS Pricing</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                          </p>       
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -525,18 +544,19 @@ Properties:
                                        <dd>
                                           
                                           <p>A name for the DB instance. If you specify a name, AWS CloudFormation converts it
-                                             to lowercase. If you don&apos;t specify a name, AWS CloudFormation generates a unique
-                                             physical ID and uses that ID for the DB instance. For more information, see 
-                                             <a href="aws-properties-name.html">Name Type</a>.
+                                             to
+                                             lowercase. If you don&apos;t specify a name, AWS CloudFormation generates a unique physical
+                                             ID and uses that ID for the DB instance. For more information, see <a href="aws-properties-name.html">Name
+                                                Type</a>.
                                           </p>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>If you specify a name, you cannot perform updates that require replacement of
-                                                   this resource. You can perform updates that require no or some interruption. If
-                                                   you must replace the resource, specify a new name. 
+                                                <p>If you specify a name, you cannot perform updates that require replacement of this
+                                                   resource. You can perform updates that require no or some interruption. If you must
+                                                   replace the resource, specify a new name. 
                                                 </p>
                                              </div>
                                           </div>
@@ -552,16 +572,16 @@ Properties:
                                           
                                           <p>The meaning of this parameter differs according to the database engine you use.</p>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
                                                 <p> If you specify the <code class="code">
-                                                      <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsnapshotidentifier">DBSnapshotIdentifier</a></code> property, AWS CloudFormation ignores this
-                                                   property.
+                                                      <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsnapshotidentifier">DBSnapshotIdentifier</a></code> property, AWS CloudFormation ignores
+                                                   this property.
                                                 </p>
-                                                <p>If you restore DB instances from snapshots, this property doesn&apos;t apply to
-                                                   the MySQL, PostgreSQL, or MariaDB engines.
+                                                <p>If you restore DB instances from snapshots, this property doesn&apos;t apply to the
+                                                   MySQL, PostgreSQL, or MariaDB engines.
                                                 </p>
                                              </div>
                                           </div>
@@ -583,10 +603,12 @@ Properties:
                                              
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
+                                                   
                                                    <p>Must contain 1 to 64 letters or numbers.</p>
                                                    
                                                 </li>
                                                 <li class="listitem">
+                                                   
                                                    <p>Can&apos;t be a word reserved by the specified database engine</p>
                                                    
                                                 </li>
@@ -610,10 +632,12 @@ Properties:
                                              
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
+                                                   
                                                    <p>Must contain 1 to 64 letters or numbers.</p>
                                                    
                                                 </li>
                                                 <li class="listitem">
+                                                   
                                                    <p>Can&apos;t be a word reserved by the specified database engine</p>
                                                    
                                                 </li>
@@ -638,16 +662,19 @@ Properties:
                                              
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
+                                                   
                                                    <p>Must contain 1 to 63 letters, numbers, or underscores.</p>
                                                    
                                                 </li>
                                                 <li class="listitem">
-                                                   <p>Must begin with a letter or an underscore. Subsequent characters can be letters, underscores,
-                                                      or digits (0-9).
+                                                   
+                                                   <p>Must begin with a letter or an underscore. Subsequent characters can be
+                                                      letters, underscores, or digits (0-9).
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
+                                                   
                                                    <p>Can&apos;t be a word reserved by the specified database engine</p>
                                                    
                                                 </li>
@@ -659,10 +686,9 @@ Properties:
                                              
                                           </p>
                                           
-                                          <p>The Oracle System ID (SID) of the created DB instance.
-                                             If you specify <code class="code">null</code>, the default value <code class="code">ORCL</code> is used.
-                                             You can&apos;t specify the string NULL, or any other reserved word, for <code class="code">DBName</code>. 
-                                             
+                                          <p>The Oracle System ID (SID) of the created DB instance. If you specify
+                                             <code class="code">null</code>, the default value <code class="code">ORCL</code> is used. You can&apos;t specify
+                                             the string NULL, or any other reserved word, for <code class="code">DBName</code>. 
                                           </p>
                                           
                                           <p>Default: <code class="code">ORCL</code>
@@ -676,6 +702,7 @@ Properties:
                                              
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
+                                                   
                                                    <p>Can&apos;t be longer than 8 characters</p>
                                                    
                                                 </li>
@@ -695,7 +722,8 @@ Properties:
                                           </p>
                                           
                                           <p>The name of the database to create when the primary instance of the DB cluster is
-                                             created. If this parameter is not specified, no database is created in the DB instance.
+                                             created. If this parameter is not specified, no database is created in the DB
+                                             instance.
                                           </p>
                                           
                                           <p>Constraints:</p>
@@ -706,10 +734,12 @@ Properties:
                                              
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
+                                                   
                                                    <p>Must contain 1 to 64 letters or numbers.</p>
                                                    
                                                 </li>
                                                 <li class="listitem">
+                                                   
                                                    <p>Can&apos;t be a word reserved by the specified database engine</p>
                                                    
                                                 </li>
@@ -725,9 +755,15 @@ Properties:
                                        <dt><a id="cfn-rds-dbinstance-dbparametergroupname"></a><span class="term"><code class="code">DBParameterGroupName</code></span></dt>
                                        <dd>
                                           
-                                          <p>The name of an existing DB parameter group or a reference to an
-                                             <a href="aws-properties-rds-dbparametergroup.html">AWS::RDS::DBParameterGroup</a> resource created in the template.
+                                          <p>The name of an existing DB parameter group or a reference to an <a href="aws-properties-rds-dbparametergroup.html">AWS::RDS::DBParameterGroup</a> resource created in the template.
                                           </p>
+                                          
+                                          <p>To list all of the available DB parameter group names, use the following
+                                             command:
+                                          </p>
+                                          
+                                          <p><code class="code">aws rds describe-db-parameter-groups --query
+                                                &quot;DBParameterGroups[].DBParameterGroupName&quot; --output text</code></p>
                                           
                                           <div class="awsdocs-note">
                                              <div class="awsdocs-note-title">
@@ -763,7 +799,7 @@ Properties:
                                              instance. Instead, use VPCSecurityGroups.
                                           </p>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
@@ -994,10 +1030,11 @@ Properties:
                                                    </ul>
                                                 </div>
                                                 <p>All other properties are ignored. Specify a virtual private cloud (VPC) security
-                                                   group if you want to submit other properties, such as <code class="code">StorageType</code>, <code class="code">StorageEncrypted</code>,
-                                                   or <code class="code">KmsKeyId</code>. If you&apos;re already using the <code class="code">DBSecurityGroups</code> property, you can&apos;t use
-                                                   these other properties by updating your DB instance to use a VPC security group. You
-                                                   must recreate the DB instance.
+                                                   group if you want to submit other properties, such as <code class="code">StorageType</code>,
+                                                   <code class="code">StorageEncrypted</code>, or <code class="code">KmsKeyId</code>. If you&apos;re already using
+                                                   the <code class="code">DBSecurityGroups</code> property, you can&apos;t use these other properties by
+                                                   updating your DB instance to use a VPC security group. You must recreate the DB
+                                                   instance.
                                                 </p>
                                              </div>
                                           </div>
@@ -1021,13 +1058,14 @@ Properties:
                                           
                                           <p>By specifying this property, you can create a DB instance from the specified DB
                                              snapshot. If the <code class="code">DBSnapshotIdentifier</code> property is an empty string or the
-                                             <code class="code">AWS::RDS::DBInstance</code> declaration has no <code class="code">DBSnapshotIdentifier</code> property, AWS
-                                             CloudFormation creates a new database. If the property contains a value (other than
-                                             an
-                                             empty string), AWS CloudFormation creates a database from the specified snapshot.
-                                             If a
-                                             snapshot with the specified name doesn&apos;t exist, AWS CloudFormation can&apos;t create the
-                                             database and it rolls back the stack.
+                                             <code class="code">AWS::RDS::DBInstance</code> declaration has no
+                                             <code class="code">DBSnapshotIdentifier</code> property, AWS CloudFormation creates a new
+                                             database. If the property contains a value (other than an empty string), AWS
+                                             CloudFormation creates a database from the specified snapshot. If a snapshot with
+                                             the
+                                             specified name doesn&apos;t exist, AWS CloudFormation can&apos;t create the database and it
+                                             rolls
+                                             back the stack.
                                           </p>
                                           
                                           
@@ -1040,24 +1078,24 @@ Properties:
                                           </p>
                                           
                                           
-                                          <p>After you restore a DB instance with a <code class="code">DBSnapshotIdentifier</code> property, you must 
-                                             specify the same <code class="code">DBSnapshotIdentifier</code> property for any future updates to the DB instance. 
-                                             When you specify this property for an update, the DB instance is not restored from
-                                             the DB snapshot again, and 
-                                             the data in the database is not changed. However, if you don&apos;t specify the <code class="code">DBSnapshotIdentifier</code> property, 
-                                             an empty DB instance is created, and the original DB instance is deleted. If you specify
-                                             a property that is different from the previous snapshot restore 
-                                             property, the DB instance is restored from the specified <code class="code">DBSnapshotIdentifier</code> property, and the original DB instance is deleted.
+                                          <p>After you restore a DB instance with a <code class="code">DBSnapshotIdentifier</code> property, you
+                                             must specify the same <code class="code">DBSnapshotIdentifier</code> property for any future updates
+                                             to the DB instance. When you specify this property for an update, the DB instance
+                                             is not
+                                             restored from the DB snapshot again, and the data in the database is not changed.
+                                             However, if you don&apos;t specify the <code class="code">DBSnapshotIdentifier</code> property, an empty
+                                             DB instance is created, and the original DB instance is deleted. If you specify a
+                                             property that is different from the previous snapshot restore property, a new DB
+                                             instance is restored from the specified <code class="code">DBSnapshotIdentifier</code> property, and
+                                             the original DB instance is deleted.
                                           </p>
                                           
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>If you specify this property, you can&apos;t specify the   
-                                                   <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbname"><code class="code">DBName</code></a>
-                                                   property.
+                                                <p>If you specify this property, you can&apos;t specify the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbname"><code class="code">DBName</code></a> property.
                                                 </p>
                                              </div>
                                           </div>
@@ -1076,13 +1114,11 @@ Properties:
                                              subnet group must be a subnet group in a new VPC. 
                                           </p>
                                           
-                                          <p>If there&apos;s no DB subnet group, then the instance isn&apos;t a VPC DB instance.</p>
+                                          <p>If there&apos;s no DB subnet group, then the DB instance isn&apos;t a VPC DB instance.</p>
                                           
-                                          <p>For more information about using Amazon RDS in a VPC, see 
-                                             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html">Using Amazon RDS with Amazon
-                                                Virtual Private Cloud (VPC)</a> in the 
-                                             <em>Amazon Relational Database Service Developer Guide</em>.
-                                             
+                                          <p>For more information about using Amazon RDS in a VPC, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html">Using Amazon RDS with Amazon Virtual
+                                                Private Cloud (VPC)</a> in the <em>Amazon Relational Database Service
+                                                Developer Guide</em>. 
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -1138,24 +1174,14 @@ Properties:
                                        <dt><a id="cfn-rds-dbinstance-domain"></a><span class="term"><code class="code">Domain</code></span></dt>
                                        <dd>
                                           
-                                          <p>The Active Directory directory ID to create the DB instance in. Currently, only Microsoft
-                                             SQL Server and Oracle 
-                                             DB instances can be created in an Active Directory Domain.
+                                          <p>The Active Directory directory ID to create the DB instance in. Currently, only MySQL,
+                                             Microsoft SQL 
+                                             Server, Oracle, and PostgreSQL DB instances can be created in an Active Directory
+                                             Domain.
                                           </p>
                                           
-                                          <p>For Microsoft SQL Server DB instances, Amazon RDS can use 
-                                             Windows Authentication to authenticate users that connect to the DB instance. For
-                                             more
-                                             information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html">
-                                                Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL
-                                                Server</a> in the 
-                                             <em>Amazon RDS User Guide</em>.
-                                          </p>
-                                          
-                                          <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate
-                                             users that connect to the DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html"> Using
-                                                Kerberos Authentication with Amazon RDS for Oracle</a> in the <em>Amazon
-                                                RDS User Guide</em>.
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html">
+                                                Kerberos Authentication</a> in the <em>Amazon RDS User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -1185,6 +1211,51 @@ Properties:
                                              in the list depend on the DB engine being used. For more information, see 
                                              <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <em>Amazon Relational Database
                                                 Service User Guide</em>.
+                                          </p>
+                                          
+                                          <p>
+                                             <b>MariaDB</b>
+                                             
+                                          </p>
+                                          
+                                          <p>Possible values are <code class="code">audit</code>, <code class="code">error</code>, <code class="code">general</code>, and <code class="code">slowquery</code>. 
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <b>Microsoft SQL Server</b>
+                                             
+                                          </p>
+                                          
+                                          <p>Possible values are <code class="code">agent</code> and <code class="code">error</code>.
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <b>MySQL</b>
+                                             
+                                          </p>
+                                          
+                                          <p>Possible values are <code class="code">audit</code>, <code class="code">error</code>, <code class="code">general</code>, and <code class="code">slowquery</code>. 
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <b>Oracle</b>
+                                             
+                                          </p>
+                                          
+                                          <p>Possible values are <code class="code">alert</code>, <code class="code">audit</code>, <code class="code">listener</code>, and <code class="code">trace</code>. 
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <b>PostgreSQL</b>
+                                             
+                                          </p>
+                                          
+                                          <p>Possible values are <code class="code">postgresql</code> and <code class="code">upgrade</code>.
+                                             
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -1309,19 +1380,110 @@ Properties:
                                        <dt><a id="cfn-rds-dbinstance-engine"></a><span class="term"><code class="code">Engine</code></span></dt>
                                        <dd>
                                           
-                                          <p>The name of the database engine that you want to use for this DB instance. For valid
-                                             values, see the <code class="code">Engine</code> parameter of the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html">CreateDBInstance</a>
-                                             action in the <em>Amazon RDS API Reference</em>.
-                                          </p>
+                                          <p>The name of the database engine that you want to use for this DB instance.</p>
                                           
                                           <div class="awsdocs-note">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>If you don&apos;t specify a value for the <code class="code">DBParameterGroupName</code>
-                                                   property, the default DBParameterGroup for the specified engine is used.
+                                                <p>If you don&apos;t specify a value for the <code class="code">DBParameterGroupName</code> property,
+                                                   the default DBParameterGroup for the specified engine is used.
                                                 </p>
                                              </div>
+                                          </div>
+                                          
+                                          <p>Valid Values:</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">aurora</code> (for MySQL 5.6-compatible Aurora)
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">aurora-mysql</code> (for MySQL 5.7-compatible Aurora)
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">aurora-postgresql</code></p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">mariadb</code></p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">mysql</code></p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">oracle-ee</code></p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">oracle-se2</code></p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">oracle-se1</code></p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">oracle-se</code></p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">postgres</code></p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">sqlserver-ee</code></p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">sqlserver-se</code></p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">sqlserver-ex</code></p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">sqlserver-web</code></p>
+                                                   
+                                                </li>
+                                             </ul>
                                           </div>
                                           
                                           <p><em>Required</em>: No
@@ -1455,18 +1617,20 @@ Properties:
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-rds-dbinstance-kmskeyid"></a><span class="term"><code class="code">KmsKeyId</code></span></dt>
-                                       <dd> 
+                                       <dd>
                                           
                                           <p>The ARN of the AWS Key Management Service (AWS KMS) master key that&apos;s used to encrypt
                                              the DB instance, such as
-                                             <code class="code">arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef</code>. If you
-                                             enable the StorageEncrypted property but don&apos;t specify this property, AWS CloudFormation
-                                             uses the default master key. If you specify this property, you must set the
-                                             StorageEncrypted property to true. 
+                                             <code class="code">arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef</code>.
+                                             If you enable the StorageEncrypted property but don&apos;t specify this property, AWS
+                                             CloudFormation uses the default master key. If you specify this property, you must
+                                             set
+                                             the StorageEncrypted property to true. 
                                           </p>
                                           
-                                          <p>If you specify the <code class="code">SourceDBInstanceIdentifier</code> property, the value is inherited from
-                                             the source DB instance if the Read Replica is created in the same region.
+                                          <p>If you specify the <code class="code">SourceDBInstanceIdentifier</code> property, the value is
+                                             inherited from the source DB instance if the Read Replica is created in the same
+                                             region.
                                           </p>
                                           
                                           <p>If you create an encrypted Read Replica in a different AWS Region, then you must
@@ -1477,12 +1641,12 @@ Properties:
                                              another region.
                                           </p>
                                           
-                                          <p>If you specify <code class="code">DBSecurityGroups</code>, AWS CloudFormation ignores this property. To specify
-                                             both a security group and this property, you must use a VPC security group. For more
-                                             information about Amazon RDS and VPC, see 
-                                             <a href="aws-properties-rds-database-instance.html">Using Amazon RDS with Amazon VPC</a> in the <em>Amazon
-                                                RDS User Guide</em>.
-                                          </p> 
+                                          <p>If you specify <code class="code">DBSecurityGroups</code>, AWS CloudFormation ignores this
+                                             property. To specify both a security group and this property, you must use a VPC
+                                             security group. For more information about Amazon RDS and VPC, see <a href="aws-properties-rds-database-instance.html">Using Amazon RDS with Amazon VPC</a> in the <em>Amazon RDS User
+                                                Guide</em>.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -1493,6 +1657,11 @@ Properties:
                                        <dd>
                                           
                                           <p>License model information for this DB instance.</p>
+                                          
+                                          <p> Valid values: <code class="code">license-included</code> | <code class="code">bring-your-own-license</code> |
+                                             <code class="code">general-public-license</code>
+                                             
+                                          </p>
                                           
                                           <div class="awsdocs-note">
                                              <div class="awsdocs-note-title">
@@ -1520,12 +1689,12 @@ Properties:
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>If you specify the <code class="code">SourceDBInstanceIdentifier</code> or <code class="code">DBSnapshotIdentifier</code> property,
-                                                   don&apos;t specify this property. The value is inherited from the source DB instance or
-                                                   snapshot.
+                                                <p>If you specify the <code class="code">SourceDBInstanceIdentifier</code> or
+                                                   <code class="code">DBSnapshotIdentifier</code> property, don&apos;t specify this property. The
+                                                   value is inherited from the source DB instance or snapshot.
                                                 </p>
                                              </div>
-                                          </div>       
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -1536,8 +1705,8 @@ Properties:
                                        <dt><a id="cfn-rds-dbinstance-masteruserpassword"></a><span class="term"><code class="code">MasterUserPassword</code></span></dt>
                                        <dd>
                                           
-                                          <p>The password for the master user. The password can include any printable ASCII character
-                                             except &quot;/&quot;, &quot;&quot;&quot;, or &quot;@&quot;.
+                                          <p>The password for the master user. The password can include any printable ASCII
+                                             character except &quot;/&quot;, &quot;&quot;&quot;, or &quot;@&quot;.
                                           </p>
                                           
                                           
@@ -1546,9 +1715,7 @@ Properties:
                                              
                                           </p>
                                           
-                                          <p>Not applicable. The password for the master user is managed by the DB
-                                             cluster.
-                                          </p>
+                                          <p>Not applicable. The password for the master user is managed by the DB cluster.</p>
                                           
                                           
                                           <p>
@@ -1655,25 +1822,29 @@ Properties:
                                        <dd>
                                           
                                           <p>Specifies whether the database instance is a multiple Availability Zone deployment.
-                                             You can&apos;t set the <code class="code">AvailabilityZone</code> parameter if the <code class="code">MultiAZ</code> parameter is set to true.
-                                             Amazon Aurora storage is replicated across all the Availability Zones and doesn&apos;t
-                                             require the <code class="code">MultiAZ</code> option to be set. 
+                                             You can&apos;t set the <code class="code">AvailabilityZone</code> parameter if the <code class="code">MultiAZ</code>
+                                             parameter is set to true. Amazon Aurora storage is replicated across all the
+                                             Availability Zones and doesn&apos;t require the <code class="code">MultiAZ</code> option to be set.
+                                             
                                           </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Boolean
                                           </p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
                                        </dd>
                                        <dt><a id="cfn-rds-dbinstance-optiongroupname"></a><span class="term"><code class="code">OptionGroupName</code></span></dt>
                                        <dd>
                                           
-                                          <p>Indicates that the DB instance should be associated with the specified option group.</p>
+                                          <p>Indicates that the DB instance should be associated with the specified option
+                                             group.
+                                          </p>
                                           
                                           <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can&apos;t
-                                             be removed from an option group. Also, that option group can&apos;t be removed from a DB
-                                             instance once it is associated with a DB instance
+                                             be
+                                             removed from an option group. Also, that option group can&apos;t be removed from a DB
+                                             instance once it is associated with a DB instance.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -1804,19 +1975,19 @@ Properties:
                                        <dt><a id="cfn-rds-dbinstance-preferredmaintenancewindow"></a><span class="term"><code class="code">PreferredMaintenanceWindow</code></span></dt>
                                        <dd>
                                           
-                                          <p>The weekly time range during which system maintenance can occur, in Universal Coordinated
-                                             Time (UTC).
+                                          <p>The weekly time range during which system maintenance can occur, in Universal
+                                             Coordinated Time (UTC).
                                           </p>
                                           
                                           <p>Format: <code class="code">ddd:hh24:mi-ddd:hh24:mi</code>
                                              
                                           </p>
                                           
-                                          <p>The default is a 30-minute window selected at random from an
-                                             8-hour block of time for each AWS Region, occurring on a random day of the
-                                             week. To see the time blocks available, see 
-                                             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow">
-                                                Adjusting the Preferred DB Instance Maintenance Window</a> in the <em>Amazon RDS User Guide.</em>
+                                          <p>The default is a 30-minute window selected at random from an 8-hour block of time
+                                             for
+                                             each AWS Region, occurring on a random day of the week. To see the time blocks
+                                             available, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow"> Adjusting the Preferred DB Instance Maintenance Window</a> in the
+                                             <em>Amazon RDS User Guide.</em>
                                              
                                           </p>
                                           
@@ -1824,7 +1995,7 @@ Properties:
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>This property applies when AWS CloudFormation initially creates the DB instance. 
+                                                <p>This property applies when AWS CloudFormation initially creates the DB instance.
                                                    If you use AWS CloudFormation to update the DB instance, those updates are applied
                                                    immediately.
                                                 </p>
@@ -1876,25 +2047,23 @@ Properties:
                                        <dd>
                                           
                                           <p> Indicates whether the DB instance is an internet-facing instance. If you specify
-                                             <code class="code">true</code>, AWS CloudFormation creates an instance with a publicly resolvable DNS name, which
-                                             resolves to a public IP address. If you specify false, AWS CloudFormation creates
-                                             an
-                                             internal instance with a DNS name that resolves to a private IP address. 
-                                          </p>       
+                                             <code class="code">true</code>, AWS CloudFormation creates an instance with a publicly resolvable
+                                             DNS name, which resolves to a public IP address. If you specify false, AWS
+                                             CloudFormation creates an internal instance with a DNS name that resolves to a private
+                                             IP address. 
+                                          </p>
                                           
                                           <p> The default behavior value depends on your VPC setup and the database subnet group.
-                                             For more information, see the <code class="code">PubliclyAccessible</code> parameter in 
-                                             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html"><code class="code">CreateDBInstance</code></a> in the
-                                             <em>Amazon RDS API Reference</em>. 
-                                          </p>       
+                                             For more information, see the <code class="code">PubliclyAccessible</code> parameter in <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html"><code class="code">CreateDBInstance</code></a> in the <em>Amazon RDS API
+                                                Reference</em>. 
+                                          </p>
                                           
                                           <p> If this resource has a public IP address and is also in a VPC that is defined in
                                              the
-                                             same template, you must use the <em>DependsOn</em> attribute to declare a dependency on the
-                                             VPC-gateway attachment. For more information, see 
-                                             <a href="aws-attribute-dependson.html">DependsOn
+                                             same template, you must use the <em>DependsOn</em> attribute to declare a
+                                             dependency on the VPC-gateway attachment. For more information, see <a href="aws-attribute-dependson.html">DependsOn
                                                 Attribute</a>. 
-                                          </p>       
+                                          </p>
                                           
                                           <div class="awsdocs-note">
                                              <div class="awsdocs-note-title">
@@ -1902,11 +2071,12 @@ Properties:
                                              <div class="awsdocs-note-text">
                                                 <p>If you specify DBSecurityGroups, AWS CloudFormation ignores this property. To
                                                    specify a security group and this property, you must use a VPC security group. For
-                                                   more information about Amazon RDS and VPC, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html">Using Amazon RDS with Amazon VPC</a> in
-                                                   the <em>Amazon RDS User Guide</em>.
+                                                   more information about Amazon RDS and VPC, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html">Using Amazon RDS with Amazon
+                                                      VPC</a> in the <em>Amazon RDS User Guide</em>.
                                                 </p>
                                              </div>
                                           </div>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Boolean
@@ -1917,19 +2087,19 @@ Properties:
                                        <dd>
                                           
                                           <p>If you want to create a Read Replica DB instance, specify the ID of the source DB
-                                             instance. Each DB instance can have 
-                                             a limited number of Read Replicas. For more information, see 
-                                             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/USER_ReadRepl.html">Working with Read Replicas</a> in the <em>Amazon Relational Database Service Developer Guide</em>.
-                                             
-                                          </p>
-                                          <p> 
-                                             The <code class="code">SourceDBInstanceIdentifier</code> property determines whether a DB instance is a Read Replica. 
-                                             If you remove the <code class="code">SourceDBInstanceIdentifier</code> property from your template and then update your stack, AWS CloudFormation deletes
-                                             the Read Replica and creates a new DB instance (not a Read Replica).
-                                             
+                                             instance. Each DB instance can have a limited number of Read Replicas. For more
+                                             information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/USER_ReadRepl.html">Working with Read
+                                                Replicas</a> in the <em>Amazon Relational Database Service Developer
+                                                Guide</em>. 
                                           </p>
                                           
-                                          <div class="awsdocs-note">
+                                          <p> The <code class="code">SourceDBInstanceIdentifier</code> property determines whether a DB instance
+                                             is a Read Replica. If you remove the <code class="code">SourceDBInstanceIdentifier</code> property
+                                             from your template and then update your stack, AWS CloudFormation deletes the Read
+                                             Replica and creates a new DB instance (not a Read Replica). 
+                                          </p>
+                                          
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
@@ -1951,12 +2121,13 @@ Properties:
                                                       <li class="listitem">
                                                          
                                                          <p>If you specify a source DB instance that uses VPC security groups, we
-                                                            recommend that you specify the <code class="code">VPCSecurityGroups</code> property. If you don&apos;t
-                                                            specify the property, the Read Replica inherits the value of the
-                                                            <code class="code">VPCSecurityGroups</code> property from the source DB when you create the replica.
-                                                            However, if you update the stack, AWS CloudFormation reverts the replica&apos;s
-                                                            <code class="code">VPCSecurityGroups</code> property to the default value because it&apos;s not defined in
-                                                            the stack&apos;s template. This change might cause unexpected issues.
+                                                            recommend that you specify the <code class="code">VPCSecurityGroups</code> property. If
+                                                            you don&apos;t specify the property, the Read Replica inherits the value of the
+                                                            <code class="code">VPCSecurityGroups</code> property from the source DB when you
+                                                            create the replica. However, if you update the stack, AWS CloudFormation
+                                                            reverts the replica&apos;s <code class="code">VPCSecurityGroups</code> property to the default
+                                                            value because it&apos;s not defined in the stack&apos;s template. This change might
+                                                            cause unexpected issues.
                                                          </p>
                                                          
                                                       </li>
@@ -1969,27 +2140,29 @@ Properties:
                                                       </li>
                                                       <li class="listitem">
                                                          
-                                                         <p>If you specify <code class="code">SourceDBInstanceIdentifier</code>, don&apos;t specify the 
-                                                            <code class="code">DBSnapshotIdentifier</code> property. You can&apos;t create a
-                                                            Read Replica from a snapshot.
+                                                         <p>If you specify <code class="code">SourceDBInstanceIdentifier</code>, don&apos;t specify the
+                                                            <code class="code">DBSnapshotIdentifier</code> property. You can&apos;t create a Read
+                                                            Replica from a snapshot.
                                                          </p>
                                                          
                                                       </li>
                                                       <li class="listitem">
                                                          
-                                                         <p> Don&apos;t set the <code class="code">BackupRetentionPeriod</code>, <code class="code">DBName</code>, <code class="code">MasterUsername</code>,
-                                                            <code class="code">MasterUserPassword</code>, and <code class="code">PreferredBackupWindow</code> properties. The database
-                                                            attributes are inherited from the source DB instance, and backups are
-                                                            disabled for Read Replicas.
+                                                         <p> Don&apos;t set the <code class="code">BackupRetentionPeriod</code>, <code class="code">DBName</code>,
+                                                            <code class="code">MasterUsername</code>, <code class="code">MasterUserPassword</code>, and
+                                                            <code class="code">PreferredBackupWindow</code> properties. The database attributes
+                                                            are inherited from the source DB instance, and backups are disabled for Read
+                                                            Replicas.
                                                          </p>
                                                          
                                                       </li>
                                                       <li class="listitem">
                                                          
                                                          <p>If the source DB instance is in a different region than the Read Replica,
-                                                            specify the source region in <code class="code">SourceRegion</code>, and specify an ARN for a valid DB instance in <code class="code">SourceDBInstanceIdentifier</code>. For more information, see
-                                                            <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN">Constructing a Amazon RDS Amazon Resource Name (ARN)</a> in the <em>Amazon RDS User
-                                                               Guide</em>.
+                                                            specify the source region in <code class="code">SourceRegion</code>, and specify an ARN
+                                                            for a valid DB instance in <code class="code">SourceDBInstanceIdentifier</code>. For more
+                                                            information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN">Constructing a Amazon RDS Amazon Resource Name (ARN)</a> in the
+                                                            <em>Amazon RDS User Guide</em>.
                                                          </p>
                                                          
                                                       </li>
@@ -2004,6 +2177,7 @@ Properties:
                                                 </div>
                                              </div>
                                           </div>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -2052,26 +2226,24 @@ Properties:
                                           
                                           <p>Specifies the storage type to be associated with the DB instance.</p>
                                           
-                                          <p>
-                                             Valid values: <code class="code">standard | gp2 | io1</code>
+                                          <p> Valid values: <code class="code">standard | gp2 | io1</code>
                                              
                                           </p>
                                           
-                                          <p>
-                                             If you specify <code class="code">io1</code>, you must also include a value for the
-                                             <code class="code">Iops</code> parameter.
+                                          <p>The <code class="code">standard</code> value is also known as magnetic.
+                                          </p>
+                                          
+                                          <p> If you specify <code class="code">io1</code>, you must also include a value for the
+                                             <code class="code">Iops</code> parameter. 
+                                          </p>
+                                          
+                                          <p> Default: <code class="code">io1</code> if the <code class="code">Iops</code> parameter is specified, otherwise
+                                             <code class="code">standard</code>
                                              
                                           </p>
                                           
-                                          <p>
-                                             Default: <code class="code">io1</code> if the <code class="code">Iops</code> parameter
-                                             is specified, otherwise <code class="code">standard</code>
-                                             
-                                          </p>
-                                          
-                                          <p>For more information, see
-                                             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html">Amazon RDS DB Instance Storage</a> in the <em>Amazon RDS User
-                                                Guide</em>.
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html">Amazon RDS DB Instance
+                                                Storage</a> in the <em>Amazon RDS User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -2124,14 +2296,17 @@ Properties:
                                        <dd>
                                           
                                           <p>A list of the VPC security group IDs to assign to the DB instance. The list can
-                                             include both the physical IDs of existing VPC security groups and references to
-                                             <a href="aws-properties-ec2-security-group.html">AWS::EC2::SecurityGroup</a> resources created in the template.
+                                             include both the physical IDs of existing VPC security groups and references to <a href="aws-properties-ec2-security-group.html">AWS::EC2::SecurityGroup</a> resources created in the template.
+                                          </p>
+                                          
+                                          <p>If you plan to update the resource, don&apos;t specify VPC security groups in a shared
+                                             VPC.
                                           </p>
                                           
                                           <p> If you set <code class="code">VPCSecurityGroups</code>, you must not set <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsecuritygroups"><code class="code">DBSecurityGroups</code></a>, and vice versa.
                                           </p>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
@@ -2149,6 +2324,7 @@ Properties:
                                                          <p>You can&apos;t revert to using an RDS security group after you establish a VPC
                                                             security group membership.
                                                          </p>
+                                                         
                                                       </li>
                                                       <li class="listitem">
                                                          
@@ -2157,25 +2333,26 @@ Properties:
                                                             fails in another AWS CloudFormation resource, the rollback fails because it
                                                             can&apos;t revert to an RDS security group.
                                                          </p>
+                                                         
                                                       </li>
                                                       <li class="listitem">
                                                          
                                                          <p>To use the properties that are available when you use a VPC security
                                                             group, you must recreate the DB instance. If you don&apos;t, AWS CloudFormation
-                                                            submits only the property values that are listed in the 
-                                                            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsecuritygroups">
-                                                               <code class="code">DBSecurityGroups</code></a>
-                                                            property.
+                                                            submits only the property values that are listed in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsecuritygroups">
+                                                               <code class="code">DBSecurityGroups</code></a> property.
                                                          </p>
+                                                         
                                                       </li>
                                                    </ul>
                                                 </div>
                                              </div>
                                           </div>
                                           
-                                          <p>To avoid this situation, migrate your DB instance to using VPC security groups
-                                             only when that is the only change in your stack template. 
-                                          </p>      
+                                          <p>To avoid this situation, migrate your DB instance to using VPC security groups only
+                                             when that is the only change in your stack template. 
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of String
@@ -2184,9 +2361,9 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-properties-rds-database-instance-return-values">Return Values</h2>
+                                 <h2 id="aws-properties-rds-database-instance-return-values">Return values</h2>
                                  <h3 id="aws-properties-rds-database-instance-return-values-ref">Ref</h3>
-                                 <p>            
+                                 <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the DB instance name.
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
@@ -2213,7 +2390,8 @@ Properties:
                                        <dt><a id="Endpoint.Port-fn::getatt"></a><span class="term"><code class="code">Endpoint.Port</code></span></dt>
                                        <dd>
                                           
-                                          <p>The port number on which the database accepts connections. For example: <code class="code">3306</code>
+                                          <p>The port number on which the database accepts connections. For example:
+                                             <code class="code">3306</code>
                                              
                                           </p>
                                           
@@ -2222,11 +2400,11 @@ Properties:
                                  </div>
                                  <h2 id="aws-properties-rds-database-instance--examples">Examples</h2>
                                  <h3 id="aws-properties-rds-database-instance--examples--Creating_a_DB_Instance_with_Enhanced_Monitoring_Enabled">Creating a DB Instance with Enhanced Monitoring Enabled</h3>
-                                 <p>The following example creates an Amazon RDS MySQL DB instance with Enhanced Monitoring
-                                    enabled. The IAM role for Enhanced Monitoring 
-                                    specified in <code class="code">MonitoringRoleArn</code> must exist before you run this example.
-                                    For more information about Enhanced Monitoring, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html">
-                                       Enhanced Monitoring</a> in the <em>Amazon RDS User Guide</em>.
+                                 <p>The following example creates an Amazon RDS MySQL DB instance with Enhanced
+                                    Monitoring enabled. The IAM role for Enhanced Monitoring specified in
+                                    <code class="code">MonitoringRoleArn</code> must exist before you run this example. For
+                                    more information about Enhanced Monitoring, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html"> Enhanced
+                                       Monitoring</a> in the <em>Amazon RDS User Guide</em>.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-properties-rds-database-instance--examples--Creating_a_DB_Instance_with_Enhanced_Monitoring_Enabled--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -2385,10 +2563,8 @@ Resources:
       MonitoringInterval: &apos;60&apos;
       MonitoringRoleArn: &apos;arn:aws:iam::123456789012:role/rds-monitoring-role&apos;</code></pre></div>
                                  <h3 id="aws-properties-rds-database-instance--examples--Cross-Region_Encrypted_Read_Replica">Cross-Region Encrypted Read Replica</h3>
-                                 <p>The following example creates an encrypted Read Replica from a cross-region source
-                                    DB instance.
-                                    
-                                    
+                                 <p>The following example creates an encrypted Read Replica from a cross-region
+                                    source DB instance. 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-properties-rds-database-instance--examples--Cross-Region_Encrypted_Read_Replica--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -2467,45 +2643,43 @@ Resources:
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h4 id="aws-properties-rds-database-instance--examples--Cross-Region_Encrypted_Read_Replica--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- 
 AWSTemplateFormatVersion: 2010-09-09
-Description: &quot;RDS Storage Encrypted&quot;
-Outputs: 
-  InstanceId: 
-    Description: &quot;InstanceId of the newly created RDS Instance&quot;
-    Value: MyDBSmall
-Parameters: 
-  DBInstanceType: 
+Description: RDS Storage Encrypted
+Parameters:
+  SourceDBInstanceIdentifier:
     Type: String
-  SourceDBInstanceIdentifier: 
+  DBInstanceType:
     Type: String
-  SourceRegion: 
+  SourceRegion:
     Type: String
-Resources: 
-  MyDBSmall: 
-    Properties: 
-      DBInstanceClass: DBInstanceType
-      KmsKeyId: MyKey
-      SourceDBInstanceIdentifier: SourceDBInstanceIdentifier
-      SourceRegion: SourceRegion
-    Type: &quot;AWS::RDS::DBInstance&quot;
-  MyKey: 
-    Properties: 
-      KeyPolicy: 
-        Id: key-default-1
-        Statement: 
-          - 
-            Action: &quot;kms:*&quot;
-            Effect: Allow
-            Principal: 
-              AWS: 
-                - &quot;&quot;
-                - 
-                  - &quot;arn:aws:iam::&quot;
-                  - &quot;AWS::AccountId&quot;
-                  - &quot;:root&quot;
-            Resource: &quot;*&quot;
-            Sid: &quot;Enable IAM User Permissions&quot;
-        Version: 2012-10-17
+Resources:
+  MyKey:
     Type: &quot;AWS::KMS::Key&quot;
+    Properties:
+      KeyPolicy:
+        Version: 2012-10-17
+        Id: key-default-1
+        Statement:
+          - Sid: Enable IAM User Permissions
+            Effect: Allow
+            Principal:
+              AWS: !Join
+                - &quot;&quot;
+                - - &quot;arn:aws:iam::&quot;
+                  - !Ref &quot;AWS::AccountId&quot;
+                  - &quot;:root&quot;
+            Action: &quot;kms:*&quot;
+            Resource: &quot;*&quot;
+  MyDBSmall:
+    Type: &quot;AWS::RDS::DBInstance&quot;
+    Properties:
+      DBInstanceClass: !Ref DBInstanceType
+      SourceDBInstanceIdentifier: !Ref SourceDBInstanceIdentifier
+      SourceRegion: !Ref SourceRegion
+      KmsKeyId: !Ref MyKey
+Outputs:
+  InstanceId:
+    Description: InstanceId of the newly created RDS Instance
+    Value: !Ref MyDBSmall                         
 </code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                               </div>

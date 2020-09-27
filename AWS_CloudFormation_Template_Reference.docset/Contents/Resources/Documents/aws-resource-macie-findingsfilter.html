@@ -17,9 +17,12 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>The <code class="code">AWS::Macie::FindingsFilter</code> resource represents an individual findings
-                                    filter that you created and saved to view, analyze, and manage findings.
+                                    filter that you create and save to view, analyze, and manage findings. A
+                                    <em>findings filter</em> is a set of criteria that specifies which
+                                    findings to include in the results of a query for findings. A findings filter
+                                    can also perform specific actions on findings that meet the filter&apos;s criteria.
                                  </p>
-                                 <p>A <code class="code">Session</code> must exist in the account before you can create a
+                                 <p>A <code class="code">Session</code> must exist for the account before you can create a
                                     <code class="code">FindingsFilter</code>. Use a <a href="aws-attribute-dependson.html">DependsOn
                                        attribute</a> to ensure that the <code class="code">Session</code> is created before the
                                     other resources. For example, <code class="code">&quot;DependsOn: Session&quot;</code>.
@@ -54,8 +57,8 @@ Properties:
                                        <dt><a id="cfn-macie-findingsfilter-action"></a><span class="term"><code class="code">Action</code></span></dt>
                                        <dd>
                                           
-                                          <p>The action to perform on findings that meet the filter criteria (findingCriteria).
-                                             Valid values are:
+                                          <p>The action to perform on findings that meet the filter criteria
+                                             (<code class="code">FindingCriteria</code>). Valid values are:
                                           </p>
                                           
                                           <div class="itemizedlist">
@@ -65,12 +68,12 @@ Properties:
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
                                                    
-                                                   <p>ARCHIVE - automatically archive the findings.</p>
+                                                   <p>ARCHIVE - Suppress (automatically archive) the findings.</p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>NOOP - don&apos;t perform any action on the findings.</p>
+                                                   <p>NOOP - Don&apos;t perform any action on the findings.</p>
                                                    
                                                 </li>
                                              </ul>
@@ -107,7 +110,7 @@ Properties:
                                           
                                           <p>The criteria to use to filter findings.</p>
                                           
-                                          <p><em>Required</em>: No
+                                          <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-macie-findingsfilter-findingcriteria.html">FindingCriteria</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
@@ -124,7 +127,7 @@ Properties:
                                              that they&apos;re allowed to perform in Amazon Macie.
                                           </p>
                                           
-                                          <p><em>Required</em>: No
+                                          <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -146,7 +149,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-macie-findingsfilter-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-macie-findingsfilter-return-values">Return values</h2>
                                  <h3 id="aws-resource-macie-findingsfilter-return-values-ref">Ref</h3>
                                  <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the ID of the <code class="code">FindingsFilter</code>. For example,
                                     <code class="code"><span>{</span> &quot;Ref&quot;: &quot;FindingsFilter&quot; }</code>.
@@ -170,8 +173,8 @@ Properties:
                                        <dt><a id="FindingsFilterListItems-fn::getatt"></a><span class="term"><code class="code">FindingsFilterListItems</code></span></dt>
                                        <dd>
                                           
-                                          <p>An array of <code class="code">FindingsFilterListItem</code> objects, one for each filter that&apos;s
-                                             associated with the account.
+                                          <p>An array of <code class="code">FindingsFilterListItem</code> objects, one for each findings filter
+                                             that&apos;s associated with the account.
                                           </p>
                                           
                                        </dd>
@@ -184,40 +187,23 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-macie-findingsfilter--examples">Examples</h2>
-                                 <p>The following examples demonstrates how to declare an
-                                    <code class="code">AWS::Macie::FindingsFilter</code> resource:
+                                 <p>The following example demonstrates how to declare an
+                                    <code class="code">AWS::Macie::FindingsFilter</code> resource.
                                  </p>
-                                 <h3 id="aws-resource-macie-findingsfilter--examples--Creating_a_Macie_FindingsFilter_using_an_account_ID">Creating a Macie FindingsFilter using an account ID</h3>
+                                 <h3 id="aws-resource-macie-findingsfilter--examples--Creating_a_Macie_FindingsFilter_that_filters_by_account_ID">Creating a Macie FindingsFilter that filters by account ID</h3>
+                                 <p>This example creates a findings filter that suppresses (automatically
+                                    archives) findings that apply to the specified account.
+                                 </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-macie-findingsfilter--examples--Creating_a_Macie_FindingsFilter_using_an_account_ID--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-	&quot;Type&quot;: &quot;AWS::Macie::FindingsFilter&quot;,
-	&quot;DependsOn&quot;: &quot;Session&quot;,
-	&quot;Properties&quot;: <span>{</span>
-		&quot;Action&quot;: &quot;ARCHIVE&quot;,
-		&quot;Description&quot;: &quot;My custom findings filter&quot;,
-		&quot;FindingCriteria&quot;: <span>{</span>
-			&quot;Criterion&quot;: <span>{</span>
-				&quot;AccountId&quot;: <span>{</span>
-					&quot;eq&quot;: &quot;123456789012&quot;
-				},
-				&quot;Name&quot;: &quot;MyFilterName&quot;,
-				&quot;Position&quot;: 1
-			}
-		}
-	}
-}</code></pre></div>
+                                    <h4 id="aws-resource-macie-findingsfilter--examples--Creating_a_Macie_FindingsFilter_that_filters_by_account_ID--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;Type&quot;: &quot;AWS::Macie::FindingsFilter&quot;, &quot;DependsOn&quot;: &quot;Session&quot;,
+                &quot;Properties&quot;: <span>{</span> &quot;Action&quot;: &quot;ARCHIVE&quot;, &quot;Description&quot;: &quot;My custom findings filter&quot;,
+                &quot;FindingCriteria&quot;: <span>{</span> &quot;Criterion&quot;: <span>{</span> &quot;AccountId&quot;: <span>{</span> &quot;eq&quot;: &quot;123456789012&quot; }, &quot;Name&quot;:
+                &quot;MyFilterName&quot;, &quot;Position&quot;: 1 } } } }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-macie-findingsfilter--examples--Creating_a_Macie_FindingsFilter_using_an_account_ID--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Macie::FindingsFilter
-DependsOn: &quot;Session&quot;
-Properties: 
-  Action: ARCHIVE
-  Description: &quot;My custom findings filter&quot;
-  FindingCriteria: 
-    Criterion: 
-      &quot;AccountID&quot;:
-        eq: &quot;123456789012&quot;
-  Name: MyFilterName
-  Position: 1</code></pre></div>
+                                    <h4 id="aws-resource-macie-findingsfilter--examples--Creating_a_Macie_FindingsFilter_that_filters_by_account_ID--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Macie::FindingsFilter DependsOn: &quot;Session&quot;
+                Properties: Action: ARCHIVE Description: &quot;My custom findings filter&quot;
+                FindingCriteria: Criterion: &quot;AccountID&quot;: eq: &quot;123456789012&quot; Name: MyFilterName
+                Position: 1</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                               </div>
                               <noscript>

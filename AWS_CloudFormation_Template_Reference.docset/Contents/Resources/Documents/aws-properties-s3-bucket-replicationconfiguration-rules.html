@@ -21,18 +21,26 @@
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-properties-s3-bucket-replicationconfiguration-rules-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-s3-bucket-replicationrule-deletemarkerreplication">DeleteMarkerReplication</a>&quot; : <code class="replaceable"><a href="./aws-properties-s3-bucket-deletemarkerreplication.html">DeleteMarkerReplication</a></code>,
   &quot;<a href="#cfn-s3-bucket-replicationconfiguration-rules-destination">Destination</a>&quot; : <code class="replaceable"><a href="./aws-properties-s3-bucket-replicationconfiguration-rules-destination.html">ReplicationDestination</a></code>,
+  &quot;<a href="#cfn-s3-bucket-replicationrule-filter">Filter</a>&quot; : <code class="replaceable"><a href="./aws-properties-s3-bucket-replicationrulefilter.html">ReplicationRuleFilter</a></code>,
   &quot;<a href="#cfn-s3-bucket-replicationconfiguration-rules-id">Id</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-s3-bucket-replicationconfiguration-rules-prefix">Prefix</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-s3-bucket-replicationrule-priority">Priority</a>&quot; : <code class="replaceable">Integer</code>,
   &quot;<a href="#cfn-s3-bucket-replicationrule-sourceselectioncriteria">SourceSelectionCriteria</a>&quot; : <code class="replaceable"><a href="./aws-properties-s3-bucket-sourceselectioncriteria.html">SourceSelectionCriteria</a></code>,
   &quot;<a href="#cfn-s3-bucket-replicationconfiguration-rules-status">Status</a>&quot; : <code class="replaceable">String</code>
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h3 id="aws-properties-s3-bucket-replicationconfiguration-rules-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-s3-bucket-replicationconfiguration-rules-destination">Destination</a>: <code class="replaceable">
+                                    <h3 id="aws-properties-s3-bucket-replicationconfiguration-rules-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-s3-bucket-replicationrule-deletemarkerreplication">DeleteMarkerReplication</a>: <code class="replaceable">
+    <a href="./aws-properties-s3-bucket-deletemarkerreplication.html">DeleteMarkerReplication</a></code>
+  <a href="#cfn-s3-bucket-replicationconfiguration-rules-destination">Destination</a>: <code class="replaceable">
     <a href="./aws-properties-s3-bucket-replicationconfiguration-rules-destination.html">ReplicationDestination</a></code>
+  <a href="#cfn-s3-bucket-replicationrule-filter">Filter</a>: <code class="replaceable">
+    <a href="./aws-properties-s3-bucket-replicationrulefilter.html">ReplicationRuleFilter</a></code>
   <a href="#cfn-s3-bucket-replicationconfiguration-rules-id">Id</a>: <code class="replaceable">String</code>
   <a href="#cfn-s3-bucket-replicationconfiguration-rules-prefix">Prefix</a>: <code class="replaceable">String</code>
+  <a href="#cfn-s3-bucket-replicationrule-priority">Priority</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-s3-bucket-replicationrule-sourceselectioncriteria">SourceSelectionCriteria</a>: <code class="replaceable">
     <a href="./aws-properties-s3-bucket-sourceselectioncriteria.html">SourceSelectionCriteria</a></code>
   <a href="#cfn-s3-bucket-replicationconfiguration-rules-status">Status</a>: <code class="replaceable">String</code>
@@ -40,6 +48,35 @@
                                  <h2 id="aws-properties-s3-bucket-replicationconfiguration-rules-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-s3-bucket-replicationrule-deletemarkerreplication"></a><span class="term"><code class="code">DeleteMarkerReplication</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>Specifies whether Amazon S3 replicates the delete markers. If you specify a <code class="code">Filter</code>, you must specify this element. However, in the latest version of replication configuration
+                                             (when <code class="code">Filter</code> is specified), Amazon S3 doesn&apos;t replicate delete markers. Therefore, the <code class="code">DeleteMarkerReplication</code> element can contain only &lt;Status&gt;Disabled&lt;/Status&gt;. For an example configuration,
+                                             see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config">Basic Rule Configuration</a>.
+                                             
+                                          </p>
+                                          
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p> If you don&apos;t specify the <code class="code">Filter</code> element, Amazon S3 assumes that the replication
+                                                   configuration is the earlier version, V1. In the earlier version, Amazon S3 handled
+                                                   replication of delete markers differently. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations">Backward Compatibility</a>.
+                                                </p>
+                                             </div>
+                                          </div> 
+                                          
+                                          
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-s3-bucket-deletemarkerreplication.html">DeleteMarkerReplication</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-s3-bucket-replicationconfiguration-rules-destination"></a><span class="term"><code class="code">Destination</code></span></dt>
                                        <dd>
                                           
@@ -50,6 +87,21 @@
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-s3-bucket-replicationconfiguration-rules-destination.html">ReplicationDestination</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-s3-bucket-replicationrule-filter"></a><span class="term"><code class="code">Filter</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>A filter that identifies the subset of objects to which the replication rule applies.
+                                             A
+                                             <code class="code">Filter</code> must specify exactly one <code class="code">Prefix</code>, <code class="code">TagFilter</code>, or an
+                                             <code class="code">And</code> child element.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-s3-bucket-replicationrulefilter.html">ReplicationRuleFilter</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-s3-bucket-replicationconfiguration-rules-id"></a><span class="term"><code class="code">Id</code></span></dt>
@@ -75,9 +127,52 @@
                                              an empty string. 
                                           </p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-s3-bucket-replicationrule-priority"></a><span class="term"><code class="code">Priority</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>The priority associated with the rule. If you specify multiple rules in a replication
+                                             configuration, Amazon S3 prioritizes the rules to prevent conflicts when filtering.
+                                             If two or
+                                             more rules identify the same object based on a specified filter, the rule with higher
+                                             priority
+                                             takes precedence. For example:
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>Same object quality prefix-based filter criteria if prefixes you specified in multiple
+                                                      rules
+                                                      overlap 
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Same object qualify tag-based filter criteria specified in multiple rules</p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html">Replication</a> in the <em>Amazon Simple Storage Service Developer
+                                                Guide</em>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
@@ -107,7 +202,7 @@
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">Disabled | Enabled</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">Disabled | Enabled</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>

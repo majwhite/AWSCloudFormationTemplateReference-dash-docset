@@ -137,8 +137,8 @@ Properties:
                                        <dd>
                                           
                                           <p>The database endpoint identifier. Identifiers must begin with a letter and must contain
-                                             only
-                                             ASCII letters, digits, and hyphens. They can&apos;t end with a hyphen or contain two
+                                             only ASCII letters, digits, and hyphens. They can&apos;t end with a hyphen, or contain
+                                             two
                                              consecutive hyphens.
                                           </p>
                                           
@@ -158,7 +158,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">source | target</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">source | target</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-dms-endpoint-enginename"></a><span class="term"><code class="code">EngineName</code></span></dt>
@@ -169,8 +169,8 @@ Properties:
                                              <code class="code">&quot;postgres&quot;</code>, <code class="code">&quot;mariadb&quot;</code>, <code class="code">&quot;aurora&quot;</code>,
                                              <code class="code">&quot;aurora-postgresql&quot;</code>, <code class="code">&quot;redshift&quot;</code>, <code class="code">&quot;s3&quot;</code>,
                                              <code class="code">&quot;db2&quot;</code>, <code class="code">&quot;azuredb&quot;</code>, <code class="code">&quot;sybase&quot;</code>, <code class="code">&quot;dynamodb&quot;</code>, <code class="code">&quot;mongodb&quot;</code>,
-                                             <code class="code">&quot;kinesis&quot;</code>, <code class="code">&quot;kafka&quot;</code>, <code class="code">&quot;elasticsearch&quot;</code>, <code class="code">&quot;documentdb&quot;</code>, and 
-                                             <code class="code">&quot;sqlserver&quot;</code>.
+                                             <code class="code">&quot;kinesis&quot;</code>, <code class="code">&quot;kafka&quot;</code>, <code class="code">&quot;elasticsearch&quot;</code>, <code class="code">&quot;docdb&quot;</code>,
+                                             <code class="code">&quot;sqlserver&quot;</code>, and <code class="code">&quot;neptune&quot;</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -269,14 +269,7 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-dms-endpoint-neptunesettings"></a><span class="term"><code class="code">NeptuneSettings</code></span></dt>
                                        <dd>
-                                          
-                                          <p>Settings in JSON format for the target Amazon Neptune endpoint.
-                                             For more information
-                                             about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings">Specifying Endpoint Settings for Amazon Neptune as a Target</a> 
-                                             in the <em>AWS Database Migration Service User Guide.</em>
-                                             
-                                          </p>
-                                          
+                                          <p>Not currently supported by AWS CloudFormation.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-dms-endpoint-neptunesettings.html">NeptuneSettings</a></p>
@@ -342,7 +335,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">none | require | verify-ca | verify-full</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">none | require | verify-ca | verify-full</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-dms-endpoint-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
@@ -368,7 +361,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-dms-endpoint-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-dms-endpoint-return-values">Return values</h2>
                                  <h3 id="aws-resource-dms-endpoint-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the ARN of the endpoint.
@@ -396,18 +389,45 @@ Properties:
                                  <h2 id="aws-resource-dms-endpoint--examples">Examples</h2>
                                  <h3 id="aws-resource-dms-endpoint--examples--"></h3>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-dms-endpoint--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;, &quot;Resources&quot;: <span>{</span>
-                &quot;myBasicEndpoint&quot;: <span>{</span> &quot;Type&quot;: &quot;AWS::DMS::Endpoint&quot;, &quot;Properties&quot;: <span>{</span> &quot;EngineName&quot;:
-                &quot;mysql&quot;, &quot;EndpointType&quot;: &quot;source&quot;, &quot;Username&quot;: &quot;username&quot;, &quot;Password&quot;: <span>{</span> &quot;Ref&quot;:
-                &quot;PasswordParameter&quot; }, &quot;ServerName&quot;: &quot;source.db.amazon.com&quot;, &quot;Port&quot;: 1234,
-                &quot;DatabaseName&quot;: &quot;source-db&quot; } } } }</code></pre></div>
+                                    <h4 id="aws-resource-dms-endpoint--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+  &quot;Resources&quot;: <span>{</span>
+    &quot;myBasicEndpoint&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::DMS::Endpoint&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;EngineName&quot;: &quot;mysql&quot;,
+        &quot;EndpointType&quot;: &quot;source&quot;,
+        &quot;Username&quot;: &quot;username&quot;,
+        &quot;Password&quot;: <span>{</span>
+          &quot;Ref&quot;: &quot;PasswordParameter&quot;
+        },
+        &quot;ServerName&quot;: &quot;source.db.amazon.com&quot;,
+        &quot;Port&quot;: 1234,
+        &quot;DatabaseName&quot;: &quot;source-db&quot;
+      }
+    }
+  }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-dms-endpoint--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09 Description: &quot;Endpoint
-                test&quot; Resources: BasicEndpoint: Properties: DatabaseName: my-db EndpointType: target
-                EngineName: mysql Password: PasswordParameter Port: 1234 ServerName:
-                server.db.amazon.com Tags: - Key: type Value: new Username: username Type:
-                &quot;AWS::DMS::Endpoint&quot; </code></pre></div>
-                                 <h2 id="aws-resource-dms-endpoint--seealso">See Also</h2>
+                                    <h4 id="aws-resource-dms-endpoint--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Description: &quot;Endpoint test&quot;
+Resources: 
+  BasicEndpoint: 
+    Properties: 
+      DatabaseName: my-db
+      EndpointType: target
+      EngineName: mysql
+      Password: PasswordParameter
+      Port: 1234
+      ServerName: server.db.amazon.com
+      Tags: 
+        - 
+          Key: type
+          Value: new
+      Username: username
+    Type: &quot;AWS::DMS::Endpoint&quot;
+</code></pre></div>
+                                 <h2 id="aws-resource-dms-endpoint--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
                                      

@@ -17,14 +17,22 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>The <code class="code">AWS::ApplicationAutoScaling::ScalableTarget</code> resource specifies a resource
-                                    that Application Auto Scaling can scale. 
+                                    that Application Auto Scaling can scale, such as an AWS::DynamoDB::Table or AWS::ECS::Service
+                                    resource.
                                  </p>
-                                 <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_RegisterScalableTarget.html">RegisterScalableTarget</a> in the <em>Application Auto Scaling API
-                                       Reference</em>.
-                                 </p>
-                                 <p>For introductory exercises for scaling specific resources, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/getting-started.html">Getting Started</a> in the
-                                    <em>Application Auto Scaling User Guide</em>.
-                                 </p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>If the resource that you want Application Auto Scaling to scale is not yet created
+                                          in
+                                          your AWS account, add a dependency on the resource when registering it as a scalable
+                                          target
+                                          using the <a href="aws-attribute-dependson.html">DependsOn</a>
+                                          attribute. 
+                                       </p>
+                                    </div>
+                                 </div>
                                  <h2 id="aws-resource-applicationautoscaling-scalabletarget-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -64,7 +72,8 @@ Properties:
                                           
                                           <p>The maximum value that you plan to scale out to. When a scaling policy is in effect,
                                              Application Auto Scaling can scale out (expand) as needed to the maximum capacity
-                                             limit in response to changing demand.
+                                             limit in
+                                             response to changing demand.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -78,7 +87,8 @@ Properties:
                                           
                                           <p>The minimum value that you plan to scale in to. When a scaling policy is in effect,
                                              Application Auto Scaling can scale in (contract) as needed to the minimum capacity
-                                             limit in response to changing demand. 
+                                             limit in
+                                             response to changing demand. 
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -90,17 +100,123 @@ Properties:
                                        <dt><a id="cfn-applicationautoscaling-scalabletarget-resourceid"></a><span class="term"><code class="code">ResourceId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The resource identifier to associate with this scalable target. This string consists
-                                             of
-                                             the resource type and unique identifier. For valid values, see the <code class="code">ResourceId</code>
-                                             parameter for <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_RegisterScalableTarget.html">RegisterScalableTarget</a> in the <em>Application Auto Scaling API
-                                                Reference</em>.
-                                          </p>
+                                          <p>The identifier of the resource associated with the scalable target.
+                                             This string consists of the resource type and unique identifier.
+                                          </p> 
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>ECS service - The resource type is <code class="code">service</code> and the unique identifier is the cluster name  
+                                                      and service name. Example: <code class="code">service/default/sample-webapp</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Spot Fleet request - The resource type is <code class="code">spot-fleet-request</code> and the unique identifier is the 
+                                                      Spot Fleet request ID. Example: <code class="code">spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>EMR cluster - The resource type is <code class="code">instancegroup</code> and the unique identifier is the cluster ID and instance group ID.
+                                                      Example: <code class="code">instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>AppStream 2.0 fleet - The resource type is <code class="code">fleet</code> and the unique identifier is the fleet name.
+                                                      Example: <code class="code">fleet/sample-fleet</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>DynamoDB table - The resource type is <code class="code">table</code> and the unique identifier is the table name. 
+                                                      Example: <code class="code">table/my-table</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>DynamoDB global secondary index - The resource type is <code class="code">index</code> and the unique identifier is the index name. 
+                                                      Example: <code class="code">table/my-table/index/my-table-index</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Aurora DB cluster - The resource type is <code class="code">cluster</code> and the unique identifier is the cluster name.
+                                                      Example: <code class="code">cluster:my-db-cluster</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Amazon SageMaker endpoint variant - The resource type is <code class="code">variant</code> and the unique identifier is the resource ID.
+                                                      Example: <code class="code">endpoint/my-end-point/variant/KMeansClustering</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Custom resources are not supported with a resource type. This parameter must specify
+                                                      the <code class="code">OutputValue</code> from the CloudFormation template stack used to access the resources. The unique identifier
+                                                      is defined by the service provider. More information
+                                                      is available in our <a href="https://github.com/aws/aws-auto-scaling-custom-resource" target="_blank"><span>GitHub
+                                                            repository</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Amazon Comprehend document classification endpoint - The resource type and unique
+                                                      identifier are specified using the endpoint ARN. Example: <code class="code">arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Lambda provisioned concurrency - The resource type is <code class="code">function</code> and the unique identifier is the function name with a function version or alias name
+                                                      suffix that is not <code class="code">$LATEST</code>. 
+                                                      Example: <code class="code">function:my-function:prod</code> or <code class="code">function:my-function:1</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Amazon Keyspaces table - The resource type is <code class="code">table</code> and the unique identifier is the table name. 
+                                                      Example: <code class="code">keyspace/mykeyspace/table/mytable</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div> 
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">1600</code></p>
+                                          <p><em>Pattern</em>: <code class="code">[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-applicationautoscaling-scalabletarget-rolearn"></a><span class="term"><code class="code">RoleARN</code></span></dt>
@@ -115,14 +231,16 @@ Properties:
                                              resources on your behalf, or a service-linked role for the specified service. For
                                              more
                                              information, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/security_iam_service-with-iam.html">How Application
-                                                Auto Scaling Works with IAM</a> in the <em>Application Auto Scaling User
+                                                Auto Scaling works with IAM</a> in the <em>Application Auto Scaling User
                                                 Guide</em>.
                                           </p>
                                           
-                                          <p>To automatically create a service-linked role, specify the full ARN of the service-linked
-                                             role in your stack template. For examples of the ARN format and more information,
-                                             see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-service-linked-roles.html">Service-Linked Roles</a> in the <em>Application Auto Scaling User
-                                                Guide</em>.
+                                          <p>To automatically create a service-linked role (recommended), specify the full ARN
+                                             of the
+                                             service-linked role in your stack template. To find the exact ARN of the service-linked
+                                             role
+                                             for your AWS or custom resource, see the <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-service-linked-roles.html">Service-linked roles</a> topic in the <em>Application Auto Scaling User
+                                                Guide</em>. Look for the ARN in the table at the bottom of the page.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -134,17 +252,149 @@ Properties:
                                        <dt><a id="cfn-applicationautoscaling-scalabletarget-scalabledimension"></a><span class="term"><code class="code">ScalableDimension</code></span></dt>
                                        <dd>
                                           
-                                          <p>The scalable dimension that is associated with the scalable target. Specify the service
-                                             namespace, resource type, and scaling property, for example,
-                                             <code class="code">ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service.
-                                             For valid values, see the <code class="code">ScalableDimension</code> parameter for <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_RegisterScalableTarget.html">RegisterScalableTarget</a> in the <em>Application Auto Scaling API
-                                                Reference</em>.
-                                          </p>
+                                          <p>The scalable dimension associated with the scalable target.
+                                             This string consists of the service namespace, resource type, and scaling property.
+                                          </p> 
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">ecs:service:DesiredCount</code> - The desired task count of an ECS service.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">ec2:spot-fleet-request:TargetCapacity</code> - The target capacity of a Spot Fleet request.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">elasticmapreduce:instancegroup:InstanceCount</code> - The instance count of an EMR Instance Group.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">appstream:fleet:DesiredCapacity</code> - The desired capacity of an AppStream 2.0 fleet.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">dynamodb:table:ReadCapacityUnits</code> - The provisioned read capacity for a DynamoDB table.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">dynamodb:table:WriteCapacityUnits</code> - The provisioned write capacity for a DynamoDB table.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">dynamodb:index:ReadCapacityUnits</code> - The provisioned read capacity for a DynamoDB global secondary index.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">dynamodb:index:WriteCapacityUnits</code> - The provisioned write capacity for a DynamoDB global secondary index.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">rds:cluster:ReadReplicaCount</code> - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible
+                                                      edition and Aurora PostgreSQL-compatible edition.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">sagemaker:variant:DesiredInstanceCount</code> - The number of EC2 instances for an Amazon SageMaker model endpoint variant.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">custom-resource:ResourceType:Property</code> - The scalable dimension for a custom resource provided by your own application or
+                                                      service.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">comprehend:document-classifier-endpoint:DesiredInferenceUnits</code> - The number of inference units for an Amazon Comprehend document classification
+                                                      endpoint.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">lambda:function:ProvisionedConcurrency</code> - The provisioned concurrency for a Lambda function.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">cassandra:table:ReadCapacityUnits</code> - The provisioned read capacity for an Amazon Keyspaces table.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">cassandra:table:WriteCapacityUnits</code> -  The provisioned write capacity for an Amazon Keyspaces table.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div> 
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Allowed values</em>: <code class="code">appstream:fleet:DesiredCapacity | cassandra:table:ReadCapacityUnits | cassandra:table:WriteCapacityUnits
+                                                | comprehend:document-classifier-endpoint:DesiredInferenceUnits | custom-resource:ResourceType:Property
+                                                | dynamodb:index:ReadCapacityUnits | dynamodb:index:WriteCapacityUnits | dynamodb:table:ReadCapacityUnits
+                                                | dynamodb:table:WriteCapacityUnits | ec2:spot-fleet-request:TargetCapacity | ecs:service:DesiredCount
+                                                | elasticmapreduce:instancegroup:InstanceCount | lambda:function:ProvisionedConcurrency
+                                                | rds:cluster:ReadReplicaCount | sagemaker:variant:DesiredInstanceCount</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-applicationautoscaling-scalabletarget-scheduledactions"></a><span class="term"><code class="code">ScheduledActions</code></span></dt>
@@ -152,7 +402,7 @@ Properties:
                                           
                                           <p>The scheduled actions for the scalable target. Duplicates aren&apos;t allowed.</p>
                                           
-                                          <p>For more information about using scheduled scaling, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html">Scheduled Scaling</a> in the <em>Application Auto Scaling User
+                                          <p>For more information about using scheduled scaling, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html">Scheduled scaling</a> in the <em>Application Auto Scaling User
                                                 Guide</em>.
                                           </p>
                                           
@@ -164,16 +414,16 @@ Properties:
                                        <dt><a id="cfn-applicationautoscaling-scalabletarget-servicenamespace"></a><span class="term"><code class="code">ServiceNamespace</code></span></dt>
                                        <dd>
                                           
-                                          <p>The namespace of the AWS service that provides the resource or
-                                             <code class="code">custom-resource</code> for a resource provided by your own application or service. For
-                                             valid values, see the <code class="code">ServiceNamespace</code> parameter for <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_RegisterScalableTarget.html">RegisterScalableTarget</a> in the <em>Application Auto Scaling API
-                                                Reference</em>.
+                                          <p>The namespace of the AWS service that provides the resource, or a
+                                             <code class="code">custom-resource</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Allowed values</em>: <code class="code">appstream | cassandra | comprehend | custom-resource | dynamodb | ec2 | ecs | elasticmapreduce
+                                                | lambda | rds | sagemaker</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-applicationautoscaling-scalabletarget-suspendedstate"></a><span class="term"><code class="code">SuspendedState</code></span></dt>
@@ -218,7 +468,7 @@ Properties:
                                              </ul>
                                           </div>
                                           
-                                          <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html">Suspending and Resuming Scaling</a> in the <em>Application Auto Scaling User
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html">Suspending and resuming scaling</a> in the <em>Application Auto Scaling User
                                                 Guide</em>.
                                           </p>
                                           
@@ -229,7 +479,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-applicationautoscaling-scalabletarget-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-applicationautoscaling-scalabletarget-return-values">Return values</h2>
                                  <h3 id="aws-resource-applicationautoscaling-scalabletarget-return-values-ref">Ref</h3>
                                  <p>When the logical ID of this resource is provided to the <code class="code">Ref</code> intrinsic
                                     function, <code class="code">Ref</code> returns the AWS CloudFormation-generated ID of the resource. For
@@ -246,23 +496,30 @@ Properties:
                                  <h2 id="aws-resource-applicationautoscaling-scalabletarget--examples">Examples</h2>
                                  <p>Each scalable target has a service namespace, scalable dimension, and resource ID,
                                     as
-                                    well as values for minimum and maximum capacity. 
+                                    well as values for minimum and maximum capacity.
                                  </p>
-                                 <h3 id="aws-resource-applicationautoscaling-scalabletarget--examples--Register_a_Scalable_Target">Register a Scalable Target</h3>
-                                 <p>The following example creates a scalable target for an Amazon Keyspaces (for Apache
-                                    Cassandra) table (<a href="aws-resource-cassandra-table.html">AWS::Cassandra::Table</a>). 
-                                    Application Auto Scaling can scale the write capacity throughput at a minimum of 1
-                                    capacity unit and a maximum of 20. For more information about scaling Amazon Keyspaces
-                                    tables, see
-                                    <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html">Managing Amazon Keyspaces Throughput Capacity with Application Auto Scaling</a> in the <em>Amazon Keyspaces (for Apache Cassandra) Developer Guide</em>.
+                                 <p>For more template snippets, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-autoscaling.html#scenario-app-as-template-examples">Application Auto Scaling template examples</a>.
                                  </p>
-                                 <p>To register a different resource supported by Application Auto Scaling, specify its
-                                    namespace in <code class="code">ServiceNamespace</code>, its scalable dimension in
-                                    <code class="code">ScalableDimension</code>, its resource ID in <code class="code">ResourceId</code>, and its
-                                    service-linked role in <code class="code">RoleARN</code>.
+                                 <h3 id="aws-resource-applicationautoscaling-scalabletarget--examples--Register_a_scalable_target">Register a scalable target</h3>
+                                 <p>The following example creates a scalable target for an <a href="aws-resource-cassandra-table.html">AWS::Cassandra::Table</a> resource. Application Auto Scaling can scale the write
+                                    capacity throughput at a minimum of 1 capacity unit and a maximum of 20. To register
+                                    a
+                                    different resource supported by Application Auto Scaling, specify its namespace in
+                                    <code class="code">ServiceNamespace</code>, its scalable dimension in <code class="code">ScalableDimension</code>,
+                                    its resource ID in <code class="code">ResourceId</code>, and its service-linked role in
+                                    <code class="code">RoleARN</code>.
                                  </p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>The <code class="code">RoleArn</code> property references a service-linked role that is created after you use Application
+                                          Auto Scaling with the specified resource for the first time.
+                                       </p>
+                                    </div>
+                                 </div>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Register_a_Scalable_Target--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Register_a_scalable_target--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;ScalableTarget&quot;:<span>{</span>
     &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalableTarget&quot;,
     &quot;Properties&quot;:<span>{</span>
@@ -278,7 +535,7 @@ Properties:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Register_a_Scalable_Target--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ScalableTarget:
+                                    <h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Register_a_scalable_target--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ScalableTarget:
   Type: AWS::ApplicationAutoScaling::ScalableTarget
   Properties:
     MaxCapacity: 20
@@ -288,271 +545,34 @@ Properties:
     ServiceNamespace: cassandra
     ScalableDimension: cassandra:table:WriteCapacityUnits
     ResourceId: keyspace/mykeyspace/table/mytable</code></pre></div>
-                                 <h3 id="aws-resource-applicationautoscaling-scalabletarget--examples--Lambda_with_a_Scheduled_Action">Lambda with a Scheduled Action</h3>
-                                 <p>The following example registers the provisioned concurrency for a function alias
-                                    (<a href="aws-resource-lambda-alias.html">AWS::Lambda::Alias</a>) called BLUE, with a minimum capacity of 1 and a maximum
-                                    capacity of 100. It also creates a scheduled action with a recurring schedule using
-                                    a cron
-                                    expression.
-                                 </p>
-                                 <p>This example uses the <a href="intrinsic-function-reference-join.html">Fn::Join</a> and <a href="intrinsic-function-reference-ref.html">Ref</a> intrinsic functions in the <code class="code">RoleARN</code> property to specify the ARN
-                                    of the service-linked role. It uses the <a href="intrinsic-function-reference-sub.html">Fn::Sub</a> intrinsic function to construct the <code class="code">ResourceId</code> property. 
-                                 </p>
-                                 <p>Note: You can&apos;t allocate provisioned concurrency on an alias that points to the
-                                    unpublished version ($LATEST).
-                                    
-                                 </p>
-                                 <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Lambda_with_a_Scheduled_Action--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;ScalableTarget&quot;:<span>{</span>
-    &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalableTarget&quot;,
-    &quot;Properties&quot;:<span>{</span>
-      &quot;MaxCapacity&quot;:100,
-      &quot;MinCapacity&quot;:1,
-      &quot;RoleARN&quot;:<span>{</span>
-        &quot;Fn::Join&quot;:[
-          &quot;:&quot;,
-          [
-            &quot;arn:aws:iam:&quot;,
-            <span>{</span>
-              &quot;Ref&quot;:&quot;AWS::AccountId&quot;
-            },
-            &quot;role/aws-service-role/lambda.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_LambdaConcurrency&quot;
-          ]
-        ]
-      },
-      &quot;ServiceNamespace&quot;:&quot;lambda&quot;,
-      &quot;ScalableDimension&quot;:&quot;lambda:function:ProvisionedConcurrency&quot;,
-      &quot;ResourceId&quot;:<span>{</span>
-        &quot;Fn::Sub&quot;:&quot;function:$<span>{</span>MyFunction}:BLUE&quot;
-      },
-      &quot;ScheduledActions&quot;:[
-        <span>{</span>
-          &quot;EndTime&quot;:&quot;2019-12-31T12:00:00.000Z&quot;,
-          &quot;ScalableTargetAction&quot;:<span>{</span>
-            &quot;MaxCapacity&quot;:&quot;500&quot;,
-            &quot;MinCapacity&quot;:&quot;50&quot;
-          },
-          &quot;ScheduledActionName&quot;:&quot;First&quot;,
-          &quot;StartTime&quot;:&quot;2019-12-25T12:00:00.000Z&quot;,
-          &quot;Schedule&quot;:&quot;cron(0 18 * * ? *)&quot;
-        }
-      ]
-    }
-  }
-}</code></pre></div>
-                                 <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Lambda_with_a_Scheduled_Action--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ScalableTarget:
-  Type: AWS::ApplicationAutoScaling::ScalableTarget
-  Properties:
-    MaxCapacity: 100
-    MinCapacity: 1
-    RoleARN: !Join 
-      - &apos;:&apos;
-      - - &apos;arn:aws:iam:&apos;
-        - !Ref &apos;AWS::AccountId&apos;
-        - role/aws-service-role/lambda.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_LambdaConcurrency
-    ServiceNamespace: lambda
-    ScalableDimension: lambda:function:ProvisionedConcurrency
-    ResourceId: !Sub function:$<span>{</span>MyFunction}:BLUE
-    ScheduledActions:
-      - EndTime: &apos;2019-12-31T12:00:00.000Z&apos;
-        ScalableTargetAction:
-          MaxCapacity: &apos;500&apos;
-          MinCapacity: &apos;50&apos;
-        ScheduledActionName: First
-        StartTime: &apos;2019-12-25T12:00:00.000Z&apos;
-        Schedule: &apos;cron(0 18 * * ? *)&apos;</code></pre></div>
-                                 <h3 id="aws-resource-applicationautoscaling-scalabletarget--examples--Amazon_DynamoDB">Amazon DynamoDB</h3>
-                                 <p>This example registers the read and write capacity throughput of a DynamoDB table
-                                    (<a href="aws-resource-dynamodb-table.html">AWS::DynamoDB::Table</a>) and its global secondary index as scalable targets. It
-                                    uses the <a href="intrinsic-function-reference-sub.html">Fn::Sub</a> intrinsic function to construct the <code class="code">ResourceId</code> properties. 
-                                 </p>
-                                 <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Amazon_DynamoDB--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Resources&quot; : <span>{</span>
-    &quot;DDBTable&quot; : <span>{</span>
-      &quot;Type&quot; : &quot;AWS::DynamoDB::Table&quot;,
-      &quot;Properties&quot; : <span>{</span>
-        &quot;AttributeDefinitions&quot; : [
-          <span>{</span>
-            &quot;AttributeName&quot; : &quot;id&quot;,
-            &quot;AttributeType&quot; : &quot;S&quot;   
-          }
-        ],
-        &quot;KeySchema&quot; : [
-          <span>{</span>
-            &quot;AttributeName&quot; : &quot;id&quot;,
-            &quot;KeyType&quot; : &quot;HASH&quot;
-          }
-        ],
-        &quot;ProvisionedThroughput&quot; : <span>{</span>
-          &quot;ReadCapacityUnits&quot; : &quot;5&quot;,
-          &quot;WriteCapacityUnits&quot; : &quot;5&quot;
-        },
-        &quot;GlobalSecondaryIndexes&quot; : [<span>{</span>
-          &quot;IndexName&quot; : &quot;GSI&quot;,
-          &quot;KeySchema&quot; : [
-            <span>{</span>
-              &quot;AttributeName&quot; : &quot;id&quot;,
-              &quot;KeyType&quot; : &quot;HASH&quot;
-            }
-          ],                         
-          &quot;Projection&quot; : <span>{</span>
-            &quot;ProjectionType&quot; : &quot;KEYS_ONLY&quot;
-          },
-          &quot;ProvisionedThroughput&quot; : <span>{</span>
-            &quot;ReadCapacityUnits&quot; : &quot;5&quot;,
-            &quot;WriteCapacityUnits&quot; : &quot;5&quot;
-          }
-        }]
-      }
-    },
-    &quot;WriteCapacityScalableTarget&quot;:<span>{</span>
-      &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalableTarget&quot;,
-      &quot;Properties&quot;:<span>{</span>
-        &quot;MaxCapacity&quot;:100,
-        &quot;MinCapacity&quot;:5,
-        &quot;RoleARN&quot;:<span>{</span>
-          &quot;Fn::Sub&quot;:&quot;arn:aws:iam::$<span>{</span>AWS::AccountId}:role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable&quot;
-        },
-        &quot;ServiceNamespace&quot;:&quot;dynamodb&quot;,
-        &quot;ScalableDimension&quot;:&quot;dynamodb:table:WriteCapacityUnits&quot;,
-        &quot;ResourceId&quot;:<span>{</span>
-          &quot;Fn::Sub&quot;:&quot;table/$<span>{</span>DDBTable}&quot;
-        }
-      }
-    },
-    &quot;ReadCapacityScalableTarget&quot;:<span>{</span>
-      &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalableTarget&quot;,
-      &quot;Properties&quot;:<span>{</span>
-        &quot;MaxCapacity&quot;:100,
-        &quot;MinCapacity&quot;:5,
-        &quot;RoleARN&quot;:<span>{</span>
-          &quot;Fn::Sub&quot;:&quot;arn:aws:iam::$<span>{</span>AWS::AccountId}:role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable&quot;
-        },
-        &quot;ServiceNamespace&quot;:&quot;dynamodb&quot;,
-        &quot;ScalableDimension&quot;:&quot;dynamodb:table:ReadCapacityUnits&quot;,
-        &quot;ResourceId&quot;:<span>{</span>
-          &quot;Fn::Sub&quot;:&quot;table/$<span>{</span>DDBTable}&quot;
-        }
-      }
-    },
-    &quot;WriteCapacityScalableTargetGSI&quot;:<span>{</span>
-      &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalableTarget&quot;,
-      &quot;Properties&quot;:<span>{</span>
-        &quot;MaxCapacity&quot;:100,
-        &quot;MinCapacity&quot;:5,
-        &quot;RoleARN&quot;:<span>{</span>
-          &quot;Fn::Sub&quot;:&quot;arn:aws:iam::$<span>{</span>AWS::AccountId}:role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable&quot;
-        },
-        &quot;ServiceNamespace&quot;:&quot;dynamodb&quot;,
-        &quot;ScalableDimension&quot;:&quot;dynamodb:index:WriteCapacityUnits&quot;,
-        &quot;ResourceId&quot;:<span>{</span>
-          &quot;Fn::Sub&quot;:&quot;table/$<span>{</span>DDBTable}/index/GSI&quot;
-        }
-      }
-    },
-    &quot;ReadCapacityScalableTargetGSI&quot;:<span>{</span>
-      &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalableTarget&quot;,
-      &quot;Properties&quot;:<span>{</span>
-        &quot;MaxCapacity&quot;:100,
-        &quot;MinCapacity&quot;:5,
-        &quot;RoleARN&quot;:<span>{</span>
-          &quot;Fn::Sub&quot;:&quot;arn:aws:iam::$<span>{</span>AWS::AccountId}:role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable&quot;
-        },
-        &quot;ServiceNamespace&quot;:&quot;dynamodb&quot;,
-        &quot;ScalableDimension&quot;:&quot;dynamodb:index:ReadCapacityUnits&quot;,
-        &quot;ResourceId&quot;:<span>{</span>
-          &quot;Fn::Sub&quot;:&quot;table/$<span>{</span>DDBTable}/index/GSI&quot;
-        }
-      }
-    }
-  }
-}</code></pre></div>
-                                 <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-applicationautoscaling-scalabletarget--examples--Amazon_DynamoDB--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
-  DDBTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: &quot;id&quot;
-          AttributeType: &quot;S&quot;
-      KeySchema:
-        - AttributeName: &quot;id&quot;
-          KeyType: &quot;HASH&quot;
-      ProvisionedThroughput:
-        ReadCapacityUnits: 5
-        WriteCapacityUnits: 5  
-      GlobalSecondaryIndexes:
-        - IndexName: &quot;GSI&quot;
-          KeySchema:
-            - AttributeName: &quot;id&quot;
-              KeyType: &quot;HASH&quot;
-          Projection:
-            ProjectionType: &quot;KEYS_ONLY&quot;
-          ProvisionedThroughput:
-            ReadCapacityUnits: 5
-            WriteCapacityUnits: 5    
-  WriteCapacityScalableTarget:
-    Type: AWS::ApplicationAutoScaling::ScalableTarget
-    Properties:
-      MaxCapacity: 100
-      MinCapacity: 5
-      RoleARN: 
-        Fn::Sub: &apos;arn:aws:iam::$<span>{</span>AWS::AccountId}:role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable&apos;
-      ServiceNamespace: dynamodb
-      ScalableDimension: dynamodb:table:WriteCapacityUnits
-      ResourceId: !Sub table/$<span>{</span>DDBTable} 
-  ReadCapacityScalableTarget:
-    Type: AWS::ApplicationAutoScaling::ScalableTarget
-    Properties:
-      MaxCapacity: 100
-      MinCapacity: 5
-      RoleARN: 
-        Fn::Sub: &apos;arn:aws:iam::$<span>{</span>AWS::AccountId}:role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable&apos;
-      ServiceNamespace: dynamodb
-      ScalableDimension: dynamodb:table:ReadCapacityUnits
-      ResourceId: !Sub table/$<span>{</span>DDBTable}
-  WriteCapacityScalableTargetGSI:
-    Type: AWS::ApplicationAutoScaling::ScalableTarget
-    Properties:
-      MaxCapacity: 100
-      MinCapacity: 5
-      RoleARN:
-        Fn::Sub: &apos;arn:aws:iam::$<span>{</span>AWS::AccountId}:role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable&apos;
-      ServiceNamespace: dynamodb
-      ScalableDimension: dynamodb:index:WriteCapacityUnits
-      ResourceId: !Sub table/$<span>{</span>DDBTable}/index/GSI
-  ReadCapacityScalableTargetGSI:
-    Type: AWS::ApplicationAutoScaling::ScalableTarget
-    Properties:
-      MaxCapacity: 100
-      MinCapacity: 5
-      RoleARN: 
-        Fn::Sub: &apos;arn:aws:iam::$<span>{</span>AWS::AccountId}:role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable&apos;
-      ServiceNamespace: dynamodb
-      ScalableDimension: dynamodb:index:ReadCapacityUnits
-      ResourceId: !Sub table/$<span>{</span>DDBTable}/index/GSI
-</code></pre></div>
-                                 <h2 id="aws-resource-applicationautoscaling-scalabletarget--seealso">See Also</h2>
+                                 <h2 id="aws-resource-applicationautoscaling-scalabletarget--seealso">See also</h2>
                                  <div class="itemizedlist">
+                                     
+                                     
                                      
                                      
                                     
                                     <ul class="itemizedlist" type="disc">
                                        <li class="listitem">
                                           
-                                          <p><a href="https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html">Application Auto Scaling User Guide</a>
-                                             
-                                          </p>
+                                          <p><a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_RegisterScalableTarget.html">RegisterScalableTarget</a> in the <em>Application Auto Scaling API
+                                                Reference</em></p>
                                           
                                        </li>
                                        <li class="listitem">
                                           
-                                          <p><a href="https://docs.aws.amazon.com/cli/latest/reference/application-autoscaling/register-scalable-target.html#examples">Examples</a> of Application Auto Scaling scalable targets in the <em> AWS
-                                                CLI Command Reference</em></p>
+                                          <p><a href="https://docs.aws.amazon.com/autoscaling/application/userguide/getting-started.html">Getting started</a>
+                                             in the <em>Application Auto Scaling User Guide</em></p>
                                           
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p><a href="http://aws.amazon.com/blogs/database/how-to-use-aws-cloudformation-to-configure-auto-scaling-for-amazon-dynamodb-tables-and-indexes/" target="_blank"><span>How to use AWS CloudFormation to configure auto scaling for Amazon DynamoDB tables
+                                                   and indexes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          <p><a href="http://aws.amazon.com/blogs/compute/scheduling-aws-lambda-provisioned-concurrency-for-recurring-peak-usage/" target="_blank"><span>Scheduling AWS Lambda Provisioned Concurrency for recurring peak usage</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></p>
                                        </li>
                                     </ul>
                                  </div>

@@ -23,7 +23,8 @@
                                     <h3 id="aws-resource-elasticloadbalancingv2-listener-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::ElasticLoadBalancingV2::Listener&quot;,
   &quot;Properties&quot; : <span>{</span>
-      &quot;<a href="#cfn-elasticloadbalancingv2-listener-certificates">Certificates</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-elasticloadbalancingv2-listener-certificates-1.html">Certificate</a>, ... ]</code>,
+      &quot;<a href="#cfn-elasticloadbalancingv2-listener-alpnpolicy">AlpnPolicy</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+      &quot;<a href="#cfn-elasticloadbalancingv2-listener-certificates">Certificates</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-elasticloadbalancingv2-listener-certificates.html">Certificate</a>, ... ]</code>,
       &quot;<a href="#cfn-elasticloadbalancingv2-listener-defaultactions">DefaultActions</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-elasticloadbalancingv2-listener-defaultactions.html">Action</a>, ... ]</code>,
       &quot;<a href="#cfn-elasticloadbalancingv2-listener-loadbalancerarn">LoadBalancerArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-elasticloadbalancingv2-listener-port">Port</a>&quot; : <code class="replaceable">Integer</code>,
@@ -35,8 +36,10 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-elasticloadbalancingv2-listener-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::ElasticLoadBalancingV2::Listener
 Properties: 
+  <a href="#cfn-elasticloadbalancingv2-listener-alpnpolicy">AlpnPolicy</a>: <code class="replaceable">
+    - String</code>
   <a href="#cfn-elasticloadbalancingv2-listener-certificates">Certificates</a>: <code class="replaceable">
-    - <a href="./aws-properties-elasticloadbalancingv2-listener-certificates-1.html">Certificate</a></code>
+    - <a href="./aws-properties-elasticloadbalancingv2-listener-certificates.html">Certificate</a></code>
   <a href="#cfn-elasticloadbalancingv2-listener-defaultactions">DefaultActions</a>: <code class="replaceable">
     - <a href="./aws-properties-elasticloadbalancingv2-listener-defaultactions.html">Action</a></code>
   <a href="#cfn-elasticloadbalancingv2-listener-loadbalancerarn">LoadBalancerArn</a>: <code class="replaceable">String</code>
@@ -47,6 +50,17 @@ Properties:
                                  <h2 id="aws-resource-elasticloadbalancingv2-listener-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-elasticloadbalancingv2-listener-alpnpolicy"></a><span class="term"><code class="code">AlpnPolicy</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>[TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN) policy.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-elasticloadbalancingv2-listener-certificates"></a><span class="term"><code class="code">Certificates</code></span></dt>
                                        <dd>
                                           
@@ -59,7 +73,7 @@ Properties:
                                           
                                           <p><em>Required</em>: Conditional
                                           </p>
-                                          <p><em>Type</em>: List of <a href="./aws-properties-elasticloadbalancingv2-listener-certificates-1.html">Certificate</a></p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-elasticloadbalancingv2-listener-certificates.html">Certificate</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-elasticloadbalancingv2-listener-defaultactions"></a><span class="term"><code class="code">DefaultActions</code></span></dt>
@@ -112,7 +126,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">HTTP | HTTPS | TCP | TCP_UDP | TLS | UDP</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">HTTP | HTTPS | TCP | TCP_UDP | TLS | UDP</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-elasticloadbalancingv2-listener-sslpolicy"></a><span class="term"><code class="code">SslPolicy</code></span></dt>
@@ -222,7 +236,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-elasticloadbalancingv2-listener-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-elasticloadbalancingv2-listener-return-values">Return values</h2>
                                  <h3 id="aws-resource-elasticloadbalancingv2-listener-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the Amazon Resource Name (ARN) of the listener.
@@ -276,7 +290,7 @@ Properties:
     }
 }
          </code></pre></div>
-                                 <h2 id="aws-resource-elasticloadbalancingv2-listener--seealso">See Also</h2>
+                                 <h2 id="aws-resource-elasticloadbalancingv2-listener--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
                                      

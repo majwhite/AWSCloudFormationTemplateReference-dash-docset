@@ -26,7 +26,10 @@
   &quot;Type&quot; : &quot;AWS::Amplify::Domain&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-amplify-domain-appid">AppId</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-amplify-domain-autosubdomaincreationpatterns">AutoSubDomainCreationPatterns</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+      &quot;<a href="#cfn-amplify-domain-autosubdomainiamrole">AutoSubDomainIAMRole</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-amplify-domain-domainname">DomainName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-amplify-domain-enableautosubdomain">EnableAutoSubDomain</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-amplify-domain-subdomainsettings">SubDomainSettings</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-amplify-domain-subdomainsetting.html">SubDomainSetting</a>, ... ]</code>
     }
 }
@@ -35,7 +38,11 @@
                                     <h3 id="aws-resource-amplify-domain-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Amplify::Domain
 Properties: 
   <a href="#cfn-amplify-domain-appid">AppId</a>: <code class="replaceable">String</code>
+  <a href="#cfn-amplify-domain-autosubdomaincreationpatterns">AutoSubDomainCreationPatterns</a>: <code class="replaceable">
+    - String</code>
+  <a href="#cfn-amplify-domain-autosubdomainiamrole">AutoSubDomainIAMRole</a>: <code class="replaceable">String</code>
   <a href="#cfn-amplify-domain-domainname">DomainName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-amplify-domain-enableautosubdomain">EnableAutoSubDomain</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-amplify-domain-subdomainsettings">SubDomainSettings</a>: <code class="replaceable">
     - <a href="./aws-properties-amplify-domain-subdomainsetting.html">SubDomainSetting</a></code>
 </code></pre></div>
@@ -45,24 +52,42 @@ Properties:
                                        <dt><a id="cfn-amplify-domain-appid"></a><span class="term"><code class="code">AppId</code></span></dt>
                                        <dd>
                                           
-                                          <p>
-                                             Unique Id for an Amplify App.
-                                             
-                                          </p>
+                                          <p> The unique ID for an Amplify app. </p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-amplify-domain-autosubdomaincreationpatterns"></a><span class="term"><code class="code">AutoSubDomainCreationPatterns</code></span></dt>
+                                       <dd>
+                                          
+                                          <p> Sets the branch patterns for automatic subdomain creation. </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-amplify-domain-autosubdomainiamrole"></a><span class="term"><code class="code">AutoSubDomainIAMRole</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The required AWS Identity and Access Management (IAM) service role for the Amazon
+                                             Resource Name (ARN) for automatically creating subdomains.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-amplify-domain-domainname"></a><span class="term"><code class="code">DomainName</code></span></dt>
                                        <dd>
                                           
-                                          <p>
-                                             Domain name for the Domain Association.
-                                             
-                                          </p>
+                                          <p> The domain name for the domain association. </p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -70,13 +95,21 @@ Properties:
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
+                                       <dt><a id="cfn-amplify-domain-enableautosubdomain"></a><span class="term"><code class="code">EnableAutoSubDomain</code></span></dt>
+                                       <dd>
+                                          
+                                          <p> Enables the automated creation of subdomains for branches. </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-amplify-domain-subdomainsettings"></a><span class="term"><code class="code">SubDomainSettings</code></span></dt>
                                        <dd>
                                           
-                                          <p>
-                                             Setting structure for the Subdomain.
-                                             
-                                          </p>
+                                          <p> The setting for the subdomain. </p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -85,7 +118,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-amplify-domain-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-amplify-domain-return-values">Return values</h2>
                                  <h3 id="aws-resource-amplify-domain-return-values-fn--getatt">Fn::GetAtt</h3>
                                  <h4 id="aws-resource-amplify-domain-return-values-fn--getatt-fn--getatt"></h4>
                                  <div class="variablelist">
@@ -94,6 +127,18 @@ Properties:
                                        <dd>
                                           
                                           <p>ARN for the Domain Association.</p>
+                                          
+                                       </dd>
+                                       <dt><a id="AutoSubDomainCreationPatterns-fn::getatt"></a><span class="term"><code class="code">AutoSubDomainCreationPatterns</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Branch patterns for the automatically created subdomain.</p>
+                                          
+                                       </dd>
+                                       <dt><a id="AutoSubDomainIAMRole-fn::getatt"></a><span class="term"><code class="code">AutoSubDomainIAMRole</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The IAM service role for the subdomain.</p>
                                           
                                        </dd>
                                        <dt><a id="CertificateRecord-fn::getatt"></a><span class="term"><code class="code">CertificateRecord</code></span></dt>
@@ -111,7 +156,13 @@ Properties:
                                        <dt><a id="DomainStatus-fn::getatt"></a><span class="term"><code class="code">DomainStatus</code></span></dt>
                                        <dd>
                                           
-                                          <p>Status fo the Domain Association.</p>
+                                          <p>Status for the Domain Association.</p>
+                                          
+                                       </dd>
+                                       <dt><a id="EnableAutoSubDomain-fn::getatt"></a><span class="term"><code class="code">EnableAutoSubDomain</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies whether the automated creation of subdomains for branches is enabled.</p>
                                           
                                        </dd>
                                        <dt><a id="StatusReason-fn::getatt"></a><span class="term"><code class="code">StatusReason</code></span></dt>

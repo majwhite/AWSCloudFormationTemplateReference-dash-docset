@@ -85,13 +85,14 @@
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">gzip | none</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">gzip | none</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-dms-endpoint-s3settings-csvdelimiter"></a><span class="term"><code class="code">CsvDelimiter</code></span></dt>
                                        <dd>
                                           
-                                          <p> The delimiter used to separate columns in the source files. The default is a comma.
+                                          <p> The delimiter used to separate columns in the .csv file for both source and target.
+                                             The default is a comma.
                                              
                                           </p>
                                           
@@ -104,7 +105,8 @@
                                        <dt><a id="cfn-dms-endpoint-s3settings-csvrowdelimiter"></a><span class="term"><code class="code">CsvRowDelimiter</code></span></dt>
                                        <dd>
                                           
-                                          <p> The delimiter used to separate rows in the source files. The default is a carriage
+                                          <p> The delimiter used to separate rows in the .csv file for both source and target.
+                                             The default is a carriage
                                              return (<code class="code">\n</code>). 
                                           </p>
                                           
@@ -119,7 +121,10 @@
                                           
                                           <p> The external table definition. </p>
                                           
-                                          <p><em>Required</em>: No
+                                          <p>Conditional: If <code class="code">S3</code> is used as a source then <code class="code">ExternalTableDefinition</code> is required.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Conditional
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -128,7 +133,9 @@
                                        <dt><a id="cfn-dms-endpoint-s3settings-serviceaccessrolearn"></a><span class="term"><code class="code">ServiceAccessRoleArn</code></span></dt>
                                        <dd>
                                           
-                                          <p> The Amazon Resource Name (ARN) used by the service access IAM role. </p>
+                                          <p> The Amazon Resource Name (ARN) used by the service access IAM role. It is a required
+                                             parameter that enables DMS to write and read objects from an 3S bucket.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>

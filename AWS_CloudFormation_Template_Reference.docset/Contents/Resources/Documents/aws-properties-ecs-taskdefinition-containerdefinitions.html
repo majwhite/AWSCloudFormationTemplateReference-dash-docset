@@ -34,6 +34,7 @@
   &quot;<a href="#cfn-ecs-taskdefinition-containerdefinition-dockersecurityoptions">DockerSecurityOptions</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
   &quot;<a href="#cfn-ecs-taskdefinition-containerdefinition-entrypoint">EntryPoint</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
   &quot;<a href="#cfn-ecs-taskdefinition-containerdefinition-environment">Environment</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-ecs-taskdefinition-containerdefinitions-environment.html">KeyValuePair</a>, ... ]</code>,
+  &quot;<a href="#cfn-ecs-taskdefinition-containerdefinition-environmentfiles">EnvironmentFiles</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-ecs-taskdefinition-environmentfile.html">EnvironmentFile</a>, ... ]</code>,
   &quot;<a href="#cfn-ecs-taskdefinition-containerdefinition-essential">Essential</a>&quot; : <code class="replaceable">Boolean</code>,
   &quot;<a href="#cfn-ecs-taskdefinition-containerdefinition-extrahosts">ExtraHosts</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-ecs-taskdefinition-containerdefinitions-hostentry.html">HostEntry</a>, ... ]</code>,
   &quot;<a href="#cfn-ecs-taskdefinition-containerdefinition-firelensconfiguration">FirelensConfiguration</a>&quot; : <code class="replaceable"><a href="./aws-properties-ecs-taskdefinition-firelensconfiguration.html">FirelensConfiguration</a></code>,
@@ -83,6 +84,8 @@
     - String</code>
   <a href="#cfn-ecs-taskdefinition-containerdefinition-environment">Environment</a>: <code class="replaceable">
     - <a href="./aws-properties-ecs-taskdefinition-containerdefinitions-environment.html">KeyValuePair</a></code>
+  <a href="#cfn-ecs-taskdefinition-containerdefinition-environmentfiles">EnvironmentFiles</a>: <code class="replaceable">
+    - <a href="./aws-properties-ecs-taskdefinition-environmentfile.html">EnvironmentFile</a></code>
   <a href="#cfn-ecs-taskdefinition-containerdefinition-essential">Essential</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-ecs-taskdefinition-containerdefinition-extrahosts">ExtraHosts</a>: <code class="replaceable">
     - <a href="./aws-properties-ecs-taskdefinition-containerdefinitions-hostentry.html">HostEntry</a></code>
@@ -134,7 +137,7 @@
                                           
                                           <p>The command that is passed to the container. This parameter maps to <code class="code">Cmd</code>
                                              in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the
-                                             <code class="code">COMMAND</code> parameter to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker
+                                             <code class="code">COMMAND</code> parameter to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker
                                                    run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>. For more information, see <a href="https://docs.docker.com/engine/reference/builder/#cmd" target="_blank"><span>https://docs.docker.com/engine/reference/builder/#cmd</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>. If there are multiple arguments, each
                                              argument should be a separated string in the array.
                                           </p>
@@ -150,7 +153,7 @@
                                           
                                           <p>The number of <code class="code">cpu</code> units reserved for the container. This parameter maps
                                              to <code class="code">CpuShares</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the
-                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--cpu-shares</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--cpu-shares</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
                                           <p>This field is optional for tasks using the Fargate launch type, and the
@@ -225,7 +228,8 @@
                                           <p>On Windows container instances, the CPU limit is enforced as an absolute limit, or
                                              a
                                              quota. Windows containers only have access to the specified amount of CPU that is
-                                             described in the task definition.
+                                             described in the task definition. A null or zero CPU value is passed to Docker as
+                                             <code class="code">0</code>, which Windows interprets as 1% of one CPU.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -275,7 +279,9 @@
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>This parameter is not supported for Windows containers.</p>
+                                                <p>This parameter is not supported for Windows containers or tasks that use the awsvpc
+                                                   network mode.
+                                                </p>
                                              </div>
                                           </div> 
                                           
@@ -290,14 +296,16 @@
                                           
                                           <p>A list of DNS search domains that are presented to the container. This parameter maps
                                              to <code class="code">DnsSearch</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the
-                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--dns-search</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--dns-search</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p> 
                                           
                                           <div class="awsdocs-note">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>This parameter is not supported for Windows containers.</p>
+                                                <p>This parameter is not supported for Windows containers or tasks that use the awsvpc
+                                                   network mode.
+                                                </p>
                                              </div>
                                           </div> 
                                           
@@ -312,14 +320,16 @@
                                           
                                           <p>A list of DNS servers that are presented to the container. This parameter maps to
                                              <code class="code">Dns</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the
-                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--dns</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--dns</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p> 
                                           
                                           <div class="awsdocs-note">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>This parameter is not supported for Windows containers.</p>
+                                                <p>This parameter is not supported for Windows containers or tasks that use the awsvpc
+                                                   network mode.
+                                                </p>
                                              </div>
                                           </div> 
                                           
@@ -334,7 +344,7 @@
                                           
                                           <p>A key/value map of labels to add to the container. This parameter maps to
                                              <code class="code">Labels</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the
-                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--label</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>. This parameter requires version 1.18 of the Docker Remote API or greater on your
+                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--label</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>. This parameter requires version 1.18 of the Docker Remote API or greater on your
                                              container instance. To check the Docker Remote API version on your container instance,
                                              log in to your container instance and run the following command: <code class="code">sudo docker version --format &apos;<span>{</span><span>{</span>.Server.APIVersion}}&apos;</code> 
                                              
@@ -362,7 +372,7 @@
                                           
                                           <p>This parameter maps to <code class="code">SecurityOpt</code> in the
                                              <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the
-                                             <code class="code">--security-opt</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker
+                                             <code class="code">--security-opt</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker
                                                    run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
@@ -380,6 +390,14 @@
                                              </div>
                                           </div>
                                           
+                                          <p>For more information about valid values, see <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>Docker
+                                                   Run Security Configuration</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>. 
+                                          </p>
+                                          
+                                          <p>Valid values: &quot;no-new-privileges&quot; | &quot;apparmor:PROFILE&quot; | &quot;label:value&quot; |
+                                             &quot;credentialspec:CredentialSpecFilePath&quot;
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of String
@@ -389,7 +407,7 @@
                                        <dt><a id="cfn-ecs-taskdefinition-containerdefinition-entrypoint"></a><span class="term"><code class="code">EntryPoint</code></span></dt>
                                        <dd>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
@@ -403,7 +421,7 @@
                                           
                                           <p>The entry point that is passed to the container. This parameter maps to
                                              <code class="code">Entrypoint</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the
-                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--entrypoint</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>. For more information, see <a href="https://docs.docker.com/engine/reference/builder/#entrypoint" target="_blank"><span>https://docs.docker.com/engine/reference/builder/#entrypoint</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--entrypoint</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>. For more information, see <a href="https://docs.docker.com/engine/reference/builder/#entrypoint" target="_blank"><span>https://docs.docker.com/engine/reference/builder/#entrypoint</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -417,10 +435,10 @@
                                           
                                           <p>The environment variables to pass to a container. This parameter maps to
                                              <code class="code">Env</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the
-                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--env</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--env</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
@@ -433,6 +451,39 @@
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="./aws-properties-ecs-taskdefinition-containerdefinitions-environment.html">KeyValuePair</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ecs-taskdefinition-containerdefinition-environmentfiles"></a><span class="term"><code class="code">EnvironmentFiles</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A list of files containing the environment variables to pass to a container. This
+                                             parameter maps to the <code class="code">--env-file</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                          </p>
+                                          
+                                          <p>You can specify up to ten environment files. The file must have a <code class="code">.env</code>
+                                             file extension. Each line in an environment file should contain an environment variable
+                                             in <code class="code">VARIABLE=VALUE</code> format. Lines beginning with <code class="code">#</code> are treated
+                                             as comments and are ignored. For more information on the environment variable file
+                                             syntax, see <a href="https://docs.docker.com/compose/env-file/" target="_blank"><span>Declare default
+                                                   environment variables in file</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                          </p>
+                                          
+                                          <p>If there are environment variables specified using the <code class="code">environment</code>
+                                             parameter in a container definition, they take precedence over the variables contained
+                                             within an environment file. If multiple environment files are specified that contain
+                                             the
+                                             same variable, they are processed from the top down. It is recommended to use unique
+                                             variable names. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html">Specifying Environment
+                                                Variables</a> in the <em>Amazon Elastic Container Service Developer Guide</em>.
+                                          </p>
+                                          
+                                          <p>This field is not valid for containers in tasks using the Fargate launch
+                                             type.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-ecs-taskdefinition-environmentfile.html">EnvironmentFile</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-ecs-taskdefinition-containerdefinition-essential"></a><span class="term"><code class="code">Essential</code></span></dt>
@@ -467,7 +518,7 @@
                                           <p>A list of hostnames and IP address mappings to append to the <code class="code">/etc/hosts</code>
                                              file on the container. This parameter maps to <code class="code">ExtraHosts</code> in the
                                              <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the
-                                             <code class="code">--add-host</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker
+                                             <code class="code">--add-host</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker
                                                    run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
@@ -506,7 +557,7 @@
                                           <p>The container health check command and associated configuration parameters for the
                                              container. This parameter maps to <code class="code">HealthCheck</code> in the
                                              <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the
-                                             <code class="code">HEALTHCHECK</code> parameter of <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker
+                                             <code class="code">HEALTHCHECK</code> parameter of <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker
                                                    run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
@@ -520,7 +571,7 @@
                                           
                                           <p>The hostname to use for your container. This parameter maps to <code class="code">Hostname</code>
                                              in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the
-                                             <code class="code">--hostname</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker
+                                             <code class="code">--hostname</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker
                                                    run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
@@ -552,7 +603,7 @@
                                                 </code>. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons,
                                              periods, forward slashes, and number signs are allowed. This parameter maps to <code class="code">Image</code> in the
                                              <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the
-                                             <code class="code">IMAGE</code> parameter of <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker
+                                             <code class="code">IMAGE</code> parameter of <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker
                                                    run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
@@ -621,7 +672,7 @@
                                           <p>When this parameter is <code class="code">true</code>, this allows you to deploy containerized
                                              applications that require <code class="code">stdin</code> or a <code class="code">tty</code> to be allocated. This
                                              parameter maps to <code class="code">OpenStdin</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>
-                                             section of the <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--interactive</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                             section of the <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--interactive</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -643,7 +694,7 @@
                                              <a href="https://docs.docker.com/network/links/" target="_blank"><span>Legacy container links</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>
                                              in the Docker documentation. This parameter maps to <code class="code">Links</code> in the
                                              <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the
-                                             <code class="code">--link</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker
+                                             <code class="code">--link</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker
                                                    run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p> 
                                           
@@ -651,11 +702,13 @@
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>This parameter is not supported for Windows containers.</p>
+                                                <p>This parameter is not supported for Windows containers or tasks that use the awsvpc
+                                                   network mode.
+                                                </p>
                                              </div>
                                           </div> 
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
@@ -758,7 +811,7 @@
                                              reserved for all containers within a task must be lower than the task
                                              <code class="code">memory</code> value, if one is specified. This parameter maps to
                                              <code class="code">Memory</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the
-                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--memory</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--memory</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
                                           <p>If using the Fargate launch type, this parameter is optional.</p>
@@ -795,7 +848,7 @@
                                              available memory on the container instance, whichever comes first. This parameter
                                              maps
                                              to <code class="code">MemoryReservation</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of
-                                             the <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--memory-reservation</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                             the <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--memory-reservation</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
                                           <p>If a task-level memory value is not specified, you must specify a non-zero integer
@@ -833,7 +886,7 @@
                                           <p>The mount points for data volumes in your container.</p>
                                           
                                           <p>This parameter maps to <code class="code">Volumes</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>
-                                             section of the <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--volume</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                             section of the <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--volume</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
                                           <p>Windows containers can mount whole directories on the same drive as
@@ -855,7 +908,7 @@
                                              Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. This
                                              parameter maps to <code class="code">name</code> in the
                                              <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the
-                                             <code class="code">--name</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker
+                                             <code class="code">--name</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker
                                                    run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>. 
                                           </p>
                                           
@@ -917,7 +970,7 @@
                                           <p>When this parameter is true, the container is given elevated privileges on the host
                                              container instance (similar to the <code class="code">root</code> user). This parameter maps to
                                              <code class="code">Privileged</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the
-                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--privileged</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--privileged</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p> 
                                           
                                           <div class="awsdocs-note">
@@ -941,7 +994,7 @@
                                           
                                           <p>When this parameter is <code class="code">true</code>, a TTY is allocated. This parameter maps to
                                              <code class="code">Tty</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the
-                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--tty</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--tty</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -956,7 +1009,7 @@
                                           <p>When this parameter is true, the container is given read-only access to its root file
                                              system. This parameter maps to <code class="code">ReadonlyRootfs</code> in the
                                              <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the
-                                             <code class="code">--read-only</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker
+                                             <code class="code">--read-only</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker
                                                    run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p> 
                                           
@@ -964,7 +1017,9 @@
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>This parameter is not supported for Windows containers.</p>
+                                                <p>This parameter is not supported for Windows containers or tasks that use the awsvpc
+                                                   network mode.
+                                                </p>
                                              </div>
                                           </div> 
                                           
@@ -1022,26 +1077,29 @@
                                              to a <code class="code">STOPPED</code> state.
                                           </p>
                                           
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>When the <code class="code">ECS_CONTAINER_START_TIMEOUT</code> container agent configuration
+                                                   variable is used, it is enforced indendently from this start timeout value.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
                                           <p>For tasks using the Fargate launch type, this parameter requires that
-                                             the task or service uses platform version 1.3.0 or later. If this parameter is not
-                                             specified, the default value of 3 minutes is used.
+                                             the task or service uses platform version 1.3.0 or later.
                                           </p>
                                           
-                                          <p>For tasks using the EC2 launch type, if the <code class="code">startTimeout</code>
-                                             parameter is not specified, the value set for the Amazon ECS container agent configuration
-                                             variable <code class="code">ECS_CONTAINER_START_TIMEOUT</code> is used by default. If neither the
-                                             <code class="code">startTimeout</code> parameter or the <code class="code">ECS_CONTAINER_START_TIMEOUT</code>
-                                             agent configuration variable are set, then the default values of 3 minutes for Linux
-                                             containers and 8 minutes on Windows containers are used. Your container instances
-                                             require at least version 1.26.0 of the container agent to enable a container start
+                                          <p>For tasks using the EC2 launch type, your container instances require at
+                                             least version <code class="code">1.26.0</code> of the container agent to enable a container start
                                              timeout value. However, we recommend using the latest container agent version. For
                                              information about checking your agent version and updating to the latest version,
                                              see
                                              <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html">Updating the Amazon ECS
                                                 Container Agent</a> in the <em>Amazon Elastic Container Service Developer Guide</em>. If you are
-                                             using an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1
-                                             of the
-                                             <code class="code">ecs-init</code> package. If your container instances are launched from version
+                                             using an Amazon ECS-optimized Linux AMI, your instance needs at least version <code class="code">1.26.0-1</code> of
+                                             the <code class="code">ecs-init</code> package. If your container instances are launched from version
                                              <code class="code">20190301</code> or later, then they contain the required versions of the
                                              container agent and <code class="code">ecs-init</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized Linux AMI</a> in the <em>Amazon Elastic Container Service Developer Guide</em>.
                                           </p>
@@ -1096,7 +1154,7 @@
                                           <p>A list of namespaced kernel parameters to set in the container. This parameter maps
                                              to
                                              <code class="code">Sysctls</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the
-                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--sysctl</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--sysctl</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
                                           <div class="awsdocs-note">
@@ -1153,7 +1211,7 @@
                                           
                                           <p>The user name to use inside the container. This parameter maps to <code class="code">User</code> in
                                              the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the
-                                             <code class="code">--user</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker
+                                             <code class="code">--user</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker
                                                    run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
@@ -1226,7 +1284,9 @@
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>This parameter is not supported for Windows containers.</p>
+                                                <p>This parameter is not supported for Windows containers or tasks that use the awsvpc
+                                                   network mode.
+                                                </p>
                                              </div>
                                           </div> 
                                           
@@ -1241,7 +1301,7 @@
                                           
                                           <p>Data volumes to mount from another container. This parameter maps to
                                              <code class="code">VolumesFrom</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the
-                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--volumes-from</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--volumes-from</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -1254,7 +1314,7 @@
                                           
                                           <p>The working directory in which to run commands inside the container. This parameter
                                              maps to <code class="code">WorkingDir</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate" target="_blank"><span>Create a container</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> section of the
-                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--workdir</code> option to <a href="https://docs.docker.com/engine/reference/run/" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                             <a href="https://docs.docker.com/engine/api/v1.35/" target="_blank"><span>Docker Remote API</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> and the <code class="code">--workdir</code> option to <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank"><span>docker run</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No

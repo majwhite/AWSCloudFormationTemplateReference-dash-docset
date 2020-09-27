@@ -20,8 +20,8 @@
                                     profile that enables AppConfig to access the configuration source. Valid configuration
                                     sources
                                     include Systems Manager (SSM) documents, SSM Parameter Store parameters, and Amazon
-                                    S3. A configuration
-                                    profile includes the following information.
+                                    S3. A
+                                    configuration profile includes the following information.
                                  </p>
                                  <div class="itemizedlist">
                                      
@@ -151,13 +151,14 @@ Properties:
                                        <dt><a id="cfn-appconfig-configurationprofile-locationuri"></a><span class="term"><code class="code">LocationUri</code></span></dt>
                                        <dd>
                                           
-                                          <p>A URI to locate the configuration. You can specify a Systems Manager (SSM) document,
-                                             an SSM
-                                             Parameter Store parameter, or an Amazon S3 object. For an SSM document, specify either
-                                             the
-                                             document name in the format <code class="code">ssm-document://&lt;Document_name&gt;</code> or the Amazon
-                                             Resource Name (ARN). For a parameter, specify either the parameter name in the format
-                                             <code class="code">ssm-parameter://&lt;Parameter_name&gt;</code> or the ARN. For an Amazon S3 object,
+                                          <p>A URI to locate the configuration. You can specify the AppConfig hosted configuration
+                                             store, Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon
+                                             S3 object. For the
+                                             hosted configuration store, specify <code class="code">hosted</code>. For an SSM document, specify
+                                             either the document name in the format <code class="code">ssm-document://&lt;Document_name&gt;</code> or
+                                             the Amazon Resource Name (ARN). For a parameter, specify either the parameter name
+                                             in the
+                                             format <code class="code">ssm-parameter://&lt;Parameter_name&gt;</code> or the ARN. For an Amazon S3 object,
                                              specify the URI in the following format: <code class="code">s3://&lt;bucket&gt;/&lt;objectKey&gt;
                                                 </code>. Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json
                                           </p>
@@ -190,13 +191,24 @@ Properties:
                                              LocationUri.
                                           </p>
                                           
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>A retrieval role ARN is not required for configurations stored in the AppConfig
+                                                   hosted configuration store. It is required for all other sources that store your
+                                                   configuration. 
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Minimum</em>: <code class="code">20</code></p>
                                           <p><em>Maximum</em>: <code class="code">2048</code></p>
-                                          <p><em>Pattern</em>: <code class="code">arn:(aws[a-zA-Z-]*)?:[a-z]+:([a-z]<span>{</span>2}((-gov)|(-iso(b?)))?-[a-z]+-\d<span>{</span>1})?:(\d<span>{</span>12})?:[a-zA-Z0-9-_/:.]+</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^((arn):(aws|aws-cn|aws-iso|aws-iso-[a-z]<span>{</span>1}|aws-us-gov):(iam)::\d<span>{</span>12}:role[/].*)$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-appconfig-configurationprofile-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
@@ -204,8 +216,8 @@ Properties:
                                           
                                           <p>Metadata to assign to the configuration profile. Tags help organize and categorize
                                              your
-                                             AppConfig resources. Each tag consists of a key and an optional value, both of which
-                                             you
+                                             AWS AppConfig resources. Each tag consists of a key and an optional value, both of
+                                             which you
                                              define.
                                           </p>
                                           
@@ -227,23 +239,72 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-appconfig-configurationprofile-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-appconfig-configurationprofile-return-values">Return values</h2>
                                  <h3 id="aws-resource-appconfig-configurationprofile-return-values-ref">Ref</h3>
                                  <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the configuration profile ID.
                                  </p>
                                  <h2 id="aws-resource-appconfig-configurationprofile--examples">Examples</h2>
-                                 <h3 id="aws-resource-appconfig-configurationprofile--examples--AWS_AppConfig_Configuration_Profile_Example">AWS AppConfig Configuration Profile Example</h3>
+                                 <h3 id="aws-resource-appconfig-configurationprofile--examples--AWS_AppConfig_Configuration_Profile_Example_-_CodePipeline">AWS AppConfig Configuration Profile Example - CodePipeline</h3>
+                                 <p>The following examples creates an AWS AppConfig configuration profile named
+                                    MyTestConfigurationProfile. A configuration profile includes source information for
+                                    accessing your configuration data. A configuration profile can also include optional
+                                    validators to
+                                    ensure your configuration data is syntactically and semantically correct. The following
+                                    configuration profile example uses the specified <code class="code">LocationUri</code> to retrieve configuration data from AWS CodePipeline.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-appconfig-configurationprofile--examples--AWS_AppConfig_Configuration_Profile_Example_-_CodePipeline--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Resources&quot;: <span>{</span>
+    &quot;CodePipelineConfigurationProfile&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::AppConfig::ConfigurationProfile&quot;,
+      &quot;DependsOn&quot;: &quot;MyTestApplication&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;ApplicationId&quot;: &quot;MyTestApplication&quot;,
+        &quot;Name&quot;: &quot;MyTestConfigurationProfile&quot;,
+        &quot;Description&quot;: &quot;My test configuration profile&quot;,
+        &quot;LocationUri&quot;: &quot;codepipeline://YourPipelineName&quot;,
+        &quot;Validators&quot;: [
+          <span>{</span>
+            &quot;Type&quot;: &quot;LAMBDA&quot;,
+            &quot;Content&quot;: &quot;MyLambdaValidator&quot;
+          }
+        ],
+        &quot;Tags&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;Env&quot;,
+            &quot;Value&quot;: &quot;test&quot;
+          }
+        ]
+      }
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-appconfig-configurationprofile--examples--AWS_AppConfig_Configuration_Profile_Example_-_CodePipeline--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  CodePipelineConfigurationProfile:
+    Type: AWS::AppConfig::ConfigurationProfile
+    Properties:
+      ApplicationId: !Ref MyTestApplication
+      Name: &quot;MyTestConfigurationProfile&quot;
+      Description: &quot;My test configuration profile&quot;
+      LocationUri: &quot;codepipeline://YourPipelineName&quot;
+      Validators:
+        - Type: LAMBDA
+          Content: !ImportValue MyLambdaValidator
+      Tags:
+        - Key: Env
+          Value: test</code></pre></div>
+                                 <h3 id="aws-resource-appconfig-configurationprofile--examples--AWS_AppConfig_Configuration_Profile_Example_-_Parameter_Store">AWS AppConfig Configuration Profile Example - Parameter Store</h3>
                                  <p>The following examples creats an AWS AppConfig configuration profile named
                                     MyTestConfigurationProfile. A configuration profile includes source information for
-                                    accessing your configuration data in either a Systems Manager (SSM) document or a
-                                    Parameter Store parameter. A configuration profile can also include optional validators
-                                    to
+                                    accessing your configuration data. A configuration profile can also include optional
+                                    validators to
                                     ensure your configuration data is syntactically and semantically correct. The following
                                     configuration profile example uses the specified <code class="code">RetrievalRoleArn</code> and
                                     <code class="code">LocationUri</code> to retrieve configuration data from an SSM parameter.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-appconfig-configurationprofile--examples--AWS_AppConfig_Configuration_Profile_Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-appconfig-configurationprofile--examples--AWS_AppConfig_Configuration_Profile_Example_-_Parameter_Store--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot;: &quot;AWS::AppConfig::ConfigurationProfile&quot;,
   &quot;DependsOn&quot;: &quot;MyTestApplication&quot;,
   &quot;Properties&quot;: <span>{</span>
@@ -283,10 +344,9 @@ Properties:
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-appconfig-configurationprofile--examples--AWS_AppConfig_Configuration_Profile_Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+                                    <h4 id="aws-resource-appconfig-configurationprofile--examples--AWS_AppConfig_Configuration_Profile_Example_-_Parameter_Store--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
   BasicConfigurationProfile:
     Type: AWS::AppConfig::ConfigurationProfile
-    DependsOn: MyTestApplication
     Properties:
       ApplicationId: !Ref MyTestApplication
       Name: &quot;MyTestConfigurationProfile&quot;
@@ -303,6 +363,29 @@ Properties:
         - Key: Env
           Value: test
 </code></pre></div>
+                                 <h2 id="aws-resource-appconfig-configurationprofile--seealso">See also</h2>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p>
+                                             <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig.html">AWS
+                                                AppConfig</a>
+                                             
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>
+                                             <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-creating-configuration-and-profile.html">Creating a configuration and a configuration profile </a></p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                               </div>
                               <noscript>

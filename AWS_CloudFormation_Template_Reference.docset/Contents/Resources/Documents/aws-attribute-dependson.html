@@ -11,7 +11,7 @@
     <div id="main-content" class="awsui-util-container">
                               <div id="main-col-body">
                                  <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
-                                 <h1 class="topictitle" id="aws-attribute-dependson">DependsOn Attribute</h1>
+                                 <h1 class="topictitle" id="aws-attribute-dependson">DependsOn attribute</h1>
                                  <div class="awsdocs-page-header-container">
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
@@ -22,14 +22,16 @@
                                     in the
                                     <code class="code">DependsOn</code> attribute.
                                  </p>
-                                 <div class="awsdocs-note">
+                                 <div class="awsdocs-note awsdocs-important">
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                     <div class="awsdocs-note-text">
-                                       <p>Dependent stacks also have implicit dependencies. For example, if the properties of
+                                       <p>Dependent stacks also have implicit dependencies in the form of target properties
+                                          <code class="code">!Ref</code> and <code class="code">!GetAtt</code>. For example, if the properties of
                                           resource A use a <code class="code">!Ref</code> to resource B, the following rule apply:
                                        </p>
                                        <div class="itemizedlist">
+                                           
                                            
                                            
                                           
@@ -42,6 +44,11 @@
                                              <li class="listitem">
                                                 
                                                 <p>Resource A is deleted before resource B.</p>
+                                                
+                                             </li>
+                                             <li class="listitem">
+                                                
+                                                <p>Resource B is updated before resource A.</p>
                                                 
                                              </li>
                                           </ul>
@@ -59,7 +66,7 @@
                                     <ul class="itemizedlist" type="disc">
                                        <li class="listitem">
                                           
-                                          <p>Determine when a wait condition goes into effect. For more information, see <a href="./using-cfn-waitcondition.html">Creating Wait Conditions in a Template</a>.
+                                          <p>Determine when a wait condition goes into effect. For more information, see <a href="./using-cfn-waitcondition.html">Creating wait conditions in a template</a>.
                                           </p>
                                           
                                        </li>
@@ -97,14 +104,14 @@
                                        </p>
                                     </div>
                                  </div>
-                                 <h2 id="w2ab1c25c23c15c13">Syntax</h2>
+                                 <h2 id="w2ab1c26c23c15c13">Syntax</h2>
                                  
                                  
                                  <p>The <code class="code">DependsOn</code> attribute can take a single string or list of
                                     strings.
                                  </p>
                                  <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">&quot;DependsOn&quot; : [ <code class="replaceable">String, ...</code> ]</code></pre>
-                                 <h2 id="w2ab1c25c23c15c15">Example</h2>
+                                 <h2 id="w2ab1c26c23c15c15">Example</h2>
                                  
                                  
                                  <p>The following template contains an <a href="aws-properties-ec2-instance.html">AWS::EC2::Instance</a> resource with a <code class="code">DependsOn</code>
@@ -157,7 +164,7 @@
             &quot;Type&quot; : &quot;AWS::RDS::DBInstance&quot;,
             &quot;Properties&quot; : <span>{</span>
                &quot;AllocatedStorage&quot; : &quot;5&quot;,
-               &quot;DBInstanceClass&quot; : &quot;db.m1.small&quot;,
+               &quot;DBInstanceClass&quot; : &quot;db.t2.small&quot;,
                &quot;Engine&quot; : &quot;MySQL&quot;,
                &quot;EngineVersion&quot; : &quot;5.5&quot;,
                &quot;MasterUsername&quot; : &quot;MyName&quot;,
@@ -198,7 +205,7 @@ Resources:
     Type: AWS::RDS::DBInstance
     Properties:
       AllocatedStorage: &apos;5&apos;
-      DBInstanceClass: db.m1.small
+      DBInstanceClass: db.t2.small
       Engine: MySQL
       EngineVersion: &apos;5.5&apos;
       MasterUsername: MyName
@@ -370,7 +377,7 @@ EC2Host:
         Ref: PublicSubnet</code></pre>
                                     </div>
                                  
-                                 <h3 id="w2ab1c25c23c15c17c18">Amazon ECS Service and Auto Scaling Group</h3>
+                                 <h3 id="w2ab1c26c23c15c17c18">Amazon ECS service and Auto Scaling group</h3>
                                  
                                  
                                  <p>When you use Auto Scaling or Amazon Elastic Compute Cloud (Amazon EC2) to create container
@@ -435,7 +442,7 @@ EC2Host:
                                     </div>
                                   
                                  
-                                 <h3 id="w2ab1c25c23c15c17c20">IAM Role Policy</h3>
+                                 <h3 id="w2ab1c26c23c15c17c20">IAM role policy</h3>
                                  
                                  
                                  <p>Resources that make additional calls to AWS require a service role, which permits

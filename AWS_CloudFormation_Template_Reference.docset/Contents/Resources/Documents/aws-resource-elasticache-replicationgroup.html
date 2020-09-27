@@ -37,6 +37,7 @@
       &quot;<a href="#cfn-elasticache-replicationgroup-engine">Engine</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-elasticache-replicationgroup-engineversion">EngineVersion</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-elasticache-replicationgroup-kmskeyid">KmsKeyId</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-elasticache-replicationgroup-multiazenabled">MultiAZEnabled</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-elasticache-replicationgroup-nodegroupconfiguration">NodeGroupConfiguration</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-elasticache-replicationgroup-nodegroupconfiguration.html">NodeGroupConfiguration</a>, ... ]</code>,
       &quot;<a href="#cfn-elasticache-replicationgroup-notificationtopicarn">NotificationTopicArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-elasticache-replicationgroup-numcacheclusters">NumCacheClusters</a>&quot; : <code class="replaceable">Integer</code>,
@@ -74,6 +75,7 @@ Properties:
   <a href="#cfn-elasticache-replicationgroup-engine">Engine</a>: <code class="replaceable">String</code>
   <a href="#cfn-elasticache-replicationgroup-engineversion">EngineVersion</a>: <code class="replaceable">String</code>
   <a href="#cfn-elasticache-replicationgroup-kmskeyid">KmsKeyId</a>: <code class="replaceable">String</code>
+  <a href="#cfn-elasticache-replicationgroup-multiazenabled">MultiAZEnabled</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-elasticache-replicationgroup-nodegroupconfiguration">NodeGroupConfiguration</a>: <code class="replaceable">
     - <a href="./aws-properties-elasticache-replicationgroup-nodegroupconfiguration.html">NodeGroupConfiguration</a></code>
   <a href="#cfn-elasticache-replicationgroup-notificationtopicarn">NotificationTopicArn</a>: <code class="replaceable">String</code>
@@ -140,10 +142,10 @@ Properties:
                                           
                                           <p>
                                              <code class="code">AuthToken</code> can be specified only on replication groups where <code class="code">TransitEncryptionEnabled</code> is 
-                                             <code class="code">true</code>.
+                                             <code class="code">true</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with the Redis AUTH Command</a>.
                                           </p>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
@@ -175,9 +177,7 @@ Properties:
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other
-                                                      printable special characters cannot be used in the AUTH token.
-                                                   </p>
+                                                   <p>Cannot contain any of the following characters: &apos;/&apos;, &apos;&quot;&apos;, or &apos;@&apos;. </p>
                                                    
                                                 </li>
                                              </ul>
@@ -199,41 +199,14 @@ Properties:
                                              if the existing primary fails.
                                           </p>
                                           
-                                          <p>If <code class="code">true</code>, Multi-AZ is enabled for this replication group. 
-                                             If <code class="code">false</code>, Multi-AZ is disabled for this replication group.
-                                          </p>
                                           
                                           <p>
                                              <code class="code">AutomaticFailoverEnabled</code> must be enabled for Redis (cluster mode enabled) replication groups.
                                           </p>
                                           
+                                          
                                           <p>Default: false</p>
                                           
-                                          <p>Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:</p>
-                                          
-                                          <div class="itemizedlist">
-                                              
-                                              
-                                              
-                                             
-                                             <ul class="itemizedlist" type="disc">
-                                                <li class="listitem">
-                                                   
-                                                   <p>Redis versions earlier than 2.8.6.</p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>Redis (cluster mode disabled): T1 node types.</p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>Redis (cluster mode enabled): T1 node types.</p>
-                                                   
-                                                </li>
-                                             </ul>
-                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -507,13 +480,13 @@ Properties:
                                           
                                           <p>The name of the cache subnet group to be used for the replication group.</p>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
                                                 <p>If you&apos;re going to launch your cluster in an Amazon VPC, 
                                                    you need to create a subnet group before you start creating a cluster. 
-                                                   For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html">Subnets and Subnet Groups</a>.
+                                                   For more information, see <a href="aws-properties-elasticache-subnetgroup.html">AWS::ElastiCache::SubnetGroup</a>.
                                                 </p>
                                              </div>
                                           </div>
@@ -567,6 +540,19 @@ Properties:
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-elasticache-replicationgroup-multiazenabled"></a><span class="term"><code class="code">MultiAZEnabled</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For more
+                                             information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html">Minimizing Downtime: Multi-AZ</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
@@ -698,12 +684,6 @@ Properties:
                                        <dt><a id="cfn-elasticache-replicationgroup-preferredmaintenancewindow"></a><span class="term"><code class="code">PreferredMaintenanceWindow</code></span></dt>
                                        <dd>
                                           
-                                          <p>Specifies the weekly time range during which maintenance
-                                             on the cluster is performed. It is specified as a range in
-                                             the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum
-                                             maintenance window is a 60 minute period.
-                                             Valid values for <code class="code">ddd</code> are:
-                                          </p>
                                           
                                           
                                           <p>Specifies the weekly time range during which maintenance
@@ -1024,7 +1004,7 @@ Properties:
                                              
                                           </p>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
@@ -1042,7 +1022,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-elasticache-replicationgroup-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-elasticache-replicationgroup-return-values">Return values</h2>
                                  <h3 id="aws-resource-elasticache-replicationgroup-return-values-ref">Ref</h3>
                                  <p>When the logical ID of this resource is provided to the Ref intrinsic function, Ref
                                     returns the resource name.
@@ -1071,8 +1051,7 @@ Properties:
                                              <div class="awsdocs-note-text">
                                                 <p>Redis (cluster mode disabled) replication groups don&apos;t have this attribute. Therefore,
                                                    <code class="code">Fn::GetAtt</code> returns a value for this attribute only
-                                                   if the replication group is clustered. Otherwise, <code class="code">Fn::GetAtt</code>
-                                                   fails.
+                                                   if the replication group is clustered. Otherwise, <code class="code">Fn::GetAtt</code> fails. For Redis (cluster mode disabled) replication groups, use the <code class="code">PrimaryEndpoint</code> or <code class="code">ReadEndpoint</code> attributes.
                                                 </p>
                                              </div>
                                           </div>
@@ -1145,6 +1124,14 @@ Properties:
                                           
                                           
                                           
+                                       </dd>
+                                       <dt><a id="ReaderEndPoint.Address-fn::getatt"></a><span class="term"><code class="code">ReaderEndPoint.Address</code></span></dt>
+                                       <dd>
+                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                       </dd>
+                                       <dt><a id="ReaderEndPoint.Port-fn::getatt"></a><span class="term"><code class="code">ReaderEndPoint.Port</code></span></dt>
+                                       <dd>
+                                          <p>Not currently supported by AWS CloudFormation.</p>
                                        </dd>
                                     </dl>
                                  </div>
@@ -1240,7 +1227,7 @@ Properties:
       - !Ref ReplicationGroupSG
     SnapshotRetentionLimit: 5
     SnapshotWindow: &apos;10:00-12:00&apos;         </code></pre></div>
-                                 <h2 id="aws-resource-elasticache-replicationgroup--seealso">See Also</h2>
+                                 <h2 id="aws-resource-elasticache-replicationgroup--seealso">See also</h2>
                                  <p><a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateReplicationGroup.html">CreateReplicationGroup</a> in the <em> Amazon ElastiCache API Reference Guide</em>
                                     
                                  </p>
