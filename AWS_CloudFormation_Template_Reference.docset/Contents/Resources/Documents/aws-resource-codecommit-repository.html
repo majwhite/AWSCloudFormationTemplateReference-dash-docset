@@ -130,7 +130,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-codecommit-repository-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-codecommit-repository-return-values">Return values</h2>
                                  <h3 id="aws-resource-codecommit-repository-return-values-ref">Ref</h3>
                                  <p>When the logical ID of this resource is provided to the Ref intrinsic function, <code class="code">Ref</code> returns the repository ID. 
                                  </p>
@@ -181,9 +181,46 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-codecommit-repository--examples">Examples</h2>
+                                 <p>The following examples can help you create CodeCommit repositories using CloudFormation.</p>
+                                 <h3 id="aws-resource-codecommit-repository--examples--Example">Example</h3>
+                                 <p>The following example creates a CodeCommit repository named <em>MyDemoRepo</em>.
+                                    The newly created repository is populated with code stored in an Amazon S3 bucket
+                                    named <em>MySourceCodeBucket</em> and placed
+                                    in a branch named <em>development</em>, which is the default branch for the repository. 
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-codecommit-repository--examples--Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;MyRepo&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS: : CodeCommit: : Repository&quot;,
+        &quot;Properties&quot;: <span>{</span>
+            &quot;RepositoryName&quot;: &quot;MyDemoRepo&quot;,
+            &quot;RepositoryDescription&quot;: &quot;This is a repository for my project with code from MySourceCodeBucket.&quot;,
+            &quot;Code&quot;: <span>{</span>
+                &quot;BranchName&quot;: &quot;development&quot;,
+                &quot;S3&quot;: <span>{</span>
+                    &quot;Bucket&quot;: &quot;MySourceCodeBucket&quot;,
+                    &quot;Key&quot;: &quot;MyKey&quot;,
+                    &quot;ObjectVersion&quot;: &quot;1&quot;
+                }
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-codecommit-repository--examples--Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyRepo:
+  Type: AWS::CodeCommit::Repository
+  Properties:
+    RepositoryName: MyDemoRepo
+    RepositoryDescription: This is a repository for my project with code from MySourceCodeBucket.
+    Code:
+        - BranchName: development
+        - S3: 
+          Bucket: MySourceCodeBucket,
+          Key: MyKey,
+          ObjectVersion: 1</code></pre></div>
                                  <h3 id="aws-resource-codecommit-repository--examples--Example">Example</h3>
                                  <p>The following example creates a CodeCommit repository with a trigger for all events
-                                    in the Master branch. 
+                                    in the main branch. 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-codecommit-repository--examples--Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -194,13 +231,13 @@ Properties:
             &quot;RepositoryDescription&quot;: &quot;a description&quot;,
             &quot;Triggers&quot;: [
                 <span>{</span>
-                    &quot;Name&quot;: &quot;MasterTrigger&quot;,
+                    &quot;Name&quot;: &quot;MainTrigger&quot;,
                     &quot;CustomData&quot;: &quot;Project ID 12345&quot;,
                     &quot;DestinationArn&quot;: <span>{</span>
                         &quot;Ref&quot;: &quot;SNSarn&quot;
                     },
                     &quot;Branches&quot;: [
-                        &quot;Master&quot;
+                        &quot;main&quot;
                     ],
                     &quot;Events&quot;: [
                         &quot;all&quot;
@@ -217,12 +254,12 @@ Properties:
     RepositoryName: MyRepoName
     RepositoryDescription: a description
     Triggers:
-    - Name: MasterTrigger
+    - Name: MainTrigger
       CustomData: Project ID 12345
       DestinationArn:
         Ref: SNSarn
       Branches:
-      - Master
+      - main
       Events:
       - all</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>

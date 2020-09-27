@@ -16,16 +16,14 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>
-                                    Creates a report group. A report group contains a collection of reports.
-                                    
-                                 </p>
+                                 <p>Represents a report group. A report group contains a collection of reports. </p>
                                  <h2 id="aws-resource-codebuild-reportgroup-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-resource-codebuild-reportgroup-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::CodeBuild::ReportGroup&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-codebuild-reportgroup-deletereports">DeleteReports</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-codebuild-reportgroup-exportconfig">ExportConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-codebuild-reportgroup-reportexportconfig.html">ReportExportConfig</a></code>,
       &quot;<a href="#cfn-codebuild-reportgroup-name">Name</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-codebuild-reportgroup-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
@@ -36,6 +34,7 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-codebuild-reportgroup-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::CodeBuild::ReportGroup
 Properties: 
+  <a href="#cfn-codebuild-reportgroup-deletereports">DeleteReports</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-codebuild-reportgroup-exportconfig">ExportConfig</a>: <code class="replaceable">
     <a href="./aws-properties-codebuild-reportgroup-reportexportconfig.html">ReportExportConfig</a></code>
   <a href="#cfn-codebuild-reportgroup-name">Name</a>: <code class="replaceable">String</code>
@@ -46,12 +45,56 @@ Properties:
                                  <h2 id="aws-resource-codebuild-reportgroup-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-codebuild-reportgroup-deletereports"></a><span class="term"><code class="code">DeleteReports</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>When deleting a report group, specifies if reports within the report group should
+                                             be
+                                             deleted.
+                                          </p>
+                                          
+                                          <div class="variablelist">
+                                              
+                                              
+                                             
+                                             <dl>
+                                                
+                                                <dt><a id="cfn-codebuild-reportgroup-deletereports"></a><span class="term">true</span></dt>
+                                                
+                                                <dd>
+                                                   
+                                                   <p>Deletes any reports that belong to the report group before deleting the
+                                                      report group. 
+                                                   </p>
+                                                   
+                                                </dd>
+                                                 
+                                                
+                                                <dt><a id="cfn-codebuild-reportgroup-deletereports"></a><span class="term">false</span></dt>
+                                                
+                                                <dd>
+                                                   
+                                                   <p>You must delete any reports in the report group. This is the default
+                                                      value. If you delete a report group that contains one or more reports, an
+                                                      exception is thrown. 
+                                                   </p>
+                                                   
+                                                </dd>
+                                                
+                                             </dl>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-codebuild-reportgroup-exportconfig"></a><span class="term"><code class="code">ExportConfig</code></span></dt>
                                        <dd>
                                           
-                                          <p>
-                                             Information about the destination where the raw data of this <code class="code">ReportGroup</code> is exported.
-                                             
+                                          <p> Information about the destination where the raw data of this <code class="code">ReportGroup</code>
+                                             is exported. 
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -62,9 +105,7 @@ Properties:
                                        <dt><a id="cfn-codebuild-reportgroup-name"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
                                           
-                                          <p>
-                                             The name of a <code class="code">ReportGroup</code>.
-                                             
+                                          <p> The name of a <code class="code">ReportGroup</code>. 
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -78,10 +119,7 @@ Properties:
                                        <dt><a id="cfn-codebuild-reportgroup-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
                                           
-                                          <p>
-                                             A list of tag key and value pairs associated with this report group.
-                                             
-                                          </p>
+                                          <p> A list of tag key and value pairs associated with this report group. </p>
                                           
                                           <p>These tags are available for use by AWS services that support AWS CodeBuild report
                                              group
@@ -97,8 +135,7 @@ Properties:
                                        <dt><a id="cfn-codebuild-reportgroup-type"></a><span class="term"><code class="code">Type</code></span></dt>
                                        <dd>
                                           
-                                          <p>
-                                             The type of the <code class="code">ReportGroup</code>. The one valid value is <code class="code">TEST</code>.
+                                          <p> The type of the <code class="code">ReportGroup</code>. The one valid value is <code class="code">TEST</code>.
                                              
                                           </p>
                                           
@@ -106,12 +143,12 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">TEST</code></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                          <p><em>Allowed values</em>: <code class="code">CODE_COVERAGE | TEST</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-codebuild-reportgroup-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-codebuild-reportgroup-return-values">Return values</h2>
                                  <h3 id="aws-resource-codebuild-reportgroup-return-values-ref">Ref</h3>
                                  <p>When the logical ID of this resource is provided to the <code class="code">Ref</code> intrinsic function, <code class="code">Ref</code> 
                                     returns the ARN of the AWS CodeBuild report group, such as <code class="code">arn:aws:codebuild:region:123456789012:report-group/myReportGroupName</code>.

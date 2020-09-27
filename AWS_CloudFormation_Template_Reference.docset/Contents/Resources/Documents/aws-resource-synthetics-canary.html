@@ -201,7 +201,9 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Pattern</em>: <code class="code">^arn:(aws|aws-cn|aws-us-gov|aws-iso-<span>{</span>0,1}[a-z]<span>{</span>0,1}):[A-Za-z0-9][A-Za-z0-9_/.-]<span>{</span>0,62}:[A-Za-z0-9_/.-]<span>{</span>0,63}:[A-Za-z0-9_/.-]<span>{</span>0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]<span>{</span>0,1023}$</code></p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">2048</code></p>
+                                          <p><em>Pattern</em>: <code class="code">arn:(aws[a-zA-Z-]*)?:iam::\d<span>{</span>12}:role/?[a-zA-Z_0-9+=,.@\-_/]+</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-synthetics-canary-failureretentionperiod"></a><span class="term"><code class="code">FailureRetentionPeriod</code></span></dt>
@@ -245,11 +247,13 @@ Properties:
                                        <dt><a id="cfn-synthetics-canary-runconfig"></a><span class="term"><code class="code">RunConfig</code></span></dt>
                                        <dd>
                                           
-                                          <p>A structure that contains input information for a canary run. This structure
-                                             is required.
+                                          <p>A structure that contains input information for a canary run. If you omit
+                                             this structure, the
+                                             frequency of the canary is used as canary&apos;s timeout value, up to a maximum of 900
+                                             seconds.
                                           </p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-synthetics-canary-runconfig.html">RunConfig</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
@@ -258,7 +262,8 @@ Properties:
                                        <dd>
                                           
                                           <p>Specifies the runtime version to use for the canary. Currently, the only valid 
-                                             value is <code class="code">syn-1.0</code>. For more information about
+                                             values are <code class="code">syn-nodejs-2.0</code>, <code class="code">syn-nodejs-2.0-beta</code>, and 
+                                             <code class="code">syn-1.0</code>. For more information about
                                              runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html">
                                                 Canary Runtime Versions</a>.
                                           </p>
@@ -341,7 +346,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-synthetics-canary-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-synthetics-canary-return-values">Return values</h2>
                                  <h3 id="aws-resource-synthetics-canary-return-values-ref">Ref</h3>
                                  <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the name of the canary, such as <code class="code">MyCanary</code>.
                                  </p>
@@ -376,7 +381,7 @@ Properties:
                                  <h2 id="aws-resource-synthetics-canary--examples">Examples</h2>
                                  <h3 id="aws-resource-synthetics-canary--examples--Canary_with_script_stored_in_an_Amazon_S3_bucket">Canary with script stored in an Amazon S3 bucket</h3>
                                  <p>This example creates a canary that uses an existing script stored in 
-                                    an S3 bucket.
+                                    an S3 bucket. The canary is started as soon as it is created.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-synthetics-canary--examples--Canary_with_script_stored_in_an_Amazon_S3_bucket--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -408,6 +413,7 @@ Properties:
                 },
                 &quot;FailureRetentionPeriod&quot;: 30,
                 &quot;SuccessRetentionPeriod&quot;: 30,
+                &quot;StartCanaryAfterCreation&quot;: true,
                 &quot;Tags&quot;: [
                     <span>{</span>
                         &quot;Id&quot;: &quot;key00AtCreate&quot;,
@@ -433,7 +439,7 @@ Properties:
             FailureRetentionPeriod: 30
             SuccessRetentionPeriod: 30
             Tags: [<span>{</span>Key: key00AtCreate, Value: value001AtCreate}]
-            StartCanaryAfterCreation: false</code></pre></div>
+            StartCanaryAfterCreation: true</code></pre></div>
                                  <h3 id="aws-resource-synthetics-canary--examples--Canary_with_script_passed_through_CloudFormation">Canary with script passed through CloudFormation</h3>
                                  <p>This example creates a canary and passes the script code directly
                                     into the canary.
@@ -466,9 +472,9 @@ Properties:
                     &quot;TimeoutInSeconds&quot;: 60
                 },
                 &quot;FailureRetentionPeriod&quot;: 30,
-                &quot;SuccessRetentionPeriod&quot;: 30
-            },
-            &quot;Tags&quot;: [
+                &quot;SuccessRetentionPeriod&quot;: 30,
+                &quot;StartCanaryAfterCreation&quot;: false,
+                &quot;Tags&quot;: [
                 <span>{</span>
                     &quot;Id&quot;: &quot;key00AtCreate&quot;,
                     &quot;Value&quot;: &quot;value001AtCreate&quot;

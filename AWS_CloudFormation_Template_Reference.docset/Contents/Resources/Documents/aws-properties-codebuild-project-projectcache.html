@@ -76,41 +76,42 @@
                                        <dt><a id="cfn-codebuild-project-projectcache-modes"></a><span class="term"><code class="code">Modes</code></span></dt>
                                        <dd>
                                           
-                                          <p>
-                                             If you use a <code class="code">LOCAL</code> cache, the local cache mode. You can use one or more local 
-                                             cache modes at the same time.
-                                             
+                                          <p>An array of strings that specify the local cache modes. You can use one or more local
+                                             cache modes at the same time. This is only used for <code class="code">LOCAL</code> cache
+                                             types.
                                           </p>
                                           
+                                          <p>Possible values are:</p>
                                           
-                                          <div class="itemizedlist">
+                                          <div class="variablelist">
+                                              
                                               
                                               
                                              
-                                             <ul class="itemizedlist" type="disc">
-                                                <li class="listitem">
+                                             <dl>
+                                                
+                                                <dt><a id="cfn-codebuild-project-projectcache-modes"></a><span class="term">LOCAL_SOURCE_CACHE</span></dt>
+                                                
+                                                <dd>
                                                    
-                                                   <p>
-                                                      <code class="code">LOCAL_SOURCE_CACHE</code> mode caches Git metadata for primary and secondary 
-                                                      sources. After the cache is created, subsequent builds pull only the change between
-                                                      commits. This 
-                                                      mode is a good choice for projects with a clean working directory and a source that
-                                                      is a large Git 
-                                                      repository. If you choose this option and your project does not use a Git repository
-                                                      (GitHub, GitHub Enterprise, or Bitbucket), 
-                                                      the option is ignored. 
-                                                      
+                                                   <p>Caches Git metadata for primary and secondary sources. After the cache is
+                                                      created, subsequent builds pull only the change between commits. This mode
+                                                      is a good choice for projects with a clean working directory and a source
+                                                      that is a large Git repository. If you choose this option and your project
+                                                      does not use a Git repository (GitHub, GitHub Enterprise, or Bitbucket), the
+                                                      option is ignored. 
                                                    </p>
                                                    
-                                                </li>
-                                                <li class="listitem">
+                                                </dd>
+                                                 
+                                                
+                                                <dt><a id="cfn-codebuild-project-projectcache-modes"></a><span class="term">LOCAL_DOCKER_LAYER_CACHE</span></dt>
+                                                
+                                                <dd>
                                                    
-                                                   <p>
-                                                      <code class="code">LOCAL_DOCKER_LAYER_CACHE</code> mode caches existing Docker layers. This mode is a good choice for 
-                                                      projects that build or pull large Docker images. It can prevent the performance issues
-                                                      caused by pulling large Docker 
-                                                      images down from the network.
-                                                      
+                                                   <p>Caches existing Docker layers. This mode is a good choice for projects
+                                                      that build or pull large Docker images. It can prevent the performance
+                                                      issues caused by pulling large Docker images down from the network. 
                                                    </p>
                                                    
                                                    <div class="awsdocs-note">
@@ -120,32 +121,27 @@
                                                          <div class="itemizedlist">
                                                              
                                                              
-                                                            
                                                              
                                                             
                                                             <ul class="itemizedlist" type="disc">
                                                                <li class="listitem">
                                                                   
-                                                                  <p>
-                                                                     You can use a Docker layer cache in the Linux environment only.
-                                                                     
+                                                                  <p>You can use a Docker layer cache in the Linux environment
+                                                                     only. 
                                                                   </p>
                                                                   
                                                                </li>
                                                                <li class="listitem">
                                                                   
-                                                                  <p>
-                                                                     The <code class="code">privileged</code> flag must be set so that your project has 
-                                                                     the required Docker permissions.
-                                                                     
+                                                                  <p>The <code class="code">privileged</code> flag must be set so that your
+                                                                     project has the required Docker permissions. 
                                                                   </p>
                                                                   
                                                                </li>
                                                                <li class="listitem">
                                                                   
-                                                                  <p>
-                                                                     You should consider the security implications before you use a Docker layer cache.
-                                                                     
+                                                                  <p>You should consider the security implications before you use a
+                                                                     Docker layer cache. 
                                                                   </p>
                                                                   
                                                                </li>
@@ -154,21 +150,16 @@
                                                       </div>
                                                    </div>
                                                    
-                                                </li>
-                                             </ul>
-                                          </div>
-                                          
-                                          <div class="itemizedlist">
-                                              
-                                             
-                                             <ul class="itemizedlist" type="disc">
-                                                <li class="listitem">
+                                                </dd>
+                                                 
+                                                
+                                                <dt><a id="cfn-codebuild-project-projectcache-modes"></a><span class="term">LOCAL_CUSTOM_CACHE</span></dt>
+                                                
+                                                <dd>
                                                    
-                                                   <p>
-                                                      <code class="code">LOCAL_CUSTOM_CACHE</code> mode caches directories
-                                                      you specify in the buildspec file. This mode is a good choice if your
-                                                      build scenario is not suited to one of the other
-                                                      three local cache modes. If you use a custom cache: 
+                                                   <p>Caches directories you specify in the buildspec file. This mode is a good
+                                                      choice if your build scenario is not suited to one of the other three local
+                                                      cache modes. If you use a custom cache: 
                                                    </p>
                                                    
                                                    <div class="itemizedlist">
@@ -179,39 +170,32 @@
                                                       <ul class="itemizedlist" type="disc">
                                                          <li class="listitem">
                                                             
-                                                            <p>
-                                                               Only directories can be specified for caching. You cannot specify individual files.
-                                                               
+                                                            <p>Only directories can be specified for caching. You cannot specify
+                                                               individual files. 
                                                             </p>
                                                             
                                                          </li>
                                                          <li class="listitem">
                                                             
-                                                            <p>
-                                                               Symlinks are used to reference cached directories.
-                                                               
-                                                            </p>
+                                                            <p>Symlinks are used to reference cached directories. </p>
                                                             
                                                          </li>
                                                          <li class="listitem">
                                                             
-                                                            <p>
-                                                               Cached directories are linked to your build before it downloads its project sources.
-                                                               
-                                                               Cached items are overridden if a source item has the same name. Directories are specified
-                                                               
-                                                               using cache paths in the buildspec file.
-                                                               
+                                                            <p>Cached directories are linked to your build before it downloads
+                                                               its project sources. Cached items are overridden if a source item
+                                                               has the same name. Directories are specified using cache paths in
+                                                               the buildspec file. 
                                                             </p>
                                                             
                                                          </li>
                                                       </ul>
                                                    </div>
                                                    
-                                                   
-                                                </li>
-                                             </ul>
-                                          </div>      
+                                                </dd>
+                                                
+                                             </dl>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -247,9 +231,8 @@
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">LOCAL</code>: The build project stores a cache locally on a build host that is only available
-                                                      to 
-                                                      that build host.
+                                                      <code class="code">LOCAL</code>: The build project stores a cache locally on a build host
+                                                      that is only available to that build host.
                                                    </p>
                                                    
                                                 </li>
@@ -260,12 +243,12 @@
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">LOCAL | NO_CACHE | S3</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">LOCAL | NO_CACHE | S3</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-properties-codebuild-project-projectcache--seealso">See Also</h2>
+                                 <h2 id="aws-properties-codebuild-project-projectcache--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
                                     

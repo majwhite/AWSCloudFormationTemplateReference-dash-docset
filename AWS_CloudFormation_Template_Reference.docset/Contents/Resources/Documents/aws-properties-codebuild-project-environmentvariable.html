@@ -17,7 +17,7 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>
-                                    <code class="code">EnvironmentVariable</code> is a property of the <a href="aws-properties-codebuild-project-environment.html">AWS CodeBuild Project Environment</a> 
+                                    <code class="code">EnvironmentVariable</code> is a property of the <a href="aws-properties-codebuild-project-environment.html">AWS CodeBuild Project Environment</a>
                                     property type that specifies the name and value of an environment variable for an
                                     AWS CodeBuild 
                                     project environment. When you use the environment to run a build, these variables
@@ -67,28 +67,28 @@
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">PARAMETER_STORE</code>: An environment variable stored in Amazon EC2 Systems Manager Parameter
-                                                      Store. To learn how to specify a parameter store environment variable, see 
-                                                      <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#parameter-store-build-spec">
-                                                         parameter store reference-key in the buildspec file</a>.
+                                                      <code class="code">PARAMETER_STORE</code>: An environment variable stored in Amazon EC2 Systems Manager
+                                                      Parameter Store. To learn how to specify a parameter store environment variable,
+                                                      see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.parameter-store">env/parameter-store</a> in the
+                                                      <em>AWS CodeBuild User Guide</em>.
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">PLAINTEXT</code>: An environment variable in plain text format. This is the default value.
+                                                      <code class="code">PLAINTEXT</code>: An environment variable in plain text format. This is
+                                                      the default value.
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">SECRETS_MANAGER</code>: An environment variable stored in AWS Secrets Manager. To learn how to specify a
-                                                      secrets manager 
-                                                      environment variable, see 
-                                                      <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#secrets-manager-build-spec">
-                                                         secrets manager reference-key in the buildspec file</a>.
+                                                      <code class="code">SECRETS_MANAGER</code>: An environment variable stored in AWS Secrets
+                                                      Manager. To learn how to specify a secrets manager environment variable, see
+                                                      <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.secrets-manager">env/secrets-manager</a> in the
+                                                      <em>AWS CodeBuild User Guide</em>.
                                                    </p>
                                                    
                                                 </li>
@@ -99,7 +99,7 @@
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">PARAMETER_STORE | PLAINTEXT | SECRETS_MANAGER</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">PARAMETER_STORE | PLAINTEXT | SECRETS_MANAGER</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-codebuild-project-environmentvariable-value"></a><span class="term"><code class="code">Value</code></span></dt>
@@ -107,15 +107,17 @@
                                           
                                           <p>The value of the environment variable.</p>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>We strongly discourage the use of <code class="code">PLAINTEXT</code> environment variables to store sensitive values,
-                                                   especially AWS secret key IDs and secret access keys. <code class="code">PLAINTEXT</code> environment variables can be
-                                                   displayed in plain text using the AWS CodeBuild console and the AWS Command Line Interface
-                                                   (AWS CLI). For sensitive values, we recommend you use 
-                                                   an environment variable of type <code class="code">PARAMETER_STORE</code> or <code class="code">SECRETS_MANAGER</code>. 
+                                                <p>We strongly discourage the use of <code class="code">PLAINTEXT</code> environment variables to
+                                                   store sensitive values, especially AWS secret key IDs and secret access keys.
+                                                   <code class="code">PLAINTEXT</code> environment variables can be displayed in plain text
+                                                   using the AWS CodeBuild console and the AWS Command Line Interface (AWS CLI). For
+                                                   sensitive values, we recommend you use an
+                                                   environment variable of type <code class="code">PARAMETER_STORE</code> or
+                                                   <code class="code">SECRETS_MANAGER</code>. 
                                                 </p>
                                              </div>
                                           </div>
@@ -128,6 +130,40 @@
                                        </dd>
                                     </dl>
                                  </div>
+                                 <h2 id="aws-properties-codebuild-project-environmentvariable--examples">Examples</h2>
+                                 <h3 id="aws-properties-codebuild-project-environmentvariable--examples--"></h3>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-codebuild-project-environmentvariable--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Project&quot;: <span>{</span>
+    &quot;Environment&quot;: <span>{</span>
+      &quot;EnvironmentVariables&quot;: [
+        <span>{</span>
+          &quot;Name&quot;: &quot;MY_VAR_1&quot;,
+          &quot;Type&quot;: &quot;PLAINTEXT&quot;,
+          &quot;Value&quot;: &quot;VAR_1_VALUE&quot;
+        },
+        <span>{</span>
+          &quot;Name&quot;: &quot;MY_VAR_2&quot;,
+          &quot;Type&quot;: &quot;PLAINTEXT&quot;,
+          &quot;Value&quot;: &quot;VAR_2_VALUE&quot;
+        }
+      ]
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-codebuild-project-environmentvariable--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Project:
+  Type: AWS::CodeBuild::Project
+  Properties:
+    Environment:
+      EnvironmentVariables:
+        - Name: MY_VAR_1
+          Type: PLAINTEXT
+          Value: VAR_1_VALUE
+        - Name: MY_VAR_2
+          Type: PLAINTEXT
+          Value: VAR_2_VALUE
+      </code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                               </div>
                               <noscript>

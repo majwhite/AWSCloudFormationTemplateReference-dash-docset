@@ -142,7 +142,7 @@ Properties:
                                              
                                           </p>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
@@ -177,7 +177,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">GreaterThanOrEqualToThreshold | GreaterThanThreshold | GreaterThanUpperThreshold |
+                                          <p><em>Allowed values</em>: <code class="code">GreaterThanOrEqualToThreshold | GreaterThanThreshold | GreaterThanUpperThreshold |
                                                 LessThanLowerOrGreaterThanUpperThreshold | LessThanLowerThreshold | LessThanOrEqualToThreshold
                                                 | LessThanThreshold</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
@@ -191,6 +191,11 @@ Properties:
                                              		           and the value that you set for <code class="code">EvaluationPeriods</code> is the N value.
                                              		           For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation">Evaluating
                                                 		           an Alarm</a> in the <em>Amazon CloudWatch User Guide</em>.
+                                          </p>
+                                          
+                                          <p>If you omit this parameter, CloudWatch uses the same value here that you set
+                                             for <code class="code">EvaluationPeriods</code>, and the alarm goes to alarm state if that many consecutive 
+                                             periods are breaching.
                                           </p>
                                           	     
                                           <p><em>Required</em>: No
@@ -207,6 +212,7 @@ Properties:
                                              expression, you can&apos;t 
                                              specify <code class="code">Dimensions</code>. Instead, you use <code class="code">Metrics</code>.
                                           </p>
+                                          
                                           	     
                                           <p><em>Required</em>: No
                                           </p>
@@ -235,7 +241,18 @@ Properties:
                                        <dt><a id="cfn-cloudwatch-alarms-evaluationperiods"></a><span class="term"><code class="code">EvaluationPeriods</code></span></dt>
                                        <dd>
                                           		       
-                                          <p>The number of periods over which data is compared to the specified threshold.</p>
+                                          <p>The number of periods over which data is compared to the specified threshold. 
+                                             		           If you are setting an alarm that requires that a number of consecutive
+                                             data points be 
+                                             		           breaching to trigger the alarm, this value specifies that number. If
+                                             you 
+                                             		           are setting an &quot;M out of N&quot; alarm, this value is the N, and <code class="code">DatapointsToAlarm</code> 
+                                             		           is the M.
+                                          </p>
+                                          
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation">Evaluating
+                                                an Alarm</a> in the <em>Amazon CloudWatch User Guide</em>.
+                                          </p>
                                           	     
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -250,6 +267,10 @@ Properties:
                                           <p>The percentile statistic for the metric associated with the alarm. Specify a value
                                              between
                                              			p0.0 and p100.
+                                          </p>
+                                          
+                                          <p>For an alarm based on a metric, you must specify either <code class="code">Statistic</code>
+                                             or <code class="code">ExtendedStatistic</code> but not both.
                                           </p>
                                           
                                           <p>For an alarm based on a math expression, you can&apos;t 
@@ -319,6 +340,11 @@ Properties:
                                              metric. For an alarm based on a math expression, you can&apos;t 
                                              specify <code class="code">Namespace</code> and you use <code class="code">Metrics</code> instead.
                                           </p>
+                                          
+                                          <p>For a list of namespaces for metrics from AWS services, see 
+                                             <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html">
+                                                AWS Services That Publish CloudWatch Metrics.
+                                                </a></p>
                                           	     
                                           <p><em>Required</em>: No
                                           </p>
@@ -354,12 +380,14 @@ Properties:
                                           <p>For an alarm based on a math expression, you can&apos;t 
                                              specify <code class="code">Period</code>, and instead you use the <code class="code">Metrics</code> parameter.
                                           </p>
+                                          
+                                          <p><em>Minimum:</em> 10
+                                          </p>
                                           	     
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
                                           </p>
-                                          <p><em>Minimum</em>: <code class="code">1</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-cloudwatch-alarms-statistic"></a><span class="term"><code class="code">Statistic</code></span></dt>
@@ -367,6 +395,10 @@ Properties:
                                           		       
                                           <p>The statistic for the metric associated with the alarm, other than percentile.
                                              		    For percentile statistics, use <code class="code">ExtendedStatistic</code>.
+                                          </p>
+                                          
+                                          <p>For an alarm based on a metric, you must specify either <code class="code">Statistic</code>
+                                             or <code class="code">ExtendedStatistic</code> but not both.
                                           </p>
                                           
                                           <p>For an alarm based on a math expression, you can&apos;t 
@@ -377,7 +409,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">Average | Maximum | Minimum | SampleCount | Sum</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">Average | Maximum | Minimum | SampleCount | Sum</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-cloudwatch-alarms-threshold"></a><span class="term"><code class="code">Threshold</code></span></dt>
@@ -393,14 +425,12 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-cloudwatch-alarms-dynamic-threshold"></a><span class="term"><code class="code">ThresholdMetricId</code></span></dt>
                                        <dd>
-                                          
-                                          
-                                          
+                                          		       
                                           <p>In an alarm based on an anomaly detection model, this is the ID of the 
-                                             <code class="code">ANOMALY_DETECTION_BAND</code> function 
-                                             used as the threshold for the alarm.
+                                             			<code class="code">ANOMALY_DETECTION_BAND</code> function 
+                                             			used as the threshold for the alarm.
                                           </p>
-                                          
+                                          	     
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -453,7 +483,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">Bits | Bits/Second | Bytes | Bytes/Second | Count | Count/Second | Gigabits | Gigabits/Second
+                                          <p><em>Allowed values</em>: <code class="code">Bits | Bits/Second | Bytes | Bytes/Second | Count | Count/Second | Gigabits | Gigabits/Second
                                                 | Gigabytes | Gigabytes/Second | Kilobits | Kilobits/Second | Kilobytes | Kilobytes/Second
                                                 | Megabits | Megabits/Second | Megabytes | Megabytes/Second | Microseconds | Milliseconds
                                                 | None | Percent | Seconds | Terabits | Terabits/Second | Terabytes | Terabytes/Second</code></p>
@@ -461,7 +491,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-properties-cw-alarm-return-values">Return Values</h2>
+                                 <h2 id="aws-properties-cw-alarm-return-values">Return values</h2>
                                  <h3 id="aws-properties-cw-alarm-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the alarm name, such as <code class="code">TestAlarm</code>.
@@ -560,7 +590,7 @@ Properties:
       ThresholdMetricId: ad1
       TreatMissingData: breaching
 </code></pre></div>
-                                 <h2 id="aws-properties-cw-alarm--seealso">See Also</h2>
+                                 <h2 id="aws-properties-cw-alarm--seealso">See also</h2>
                                  <div class="itemizedlist">
                                     				         
                                     			      

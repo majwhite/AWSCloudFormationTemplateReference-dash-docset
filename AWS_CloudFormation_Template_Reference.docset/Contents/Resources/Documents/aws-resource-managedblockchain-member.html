@@ -91,7 +91,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-managedblockchain-member-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-managedblockchain-member-return-values">Return values</h2>
                                  <h3 id="aws-resource-managedblockchain-member-return-values-ref">Ref</h3>
                                  <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the member ID.
                                  </p>
@@ -249,7 +249,7 @@ Resources:
 </code></pre></div>
                                  <h3 id="aws-resource-managedblockchain-member--examples--Create_an_Additional_Member_in_an_Existing_Network">Create an Additional Member in an Existing Network</h3>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-managedblockchain-member--examples--Create_an_Additional_Member_in_an_Existing_Network--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: &quot;Basic Secondary Member template&quot;
+                                    <h4 id="aws-resource-managedblockchain-member--examples--Create_an_Additional_Member_in_an_Existing_Network--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: Basic Secondary Member template
 Parameters:
   MemberName:
     Type: String
@@ -263,17 +263,17 @@ Parameters:
     Type: String
   InvitationId:
     Type: String
-
 Resources:
   Member:
-    Type: &quot;AWS::ManagedBlockchain::Member&quot;
+    Type: &apos;AWS::ManagedBlockchain::Member&apos;
     Properties:
       MemberConfiguration:
         Name: !Ref MemberName
         Description: !Ref MemberDescription
-        FabricMemberConfiguration:
-          AdminUsername: !Ref MemberAdminUsername
-          AdminPassword: !Ref MemberAdminPassword
+        MemberFrameworkConfiguration:
+          MemberFabricConfiguration:
+            AdminUsername: !Ref MemberAdminUsername
+            AdminPassword: !Ref MemberAdminPassword
       NetworkId: !Ref NetworkId
       InvitationId: !Ref InvitationId
             </code></pre></div>
@@ -281,41 +281,52 @@ Resources:
                                     <h4 id="aws-resource-managedblockchain-member--examples--Create_an_Additional_Member_in_an_Existing_Network--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Description&quot;: &quot;Basic Additional Member template&quot;,
   &quot;Parameters&quot;: <span>{</span>
-    &quot;MemberName&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;String&quot;
-    },
-    &quot;MemberDescription&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;String&quot;
-    },
-    &quot;MemberAdminUsername&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;String&quot;
-    },
-    &quot;MemberAdminPassword&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;String&quot;
-    },
-    &quot;NetworkId&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;String&quot;
-    },
-    &quot;InvitationId&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;String&quot;
-    }
+      &quot;MemberName&quot;: <span>{</span>
+          &quot;Type&quot;: &quot;String&quot;
+      },
+      &quot;MemberDescription&quot;: <span>{</span>
+          &quot;Type&quot;: &quot;String&quot;
+      },
+      &quot;MemberAdminUsername&quot;: <span>{</span>
+          &quot;Type&quot;: &quot;String&quot;
+      },
+      &quot;MemberAdminPassword&quot;: <span>{</span>
+          &quot;Type&quot;: &quot;String&quot;
+      },
+      &quot;NetworkId&quot;: <span>{</span>
+          &quot;Type&quot;: &quot;String&quot;
+      },
+      &quot;InvitationId&quot;: <span>{</span>
+          &quot;Type&quot;: &quot;String&quot;
+      }
   },
   &quot;Resources&quot;: <span>{</span>
-    &quot;Member&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;AWS::ManagedBlockchain::Member&quot;,
-      &quot;Properties&quot;: <span>{</span>
-        &quot;MemberConfiguration&quot;: <span>{</span>
-          &quot;Name&quot;: &quot;MemberName&quot;,
-          &quot;Description&quot;: &quot;MemberDescription&quot;,
-          &quot;FabricMemberConfiguration&quot;: <span>{</span>
-            &quot;AdminUsername&quot;: &quot;MemberAdminUsername&quot;,
-            &quot;AdminPassword&quot;: &quot;MemberAdminPassword&quot;
+      &quot;Member&quot;: <span>{</span>
+          &quot;Type&quot;: &quot;AWS::ManagedBlockchain::Member&quot;,
+          &quot;Properties&quot;: <span>{</span>
+              &quot;MemberConfiguration&quot;: <span>{</span>
+                  &quot;Name&quot;: <span>{</span>
+                      &quot;Ref&quot;: &quot;MemberName&quot;
+                  },
+                  &quot;MemberFrameworkConfiguration&quot;: <span>{</span>
+                      &quot;MemberFabricConfiguration&quot;: <span>{</span>
+                          &quot;AdminUsername&quot;: <span>{</span>
+                              &quot;Ref&quot;: &quot;MemberAdminUsername&quot;
+                          },
+                          &quot;AdminPassword&quot;: <span>{</span>
+                              &quot;Ref&quot;: &quot;MemberAdminPassword&quot;
+                          }
+                      }
+                  }
+              },
+              &quot;NetworkId&quot;: <span>{</span>
+                  &quot;Ref&quot;: &quot;NetworkId&quot;
+              },
+              &quot;InvitationId&quot;: <span>{</span>
+                  &quot;Ref&quot;: &quot;InvitationId&quot;
+              }
           }
-        },
-        &quot;NetworkId&quot;: &quot;NetworkId&quot;,
-        &quot;InvitationId&quot;: &quot;InvitationId&quot;
       }
-    }
   }
 }
             </code></pre></div>

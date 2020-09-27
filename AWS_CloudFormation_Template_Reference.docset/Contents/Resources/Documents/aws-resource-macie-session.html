@@ -16,11 +16,11 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::Macie::Session</code> resource represents the Macie service and
-                                    configuration settings in your account. A <code class="code">Session</code> is created for each
+                                 <p>The <code class="code">AWS::Macie::Session</code> resource represents the Amazon Macie service and
+                                    configuration settings for an account. A <code class="code">Session</code> is created for each AWS
                                     Region in which you enable Macie. 
                                  </p>
-                                 <p>You must create a <code class="code">Session</code> in an account before you can create a
+                                 <p>You must create a <code class="code">Session</code> for an account before you can create an
                                     <code class="code">AWS::Macie::FindingsFilter</code> or
                                     <code class="code">AWS::Macie::CustomDataIdentifier</code> resource. Use a <a href="aws-attribute-dependson.html">DependsOn
                                        attribute</a> to ensure that the <code class="code">Session</code> is created before the
@@ -49,9 +49,9 @@ Properties:
                                        <dt><a id="cfn-macie-session-findingpublishingfrequency"></a><span class="term"><code class="code">FindingPublishingFrequency</code></span></dt>
                                        <dd>
                                           
-                                          <p>The frequency with which Amazon Macie publishes findings for an account. This includes
-                                             adding findings to AWS Security Hub and exporting finding events to Amazon CloudWatch.
-                                             Valid values are:
+                                          <p>The frequency with which Amazon Macie publishes updates to policy findings for an
+                                             account. This includes publishing updates to AWS Security Hub and Amazon EventBridge
+                                             (formerly called Amazon CloudWatch Events). Valid values are:
                                           </p>
                                           
                                           <div class="itemizedlist">
@@ -87,7 +87,8 @@ Properties:
                                        <dt><a id="cfn-macie-session-status"></a><span class="term"><code class="code">Status</code></span></dt>
                                        <dd>
                                           
-                                          <p>The <code class="code">MacieStatus</code> of the <code class="code">Session</code>. Values include <code class="code">ENABLED</code> or <code class="code">PAUSED</code>.
+                                          <p>The <code class="code">MacieStatus</code> of the <code class="code">Session</code>. Valid values include
+                                             <code class="code">ENABLED</code> and <code class="code">PAUSED</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -98,7 +99,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-macie-session-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-macie-session-return-values">Return values</h2>
                                  <h3 id="aws-resource-macie-session-return-values-ref">Ref</h3>
                                  <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the AWS Account ID for the account in which the Macie
                                     session is created. For example, <code class="code"><span>{</span> &quot;Ref&quot;: &quot;Session&quot; }</code>.
@@ -118,14 +119,15 @@ Properties:
                                        <dt><a id="AwsAccountId-fn::getatt"></a><span class="term"><code class="code">AwsAccountId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The account ID of the account in which the <code class="code">Session</code> is created.
+                                          <p>The account ID for the AWS account in which the <code class="code">Session</code> is
+                                             created.
                                           </p>
                                           
                                        </dd>
                                        <dt><a id="ServiceRole-fn::getatt"></a><span class="term"><code class="code">ServiceRole</code></span></dt>
                                        <dd>
                                           
-                                          <p>The Amazon Resource Name (ARN) of the service-level role that allows Amazon Macie
+                                          <p>The Amazon Resource Name (ARN) of the service-linked role that allows Amazon Macie
                                              to
                                              monitor and analyze data in AWS resources for the account.
                                           </p>
@@ -134,23 +136,19 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-macie-session--examples">Examples</h2>
-                                 <p>The following examples demonstrates how to declare an
-                                    <code class="code">AWS::Macie::Session</code> resource:
+                                 <p>The following example demonstrates how to declare an
+                                    <code class="code">AWS::Macie::Session</code> resource.
                                  </p>
                                  <h3 id="aws-resource-macie-session--examples--Creating_a_Macie_Session">Creating a Macie Session</h3>
+                                 <p>This example enables Amazon Macie for an account. It also configures Macie to
+                                    publish updated findings every hour for the account.
+                                 </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-macie-session--examples--Creating_a_Macie_Session--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-	&quot;Type&quot;: &quot;AWS::Macie::Session&quot;,
-	&quot;Properties&quot;: <span>{</span>
-		&quot;FindingPublishingFrequency&quot;: &quot;ONE_HOUR&quot;,
-		&quot;Status&quot;: &quot;ENABLED&quot;
-	}
-}</code></pre></div>
+                                    <h4 id="aws-resource-macie-session--examples--Creating_a_Macie_Session--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;Type&quot;: &quot;AWS::Macie::Session&quot;, &quot;Properties&quot;: <span>{</span>
+                &quot;FindingPublishingFrequency&quot;: &quot;ONE_HOUR&quot;, &quot;Status&quot;: &quot;ENABLED&quot; } }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-macie-session--examples--Creating_a_Macie_Session--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Macie::Session
-    Properties: 
-      FindingPublishingFrequency: ONE_HOUR
-      Status: ENABLED</code></pre></div>
+                                    <h4 id="aws-resource-macie-session--examples--Creating_a_Macie_Session--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Macie::Session Properties:
+                FindingPublishingFrequency: ONE_HOUR Status: ENABLED</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                               </div>
                               <noscript>

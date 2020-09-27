@@ -32,6 +32,7 @@
       &quot;<a href="#cfn-apigatewayv2-integration-credentialsarn">CredentialsArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-apigatewayv2-integration-description">Description</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-apigatewayv2-integration-integrationmethod">IntegrationMethod</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-apigatewayv2-integration-integrationsubtype">IntegrationSubtype</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-apigatewayv2-integration-integrationtype">IntegrationType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-apigatewayv2-integration-integrationuri">IntegrationUri</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-apigatewayv2-integration-passthroughbehavior">PassthroughBehavior</a>&quot; : <code class="replaceable">String</code>,
@@ -54,6 +55,7 @@ Properties:
   <a href="#cfn-apigatewayv2-integration-credentialsarn">CredentialsArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-apigatewayv2-integration-description">Description</a>: <code class="replaceable">String</code>
   <a href="#cfn-apigatewayv2-integration-integrationmethod">IntegrationMethod</a>: <code class="replaceable">String</code>
+  <a href="#cfn-apigatewayv2-integration-integrationsubtype">IntegrationSubtype</a>: <code class="replaceable">String</code>
   <a href="#cfn-apigatewayv2-integration-integrationtype">IntegrationType</a>: <code class="replaceable">String</code>
   <a href="#cfn-apigatewayv2-integration-integrationuri">IntegrationUri</a>: <code class="replaceable">String</code>
   <a href="#cfn-apigatewayv2-integration-passthroughbehavior">PassthroughBehavior</a>: <code class="replaceable">String</code>
@@ -137,7 +139,8 @@ Properties:
                                           <p>Specifies the credentials required for the integration, if any. For AWS integrations,
                                              three options are available. To specify an IAM Role for API Gateway to assume, use
                                              the role&apos;s Amazon Resource Name (ARN). To require that the caller&apos;s identity be passed
-                                             through from the request, specify the string <code class="code">arn:aws:iam::*:user/*</code>. To use resource-based permissions on supported AWS services, specify null.
+                                             through from the request, specify the string <code class="code">arn:aws:iam::*:user/*</code>. To use resource-based permissions on supported AWS services, don&apos;t specify this
+                                             parameter.
                                           </p>
                                           <p><em>Required</em>: No
                                           </p>
@@ -161,6 +164,18 @@ Properties:
                                           
                                           
                                           <p>Specifies the integration&apos;s HTTP method type.</p>
+                                          <p><em>Required</em>: Conditional
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-apigatewayv2-integration-integrationsubtype"></a><span class="term"><code class="code">IntegrationSubtype</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Supported only for HTTP API <code class="code">AWS_PROXY</code> integrations. Specifies the AWS service action to invoke. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html">Integration subtype reference</a>.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -184,9 +199,8 @@ Properties:
                                              this is known as AWS integration. Supported only for WebSocket APIs.
                                           </p>
                                           <p>
-                                             <code class="code">AWS_PROXY</code>: for integrating the route or method request with the Lambda function-invoking action
-                                             with the client request passed through as-is. This integration is also referred to
-                                             as Lambda proxy integration.
+                                             <code class="code">AWS_PROXY</code>: for integrating the route or method request with a Lambda function or other AWS
+                                             service action. This integration is also referred to as a Lambda proxy integration.
                                           </p>
                                           <p>
                                              <code class="code">HTTP</code>: for integrating the route or method request with an HTTP endpoint. This integration
@@ -267,7 +281,7 @@ Properties:
                                              <code class="code">1.0</code> is the only supported value. To learn more, see 
                                              <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html">Working with AWS Lambda proxy integrations for HTTP APIs</a>.
                                           </p>
-                                          <p><em>Required</em>: No
+                                          <p><em>Required</em>: Conditional
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -277,17 +291,17 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>A key-value map specifying request parameters that are passed from the method request
-                                             to the backend. The key is an integration request parameter name and the associated
-                                             value is a method request parameter value or static value that must be enclosed within
-                                             single quotes and pre-encoded as required by the backend. The method request parameter
-                                             value must match the pattern of <code class="code">method.request.<code class="replaceable"><span>{</span>location}</code>.<code class="replaceable"><span>{</span>name}</code>
-                                                </code>, where <code class="code">
-                                                <code class="replaceable"><span>{</span>location}</code>
-                                                </code> is <code class="code">querystring</code>, <code class="code">path</code>, or <code class="code">header</code>; and <code class="code">
-                                                <code class="replaceable"><span>{</span>name}</code>
-                                                </code> must be a valid and unique method request parameter name. Supported only for WebSocket
-                                             APIs.
+                                          
+                                          <p>For WebSocket APIs, a key-value map specifying request parameters that are passed
+                                             from the method request to the backend. The key is an integration request parameter
+                                             name and the associated value is a method request parameter value or static value
+                                             that must be enclosed within single quotes and pre-encoded as required by the backend.
+                                             The method request parameter value must match the pattern of <code class="code">method.request.<code class="replaceable"><span>{</span>location}</code>.<code class="replaceable"><span>{</span>name}</code>
+                                                </code>, where <code class="code"> <code class="replaceable"><span>{</span>location}</code> </code> is <code class="code">querystring</code>, <code class="code">path</code>, or <code class="code">header</code>; and <code class="code"><code class="replaceable"><span>{</span>name}</code></code> must be a valid and unique method request parameter name.
+                                          </p>
+                                          <p>For HTTP APIs, request parameters are a key-value map specifying parameters that are
+                                             passed to <code class="code">AWS_PROXY</code> integrations with a specified <code class="code">integrationSubtype</code>. You can provide static values, or map request data, stage variables, or context
+                                             variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html">Working with AWS service integrations for HTTP APIs</a>.
                                           </p>
                                           <p><em>Required</em>: No
                                           </p>
@@ -352,7 +366,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-apigatewayv2-integration-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-apigatewayv2-integration-return-values">Return values</h2>
                                  <h3 id="aws-resource-apigatewayv2-integration-return-values-ref">Ref</h3>
                                  <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the Integration resource ID, such as
                                     <code class="code">abcd123</code>.
@@ -421,7 +435,7 @@ Properties:
     IntegrationMethod: GET
     ConnectionType: INTERNET
 </code></pre></div>
-                                 <h2 id="aws-resource-apigatewayv2-integration--seealso">See Also</h2>
+                                 <h2 id="aws-resource-apigatewayv2-integration--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
                                     

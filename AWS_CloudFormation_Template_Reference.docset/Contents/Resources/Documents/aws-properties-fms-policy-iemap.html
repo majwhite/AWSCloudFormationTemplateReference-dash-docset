@@ -16,22 +16,56 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Specifies the AWS account IDs to exclude from or include in the policy. Used for the
-                                    policy&apos;s <code class="code">IncludeMap</code> and 
-                                    <code class="code">ExcludeMap</code>. 
+                                 <p>Specifies the AWS account IDs and AWS Organizations organizational units (OUs) to
+                                    include in or exclude from the policy.
+                                    Specifying an OU is the equivalent of specifying all accounts in the OU and in any
+                                    of its child OUs, including any child OUs and accounts that are added at a later time.
                                  </p>
-                                 <p>The key to the map is <code class="code">ACCOUNT</code>. For example, a valid <code class="code">IEMap</code>
-                                    would be <code class="code"><span>{</span>&#x201C;ACCOUNT&#x201D; : [&#x201C;accountID1&#x201D;, &#x201C;accountID2&#x201D;]}</code>.
+                                 <p>This is used for the policy&apos;s <code class="code">IncludeMap</code> and <code class="code">ExcludeMap</code>.
                                  </p>
+                                 <p>You can specify account IDs, OUs, or a combination: </p>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p>Specify account IDs by setting the key to <code class="code">ACCOUNT</code>. For example, the following is a valid map:  
+                                             <code class="code"><span>{</span>&#x201C;ACCOUNT&#x201D; : [&#x201C;accountID1&#x201D;, &#x201C;accountID2&#x201D;]}</code>.
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>Specify OUs by setting the key to <code class="code">ORGUNIT</code>. For example, the following is a valid map: 
+                                             <code class="code"><span>{</span>&#x201C;ORGUNIT&#x201D; : [&#x201C;ouid111&#x201D;, &#x201C;ouid112&#x201D;]}</code>.
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>Specify accounts and OUs together in a single map, separated with a comma. For example,
+                                             the following is a valid map:
+                                             <code class="code"><span>{</span>&#x201C;ACCOUNT&#x201D; : [&#x201C;accountID1&#x201D;, &#x201C;accountID2&#x201D;], &#x201C;ORGUNIT&#x201D; : [&#x201C;ouid111&#x201D;, &#x201C;ouid112&#x201D;]}</code>.
+                                          </p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
                                  <h2 id="aws-properties-fms-policy-iemap-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-properties-fms-policy-iemap-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;<a href="#cfn-fms-policy-iemap-account">ACCOUNT</a>&quot; : <code class="replaceable">[ String, ... ]</code>
+  &quot;<a href="#cfn-fms-policy-iemap-account">ACCOUNT</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+  &quot;<a href="#cfn-fms-policy-iemap-orgunit">ORGUNIT</a>&quot; : <code class="replaceable">[ String, ... ]</code>
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-properties-fms-policy-iemap-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-fms-policy-iemap-account">ACCOUNT</a>: <code class="replaceable">
+    - String</code>
+  <a href="#cfn-fms-policy-iemap-orgunit">ORGUNIT</a>: <code class="replaceable">
     - String</code>
 </code></pre></div>
                                  <h2 id="aws-properties-fms-policy-iemap-properties">Properties</h2>
@@ -41,6 +75,17 @@
                                        <dd>
                                           
                                           <p>The account list for the map.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fms-policy-iemap-orgunit"></a><span class="term"><code class="code">ORGUNIT</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The organizational unit list for the map.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>

@@ -19,12 +19,8 @@
                                  <p>The <code class="code">AWS::ApplicationAutoScaling::ScalingPolicy</code> resource defines a scaling
                                     policy that Application Auto Scaling uses to adjust your application resources. 
                                  </p>
-                                 <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_PutScalingPolicy.html">PutScalingPolicy</a> in the <em>Application Auto Scaling API
-                                       Reference</em>. For more information about scaling policies, see the <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html">Application
+                                 <p>For more information about Application Auto Scaling scaling policies, see the <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html">Application
                                        Auto Scaling User Guide</a>.
-                                 </p>
-                                 <p>For introductory exercises for scaling specific resources, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/getting-started.html">Getting Started</a> in the
-                                    <em>Application Auto Scaling User Guide</em>.
                                  </p>
                                  <h2 id="aws-resource-applicationautoscaling-scalingpolicy-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -84,7 +80,8 @@ Properties:
                                           <p><code class="code">TargetTrackingScaling</code>&#x2014;Not supported for Amazon EMR
                                           </p>
                                           
-                                          <p><code class="code">StepScaling</code>&#x2014;Not supported for DynamoDB, Comprehend, or Lambda
+                                          <p><code class="code">StepScaling</code>&#x2014;Not supported for DynamoDB, Amazon Comprehend, Lambda, or Amazon
+                                             Keyspaces (for Apache Cassandra)
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -96,43 +93,271 @@ Properties:
                                        <dt><a id="cfn-applicationautoscaling-scalingpolicy-resourceid"></a><span class="term"><code class="code">ResourceId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The unique resource identifier for the scalable target that this scaling policy applies
-                                             to. For valid values, see the <code class="code">ResourceId</code> parameter for <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_PutScalingPolicy.html">PutScalingPolicy</a> in the <em>Application Auto Scaling API
-                                                Reference</em>.
-                                          </p>
+                                          <p>The identifier of the resource associated with the scaling policy.
+                                             This string consists of the resource type and unique identifier.
+                                          </p> 
                                           
-                                          <p>You must specify either the <code class="code">ResourceId</code>, <code class="code">ScalableDimension</code>, and
-                                             <code class="code">ServiceNamespace</code> properties, or the <code class="code">ScalingTargetId</code> property, but
-                                             not both.
-                                          </p>
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>ECS service - The resource type is <code class="code">service</code> and the unique identifier is the cluster name  
+                                                      and service name. Example: <code class="code">service/default/sample-webapp</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Spot Fleet request - The resource type is <code class="code">spot-fleet-request</code> and the unique identifier is the 
+                                                      Spot Fleet request ID. Example: <code class="code">spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>EMR cluster - The resource type is <code class="code">instancegroup</code> and the unique identifier is the cluster ID and instance group ID.
+                                                      Example: <code class="code">instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>AppStream 2.0 fleet - The resource type is <code class="code">fleet</code> and the unique identifier is the fleet name.
+                                                      Example: <code class="code">fleet/sample-fleet</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>DynamoDB table - The resource type is <code class="code">table</code> and the unique identifier is the table name. 
+                                                      Example: <code class="code">table/my-table</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>DynamoDB global secondary index - The resource type is <code class="code">index</code> and the unique identifier is the index name. 
+                                                      Example: <code class="code">table/my-table/index/my-table-index</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Aurora DB cluster - The resource type is <code class="code">cluster</code> and the unique identifier is the cluster name.
+                                                      Example: <code class="code">cluster:my-db-cluster</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Amazon SageMaker endpoint variant - The resource type is <code class="code">variant</code> and the unique identifier is the resource ID.
+                                                      Example: <code class="code">endpoint/my-end-point/variant/KMeansClustering</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Custom resources are not supported with a resource type. This parameter must specify
+                                                      the <code class="code">OutputValue</code> from the CloudFormation template stack used to access the resources. The unique identifier
+                                                      is defined by the service provider. More information
+                                                      is available in our <a href="https://github.com/aws/aws-auto-scaling-custom-resource" target="_blank"><span>GitHub
+                                                            repository</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Amazon Comprehend document classification endpoint - The resource type and unique
+                                                      identifier are specified using the endpoint ARN. Example: <code class="code">arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Lambda provisioned concurrency - The resource type is <code class="code">function</code> and the unique identifier is the function name with a function version or alias name
+                                                      suffix that is not <code class="code">$LATEST</code>. 
+                                                      Example: <code class="code">function:my-function:prod</code> or <code class="code">function:my-function:1</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Amazon Keyspaces table - The resource type is <code class="code">table</code> and the unique identifier is the table name. 
+                                                      Example: <code class="code">keyspace/mykeyspace/table/mytable</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div> 
                                           
-                                          <p><em>Required</em>: Conditional
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">1600</code></p>
+                                          <p><em>Pattern</em>: <code class="code">[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-applicationautoscaling-scalingpolicy-scalabledimension"></a><span class="term"><code class="code">ScalableDimension</code></span></dt>
                                        <dd>
                                           
-                                          <p>The scalable dimension of the scalable target that this scaling policy applies to.
-                                             The
-                                             scalable dimension contains the service namespace, resource type, and scaling property,
-                                             such
-                                             as <code class="code">ecs:service:DesiredCount</code> for the desired task count of an Amazon ECS service.
-                                             For valid values, see the <code class="code">ScalableDimension</code> parameter for <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_PutScalingPolicy.html">PutScalingPolicy</a> in the <em>Application Auto Scaling API
-                                                Reference</em>.
+                                          <p>The scalable dimension. This string consists of the service namespace, resource type,
+                                             and scaling property.
                                           </p>
                                           
-                                          <p>You must specify either the <code class="code">ResourceId</code>, <code class="code">ScalableDimension</code>, and
-                                             <code class="code">ServiceNamespace</code> properties, or the <code class="code">ScalingTargetId</code> property, but
-                                             not both.
-                                          </p>
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">ecs:service:DesiredCount</code> - The desired task count of an ECS service.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">ec2:spot-fleet-request:TargetCapacity</code> - The target capacity of a Spot Fleet request.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">elasticmapreduce:instancegroup:InstanceCount</code> - The instance count of an EMR Instance Group.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">appstream:fleet:DesiredCapacity</code> - The desired capacity of an AppStream 2.0 fleet.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">dynamodb:table:ReadCapacityUnits</code> - The provisioned read capacity for a DynamoDB table.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">dynamodb:table:WriteCapacityUnits</code> - The provisioned write capacity for a DynamoDB table.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">dynamodb:index:ReadCapacityUnits</code> - The provisioned read capacity for a DynamoDB global secondary index.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">dynamodb:index:WriteCapacityUnits</code> - The provisioned write capacity for a DynamoDB global secondary index.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">rds:cluster:ReadReplicaCount</code> - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible
+                                                      edition and Aurora PostgreSQL-compatible edition.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">sagemaker:variant:DesiredInstanceCount</code> - The number of EC2 instances for an Amazon SageMaker model endpoint variant.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">custom-resource:ResourceType:Property</code> - The scalable dimension for a custom resource provided by your own application or
+                                                      service.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">comprehend:document-classifier-endpoint:DesiredInferenceUnits</code> - The number of inference units for an Amazon Comprehend document classification
+                                                      endpoint.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">lambda:function:ProvisionedConcurrency</code> - The provisioned concurrency for a Lambda function.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">cassandra:table:ReadCapacityUnits</code> - The provisioned read capacity for an Amazon Keyspaces table.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">cassandra:table:WriteCapacityUnits</code> -  The provisioned write capacity for an Amazon Keyspaces table.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div> 
                                           
-                                          <p><em>Required</em>: Conditional
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Allowed values</em>: <code class="code">appstream:fleet:DesiredCapacity | cassandra:table:ReadCapacityUnits | cassandra:table:WriteCapacityUnits
+                                                | comprehend:document-classifier-endpoint:DesiredInferenceUnits | custom-resource:ResourceType:Property
+                                                | dynamodb:index:ReadCapacityUnits | dynamodb:index:WriteCapacityUnits | dynamodb:table:ReadCapacityUnits
+                                                | dynamodb:table:WriteCapacityUnits | ec2:spot-fleet-request:TargetCapacity | ecs:service:DesiredCount
+                                                | elasticmapreduce:instancegroup:InstanceCount | lambda:function:ProvisionedConcurrency
+                                                | rds:cluster:ReadReplicaCount | sagemaker:variant:DesiredInstanceCount</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-applicationautoscaling-scalingpolicy-scalingtargetid"></a><span class="term"><code class="code">ScalingTargetId</code></span></dt>
@@ -144,10 +369,16 @@ Properties:
                                              <code class="code">AWS::ApplicationAutoScaling::ScalableTarget</code> resource.
                                           </p>
                                           
-                                          <p>You must specify either the <code class="code">ScalingTargetId</code> property, or the
-                                             <code class="code">ResourceId</code>, <code class="code">ScalableDimension</code>, and <code class="code">ServiceNamespace</code>
-                                             properties, but not both. 
-                                          </p>
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>You must specify either the <code class="code">ScalingTargetId</code> property, or the
+                                                   <code class="code">ResourceId</code>, <code class="code">ScalableDimension</code>, and <code class="code">ServiceNamespace</code>
+                                                   properties, but not both. 
+                                                </p>
+                                             </div>
+                                          </div>
                                           
                                           <p><em>Required</em>: Conditional
                                           </p>
@@ -158,21 +389,16 @@ Properties:
                                        <dt><a id="cfn-applicationautoscaling-scalingpolicy-servicenamespace"></a><span class="term"><code class="code">ServiceNamespace</code></span></dt>
                                        <dd>
                                           
-                                          <p>The namespace of the AWS service that provides the resource or
-                                             <code class="code">custom-resource</code> for a resource provided by your own application or service. For
-                                             valid values, see the <code class="code">ServiceNamespace</code> parameter for <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_PutScalingPolicy.html">PutScalingPolicy</a> in the <em>Application Auto Scaling API
-                                                Reference</em>.
+                                          <p>The namespace of the AWS service that provides the resource, or a
+                                             <code class="code">custom-resource</code>.
                                           </p>
                                           
-                                          <p>You must specify either the <code class="code">ResourceId</code>, <code class="code">ScalableDimension</code>, and
-                                             <code class="code">ServiceNamespace</code> properties, or the <code class="code">ScalingTargetId</code> property, but
-                                             not both.
-                                          </p>
-                                          
-                                          <p><em>Required</em>: Conditional
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Allowed values</em>: <code class="code">appstream | cassandra | comprehend | custom-resource | dynamodb | ec2 | ecs | elasticmapreduce
+                                                | lambda | rds | sagemaker</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration"></a><span class="term"><code class="code">StepScalingPolicyConfiguration</code></span></dt>
@@ -197,7 +423,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-applicationautoscaling-scalingpolicy-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-applicationautoscaling-scalingpolicy-return-values">Return values</h2>
                                  <h3 id="aws-resource-applicationautoscaling-scalingpolicy-return-values-ref">Ref</h3>
                                  <p>When the logical ID of this resource is provided to the <code class="code">Ref</code> intrinsic
                                     function, <code class="code">Ref</code> returns the Application Auto Scaling scaling policy Amazon Resource
@@ -209,271 +435,69 @@ Properties:
                                  </p>
                                  <h2 id="aws-resource-applicationautoscaling-scalingpolicy--examples">Examples</h2>
                                  <p>The following examples create scaling policies for a scalable target that is registered
-                                    with Application Auto Scaling. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_PutScalingPolicy.html">PutScalingPolicy</a> in the <em>Application Auto Scaling API
-                                       Reference</em>.
+                                    with Application Auto Scaling. 
                                  </p>
-                                 <h3 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_Tracking_Scaling_Policy_with_a_Predefined_Metric_Specification_for_an_Amazon_DynamoDB_Table">Target Tracking Scaling Policy with a Predefined Metric Specification for an Amazon
-                                    DynamoDB Table
-                                 </h3>
-                                 <p>This example both registers a DynamoDB table (<a href="aws-resource-dynamodb-table.html">AWS::DynamoDB::Table</a>) as a scalable target and creates a scaling policy with
-                                    the <code class="code">TargetTrackingScaling</code> policy type. The scaling policy scales the table&apos;s
-                                    write capacity throughput to maintain the target utilization at 50 percent based on
-                                    the
-                                    write capacity utilization metric.
+                                 <p>For more template snippets, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-autoscaling.html#scenario-app-as-template-examples">Application Auto Scaling template examples</a>.
+                                 </p>
+                                 <h3 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_tracking_scaling_policy_with_a_predefined_metric">Target tracking scaling policy with a predefined metric</h3>
+                                 <p>This example shows how to declare a new AWS::ApplicationAutoScaling::ScalingPolicy
+                                    resource to create a new scaling policy using the <code class="code">TargetTrackingScaling</code>
+                                    policy type.
+                                 </p>
+                                 <p>In this snippet, the policy specifies the <code class="code">ECSServiceAverageCPUUtilization</code>
+                                    predefined metric. The metrics used with a target tracking scaling policy are either
+                                    custom or predefined. For the list of predefined metrics, see <a href="aws-properties-applicationautoscaling-scalingpolicy-predefinedmetricspecification.html">PredefinedMetricSpecification</a>. When the metric is at or exceeds 75 percent, the
+                                    scaling policy increases (scales out) the capacity of the scalable target, and when
+                                    it
+                                    falls below 75 percent, the scaling policy decreases (scales in) the capacity of the
+                                    scalable target. The scaling policy has a 60 second cooldown period after every scaling
+                                    activity.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_Tracking_Scaling_Policy_with_a_Predefined_Metric_Specification_for_an_Amazon_DynamoDB_Table--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_tracking_scaling_policy_with_a_predefined_metric--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Resources&quot;:<span>{</span>
-    &quot;WriteCapacityScalableTarget&quot;:<span>{</span>
-      &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalableTarget&quot;,
-      &quot;Properties&quot;:<span>{</span>
-        &quot;MaxCapacity&quot;:15,
-        &quot;MinCapacity&quot;:5,
-        &quot;RoleARN&quot;:<span>{</span>
-          &quot;Fn::Sub&quot;:&quot;arn:aws:iam::$<span>{</span>AWS::AccountId}:role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable&quot;
-        },
-        &quot;ServiceNamespace&quot;:&quot;dynamodb&quot;,
-        &quot;ScalableDimension&quot;:&quot;dynamodb:table:WriteCapacityUnits&quot;,
-        &quot;ResourceId&quot;:<span>{</span>
-          &quot;Fn::Join&quot;:[
-            &quot;/&quot;,
-            [
-              &quot;table&quot;,
-              <span>{</span>
-                &quot;Ref&quot;:&quot;DDBTable&quot;
-              }
-            ]
-          ]
-        }
-      }
-    },
-    &quot;WriteScalingPolicy&quot;:<span>{</span>
+    &quot;TargetTrackingScalingPolicy&quot;:<span>{</span>
       &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalingPolicy&quot;,
       &quot;Properties&quot;:<span>{</span>
-        &quot;PolicyName&quot;:&quot;WriteAutoScalingPolicy&quot;,
+        &quot;PolicyName&quot;:&quot;cpu75-target-tracking-scaling-policy&quot;,
         &quot;PolicyType&quot;:&quot;TargetTrackingScaling&quot;,
         &quot;ScalingTargetId&quot;:<span>{</span>
-          &quot;Ref&quot;:&quot;WriteCapacityScalableTarget&quot;
+          &quot;Ref&quot;:&quot;ScalableTarget&quot;
         },
         &quot;TargetTrackingScalingPolicyConfiguration&quot;:<span>{</span>
-          &quot;TargetValue&quot;:50.0,
+          &quot;TargetValue&quot;:75.0,
           &quot;ScaleInCooldown&quot;:60,
-          &quot;ScaleOutCooldown&quot;:60,
-          &quot;PredefinedMetricSpecification&quot;:<span>{</span>
-            &quot;PredefinedMetricType&quot;:&quot;DynamoDBWriteCapacityUtilization&quot;
-          }
-        }
-      }
-    }
-  }
-}</code></pre></div>
-                                 <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_Tracking_Scaling_Policy_with_a_Predefined_Metric_Specification_for_an_Amazon_DynamoDB_Table--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
-Resources:
-  WriteCapacityScalableTarget:
-    Type: AWS::ApplicationAutoScaling::ScalableTarget
-    Properties:
-      MaxCapacity: 15
-      MinCapacity: 5
-      RoleARN: 
-        Fn::Sub: &apos;arn:aws:iam::$<span>{</span>AWS::AccountId}:role/aws-service-role/dynamodb.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_DynamoDBTable&apos;
-      ServiceNamespace: dynamodb
-      ScalableDimension: dynamodb:table:WriteCapacityUnits
-      ResourceId: !Join
-        - /
-        - - table
-          - !Ref DDBTable
-  WriteScalingPolicy:
-    Type: AWS::ApplicationAutoScaling::ScalingPolicy
-    Properties:
-      PolicyName: WriteAutoScalingPolicy
-      PolicyType: TargetTrackingScaling
-      ScalingTargetId: !Ref WriteCapacityScalableTarget
-      TargetTrackingScalingPolicyConfiguration:
-        TargetValue: 50.0
-        ScaleInCooldown: 60
-        ScaleOutCooldown: 60
-        PredefinedMetricSpecification:
-          PredefinedMetricType: DynamoDBWriteCapacityUtilization</code></pre></div>
-                                 <h3 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_Tracking_Scaling_Policies_for_an_ECS_Service">Target Tracking Scaling Policies for an ECS Service</h3>
-                                 <p>The following example both registers an ECS service (<a href="aws-resource-ecs-service.html">AWS::ECS::Service</a>) as a scalable target and creates two scaling policies with
-                                    the <code class="code">TargetTrackingScaling</code> policy type. The policies are used to scale the ECS
-                                    service based on the service&apos;s average CPU and memory usage. 
-                                 </p>
-                                 <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_Tracking_Scaling_Policies_for_an_ECS_Service--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Resources&quot;:<span>{</span>
-    &quot;ECSScalableTarget&quot;:<span>{</span>
-      &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalableTarget&quot;,
-      &quot;Properties&quot;:<span>{</span>
-        &quot;MaxCapacity&quot;:&quot;2&quot;,
-        &quot;MinCapacity&quot;:&quot;1&quot;,
-        &quot;RoleARN&quot;:<span>{</span>
-          &quot;Fn::Sub&quot;:&quot;arn:aws:iam::$<span>{</span>AWS::AccountId}:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService&quot;
-        },
-        &quot;ServiceNamespace&quot;:&quot;ecs&quot;,
-        &quot;ScalableDimension&quot;:&quot;ecs:service:DesiredCount&quot;,
-        &quot;ResourceId&quot;:<span>{</span>
-          &quot;Fn::Join&quot;:[
-            &quot;/&quot;,
-            [
-              &quot;service&quot;,
-              <span>{</span>
-                &quot;Ref&quot;:&quot;cluster&quot;
-              },
-              <span>{</span>
-                &quot;Fn::GetAtt&quot;:[
-                  &quot;service&quot;,
-                  &quot;Name&quot;
-                ]
-              }
-            ]
-          ]
-        }
-      }
-    },
-    &quot;ServiceScalingPolicyCPU&quot;:<span>{</span>
-      &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalingPolicy&quot;,
-      &quot;Properties&quot;:<span>{</span>
-        &quot;PolicyName&quot;:<span>{</span>&quot;Fn::Sub&quot;:&quot;$<span>{</span>AWS::StackName}-target-tracking-cpu70&quot;},
-        &quot;PolicyType&quot;:&quot;TargetTrackingScaling&quot;,
-        &quot;ScalingTargetId&quot;:<span>{</span>
-          &quot;Ref&quot;:&quot;ECSScalableTarget&quot;
-        },
-        &quot;TargetTrackingScalingPolicyConfiguration&quot;:<span>{</span>
-          &quot;TargetValue&quot;:70.0,
-          &quot;ScaleInCooldown&quot;:180,
           &quot;ScaleOutCooldown&quot;:60,
           &quot;PredefinedMetricSpecification&quot;:<span>{</span>
             &quot;PredefinedMetricType&quot;:&quot;ECSServiceAverageCPUUtilization&quot;
           }
         }
       }
-    },
-    &quot;ServiceScalingPolicyMem&quot;:<span>{</span>
-      &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalingPolicy&quot;,
-      &quot;Properties&quot;:<span>{</span>
-        &quot;PolicyName&quot;:<span>{</span>&quot;Fn::Sub&quot;:&quot;$<span>{</span>AWS::StackName}-target-tracking-mem90&quot;},
-        &quot;PolicyType&quot;:&quot;TargetTrackingScaling&quot;,
-        &quot;ScalingTargetId&quot;:<span>{</span>
-          &quot;Ref&quot;:&quot;ECSScalableTarget&quot;
-        },
-        &quot;TargetTrackingScalingPolicyConfiguration&quot;:<span>{</span>
-          &quot;TargetValue&quot;:90.0,
-          &quot;ScaleInCooldown&quot;:180,
-          &quot;ScaleOutCooldown&quot;:60,
-          &quot;PredefinedMetricSpecification&quot;:<span>{</span>
-            &quot;PredefinedMetricType&quot;:&quot;ECSServiceAverageMemoryUtilization&quot;
-          }
-        }
-      }
     }
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_Tracking_Scaling_Policies_for_an_ECS_Service--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+                                    <h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_tracking_scaling_policy_with_a_predefined_metric--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
 Resources:
-  ECSScalableTarget:
-    Type: AWS::ApplicationAutoScaling::ScalableTarget
-    Properties:
-      MaxCapacity: &apos;2&apos;
-      MinCapacity: &apos;1&apos;  
-      RoleARN: 
-        Fn::Sub: &apos;arn:aws:iam::$<span>{</span>AWS::AccountId}:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService&apos;
-      ServiceNamespace: ecs
-      ScalableDimension: &apos;ecs:service:DesiredCount&apos;
-      ResourceId: !Join 
-        - /
-        - - service
-          - !Ref cluster
-          - !GetAtt service.Name
-  ServiceScalingPolicyCPU:
+  TargetTrackingScalingPolicy:
     Type: AWS::ApplicationAutoScaling::ScalingPolicy
     Properties:
-      PolicyName: !Sub $<span>{</span>AWS::StackName}-target-tracking-cpu70
+      PolicyName: cpu75-target-tracking-scaling-policy
       PolicyType: TargetTrackingScaling
-      ScalingTargetId:
-        Ref: ECSScalableTarget
+      ScalingTargetId: !Ref ScalableTarget
       TargetTrackingScalingPolicyConfiguration:
-        TargetValue: 70.0
-        ScaleInCooldown: 180
-        ScaleOutCooldown: 60
-        PredefinedMetricSpecification:
-          PredefinedMetricType: ECSServiceAverageCPUUtilization
-  ServiceScalingPolicyMem:
-    Type: AWS::ApplicationAutoScaling::ScalingPolicy
-    Properties:
-      PolicyName: !Sub $<span>{</span>AWS::StackName}-target-tracking-mem90
-      PolicyType: TargetTrackingScaling
-      ScalingTargetId:
-        Ref: ECSScalableTarget
-      TargetTrackingScalingPolicyConfiguration:
-        TargetValue: 90.0
-        ScaleInCooldown: 180
-        ScaleOutCooldown: 60
-        PredefinedMetricSpecification:
-          PredefinedMetricType: ECSServiceAverageMemoryUtilization</code></pre></div>
-                                 <h3 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_Tracking_Scaling_Policy_for_Scale_Out_Only_for_an_ECS_Service">Target Tracking Scaling Policy for Scale Out Only for an ECS Service</h3>
-                                 <p>The following example applies a target tracking scaling policy with the
-                                    <code class="code">ALBRequestCountPerTarget</code> metric type to an ECS service called
-                                    <code class="code">web-app</code> in the default cluster. The policy is used to add capacity to the
-                                    ECS service when the request count per target exceeds the target value. Because the
-                                    value
-                                    of <code class="code">DisableScaleIn</code> is set to true, the target tracking policy won&apos;t remove
-                                    capacity from the scalable target.
-                                 </p>
-                                 <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_Tracking_Scaling_Policy_for_Scale_Out_Only_for_an_ECS_Service--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Resources&quot;:<span>{</span>
-    &quot;ServiceScalingPolicyALB&quot;:<span>{</span>
-      &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalingPolicy&quot;,
-      &quot;Properties&quot;:<span>{</span>
-        &quot;PolicyName&quot;:&quot;alb-scale-out-target-tracking-scaling-policy&quot;,
-        &quot;PolicyType&quot;:&quot;TargetTrackingScaling&quot;,
-        &quot;ServiceNamespace&quot;:&quot;ecs&quot;,
-        &quot;ScalableDimension&quot;:&quot;ecs:service:DesiredCount&quot;,
-        &quot;ResourceId&quot;:&quot;service/default/web-app&quot;,
-        &quot;TargetTrackingScalingPolicyConfiguration&quot;:<span>{</span>
-          &quot;TargetValue&quot;:1000.0,
-          &quot;ScaleInCooldown&quot;:60,
-          &quot;ScaleOutCooldown&quot;:60,
-          &quot;DisableScaleIn&quot;:true,
-          &quot;PredefinedMetricSpecification&quot;:<span>{</span>
-            &quot;PredefinedMetricType&quot;:&quot;ALBRequestCountPerTarget&quot;,
-            &quot;ResourceLabel&quot;: &quot;app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d&quot;
-          }
-        }
-      }
-    }
-  }
-}</code></pre></div>
-                                 <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Target_Tracking_Scaling_Policy_for_Scale_Out_Only_for_an_ECS_Service--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
-Resources:
-  ServiceScalingPolicyALB:
-    Type: AWS::ApplicationAutoScaling::ScalingPolicy
-    Properties:
-      PolicyName: alb-scale-out-target-tracking-scaling-policy
-      PolicyType: TargetTrackingScaling
-      ServiceNamespace: ecs
-      ScalableDimension: ecs:service:DesiredCount
-      ResourceId: service/default/web-app
-      TargetTrackingScalingPolicyConfiguration:
-        TargetValue: 1000.0
+        TargetValue: 75.0
         ScaleInCooldown: 60
         ScaleOutCooldown: 60
-        DisableScaleIn: true
         PredefinedMetricSpecification:
-          PredefinedMetricType: ALBRequestCountPerTarget
-          ResourceLabel: app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d</code></pre></div>
-                                 <h3 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Step_Scaling_Policy_for_Scale_Out_Only_for_a_Spot_Fleet">Step Scaling Policy for Scale Out Only for a Spot Fleet</h3>
-                                 <p>The following example registers a Spot Fleet (<a href="aws-resource-ec2-spotfleet.html">AWS::EC2::SpotFleet</a>) as a scalable target, creates a scheduled action, and
-                                    creates a scaling policy. It uses the <a href="intrinsic-function-reference-join.html">Fn::Join</a> and <a href="intrinsic-function-reference-ref.html">Ref</a> intrinsic functions to construct the <code class="code">ResourceId</code> property. 
-                                 </p>
-                                 <p>It creates a scaling policy with the <code class="code">StepScaling</code> policy type and the
-                                    <code class="code">ChangeInCapacity</code> adjustment type. When an associated alarm is triggered,
-                                    the policy increases the capacity of the scalable target based on the following step
-                                    adjustments (assuming a CloudWatch alarm threshold of 70 percent): 
+          PredefinedMetricType: ECSServiceAverageCPUUtilization</code></pre></div>
+                                 <h3 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Step_scaling_policy">Step scaling policy</h3>
+                                 <p>The following example creates a scaling policy with the <code class="code">StepScaling</code>
+                                    policy type and the <code class="code">ChangeInCapacity</code> adjustment type. When an associated
+                                    alarm is triggered, the policy increases the capacity of the scalable target based
+                                    on the
+                                    following step adjustments (assuming a CloudWatch alarm threshold of 70 percent):
+                                    
                                  </p>
                                  <div class="itemizedlist">
                                      
@@ -504,51 +528,19 @@ Resources:
                                        </li>
                                     </ul>
                                  </div>
+                                 <p>In this snippet, the scaling policy has a 600 second cooldown period after every
+                                    scaling activity.
+                                 </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Step_Scaling_Policy_for_Scale_Out_Only_for_a_Spot_Fleet--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Step_scaling_policy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Resources&quot;:<span>{</span>
-    &quot;SpotFleetScalableTarget&quot;:<span>{</span>
-      &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalableTarget&quot;,
-      &quot;Properties&quot;:<span>{</span>
-        &quot;MaxCapacity&quot;:2,
-        &quot;MinCapacity&quot;:1,
-        &quot;RoleARN&quot;:<span>{</span>
-          &quot;Fn::Sub&quot;:&quot;arn:aws:iam::$<span>{</span>AWS::AccountId}:role/aws-service-role/ec2.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_EC2SpotFleetRequest&quot;
-        },
-        &quot;ServiceNamespace&quot;:&quot;ec2&quot;,
-        &quot;ScalableDimension&quot;:&quot;ec2:spot-fleet-request:TargetCapacity&quot;,
-        &quot;ResourceId&quot;:<span>{</span>
-          &quot;Fn::Join&quot;:[
-            &quot;/&quot;,
-            [
-              &quot;spot-fleet-request&quot;,
-              <span>{</span>
-                &quot;Ref&quot;:&quot;ECSSpotFleet&quot;
-              }
-            ]
-          ]
-        },
-        &quot;ScheduledActions&quot;:[
-          <span>{</span>
-            &quot;EndTime&quot;:&quot;2019-12-31T12:00:00.000Z&quot;,
-            &quot;ScalableTargetAction&quot;:<span>{</span>
-              &quot;MaxCapacity&quot;:&quot;20&quot;,
-              &quot;MinCapacity&quot;:&quot;5&quot;
-            },
-            &quot;ScheduledActionName&quot;:&quot;First&quot;,
-            &quot;StartTime&quot;:&quot;2019-12-25T12:00:00.000Z&quot;,
-            &quot;Schedule&quot;:&quot;cron(0 18 * * ? *)&quot;
-          }
-        ]
-      }
-    },
-    &quot;SpotFleetPolicyHigh&quot;:<span>{</span>
+    &quot;PolicyHigh&quot;:<span>{</span>
       &quot;Type&quot;:&quot;AWS::ApplicationAutoScaling::ScalingPolicy&quot;,
       &quot;Properties&quot;:<span>{</span>
-        &quot;PolicyName&quot;:&quot;SpotFleetPolicyHigh&quot;,
+        &quot;PolicyName&quot;:&quot;PolicyHigh&quot;,
         &quot;PolicyType&quot;:&quot;StepScaling&quot;,
         &quot;ScalingTargetId&quot;:<span>{</span>
-          &quot;Ref&quot;:&quot;SpotFleetScalableTarget&quot;
+          &quot;Ref&quot;:&quot;ScalableTarget&quot;
         },
         &quot;StepScalingPolicyConfiguration&quot;:<span>{</span>
           &quot;AdjustmentType&quot;:&quot;ChangeInCapacity&quot;,
@@ -576,36 +568,15 @@ Resources:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Step_Scaling_Policy_for_Scale_Out_Only_for_a_Spot_Fleet--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+                                    <h4 id="aws-resource-applicationautoscaling-scalingpolicy--examples--Step_scaling_policy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
 Resources:
-  SpotFleetScalableTarget:
-    Type: AWS::ApplicationAutoScaling::ScalableTarget
-    Properties:
-      MaxCapacity: 2
-      MinCapacity: 1
-      RoleARN: 
-        Fn::Sub: &apos;arn:aws:iam::$<span>{</span>AWS::AccountId}:role/aws-service-role/ec2.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_EC2SpotFleetRequest&apos;
-      ServiceNamespace: ec2
-      ScalableDimension: &apos;ec2:spot-fleet-request:TargetCapacity&apos;
-      ResourceId: !Join 
-        - /
-        - - spot-fleet-request
-          - !Ref ECSSpotFleet
-      ScheduledActions:
-        - EndTime: &apos;2019-12-31T12:00:00.000Z&apos;
-          ScalableTargetAction:
-            MaxCapacity: &apos;20&apos;
-            MinCapacity: &apos;5&apos;
-          ScheduledActionName: First
-          StartTime: &apos;2019-12-25T12:00:00.000Z&apos;
-          Schedule: &apos;cron(0 18 * * ? *)&apos;
-  SpotFleetPolicyHigh:
+  PolicyHigh:
     Type: AWS::ApplicationAutoScaling::ScalingPolicy
     Properties:
-      PolicyName: SpotFleetPolicyHigh
+      PolicyName: PolicyHigh
       PolicyType: StepScaling
       ScalingTargetId:
-        Ref: SpotFleetScalableTarget
+        Ref: ScalableTarget
       StepScalingPolicyConfiguration:
         AdjustmentType: ChangeInCapacity
         Cooldown: 600
@@ -619,23 +590,36 @@ Resources:
           ScalingAdjustment: 2
         - MetricIntervalLowerBound: 25
           ScalingAdjustment: 3</code></pre></div>
-                                 <h2 id="aws-resource-applicationautoscaling-scalingpolicy--seealso">See Also</h2>
+                                 <h2 id="aws-resource-applicationautoscaling-scalingpolicy--seealso">See also</h2>
                                  <div class="itemizedlist">
+                                     
+                                     
                                      
                                      
                                     
                                     <ul class="itemizedlist" type="disc">
                                        <li class="listitem">
                                           
-                                          <p><a href="https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html">Application Auto Scaling User Guide</a>
-                                             
-                                          </p>
+                                          <p><a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_PutScalingPolicy.html">PutScalingPolicy</a> in the <em>Application Auto Scaling API
+                                                Reference</em></p>
                                           
                                        </li>
                                        <li class="listitem">
                                           
-                                          <p><a href="https://docs.aws.amazon.com/cli/latest/reference/application-autoscaling/put-scaling-policy.html#examples">Examples</a> of Application Auto Scaling scaling policies in the <em> AWS
-                                                CLI Command Reference</em></p>
+                                          <p><a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html">Target tracking scaling policies</a> in the <em>Application Auto Scaling
+                                                User Guide</em></p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p><a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html">Step scaling policies</a> in the <em>Application Auto Scaling User
+                                                Guide</em></p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p><a href="http://aws.amazon.com/blogs/database/how-to-use-aws-cloudformation-to-configure-auto-scaling-for-amazon-dynamodb-tables-and-indexes/" target="_blank"><span>How to use AWS CloudFormation to configure auto scaling for Amazon DynamoDB tables
+                                                   and indexes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></p>
                                           
                                        </li>
                                     </ul>

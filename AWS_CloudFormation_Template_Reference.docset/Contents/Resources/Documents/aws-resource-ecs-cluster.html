@@ -25,8 +25,10 @@
                                     <h3 id="aws-resource-ecs-cluster-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::ECS::Cluster&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-ecs-cluster-capacityproviders">CapacityProviders</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-ecs-cluster-clustername">ClusterName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ecs-cluster-clustersettings">ClusterSettings</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-ecs-cluster-clustersettings.html">ClusterSettings</a>, ... ]</code>,
+      &quot;<a href="#cfn-ecs-cluster-defaultcapacityproviderstrategy">DefaultCapacityProviderStrategy</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-ecs-cluster-capacityproviderstrategyitem.html">CapacityProviderStrategyItem</a>, ... ]</code>,
       &quot;<a href="#cfn-ecs-cluster-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
 }
@@ -34,15 +36,30 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-ecs-cluster-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::ECS::Cluster
 Properties: 
+  <a href="#cfn-ecs-cluster-capacityproviders">CapacityProviders</a>: <code class="replaceable">
+    - String</code>
   <a href="#cfn-ecs-cluster-clustername">ClusterName</a>: <code class="replaceable">String</code>
   <a href="#cfn-ecs-cluster-clustersettings">ClusterSettings</a>: <code class="replaceable">
     - <a href="./aws-properties-ecs-cluster-clustersettings.html">ClusterSettings</a></code>
+  <a href="#cfn-ecs-cluster-defaultcapacityproviderstrategy">DefaultCapacityProviderStrategy</a>: <code class="replaceable">
+    - <a href="./aws-properties-ecs-cluster-capacityproviderstrategyitem.html">CapacityProviderStrategyItem</a></code>
   <a href="#cfn-ecs-cluster-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
 </code></pre></div>
                                  <h2 id="aws-resource-ecs-cluster-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-ecs-cluster-capacityproviders"></a><span class="term"><code class="code">CapacityProviders</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The capacity providers associated with the cluster.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-ecs-cluster-clustername"></a><span class="term"><code class="code">ClusterName</code></span></dt>
                                        <dd>
                                           
@@ -68,6 +85,20 @@ Properties:
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-ecs-cluster-clustersettings.html">List</a> of <a href="./aws-properties-ecs-cluster-clustersettings.html">ClusterSettings</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ecs-cluster-defaultcapacityproviderstrategy"></a><span class="term"><code class="code">DefaultCapacityProviderStrategy</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The default capacity provider strategy for the cluster. When services or tasks are
+                                             run
+                                             in the cluster with no launch type or capacity provider strategy specified, the default
+                                             capacity provider strategy is used.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-ecs-cluster-capacityproviderstrategyitem.html">CapacityProviderStrategyItem</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-ecs-cluster-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
@@ -145,7 +176,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-ecs-cluster-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-ecs-cluster-return-values">Return values</h2>
                                  <h3 id="aws-resource-ecs-cluster-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the resource name.
@@ -181,73 +212,100 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-ecs-cluster--examples">Examples</h2>
-                                 <h3 id="aws-resource-ecs-cluster--examples--Creating_an_Amazon_ECS_cluster">Creating an Amazon ECS cluster</h3>
-                                 <p>The following example creates an empty cluster named
-                                    <code class="code">MyCluster</code>.
+                                 <h3 id="aws-resource-ecs-cluster--examples--Define_a_cluster_with_the_AWS_Fargate_capacity_providers_and_a_default_capacity_provider_strategy_defined">Define a cluster with the AWS Fargate capacity providers and a default capacity provider
+                                    strategy defined
+                                 </h3>
+                                 <p>The following example defines a cluster named <code class="code">MyFargateCluster</code>
+                                    with the <code class="code">FARGATE</code> and <code class="code">FARGATE_SPOT</code> capacity providers.
+                                    A default capacity provider strategy is also defined where tasks launched will
+                                    be split evenly between the <code class="code">FARGATE</code> and <code class="code">FARGATE_SPOT</code>
+                                    capacity providers.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ecs-cluster--examples--Creating_an_Amazon_ECS_cluster--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
-    &quot;Resources&quot;: <span>{</span>
-        &quot;MyCluster&quot;: <span>{</span>
-            &quot;Type&quot;: &quot;AWS::ECS::Cluster&quot;,
-            &quot;Properties&quot;: <span>{</span>
-                &quot;ClusterName&quot;: &quot;MyCluster&quot;
+                                    <h4 id="aws-resource-ecs-cluster--examples--Define_a_cluster_with_the_AWS_Fargate_capacity_providers_and_a_default_capacity_provider_strategy_defined--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;ECSCluster&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS: : ECS: : Cluster&quot;,
+    &quot;Properties&quot;: <span>{</span>
+        &quot;ClusterName&quot;: &quot;MyFargateCluster&quot;,
+        &quot;CapacityProviders&quot;: [
+            &quot;FARGATE&quot;,
+            &quot;FARGATE_SPOT&quot;
+        ],
+        &quot;DefaultCapacityProviderStrategy&quot;: [
+            <span>{</span>
+                &quot;CapacityProvider&quot;: &quot;FARGATE&quot;,
+                &quot;Weight&quot;: 1
+            },
+            <span>{</span>
+                &quot;CapacityProvider&quot;: &quot;FARGATE_SPOT&quot;,
+                &quot;Weight&quot;: 1
             }
-        }
+        ]
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ecs-cluster--examples--Creating_an_Amazon_ECS_cluster--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
-Resources:
-  MyCluster:
-    Type: &apos;AWS::ECS::Cluster&apos;
-    Properties:
-      ClusterName: MyCluster</code></pre></div>
-                                 <h3 id="aws-resource-ecs-cluster--examples--Creating_an_empty_Amazon_ECS_cluster_with_tags_with_CloudWatch_Container_Insights_enabled">Creating an empty Amazon ECS cluster with tags with CloudWatch Container Insights
-                                    enabled
-                                 </h3>
-                                 <p>The following example creates an empty cluster named <code class="code">MyCluster</code>
+                                    <h4 id="aws-resource-ecs-cluster--examples--Define_a_cluster_with_the_AWS_Fargate_capacity_providers_and_a_default_capacity_provider_strategy_defined--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ECSCluster:
+  Type: &apos;AWS::ECS::Cluster&apos;
+  Properties:
+    ClusterName: MyFargateCluster
+    CapacityProviders:
+      - FARGATE
+        FARGATE_SPOT
+    DefaultCapacityProviderStrategy:
+      - CapacityProvider: FARGATE
+        Weight: 1
+      - CapacityProvider: FARGATE_SPOT
+        Weight: 1</code></pre></div>
+                                 <h3 id="aws-resource-ecs-cluster--examples--Define_an_empty_cluster">Define an empty cluster</h3>
+                                 <p>The following example defines an empty cluster named
+                                    <code class="code">MyEmptyCluster</code>.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ecs-cluster--examples--Define_an_empty_cluster--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;ECSCluster&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::ECS::Cluster&quot;,
+    &quot;Properties&quot;: <span>{</span>
+        &quot;ClusterName&quot;: &quot;MyEmptyCluster&quot;
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ecs-cluster--examples--Define_an_empty_cluster--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ECSCluster:
+  Type: &apos;AWS::ECS::Cluster&apos;
+  Properties:
+    ClusterName: MyEmptyCluster</code></pre></div>
+                                 <h3 id="aws-resource-ecs-cluster--examples--Define_an_empty_cluster_with_CloudWatch_Container_Insights_enabled_and_defined_tags">Define an empty cluster with CloudWatch Container Insights enabled and defined tags</h3>
+                                 <p>The following example defines an empty cluster named <code class="code">MyCluster</code>
                                     with CloudWatch Container Insights enabled that is tagged with the key
                                     <code class="code">environment</code> and the value <code class="code">production</code>.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ecs-cluster--examples--Creating_an_empty_Amazon_ECS_cluster_with_tags_with_CloudWatch_Container_Insights_enabled--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
-    &quot;Resources&quot;: <span>{</span>
-        &quot;ECSCluster&quot;: <span>{</span>
-            &quot;Type&quot;: &quot;AWS::ECS::Cluster&quot;,
-            &quot;Properties&quot;: <span>{</span>
-                &quot;ClusterName&quot;: &quot;MyCluster&quot;,
-                &quot;ClusterSettings&quot;: [
-                    <span>{</span>
-                        &quot;Name&quot;: &quot;containerInsights&quot;,
-                        &quot;Value&quot;: &quot;enabled&quot;
-                    }
-                ],
-                &quot;Tags&quot;: [
-                    <span>{</span>
-                        &quot;Key&quot;: &quot;environment&quot;,
-                        &quot;Value&quot;: &quot;production&quot;
-                    }
-                ]
+                                    <h4 id="aws-resource-ecs-cluster--examples--Define_an_empty_cluster_with_CloudWatch_Container_Insights_enabled_and_defined_tags--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;ECSCluster&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::ECS::Cluster&quot;,
+    &quot;Properties&quot;: <span>{</span>
+        &quot;ClusterName&quot;: &quot;MyCluster&quot;,
+        &quot;ClusterSettings&quot;: [
+            <span>{</span>
+                &quot;Name&quot;: &quot;containerInsights&quot;,
+                &quot;Value&quot;: &quot;enabled&quot;
             }
-        }
+        ],
+        &quot;Tags&quot;: [
+            <span>{</span>
+                &quot;Key&quot;: &quot;environment&quot;,
+                &quot;Value&quot;: &quot;production&quot;
+            }
+        ]
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ecs-cluster--examples--Creating_an_empty_Amazon_ECS_cluster_with_tags_with_CloudWatch_Container_Insights_enabled--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
-Resources:
-  ECSCluster:
-    Type: &apos;AWS::ECS::Cluster&apos;
-    Properties:
-      ClusterName: MyCluster
-      ClusterSettings:
-        - Name: containerInsights
-          Value: enabled
-      Tags:
-        - Key: environment
-          Value: production</code></pre></div>
+                                    <h4 id="aws-resource-ecs-cluster--examples--Define_an_empty_cluster_with_CloudWatch_Container_Insights_enabled_and_defined_tags--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ECSCluster:
+  Type: &apos;AWS::ECS::Cluster&apos;
+  Properties:
+    ClusterName: MyCluster
+    ClusterSettings:
+      - Name: containerInsights
+        Value: enabled
+    Tags:
+      - Key: environment
+        Value: production</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                               </div>
                               <noscript>

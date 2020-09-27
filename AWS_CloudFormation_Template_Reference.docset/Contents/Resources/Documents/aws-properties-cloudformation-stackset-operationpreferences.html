@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-properties-cloudformation-stackset-operationpreferences">AWS::CloudFormation::StackSet OperationPreferences</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The user-specified preferences for how AWS CloudFormation performs a stack set operation.
+                                    For more information on maximum concurrent accounts and failure tolerance, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options">Stack set operation options</a>.
+                                 </p>
+                                 <h2 id="aws-properties-cloudformation-stackset-operationpreferences-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-properties-cloudformation-stackset-operationpreferences-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-cloudformation-stackset-operationpreferences-failuretolerancecount">FailureToleranceCount</a>&quot; : <code class="replaceable">Integer</code>,
+  &quot;<a href="#cfn-cloudformation-stackset-operationpreferences-failuretolerancepercentage">FailureTolerancePercentage</a>&quot; : <code class="replaceable">Integer</code>,
+  &quot;<a href="#cfn-cloudformation-stackset-operationpreferences-maxconcurrentcount">MaxConcurrentCount</a>&quot; : <code class="replaceable">Integer</code>,
+  &quot;<a href="#cfn-cloudformation-stackset-operationpreferences-maxconcurrentpercentage">MaxConcurrentPercentage</a>&quot; : <code class="replaceable">Integer</code>,
+  &quot;<a href="#cfn-cloudformation-stackset-operationpreferences-regionorder">RegionOrder</a>&quot; : <code class="replaceable">[ String, ... ]</code>
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-properties-cloudformation-stackset-operationpreferences-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-cloudformation-stackset-operationpreferences-failuretolerancecount">FailureToleranceCount</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-cloudformation-stackset-operationpreferences-failuretolerancepercentage">FailureTolerancePercentage</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-cloudformation-stackset-operationpreferences-maxconcurrentcount">MaxConcurrentCount</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-cloudformation-stackset-operationpreferences-maxconcurrentpercentage">MaxConcurrentPercentage</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-cloudformation-stackset-operationpreferences-regionorder">RegionOrder</a>: <code class="replaceable">
+    - String</code>
+</code></pre></div>
+                                 <h2 id="aws-properties-cloudformation-stackset-operationpreferences-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-cloudformation-stackset-operationpreferences-failuretolerancecount"></a><span class="term"><code class="code">FailureToleranceCount</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The number of accounts, per Region, for which this operation can fail before AWS
+                                             CloudFormation stops the operation in that Region. If the operation is stopped in
+                                             a Region,
+                                             AWS CloudFormation doesn&apos;t attempt the operation in any subsequent Regions.
+                                          </p>
+                                          
+                                          <p>Conditional: You must specify either <code class="code">FailureToleranceCount</code> or
+                                             <code class="code">FailureTolerancePercentage</code> (but not both).
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Conditional
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudformation-stackset-operationpreferences-failuretolerancepercentage"></a><span class="term"><code class="code">FailureTolerancePercentage</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The percentage of accounts, per Region, for which this stack operation can fail
+                                             before AWS CloudFormation stops the operation in that Region. If the operation is
+                                             stopped
+                                             in a Region, AWS CloudFormation doesn&apos;t attempt the operation in any subsequent
+                                             Regions.
+                                          </p>
+                                          
+                                          <p>When calculating the number of accounts based on the specified percentage, AWS
+                                             CloudFormation rounds <em>down</em> to the next whole number.
+                                          </p>
+                                          
+                                          <p>Conditional: You must specify either <code class="code">FailureToleranceCount</code> or
+                                             <code class="code">FailureTolerancePercentage</code>, but not both.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Conditional
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudformation-stackset-operationpreferences-maxconcurrentcount"></a><span class="term"><code class="code">MaxConcurrentCount</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The maximum number of accounts in which to perform this operation at one time. This
+                                             is dependent on the value of
+                                             <code class="code">FailureToleranceCount</code>. <code class="code">MaxConcurrentCount</code> is at most one more
+                                             than the <code class="code">FailureToleranceCount</code>.
+                                          </p>
+                                          
+                                          <p>Note that this setting lets you specify the <em>maximum</em> for
+                                             operations. For large deployments, under certain circumstances the actual number of
+                                             accounts acted upon concurrently may be lower due to service throttling.
+                                          </p>
+                                          
+                                          <p>Conditional: You must specify either <code class="code">MaxConcurrentCount</code> or
+                                             <code class="code">MaxConcurrentPercentage</code>, but not both.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Conditional
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudformation-stackset-operationpreferences-maxconcurrentpercentage"></a><span class="term"><code class="code">MaxConcurrentPercentage</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The maximum percentage of accounts in which to perform this operation at one
+                                             time.
+                                          </p>
+                                          
+                                          <p>When calculating the number of accounts based on the specified percentage, AWS
+                                             CloudFormation rounds down to the next whole number. This is true except in cases
+                                             where
+                                             rounding down would result is zero. In this case, CloudFormation sets the number as
+                                             one
+                                             instead.
+                                          </p>
+                                          
+                                          <p>Note that this setting lets you specify the <em>maximum</em> for
+                                             operations. For large deployments, under certain circumstances the actual number of
+                                             accounts acted upon concurrently may be lower due to service throttling.
+                                          </p>
+                                          
+                                          <p>Conditional: You must specify either <code class="code">MaxConcurrentCount</code> or
+                                             <code class="code">MaxConcurrentPercentage</code>, but not both.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Conditional
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudformation-stackset-operationpreferences-regionorder"></a><span class="term"><code class="code">RegionOrder</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The order of the Regions where you want to perform the stack operation.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

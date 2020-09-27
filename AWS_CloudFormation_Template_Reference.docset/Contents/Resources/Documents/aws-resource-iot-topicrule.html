@@ -64,7 +64,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-iot-topicrule-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-iot-topicrule-return-values">Return values</h2>
                                  <h3 id="aws-resource-iot-topicrule-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the topic rule name. For example:
@@ -106,25 +106,141 @@ Properties:
                                  <h3 id="aws-resource-iot-topicrule--examples--"></h3>
                                  <p>The following example declares an AWS IoT rule.</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-iot-topicrule--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;, &quot;Resources&quot;: <span>{</span>
-            &quot;MyTopicRule&quot;: <span>{</span> &quot;Type&quot;: &quot;AWS::IoT::TopicRule&quot;, &quot;Properties&quot;: <span>{</span> &quot;RuleName&quot;: <span>{</span> &quot;Ref&quot;:
-            &quot;NameParameter&quot; }, &quot;TopicRulePayload&quot;: <span>{</span> &quot;RuleDisabled&quot;: &quot;true&quot;, &quot;Sql&quot;: &quot;SELECT temp
-            FROM &apos;SomeTopic&apos; WHERE temp &gt; 60&quot;, &quot;Actions&quot;: [<span>{</span> &quot;S3&quot;: <span>{</span> &quot;BucketName&quot;: <span>{</span> &quot;Ref&quot;:
-            &quot;MyBucket&quot; }, &quot;RoleArn&quot;: <span>{</span> &quot;Fn::GetAtt&quot;: [&quot;MyRole&quot;, &quot;Arn&quot;] }, &quot;Key&quot;: &quot;MyKey.txt&quot; } }] }
-            , &quot;MyBucket&quot;: <span>{</span> &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;, &quot;Properties&quot;: <span>{</span>} }, &quot;MyRole&quot;: <span>{</span> &quot;Type&quot;:
-            &quot;AWS::IAM::Role&quot;, &quot;Properties&quot;: <span>{</span> &quot;AssumeRolePolicyDocument&quot;: <span>{</span> &quot;Version&quot;: &quot;2012-10-17&quot;,
-            &quot;Statement&quot;: [<span>{</span> &quot;Effect&quot;: &quot;Allow&quot;, &quot;Principal&quot;: <span>{</span> &quot;Service&quot;: [&quot;iot.amazonaws.com&quot;] },
-            &quot;Action&quot;: [&quot;sts:AssumeRole&quot;] }] } } } }, &quot;Parameters&quot;: <span>{</span> &quot;NameParameter&quot;: <span>{</span> &quot;Type&quot;:
-            &quot;String&quot; } } } } }</code></pre></div>
+                                    <h4 id="aws-resource-iot-topicrule--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">
+            <span>{</span>
+   &quot;AWSTemplateFormatVersion&quot;:&quot;2010-09-09&quot;,
+   &quot;Resources&quot;:<span>{</span>
+      &quot;MyTopicRule&quot;:<span>{</span>
+         &quot;Type&quot;:&quot;AWS::IoT::TopicRule&quot;,
+         &quot;Properties&quot;:<span>{</span>
+            &quot;RuleName&quot;:<span>{</span>
+               &quot;Ref&quot;:&quot;NameParameter&quot;
+            },
+            &quot;TopicRulePayload&quot;:<span>{</span>
+               &quot;RuleDisabled&quot;:&quot;true&quot;,
+               &quot;Sql&quot;:&quot;SELECT temp FROM &apos;SomeTopic&apos; WHERE temp &gt; 60&quot;,
+               &quot;Actions&quot;:[
+                  <span>{</span>
+                     &quot;S3&quot;:<span>{</span>
+                        &quot;BucketName&quot;:<span>{</span>
+                           &quot;Ref&quot;:&quot;MyBucket&quot;
+                        },
+                        &quot;RoleArn&quot;:<span>{</span>
+                           &quot;Fn::GetAtt&quot;:[
+                              &quot;MyRole&quot;,
+                              &quot;Arn&quot;
+                           ]
+                        },
+                        &quot;Key&quot;:&quot;MyKey.txt&quot;
+                     }
+                  }
+               ]
+            },
+            &quot;MyBucket&quot;:<span>{</span>
+               &quot;Type&quot;:&quot;AWS::S3::Bucket&quot;,
+               &quot;Properties&quot;:<span>{</span>
+
+               }
+            },
+            &quot;MyRole&quot;:<span>{</span>
+               &quot;Type&quot;:&quot;AWS::IAM::Role&quot;,
+               &quot;Properties&quot;:<span>{</span>
+                  &quot;AssumeRolePolicyDocument&quot;:<span>{</span>
+                     &quot;Version&quot;:&quot;2012-10-17&quot;,
+                     &quot;Statement&quot;:[
+                        <span>{</span>
+                           &quot;Effect&quot;:&quot;Allow&quot;,
+                           &quot;Principal&quot;:<span>{</span>
+                              &quot;Service&quot;:[
+                                 &quot;iot.amazonaws.com&quot;
+                              ]
+                           },
+                           &quot;Action&quot;:[
+                              &quot;sts:AssumeRole&quot;
+                           ]
+                        }
+                     ]
+                  }
+               }
+            }
+         },
+         &quot;Parameters&quot;:<span>{</span>
+            &quot;NameParameter&quot;:<span>{</span>
+               &quot;Type&quot;:&quot;String&quot;
+            }
+         }
+      }
+   }
+}
+         </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-iot-topicrule--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos; Resources: MyTopicRule:
-            Type: &apos;AWS::IoT::TopicRule&apos; Properties: RuleName: <span>{</span>Ref: NameParameter} TopicRulePayload:
-            <span>{</span>RuleDisabled: &apos;true&apos;, Sql: &apos;Select temp FROM &apos;&apos;SomeTopic&apos;&apos; WHERE temp &gt; 60&apos;, Actions:
-            [<span>{</span>S3: <span>{</span>BucketName: <span>{</span>Ref: MyBucket, RoleArn: <span>{</span>&apos;Fn::GetAtt&apos;: [MyRole, Arn], Key:
-            MyKey.txt}}}}]} MyBucket: <span>{</span>Type: &apos;AWS::S3::Bucket&apos;, Properties: null} MyRole: <span>{</span>Type: &apos;AWS::IAM::Role&apos;,
-            Properties: <span>{</span>AssumeRolePolicyDocument: <span>{</span>Version: &apos;2012-10-17&apos;, Statement: <span>{</span>Effect: Allow,
-            Principal: <span>{</span>Service: [iot.amazonaws.com]}, Action: [&apos;sts:AssumeRole&apos;]}}}} Parameters:
-            NameParameter: <span>{</span>Type: String}</code></pre></div>
+                                    <h4 id="aws-resource-iot-topicrule--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">
+            <span>{</span>
+   &quot;AWSTemplateFormatVersion&quot;:&quot;2010-09-09&quot;,
+   &quot;Resources&quot;:<span>{</span>
+      &quot;MyTopicRule&quot;:<span>{</span>
+         &quot;Type&quot;:&quot;AWS::IoT::TopicRule&quot;,
+         &quot;Properties&quot;:<span>{</span>
+            &quot;RuleName&quot;:<span>{</span>
+               &quot;Ref&quot;:&quot;NameParameter&quot;
+            },
+            &quot;TopicRulePayload&quot;:<span>{</span>
+               &quot;RuleDisabled&quot;:&quot;true&quot;,
+               &quot;Sql&quot;:&quot;SELECT temp FROM &apos;SomeTopic&apos; WHERE temp &gt; 60&quot;,
+               &quot;Actions&quot;:[
+                  <span>{</span>
+                     &quot;S3&quot;:<span>{</span>
+                        &quot;BucketName&quot;:<span>{</span>
+                           &quot;Ref&quot;:&quot;MyBucket&quot;
+                        },
+                        &quot;RoleArn&quot;:<span>{</span>
+                           &quot;Fn::GetAtt&quot;:[
+                              &quot;MyRole&quot;,
+                              &quot;Arn&quot;
+                           ]
+                        },
+                        &quot;Key&quot;:&quot;MyKey.txt&quot;
+                     }
+                  }
+               ]
+            },
+            &quot;MyBucket&quot;:<span>{</span>
+               &quot;Type&quot;:&quot;AWS::S3::Bucket&quot;,
+               &quot;Properties&quot;:<span>{</span>
+
+               }
+            },
+            &quot;MyRole&quot;:<span>{</span>
+               &quot;Type&quot;:&quot;AWS::IAM::Role&quot;,
+               &quot;Properties&quot;:<span>{</span>
+                  &quot;AssumeRolePolicyDocument&quot;:<span>{</span>
+                     &quot;Version&quot;:&quot;2012-10-17&quot;,
+                     &quot;Statement&quot;:[
+                        <span>{</span>
+                           &quot;Effect&quot;:&quot;Allow&quot;,
+                           &quot;Principal&quot;:<span>{</span>
+                              &quot;Service&quot;:[
+                                 &quot;iot.amazonaws.com&quot;
+                              ]
+                           },
+                           &quot;Action&quot;:[
+                              &quot;sts:AssumeRole&quot;
+                           ]
+                        }
+                     ]
+                  }
+               }
+            }
+         },
+         &quot;Parameters&quot;:<span>{</span>
+            &quot;NameParameter&quot;:<span>{</span>
+               &quot;Type&quot;:&quot;String&quot;
+            }
+         }
+      }
+   }
+}
+         </code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                               </div>
                               <noscript>

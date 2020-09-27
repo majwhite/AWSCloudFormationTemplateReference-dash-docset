@@ -22,12 +22,15 @@
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-properties-wafv2-webacl-ratebasedstatementtwo-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;<a href="#cfn-wafv2-webacl-ratebasedstatementtwo-aggregatekeytype">AggregateKeyType</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-wafv2-webacl-ratebasedstatementtwo-forwardedipconfig">ForwardedIPConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-wafv2-webacl-forwardedipconfiguration.html">ForwardedIPConfiguration</a></code>,
   &quot;<a href="#cfn-wafv2-webacl-ratebasedstatementtwo-limit">Limit</a>&quot; : <code class="replaceable">Integer</code>,
   &quot;<a href="#cfn-wafv2-webacl-ratebasedstatementtwo-scopedownstatement">ScopeDownStatement</a>&quot; : <code class="replaceable"><a href="./aws-properties-wafv2-webacl-statementthree.html">StatementThree</a></code>
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-properties-wafv2-webacl-ratebasedstatementtwo-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-wafv2-webacl-ratebasedstatementtwo-aggregatekeytype">AggregateKeyType</a>: <code class="replaceable">String</code>
+  <a href="#cfn-wafv2-webacl-ratebasedstatementtwo-forwardedipconfig">ForwardedIPConfig</a>: <code class="replaceable">
+    <a href="./aws-properties-wafv2-webacl-forwardedipconfiguration.html">ForwardedIPConfiguration</a></code>
   <a href="#cfn-wafv2-webacl-ratebasedstatementtwo-limit">Limit</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-wafv2-webacl-ratebasedstatementtwo-scopedownstatement">ScopeDownStatement</a>: <code class="replaceable">
     <a href="./aws-properties-wafv2-webacl-statementthree.html">StatementThree</a></code>
@@ -38,14 +41,62 @@
                                        <dt><a id="cfn-wafv2-webacl-ratebasedstatementtwo-aggregatekeytype"></a><span class="term"><code class="code">AggregateKeyType</code></span></dt>
                                        <dd>
                                           
-                                          <p>Setting that indicates how to aggregate the request counts. Currently, you must set
-                                             this to IP. The request counts are aggregated on IP addresses.
-                                          </p>
+                                          <p>Setting that indicates how to aggregate the request counts. The options are the following:</p> 
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>IP - Aggregate the request counts on the IP address from the web request origin.</p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>FORWARDED_IP - Aggregate the request counts on the first IP address in an HTTP header.
+                                                      If you use this, configure the <code class="code">ForwardedIPConfig</code>, to specify the header to use. 
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Allowed values</em>: <code class="code">FORWARDED_IP | IP</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-wafv2-webacl-ratebasedstatementtwo-forwardedipconfig"></a><span class="term"><code class="code">ForwardedIPConfig</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The configuration for inspecting IP addresses in an HTTP header that you specify,
+                                             instead of using the IP address that&apos;s reported by the web request origin. Commonly,
+                                             this is the X-Forwarded-For (XFF) header, but you can specify any header name. 
+                                          </p>
+                                          
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If the specified header isn&apos;t present in the request, AWS WAF doesn&apos;t apply the rule
+                                                   to the web request at all.
+                                                </p>
+                                             </div>
+                                          </div> 
+                                          
+                                          <p>This configuration is used for <code class="code">GeoMatchStatement</code> and <code class="code">RateBasedStatement</code>. For <code class="code">IPSetReferenceStatement</code>, use <code class="code">IPSetForwardedIPConfig</code> instead.  
+                                          </p>
+                                          
+                                          <p>AWS WAF only evaluates the first IP address found in the specified HTTP header. </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-wafv2-webacl-forwardedipconfiguration.html">ForwardedIPConfiguration</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-wafv2-webacl-ratebasedstatementtwo-limit"></a><span class="term"><code class="code">Limit</code></span></dt>

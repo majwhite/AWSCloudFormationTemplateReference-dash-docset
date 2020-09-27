@@ -33,6 +33,7 @@
       &quot;<a href="#cfn-lambda-function-deadletterconfig">DeadLetterConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-lambda-function-deadletterconfig.html">DeadLetterConfig</a></code>,
       &quot;<a href="#cfn-lambda-function-description">Description</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-lambda-function-environment">Environment</a>&quot; : <code class="replaceable"><a href="./aws-properties-lambda-function-environment.html">Environment</a></code>,
+      &quot;<a href="#cfn-lambda-function-filesystemconfigs">FileSystemConfigs</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-lambda-function-filesystemconfig.html">FileSystemConfig</a>, ... ]</code>,
       &quot;<a href="#cfn-lambda-function-functionname">FunctionName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-lambda-function-handler">Handler</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-lambda-function-kmskeyarn">KmsKeyArn</a>&quot; : <code class="replaceable">String</code>,
@@ -58,6 +59,8 @@ Properties:
   <a href="#cfn-lambda-function-description">Description</a>: <code class="replaceable">String</code>
   <a href="#cfn-lambda-function-environment">Environment</a>: <code class="replaceable">
     <a href="./aws-properties-lambda-function-environment.html">Environment</a></code>
+  <a href="#cfn-lambda-function-filesystemconfigs">FileSystemConfigs</a>: <code class="replaceable">
+    - <a href="./aws-properties-lambda-function-filesystemconfig.html">FileSystemConfig</a></code>
   <a href="#cfn-lambda-function-functionname">FunctionName</a>: <code class="replaceable">String</code>
   <a href="#cfn-lambda-function-handler">Handler</a>: <code class="replaceable">String</code>
   <a href="#cfn-lambda-function-kmskeyarn">KmsKeyArn</a>: <code class="replaceable">String</code>
@@ -122,6 +125,25 @@ Properties:
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-lambda-function-environment.html">Environment</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-lambda-function-filesystemconfigs"></a><span class="term"><code class="code">FileSystemConfigs</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>Connection settings for an Amazon EFS file system. To connect a function to a file
+                                             system, a mount target must be available in every Availability Zone that your function
+                                             connects to. If your template contains an <a href="aws-resource-efs-mounttarget.html">AWS::EFS::MountTarget</a> resource, you must also specify a <code class="code">DependsOn</code> attribute to ensure that the mount target is created or updated before the function.
+                                          </p>
+                                          
+                                          <p>For more information about using the <code class="code">DependsOn</code> attribute, see <a href="aws-attribute-dependson.html">DependsOn Attribute</a>.
+                                             
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-lambda-function-filesystemconfig.html">FileSystemConfig</a></p>
+                                          <p><em>Maximum</em>: <code class="code">1</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-lambda-function-functionname"></a><span class="term"><code class="code">FunctionName</code></span></dt>
@@ -241,8 +263,9 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">dotnetcore2.1 | dotnetcore3.1 | go1.x | java11 | java8 | nodejs10.x | nodejs12.x |
-                                                provided | python2.7 | python3.6 | python3.7 | python3.8 | ruby2.5 | ruby2.7</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">dotnetcore2.1 | dotnetcore3.1 | go1.x | java11 | java8 | java8.al2 | nodejs10.x |
+                                                nodejs12.x | provided | provided.al2 | python2.7 | python3.6 | python3.7 | python3.8
+                                                | ruby2.5 | ruby2.7</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-lambda-function-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
@@ -299,7 +322,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-lambda-function-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-lambda-function-return-values">Return values</h2>
                                  <h3 id="aws-resource-lambda-function-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the resource name.

@@ -50,9 +50,12 @@
                                                 <li class="listitem">
                                                    						               
                                                    <p>To accept HTTPS connections from only viewers that support SNI, set
-                                                      						    <code class="code">SslSupportMethod</code> to <code class="code">sni-only</code>. This is
-                                                      							recommended. Most browsers and clients released after 2010 support
-                                                      							SNI.
+                                                      							<code class="code">SSLSupportMethod</code> to <code class="code">sni-only</code>. This is
+                                                      							recommended. Most browsers and clients support
+                                                      SNI.
+                                                      (In CloudFormation, the field name is
+                                                      							<code class="code">SslSupportMethod</code>. Note the different
+                                                      							capitalization.)
                                                       
                                                    </p>
                                                    					             
@@ -60,9 +63,11 @@
                                                 <li class="listitem">
                                                    						               
                                                    <p>To accept HTTPS connections from all viewers, including those that don&#x2019;t support SNI,
-                                                      						    set <code class="code">SslSupportMethod</code> to <code class="code">vip</code>. This is not
+                                                      							set <code class="code">SSLSupportMethod</code> to <code class="code">vip</code>. This is not
                                                       							recommended, and results in additional monthly charges from
-                                                      							CloudFront.
+                                                      							CloudFront. (In CloudFormation, the field name is
+                                                      							<code class="code">SslSupportMethod</code>. Note the different
+                                                      							capitalization.)
                                                       
                                                    </p>
                                                    					             
@@ -95,7 +100,10 @@
                                                 <li class="listitem">
                                                    						               
                                                    <p>
-                                                      						<code class="code">AcmCertificateArn</code>
+                                                      <code class="code">ACMCertificateArn</code>
+                                                      (In CloudFormation, this field name is
+                                                      							<code class="code">AcmCertificateArn</code>. Note the different
+                                                      							capitalization.)
                                                       
                                                    </p>
                                                    					             
@@ -103,7 +111,10 @@
                                                 <li class="listitem">
                                                    						               
                                                    <p>
-                                                      						<code class="code">IamCertificateId</code>
+                                                      <code class="code">IAMCertificateId</code>
+                                                      (In CloudFormation, this field name is
+                                                      							<code class="code">IamCertificateId</code>. Note the different
+                                                      							capitalization.)
                                                       
                                                    </p>
                                                    					             
@@ -149,6 +160,16 @@
                                        <dt><a id="cfn-cloudfront-distribution-viewercertificate-acmcertificatearn"></a><span class="term"><code class="code">AcmCertificateArn</code></span></dt>
                                        <dd>
                                           		       
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>In CloudFormation, this field name is <code class="code">AcmCertificateArn</code>. Note the different
+                                                   				capitalization.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          		       
                                           <p>If the distribution uses <code class="code">Aliases</code> (alternate domain names or CNAMEs) and
                                              			the SSL/TLS certificate is stored in <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">AWS Certificate Manager (ACM)</a>, provide the Amazon Resource
                                              			Name (ARN) of the ACM certificate. CloudFront only supports ACM certificates in
@@ -157,7 +178,9 @@
                                           </p>
                                           		       
                                           <p>If you specify an ACM certificate ARN, you must also specify values for
-                                             		    <code class="code">MinimumProtocolVersion</code> and <code class="code">SslSupportMethod</code>.
+                                             			<code class="code">MinimumProtocolVerison</code> and <code class="code">SSLSupportMethod</code>.
+                                             			(In CloudFormation, the field name is <code class="code">SslSupportMethod</code>. Note the different
+                                             			capitalization.)
                                              
                                           </p>
                                           	     
@@ -174,8 +197,8 @@
                                              			<code class="code">d111111abcdef8.cloudfront.net</code>, set this field to <code class="code">true</code>.
                                           </p>
                                           		       
-                                          <p>If the distribution uses <code class="code">Aliases</code> (alternate domain names or CNAMEs),
-                                             			omit this field and specify values for the following fields:
+                                          <p>If the distribution uses <code class="code">Aliases</code> (alternate domain names or CNAMEs), set
+                                             			this field to <code class="code">false</code> and specify values for the following fields:
                                           </p>
                                           		       
                                           <div class="itemizedlist">
@@ -187,8 +210,13 @@
                                                 <li class="listitem">
                                                    				           
                                                    <p>
-                                                      				  <code class="code">AcmCertificateArn</code> or <code class="code">IamCertificateId</code> (specify a value for one,
+                                                      <code class="code">ACMCertificateArn</code> or <code class="code">IAMCertificateId</code> (specify a value for one,
                                                       					not both)
+                                                   </p>
+                                                   				           
+                                                   <p>In CloudFormation, these field names are
+                                                      					<code class="code">AcmCertificateArn</code> and <code class="code">IamCertificateId</code>. Note the
+                                                      					different capitalization.
                                                    </p>
                                                    			         
                                                 </li>
@@ -203,7 +231,10 @@
                                                 <li class="listitem">
                                                    				           
                                                    <p>
-                                                      				  <code class="code">SslSupportMethod</code>
+                                                      <code class="code">SSLSupportMethod</code>
+                                                      (In CloudFormation, this field name is
+                                                      					<code class="code">SslSupportMethod</code>. Note the different
+                                                      					capitalization.)
                                                       
                                                    </p>
                                                    			         
@@ -220,6 +251,16 @@
                                        <dt><a id="cfn-cloudfront-distribution-viewercertificate-iamcertificateid"></a><span class="term"><code class="code">IamCertificateId</code></span></dt>
                                        <dd>
                                           		       
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>In CloudFormation, this field name is <code class="code">IamCertificateId</code>. Note the different
+                                                   				capitalization.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          		       
                                           <p>If the distribution uses <code class="code">Aliases</code> (alternate domain names or CNAMEs) and
                                              			the SSL/TLS certificate is stored in <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html">AWS
                                                 			Identity and Access Management (AWS IAM)</a>, provide the ID of the IAM
@@ -227,7 +268,8 @@
                                           </p>
                                           		       
                                           <p>If you specify an IAM certificate ID, you must also specify values for
-                                             		    <code class="code">MinimumProtocolVersion</code> and <code class="code">SslSupportMethod</code>.
+                                             			<code class="code">MinimumProtocolVerison</code> and <code class="code">SSLSupportMethod</code>.  (In CloudFormation, the field name is <code class="code">SslSupportMethod</code>. Note the
+                                             			different capitalization.)
                                              
                                           </p>
                                           	     
@@ -282,12 +324,10 @@
                                              </div>
                                           </div>
                                           		       
-                                          <p>We recommend that you specify <code class="code">TLSv1.2_2018</code> unless your viewers are using
-                                             			browsers or devices that don&#x2019;t support TLSv1.2.
-                                          </p>
-                                          	        
-                                          <p>When you&#x2019;re using SNI only (you set <code class="code">SslSupportMethod</code> to <code class="code">sni-only</code>),
-                                             			you must specify <code class="code">TLSv1</code> or higher.
+                                          <p>When you&#x2019;re using SNI only (you set <code class="code">SSLSupportMethod</code> to <code class="code">sni-only</code>),
+                                             			you must specify <code class="code">TLSv1</code> or higher. (In CloudFormation, the
+                                             			field name is <code class="code">SslSupportMethod</code>. Note the different
+                                             			capitalization.)
                                              
                                           </p>
                                           		       
@@ -302,11 +342,21 @@
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">SSLv3 | TLSv1 | TLSv1.1_2016 | TLSv1.2_2018 | TLSv1_2016</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">SSLv3 | TLSv1 | TLSv1.1_2016 | TLSv1.2_2018 | TLSv1.2_2019 | TLSv1_2016</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-cloudfront-distribution-viewercertificate-sslsupportmethod"></a><span class="term"><code class="code">SslSupportMethod</code></span></dt>
                                        <dd>
+                                          		       
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>In CloudFormation, this field name is <code class="code">SslSupportMethod</code>. Note the different
+                                                   				capitalization.
+                                                </p>
+                                             </div>
+                                          </div> 
                                           		       
                                           <p>If the distribution uses <code class="code">Aliases</code> (alternate domain names or CNAMEs), specify
                                              			which viewers the distribution accepts HTTPS connections from.
@@ -314,6 +364,7 @@
                                           		       
                                           <div class="itemizedlist"> 
                                              			           
+                                             			          
                                              			           
                                              		       
                                              <ul class="itemizedlist" type="disc">
@@ -322,9 +373,8 @@
                                                    <p>
                                                       <code class="code">sni-only</code> &#x2013; The distribution accepts HTTPS connections from only viewers that
                                                       					support <a href="https://en.wikipedia.org/wiki/Server_Name_Indication" target="_blank"><span>server
-                                                            					name indication (SNI)</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>. This is recommended. Most browsers and clients
-                                                      					released after 2010 support SNI.
-                                                   </p> 
+                                                            					name indication (SNI)</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>. This is recommended. Most browsers and clients support SNI.
+                                                   </p>
                                                    			         
                                                 </li>
                                                 <li class="listitem"> 
@@ -333,6 +383,16 @@
                                                       <code class="code">vip</code> &#x2013; The distribution accepts HTTPS connections from all viewers including
                                                       					those that don&#x2019;t support SNI. This is not recommended, and results in additional
                                                       					monthly charges from CloudFront.
+                                                   </p>
+                                                   			         
+                                                </li>
+                                                <li class="listitem">
+                                                   				           
+                                                   <p>
+                                                      <code class="code">static-ip</code> - Do not specify this value unless your distribution
+                                                      					has been enabled for this feature by the CloudFront team. If you have a use case
+                                                      					that requires static IP addresses for a distribution, contact CloudFront through
+                                                      					the <a href="https://console.aws.amazon.com/support/home" target="_blank"><span>AWS Support Center</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                                    </p>
                                                    			         
                                                 </li>
@@ -347,12 +407,12 @@
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">sni-only | vip</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">sni-only | static-ip | vip</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-properties-cloudfront-distribution-viewercertificate--seealso">See Also</h2>
+                                 <h2 id="aws-properties-cloudfront-distribution-viewercertificate--seealso">See also</h2>
                                  <div class="itemizedlist">
                                     				         
                                     			      

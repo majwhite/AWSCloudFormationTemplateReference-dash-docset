@@ -25,6 +25,7 @@
                                     <h3 id="aws-resource-cognito-userpoolclient-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::Cognito::UserPoolClient&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-cognito-userpoolclient-accesstokenvalidity">AccessTokenValidity</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-cognito-userpoolclient-allowedoauthflows">AllowedOAuthFlows</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-cognito-userpoolclient-allowedoauthflowsuserpoolclient">AllowedOAuthFlowsUserPoolClient</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-cognito-userpoolclient-allowedoauthscopes">AllowedOAuthScopes</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
@@ -34,11 +35,13 @@
       &quot;<a href="#cfn-cognito-userpoolclient-defaultredirecturi">DefaultRedirectURI</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-cognito-userpoolclient-explicitauthflows">ExplicitAuthFlows</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-cognito-userpoolclient-generatesecret">GenerateSecret</a>&quot; : <code class="replaceable">Boolean</code>,
+      &quot;<a href="#cfn-cognito-userpoolclient-idtokenvalidity">IdTokenValidity</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-cognito-userpoolclient-logouturls">LogoutURLs</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-cognito-userpoolclient-preventuserexistenceerrors">PreventUserExistenceErrors</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-cognito-userpoolclient-readattributes">ReadAttributes</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-cognito-userpoolclient-refreshtokenvalidity">RefreshTokenValidity</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-cognito-userpoolclient-supportedidentityproviders">SupportedIdentityProviders</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+      &quot;<a href="#cfn-cognito-userpoolclient-tokenvalidityunits">TokenValidityUnits</a>&quot; : <code class="replaceable"><a href="./aws-properties-cognito-userpoolclient-tokenvalidityunits.html">TokenValidityUnits</a></code>,
       &quot;<a href="#cfn-cognito-userpoolclient-userpoolid">UserPoolId</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-cognito-userpoolclient-writeattributes">WriteAttributes</a>&quot; : <code class="replaceable">[ String, ... ]</code>
     }
@@ -47,6 +50,7 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-cognito-userpoolclient-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Cognito::UserPoolClient
 Properties: 
+  <a href="#cfn-cognito-userpoolclient-accesstokenvalidity">AccessTokenValidity</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-cognito-userpoolclient-allowedoauthflows">AllowedOAuthFlows</a>: <code class="replaceable">
     - String</code>
   <a href="#cfn-cognito-userpoolclient-allowedoauthflowsuserpoolclient">AllowedOAuthFlowsUserPoolClient</a>: <code class="replaceable">Boolean</code>
@@ -61,6 +65,7 @@ Properties:
   <a href="#cfn-cognito-userpoolclient-explicitauthflows">ExplicitAuthFlows</a>: <code class="replaceable">
     - String</code>
   <a href="#cfn-cognito-userpoolclient-generatesecret">GenerateSecret</a>: <code class="replaceable">Boolean</code>
+  <a href="#cfn-cognito-userpoolclient-idtokenvalidity">IdTokenValidity</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-cognito-userpoolclient-logouturls">LogoutURLs</a>: <code class="replaceable">
     - String</code>
   <a href="#cfn-cognito-userpoolclient-preventuserexistenceerrors">PreventUserExistenceErrors</a>: <code class="replaceable">String</code>
@@ -69,6 +74,8 @@ Properties:
   <a href="#cfn-cognito-userpoolclient-refreshtokenvalidity">RefreshTokenValidity</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-cognito-userpoolclient-supportedidentityproviders">SupportedIdentityProviders</a>: <code class="replaceable">
     - String</code>
+  <a href="#cfn-cognito-userpoolclient-tokenvalidityunits">TokenValidityUnits</a>: <code class="replaceable">
+    <a href="./aws-properties-cognito-userpoolclient-tokenvalidityunits.html">TokenValidityUnits</a></code>
   <a href="#cfn-cognito-userpoolclient-userpoolid">UserPoolId</a>: <code class="replaceable">String</code>
   <a href="#cfn-cognito-userpoolclient-writeattributes">WriteAttributes</a>: <code class="replaceable">
     - String</code>
@@ -76,6 +83,22 @@ Properties:
                                  <h2 id="aws-resource-cognito-userpoolclient-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-cognito-userpoolclient-accesstokenvalidity"></a><span class="term"><code class="code">AccessTokenValidity</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The time limit, between 5 minutes and 1 day, after which the access token is no longer
+                                             valid and cannot be used. This value will be overridden if
+                                             you have entered a value in TokenValidityUnits.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">86400</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-cognito-userpoolclient-allowedoauthflows"></a><span class="term"><code class="code">AllowedOAuthFlows</code></span></dt>
                                        <dd>
                                           
@@ -354,6 +377,22 @@ Properties:
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
+                                       <dt><a id="cfn-cognito-userpoolclient-idtokenvalidity"></a><span class="term"><code class="code">IdTokenValidity</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The time limit, between 5 minutes and 1 day, after which the ID token is no longer
+                                             valid and cannot be used. This value will be overridden if
+                                             you have entered a value in TokenValidityUnits.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">86400</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-cognito-userpoolclient-logouturls"></a><span class="term"><code class="code">LogoutURLs</code></span></dt>
                                        <dd>
                                           
@@ -386,7 +425,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">ENABLED | LEGACY</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">ENABLED | LEGACY</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-cognito-userpoolclient-readattributes"></a><span class="term"><code class="code">ReadAttributes</code></span></dt>
@@ -412,7 +451,7 @@ Properties:
                                           <p><em>Type</em>: Integer
                                           </p>
                                           <p><em>Minimum</em>: <code class="code">0</code></p>
-                                          <p><em>Maximum</em>: <code class="code">3650</code></p>
+                                          <p><em>Maximum</em>: <code class="code">315360000</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-cognito-userpoolclient-supportedidentityproviders"></a><span class="term"><code class="code">SupportedIdentityProviders</code></span></dt>
@@ -427,6 +466,18 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: List of String
                                           </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cognito-userpoolclient-tokenvalidityunits"></a><span class="term"><code class="code">TokenValidityUnits</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The units in which the validity times are represented in. Default for RefreshToken
+                                             is days, and default for ID and access tokens are hours.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-cognito-userpoolclient-tokenvalidityunits.html">TokenValidityUnits</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-cognito-userpoolclient-userpoolid"></a><span class="term"><code class="code">UserPoolId</code></span></dt>
@@ -465,7 +516,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-cognito-userpoolclient-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-cognito-userpoolclient-return-values">Return values</h2>
                                  <h3 id="aws-resource-cognito-userpoolclient-return-values-ref">Ref</h3>
                                  <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the Amazon Cognito user pool client ID, such as
                                     <code class="code">1h57kf5cpq17m0eml12EXAMPLE</code>.

@@ -140,16 +140,20 @@
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
                                                    
-                                                   <p>For an image tag: <code class="code">registry/repository:tag</code>. For example, to specify an image with the tag &quot;latest,&quot; use 
-                                                      <code class="code">registry/repository:latest</code>.
+                                                   <p>For an image tag: <code class="code">&lt;registry&gt;/&lt;repository&gt;:&lt;tag&gt;</code>. For
+                                                      example, in the Docker repository that CodeBuild uses to manage its Docker
+                                                      images, this would be <code class="code">aws/codebuild/standard:4.0</code>. To specify the
+                                                      latest version of this image, this would be
+                                                      <code class="code">aws/codebuild/standard:latest</code>.
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>For an image digest: <code class="code">registry/repository@digest</code>. For example, to specify an image with the digest 
-                                                      &quot;sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf,&quot; use 
-                                                      <code class="code">registry/repository@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf</code>.
+                                                   <p>For an image digest: <code class="code">&lt;registry&gt;/&lt;repository&gt;@&lt;digest&gt;</code>.
+                                                      For example, to specify an image with the digest
+                                                      &quot;sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf,&quot; use
+                                                      <code class="code">&lt;registry&gt;/&lt;repository&gt;@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf</code>.
                                                    </p>
                                                    
                                                 </li>
@@ -180,36 +184,32 @@
                                                    
                                                    <p>
                                                       <code class="code">CODEBUILD</code> specifies that AWS CodeBuild uses its own credentials.
-                                                      This requires that you modify your ECR repository policy to trust AWS CodeBuild&apos;s
-                                                      service principal.
-                                                      
+                                                      This requires that you modify your ECR repository policy to trust AWS
+                                                      CodeBuild&apos;s service principal. 
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">SERVICE_ROLE</code> specifies that AWS CodeBuild uses your build project&apos;s service role.
-                                                      
+                                                      <code class="code">SERVICE_ROLE</code> specifies that AWS CodeBuild uses your build project&apos;s service
+                                                      role. 
                                                    </p>
                                                    
                                                 </li>
                                              </ul>
                                           </div>
                                           
-                                          
-                                          <p>
-                                             When you use a cross-account or private registry image, you must use SERVICE_ROLE
-                                             credentials. 
-                                             When you use an AWS CodeBuild curated image, you must use CODEBUILD credentials. 
+                                          <p> When you use a cross-account or private registry image, you must use SERVICE_ROLE
+                                             credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD credentials.
                                              
-                                          </p>   
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">CODEBUILD | SERVICE_ROLE</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">CODEBUILD | SERVICE_ROLE</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-codebuild-project-environment-privilegedmode"></a><span class="term"><code class="code">PrivilegedMode</code></span></dt>
@@ -305,21 +305,21 @@
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
                                                    
-                                                   <p>The environment type <code class="code">ARM_CONTAINER</code> is available only in
-                                                      regions US East (N. Virginia), US East (Ohio), US West (Oregon),
-                                                      EU (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo),
-                                                      Asia Pacific (Sydney), and EU (Frankfurt).
+                                                   <p>The environment type <code class="code">ARM_CONTAINER</code> is available only in regions
+                                                      US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
+                                                      Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and
+                                                      EU (Frankfurt).
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>The environment type <code class="code">LINUX_CONTAINER</code> with compute type 
-                                                      <code class="code">build.general1.2xlarge</code> is available only in
-                                                      regions US East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central),
-                                                      EU (Ireland), EU (London), EU (Frankfurt),
-                                                      Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore),
-                                                      Asia Pacific (Sydney), China (Beijing), and
+                                                   <p>The environment type <code class="code">LINUX_CONTAINER</code> with compute type
+                                                      <code class="code">build.general1.2xlarge</code> is available only in regions
+                                                      US East (N. Virginia), US East (Ohio), US West (Oregon),
+                                                      Canada (Central), EU (Ireland), EU (London),
+                                                      EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul),
+                                                      Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and
                                                       China (Ningxia).
                                                    </p>
                                                    
@@ -327,10 +327,10 @@
                                                 <li class="listitem">
                                                    
                                                    <p>The environment type <code class="code">LINUX_GPU_CONTAINER</code> is available only in
-                                                      regions US East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central),
-                                                      EU (Ireland), EU (London), EU (Frankfurt),
-                                                      Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore),
-                                                      Asia Pacific (Sydney) , China (Beijing), and
+                                                      regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+                                                      Canada (Central), EU (Ireland), EU (London),
+                                                      EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul),
+                                                      Asia Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and
                                                       China (Ningxia).
                                                    </p>
                                                    
@@ -338,12 +338,11 @@
                                              </ul>
                                           </div>
                                           
-                                          
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">ARM_CONTAINER | LINUX_CONTAINER | LINUX_GPU_CONTAINER | WINDOWS_CONTAINER</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">ARM_CONTAINER | LINUX_CONTAINER | LINUX_GPU_CONTAINER | WINDOWS_CONTAINER | WINDOWS_SERVER_2019_CONTAINER</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>

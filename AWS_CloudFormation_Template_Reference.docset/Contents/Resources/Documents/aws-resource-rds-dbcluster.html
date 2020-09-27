@@ -29,9 +29,83 @@
                                        </p>
                                     </div>
                                  </div>
-                                 <p>The default <code class="code">DeletionPolicy</code> for <code class="code">AWS::RDS::DBCluster</code>
-                                    resources is <code class="code">Snapshot</code>. For more information about how AWS
-                                    CloudFormation deletes resources, see <a href="aws-attribute-deletionpolicy.html">
+                                 <p><b>Updating DB Clusters</b></p>
+                                 <p>When properties labeled &quot;<em>Update requires:</em>
+                                    <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a>&quot; are updated, AWS CloudFormation first creates a replacement DB
+                                    cluster, then changes references from other dependent resources to point to the
+                                    replacement DB cluster, and finally deletes the old DB cluster.
+                                 </p>
+                                 <div class="awsdocs-note awsdocs-important">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>We highly recommend that you take a snapshot of the database before updating the
+                                          stack. If you don&apos;t, you lose the data when AWS CloudFormation replaces your DB
+                                          cluster. To preserve your data, perform the following procedure:
+                                       </p>
+                                       <div class="orderedlist">
+                                           
+                                          
+                                           
+                                          
+                                           
+                                          
+                                           
+                                          
+                                          <ol>
+                                             <li>
+                                                
+                                                <p>Deactivate any applications that are using the DB cluster so that there&apos;s
+                                                   no activity on the DB instance.
+                                                </p>
+                                                
+                                             </li>
+                                             <li>
+                                                
+                                                <p>Create a snapshot of the DB cluster. For more information about creating
+                                                   DB snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CreateSnapshotCluster.html">Creating a DB Cluster Snapshot</a>.
+                                                </p>
+                                                
+                                             </li>
+                                             <li>
+                                                
+                                                <p>If you want to restore your DB cluster using a DB cluster snapshot, modify
+                                                   the updated template with your DB cluster changes and add the
+                                                   <code class="code">SnapshotIdentifier</code> property with the ID of the DB cluster
+                                                   snapshot that you want to use.
+                                                </p>
+                                                
+                                                <p>After you restore a DB cluster with a <code class="code">SnapshotIdentifier</code>
+                                                   property, you must specify the same <code class="code">SnapshotIdentifier</code> property
+                                                   for any future updates to the DB cluster. When you specify this property for
+                                                   an update, the DB cluster is not restored from the DB cluster snapshot
+                                                   again, and the data in the database is not changed. However, if you don&apos;t
+                                                   specify the <code class="code">SnapshotIdentifier</code> property, an empty DB cluster is
+                                                   created, and the original DB cluster is deleted. If you specify a property
+                                                   that is different from the previous snapshot restore property, a new DB
+                                                   cluster is restored from the specified <code class="code">SnapshotIdentifier</code>
+                                                   property, and the original DB cluster is deleted.
+                                                </p>
+                                                
+                                             </li>
+                                             <li>
+                                                
+                                                <p>Update the stack.</p>
+                                                
+                                             </li>
+                                          </ol>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <p>For more information about updating other properties of this resource, see <code class="code">
+                                       <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html">ModifyDBCluster</a></code>. For more information about updating stacks, see
+                                    <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">AWS
+                                       CloudFormation Stacks Updates</a>.
+                                 </p>
+                                 <p><b>Deleting DB Clusters</b></p>
+                                 <p>The default <code class="code">DeletionPolicy</code> for <code class="code">AWS::RDS::DBCluster</code> resources
+                                    is <code class="code">Snapshot</code>. For more information about how AWS CloudFormation deletes
+                                    resources, see <a href="aws-attribute-deletionpolicy.html">
                                        DeletionPolicy Attribute</a>.
                                  </p>
                                  <h2 id="aws-resource-rds-dbcluster-syntax">Syntax</h2>
@@ -275,13 +349,16 @@ Properties:
                                           
                                           <p>The name of the DB cluster parameter group to associate with this DB cluster.</p>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>If you apply a parameter group to an existing DB cluster, then its DB instances might
-                                                   need to reboot. 
-                                                   This can result in an outage while the DB instances are rebooting.
+                                                <p>If you apply a parameter group to an existing DB cluster, then its DB instances
+                                                   might need to reboot. This can result in an outage while the DB instances are
+                                                   rebooting.
+                                                </p>
+                                                <p>If you apply a change to parameter group associated with a stopped DB cluster,
+                                                   then the update stack waits until the DB cluster is started.
                                                 </p>
                                              </div>
                                           </div>
@@ -297,6 +374,13 @@ Properties:
                                                 </p>
                                              </div>
                                           </div>
+                                          
+                                          <p>To list all of the available DB cluster parameter group names, use the following
+                                             command:
+                                          </p>
+                                          
+                                          <p><code class="code">aws rds describe-db-cluster-parameter-groups --query
+                                                &quot;DBClusterParameterGroups[].DBClusterParameterGroupName&quot; --output text</code></p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -336,6 +420,24 @@ Properties:
                                              values
                                              in the list depend on the DB engine being used. For more information, see 
                                              <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <em>Amazon Aurora User Guide</em>.
+                                          </p>
+                                          
+                                          <p>
+                                             <b>Aurora MySQL</b>
+                                             
+                                          </p>
+                                          
+                                          <p>Possible values are <code class="code">audit</code>, <code class="code">error</code>, <code class="code">general</code>, and <code class="code">slowquery</code>. 
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <b>Aurora PostgreSQL</b>
+                                             
+                                          </p>
+                                          
+                                          <p>Possible values are <code class="code">postgresql</code> and <code class="code">upgrade</code>.
+                                             
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -406,73 +508,17 @@ Properties:
                                        <dt><a id="cfn-rds-dbcluster-enginemode"></a><span class="term"><code class="code">EngineMode</code></span></dt>
                                        <dd>
                                           
-                                          <p>The DB engine mode of the DB cluster, either <code class="code">provisioned</code>, <code class="code">serverless</code>,
-                                             <code class="code">parallelquery</code>, <code class="code">global</code>, or <code class="code">multimaster</code>.
-                                          </p>
-                                          
-                                          <div class="awsdocs-note">
-                                             <div class="awsdocs-note-title">
-                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
-                                             <div class="awsdocs-note-text">
-                                                <p>
-                                                   <code class="code">global</code> engine mode only applies for global database clusters created with Aurora MySQL version
-                                                   5.6.10a. For higher Aurora MySQL versions, the clusters in a global database use <code class="code">provisioned</code>
-                                                   engine mode.
-                                                   
-                                                </p>
-                                             </div>
-                                          </div>
-                                          
-                                          <p>Limitations and requirements apply to some DB engine modes. For more information,
-                                             see the 
-                                             following sections in the <em>Amazon Aurora User Guide</em>:
-                                          </p>
-                                          
-                                          <div class="itemizedlist">
-                                              
-                                              
-                                              
-                                              
+                                          <p>The DB engine mode of the DB cluster, either <code class="code">provisioned</code> or
+                                             <code class="code">serverless</code>.
                                              
-                                             <ul class="itemizedlist" type="disc">
-                                                <li class="listitem">
-                                                   
-                                                   <p>
-                                                      <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations">
-                                                         Limitations of Aurora Serverless</a>
-                                                      
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>
-                                                      <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations">
-                                                         Limitations of Parallel Query</a>
-                                                      
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>
-                                                      <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations">
-                                                         Requirements for Aurora Global Databases</a>
-                                                      
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>
-                                                      <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations">
-                                                         Limitations of Multi-Master Clusters</a>
-                                                      
-                                                   </p>
-                                                   
-                                                </li>
-                                             </ul>
-                                          </div>
+                                          </p>
+                                          
+                                          
+                                          <p>Limitations and requirements apply to the <code class="code">serverless</code> DB engine mode. For
+                                             more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations"> Limitations of Aurora Serverless</a>.
+                                          </p>
+                                          
+                                          
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -485,20 +531,26 @@ Properties:
                                           
                                           <p>The version number of the database engine to use.</p>
                                           
-                                          <p>To list all of the available engine versions for <code class="code">aurora</code> (for MySQL 5.6-compatible Aurora), use the following command:
+                                          <p>To list all of the available engine versions for <code class="code">aurora</code> (for MySQL
+                                             5.6-compatible Aurora), use the following command:
                                           </p>
                                           
-                                          <p><code class="code">aws rds describe-db-engine-versions --engine aurora --query &quot;DBEngineVersions[].EngineVersion&quot;</code></p>
+                                          <p><code class="code">aws rds describe-db-engine-versions --engine aurora --query
+                                                &quot;DBEngineVersions[].EngineVersion&quot;</code></p>
                                           
-                                          <p>To list all of the available engine versions for <code class="code">aurora-mysql</code> (for MySQL 5.7-compatible Aurora), use the following command:
+                                          <p>To list all of the available engine versions for <code class="code">aurora-mysql</code> (for MySQL
+                                             5.7-compatible Aurora), use the following command:
                                           </p>
                                           
-                                          <p><code class="code">aws rds describe-db-engine-versions --engine aurora-mysql --query &quot;DBEngineVersions[].EngineVersion&quot;</code></p>
+                                          <p><code class="code">aws rds describe-db-engine-versions --engine aurora-mysql --query
+                                                &quot;DBEngineVersions[].EngineVersion&quot;</code></p>
                                           
-                                          <p>To list all of the available engine versions for <code class="code">aurora-postgresql</code>, use the following command:
+                                          <p>To list all of the available engine versions for <code class="code">aurora-postgresql</code>, use
+                                             the following command:
                                           </p>
                                           
-                                          <p><code class="code">aws rds describe-db-engine-versions --engine aurora-postgresql --query &quot;DBEngineVersions[].EngineVersion&quot;</code></p>
+                                          <p><code class="code">aws rds describe-db-engine-versions --engine aurora-postgresql --query
+                                                &quot;DBEngineVersions[].EngineVersion&quot;</code></p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -533,13 +585,12 @@ Properties:
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>You must specify <code class="code">MasterUsername</code>, unless you specify
-                                                   <code class="code">SnapshotIdentifier</code>. In that case, don&apos;t specify
-                                                   <code class="code">MasterUsername</code>.
+                                                <p>If you specify the <code class="code">SourceDBInstanceIdentifier</code> or
+                                                   <code class="code">SnapshotIdentifier</code> property, don&apos;t specify this property. The value
+                                                   is inherited from the source DB instance or snapshot.
                                                 </p>
                                              </div>
                                           </div>
-                                          
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -556,12 +607,12 @@ Properties:
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>If you specify the <code class="code">SourceDBInstanceIdentifier</code> or <code class="code">SnapshotIdentifier</code> property,
-                                                   don&apos;t specify this property. The value is inherited from the source DB instance or
-                                                   snapshot.
+                                                <p>If you specify the <code class="code">SourceDBInstanceIdentifier</code> or
+                                                   <code class="code">SnapshotIdentifier</code> property, don&apos;t specify this property. The value
+                                                   is inherited from the source DB instance or snapshot.
                                                 </p>
                                              </div>
-                                          </div>       
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -574,10 +625,48 @@ Properties:
                                           
                                           <p>The port number on which the DB instances in the DB cluster accept connections.</p>
                                           
-                                          <p>
-                                             Default: <code class="code">3306</code> (for both Aurora MySQL and Aurora PostgreSQL)
+                                          <p>Default:</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
                                              
-                                          </p>
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>When <code class="code">EngineMode</code> is <code class="code">provisioned</code>, <code class="code">3306</code>
+                                                      (for both Aurora MySQL and Aurora PostgreSQL)
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>When <code class="code">EngineMode</code> is <code class="code">serverless</code>:
+                                                   </p>
+                                                   
+                                                   <div class="itemizedlist">
+                                                       
+                                                       
+                                                      
+                                                      <ul class="itemizedlist" type="disc">
+                                                         <li class="listitem">
+                                                            
+                                                            <p><code class="code">3306</code> when <code class="code">Engine</code> is <code class="code">aurora</code> or
+                                                               <code class="code">aurora-mysql</code></p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p><code class="code">5432</code> when <code class="code">Engine</code> is
+                                                               <code class="code">aurora-postgresql</code></p>
+                                                            
+                                                         </li>
+                                                      </ul>
+                                                   </div>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -728,8 +817,8 @@ Properties:
                                        <dt><a id="cfn-rds-dbcluster-scalingconfiguration"></a><span class="term"><code class="code">ScalingConfiguration</code></span></dt>
                                        <dd>
                                           
-                                          <p>The 
-                                             <code class="code">ScalingConfiguration</code> property type specifies the scaling configuration of an Aurora Serverless DB cluster.
+                                          <p>The <code class="code">ScalingConfiguration</code> property type specifies the scaling
+                                             configuration of an Aurora Serverless DB cluster.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -740,20 +829,25 @@ Properties:
                                        <dt><a id="cfn-rds-dbcluster-snapshotidentifier"></a><span class="term"><code class="code">SnapshotIdentifier</code></span></dt>
                                        <dd>
                                           
-                                          <p>The identifier for the DB snapshot or DB cluster snapshot to restore from.</p>
+                                          <p>The identifier for the DB snapshot or DB cluster snapshot to restore
+                                             from.
+                                          </p>
                                           
                                           <p>You can use either the name or the Amazon Resource Name (ARN) to specify a DB
                                              cluster snapshot. However, you can use only the ARN to specify a DB snapshot.
                                           </p>
                                           
-                                          <p>After you restore a DB cluster with a <code class="code">SnapshotIdentifier</code> property, you must 
-                                             specify the same <code class="code">SnapshotIdentifier</code> property for any future updates to the DB cluster. 
-                                             When you specify this property for an update, the DB cluster is not restored from
-                                             the snapshot again, and 
-                                             the data in the database is not changed. However, if you don&apos;t specify the <code class="code">SnapshotIdentifier</code> property, 
-                                             an empty DB cluster is created, and the original DB cluster is deleted. If you specify
-                                             a property that is different from the previous snapshot restore 
-                                             property, the DB cluster is restored from the specified <code class="code">SnapshotIdentifier</code> property, and the original DB cluster is deleted.
+                                          <p>After you restore a DB cluster with a <code class="code">SnapshotIdentifier</code> property, you
+                                             must specify the same <code class="code">SnapshotIdentifier</code> property for any future updates to
+                                             the DB cluster. When you specify this property for an update, the DB cluster is not
+                                             restored from the snapshot again, and the data in the database is not changed. However,
+                                             if you don&apos;t specify the <code class="code">SnapshotIdentifier</code> property, an empty DB cluster
+                                             is created, and the original DB cluster is deleted. If you specify a property that
+                                             is
+                                             different from the previous snapshot restore property, a new DB cluster is restored
+                                             from
+                                             the specified <code class="code">SnapshotIdentifier</code> property, and the original DB cluster is
+                                             deleted.
                                           </p>
                                           
                                           <p>Constraints:</p>
@@ -820,12 +914,12 @@ Properties:
                                           
                                           <p>Indicates whether the DB cluster is encrypted.</p>
                                           
-                                          <p>If you specify the <code class="code">SnapshotIdentifier</code> or <code class="code">SourceDBInstanceIdentifier</code> property,
-                                             don&apos;t specify this property. The value is inherited from the snapshot or
-                                             source DB instance. 
+                                          <p>If you specify the <code class="code">SnapshotIdentifier</code> or
+                                             <code class="code">SourceDBInstanceIdentifier</code> property, don&apos;t specify this property. The
+                                             value is inherited from the snapshot or source DB instance. 
                                           </p>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
@@ -856,10 +950,9 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>A value that indicates whether to restore the DB cluster to the latest 
-                                             restorable backup time. By default, the DB cluster is not restored to the latest 
-                                             restorable backup time.
-                                             
+                                          <p>A value that indicates whether to restore the DB cluster to the latest restorable
+                                             backup time. By default, the DB cluster is not restored to the latest restorable backup
+                                             time. 
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -873,6 +966,10 @@ Properties:
                                           
                                           <p>A list of EC2 VPC security groups to associate with this DB cluster.</p>
                                           
+                                          <p>If you plan to update the resource, don&apos;t specify VPC security groups in a shared
+                                             VPC.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of String
@@ -881,7 +978,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-rds-dbcluster-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-rds-dbcluster-return-values">Return values</h2>
                                  <h3 id="aws-resource-rds-dbcluster-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the name of the DB cluster.
@@ -901,7 +998,8 @@ Properties:
                                        <dt><a id="Endpoint.Address-fn::getatt"></a><span class="term"><code class="code">Endpoint.Address</code></span></dt>
                                        <dd>
                                           
-                                          <p>The connection endpoint for the DB cluster. For example: <code class="code">mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com</code>
+                                          <p>The connection endpoint for the DB cluster. For example:
+                                             <code class="code">mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com</code>
                                              
                                           </p>
                                           
@@ -909,7 +1007,7 @@ Properties:
                                        <dt><a id="Endpoint.Port-fn::getatt"></a><span class="term"><code class="code">Endpoint.Port</code></span></dt>
                                        <dd>
                                           
-                                          <p>The port number that will accept connections on this DB cluster. For example: 
+                                          <p>The port number that will accept connections on this DB cluster. For example:
                                              <code class="code">3306</code>
                                              
                                           </p>
@@ -919,7 +1017,7 @@ Properties:
                                        <dt><a id="ReadEndpoint.Address-fn::getatt"></a><span class="term"><code class="code">ReadEndpoint.Address</code></span></dt>
                                        <dd>
                                           
-                                          <p>The reader endpoint for the DB cluster. For example: 
+                                          <p>The reader endpoint for the DB cluster. For example:
                                              <code class="code">mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com</code>
                                              
                                           </p>
@@ -928,6 +1026,16 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-rds-dbcluster--examples">Examples</h2>
+                                 <p>The following examples create DB clusters.</p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>For an example that adds a scaling policy for a DB cluster with Application
+                                          Auto Scaling, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-autoscaling.html#w2ab1c19c22c15c21c11">Declaring a scaling policy for an Aurora DB cluster</a>.
+                                       </p>
+                                    </div>
+                                 </div>
                                  <h3 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_Cluster_with_Two_DB_Instances">Creating an Amazon Aurora DB Cluster with Two DB Instances</h3>
                                  <p>The following example creates an Amazon Aurora DB cluster and adds two DB
                                     instances to it. Because Amazon RDS automatically assigns a writer and reader DB
@@ -938,8 +1046,8 @@ Properties:
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                     <div class="awsdocs-note-text">
-                                       <p>The example uses the <code class="code">time_zone</code> Aurora MySQL parameter. For Aurora PostgreSQL, 
-                                          use the <code class="code">timezone</code> parameter instead.
+                                       <p>The example uses the <code class="code">time_zone</code> Aurora MySQL parameter. For
+                                          Aurora PostgreSQL, use the <code class="code">timezone</code> parameter instead.
                                        </p>
                                     </div>
                                  </div>
@@ -1054,8 +1162,7 @@ RDSDBClusterParameterGroup:
 RDSDBInstance1: 
   Properties: 
     AvailabilityZone: 
-      ? &quot;Fn::GetAtt&quot;
-      : 
+      Fn::GetAtt:
         - Subnet1
         - AvailabilityZone
     DBClusterIdentifier: 
@@ -1071,8 +1178,7 @@ RDSDBInstance1:
 RDSDBInstance2: 
   Properties: 
     AvailabilityZone: 
-      ? &quot;Fn::GetAtt&quot;
-      : 
+      Fn::GetAtt:
         - Subnet2
         - AvailabilityZone
     DBClusterIdentifier: 
@@ -1094,12 +1200,10 @@ RDSDBParameterGroup:
   Type: &quot;AWS::RDS::DBParameterGroup&quot;
 </code></pre></div>
                                  <h3 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_Cluster_That_Exports_Logs_to_Amazon_CloudWatch_Logs">Creating an Amazon Aurora DB Cluster That Exports Logs to Amazon CloudWatch Logs</h3>
-                                 <p>The following example creates an Amazon Aurora PostgreSQL DB cluster that exports
-                                    logs to Amazon CloudWatch Logs. 
-                                    For more information about exporting Aurora DB cluster logs to Amazon CloudWatch Logs,
-                                    
-                                    see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">
-                                       Publishing Database Logs to Amazon CloudWatch Logs</a> in the <em>Amazon Aurora User Guide</em>.
+                                 <p>The following example creates an Amazon Aurora PostgreSQL DB cluster that
+                                    exports logs to Amazon CloudWatch Logs. For more information about exporting
+                                    Aurora DB cluster logs to Amazon CloudWatch Logs, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch"> Publishing Database Logs to Amazon CloudWatch Logs</a> in the
+                                    <em>Amazon Aurora User Guide</em>.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_Cluster_That_Exports_Logs_to_Amazon_CloudWatch_Logs--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -1233,20 +1337,23 @@ Resources:
       PubliclyAccessible: &apos;true&apos;
       DBInstanceClass: db.r4.large</code></pre></div>
                                  <h3 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_Serverless_DB_Cluster">Creating an Amazon Aurora Serverless DB Cluster</h3>
-                                 <p>The following example creates an Amazon Aurora Serverless DB cluster. 
-                                    An Aurora Serverless DB cluster is a DB cluster that automatically starts up, shuts
-                                    down, 
-                                    and scales up or down its compute capacity based on your application&apos;s needs. For
-                                    more information 
-                                    about Aurora Serverless DB clusters, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html">Using Amazon Aurora Serverless</a> 
-                                    in the <em>Amazon Aurora User Guide</em>.
+                                 <p>The following example creates an Amazon Aurora Serverless DB cluster. An
+                                    Aurora Serverless DB cluster is a DB cluster that automatically starts up, shuts
+                                    down, and scales up or down its compute capacity based on your application&apos;s
+                                    needs. For more information about Aurora Serverless DB clusters, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html">Using Amazon
+                                       Aurora Serverless</a> in the <em>Amazon Aurora User
+                                       Guide</em>.
                                  </p>
                                  <div class="awsdocs-note">
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                     <div class="awsdocs-note-text">
-                                       <p>This example creates an Aurora MySQL Serverless DB cluster by setting <code class="code">Engine</code> to <code class="code">aurora</code> and <code class="code">EngineVersion</code> to <code class="code">5.6.10a</code>. 
-                                          To create an Aurora PostgreSQL Serverless DB cluster, set <code class="code">Engine</code> to <code class="code">aurora-postgresql</code> and <code class="code">EngineVersion</code> to <code class="code">10.7</code>.
+                                       <p>This example creates an Aurora MySQL Serverless DB cluster by setting
+                                          <code class="code">Engine</code> to <code class="code">aurora</code> and
+                                          <code class="code">EngineVersion</code> to <code class="code">5.6.10a</code>. To create an Aurora
+                                          PostgreSQL Serverless DB cluster, set <code class="code">Engine</code> to
+                                          <code class="code">aurora-postgresql</code> and <code class="code">EngineVersion</code> to
+                                          <code class="code">10.7</code>.
                                        </p>
                                     </div>
                                  </div>

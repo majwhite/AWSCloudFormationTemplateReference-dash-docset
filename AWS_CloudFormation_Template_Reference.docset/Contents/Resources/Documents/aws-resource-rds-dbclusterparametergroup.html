@@ -27,6 +27,9 @@
                                        <p>If you apply a parameter group to a DB cluster, then its DB instances might need
                                           to reboot. This can result in an outage while the DB instances are rebooting.
                                        </p>
+                                       <p>If you apply a change to parameter group associated with a stopped DB cluster,
+                                          then the update stack waits until the DB cluster is started.
+                                       </p>
                                     </div>
                                  </div>
                                  <h2 id="aws-resource-rds-dbclusterparametergroup-syntax">Syntax</h2>
@@ -68,10 +71,9 @@ Properties:
                                        <dt><a id="cfn-rds-dbclusterparametergroup-family"></a><span class="term"><code class="code">Family</code></span></dt>
                                        <dd>
                                           
-                                          <p>The DB cluster parameter group family name. A DB cluster parameter group can be associated
-                                             with one and only one DB cluster parameter group 
-                                             family, and can be applied only to a DB cluster running a DB engine and engine version
-                                             compatible with that DB 
+                                          <p>The DB cluster parameter group family name. A DB cluster parameter group can be
+                                             associated with one and only one DB cluster parameter group family, and can be applied
+                                             only to a DB cluster running a DB engine and engine version compatible with that DB
                                              cluster parameter group family.
                                           </p>
                                           
@@ -83,16 +85,18 @@ Properties:
                                                    parameter group.
                                                 </p>
                                              </div>
-                                          </div> 
+                                          </div>
                                           
-                                          <p>To list all of the available parameter group families, use the following command:</p>
+                                          <p>To list all of the available parameter group families, use the following
+                                             command:
+                                          </p>
                                           
-                                          <p><code class="code">aws rds describe-db-engine-versions --query &quot;DBEngineVersions[].DBParameterGroupFamily&quot;</code></p>
+                                          <p><code class="code">aws rds describe-db-engine-versions --query
+                                                &quot;DBEngineVersions[].DBParameterGroupFamily&quot;</code></p>
                                           
-                                          <p>The output contains duplicates.</p>       
+                                          <p>The output contains duplicates.</p>
                                           
-                                          <p>For more information, see
-                                             <code class="code"><a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterParameterGroup.html">CreateDBClusterParameterGroup</a></code>.
+                                          <p>For more information, see <code class="code"><a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterParameterGroup.html">CreateDBClusterParameterGroup</a></code>.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -125,7 +129,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-rds-dbclusterparametergroup-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-rds-dbclusterparametergroup-return-values">Return values</h2>
                                  <h3 id="aws-resource-rds-dbclusterparametergroup-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the name of the DB cluster parameter group.

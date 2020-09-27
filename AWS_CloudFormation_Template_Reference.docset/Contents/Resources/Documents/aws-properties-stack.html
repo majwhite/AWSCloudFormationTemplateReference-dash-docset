@@ -16,29 +16,32 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::CloudFormation::Stack</code> type nests a stack as a resource in a top-level
-                                    template.
+                                 <p>The <code class="code">AWS::CloudFormation::Stack</code> type nests a stack as a resource in a
+                                    top-level template.
                                  </p>
                                  <p>You can add output values from a nested stack within the containing template. You
                                     use the
-                                    <a href="intrinsic-function-reference-getatt.html">GetAtt</a> function with the nested
-                                    stack&apos;s logical name and the name of the output value in the nested stack in the format
+                                    <a href="intrinsic-function-reference-getatt.html">GetAtt</a> function with the nested stack&apos;s logical name and the name of the output
+                                    value in the nested stack in the format
                                     <code class="code">Outputs.<em>NestedStackOutputName</em></code>.
                                  </p>
-                                 <div class="awsdocs-note">
+                                 <div class="awsdocs-note awsdocs-important">
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                     <div class="awsdocs-note-text">
-                                       <p>We strongly recommend that updates to nested stacks are run from the parent stack.</p>
+                                       <p>We strongly recommend that updates to nested stacks are run from the parent
+                                          stack.
+                                       </p>
                                     </div>
                                  </div>
                                  <p>When you apply template changes to update a top-level stack, CloudFormation updates
-                                    the top-level
-                                    stack and initiates an update to its nested stacks. CloudFormation updates the resources
-                                    of modified
-                                    nested stacks, but does not update the resources of unmodified nested stacks. For
-                                    more
-                                    information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">CloudFormation Stacks Updates</a>.
+                                    the
+                                    top-level stack and initiates an update to its nested stacks. CloudFormation updates
+                                    the
+                                    resources of modified nested stacks, but does not update the resources of unmodified
+                                    nested
+                                    stacks. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">CloudFormation stack
+                                       updates</a>.
                                  </p>
                                  <div class="awsdocs-note">
                                     <div class="awsdocs-note-title">
@@ -47,7 +50,7 @@
                                        <p>You must acknowledge IAM capabilities for nested stacks that contain IAM resources.
                                           Also, verify that you have cancel update stack permissions, which is required if an
                                           update
-                                          rolls back. For more information about IAM and CloudFormation, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html">Controlling Access with AWS Identity and Access Management</a>.
+                                          rolls back. For more information about IAM and CloudFormation, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html">Controlling access with AWS Identity and Access Management</a>.
                                        </p>
                                     </div>
                                  </div>
@@ -101,29 +104,27 @@ Properties:
                                           
                                           <p>The set value pairs that represent the parameters passed to CloudFormation when this
                                              nested stack is created. Each parameter has a name corresponding to a parameter defined
-                                             in the embedded template and a value representing the value that you want to set for
-                                             the parameter. 
+                                             in the
+                                             embedded template and a value representing the value that you want to set for the
+                                             parameter. 
                                           </p>
                                           
                                           <div class="awsdocs-note">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>If you use the <code class="code">Ref</code> function to pass a parameter value to a
-                                                   nested stack, comma-delimited list parameters must be of type
-                                                   <code class="code">String</code>. In other words, you cannot pass values that are of type
-                                                   <code class="code">CommaDelimitedList</code> to nested stacks.
+                                                <p>If you use the <code class="code">Ref</code> function to pass a parameter value to a nested stack,
+                                                   comma-delimited list parameters must be of type <code class="code">String</code>. In other words, you
+                                                   cannot pass values that are of type <code class="code">CommaDelimitedList</code> to nested stacks.
                                                 </p>
                                              </div>
                                           </div>
                                           
-                                          <p>Conditional. Required if the nested stack
-                                             requires input parameters.
-                                          </p>
+                                          <p>Conditional. Required if the nested stack requires input parameters.</p>
                                           
-                                          <p>Whether an update causes interruptions
-                                             depends on the resources that are being updated. An update never causes a nested
-                                             stack to be replaced.
+                                          <p>Whether an update causes interruptions depends on the resources that are being updated.
+                                             An
+                                             update never causes a nested stack to be replaced.
                                           </p>
                                           
                                           <p><em>Required</em>: Conditional
@@ -153,7 +154,8 @@ Properties:
                                           
                                           <p>Location of file containing the template body. The URL must point to a template (max
                                              size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information,
-                                             see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a>.
+                                             see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template
+                                                anatomy</a>.
                                           </p>
                                           
                                           <p>Whether an update causes interruptions depends on the resources that are being updated.
@@ -174,12 +176,12 @@ Properties:
                                           
                                           <p>The length of time, in minutes, that CloudFormation waits for the nested stack to
                                              reach
-                                             the <code class="code">CREATE_COMPLETE</code> state. The default is no timeout. When CloudFormation detects that the
-                                             nested stack has reached the <code class="code">CREATE_COMPLETE</code> state, it marks the nested stack
-                                             resource as <code class="code">CREATE_COMPLETE</code> in the parent stack and resumes creating the parent
-                                             stack. If the timeout period expires before the nested stack reaches
-                                             <code class="code">CREATE_COMPLETE</code>, CloudFormation marks the nested stack as failed and rolls back both the
-                                             nested stack and parent stack.
+                                             the <code class="code">CREATE_COMPLETE</code> state. The default is no timeout. When CloudFormation detects
+                                             that the nested stack has reached the <code class="code">CREATE_COMPLETE</code> state, it marks the nested
+                                             stack resource as <code class="code">CREATE_COMPLETE</code> in the parent stack and resumes creating the
+                                             parent stack. If the timeout period expires before the nested stack reaches
+                                             <code class="code">CREATE_COMPLETE</code>, CloudFormation marks the nested stack as failed and rolls back
+                                             both the nested stack and parent stack.
                                           </p>
                                           
                                           <p>Updates are not supported.</p>
@@ -193,7 +195,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-properties-stack-return-values">Return Values</h2>
+                                 <h2 id="aws-properties-stack-return-values">Return values</h2>
                                  <h3 id="aws-properties-stack-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the stack ID. For example:
@@ -205,10 +207,12 @@ Properties:
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
                                  <h2 id="aws-properties-stack--examples">Examples</h2>
-                                 <h3 id="aws-properties-stack--examples--Specify_Stack_Parameters">Specify Stack Parameters</h3>
-                                 <p>The sample template EC2ChooseAMI.template contains the following Parameters section:</p>
+                                 <h3 id="aws-properties-stack--examples--Specify_stack_parameters">Specify stack parameters</h3>
+                                 <p>The sample template EC2ChooseAMI.template contains the following Parameters
+                                    section:
+                                 </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-properties-stack--examples--Specify_Stack_Parameters--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Parameters&quot; : <span>{</span>
+                                    <h4 id="aws-properties-stack--examples--Specify_stack_parameters--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Parameters&quot; : <span>{</span>
   &quot;InstanceType&quot; : <span>{</span>
     &quot;Type&quot; : &quot;String&quot;,
     &quot;Default&quot; : &quot;m1.small&quot;,
@@ -225,7 +229,7 @@ Properties:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-properties-stack--examples--Specify_Stack_Parameters--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Parameters: 
+                                    <h4 id="aws-properties-stack--examples--Specify_stack_parameters--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Parameters: 
   InstanceType: 
     Type: &quot;String&quot;
     Default: &quot;m1.small&quot;
@@ -237,13 +241,13 @@ Properties:
   KeyName: 
     Type: &quot;String&quot;
     Description: &quot;Name of an existing EC2 KeyPair to enable SSH access to the web server&quot;</code></pre></div>
-                                 <h3 id="aws-properties-stack--examples--Nested_Stack">Nested Stack</h3>
+                                 <h3 id="aws-properties-stack--examples--Nested_stack">Nested stack</h3>
                                  <p>You could use the following template to embed a stack (myStackWithParams) using the
                                     EC2ChooseAMI.template and use the Parameters property in the AWS::CloudFormation::Stack
                                     resource to specify an InstanceType and KeyName.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-properties-stack--examples--Nested_Stack--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-properties-stack--examples--Nested_stack--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;AWSTemplateFormatVersion&quot; : &quot;2010-09-09&quot;,
   &quot;Resources&quot; : <span>{</span>
     &quot;myStackWithParams&quot; : <span>{</span>
@@ -259,7 +263,7 @@ Properties:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-properties-stack--examples--Nested_Stack--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &quot;2010-09-09&quot;
+                                    <h4 id="aws-properties-stack--examples--Nested_stack--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &quot;2010-09-09&quot;
 Resources: 
   myStackWithParams: 
     Type: AWS::CloudFormation::Stack
@@ -268,7 +272,7 @@ Resources:
       Parameters: 
         InstanceType: &quot;t1.micro&quot;
         KeyName: &quot;mykey&quot;</code></pre></div>
-                                 <h2 id="aws-properties-stack--seealso">See Also</h2>
+                                 <h2 id="aws-properties-stack--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
                                      
@@ -276,14 +280,16 @@ Resources:
                                     <ul class="itemizedlist" type="disc">
                                        <li class="listitem">
                                           
-                                          <p>For sample template snippets, see Nested Stacks in <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-cloudformation.html">CloudFormation Template Snippets</a>.
+                                          <p>For sample template snippets, see Nested Stacks in <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-cloudformation.html">CloudFormation
+                                                template snippets</a>.
                                           </p>
                                           
                                        </li>
                                        <li class="listitem">
                                           
                                           <p>If you have nested stacks that are stuck in an in-progress operation, see
-                                             Troubleshooting Errors in <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html">Troubleshooting AWS CloudFormation</a>.
+                                             Troubleshooting Errors in <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html">Troubleshooting AWS
+                                                CloudFormation</a>.
                                           </p>
                                           
                                        </li>

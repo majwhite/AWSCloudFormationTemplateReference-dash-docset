@@ -18,7 +18,7 @@
                                  </div>
                                  <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns the value of an attribute from a
                                     resource in the template. For more information about <code class="code">GetAtt</code> return values for a
-                                    particular resource, refer to the documentation for that resource in the <a href="./aws-template-resource-type-ref.html">Resource and Property Reference</a>.
+                                    particular resource, refer to the documentation for that resource in the <a href="./aws-template-resource-type-ref.html">Resource and property reference</a>.
                                  </p>
                                  
                                  <h2 id="getatt-declaration">Declaration</h2>
@@ -73,7 +73,7 @@
                                  </div>
                                   
                                  
-                                 <h2 id="intrinsic-function-reference-getatt-return">Return Value</h2>
+                                 <h2 id="intrinsic-function-reference-getatt-return">Return value</h2>
                                  
                                  <p>The attribute value.</p>
                                   
@@ -81,7 +81,7 @@
                                  <h2 id="intrinsic-function-reference-getatt-examples">Examples</h2>
                                   
                                  
-                                 <h3 id="intrinsic-function-reference-getatt-example">Return a String</h3>
+                                 <h3 id="intrinsic-function-reference-getatt-example">Return a string</h3>
                                  
                                  <p>This example snippet returns a string containing the DNS name of the load balancer
                                     with
@@ -91,17 +91,17 @@
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     
                                     <h4 id="intrinsic-function-reference-getatt-example.json">JSON</h4>
-                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">&quot;Fn::GetAtt&quot; : [ &quot;myELB&quot; , &quot;DNSName&quot; ]</code></pre>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Fn::GetAtt&quot; : [ &quot;myELB&quot; , &quot;DNSName&quot; ]</code></pre>
                                     </div>
                                  
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     
                                     <h4 id="intrinsic-function-reference-getatt-example.yaml">YAML</h4>
-                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">!GetAtt myELB.DNSName</code></pre>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">!GetAtt myELB.DNSName</code></pre>
                                     </div>
                                   
                                  
-                                 <h4 id="intrinsic-function-reference-getatt-example2">Return Multiple Strings</h4>
+                                 <h4 id="intrinsic-function-reference-getatt-example2">Return multiple strings</h4>
                                  
                                  <p>The following example template returns the <code class="code">SourceSecurityGroup.OwnerAlias</code>
                                     and <code class="code">SourceSecurityGroup.GroupName</code> of the load balancer with the logical name
@@ -111,7 +111,7 @@
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     
                                     <h5 id="intrinsic-function-reference-getatt-example2.json">JSON</h5>
-                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class=""><span>{</span>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
     &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
     &quot;Resources&quot;: <span>{</span>
         &quot;myELB&quot;: <span>{</span>
@@ -136,8 +136,8 @@
                 &quot;SecurityGroupIngress&quot;: [
                     <span>{</span>
                         &quot;IpProtocol&quot;: &quot;tcp&quot;,
-                        &quot;FromPort&quot;: &quot;80&quot;,
-                        &quot;ToPort&quot;: &quot;80&quot;,
+                        &quot;FromPort&quot;: 80,
+                        &quot;ToPort&quot;: 80,
                         &quot;SourceSecurityGroupOwnerId&quot;: <span>{</span>
                             &quot;Fn::GetAtt&quot;: [
                                 &quot;myELB&quot;,
@@ -155,13 +155,14 @@
             }
         }
     }
-}</code></pre>
+}
+</code></pre>
                                     </div>
                                  
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     
                                     <h5 id="intrinsic-function-reference-getatt-example2.yaml">YAML</h5>
-                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">AWSTemplateFormatVersion: 2010-09-09
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Resources:
   myELB:
     Type: AWS::ElasticLoadBalancing::LoadBalancer
@@ -178,16 +179,17 @@ Resources:
       GroupDescription: ELB ingress group
       SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: &apos;80&apos;
-          ToPort: &apos;80&apos;
+          FromPort: 80
+          ToPort: 80
           SourceSecurityGroupOwnerId: !GetAtt myELB.SourceSecurityGroup.OwnerAlias
-          SourceSecurityGroupName: !GetAtt myELB.SourceSecurityGroup.GroupName</code></pre>
+          SourceSecurityGroupName: !GetAtt myELB.SourceSecurityGroup.GroupName
+</code></pre>
                                     </div>
                                   
                                   
                                   
                                  
-                                 <h2 id="getatt-supported-functions">Supported Functions</h2>
+                                 <h2 id="getatt-supported-functions">Supported functions</h2>
                                  
                                  <p>For the <code class="code">Fn::GetAtt</code> logical resource name, you cannot use functions. You must
                                     specify a string that is a resource&apos;s logical ID.

@@ -16,12 +16,13 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The period of time during which a certificate issued by your
-                                    			private certificate authority (CA) is valid. The expiration can be
-                                    			absolute (expressed as an explicit date and time) or relative
-                                    			(expressed as a period of time after issuance in days, months, or
-                                    			years). For more information, see <a href="https://tools.ietf.org/html/rfc5280#section-4.1.2.5" target="_blank"><span>Validity</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> 
-                                    			in RFC 5280.
+                                 <p>Validity specifies the period of time during which a certificate is valid. Validity
+                                    can be
+                                    			expressed as an explicit date and time when the certificate expires, or as a span
+                                    of
+                                    			time after issuance, stated in days, months, or years. For more information, see
+                                    <a href="https://tools.ietf.org/html/rfc5280#section-4.1.2.5" target="_blank"><span>Validity</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> in RFC
+                                    			5280.
                                  </p>
                                  <p>You can issue a certificate by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html">IssueCertificate</a> action.
                                  </p>
@@ -43,16 +44,23 @@
                                        <dt><a id="cfn-acmpca-certificate-validity-type"></a><span class="term"><code class="code">Type</code></span></dt>
                                        <dd>
                                           		       
-                                          <p>Determines how <em>ACM Private CA</em> interprets the
-                                             				<code class="code">Value</code> parameter, an integer. Supported validity
-                                             			types include those listed below. Type definitions with absolute
+                                          <p>Determines how <em>ACM Private CA</em> interprets the <code class="code">Value</code> parameter,
+                                             			an integer. Supported validity types include those listed below. Type definitions
+                                             with
                                              			values include a sample input value and the resulting output. 
                                           </p>
                                           		       
                                           <p>
-                                             <code class="code">END_DATE</code>: Absolute value, using UTCTime
-                                             			(YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS) format.
+                                             <code class="code">END_DATE</code>: The specific date and time when the certificate will expire,
+                                             			expressed using UTCTime (YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS) format.
+                                             When
+                                             			UTCTime is used, if the year field (YY) is greater than or equal to 50, the year
+                                             is
+                                             			interpreted as 19YY. If the year field is less than 50, the year is interpreted
+                                             as
+                                             			20YY.
                                           </p>
+                                          
                                           		       
                                           <div class="itemizedlist">
                                              			          
@@ -66,16 +74,18 @@
                                                 </li>
                                                 <li class="listitem">
                                                    				           
-                                                   <p>Output date: 12/31/2049 23:59:59</p>
+                                                   <p>Output expiration date/time: 12/31/2049 23:59:59</p>
                                                    			         
                                                 </li>
                                              </ul>
                                           </div>
+                                          
                                           		       
                                           <p>
-                                             <code class="code">ABSOLUTE</code>: Absolute value, expressed as the number of
-                                             			seconds since the Unix epoch.
+                                             <code class="code">ABSOLUTE</code>:  The specific date and time when the certificate will expire,
+                                             			expressed in seconds since the Unix Epoch. 
                                           </p>
+                                          
                                           		       
                                           <div class="itemizedlist">
                                              			          
@@ -89,34 +99,58 @@
                                                 </li>
                                                 <li class="listitem">
                                                    				           
-                                                   <p>Output date: 01/01/2050 00:00:00</p>
+                                                   <p>Output expiration date/time: 01/01/2050 00:00:00</p>
                                                    			         
                                                 </li>
                                              </ul>
                                           </div>
                                           		       
                                           <p>
-                                             <code class="code">DAYS</code>, <code class="code">MONTHS</code>, <code class="code">YEARS</code>:
-                                             			Relative values, setting expiration as a number of days, months, or
-                                             			years after certificate issuance.
+                                             <code class="code">DAYS</code>, <code class="code">MONTHS</code>, <code class="code">YEARS</code>: The relative time from the
+                                             			moment of issuance until the certificate will expire, expressed in days, months,
+                                             or
+                                             			years. 
                                           </p>
                                           		       
-                                          <p>Note: When UTCTime is used, if the year field (YY) is greater than
-                                             			or equal to 50, the year is interpreted as 19YY. If the year field
-                                             			is less than 50, the year is interpreted as 20YY.
+                                          <p>Example if  <code class="code">DAYS</code>, issued on 10/12/2020 at 12:34:54 UTC:
                                           </p>
+                                          		       
+                                          <div class="itemizedlist">
+                                             			          
+                                             			          
+                                             		       
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   				           
+                                                   <p>Sample input value: 90</p>
+                                                   			         
+                                                </li>
+                                                <li class="listitem">
+                                                   				           
+                                                   <p>Output expiration date: 01/10/2020 12:34:54 UTC</p>
+                                                   			         
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          		       
+                                          <p>The minimum validity duration for a certificate using relative time
+                                             			(<code class="code">DAYS</code>) is one day. The minimum validity for a certificate using absolute
+                                             			time (<code class="code">ABSOLUTE</code> or <code class="code">END_DATE</code>) is one second.
+                                          </p>
+                                          
                                           	     
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">ABSOLUTE | DAYS | END_DATE | MONTHS | YEARS</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">ABSOLUTE | DAYS | END_DATE | MONTHS | YEARS</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-acmpca-certificate-validity-value"></a><span class="term"><code class="code">Value</code></span></dt>
                                        <dd>
                                           		       
-                                          <p>Time period.</p>
+                                          <p>A long integer interpreted according to the value of <code class="code">Type</code>, below.
+                                          </p>
                                           	     
                                           <p><em>Required</em>: Yes
                                           </p>

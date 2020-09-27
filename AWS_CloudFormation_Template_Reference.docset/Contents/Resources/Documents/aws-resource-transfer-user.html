@@ -71,7 +71,10 @@ Properties:
                                           </p>
                                           
                                           
-                                          <p>An example is <code class="code">your-Amazon-S3-bucket-name&gt;/home/username</code>.
+                                          <p>An example is
+                                             <em>
+                                                <code class="code">your-Amazon-S3-bucket-name&gt;/home/username</code>
+                                                </em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -90,8 +93,8 @@ Properties:
                                              your user and how you want to make them visible. You will need to specify the
                                              &quot;<code class="code">Entry</code>&quot; and &quot;<code class="code">Target</code>&quot; pair, where <code class="code">Entry</code> shows how the
                                              path is made visible and <code class="code">Target</code> is the actual Amazon S3 path. If you only specify
-                                             a target, it will be displayed as is. You will need to also make sure that your AWS
-                                             IAM Role
+                                             a target, it will be displayed as is. You will need to also make sure that your IAM
+                                             role
                                              provides access to paths in <code class="code">Target</code>. The following is an example.
                                           </p>
                                           
@@ -116,7 +119,7 @@ Properties:
                                              <div class="awsdocs-note-text">
                                                 <p>If the target of a logical directory entry does not exist in Amazon S3, the entry
                                                    will
-                                                   be ignored. As a workaround, you can use the Amazon S3 api to create 0 byte objects
+                                                   be ignored. As a workaround, you can use the Amazon S3 API to create 0 byte objects
                                                    as place
                                                    holders for your directory. If using the CLI, use the <code class="code">s3api</code> call instead of
                                                    <code class="code">s3</code> so you can use the put-object operation. For example, you use the
@@ -148,7 +151,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">LOGICAL | PATH</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">LOGICAL | PATH</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-transfer-user-policy"></a><span class="term"><code class="code">Policy</code></span></dt>
@@ -227,7 +230,7 @@ Properties:
                                        <dt><a id="cfn-transfer-user-sshpublickeys"></a><span class="term"><code class="code">SshPublicKeys</code></span></dt>
                                        <dd>
                                           
-                                          <p>Contains the public key portion of the Secure Shell (SSH) keys stored for the described
+                                          <p>Specifies the public key portion of the Secure Shell (SSH) keys stored for the described
                                              user.
                                           </p>
                                           
@@ -256,9 +259,10 @@ Properties:
                                           
                                           <p>A unique string that identifies a user and is associated with a file transfer
                                              protocol-enabled server as specified by the <code class="code">ServerId</code>. This user name must be a
-                                             minimum of 3 and a maximum of 32 characters long. The following are valid characters:
+                                             minimum of 3 and a maximum of 100 characters long. The following are valid characters:
                                              a-z,
-                                             A-Z, 0-9, underscore, and hyphen. The user name can&apos;t start with a hyphen.
+                                             A-Z, 0-9, underscore &apos;_&apos;, hyphen &apos;-&apos;, period &apos;.&apos;, and at sign &apos;@&apos;. The user name can&apos;t
+                                             start with a hyphen, period, and at sign.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -266,13 +270,13 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Minimum</em>: <code class="code">3</code></p>
-                                          <p><em>Maximum</em>: <code class="code">32</code></p>
-                                          <p><em>Pattern</em>: <code class="code">^[a-zA-Z0-9_][a-zA-Z0-9_-]<span>{</span>2,31}$</code></p>
+                                          <p><em>Maximum</em>: <code class="code">100</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^[\w][\w@.-]<span>{</span>2,99}$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-transfer-user-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-transfer-user-return-values">Return values</h2>
                                  <h3 id="aws-resource-transfer-user-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the username, such as <code class="code">transfer_user</code>.
@@ -353,11 +357,11 @@ Properties:
       &quot;SshPublicKeys&quot;: &quot;AAAAB3NzaC1yc2EAAAADAQABAAABAQCOtfCAis3aHfM6yc8KWAlMQxVDBHyccCde9MdLf4DQNXn8HjAHf+Bc1vGGCAREFUL1NO2PEEKING3ALLOWEDfIf+JBecywfO35Cm6IKIV0JF2YOPXvOuQRs80hQaBUvQL9xw6VEb4xzbit2QB6&quot;,
       &quot;Tags&quot;: [
         <span>{</span>
-          &quot;Key&quot;: &quot;Group&quot;,
-          &quot;Value&quot;: &quot;UserGroup1&quot;
+          &quot;Key&quot;: &quot;KeyName&quot;,
+          &quot;Value&quot;: &quot;ValueName&quot;
         }
       ],
-      &quot;UserName&quot;: &quot;transfer_user&quot;
+      &quot;UserName&quot;: &quot;username&quot;
     }
   }
 }</code></pre></div>
@@ -382,11 +386,11 @@ Properties:
     ServerId: s-01234567890abcdef
     SshPublicKeys: AAAAB3NzaC1yc2EAAAADAQABAAABAQCOtfCAis3aHfM6yc8KWAlMQxVDBHyccCde9MdLf4DQNXn8HjAHf+Bc1vGGCAREFUL1NO2PEEKING3ALLOWEDfIf+JBecywfO35Cm6IKIV0JF2YOPXvOuQRs80hQaBUvQL9xw6VEb4xzbit2QB6
     Tags:
-      - Key: Group
-        Value: UserGroup1
-    UserName: transfer_user
+      - Key: KeyName
+        Value: ValueName
+    UserName: username
 </code></pre></div>
-                                 <h2 id="aws-resource-transfer-user--seealso">See Also</h2>
+                                 <h2 id="aws-resource-transfer-user--seealso">See also</h2>
                                  <p><a href="https://docs.aws.amazon.com/transfer/latest/userguide/API_CreateUser.html">CreateUser</a> in the <em>AWS Transfer Family User
                                        Guide</em>.
                                  </p>

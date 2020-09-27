@@ -28,6 +28,7 @@
                                     <h3 id="aws-properties-codebuild-project-source-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;<a href="#cfn-codebuild-project-source-auth">Auth</a>&quot; : <code class="replaceable"><a href="./aws-properties-codebuild-project-sourceauth.html">SourceAuth</a></code>,
   &quot;<a href="#cfn-codebuild-project-source-buildspec">BuildSpec</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-codebuild-project-source-buildstatusconfig">BuildStatusConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-codebuild-project-buildstatusconfig.html">BuildStatusConfig</a></code>,
   &quot;<a href="#cfn-codebuild-project-source-gitclonedepth">GitCloneDepth</a>&quot; : <code class="replaceable">Integer</code>,
   &quot;<a href="#cfn-codebuild-project-source-gitsubmodulesconfig">GitSubmodulesConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-codebuild-project-gitsubmodulesconfig.html">GitSubmodulesConfig</a></code>,
   &quot;<a href="#cfn-codebuild-project-source-insecuressl">InsecureSsl</a>&quot; : <code class="replaceable">Boolean</code>,
@@ -41,6 +42,8 @@
                                     <h3 id="aws-properties-codebuild-project-source-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-codebuild-project-source-auth">Auth</a>: <code class="replaceable">
     <a href="./aws-properties-codebuild-project-sourceauth.html">SourceAuth</a></code>
   <a href="#cfn-codebuild-project-source-buildspec">BuildSpec</a>: <code class="replaceable">String</code>
+  <a href="#cfn-codebuild-project-source-buildstatusconfig">BuildStatusConfig</a>: <code class="replaceable">
+    <a href="./aws-properties-codebuild-project-buildstatusconfig.html">BuildStatusConfig</a></code>
   <a href="#cfn-codebuild-project-source-gitclonedepth">GitCloneDepth</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-codebuild-project-source-gitsubmodulesconfig">GitSubmodulesConfig</a>: <code class="replaceable">
     <a href="./aws-properties-codebuild-project-gitsubmodulesconfig.html">GitSubmodulesConfig</a></code>
@@ -91,6 +94,20 @@
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-codebuild-project-source-buildstatusconfig"></a><span class="term"><code class="code">BuildStatusConfig</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Contains information that defines how the build project reports the build status to
+                                             the source provider. This option is only used when the source provider is
+                                             <code class="code">GITHUB</code>, <code class="code">GITHUB_ENTERPRISE</code>, or
+                                             <code class="code">BITBUCKET</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-codebuild-project-buildstatusconfig.html">BuildStatusConfig</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-codebuild-project-source-gitclonedepth"></a><span class="term"><code class="code">GitCloneDepth</code></span></dt>
                                        <dd>
                                           
@@ -112,10 +129,7 @@
                                        <dt><a id="cfn-codebuild-project-source-gitsubmodulesconfig"></a><span class="term"><code class="code">GitSubmodulesConfig</code></span></dt>
                                        <dd>
                                           
-                                          <p>
-                                             Information about the Git submodules configuration for the build project.
-                                             
-                                          </p>
+                                          <p> Information about the Git submodules configuration for the build project. </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -316,22 +330,24 @@
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">CODEPIPELINE</code>: The source code settings are specified in the source
-                                                      action of a pipeline in AWS CodePipeline.
+                                                      <code class="code">CODEPIPELINE</code>: The source code settings are specified in the
+                                                      source action of a pipeline in AWS CodePipeline.
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">GITHUB</code>: The source code is in a GitHub repository.
+                                                      <code class="code">GITHUB</code>: The source code is in a GitHub or GitHub Enterprise Cloud
+                                                      repository.
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">GITHUB_ENTERPRISE</code>: The source code is in a GitHub Enterprise repository.
+                                                      <code class="code">GITHUB_ENTERPRISE</code>: The source code is in a GitHub Enterprise
+                                                      Server repository.
                                                    </p>
                                                    
                                                 </li>
@@ -356,7 +372,7 @@
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">BITBUCKET | CODECOMMIT | CODEPIPELINE | GITHUB | GITHUB_ENTERPRISE | NO_SOURCE | S3</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">BITBUCKET | CODECOMMIT | CODEPIPELINE | GITHUB | GITHUB_ENTERPRISE | NO_SOURCE | S3</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>

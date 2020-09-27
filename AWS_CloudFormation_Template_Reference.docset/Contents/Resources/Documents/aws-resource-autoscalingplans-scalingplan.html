@@ -83,7 +83,8 @@ Properties:
                                        <dd>
                                           
                                           <p>A CloudFormation stack or a set of tags. You can create one scaling plan per application
-                                             source.
+                                             source. The <code class="code">ApplicationSource</code> property must be present
+                                             to ensure interoperability with the AWS Auto Scaling console.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -103,7 +104,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-autoscalingplans-scalingplan-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-autoscalingplans-scalingplan-return-values">Return values</h2>
                                  <h3 id="aws-resource-autoscalingplans-scalingplan-return-values-ref">Ref</h3>
                                  <p>When you pass the logical ID of an <code class="code">AWS::AutoScalingPlans::ScalingPlan</code>
                                     resource to the intrinsic <code class="code">Ref</code> function, the function returns the Amazon
@@ -114,15 +115,25 @@ Properties:
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>. 
                                  </p>
                                  <h2 id="aws-resource-autoscalingplans-scalingplan--examples">Examples</h2>
-                                 <h3 id="aws-resource-autoscalingplans-scalingplan--examples--Scaling_Plan">Scaling Plan</h3>
+                                 <h3 id="aws-resource-autoscalingplans-scalingplan--examples--Scaling_plan">Scaling plan</h3>
                                  <p>The following example creates a scaling plan named <code class="code">myScalingPlan</code> for an existing
-                                    Auto Scaling group whose name you specify (along with other values) when launching
-                                    the
-                                    stack using this template. It specifies the <code class="code">TagFilters</code> property as the
-                                    application source and enables predictive scaling and dynamic scaling. 
+                                    Auto Scaling group (<a href="aws-properties-as-group.html">AWS::AutoScaling::AutoScalingGroup</a>) whose name you specify when launching
+                                    the stack using this template. It specifies the <code class="code">TagFilters</code> property as
+                                    the application source. You can specify any tag
+                                    key and tag value you want without affecting the stack, as long as the key-pair is
+                                    unique for each scaling plan. This can be any value you choose that helps you
+                                    identify your scaling plan configuration. However, if you also want to use the AWS
+                                    Auto Scaling console to edit the scaling plan, then the tag must match the tag you
+                                    chose for the Auto Scaling group.
+                                 </p>
+                                 <p>The <a href="aws-properties-autoscalingplans-scalingplan-scalinginstruction.html">ScalingInstructions</a> property includes information that&apos;s required to enable predictive scaling and dynamic
+                                    scaling. In this
+                                    example, the predictive scaling mode specifies <code class="code">ForecastOnly</code>. In which
+                                    case, AWS Auto Scaling generates forecasts with traffic predictions for the two days
+                                    ahead, but does not schedule scaling actions to match the forecast. 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-autoscalingplans-scalingplan--examples--Scaling_Plan--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-autoscalingplans-scalingplan--examples--Scaling_plan--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;AWSTemplateFormatVersion&quot;:&quot;2010-09-09&quot;,
   &quot;Parameters&quot;:<span>{</span>
     &quot;myTagKey&quot;:<span>{</span>
@@ -203,7 +214,7 @@ Properties:
             &quot;PredefinedLoadMetricSpecification&quot;:<span>{</span>
               &quot;PredefinedLoadMetricType&quot;:&quot;ASGTotalCPUUtilization&quot;
             },
-            &quot;PredictiveScalingMode&quot;:&quot;ForecastAndScale&quot;,
+            &quot;PredictiveScalingMode&quot;:&quot;ForecastOnly&quot;,
             &quot;PredictiveScalingMaxCapacityBehavior&quot;:&quot;SetMaxCapacityAboveForecastCapacity&quot;,
             &quot;PredictiveScalingMaxCapacityBuffer&quot;:25,
             &quot;ScheduledActionBufferTime&quot;:600
@@ -214,7 +225,7 @@ Properties:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-autoscalingplans-scalingplan--examples--Scaling_Plan--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+                                    <h4 id="aws-resource-autoscalingplans-scalingplan--examples--Scaling_plan--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   myTagKey:
     Type: String
@@ -258,7 +269,7 @@ Resources:
               EstimatedInstanceWarmup: !Ref ASGEstimatedInstanceWarmup
           PredefinedLoadMetricSpecification:
             PredefinedLoadMetricType: &quot;ASGTotalCPUUtilization&quot;
-          PredictiveScalingMode: &quot;ForecastAndScale&quot;
+          PredictiveScalingMode: &quot;ForecastOnly&quot;
           PredictiveScalingMaxCapacityBehavior: &quot;SetMaxCapacityAboveForecastCapacity&quot;
           PredictiveScalingMaxCapacityBuffer: 25
           ScheduledActionBufferTime: 600</code></pre></div>

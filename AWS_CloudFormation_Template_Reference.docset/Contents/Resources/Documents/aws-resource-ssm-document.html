@@ -16,9 +16,10 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::SSM::Document</code> resource creates an SSM document in AWS Systems
-                                    Manager. This document defines the actions that Systems Manager performs on your AWS
-                                    resources.
+                                 <p>The <code class="code">AWS::SSM::Document</code> resource creates a Systems Manager (SSM) document in
+                                    AWS Systems Manager. This document defines the actions that Systems Manager performs
+                                    on your
+                                    AWS resources.
                                  </p>
                                  <h2 id="aws-resource-ssm-document-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -80,7 +81,7 @@ Properties:
                                           
                                           <p>A name for the Systems Manager document.</p>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
@@ -145,7 +146,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-ssm-document-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-ssm-document-return-values">Return values</h2>
                                  <h3 id="aws-resource-ssm-document-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the Systems Manager document name, such as
@@ -154,12 +155,97 @@ Properties:
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
                                  <h2 id="aws-resource-ssm-document--examples">Examples</h2>
-                                 <h3 id="aws-resource-ssm-document--examples--Join_a_managed_instance_to_a_directory_in_AWS_Directory_Service">Join a managed instance to a directory in AWS Directory Service</h3>
-                                 <p>The following Systems Manager document joins instances to a directory in AWS
-                                    Directory Service. The three runtime configuration parameters specify which directory
-                                    the instance joins. You specify these parameter values when you associate the
-                                    document with an instance.
+                                 <h3 id="aws-resource-ssm-document--examples--Create_a_document_that_runs_commands_on_an_EC2_Linux_instance">Create a document that runs commands on an EC2 Linux instance</h3>
+                                 <p>The following SSM document runs the commands you specify on your target EC2 Linux
+                                    instance. You specify the commands parameter value when you run the document using
+                                    Run
+                                    Command.
                                  </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-document--examples--Create_a_document_that_runs_commands_on_an_EC2_Linux_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">document: 
+  Type: AWS::SSM::Document
+  Properties:
+    Content:
+      schemaVersion: &apos;2.2&apos;
+      description: &apos;Run a script on Linux instances.&apos;
+      parameters:
+        commands:
+          type: String
+          description: &quot;(Required) The commands to run or the path to an existing script
+        on the instance.&quot;
+          default: &apos;echo Hello World&apos;
+      mainSteps:
+      - action: aws:runShellScript
+        name: runCommands
+        inputs:
+          timeoutSeconds: &apos;60&apos;
+          runCommand:
+          - &quot;<span>{</span><span>{</span> commands }}&quot;
+    DocumentType: Command
+    Name: &apos;CFN_2.2_command_example&apos;</code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-document--examples--Create_a_document_that_runs_commands_on_an_EC2_Linux_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;document&quot;: <span>{</span>
+  &quot;Type&quot;: &quot;AWS::SSM::Document&quot;,
+  &quot;Properties&quot;: <span>{</span>
+    &quot;Content&quot;: <span>{</span>
+      &quot;schemaVersion&quot;: &quot;2.2&quot;,
+      &quot;description&quot;: &quot;Run a script on Linux instances.&quot;,
+      &quot;parameters&quot;: <span>{</span>
+        &quot;commands&quot;: <span>{</span>
+          &quot;type&quot;: &quot;String&quot;,
+          &quot;description&quot;: &quot;(Required) The commands to run or the path to an existing script on the instance.&quot;,
+          &quot;default&quot;: &quot;echo Hello World&quot;
+        }
+      },
+      &quot;mainSteps&quot;: [
+        <span>{</span>
+          &quot;action&quot;: &quot;aws:runShellScript&quot;,
+          &quot;name&quot;: &quot;runCommands&quot;,
+          &quot;inputs&quot;: <span>{</span>
+            &quot;timeoutSeconds&quot;: &quot;60&quot;,
+            &quot;runCommand&quot;: [
+              &quot;<span>{</span><span>{</span> commands }}&quot;
+            ]
+          }
+        }
+      ]
+    },
+    &quot;DocumentType&quot;: &quot;Command&quot;,
+    &quot;Name&quot;: &quot;CFN_2.2_command_ex&quot;
+  }
+}</code></pre></div>
+                                 <h3 id="aws-resource-ssm-document--examples--Join_a_managed_instance_to_a_directory_in_AWS_Directory_Service">Join a managed instance to a directory in AWS Directory Service</h3>
+                                 <p>The following SSM document joins instances to a directory in AWS Directory Service.
+                                    The three runtime configuration parameters specify which directory the instance joins.
+                                    You
+                                    specify these parameter values when you associate the document with an instance.
+                                 </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-document--examples--Join_a_managed_instance_to_a_directory_in_AWS_Directory_Service--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">document: 
+  Type: AWS::SSM::Document
+  Properties:
+    Content:
+      schemaVersion: &apos;1.2&apos;
+      description: Join instances to an AWS Directory Service domain.
+      parameters:
+        directoryId:
+          type: String
+          description: &quot;(Required) The ID of the AWS Directory Service directory.&quot;
+        directoryName:
+          type: String
+          description: &quot;(Required) The name of the directory. For example, test.example.com&quot;
+        dnsIpAddresses:
+          type: StringList
+          default: []
+          description: &quot;(Optional) The IP addresses of the DNS servers in the directory.
+            Required when DHCP is not configured. For more information, see https://docs.aws.amazon.com/directoryservice/latest/admin-guide/simple_ad_dns.html&quot;
+          allowedPattern: &quot;((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.)<span>{</span>3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)&quot;
+      runtimeConfig:
+        aws:domainJoin:
+          properties:
+            directoryId: &quot;<span>{</span><span>{</span> directoryId}}&quot;
+            directoryName: &quot;<span>{</span><span>{</span> directoryName }}&quot;
+            dnsIpAddresses: &quot;<span>{</span><span>{</span> dnsIpAddresses }}&quot;</code></pre></div>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-ssm-document--examples--Join_a_managed_instance_to_a_directory_in_AWS_Directory_Service--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;document&quot; : <span>{</span>
     &quot;Type&quot;: &quot;AWS::SSM::Document&quot;,
@@ -195,39 +281,45 @@ Properties:
         }
     }
 }</code></pre></div>
-                                 <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-document--examples--Join_a_managed_instance_to_a_directory_in_AWS_Directory_Service--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">document: Type: AWS::SSM::Document
-Properties:
-  Content:
-    schemaVersion: &apos;1.2&apos;
-    description: Join instances to an AWS Directory Service domain.
-    parameters:
-      directoryId:
-        type: String
-        description: &quot;(Required) The ID of the AWS Directory Service directory.&quot;
-      directoryName:
-        type: String
-        description: &quot;(Required) The name of the directory. For example, test.example.com&quot;
-      dnsIpAddresses:
-        type: StringList
-        default: []
-        description: &quot;(Optional) The IP addresses of the DNS servers in the directory.
-          Required when DHCP is not configured. For more information, see https://docs.aws.amazon.com/directoryservice/latest/admin-guide/simple_ad_dns.html&quot;
-        allowedPattern: &quot;((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.)<span>{</span>3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)&quot;
-    runtimeConfig:
-      aws:domainJoin:
-        properties:
-          directoryId: &quot;<span>{</span><span>{</span> directoryId}}&quot;
-          directoryName: &quot;<span>{</span><span>{</span> directoryName }}&quot;
-          dnsIpAddresses: &quot;<span>{</span><span>{</span> dnsIpAddresses }}&quot;</code></pre></div>
-                                 <h3 id="aws-resource-ssm-document--examples--Associate_the_Systems_Manager_document_with_an_instance">Associate the Systems Manager document with an instance</h3>
-                                 <p>The following example shows how to associate the SSM document with an instance.
-                                    The <code class="code">DocumentName</code> property specifies the SSM document and the
+                                 <h3 id="aws-resource-ssm-document--examples--Associate_an_SSM_document_with_an_instance">Associate an SSM document with an instance</h3>
+                                 <p>The following example shows how to associate an SSM document with an instance. The
+                                    <code class="code">DocumentName</code> property specifies the SSM document and the
                                     <code class="code">AssociationParameters</code> property specifies values for the runtime
                                     configuration parameters.
                                  </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-document--examples--Associate_an_SSM_document_with_an_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">myEC2:
+  Type: AWS::EC2::Instance
+  Properties:
+    ImageId:
+      Ref: myImageId
+    InstanceType: t2.micro
+    SsmAssociations:
+    - DocumentName:
+        Ref: document
+      AssociationParameters:
+      - Key: directoryId
+        Value:
+        - Ref: myDirectory
+      - Key: directoryName
+        Value:
+        - testDirectory.example.com
+      - Key: dnsIpAddresses
+        Value:
+          Fn::GetAtt:
+          - myDirectory
+          - DnsIpAddresses
+    IamInstanceProfile:
+      Ref: myInstanceProfile
+    NetworkInterfaces:
+    - DeviceIndex: &apos;0&apos;
+      AssociatePublicIpAddress: &apos;true&apos;
+      SubnetId:
+        Ref: mySubnet
+    KeyName:
+      Ref: myKeyName</code></pre></div>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-document--examples--Associate_the_Systems_Manager_document_with_an_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;myEC2&quot; : <span>{</span>
+                                    <h4 id="aws-resource-ssm-document--examples--Associate_an_SSM_document_with_an_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;myEC2&quot; : <span>{</span>
     &quot;Type&quot;: &quot;AWS::EC2::Instance&quot;,
     &quot;Properties&quot;: <span>{</span>
         &quot;ImageId&quot;: <span>{</span>
@@ -283,37 +375,7 @@ Properties:
         }
     }
 }</code></pre></div>
-                                 <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-document--examples--Associate_the_Systems_Manager_document_with_an_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">myEC2: Type: AWS::EC2::Instance
-Properties:
-  ImageId:
-    Ref: myImageId
-  InstanceType: t2.micro
-  SsmAssociations:
-  - DocumentName:
-      Ref: document
-    AssociationParameters:
-    - Key: directoryId
-      Value:
-      - Ref: myDirectory
-    - Key: directoryName
-      Value:
-      - testDirectory.example.com
-    - Key: dnsIpAddresses
-      Value:
-        Fn::GetAtt:
-        - myDirectory
-        - DnsIpAddresses
-  IamInstanceProfile:
-    Ref: myInstanceProfile
-  NetworkInterfaces:
-  - DeviceIndex: &apos;0&apos;
-    AssociatePublicIpAddress: &apos;true&apos;
-    SubnetId:
-      Ref: mySubnet
-  KeyName:
-    Ref: myKeyName</code></pre></div>
-                                 <h2 id="aws-resource-ssm-document--seealso">See Also</h2>
+                                 <h2 id="aws-resource-ssm-document--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
                                     
@@ -321,8 +383,7 @@ Properties:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-ssm-docs.html">AWS Systems Manager
-                                                Documents</a>
+                                             <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-ssm-docs.html">AWS Systems Manager Documents</a>
                                              
                                           </p>
                                           

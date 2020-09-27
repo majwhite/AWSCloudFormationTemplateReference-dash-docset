@@ -16,8 +16,9 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Information about how to connect to the upstream system.</p>
-                                 <p>The parent of this entity is InputSettings.</p>
+                                 <p>This element configures the connection to the upstream system.
+                                    This element belongs to InputSettings.
+                                 </p>
                                  <h2 id="aws-properties-medialive-channel-networkinputsettings-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -37,8 +38,10 @@
                                        <dt><a id="cfn-medialive-channel-networkinputsettings-hlsinputsettings"></a><span class="term"><code class="code">HlsInputSettings</code></span></dt>
                                        <dd>
                                           
-                                          <p>Information about how to connect to the upstream system.</p>
                                           
+                                          <p>You must include this element if you include a
+                                             NetworkInputSettings element.
+                                          </p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-medialive-channel-hlsinputsettings.html">HlsInputSettings</a></p>
@@ -47,13 +50,17 @@
                                        <dt><a id="cfn-medialive-channel-networkinputsettings-servervalidation"></a><span class="term"><code class="code">ServerValidation</code></span></dt>
                                        <dd>
                                           
-                                          <p>Checks HTTPS server certificates. When set to checkCryptographyOnly, cryptography
-                                             in
-                                             the certificate is checked, but not the server&apos;s name. Certain subdomains (notably
-                                             S3
-                                             buckets that use dots in the bucket name) don&apos;t strictly match the corresponding
-                                             certificate&apos;s wildcard pattern and would otherwise cause the channel to error. This
-                                             setting is ignored for protocols that do not use HTTPS.
+                                          
+                                          <p>Applies only to HTTPS. Specifies how to check HTTPS server certificates. When set
+                                             to
+                                             checkCryptographyOnly, MediaLive checks the cryptography in the certificate 
+                                             but doesn&apos;t check the server name. This is the recommended value for 
+                                             subdomains (notably
+                                             S3 buckets, which use dots in the bucket name) that do not strictly
+                                             match the corresponding certificate&apos;s wildcard pattern. This value 
+                                             reduces the possibility that the validation will fail.
+                                             
+                                             
                                           </p>
                                           
                                           <p><em>Required</em>: No

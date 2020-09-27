@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-qldb-stream">AWS::QLDB::Stream</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The <code class="code">AWS::QLDB::Stream</code> resource creates a journal stream for a given Amazon
+                                    Quantum Ledger Database (Amazon QLDB) ledger. The stream captures every document revision
+                                    that is committed to the ledger&apos;s journal and delivers the data to a specified Amazon
+                                    Kinesis Data Streams resource.
+                                 </p>
+                                 <p>For more information, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/API_StreamJournalToKinesis.html">StreamJournalToKinesis</a> in the <em>Amazon QLDB API
+                                       Reference</em>.
+                                 </p>
+                                 <h2 id="aws-resource-qldb-stream-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-qldb-stream-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::QLDB::Stream&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-qldb-stream-exclusiveendtime">ExclusiveEndTime</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-qldb-stream-inclusivestarttime">InclusiveStartTime</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-qldb-stream-kinesisconfiguration">KinesisConfiguration</a>&quot; : <code class="replaceable"><a href="./aws-properties-qldb-stream-kinesisconfiguration.html">KinesisConfiguration</a></code>,
+      &quot;<a href="#cfn-qldb-stream-ledgername">LedgerName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-qldb-stream-rolearn">RoleArn</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-qldb-stream-streamname">StreamName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-qldb-stream-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-qldb-stream-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::QLDB::Stream
+Properties: 
+  <a href="#cfn-qldb-stream-exclusiveendtime">ExclusiveEndTime</a>: <code class="replaceable">String</code>
+  <a href="#cfn-qldb-stream-inclusivestarttime">InclusiveStartTime</a>: <code class="replaceable">String</code>
+  <a href="#cfn-qldb-stream-kinesisconfiguration">KinesisConfiguration</a>: <code class="replaceable">
+    <a href="./aws-properties-qldb-stream-kinesisconfiguration.html">KinesisConfiguration</a></code>
+  <a href="#cfn-qldb-stream-ledgername">LedgerName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-qldb-stream-rolearn">RoleArn</a>: <code class="replaceable">String</code>
+  <a href="#cfn-qldb-stream-streamname">StreamName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-qldb-stream-tags">Tags</a>: <code class="replaceable">
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
+</code></pre></div>
+                                 <h2 id="aws-resource-qldb-stream-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-qldb-stream-exclusiveendtime"></a><span class="term"><code class="code">ExclusiveEndTime</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The exclusive date and time that specifies when the stream ends. If you don&apos;t define
+                                             this parameter, the stream runs indefinitely until you cancel it.
+                                          </p>
+                                          
+                                          <p>The <code class="code">ExclusiveEndTime</code> must be in <code class="code">ISO 8601</code> date and time format
+                                             and in Universal Coordinated Time (UTC). For example:
+                                             <code class="code">2019-06-13T21:36:34Z</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-qldb-stream-inclusivestarttime"></a><span class="term"><code class="code">InclusiveStartTime</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The inclusive start date and time from which to start streaming journal data. This
+                                             parameter must be in <code class="code">ISO 8601</code> date and time format and in Universal
+                                             Coordinated Time (UTC). For example: <code class="code">2019-06-13T21:36:34Z</code>.
+                                          </p>
+                                          
+                                          <p>The <code class="code">InclusiveStartTime</code> cannot be in the future and must be before
+                                             <code class="code">ExclusiveEndTime</code>.
+                                          </p>
+                                          
+                                          <p>If you provide an <code class="code">InclusiveStartTime</code> that is before the ledger&apos;s
+                                             <code class="code">CreationDateTime</code>, QLDB effectively defaults it to the ledger&apos;s
+                                             <code class="code">CreationDateTime</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-qldb-stream-kinesisconfiguration"></a><span class="term"><code class="code">KinesisConfiguration</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The configuration settings of the Kinesis Data Streams destination for your stream
+                                             request.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-qldb-stream-kinesisconfiguration.html">KinesisConfiguration</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-qldb-stream-ledgername"></a><span class="term"><code class="code">LedgerName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name of the ledger.</p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">32</code></p>
+                                          <p><em>Pattern</em>: <code class="code">(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-qldb-stream-rolearn"></a><span class="term"><code class="code">RoleArn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a
+                                             journal stream to write data records to a Kinesis Data Streams resource.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">20</code></p>
+                                          <p><em>Maximum</em>: <code class="code">1600</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-qldb-stream-streamname"></a><span class="term"><code class="code">StreamName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name that you want to assign to the QLDB journal stream. User-defined names can
+                                             help identify and indicate the purpose of a stream.
+                                          </p>
+                                          
+                                          <p>Your stream name must be unique among other <em>active</em> streams for a
+                                             given ledger. Stream names have the same naming constraints as ledger names, as defined
+                                             in
+                                             <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming">Quotas in Amazon QLDB</a> in the <em>Amazon QLDB Developer
+                                                Guide</em>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">32</code></p>
+                                          <p><em>Pattern</em>: <code class="code">(?!^.*--)(?!^[0-9]+$)(?!^-)(?!.*-$)^[A-Za-z0-9-]+$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-qldb-stream-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>An array of key-value pairs to apply to this resource.</p>
+                                          
+                                          <p>For more information, see <a href="aws-properties-resource-tags.html">Tag</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-qldb-stream-return-values">Return values</h2>
+                                 <h3 id="aws-resource-qldb-stream-return-values-ref">Ref</h3>
+                                 <p>
+                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the resource ID or ARN. For example:
+                                 </p>
+                                 <p>
+                                    <code class="code"><span>{</span> &quot;Ref&quot;: &quot;<code class="replaceable">myQLDBStream</code>&quot; }</code>
+                                    
+                                 </p>
+                                 <p>For the resource with the logical ID <code class="code">myQLDBStream</code>, <code class="code">Ref</code>
+                                    returns the ID or ARN of the Amazon QLDB journal stream.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-qldb-stream-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-qldb-stream-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the QLDB journal stream. For example:
+                                             <code class="code">arn:aws:qldb:us-east-1:123456789012:stream/exampleLedger/IiPT4brpZCqCq3f4MTHbYy</code>.
+                                          </p>
+                                          
+                                       </dd>
+                                       <dt><a id="Id-fn::getatt"></a><span class="term"><code class="code">Id</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The unique ID that QLDB assigns to each QLDB journal stream. For example:
+                                             <code class="code">IiPT4brpZCqCq3f4MTHbYy</code>.
+                                          </p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-qldb-stream--examples">Examples</h2>
+                                 <h3 id="aws-resource-qldb-stream--examples--Amazon_QLDB_Stream">Amazon QLDB Stream</h3>
+                                 <p>The following example describes an Amazon QLDB journal stream for a ledger named
+                                    <code class="code">exampleLedger</code> and a Kinesis Data Streams destination with the ARN
+                                    <code class="code">arn:aws:kinesis:us-east-1:123456789012:stream/stream-for-qldb</code>.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-qldb-stream--examples--Amazon_QLDB_Stream--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;AWSTemplateFormatVersion&quot; : &quot;2010-09-09&quot;,
+  &quot;Resources&quot; : <span>{</span>
+    &quot;myQLDBStream&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::QLDB::Stream&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;ExclusiveEndTime&quot; : &quot;2020-05-29T22:59:59Z&quot;,
+        &quot;InclusiveStartTime&quot; : &quot;2020-05-29T00:00:00Z&quot;,
+        &quot;KinesisConfiguration&quot; : <span>{</span>
+          &quot;AggregationEnabled&quot;: true,
+          &quot;StreamArn&quot;: &quot;arn:aws:kinesis:us-east-1:123456789012:stream/stream-for-qldb&quot;
+        },
+        &quot;LedgerName&quot; : &quot;exampleLedger&quot;,
+        &quot;RoleArn&quot; : &quot;arn:aws:iam::123456789012:role/my-kinesis-stream-role&quot;,
+        &quot;StreamName&quot; : &quot;exampleLedger-stream&quot;,
+        &quot;Tags&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;Domain&quot;,
+            &quot;Value&quot;: &quot;Test&quot;
+          }
+        ]
+      }
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-qldb-stream--examples--Amazon_QLDB_Stream--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &quot;2010-09-09&quot;
+Resources:
+  myQLDBStream:
+    Type: &quot;AWS::QLDB::Stream&quot;
+    Properties:
+      ExclusiveEndTime: &quot;2020-05-29T22:59:59Z&quot;
+      InclusiveStartTime: &quot;2020-05-29T00:00:00Z&quot;
+      KinesisConfiguration:
+        AggregationEnabled: true
+        StreamArn: &quot;arn:aws:kinesis:us-east-1:123456789012:stream/stream-for-qldb&quot;
+      LedgerName: &quot;exampleLedger&quot;
+      RoleArn: &quot;arn:aws:iam::123456789012:role/my-kinesis-stream-role&quot;
+      StreamName: &quot;exampleLedger-stream&quot;
+      Tags:
+        - Key: Domain
+          Value: Test</code></pre></div>
+                                 <h2 id="aws-resource-qldb-stream--seealso">See also</h2>
+                                 <div class="itemizedlist">
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p>
+                                             <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/API_StreamJournalToKinesis.html">StreamJournalToKinesis</a> in the <em>Amazon QLDB API
+                                                Reference</em></p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

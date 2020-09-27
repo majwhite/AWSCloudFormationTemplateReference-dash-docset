@@ -23,19 +23,24 @@
                                     support. For more information, see <a href="https://docs.aws.amazon.com/acm/latest/APIReference/API_RequestCertificate.html">RequestCertificate</a> in 
                                     the AWS Certificate Manager API Reference.
                                  </p>
-                                 <div class="awsdocs-note">
+                                 <div class="awsdocs-note awsdocs-important">
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                     <div class="awsdocs-note-text">
-                                       <p>When you use the <code class="code">AWS::CertificateManager::Certificate</code> resource in an AWS
-                                          CloudFormation stack, the stack will remain in the <code class="code">CREATE_IN_PROGRESS</code>
-                                          state. Further stack operations will be delayed until you validate the certificate
-                                          request, either by acting upon the instructions in the validation email, or by adding
-                                          a
-                                          CNAME record to your DNS configuration. For more information, see 
-                                          <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html">Use
-                                             Email to Validate Domain Ownership</a> and <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html">Use
-                                             DNS to Validate Domain Ownership</a>.
+                                       <p>When you use the <code class="code">AWS::CertificateManager::Certificate</code> resource in a
+                                          CloudFormation stack, domain validation is handled automatically if all three of the
+                                          following are true: The certificate domain is hosted in Amazon Route 53, the domain
+                                          resides in your AWS account, and you are using DNS validation.
+                                       </p>
+                                       <p>However, if the certificate uses email validation, or if the domain is not hosted
+                                          in
+                                          Route 53, then the stack will remain in the <code class="code">CREATE_IN_PROGRESS</code> state.
+                                          Further stack operations are delayed until you validate the certificate request, either
+                                          by acting upon the instructions in the validation email, or by adding a CNAME record
+                                          to
+                                          your DNS configuration. For more information, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html">Use Email to Validate Domain
+                                             Ownership</a> and <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html">Use DNS to Validate Domain
+                                             Ownership</a>.
                                        </p>
                                     </div>
                                  </div>
@@ -45,6 +50,8 @@
                                     <h3 id="aws-resource-certificatemanager-certificate-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::CertificateManager::Certificate&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-certificatemanager-certificate-certificateauthorityarn">CertificateAuthorityArn</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-certificatemanager-certificate-certificatetransparencyloggingpreference">CertificateTransparencyLoggingPreference</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-certificatemanager-certificate-domainname">DomainName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-certificatemanager-certificate-domainvalidationoptions">DomainValidationOptions</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-certificatemanager-certificate-domainvalidationoption.html">DomainValidationOption</a>, ... ]</code>,
       &quot;<a href="#cfn-certificatemanager-certificate-subjectalternativenames">SubjectAlternativeNames</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
@@ -56,6 +63,8 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-certificatemanager-certificate-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::CertificateManager::Certificate
 Properties: 
+  <a href="#cfn-certificatemanager-certificate-certificateauthorityarn">CertificateAuthorityArn</a>: <code class="replaceable">String</code>
+  <a href="#cfn-certificatemanager-certificate-certificatetransparencyloggingpreference">CertificateTransparencyLoggingPreference</a>: <code class="replaceable">String</code>
   <a href="#cfn-certificatemanager-certificate-domainname">DomainName</a>: <code class="replaceable">String</code>
   <a href="#cfn-certificatemanager-certificate-domainvalidationoptions">DomainValidationOptions</a>: <code class="replaceable">
     - <a href="./aws-properties-certificatemanager-certificate-domainvalidationoption.html">DomainValidationOption</a></code>
@@ -68,6 +77,57 @@ Properties:
                                  <h2 id="aws-resource-certificatemanager-certificate-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-certificatemanager-certificate-certificateauthorityarn"></a><span class="term"><code class="code">CertificateAuthorityArn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the private certificate authority (CA) that will
+                                             be used
+                                             to issue the certificate. If you do not provide an ARN and you are trying to request
+                                             a private
+                                             certificate, ACM will attempt to issue a public certificate. For more information
+                                             about
+                                             private CAs, see the <a href="https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html">AWS Certificate Manager Private Certificate Authority (PCA)</a> user guide. The ARN must have the following form: 
+                                          </p>
+                                          
+                                          
+                                          <p>
+                                             <code class="code">arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code>
+                                             
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">20</code></p>
+                                          <p><em>Maximum</em>: <code class="code">2048</code></p>
+                                          <p><em>Pattern</em>: <code class="code">arn:[\w+=/,.@-]+:[\w+=/,.@-]+:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=,.@-]+)*</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-certificatemanager-certificate-certificatetransparencyloggingpreference"></a><span class="term"><code class="code">CertificateTransparencyLoggingPreference</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>You can opt out of certificate transparency logging by specifying the        
+                                             <code class="code">DISABLED</code> option. Opt in by specifying <code class="code">ENABLED</code>.
+                                          </p>
+                                          
+                                          <p>If you do not specify a certificate transparency logging preference on a new
+                                             CloudFormation template, or if you remove the logging preference from an existing
+                                             template, this is the same as explicitly enabling the preference.
+                                          </p>      
+                                          
+                                          <p>Changing the  certificate transparency logging preference will update the existing
+                                             resource by calling <code class="code">UpdateCertificateOptions</code> on the certificate. This action
+                                             will not create a new resource.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">DISABLED | ENABLED</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-certificatemanager-certificate-domainname"></a><span class="term"><code class="code">DomainName</code></span></dt>
                                        <dd>
                                           
@@ -139,12 +199,12 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">DNS | EMAIL</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">DNS | EMAIL</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-certificatemanager-certificate-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-certificatemanager-certificate-return-values">Return values</h2>
                                  <h3 id="aws-resource-certificatemanager-certificate-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the certificate&apos;s Amazon Resource Name (ARN).

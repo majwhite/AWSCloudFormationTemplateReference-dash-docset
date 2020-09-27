@@ -21,7 +21,12 @@
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-properties-fsx-filesystem-lustreconfiguration-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-fsx-filesystem-lustreconfiguration-autoimportpolicy">AutoImportPolicy</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-fsx-filesystem-lustreconfiguration-automaticbackupretentiondays">AutomaticBackupRetentionDays</a>&quot; : <code class="replaceable">Integer</code>,
+  &quot;<a href="#cfn-fsx-filesystem-lustreconfiguration-copytagstobackups">CopyTagsToBackups</a>&quot; : <code class="replaceable">Boolean</code>,
+  &quot;<a href="#cfn-fsx-filesystem-lustreconfiguration-dailyautomaticbackupstarttime">DailyAutomaticBackupStartTime</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-fsx-filesystem-lustreconfiguration-deploymenttype">DeploymentType</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-fsx-filesystem-lustreconfiguration-drivecachetype">DriveCacheType</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-fsx-filesystem-lustreconfiguration-exportpath">ExportPath</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-fsx-filesystem-lustreconfiguration-importedfilechunksize">ImportedFileChunkSize</a>&quot; : <code class="replaceable">Integer</code>,
   &quot;<a href="#cfn-fsx-filesystem-lustreconfiguration-importpath">ImportPath</a>&quot; : <code class="replaceable">String</code>,
@@ -30,7 +35,12 @@
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h3 id="aws-properties-fsx-filesystem-lustreconfiguration-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-fsx-filesystem-lustreconfiguration-deploymenttype">DeploymentType</a>: <code class="replaceable">String</code>
+                                    <h3 id="aws-properties-fsx-filesystem-lustreconfiguration-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-fsx-filesystem-lustreconfiguration-autoimportpolicy">AutoImportPolicy</a>: <code class="replaceable">String</code>
+  <a href="#cfn-fsx-filesystem-lustreconfiguration-automaticbackupretentiondays">AutomaticBackupRetentionDays</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-fsx-filesystem-lustreconfiguration-copytagstobackups">CopyTagsToBackups</a>: <code class="replaceable">Boolean</code>
+  <a href="#cfn-fsx-filesystem-lustreconfiguration-dailyautomaticbackupstarttime">DailyAutomaticBackupStartTime</a>: <code class="replaceable">String</code>
+  <a href="#cfn-fsx-filesystem-lustreconfiguration-deploymenttype">DeploymentType</a>: <code class="replaceable">String</code>
+  <a href="#cfn-fsx-filesystem-lustreconfiguration-drivecachetype">DriveCacheType</a>: <code class="replaceable">String</code>
   <a href="#cfn-fsx-filesystem-lustreconfiguration-exportpath">ExportPath</a>: <code class="replaceable">String</code>
   <a href="#cfn-fsx-filesystem-lustreconfiguration-importedfilechunksize">ImportedFileChunkSize</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-fsx-filesystem-lustreconfiguration-importpath">ImportPath</a>: <code class="replaceable">String</code>
@@ -40,15 +50,134 @@
                                  <h2 id="aws-properties-fsx-filesystem-lustreconfiguration-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-fsx-filesystem-lustreconfiguration-autoimportpolicy"></a><span class="term"><code class="code">AutoImportPolicy</code></span></dt>
+                                       <dd>
+                                          
+                                          <p> (Optional) When you create your file system, your existing S3 objects appear as file
+                                             and directory listings. 
+                                             Use this property to choose how Amazon FSx keeps your file and directory listings
+                                             up to date 
+                                             as you add or modify objects in your linked S3 bucket. <code class="code">AutoImportPolicy</code> can
+                                             have the following values:
+                                          </p>
+                                          
+                                          
+                                          
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">NONE</code> - (Default) AutoImport is off. Amazon FSx only updates 
+                                                      file and directory listings from the linked S3 bucket 
+                                                      when the file system is created. FSx does not update file and directory 
+                                                      listings for any new or changed objects after choosing this option.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">NEW</code> - AutoImport is on. Amazon FSx automatically imports
+                                                      directory listings of any new objects added to the linked S3 bucket that 
+                                                      do not currently exist in the FSx file system. 
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports 
+                                                      file and directory listings of any new objects added to the S3 bucket and any 
+                                                      existing objects that are changed in the S3 bucket after you choose this option. 
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html">Automatically import updates from your S3 bucket</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">NEW | NEW_CHANGED | NONE</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fsx-filesystem-lustreconfiguration-automaticbackupretentiondays"></a><span class="term"><code class="code">AutomaticBackupRetentionDays</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The number of days to retain automatic backups. Setting this to 0 disables automatic
+                                             backups. 
+                                             You can retain automatic backups for a maximum of 90 days. 
+                                             The default is 0.  Only valid for use with <code class="code">PERSISTENT_1</code> deployment types. 
+                                             For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html">Working with backups</a>
+                                             in the <em>Amazon FSx for Lustre User Guide</em>. (Default = 0)
+                                          </p>
+                                          
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">0</code></p>
+                                          <p><em>Maximum</em>: <code class="code">90</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fsx-filesystem-lustreconfiguration-copytagstobackups"></a><span class="term"><code class="code">CopyTagsToBackups</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A boolean flag indicating whether tags for the file system should be copied to
+                                             backups. This value defaults to false. If it&apos;s set to true, all tags for the file
+                                             system are copied to all automatic and user-initiated backups where the user
+                                             doesn&apos;t specify tags. If this value is true, and you specify one or more tags, only
+                                             the specified tags are copied to backups. If you specify one or more tags when creating
+                                             a
+                                             user-initiated backup, no tags are copied from the file system, regardless of this
+                                             value.
+                                             Only valid for use with <code class="code">PERSISTENT_1</code> deployment types.
+                                          </p>
+                                          
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fsx-filesystem-lustreconfiguration-dailyautomaticbackupstarttime"></a><span class="term"><code class="code">DailyAutomaticBackupStartTime</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A recurring daily time, in the format<code class="code"> HH:MM</code>. <code class="code">HH</code> is the zero-padded hour of the day (0-23), 
+                                             and <code class="code">MM</code> is the zero-padded minute of the hour. For example, <code class="code">05:00</code> specifies 5 AM daily. 
+                                             Only valid for use with <code class="code">PERSISTENT_1</code> deployment types.
+                                          </p>
+                                          
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-fsx-filesystem-lustreconfiguration-deploymenttype"></a><span class="term"><code class="code">DeploymentType</code></span></dt>
                                        <dd>
                                           
-                                          <p>(Optional)  
+                                          <p> 
                                              Choose <code class="code">SCRATCH_1</code> and <code class="code">SCRATCH_2</code> deployment 
                                              types when you need temporary storage and shorter-term processing of data. 
                                              The <code class="code">SCRATCH_2</code> deployment type provides in-transit encryption of data and higher burst 
                                              throughput capacity than <code class="code">SCRATCH_1</code>.
-                                          </p> 
+                                          </p>
+                                          
                                           
                                           <p>Choose <code class="code">PERSISTENT_1</code> deployment type for longer-term storage 
                                              and workloads and encryption of data in transit. To learn more about deployment types,
@@ -64,7 +193,6 @@
                                              
                                           </p>
                                           
-                                          
                                           <p>Encryption of data in-transit for <code class="code">SCRATCH_2</code> and <code class="code">PERSISTENT_1</code> 
                                              deployment types is supported when accessed from supported instance types in supported
                                              AWS Regions. To learn more, 
@@ -75,7 +203,26 @@
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">PERSISTENT_1 | SCRATCH_1 | SCRATCH_2</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">PERSISTENT_1 | SCRATCH_1 | SCRATCH_2</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fsx-filesystem-lustreconfiguration-drivecachetype"></a><span class="term"><code class="code">DriveCacheType</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The type of drive cache used by PERSISTENT_1 file systems that are provisioned with
+                                             HDD storage devices. This parameter is required when storage type is HDD. Set to
+                                             <code class="code">READ</code>, improve the performance for frequently accessed files and allows 20%
+                                             of the total storage capacity of the file system to be cached. 
+                                          </p>
+                                          
+                                          <p>This parameter is required when <code class="code">StorageType</code> is set to HDD.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">NONE | READ</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-fsx-filesystem-lustreconfiguration-exportpath"></a><span class="term"><code class="code">ExportPath</code></span></dt>
@@ -109,7 +256,7 @@
                                           </p>
                                           <p><em>Minimum</em>: <code class="code">3</code></p>
                                           <p><em>Maximum</em>: <code class="code">900</code></p>
-                                          <p><em>Pattern</em>: <code class="code">^.<span>{</span>3,900}$</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^[^\u0000\u0085\u2028\u2029\r\n]<span>{</span>3,4357}$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-fsx-filesystem-lustreconfiguration-importedfilechunksize"></a><span class="term"><code class="code">ImportedFileChunkSize</code></span></dt>
@@ -142,8 +289,8 @@
                                           
                                           
                                           <p>(Optional) The path to the Amazon S3 bucket (including the optional prefix) that
-                                             you&apos;re using as the data repository for your Amazon FSx for Lustre file system. 
-                                             The root of your FSx for Lustre file system will 
+                                             you&apos;re using as the data repository for your Amazon FSx for Lustre file system.
+                                             The root of your FSx for Lustre file system will
                                              be mapped to the root of the Amazon S3 bucket you select. An
                                              example is <code class="code">s3://import-bucket/optional-prefix</code>. If you specify a prefix
                                              after the Amazon S3 bucket name, only object keys with that prefix are loaded into
@@ -157,7 +304,7 @@
                                           </p>
                                           <p><em>Minimum</em>: <code class="code">3</code></p>
                                           <p><em>Maximum</em>: <code class="code">900</code></p>
-                                          <p><em>Pattern</em>: <code class="code">^.<span>{</span>3,900}$</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^[^\u0000\u0085\u2028\u2029\r\n]<span>{</span>3,4357}$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-fsx-filesystem-lustreconfiguration-perunitstoragethroughput"></a><span class="term"><code class="code">PerUnitStorageThroughput</code></span></dt>
@@ -169,27 +316,28 @@
                                              File system throughput capacity is calculated by multiplying &#xFB01;le system storage capacity
                                              (TiB) by the PerUnitStorageThroughput
                                              (MB/s/TiB). For a 2.4 TiB &#xFB01;le system, provisioning 50 MB/s/TiB of PerUnitStorageThroughput
-                                             yields 117 MB/s of &#xFB01;le system throughput. You pay for the amount of throughput that
+                                             yields 120 MB/s of &#xFB01;le system throughput. You pay for the amount of throughput that
                                              you
                                              provision.
                                              
                                           </p>
                                           
-                                          <p>Valid values are 50, 100, 200.</p>
+                                          <p>Valid values for  SSD storage: 50, 100, 200. Valid values for  HDD storage: 12, 40.</p>
                                           
                                           
                                           <p><em>Required</em>: Conditional
                                           </p>
                                           <p><em>Type</em>: Integer
                                           </p>
-                                          <p><em>Minimum</em>: <code class="code">50</code></p>
+                                          <p><em>Minimum</em>: <code class="code">12</code></p>
                                           <p><em>Maximum</em>: <code class="code">200</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-fsx-filesystem-lustreconfiguration-weeklymaintenancestarttime"></a><span class="term"><code class="code">WeeklyMaintenanceStartTime</code></span></dt>
                                        <dd>
                                           
-                                          <p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC
+                                          <p>(Optional) The preferred start time to perform weekly maintenance, formatted d:HH:MM
+                                             in the UTC
                                              time zone, where d is the weekday number, from 1 through 7, beginning with Monday
                                              and ending with Sunday.
                                           </p>

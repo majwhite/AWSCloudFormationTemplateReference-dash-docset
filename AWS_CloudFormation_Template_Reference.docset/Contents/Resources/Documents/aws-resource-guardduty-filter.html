@@ -50,35 +50,42 @@ Properties:
                                        <dt><a id="cfn-guardduty-filter-action"></a><span class="term"><code class="code">Action</code></span></dt>
                                        <dd>
                                           
-                                          
                                           <p>Specifies the action that is to be applied to the findings that match the filter.</p>
+                                          
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Allowed values</em>: <code class="code">ARCHIVE | NOOP</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-guardduty-filter-description"></a><span class="term"><code class="code">Description</code></span></dt>
                                        <dd>
                                           
-                                          
                                           <p>The description of the filter.</p>
+                                          
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Minimum</em>: <code class="code">0</code></p>
+                                          <p><em>Maximum</em>: <code class="code">512</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-guardduty-filter-detectorid"></a><span class="term"><code class="code">DetectorId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ID of the detector to associate the <code class="code">Filter</code> with.
+                                          <p>The ID of the detector belonging to the GuardDuty account that you want to create
+                                             a filter
+                                             for.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">300</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-guardduty-filter-findingcriteria"></a><span class="term"><code class="code">FindingCriteria</code></span></dt>
@@ -94,15 +101,17 @@ Properties:
                                        <dt><a id="cfn-guardduty-filter-name"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
                                           
-                                          
                                           <p>The name of the filter. Minimum length of 3. Maximum length of 64. Valid characters
                                              include alphanumeric characters, dot (.), underscore (_), and dash (-). Spaces are
                                              not allowed.
                                           </p>
+                                          
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Minimum</em>: <code class="code">3</code></p>
+                                          <p><em>Maximum</em>: <code class="code">64</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-guardduty-filter-rank"></a><span class="term"><code class="code">Rank</code></span></dt>
@@ -112,6 +121,20 @@ Properties:
                                           <p>Specifies the position of the filter in the list of current filters. Also specifies
                                              the order in which this filter is applied to the findings.
                                           </p>
+                                          
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>By default filters may not be created in the same order as they are ranked. To ensure
+                                                   filters
+                                                   are created in the correct order you can use the optional
+                                                   <code class="code">DependsOn</code> attribute with the following syntax:
+                                                   <code class="code">&quot;DependsOn&quot;:[ &quot;ObjectName&quot; ]</code>. You can find more
+                                                   information on using this attribute <a href="aws-attribute-dependson.html">here</a>.
+                                                </p>
+                                             </div>
+                                          </div>
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: Integer
@@ -120,7 +143,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-guardduty-filter-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-guardduty-filter-return-values">Return values</h2>
                                  <h3 id="aws-resource-guardduty-filter-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the name of the filter, such as

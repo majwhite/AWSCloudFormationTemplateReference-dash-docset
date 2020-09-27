@@ -85,7 +85,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">LUSTRE | WINDOWS</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">LUSTRE | WINDOWS</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-fsx-filesystem-kmskeyid"></a><span class="term"><code class="code">KmsKeyId</code></span></dt>
@@ -145,19 +145,27 @@ Properties:
                                           <div class="itemizedlist">
                                                
                                               
+                                              
                                              
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
                                                    
-                                                   <p>For <code class="code">SCRATCH_2</code> and <code class="code">PERSISTENT_1</code> deployment types, valid values are 
-                                                      1.2, 2.4, and increments of 2.4 TiB.
+                                                   <p>For <code class="code">SCRATCH_2</code> and <code class="code">PERSISTENT_1 SSD</code> deployment types, valid values are 
+                                                      1200 GiB, 2400 GiB, and increments of 2400 GiB.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>For <code class="code">PERSISTENT HDD</code> file systems, valid values are increments of 6000 GiB for 
+                                                      12 MB/s/TiB file systems and increments of 1800 GiB for 40 MB/s/TiB file systems.
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>For <code class="code">SCRATCH_1</code> deployment type, valid values are 
-                                                      1.2, 2.4, and increments of 3.6 TiB.
+                                                      1200 GiB, 2400 GiB, and increments of 3600 GiB.
                                                    </p>
                                                    
                                                 </li>
@@ -193,13 +201,12 @@ Properties:
                                           </p>
                                           <p><em>Minimum</em>: <code class="code">0</code></p>
                                           <p><em>Maximum</em>: <code class="code">2147483647</code></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-fsx-filesystem-storagetype"></a><span class="term"><code class="code">StorageType</code></span></dt>
                                        <dd>
                                           
-                                          <p>Sets the storage type for the Amazon FSx for Windows file system you&apos;re creating.
-                                             
+                                          <p>Sets the storage type for the file system you&apos;re creating. 
                                              Valid values are <code class="code">SSD</code> and <code class="code">HDD</code>.
                                           </p>
                                           
@@ -211,14 +218,15 @@ Properties:
                                                 <li class="listitem">
                                                    
                                                    <p>Set to <code class="code">SSD</code> to use solid state drive storage. 
-                                                      SSD is supported on all Windows deployment types.
+                                                      SSD is supported on all Windows and Lustre deployment types.
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>Set to <code class="code">HDD</code> to use hard disk drive storage. 
-                                                      HDD is supported on <code class="code">SINGLE_AZ_2</code> and <code class="code">MULTI_AZ_1</code> Windows file system deployment types. 
+                                                      HDD is supported on <code class="code">SINGLE_AZ_2</code> and <code class="code">MULTI_AZ_1</code> Windows file system deployment types,
+                                                      and on <code class="code">PERSISTENT</code> Lustre file system deployment types. 
                                                       
                                                    </p>
                                                    
@@ -229,7 +237,9 @@ Properties:
                                           <p>
                                              Default value is <code class="code">SSD</code>. For more information, see 
                                              <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options">
-                                                Storage Type Options</a> in the <em>Amazon FSx for Windows User Guide</em>.
+                                                Storage Type Options</a> in the <em>Amazon FSx for Windows User Guide</em> and 
+                                             <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html#storage-options">Multiple Storage Options</a> 
+                                             in the <em>Amazon FSx for Lustre User Guide</em>.
                                              
                                           </p>
                                           
@@ -237,7 +247,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">HDD | SSD</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">HDD | SSD</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-fsx-filesystem-subnetids"></a><span class="term"><code class="code">SubnetIds</code></span></dt>
@@ -293,7 +303,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-fsx-filesystem-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-fsx-filesystem-return-values">Return values</h2>
                                  <h3 id="aws-resource-fsx-filesystem-return-values-ref">Ref</h3>
                                  <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the function returns the file system resource ID. For example:
                                  </p>
@@ -357,6 +367,8 @@ Properties:
                     }
                 ],
                 &quot;LustreConfiguration&quot;: <span>{</span>
+                    &quot;AutoImportPolicy&quot; : &quot;NEW&quot;,                    
+                    &quot;CopyTagsToBackups&quot; : true,
                     &quot;DeploymentType&quot;: &quot;PERSISTENT_1&quot;,
                     &quot;PerUnitStorageThroughput&quot;: 200,                    
                     &quot;ImportPath&quot;: <span>{</span>
@@ -376,7 +388,7 @@ Properties:
                             [
                                 &quot;s3://&quot;,
                                 <span>{</span>
-                                    &quot;Fn::ImportValue&quot;: &quot;LustreCFNS3ImportBucketName&quot;
+                                    &quot;Fn::ImportValue&quot;: &quot;LustreCFNS3ExportPath&quot;
                                 }
                             ]
                         ]
@@ -408,10 +420,12 @@ Properties:
         - Key: &quot;Name&quot;
           Value: &quot;CFNs3linkedLustre&quot;
       LustreConfiguration:
+        AutoImportPolicy: &quot;NEW&quot;
+        CopyTagsToBackups: true
         DeploymentType: &quot;PERSISTENT_1&quot;
         PerUnitStorageThroughput: 200
         ImportPath: !Join [&quot;&quot;, [&quot;s3://&quot;, !ImportValue LustreCFNS3ImportBucketName]]
-        ExportPath: !Join [&quot;&quot;, [&quot;s3://&quot;, !ImportValue LustreCFNS3ImportBucketName]]
+        ExportPath: !Join [&quot;&quot;, [&quot;s3://&quot;, !ImportValue LustreCFNS3ExportPath]]
         WeeklyMaintenanceStartTime: &quot;2:20:30&quot;
 Outputs:
   FileSystemId:
@@ -455,7 +469,7 @@ Outputs:
                     &quot;ThroughputCapacity&quot;: 8,
                     &quot;WeeklyMaintenanceStartTime&quot;: &quot;4:16:30&quot;,
                     &quot;DailyAutomaticBackupStartTime&quot;: &quot;01:00&quot;,
-                    &quot;AutomaticBackupRetentionDays&quot;: 2,
+                    &quot;AutomaticBackupRetentionDays&quot;: 30,
                     &quot;CopyTagsToBackups&quot;: false,
                     &quot;DeploymentType&quot;: &quot;MULTI_AZ_1&quot;,
                     &quot;PreferredSubnetId&quot;: <span>{</span>
@@ -528,7 +542,7 @@ Outputs:
         ThroughputCapacity: 8
         WeeklyMaintenanceStartTime: &apos;4:16:30&apos;
         DailyAutomaticBackupStartTime: &apos;01:00&apos;
-        AutomaticBackupRetentionDays: 2
+        AutomaticBackupRetentionDays: 30
         CopyTagsToBackups: false
         DeploymentType: MULTI_AZ_1
         PreferredSubnetId: !ImportValue MySubnet01
@@ -594,7 +608,7 @@ Outputs:
                     &quot;ThroughputCapacity&quot;: 8,
                     &quot;WeeklyMaintenanceStartTime&quot;: &quot;4:16:30&quot;,
                     &quot;DailyAutomaticBackupStartTime&quot;: &quot;01:00&quot;,
-                    &quot;AutomaticBackupRetentionDays&quot;: 2,
+                    &quot;AutomaticBackupRetentionDays&quot;: 90,
                     &quot;CopyTagsToBackups&quot;: false,
                     &quot;DeploymentType&quot;: &quot;MULTI_AZ_1&quot;,
                     &quot;PreferredSubnetId&quot;: <span>{</span>
@@ -633,7 +647,7 @@ Outputs:
         ThroughputCapacity: 8
         WeeklyMaintenanceStartTime: &apos;4:16:30&apos;
         DailyAutomaticBackupStartTime: &apos;01:00&apos;
-        AutomaticBackupRetentionDays: 2
+        AutomaticBackupRetentionDays: 90
         DeploymentType: MULTI_AZ_1
         PreferredSubnetId: !ImportValue CfnFsxMadSubnet01
         CopyTagsToBackups: false

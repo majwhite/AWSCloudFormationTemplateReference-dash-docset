@@ -34,6 +34,7 @@
       &quot;<a href="#cfn-apigatewayv2-api-corsconfiguration">CorsConfiguration</a>&quot; : <code class="replaceable"><a href="./aws-properties-apigatewayv2-api-cors.html">Cors</a></code>,
       &quot;<a href="#cfn-apigatewayv2-api-credentialsarn">CredentialsArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-apigatewayv2-api-description">Description</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-apigatewayv2-api-disableexecuteapiendpoint">DisableExecuteApiEndpoint</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-apigatewayv2-api-disableschemavalidation">DisableSchemaValidation</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-apigatewayv2-api-failonwarnings">FailOnWarnings</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-apigatewayv2-api-name">Name</a>&quot; : <code class="replaceable">String</code>,
@@ -58,6 +59,7 @@ Properties:
     <a href="./aws-properties-apigatewayv2-api-cors.html">Cors</a></code>
   <a href="#cfn-apigatewayv2-api-credentialsarn">CredentialsArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-apigatewayv2-api-description">Description</a>: <code class="replaceable">String</code>
+  <a href="#cfn-apigatewayv2-api-disableexecuteapiendpoint">DisableExecuteApiEndpoint</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-apigatewayv2-api-disableschemavalidation">DisableSchemaValidation</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-apigatewayv2-api-failonwarnings">FailOnWarnings</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-apigatewayv2-api-name">Name</a>: <code class="replaceable">String</code>
@@ -161,6 +163,22 @@ Properties:
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-apigatewayv2-api-disableexecuteapiendpoint"></a><span class="term"><code class="code">DisableExecuteApiEndpoint</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>Specifies whether clients can invoke your API by using the default
+                                             <code class="code">execute-api</code> endpoint. By default, clients can invoke your API
+                                             with the default https://<span>{</span>api_id}.execute-api.<span>{</span>region}.amazonaws.com endpoint.
+                                             To require that clients use a custom domain name to invoke your API, disable the
+                                             default endpoint.
+                                          </p>
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
@@ -281,12 +299,31 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-apigatewayv2-api-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-apigatewayv2-api-return-values">Return values</h2>
                                  <h3 id="aws-resource-apigatewayv2-api-return-values-ref">Ref</h3>
                                  <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the API ID, such as <code class="code">a1bcdef2gh</code>.
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
+                                 <h3 id="aws-resource-apigatewayv2-api-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-apigatewayv2-api-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="ApiEndpoint-fn::getatt"></a><span class="term"><code class="code">ApiEndpoint</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The default endpoint for an API. For example: <code class="code">https://abcdef.execute-api.us-west-2.amazonaws.com</code>.
+                                          </p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
                                  <h2 id="aws-resource-apigatewayv2-api--examples">Examples</h2>
                                  <h3 id="aws-resource-apigatewayv2-api--examples--API_creation_example">API creation example</h3>
                                  <p>The following example creates a WebSocket <code class="code">Api</code> resource called
@@ -354,7 +391,7 @@ Properties:
     Description: Lambda proxy using quick create
     ProtocolType: HTTP
     Target: arn:aws:apigateway:<span>{</span>region}:lambda:path/2015-03-31/functions/arn:aws:lambda:<span>{</span>region}:<span>{</span>account-id}:function:<span>{</span>function-name}/invocations</code></pre></div>
-                                 <h2 id="aws-resource-apigatewayv2-api--seealso">See Also</h2>
+                                 <h2 id="aws-resource-apigatewayv2-api--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
                                     

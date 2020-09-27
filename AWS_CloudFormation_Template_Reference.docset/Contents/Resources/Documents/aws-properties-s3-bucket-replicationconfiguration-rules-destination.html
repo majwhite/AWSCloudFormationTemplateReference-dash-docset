@@ -16,8 +16,8 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Specifies which Amazon S3 bucket to store replicated objects in and their storage
-                                    class.
+                                 <p>A container for information about the replication destination
+                                    and its configurations including enabling the S3 Replication Time Control (S3 RTC).
                                  </p>
                                  <h2 id="aws-properties-s3-bucket-replicationconfiguration-rules-destination-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -27,6 +27,8 @@
   &quot;<a href="#cfn-s3-bucket-replicationdestination-account">Account</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-s3-bucket-replicationconfiguration-rules-destination-bucket">Bucket</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-s3-bucket-replicationdestination-encryptionconfiguration">EncryptionConfiguration</a>&quot; : <code class="replaceable"><a href="./aws-properties-s3-bucket-encryptionconfiguration.html">EncryptionConfiguration</a></code>,
+  &quot;<a href="#cfn-s3-bucket-replicationdestination-metrics">Metrics</a>&quot; : <code class="replaceable"><a href="./aws-properties-s3-bucket-metrics.html">Metrics</a></code>,
+  &quot;<a href="#cfn-s3-bucket-replicationdestination-replicationtime">ReplicationTime</a>&quot; : <code class="replaceable"><a href="./aws-properties-s3-bucket-replicationtime.html">ReplicationTime</a></code>,
   &quot;<a href="#cfn-s3-bucket-replicationconfiguration-rules-destination-storageclass">StorageClass</a>&quot; : <code class="replaceable">String</code>
 }
 </code></pre></div>
@@ -37,6 +39,10 @@
   <a href="#cfn-s3-bucket-replicationconfiguration-rules-destination-bucket">Bucket</a>: <code class="replaceable">String</code>
   <a href="#cfn-s3-bucket-replicationdestination-encryptionconfiguration">EncryptionConfiguration</a>: <code class="replaceable">
     <a href="./aws-properties-s3-bucket-encryptionconfiguration.html">EncryptionConfiguration</a></code>
+  <a href="#cfn-s3-bucket-replicationdestination-metrics">Metrics</a>: <code class="replaceable">
+    <a href="./aws-properties-s3-bucket-metrics.html">Metrics</a></code>
+  <a href="#cfn-s3-bucket-replicationdestination-replicationtime">ReplicationTime</a>: <code class="replaceable">
+    <a href="./aws-properties-s3-bucket-replicationtime.html">ReplicationTime</a></code>
   <a href="#cfn-s3-bucket-replicationconfiguration-rules-destination-storageclass">StorageClass</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-properties-s3-bucket-replicationconfiguration-rules-destination-properties">Properties</h2>
@@ -100,6 +106,37 @@
                                           <p><em>Type</em>: <a href="./aws-properties-s3-bucket-encryptionconfiguration.html">EncryptionConfiguration</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-s3-bucket-replicationdestination-metrics"></a><span class="term"><code class="code">Metrics</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>
+                                             A container specifying replication metrics-related settings enabling metrics and Amazon
+                                             S3 events for S3 Replication Time Control (S3 RTC). 
+                                             Must be specified together with a <code class="code">ReplicationTime</code> block.
+                                             
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-s3-bucket-metrics.html">Metrics</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-s3-bucket-replicationdestination-replicationtime"></a><span class="term"><code class="code">ReplicationTime</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>
+                                             A container specifying S3 Replication Time Control (S3 RTC), including whether S3
+                                             RTC is enabled and the time when all objects and operations on objects must be replicated.
+                                             
+                                             Must be specified together with a <code class="code">Metrics</code> block.
+                                             
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-s3-bucket-replicationtime.html">ReplicationTime</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-s3-bucket-replicationconfiguration-rules-destination-storageclass"></a><span class="term"><code class="code">StorageClass</code></span></dt>
                                        <dd>
                                           
@@ -119,7 +156,7 @@
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">DEEP_ARCHIVE | GLACIER | INTELLIGENT_TIERING | ONEZONE_IA | REDUCED_REDUNDANCY | STANDARD
+                                          <p><em>Allowed values</em>: <code class="code">DEEP_ARCHIVE | GLACIER | INTELLIGENT_TIERING | ONEZONE_IA | REDUCED_REDUNDANCY | STANDARD
                                                 | STANDARD_IA</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>

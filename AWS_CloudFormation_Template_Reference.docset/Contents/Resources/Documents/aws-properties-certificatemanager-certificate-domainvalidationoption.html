@@ -17,22 +17,23 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>
-                                    <code class="code">DomainValidationOption</code> is a property of the 
-                                    <a href="aws-resource-certificatemanager-certificate.html">AWS::CertificateManager::Certificate</a> 
-                                    resource that specifies the AWS Certificate Manager (ACM) certificate domain to which
-                                    ACM will send validation
-                                    emails.
+                                    <code class="code">DomainValidationOption</code> is a property of the <a href="aws-resource-certificatemanager-certificate.html">AWS::CertificateManager::Certificate</a> resource that specifies the AWS
+                                    Certificate Manager (ACM) certificate domain to validate. Depending on the chosen
+                                    validation method, ACM checks the domain&apos;s DNS record for a validation CNAME, or it
+                                    attempts to send a validation email message to the domain owner.
                                  </p>
                                  <h2 id="aws-properties-certificatemanager-certificate-domainvalidationoption-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-properties-certificatemanager-certificate-domainvalidationoption-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;<a href="#cfn-certificatemanager-certificate-domainvalidationoptions-domainname">DomainName</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-certificatemanager-certificate-domainvalidationoption-hostedzoneid">HostedZoneId</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-certificatemanager-certificate-domainvalidationoption-validationdomain">ValidationDomain</a>&quot; : <code class="replaceable">String</code>
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-properties-certificatemanager-certificate-domainvalidationoption-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-certificatemanager-certificate-domainvalidationoptions-domainname">DomainName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-certificatemanager-certificate-domainvalidationoption-hostedzoneid">HostedZoneId</a>: <code class="replaceable">String</code>
   <a href="#cfn-certificatemanager-certificate-domainvalidationoption-validationdomain">ValidationDomain</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-properties-certificatemanager-certificate-domainvalidationoption-properties">Properties</h2>
@@ -50,6 +51,42 @@
                                           <p><em>Minimum</em>: <code class="code">1</code></p>
                                           <p><em>Maximum</em>: <code class="code">253</code></p>
                                           <p><em>Pattern</em>: <code class="code">^(\*\.)?(((?!-)[A-Za-z0-9-]<span>{</span>0,62}[A-Za-z0-9])\.)+((?!-)[A-Za-z0-9-]<span>{</span>1,62}[A-Za-z0-9])$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-certificatemanager-certificate-domainvalidationoption-hostedzoneid"></a><span class="term"><code class="code">HostedZoneId</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The <code class="code">HostedZoneId</code> option, which is available if you are using Route 53 as
+                                             your domain registrar, causes ACM to add your CNAME to the domain record. Your list
+                                             of
+                                             <code class="code">DomainValidationOptions</code> must contain one and only one of the
+                                             domain-validation options, and the <code class="code">HostedZoneId</code> can be used only when
+                                             <code class="code">DNS</code> is specified as your validation method.
+                                          </p>
+                                          
+                                          <p>Use the Route 53 <code class="code">ListHostedZones</code> API to discover IDs for available hosted
+                                             zones. 
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>The <code class="code">ListHostedZones</code> API returns IDs in the format
+                                                   &quot;/hostedzone/Z111111QQQQQQQ&quot;, but CloudFormation requires the IDs to be in the format
+                                                   &quot;Z111111QQQQQQQ&quot;.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p>When you change your <code class="code">DomainValidationOptions</code>, a new resource is
+                                             created.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-certificatemanager-certificate-domainvalidationoption-validationdomain"></a><span class="term"><code class="code">ValidationDomain</code></span></dt>
@@ -100,7 +137,7 @@
                                              </ul>
                                           </div>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>

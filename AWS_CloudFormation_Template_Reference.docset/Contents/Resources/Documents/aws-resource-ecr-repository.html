@@ -17,10 +17,10 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>The <code class="code">AWS::ECR::Repository</code> resource specifies an Amazon Elastic Container
-                                    Registry (Amazon ECR) repository, where users can push and pull Docker images. For
-                                    more
-                                    information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html">Amazon ECR Repositories</a>
-                                    in the <em>Amazon Elastic Container Registry User Guide</em>.
+                                    Registry (Amazon ECR) repository, where users can push and pull Docker images, Open
+                                    Container Initiative (OCI) images, and OCI compatible artifacts. For more information,
+                                    see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html">Amazon ECR Repositories</a> in the <em>Amazon ECR User
+                                       Guide</em>.
                                  </p>
                                  <h2 id="aws-resource-ecr-repository-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -28,9 +28,11 @@
                                     <h3 id="aws-resource-ecr-repository-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::ECR::Repository&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-ecr-repository-imagescanningconfiguration">ImageScanningConfiguration</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-ecr-repository-imagetagmutability">ImageTagMutability</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ecr-repository-lifecyclepolicy">LifecyclePolicy</a>&quot; : <code class="replaceable"><a href="./aws-properties-ecr-repository-lifecyclepolicy.html">LifecyclePolicy</a></code>,
       &quot;<a href="#cfn-ecr-repository-repositoryname">RepositoryName</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-ecr-repository-repositorypolicytext">RepositoryPolicyText</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-ecr-repository-repositorypolicytext">RepositoryPolicyText</a>&quot; : <code class="replaceable"></code>,
       &quot;<a href="#cfn-ecr-repository-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
 }
@@ -38,24 +40,53 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-ecr-repository-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::ECR::Repository
 Properties: 
+  <a href="#cfn-ecr-repository-imagescanningconfiguration">ImageScanningConfiguration</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-ecr-repository-imagetagmutability">ImageTagMutability</a>: <code class="replaceable">String</code>
   <a href="#cfn-ecr-repository-lifecyclepolicy">LifecyclePolicy</a>: <code class="replaceable">
     <a href="./aws-properties-ecr-repository-lifecyclepolicy.html">LifecyclePolicy</a></code>
   <a href="#cfn-ecr-repository-repositoryname">RepositoryName</a>: <code class="replaceable">String</code>
-  <a href="#cfn-ecr-repository-repositorypolicytext">RepositoryPolicyText</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-ecr-repository-repositorypolicytext">RepositoryPolicyText</a>: <code class="replaceable"></code>
   <a href="#cfn-ecr-repository-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
 </code></pre></div>
                                  <h2 id="aws-resource-ecr-repository-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-ecr-repository-imagescanningconfiguration"></a><span class="term"><code class="code">ImageScanningConfiguration</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The image scanning configuration for the repository. This determines whether images
+                                             are scanned for known vulnerabilities after being pushed to the repository.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Json
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ecr-repository-imagetagmutability"></a><span class="term"><code class="code">ImageTagMutability</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The tag mutability setting for the repository. If this parameter is omitted, the
+                                             default setting of <code class="code">MUTABLE</code> will be used which will allow image tags to be
+                                             overwritten. If <code class="code">IMMUTABLE</code> is specified, all image tags within the
+                                             repository will be immutable which will prevent them from being overwritten.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">IMMUTABLE | MUTABLE</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-ecr-repository-lifecyclepolicy"></a><span class="term"><code class="code">LifecyclePolicy</code></span></dt>
                                        <dd>
                                           
-                                          <p>Creates or updates the lifecycle policy for the specified repository. For more
-                                             information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html">Lifecycle Policy
-                                                Template</a>.
+                                          <p>Creates or updates a lifecycle policy. For information about lifecycle policy syntax,
+                                             see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html">Lifecycle Policy Template</a>.
                                           </p>
-                                          
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -105,7 +136,7 @@ Properties:
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: Json
+                                          <p><em>Type</em>: 
                                           </p>
                                           <p><em>Minimum</em>: <code class="code">0</code></p>
                                           <p><em>Maximum</em>: <code class="code">10240</code></p>
@@ -123,7 +154,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-ecr-repository-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-ecr-repository-return-values">Return values</h2>
                                  <h3 id="aws-resource-ecr-repository-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the resource name, such as
@@ -277,7 +308,29 @@ Resources:
 Outputs:    
   Arn:
     Value: !GetAtt MyRepository.Arn</code></pre></div>
-                                 <h2 id="aws-resource-ecr-repository--seealso">See Also</h2>
+                                 <h3 id="aws-resource-ecr-repository--examples--Specify_a_repository_with_an_image_scanning_configuration">Specify a repository with an image scanning configuration</h3>
+                                 <p>The following example creates a repository named <code class="code">test-repository</code>
+                                    with image scanning enabled. For more information on image scanning, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html">Image scanning</a> in the <em>Amazon Elastic Container Registry
+                                       User Guide</em>.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ecr-repository--examples--Specify_a_repository_with_an_image_scanning_configuration--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;MyRepository&quot;: <span>{</span>
+  &quot;Type&quot;: &quot;AWS::ECR::Repository&quot;,
+  &quot;Properties&quot;: <span>{</span>
+    &quot;RepositoryName&quot; : &quot;test-repository&quot;,
+    &quot;ImageScanningConfiguration&quot; : <span>{</span>
+      &quot;scanOnPush&quot;: &quot;true&quot;
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ecr-repository--examples--Specify_a_repository_with_an_image_scanning_configuration--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyRepository: 
+  Type: AWS::ECR::Repository
+  Properties: 
+    RepositoryName: &quot;test-repository&quot;
+    ImageScanningConfiguration: 
+      scanOnPush: &quot;true&quot;</code></pre></div>
+                                 <h2 id="aws-resource-ecr-repository--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
                                      

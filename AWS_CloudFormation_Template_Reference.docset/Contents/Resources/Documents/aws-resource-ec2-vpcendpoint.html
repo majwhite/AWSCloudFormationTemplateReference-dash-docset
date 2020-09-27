@@ -33,6 +33,9 @@
                                     the
                                     endpoint network interface.
                                  </p>
+                                 <p>For information about connectivity when you use a gateway endpoint to connect to an
+                                    Amazon S3 bucket from an EC2 instance, see <a href="http://aws.amazon.com/premiumsupport/knowledge-center/connect-s3-vpc-endpoint" target="_blank"><span>Why can&#x2019;t I connect to an S3 bucket using a gateway VPC endpoint</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                 </p>
                                  <h2 id="aws-resource-ec2-vpcendpoint-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -175,7 +178,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed Values</em>: <code class="code">Gateway | Interface</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">Gateway | Interface</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-ec2-vpcendpoint-vpcid"></a><span class="term"><code class="code">VpcId</code></span></dt>
@@ -193,7 +196,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-resource-ec2-vpcendpoint-return-values">Return Values</h2>
+                                 <h2 id="aws-resource-ec2-vpcendpoint-return-values">Return values</h2>
                                  <h3 id="aws-resource-ec2-vpcendpoint-return-values-ref">Ref</h3>
                                  <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the ID of the VPC endpoint.
                                  </p>
@@ -277,22 +280,23 @@ Properties:
  }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ec2-vpcendpoint--examples--VPC_Endpoint--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::EC2::VPCEndpoint
-Properties:
-   PolicyDocument: &apos;<span>{</span>
-     &quot;Version&quot;:&quot;2012-10-17&quot;,
-     &quot;Statement&quot;:[<span>{</span>
-       &quot;Effect&quot;:&quot;Allow&quot;,
-       &quot;Principal&quot;: &quot;*&quot;,
-       &quot;Action&quot;:[&quot;s3:GetObject&quot;],
-       &quot;Resource&quot;:[&quot;arn:aws:s3:::examplebucket/*&quot;]
-     }]
-  }&apos;
-  RouteTableIds:
-    - !Ref routetableA
-    - !Ref routetableB
-  ServiceName: !Sub com.amazonaws.$<span>{</span>AWS::Region}.s3
-  VpcId: !Ref VPCID</code></pre></div>
+                                    <h4 id="aws-resource-ec2-vpcendpoint--examples--VPC_Endpoint--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">S3Endpoint:
+  Type: &apos;AWS::EC2::VPCEndpoint&apos;
+  Properties:
+    PolicyDocument:
+      Version: 2012-10-17
+      Statement:
+        - Effect: Allow
+          Principal: &apos;*&apos;
+          Action:
+            - &apos;s3:GetObject&apos;
+          Resource:
+            - &apos;arn:aws:s3:::examplebucket/*&apos;
+    RouteTableIds:
+      - !Ref routetableA
+      - !Ref routetableB
+    ServiceName: !Sub &apos;com.amazonaws.$<span>{</span>AWS::Region}.s3&apos;
+    VpcId: !Ref VPCID</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                               </div>
                               <noscript>

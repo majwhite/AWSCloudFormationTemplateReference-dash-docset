@@ -23,13 +23,11 @@
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                     <div class="awsdocs-note-text">
-                                       <p> If you use DB security groups, the settings that you can specify for your DB
-                                          instances are limited. For more information, see the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsecuritygroups">DBSecurityGroups</a> property of the <code class="code">AWS::RDS::DBInstance</code>
-                                          resource.
-                                       </p>
-                                       <p> When you specify an <code class="code">AWS::RDS::DBSecurityGroup</code> as an argument to the
-                                          <code class="code">Ref</code> function, AWS CloudFormation returns the value of the
-                                          <code class="code">DBSecurityGroupName</code>.
+                                       <p>DB security groups are a part of the EC2-Classic Platform and as such are not
+                                          supported in all regions. It is advised to use the <code class="code">AWS::EC2::SecurityGroup</code> resource
+                                          in those regions instead. To determine which platform you are on, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.FindDefaultVPC.html">Determining
+                                             Whether You Are Using the EC2-VPC or EC2-Classic Platform</a>. For more information on
+                                          the <code class="code">AWS::EC2::SecurityGroup</code>, see the documentation for <a href="aws-properties-ec2-security-group.html">EC2 security groups</a>.
                                        </p>
                                     </div>
                                  </div>
@@ -76,7 +74,7 @@ Properties:
                                              group belongs to.
                                           </p>
                                           
-                                          <div class="awsdocs-note">
+                                          <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
@@ -117,7 +115,7 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-properties-rds-security-group-return-values">Return Values</h2>
+                                 <h2 id="aws-properties-rds-security-group-return-values">Return values</h2>
                                  <h3 id="aws-properties-rds-security-group-return-values-ref">Ref</h3>
                                  <p>
                                     When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the name of the DB security group.
@@ -126,9 +124,8 @@ Properties:
                                  </p>
                                  <h2 id="aws-properties-rds-security-group--examples">Examples</h2>
                                  <h3 id="aws-properties-rds-security-group--examples--Single_VPC_security_group">Single VPC security group</h3>
-                                 <p>The following example creates a single VPC security group, referred to by 
-                                    <code class="code">EC2SecurityGroupName</code>.
-                                    
+                                 <p>The following example creates a single VPC security group, referred to by
+                                    <code class="code">EC2SecurityGroupName</code>. 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-properties-rds-security-group--examples--Single_VPC_security_group--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -193,9 +190,7 @@ Properties:
           EC2SecurityGroupId: &quot;sg-ffd722222&quot;
           EC2SecurityGroupOwnerId: &quot;111122223333&quot;</code></pre></div>
                                  <h3 id="aws-properties-rds-security-group--examples--Multiple_VPC_security_groups">Multiple VPC security groups</h3>
-                                 <p>The following example creates or updates multiple VPC security groups.
-                                    
-                                 </p>
+                                 <p>The following example creates or updates multiple VPC security groups. </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-properties-rds-security-group--examples--Multiple_VPC_security_groups--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">
 &quot;DBSecurityGroup&quot;: <span>{</span>
