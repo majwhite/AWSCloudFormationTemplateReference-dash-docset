@@ -189,14 +189,25 @@ Properties:
                                        <dt><a id="cfn-ec2-ebs-volume-kmskeyid"></a><span class="term"><code class="code">KmsKeyId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK)
-                                             to use 
-                                             for Amazon EBS encryption. If this property is not specified, your AWS managed CMK
-                                             for EBS is 
-                                             used. If <code class="code">KmsKeyId</code> is specified, the encrypted state must be <code class="code">true</code>.
+                                          <p>The identifier of the AWS Key Management Service (AWS KMS) customer master key 
+                                             	(CMK) to use for Amazon EBS encryption. If <code class="code">KmsKeyId</code> is specified, the 
+                                             	encrypted state must be <code class="code">true</code>.
                                           </p>
-                                          
-                                          <p>You can specify the CMK using any of the following:</p>
+                                          	
+                                          	
+                                          <p>If you omit this property and your account is enabled for encryption by default, 
+                                             		or <b>Encrypted</b> is set to <code class="code">true</code>, 
+                                             		then the volume is encrypted using the default CMK specified for your account. If
+                                             
+                                             		your account does not have a default CMK, then the volume is encrypted using the
+                                             
+                                             		AWS managed CMK.
+                                          </p>       
+                                          	
+                                          <p>Alternatively, if you want to specify a different CMK, you can specify one of the
+                                             
+                                             	following:
+                                          </p>
                                           
                                           <div class="itemizedlist">
                                               
@@ -212,7 +223,10 @@ Properties:
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>Key alias. For example, alias/ExampleAlias.</p>
+                                                   <p>Key alias. Specify the alias for the CMK, prefixed with <code class="code">alias/</code>. For 
+                                                      	example, for a CMK with the alias <code class="code">my_cmk</code>, use <code class="code">alias/my_cmk</code>. 
+                                                      	Or to specify the AWS managed CMK, use <code class="code">alias/aws/ebs</code>.
+                                                   </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
@@ -407,6 +421,7 @@ Properties:
                                     </ul>
                                  </div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
                               <noscript>
                                  <div>

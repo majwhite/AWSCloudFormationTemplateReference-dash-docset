@@ -32,12 +32,14 @@
       &quot;<a href="#cfn-appstream-fleet-domainjoininfo">DomainJoinInfo</a>&quot; : <code class="replaceable"><a href="./aws-properties-appstream-fleet-domainjoininfo.html">DomainJoinInfo</a></code>,
       &quot;<a href="#cfn-appstream-fleet-enabledefaultinternetaccess">EnableDefaultInternetAccess</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-appstream-fleet-fleettype">FleetType</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-appstream-fleet-iamrolearn">IamRoleArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-appstream-fleet-idledisconnecttimeoutinseconds">IdleDisconnectTimeoutInSeconds</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-appstream-fleet-imagearn">ImageArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-appstream-fleet-imagename">ImageName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-appstream-fleet-instancetype">InstanceType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-appstream-fleet-maxuserdurationinseconds">MaxUserDurationInSeconds</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-appstream-fleet-name">Name</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-appstream-fleet-streamview">StreamView</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-appstream-fleet-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
       &quot;<a href="#cfn-appstream-fleet-vpcconfig">VpcConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-appstream-fleet-vpcconfig.html">VpcConfig</a></code>
     }
@@ -55,12 +57,14 @@ Properties:
     <a href="./aws-properties-appstream-fleet-domainjoininfo.html">DomainJoinInfo</a></code>
   <a href="#cfn-appstream-fleet-enabledefaultinternetaccess">EnableDefaultInternetAccess</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-appstream-fleet-fleettype">FleetType</a>: <code class="replaceable">String</code>
+  <a href="#cfn-appstream-fleet-iamrolearn">IamRoleArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-appstream-fleet-idledisconnecttimeoutinseconds">IdleDisconnectTimeoutInSeconds</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-appstream-fleet-imagearn">ImageArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-appstream-fleet-imagename">ImageName</a>: <code class="replaceable">String</code>
   <a href="#cfn-appstream-fleet-instancetype">InstanceType</a>: <code class="replaceable">String</code>
   <a href="#cfn-appstream-fleet-maxuserdurationinseconds">MaxUserDurationInSeconds</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-appstream-fleet-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-appstream-fleet-streamview">StreamView</a>: <code class="replaceable">String</code>
   <a href="#cfn-appstream-fleet-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
   <a href="#cfn-appstream-fleet-vpcconfig">VpcConfig</a>: <code class="replaceable">
@@ -187,6 +191,27 @@ Properties:
                                           </p>
                                           <p><em>Allowed values</em>: <code class="code">ALWAYS_ON | ON_DEMAND</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-appstream-fleet-iamrolearn"></a><span class="term"><code class="code">IamRoleArn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ARN of the IAM role that is applied to the fleet. To assume a role, the fleet
+                                             instance calls the AWS Security Token Service (STS) <code class="code">AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new
+                                             session with temporary credentials. AppStream 2.0 retrieves the temporary credentials
+                                             and creates the <b>appstream_machine_role</b> credential profile on the instance.
+                                          </p>
+                                          
+                                          
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream
+                                                2.0 Streaming Instances</a> in the <em>Amazon AppStream 2.0 Administration Guide</em>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Pattern</em>: <code class="code">^arn:aws(?:\-cn|\-iso\-b|\-iso|\-us\-gov)?:[A-Za-z0-9][A-Za-z0-9_/.-]<span>{</span>0,62}:[A-Za-z0-9_/.-]<span>{</span>0,63}:[A-Za-z0-9_/.-]<span>{</span>0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.\\-]<span>{</span>0,1023}$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-appstream-fleet-idledisconnecttimeoutinseconds"></a><span class="term"><code class="code">IdleDisconnectTimeoutInSeconds</code></span></dt>
                                        <dd>
@@ -498,6 +523,24 @@ Properties:
                                           <p><em>Pattern</em>: <code class="code">^[a-zA-Z0-9][a-zA-Z0-9_.-]<span>{</span>0,100}$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
+                                       <dt><a id="cfn-appstream-fleet-streamview"></a><span class="term"><code class="code">StreamView</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet.
+                                             When <code class="code">APP</code> is specified, only the windows of applications opened by users display. When <code class="code">DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.
+                                          </p>
+                                          
+                                          
+                                          <p>The default value is <code class="code">APP</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">APP | DESKTOP</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-appstream-fleet-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
                                           
@@ -539,6 +582,7 @@ Properties:
                                     </ul>
                                  </div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
                               <noscript>
                                  <div>

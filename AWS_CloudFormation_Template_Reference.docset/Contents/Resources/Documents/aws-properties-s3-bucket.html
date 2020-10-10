@@ -1181,12 +1181,13 @@ Resources:
 </code></pre></div>
                                  <h3 id="aws-properties-s3-bucket--examples--Create_a_Bucket_with_Default_Encryption_Enabled">Create a Bucket with Default Encryption Enabled</h3>
                                  <p>The following example creates a bucket with server-side bucket encryption configured.
-                                    This example uses S3-managed keys. You can use KMS-managed keys instead by modifying
+                                    This example uses KMS-managed keys. You can use S3-managed keys instead by modifying
                                     the
                                     <a href="aws-properties-s3-bucket-serversideencryptionbydefault.html">Amazon S3 Bucket ServerSideEncryptionByDefault</a> property.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-properties-s3-bucket--examples--Create_a_Bucket_with_Default_Encryption_Enabled--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-properties-s3-bucket--examples--Create_a_Bucket_with_Default_Encryption_Enabled--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">
+<span>{</span>
   &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
   &quot;Description&quot;: &quot;S3 bucket with default encryption&quot;,
   &quot;Resources&quot;: <span>{</span>
@@ -1199,7 +1200,8 @@ Resources:
         &quot;BucketEncryption&quot;: <span>{</span>
           &quot;ServerSideEncryptionConfiguration&quot;: [<span>{</span>
             &quot;ServerSideEncryptionByDefault&quot;: <span>{</span>
-              &quot;SSEAlgorithm&quot;: &quot;AES256&quot;
+              &quot;SSEAlgorithm&quot;: &quot;aws:kms&quot;,
+              &quot;KMSMasterKeyID&quot;: &quot;KMS-KEY-ARN&quot;
             }
           }]
         }
@@ -1207,9 +1209,11 @@ Resources:
       &quot;DeletionPolicy&quot;: &quot;Delete&quot;
     }
   }
-}</code></pre></div>
+}
+         </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-properties-s3-bucket--examples--Create_a_Bucket_with_Default_Encryption_Enabled--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+                                    <h4 id="aws-properties-s3-bucket--examples--Create_a_Bucket_with_Default_Encryption_Enabled--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">
+AWSTemplateFormatVersion: 2010-09-09
 Description: S3 bucket with default encryption
 Resources:
   EncryptedS3Bucket:
@@ -1219,8 +1223,10 @@ Resources:
       BucketEncryption:
         ServerSideEncryptionConfiguration:
           - ServerSideEncryptionByDefault:
-              SSEAlgorithm: AES256
-    DeletionPolicy: Delete</code></pre></div>
+              SSEAlgorithm: aws:kms
+              KMSMasterKeyID: KMS-KEY-ARN
+    DeletionPolicy: Delete
+         </code></pre></div>
                                  <h2 id="aws-properties-s3-bucket--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
@@ -1234,6 +1240,7 @@ Resources:
                                     </ul>
                                  </div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
                               <noscript>
                                  <div>

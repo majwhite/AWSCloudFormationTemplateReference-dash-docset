@@ -64,31 +64,40 @@
                                        <dt><a id="cfn-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration-cooldown"></a><span class="term"><code class="code">Cooldown</code></span></dt>
                                        <dd>
                                           
-                                          <p>The amount of time, in seconds, to wait for a previous scaling activity to take
-                                             effect.
+                                          
+                                          <p>The amount of time, in seconds, to wait for a previous scaling activity to take effect.
+                                             
                                           </p>
                                           
                                           <p>With scale-out policies, the intention is to continuously (but not excessively) scale
-                                             out. After Application Auto Scaling successfully scales out using a step scaling policy,
-                                             it starts to
-                                             calculate the cooldown time. While the cooldown period is in effect, capacity added
-                                             by the
-                                             initiating scale-out activity is calculated as part of the desired capacity for the
-                                             next
-                                             scale-out activity. For example, when an alarm triggers a step scaling policy to increase
-                                             the capacity by 2, the scaling activity completes successfully, and a cooldown period
-                                             starts. If the alarm triggers again during the cooldown period but at a more aggressive
-                                             step adjustment of 3, the previous increase of 2 is considered part of the current
+                                             out.
+                                             After Application Auto Scaling successfully scales out using a step scaling policy,
+                                             it starts to calculate the
+                                             cooldown time. The scaling policy won&apos;t increase the desired capacity again unless
+                                             either a
+                                             larger scale out is triggered or the cooldown period ends. While the cooldown period
+                                             is in
+                                             effect, capacity added by the initiating scale-out activity is calculated as part
+                                             of the
+                                             desired capacity for the next scale-out activity. For example, when an alarm triggers
+                                             a step
+                                             scaling policy to increase the capacity by 2, the scaling activity completes successfully,
+                                             and
+                                             a cooldown period starts. If the alarm triggers again during the cooldown period but
+                                             at a more
+                                             aggressive step adjustment of 3, the previous increase of 2 is considered part of
+                                             the current
                                              capacity. Therefore, only 1 is added to the capacity.
                                           </p>
                                           
                                           <p>With scale-in policies, the intention is to scale in conservatively to protect your
                                              application&#x2019;s availability, so scale-in activities are blocked until the cooldown
+                                             period has
+                                             expired. However, if another alarm triggers a scale-out activity during the cooldown
                                              period
-                                             has expired. However, if another alarm triggers a scale-out activity during the cooldown
-                                             period after a scale-in activity, Application Auto Scaling scales out the target immediately.
-                                             In this case,
-                                             the cooldown period for the scale-in activity stops and doesn&apos;t complete.
+                                             after a scale-in activity, Application Auto Scaling scales out the target immediately.
+                                             In this case, the
+                                             cooldown period for the scale-in activity stops and doesn&apos;t complete.
                                           </p>
                                           
                                           <p>Application Auto Scaling provides a default value of 300 for the following scalable
@@ -151,6 +160,7 @@
                                               
                                               
                                               
+                                              
                                              
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
@@ -165,7 +175,7 @@
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>Amazon Comprehend document classification endpoints</p>
+                                                   <p>Amazon Comprehend document classification and entity recognizer endpoints</p>
                                                    
                                                 </li>
                                                 <li class="listitem">
@@ -176,6 +186,11 @@
                                                 <li class="listitem">
                                                    
                                                    <p>Amazon Keyspaces tables</p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Amazon MSK cluster storage</p>
                                                    
                                                 </li>
                                              </ul>
@@ -205,17 +220,13 @@
                                        <dt><a id="cfn-applicationautoscaling-scalingpolicy-stepscalingpolicyconfiguration-minadjustmentmagnitude"></a><span class="term"><code class="code">MinAdjustmentMagnitude</code></span></dt>
                                        <dd>
                                           
-                                          <p>The minimum value to scale by when scaling by percentages. For example, suppose that
-                                             you
-                                             create a step scaling policy to scale out an Amazon ECS service by 25 percent and
-                                             you specify a
+                                          <p>The minimum value to scale by when the adjustment type is
+                                             <code class="code">PercentChangeInCapacity</code>. For example, suppose that you create a step
+                                             scaling policy to scale out an Amazon ECS service by 25 percent and you specify a
                                              <code class="code">MinAdjustmentMagnitude</code> of 2. If the service has 4 tasks and the scaling
                                              policy is performed, 25 percent of 4 is 1. However, because you specified a
                                              <code class="code">MinAdjustmentMagnitude</code> of 2, Application Auto Scaling scales out the service by 2
                                              tasks.
-                                          </p>
-                                          
-                                          <p>Valid only if the adjustment type is <code class="code">PercentChangeInCapacity</code>. 
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -243,6 +254,7 @@
                                     </dl>
                                  </div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
                               <noscript>
                                  <div>

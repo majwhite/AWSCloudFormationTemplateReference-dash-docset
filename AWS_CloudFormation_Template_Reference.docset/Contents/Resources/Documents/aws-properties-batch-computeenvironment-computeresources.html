@@ -74,20 +74,20 @@
                                           <p>The allocation strategy to use for the compute resource in case not enough instances
                                              of the best fitting
                                              instance type can be allocated. This could be due to availability of the instance
-                                             type in the region or <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service limits</a>. If this is
-                                             not specified, the default is <code class="code">BEST_FIT</code>, which will use only the best fitting instance type, waiting for
-                                             additional capacity if it&apos;s not available. This allocation strategy keeps costs lower
-                                             but can limit scaling. If you
-                                             are using Spot Fleets with <code class="code">BEST_FIT</code> then the Spot Fleet IAM Role must be specified.
+                                             type in the region or <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service limits</a>. If
+                                             this is not specified, the default is <code class="code">BEST_FIT</code>, which will use only the best fitting instance type,
+                                             waiting for additional capacity if it&apos;s not available. This allocation strategy keeps
+                                             costs lower but can limit
+                                             scaling. If you are using Spot Fleets with <code class="code">BEST_FIT</code> then the Spot Fleet IAM Role must be specified.
                                              <code class="code">BEST_FIT_PROGRESSIVE</code> will select additional instance types that are large enough to meet the
                                              requirements of the jobs in the queue, with a preference for instance types with a
                                              lower cost per vCPU.
                                              <code class="code">SPOT_CAPACITY_OPTIMIZED</code> is only available for Spot Instance compute resources and will select
                                              additional instance types that are large enough to meet the requirements of the jobs
-                                             in the queue, with a preference
-                                             for instance types that are less likely to be interrupted. For more information, see
-                                             <a href="https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html">Allocation Strategies</a> in the
-                                             <em>AWS Batch User Guide</em>.
+                                             in the queue, with a
+                                             preference for instance types that are less likely to be interrupted. For more information,
+                                             see <a href="https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html ">Allocation Strategies</a> in
+                                             the <em>AWS Batch User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -103,12 +103,12 @@
                                           <p>The maximum percentage that a Spot Instance price can be when compared with the On-Demand
                                              price for that
                                              instance type before instances are launched. For example, if your maximum percentage
-                                             is 20%, then the Spot price must
-                                             be below 20% of the current On-Demand price for that Amazon EC2 instance. You always
-                                             pay the lowest (market) price and
-                                             never more than your maximum percentage. If you leave this field empty, the default
-                                             value is 100% of the On-Demand
-                                             price.
+                                             is 20%, then the Spot price
+                                             must be below 20% of the current On-Demand price for that Amazon EC2 instance. You
+                                             always pay the lowest (market) price
+                                             and never more than your maximum percentage. If you leave this field empty, the default
+                                             value is 100% of the
+                                             On-Demand price.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -176,9 +176,9 @@
                                           
                                           <p>The instances types that may be launched. You can specify instance families to launch
                                              any instance type within
-                                             those families (for example, <code class="code">c5</code> or <code class="code">p3</code>), or you can specify specific sizes within a family
-                                             (such as <code class="code">c5.8xlarge</code>). You can also choose <code class="code">optimal</code> to pick instance types (from the C, M,
-                                             and R instance families) on the fly that match the demand of your job queues.
+                                             those families (for example, <code class="code">c5</code> or <code class="code">p3</code>), or you can specify specific sizes within a
+                                             family (such as <code class="code">c5.8xlarge</code>). You can also choose <code class="code">optimal</code> to pick instance types (from
+                                             the C, M, and R instance families) on the fly that match the demand of your job queues.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -191,13 +191,11 @@
                                        <dd>
                                           
                                           <p>The launch template to use for your compute resources. Any other compute resource
-                                             parameters that you specify in
-                                             a <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_CreateComputeEnvironment.html">CreateComputeEnvironment</a>
-                                             API operation override the same parameters in the launch template. You must
-                                             specify either the launch template ID or launch template name in the request, but
-                                             not both. For more information, see
-                                             <a href="https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html">Launch Template Support</a> in
-                                             the <em>AWS Batch User Guide</em>.
+                                             parameters that you specify in a <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_CreateComputeEnvironment.html">CreateComputeEnvironment</a> API operation override the same parameters in the launch
+                                             template. You must specify either the launch template ID or launch template name in
+                                             the
+                                             request, but not both. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html">Launch Template Support</a> in the
+                                             <em>AWS Batch User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -234,13 +232,14 @@
                                        <dd>
                                           
                                           <p>The Amazon EC2 placement group to associate with your compute resources. If you intend
-                                             to submit multi-node parallel
-                                             jobs to your compute environment, you should consider creating a cluster placement
-                                             group and associate it with your
-                                             compute resources. This keeps your multi-node parallel job on a logical grouping of
-                                             instances within a single
-                                             Availability Zone with high network flow potential. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">Placement Groups</a> in the <em>Amazon EC2 User Guide for
-                                                Linux Instances</em>.
+                                             to submit multi-node
+                                             parallel jobs to your compute environment, you should consider creating a cluster
+                                             placement group and associate it
+                                             with your compute resources. This keeps your multi-node parallel job on a logical
+                                             grouping of instances within a
+                                             single Availability Zone with high network flow potential. For more information, see
+                                             <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">Placement Groups</a> in the <em>Amazon EC2 User Guide
+                                                for Linux Instances</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -272,8 +271,8 @@
                                              <code class="code">SPOT</code> compute environment.
                                              This role is required if the allocation
                                              strategy set to <code class="code">BEST_FIT</code> or if the allocation strategy is not specified. For more
-                                             information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html">Amazon EC2 Spot Fleet
-                                                Role</a> in the <em>AWS Batch User Guide</em>.
+                                             information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html">Amazon EC2 Spot
+                                                Fleet Role</a> in the <em>AWS Batch User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -286,8 +285,8 @@
                                        <dd>
                                           
                                           <p>The VPC subnets into which the compute resources are launched. For more information,
-                                             see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">VPCs and Subnets</a> in the <em>Amazon
-                                                VPC User Guide</em>.
+                                             see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">VPCs and Subnets</a> in the
+                                             <em>Amazon VPC User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -300,10 +299,16 @@
                                        <dd>
                                           
                                           <p>Key-value pair tags to be applied to resources that are launched in the compute environment.
-                                             For AWS Batch, these
-                                             take the form of &quot;String1&quot;: &quot;String2&quot;, where String1 is the tag key and String2 is
-                                             the tag value&#x2014;for example, <span>{</span>
-                                             &quot;Name&quot;: &quot;AWS Batch Instance - C4OnDemand&quot; }.
+                                             For AWS Batch,
+                                             these take the form of &quot;String1&quot;: &quot;String2&quot;, where String1 is the tag key and String2
+                                             is the tag value&#x2014;for
+                                             example, <span>{</span> &quot;Name&quot;: &quot;AWS Batch Instance - C4OnDemand&quot;
+                                             }. These tags can not be updated or removed
+                                             after the compute environment has been created; any changes require creating a new
+                                             compute environment and
+                                             removing the old compute environment. These tags are not seen when using the AWS Batch
+                                             ListTagsForResource API
+                                             operation.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -335,14 +340,14 @@
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in
-                                             the <em>AWS Batch User Guide</em>.
+                                             <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in the <em>AWS Batch User Guide</em>.
                                           </p>
                                           
                                        </li>
                                     </ul>
                                  </div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
                               <noscript>
                                  <div>
