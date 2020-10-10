@@ -29,7 +29,7 @@
                                        </p>
                                     </div>
                                  </div>
-                                 <p><b>Updating DB Clusters</b></p>
+                                 <p><b>Updating DB clusters</b></p>
                                  <p>When properties labeled &quot;<em>Update requires:</em>
                                     <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a>&quot; are updated, AWS CloudFormation first creates a replacement DB
                                     cluster, then changes references from other dependent resources to point to the
@@ -102,7 +102,7 @@
                                     <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">AWS
                                        CloudFormation Stacks Updates</a>.
                                  </p>
-                                 <p><b>Deleting DB Clusters</b></p>
+                                 <p><b>Deleting DB clusters</b></p>
                                  <p>The default <code class="code">DeletionPolicy</code> for <code class="code">AWS::RDS::DBCluster</code> resources
                                     is <code class="code">Snapshot</code>. For more information about how AWS CloudFormation deletes
                                     resources, see <a href="aws-attribute-deletionpolicy.html">
@@ -508,17 +508,73 @@ Properties:
                                        <dt><a id="cfn-rds-dbcluster-enginemode"></a><span class="term"><code class="code">EngineMode</code></span></dt>
                                        <dd>
                                           
-                                          <p>The DB engine mode of the DB cluster, either <code class="code">provisioned</code> or
-                                             <code class="code">serverless</code>.
+                                          <p>The DB engine mode of the DB cluster, either <code class="code">provisioned</code> <code class="code">serverless</code>, 
+                                             <code class="code">parallelquery</code>, or <code class="code">multimaster</code>.
+                                          </p>
+                                          
+                                          <p>The <code class="code">parallelquery</code> engine mode is not required for Aurora MySQL version 1.23 and higher 1.x versions,
                                              
+                                             and version 2.09 and higher 2.x versions.
                                           </p>
                                           
-                                          
-                                          <p>Limitations and requirements apply to the <code class="code">serverless</code> DB engine mode. For
-                                             more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations"> Limitations of Aurora Serverless</a>.
+                                          <p>The <code class="code">multimaster</code> engine mode only applies for DB clusters created with Aurora MySQL version 5.6.10a.
                                           </p>
                                           
+                                          <p>For Aurora PostgreSQL, <code class="code">parallelquery</code> and <code class="code">multimaster</code> engine modes are not required.
+                                          </p>
                                           
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>
+                                                   The <code class="code">global</code> engine mode isn&apos;t supported.
+                                                   
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p>Limitations and requirements apply to some DB engine modes. For more information,
+                                             see the 
+                                             following sections in the <em>Amazon Aurora User Guide</em>:
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations">
+                                                         Limitations of Aurora Serverless</a>
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations">
+                                                         Limitations of Parallel Query</a>
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations">
+                                                         Limitations of Multi-Master Clusters</a>
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -1036,7 +1092,7 @@ Properties:
                                        </p>
                                     </div>
                                  </div>
-                                 <h3 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_Cluster_with_Two_DB_Instances">Creating an Amazon Aurora DB Cluster with Two DB Instances</h3>
+                                 <h3 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_cluster_with_two_DB_instances">Creating an Amazon Aurora DB cluster with two DB instances</h3>
                                  <p>The following example creates an Amazon Aurora DB cluster and adds two DB
                                     instances to it. Because Amazon RDS automatically assigns a writer and reader DB
                                     instances in the cluster, use the cluster endpoint to read and write data, not
@@ -1052,7 +1108,7 @@ Properties:
                                     </div>
                                  </div>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_Cluster_with_Two_DB_Instances--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_cluster_with_two_DB_instances--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
     &quot;RDSCluster&quot;: <span>{</span>
         &quot;Type&quot;: &quot;AWS::RDS::DBCluster&quot;,
         &quot;Properties&quot;: <span>{</span>
@@ -1139,7 +1195,7 @@ Properties:
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_Cluster_with_Two_DB_Instances--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- 
+                                    <h4 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_cluster_with_two_DB_instances--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- 
 RDSCluster: 
   Properties: 
     DBClusterParameterGroupName: 
@@ -1199,14 +1255,14 @@ RDSDBParameterGroup:
       sql_mode: IGNORE_SPACE
   Type: &quot;AWS::RDS::DBParameterGroup&quot;
 </code></pre></div>
-                                 <h3 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_Cluster_That_Exports_Logs_to_Amazon_CloudWatch_Logs">Creating an Amazon Aurora DB Cluster That Exports Logs to Amazon CloudWatch Logs</h3>
+                                 <h3 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_cluster_that_exports_logs_to_Amazon_CloudWatch_Logs">Creating an Amazon Aurora DB cluster that exports logs to Amazon CloudWatch Logs</h3>
                                  <p>The following example creates an Amazon Aurora PostgreSQL DB cluster that
                                     exports logs to Amazon CloudWatch Logs. For more information about exporting
                                     Aurora DB cluster logs to Amazon CloudWatch Logs, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch"> Publishing Database Logs to Amazon CloudWatch Logs</a> in the
                                     <em>Amazon Aurora User Guide</em>.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_Cluster_That_Exports_Logs_to_Amazon_CloudWatch_Logs--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_cluster_that_exports_logs_to_Amazon_CloudWatch_Logs--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;AWSTemplateFormatVersion&quot; : &quot;2010-09-09&quot;,
 
 
@@ -1284,7 +1340,7 @@ RDSDBParameterGroup:
 
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_Cluster_That_Exports_Logs_to_Amazon_CloudWatch_Logs--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+                                    <h4 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_cluster_that_exports_logs_to_Amazon_CloudWatch_Logs--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Description: &gt;-
   AWS CloudFormation Sample Template for sending Aurora DB cluster logs to
   CloudWatch Logs: Sample template showing how to create an Aurora PostgreSQL DB
@@ -1336,7 +1392,7 @@ Resources:
       DBClusterIdentifier: !Ref RDSCluster
       PubliclyAccessible: &apos;true&apos;
       DBInstanceClass: db.r4.large</code></pre></div>
-                                 <h3 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_Serverless_DB_Cluster">Creating an Amazon Aurora Serverless DB Cluster</h3>
+                                 <h3 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_Serverless_DB_cluster">Creating an Amazon Aurora Serverless DB cluster</h3>
                                  <p>The following example creates an Amazon Aurora Serverless DB cluster. An
                                     Aurora Serverless DB cluster is a DB cluster that automatically starts up, shuts
                                     down, and scales up or down its compute capacity based on your application&apos;s
@@ -1358,7 +1414,7 @@ Resources:
                                     </div>
                                  </div>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_Serverless_DB_Cluster--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_Serverless_DB_cluster--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;AWSTemplateFormatVersion&quot; : &quot;2010-09-09&quot;,
 
   &quot;Description&quot; : &quot;AWS CloudFormation Sample Template AuroraServerlessDBCluster: Sample template showing how to create an Amazon Aurora Serverless DB cluster. **WARNING** This template creates an Amazon Aurora DB cluster. You will be billed for the AWS resources used if you create a stack from this template.&quot;,
@@ -1408,7 +1464,7 @@ Resources:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_Serverless_DB_Cluster--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+                                    <h4 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_Serverless_DB_cluster--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Description: &gt;-
   AWS CloudFormation Sample Template AuroraServerlessDBCluster: Sample template
   showing how to create an Amazon Aurora Serverless DB cluster. **WARNING** This
@@ -1447,6 +1503,7 @@ Resources:
         MaxCapacity: 32
         SecondsUntilAutoPause: 1000</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
                               <noscript>
                                  <div>

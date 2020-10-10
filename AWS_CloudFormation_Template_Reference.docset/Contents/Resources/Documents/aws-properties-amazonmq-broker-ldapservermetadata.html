@@ -16,7 +16,8 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">LdapServerMetadata</code> property type specifies Not currently supported by AWS CloudFormation. for an <a href="./aws-resource-amazonmq-broker.html">AWS::AmazonMQ::Broker</a>.
+                                 <p>Optional. The metadata of the LDAP server used to authenticate and authorize
+                                    connections to the broker.
                                  </p>
                                  <h2 id="aws-properties-amazonmq-broker-ldapservermetadata-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -54,7 +55,11 @@
                                     <dl>
                                        <dt><a id="cfn-amazonmq-broker-ldapservermetadata-hosts"></a><span class="term"><code class="code">Hosts</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>Specifies the location of the LDAP server such as AWS Directory Service for Microsoft
+                                             Active Directory. Optional failover server.
+                                          </p>
+                                          
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: List of String
@@ -63,7 +68,12 @@
                                        </dd>
                                        <dt><a id="cfn-amazonmq-broker-ldapservermetadata-rolebase"></a><span class="term"><code class="code">RoleBase</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          <p>
+                                             The distinguished name of the node in the directory information tree (DIT) to search
+                                             for roles or groups.
+                                             For example, <code class="code">ou=group</code>, <code class="code">ou=corp</code>, <code class="code">dc=corp</code>, <code class="code">dc=example</code>, <code class="code">dc=com</code>. 
+                                             
+                                          </p>
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
@@ -72,7 +82,11 @@
                                        </dd>
                                        <dt><a id="cfn-amazonmq-broker-ldapservermetadata-rolename"></a><span class="term"><code class="code">RoleName</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>Specifies the LDAP attribute that identifies the group name attribute in the object
+                                             returned from the group membership query. 
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -81,7 +95,15 @@
                                        </dd>
                                        <dt><a id="cfn-amazonmq-broker-ldapservermetadata-rolesearchmatching"></a><span class="term"><code class="code">RoleSearchMatching</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The LDAP search filter used to find roles within the roleBase. The distinguished name
+                                             of the user matched by userSearchMatching
+                                             is substituted into the <code class="code"><span>{</span>0}</code> placeholder in the search filter. The client&apos;s username is substituted into the
+                                             <code class="code"><span>{</span>1}</code> placeholder. For example, if you set this option to <code class="code">(member=uid=<span>{</span>1})</code> for the user janedoe, the search filter becomes <code class="code">(member=uid=janedoe)</code>
+                                             after string substitution. It matches all role entries that have a member attribute
+                                             equal to <code class="code">uid=janedoe</code> under the subtree selected by the <code class="code">RoleBases</code>.
+                                          </p>
+                                          
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
@@ -90,7 +112,11 @@
                                        </dd>
                                        <dt><a id="cfn-amazonmq-broker-ldapservermetadata-rolesearchsubtree"></a><span class="term"><code class="code">RoleSearchSubtree</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          <p>
+                                             The directory search scope for the role. If set to true, scope is to search the entire
+                                             subtree.
+                                             
+                                          </p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Boolean
@@ -99,7 +125,12 @@
                                        </dd>
                                        <dt><a id="cfn-amazonmq-broker-ldapservermetadata-serviceaccountpassword"></a><span class="term"><code class="code">ServiceAccountPassword</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          <p>
+                                             Service account password. A service account is an account in your LDAP server that
+                                             has access to initiate a connection. For example,
+                                             <code class="code">cn=admin</code>,<code class="code">dc=corp</code>, <code class="code">dc=example</code>, <code class="code">dc=com</code>. 
+                                             
+                                          </p>
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
@@ -108,7 +139,12 @@
                                        </dd>
                                        <dt><a id="cfn-amazonmq-broker-ldapservermetadata-serviceaccountusername"></a><span class="term"><code class="code">ServiceAccountUsername</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>Service account username. A service account is an account in your LDAP server that
+                                             has access to initiate a connection. For example, cn=admin,dc=corp, dc=example, dc=com.
+                                             
+                                             
+                                          </p>
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
@@ -117,7 +153,15 @@
                                        </dd>
                                        <dt><a id="cfn-amazonmq-broker-ldapservermetadata-userbase"></a><span class="term"><code class="code">UserBase</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>Select a particular subtree of the directory information tree (DIT) to search for
+                                             user entries. 
+                                             The subtree is specified by a DN, which specifies the base node of the subtree. For
+                                             example, by setting this option to
+                                             <code class="code">ou=Users</code>,<code class="code">ou=corp</code>, <code class="code">dc=corp</code>, <code class="code">dc=example</code>, <code class="code">dc=com</code>, the search for user entries is restricted to the subtree beneath
+                                             <code class="code">ou=Users</code>,<code class="code">ou=corp</code>, <code class="code">dc=corp</code>, <code class="code">dc=example</code>, <code class="code">dc=com</code>.
+                                          </p>
+                                          
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
@@ -126,7 +170,9 @@
                                        </dd>
                                        <dt><a id="cfn-amazonmq-broker-ldapservermetadata-userrolename"></a><span class="term"><code class="code">UserRoleName</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>Specifies the name of the LDAP attribute for the user group membership.</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -135,7 +181,13 @@
                                        </dd>
                                        <dt><a id="cfn-amazonmq-broker-ldapservermetadata-usersearchmatching"></a><span class="term"><code class="code">UserSearchMatching</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The LDAP search filter used to find users within the <code class="code">userBase</code>. The client&apos;s username is substituted into the <code class="code"><span>{</span>0}</code>
+                                             placeholder in the search filter. For example, if this option is set to <code class="code">(uid=<span>{</span>0})</code> and the received username is <code class="code">janedoe</code>,
+                                             the search filter becomes <code class="code">(uid=janedoe)</code> after string substitution. It will result in matching an entry like <code class="code">uid=janedoe</code>,
+                                             <code class="code">ou=Users</code>, <code class="code">ou=corp</code>, <code class="code">dc=corp</code>, <code class="code">dc=example</code>, <code class="code">dc=com</code>.
+                                          </p>
+                                          
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
@@ -144,7 +196,11 @@
                                        </dd>
                                        <dt><a id="cfn-amazonmq-broker-ldapservermetadata-usersearchsubtree"></a><span class="term"><code class="code">UserSearchSubtree</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The directory search scope for the user.
+                                             If set to true, scope is to search the entire subtree.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Boolean
@@ -154,6 +210,7 @@
                                     </dl>
                                  </div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
                               <noscript>
                                  <div>

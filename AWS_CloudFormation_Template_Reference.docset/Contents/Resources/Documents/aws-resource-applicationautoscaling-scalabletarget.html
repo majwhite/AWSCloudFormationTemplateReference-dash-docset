@@ -117,6 +117,8 @@ Properties:
                                               
                                               
                                               
+                                              
+                                              
                                              
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
@@ -194,6 +196,13 @@ Properties:
                                                 </li>
                                                 <li class="listitem">
                                                    
+                                                   <p>Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier
+                                                      are specified using the endpoint ARN. Example: <code class="code">arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
                                                    <p>Lambda provisioned concurrency - The resource type is <code class="code">function</code> and the unique identifier is the function name with a function version or alias name
                                                       suffix that is not <code class="code">$LATEST</code>. 
                                                       Example: <code class="code">function:my-function:prod</code> or <code class="code">function:my-function:1</code>.
@@ -204,6 +213,14 @@ Properties:
                                                    
                                                    <p>Amazon Keyspaces table - The resource type is <code class="code">table</code> and the unique identifier is the table name. 
                                                       Example: <code class="code">keyspace/mykeyspace/table/mytable</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Amazon MSK cluster - The resource type and unique identifier are specified using the
+                                                      cluster ARN. 
+                                                      Example: <code class="code">arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5</code>.
                                                    </p>
                                                    
                                                 </li>
@@ -257,6 +274,8 @@ Properties:
                                           </p> 
                                           
                                           <div class="itemizedlist">
+                                              
+                                              
                                               
                                               
                                               
@@ -364,6 +383,13 @@ Properties:
                                                 <li class="listitem">
                                                    
                                                    <p>
+                                                      <code class="code">comprehend:entity-recognizer-endpoint:DesiredInferenceUnits</code> - The number of inference units for an Amazon Comprehend entity recognizer endpoint.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
                                                       <code class="code">lambda:function:ProvisionedConcurrency</code> - The provisioned concurrency for a Lambda function.
                                                    </p>
                                                    
@@ -382,6 +408,13 @@ Properties:
                                                    </p>
                                                    
                                                 </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">kafka:broker-storage:VolumeSize</code> - The provisioned volume size (in GiB) for brokers in an Amazon MSK cluster.
+                                                   </p>
+                                                   
+                                                </li>
                                              </ul>
                                           </div> 
                                           
@@ -390,11 +423,11 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Allowed values</em>: <code class="code">appstream:fleet:DesiredCapacity | cassandra:table:ReadCapacityUnits | cassandra:table:WriteCapacityUnits
-                                                | comprehend:document-classifier-endpoint:DesiredInferenceUnits | custom-resource:ResourceType:Property
-                                                | dynamodb:index:ReadCapacityUnits | dynamodb:index:WriteCapacityUnits | dynamodb:table:ReadCapacityUnits
-                                                | dynamodb:table:WriteCapacityUnits | ec2:spot-fleet-request:TargetCapacity | ecs:service:DesiredCount
-                                                | elasticmapreduce:instancegroup:InstanceCount | lambda:function:ProvisionedConcurrency
-                                                | rds:cluster:ReadReplicaCount | sagemaker:variant:DesiredInstanceCount</code></p>
+                                                | comprehend:document-classifier-endpoint:DesiredInferenceUnits | comprehend:entity-recognizer-endpoint:DesiredInferenceUnits
+                                                | custom-resource:ResourceType:Property | dynamodb:index:ReadCapacityUnits | dynamodb:index:WriteCapacityUnits
+                                                | dynamodb:table:ReadCapacityUnits | dynamodb:table:WriteCapacityUnits | ec2:spot-fleet-request:TargetCapacity
+                                                | ecs:service:DesiredCount | elasticmapreduce:instancegroup:InstanceCount | kafka:broker-storage:VolumeSize
+                                                | lambda:function:ProvisionedConcurrency | rds:cluster:ReadReplicaCount | sagemaker:variant:DesiredInstanceCount</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-applicationautoscaling-scalabletarget-scheduledactions"></a><span class="term"><code class="code">ScheduledActions</code></span></dt>
@@ -423,7 +456,7 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Allowed values</em>: <code class="code">appstream | cassandra | comprehend | custom-resource | dynamodb | ec2 | ecs | elasticmapreduce
-                                                | lambda | rds | sagemaker</code></p>
+                                                | kafka | lambda | rds | sagemaker</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-applicationautoscaling-scalabletarget-suspendedstate"></a><span class="term"><code class="code">SuspendedState</code></span></dt>
@@ -577,6 +610,7 @@ Properties:
                                     </ul>
                                  </div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
                               <noscript>
                                  <div>

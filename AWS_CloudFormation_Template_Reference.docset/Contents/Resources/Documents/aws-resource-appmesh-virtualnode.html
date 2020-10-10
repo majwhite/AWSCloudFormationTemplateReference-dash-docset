@@ -30,9 +30,9 @@
                                     as a <code class="code">backend</code>.
                                  </p>
                                  <p>The response metadata for your new virtual node contains the <code class="code">arn</code> that is
-                                    associated with the virtual node. Set this value (either the full ARN or the truncated
-                                    resource name: for example, <code class="code">mesh/default/virtualNode/simpleapp</code>) as the
-                                    <code class="code">APPMESH_VIRTUAL_NODE_NAME</code> environment variable for your task group&apos;s Envoy
+                                    associated with the virtual node. Set this value to the full ARN; for example,
+                                    <code class="code">arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>)
+                                    as the <code class="code">APPMESH_RESOURCE_ARN</code> environment variable for your task group&apos;s Envoy
                                     proxy container in your task definition or pod spec. This is then mapped to the
                                     <code class="code">node.id</code> and <code class="code">node.cluster</code> Envoy parameters.
                                  </p>
@@ -40,14 +40,17 @@
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                     <div class="awsdocs-note-text">
-                                       <p>If you require your Envoy stats or tracing to use a different name, you can override
-                                          the <code class="code">node.cluster</code> value that is set by
-                                          <code class="code">APPMESH_VIRTUAL_NODE_NAME</code> with the
-                                          <code class="code">APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.
+                                       <p>By default, App Mesh uses the name of the resource you specified in
+                                          <code class="code">APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and
+                                          traces. You can override this behavior by setting the
+                                          <code class="code">APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.
                                        </p>
                                     </div>
                                  </div>
-                                 <p>For more information about virtual nodes, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html">Virtual nodes</a>.
+                                 <p>For more information about virtual nodes, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html">Virtual nodes</a>. You must be using <code class="code">1.15.0</code> or later of the Envoy image when
+                                    setting these variables. For more information about App Mesh Envoy variables, see
+                                    <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html">Envoy image</a> in
+                                    the AWS App Mesh User Guide.
                                  </p>
                                  <h2 id="aws-resource-appmesh-virtualnode-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -415,6 +418,7 @@ Outputs:
                                     </ul>
                                  </div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
                               <noscript>
                                  <div>
