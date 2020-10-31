@@ -129,6 +129,7 @@
       &quot;<a href="#cfn-rds-dbcluster-engine">Engine</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-rds-dbcluster-enginemode">EngineMode</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-rds-dbcluster-engineversion">EngineVersion</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-rds-dbcluster-globalclusteridentifier">GlobalClusterIdentifier</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-rds-dbcluster-kmskeyid">KmsKeyId</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-rds-dbcluster-masterusername">MasterUsername</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-rds-dbcluster-masteruserpassword">MasterUserPassword</a>&quot; : <code class="replaceable">String</code>,
@@ -169,6 +170,7 @@ Properties:
   <a href="#cfn-rds-dbcluster-engine">Engine</a>: <code class="replaceable">String</code>
   <a href="#cfn-rds-dbcluster-enginemode">EngineMode</a>: <code class="replaceable">String</code>
   <a href="#cfn-rds-dbcluster-engineversion">EngineVersion</a>: <code class="replaceable">String</code>
+  <a href="#cfn-rds-dbcluster-globalclusteridentifier">GlobalClusterIdentifier</a>: <code class="replaceable">String</code>
   <a href="#cfn-rds-dbcluster-kmskeyid">KmsKeyId</a>: <code class="replaceable">String</code>
   <a href="#cfn-rds-dbcluster-masterusername">MasterUsername</a>: <code class="replaceable">String</code>
   <a href="#cfn-rds-dbcluster-masteruserpassword">MasterUserPassword</a>: <code class="replaceable">String</code>
@@ -503,7 +505,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
                                        </dd>
                                        <dt><a id="cfn-rds-dbcluster-enginemode"></a><span class="term"><code class="code">EngineMode</code></span></dt>
                                        <dd>
@@ -612,7 +614,22 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-rds-dbcluster-globalclusteridentifier"></a><span class="term"><code class="code">GlobalClusterIdentifier</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>
+                                             The global cluster ID of an Aurora cluster that becomes the primary cluster
+                                             in the new global database cluster.
+                                             
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
                                        </dd>
                                        <dt><a id="cfn-rds-dbcluster-kmskeyid"></a><span class="term"><code class="code">KmsKeyId</code></span></dt>
                                        <dd>
@@ -1189,14 +1206,15 @@ Properties:
             &quot;Description&quot;: &quot;CloudFormation Sample Aurora Parameter Group&quot;,
             &quot;Family&quot;: &quot;aurora5.6&quot;,
             &quot;Parameters&quot;: <span>{</span>
-                &quot;sql_mode&quot;: &quot;IGNORE_SPACE&quot;
+                &quot;sql_mode&quot;: &quot;IGNORE_SPACE&quot;,
+                &quot;max_allowed_packet&quot;: 1024,
+                &quot;innodb_buffer_pool_size&quot;: &quot;<span>{</span>DBInstanceClassMemory*3/4}&quot;
             }
         }
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_cluster_with_two_DB_instances--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- 
-RDSCluster: 
+                                    <h4 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_cluster_with_two_DB_instances--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">RDSCluster: 
   Properties: 
     DBClusterParameterGroupName: 
       Ref: RDSDBClusterParameterGroup
@@ -1247,14 +1265,15 @@ RDSDBInstance2:
     Engine: aurora
     PubliclyAccessible: &quot;true&quot;
   Type: &quot;AWS::RDS::DBInstance&quot;
-RDSDBParameterGroup: 
-  Properties: 
-    Description: &quot;CloudFormation Sample Aurora Parameter Group&quot;
+RDSDBParameterGroup:
+  Type: &apos;AWS::RDS::DBParameterGroup&apos;
+  Properties:
+    Description: CloudFormation Sample Aurora Parameter Group
     Family: aurora5.6
-    Parameters: 
+    Parameters:
       sql_mode: IGNORE_SPACE
-  Type: &quot;AWS::RDS::DBParameterGroup&quot;
-</code></pre></div>
+      max_allowed_packet: 1024
+      innodb_buffer_pool_size: &apos;<span>{</span>DBInstanceClassMemory*3/4}&apos;</code></pre></div>
                                  <h3 id="aws-resource-rds-dbcluster--examples--Creating_an_Amazon_Aurora_DB_cluster_that_exports_logs_to_Amazon_CloudWatch_Logs">Creating an Amazon Aurora DB cluster that exports logs to Amazon CloudWatch Logs</h3>
                                  <p>The following example creates an Amazon Aurora PostgreSQL DB cluster that
                                     exports logs to Amazon CloudWatch Logs. For more information about exporting

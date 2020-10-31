@@ -31,8 +31,6 @@
   &quot;Type&quot; : &quot;AWS::CodeArtifact::Repository&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-codeartifact-repository-description">Description</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-codeartifact-repository-domainname">DomainName</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-codeartifact-repository-domainowner">DomainOwner</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-codeartifact-repository-externalconnections">ExternalConnections</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-codeartifact-repository-permissionspolicydocument">PermissionsPolicyDocument</a>&quot; : <code class="replaceable">Json</code>,
       &quot;<a href="#cfn-codeartifact-repository-repositoryname">RepositoryName</a>&quot; : <code class="replaceable">String</code>,
@@ -44,8 +42,6 @@
                                     <h3 id="aws-resource-codeartifact-repository-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::CodeArtifact::Repository
 Properties: 
   <a href="#cfn-codeartifact-repository-description">Description</a>: <code class="replaceable">String</code>
-  <a href="#cfn-codeartifact-repository-domainname">DomainName</a>: <code class="replaceable">String</code>
-  <a href="#cfn-codeartifact-repository-domainowner">DomainOwner</a>: <code class="replaceable">String</code>
   <a href="#cfn-codeartifact-repository-externalconnections">ExternalConnections</a>: <code class="replaceable">
     - String</code>
   <a href="#cfn-codeartifact-repository-permissionspolicydocument">PermissionsPolicyDocument</a>: <code class="replaceable">Json</code>
@@ -71,42 +67,6 @@ Properties:
                                           <p><em>Maximum</em>: <code class="code">1000</code></p>
                                           <p><em>Pattern</em>: <code class="code">\P<span>{</span>C}+</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                                       </dd>
-                                       <dt><a id="cfn-codeartifact-repository-domainname"></a><span class="term"><code class="code">DomainName</code></span></dt>
-                                       <dd>
-                                          
-                                          <p>
-                                             The name of the domain that contains the repository.
-                                             
-                                          </p>
-                                          
-                                          <p><em>Required</em>: Yes
-                                          </p>
-                                          <p><em>Type</em>: String
-                                          </p>
-                                          <p><em>Minimum</em>: <code class="code">2</code></p>
-                                          <p><em>Maximum</em>: <code class="code">50</code></p>
-                                          <p><em>Pattern</em>: <code class="code">[a-z][a-z0-9\-]<span>{</span>0,48}[a-z0-9]</code></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
-                                       </dd>
-                                       <dt><a id="cfn-codeartifact-repository-domainowner"></a><span class="term"><code class="code">DomainOwner</code></span></dt>
-                                       <dd>
-                                          
-                                          <p>
-                                             The 12-digit account number of the AWS account that owns the domain that contains
-                                             the repository. It does not include 
-                                             dashes or spaces.
-                                             
-                                          </p>
-                                          
-                                          <p><em>Required</em>: No
-                                          </p>
-                                          <p><em>Type</em>: String
-                                          </p>
-                                          <p><em>Minimum</em>: <code class="code">12</code></p>
-                                          <p><em>Maximum</em>: <code class="code">12</code></p>
-                                          <p><em>Pattern</em>: <code class="code">[0-9]<span>{</span>12}</code></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-codeartifact-repository-externalconnections"></a><span class="term"><code class="code">ExternalConnections</code></span></dt>
                                        <dd>
@@ -213,6 +173,119 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
+                                 <h2 id="aws-resource-codeartifact-repository--examples">Examples</h2>
+                                 <p>The following examples can help you create CodeArtifact repositories using CloudFormation.</p>
+                                 <h3 id="aws-resource-codeartifact-repository--examples--Create_a_domain_and_repository">Create a domain and repository</h3>
+                                 <p>The following example creates a CodeArtifact domain named <em>my-domain</em> and a CodeArtifact 
+                                    repository named <em>my-repo</em> inside it.
+                                 </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-codeartifact-repository--examples--Create_a_domain_and_repository--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  MyCodeArtifactDomain:
+    Type: &apos;AWS::CodeArtifact::Domain&apos;
+    Properties:
+      DomainName: &quot;my-domain&quot;
+  MyCodeArtifactRepository:
+    Type: &apos;AWS::CodeArtifact::Repository&apos;
+    Properties:
+      RepositoryName: &quot;my-repo&quot;
+      DomainName: !GetAtt MyCodeArtifactDomain.Name</code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-codeartifact-repository--examples--Create_a_domain_and_repository--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Resources&quot;: <span>{</span>
+    &quot;MyCodeArtifactDomain&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::CodeArtifact::Domain&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;DomainName&quot;: &quot;my-domain&quot;
+      }
+    },
+    &quot;MyCodeArtifactRepository&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::CodeArtifact::Repository&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;RepositoryName&quot;: &quot;my-repo&quot;,
+        &quot;DomainName&quot;: <span>{</span>
+          &quot;Fn::GetAtt&quot;: [
+            &quot;MyCodeArtifactDomain&quot;,
+            &quot;Name&quot;
+          ]
+        }
+      }
+    }
+  }
+}</code></pre></div>
+                                 <h3 id="aws-resource-codeartifact-repository--examples--Create_a_repository_with_an_upstream_repository_and_external_connection">Create a repository with an upstream repository and external connection</h3>
+                                 <p>The following example creates a CodeArtifact domain named <em>my-domain</em> to store repositories. It also 
+                                    creates two CodeArtifact repositories: <em>my-repo</em> and <em>my-upstream-repo</em> 
+                                    within the domain. <em>my-repo</em> has <em>my-upstream-repo</em> configured as an upstream 
+                                    repository, and <em>my-upstream-repo</em> has an external connection to the public repository, 
+                                    <b>npmjs</b>.
+                                 </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-codeartifact-repository--examples--Create_a_repository_with_an_upstream_repository_and_external_connection--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  MyCodeArtifactDomain:
+    Type: &apos;AWS::CodeArtifact::Domain&apos;
+    Properties:
+      DomainName: &quot;my-domain&quot;
+  MyCodeArtifactUpstreamRepository:
+    Type: &apos;AWS::CodeArtifact::Repository&apos;
+    Properties:
+      RepositoryName: &quot;my-upstream-repo&quot;
+      DomainName: !GetAtt MyCodeArtifactDomain.Name
+      ExternalConnections:
+        - public:npmjs
+  MyCodeArtifactRepository:
+    Type: &apos;AWS::CodeArtifact::Repository&apos;
+    Properties:
+      RepositoryName: &quot;my-repo&quot;
+      DomainName: !GetAtt MyCodeArtifactDomain.Name
+      Upstreams:
+        - !GetAtt MyCodeArtifactUpstreamRepository.Name</code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-codeartifact-repository--examples--Create_a_repository_with_an_upstream_repository_and_external_connection--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Resources&quot;: <span>{</span>
+    &quot;MyCodeArtifactDomain&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::CodeArtifact::Domain&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;DomainName&quot;: &quot;my-domain&quot;
+      }
+    },
+    &quot;MyCodeArtifactUpstreamRepository&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::CodeArtifact::Repository&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;RepositoryName&quot;: &quot;my-upstream-repo&quot;,
+        &quot;DomainName&quot;: <span>{</span>
+          &quot;Fn::GetAtt&quot;: [
+            &quot;MyCodeArtifactDomain&quot;,
+            &quot;Name&quot;
+          ]
+        },
+        &quot;ExternalConnections&quot;: [
+          &quot;public:npmjs&quot;
+        ]
+      }
+    },
+    &quot;MyCodeArtifactRepository&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::CodeArtifact::Repository&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;RepositoryName&quot;: &quot;my-repo&quot;,
+        &quot;DomainName&quot;: <span>{</span>
+          &quot;Fn::GetAtt&quot;: [
+            &quot;MyCodeArtifactDomain&quot;,
+            &quot;Name&quot;
+          ]
+        },
+        &quot;Upstreams&quot;: [
+          <span>{</span>
+            &quot;Fn::GetAtt&quot;: [
+              &quot;MyCodeArtifactUpstreamRepository&quot;,
+              &quot;Name&quot;
+            ]
+          }
+        ]
+      }
+    }
+  }
+}</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>

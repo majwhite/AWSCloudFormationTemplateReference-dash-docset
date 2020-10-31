@@ -17,8 +17,11 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>The <code class="code">AWS::RDS::DBClusterParameterGroup</code> resource creates a new Amazon RDS
-                                    DB cluster parameter group. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Aurora.html">Managing an Amazon Aurora DB
-                                       Cluster</a> in the <em>Amazon Aurora User Guide</em>.
+                                    DB cluster parameter group.
+                                 </p>
+                                 <p>For information about configuring parameters for Amazon Aurora DB instances, see 
+                                    <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html">Working with DB parameter 
+                                       groups and DB cluster parameter groups</a> in the <em>Amazon Aurora User Guide</em>.
                                  </p>
                                  <div class="awsdocs-note">
                                     <div class="awsdocs-note-title">
@@ -138,32 +141,31 @@ Properties:
                                  </p>
                                  <h2 id="aws-resource-rds-dbclusterparametergroup--examples">Examples</h2>
                                  <h3 id="aws-resource-rds-dbclusterparametergroup--examples--"></h3>
-                                 <p>The following snippet creates a parameter group that sets the character set
-                                    database to <code class="code">UTF32</code>: 
+                                 <p>The following snippet creates a DB cluster parameter group for an Aurora MySQL DB
+                                    cluster and
+                                    sets the <code class="code">time_zone</code> and <code class="code">characater_set_database</code> parameters: 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-rds-dbclusterparametergroup--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-    &quot;RDSDBClusterParameterGroup&quot;: <span>{</span>
-        &quot;Type&quot;: &quot;AWS: : RDS: : DBClusterParameterGroup&quot;,
+                                    <h4 id="aws-resource-rds-dbclusterparametergroup--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;RDSDBClusterParameterGroup&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::RDS::DBClusterParameterGroup&quot;,
         &quot;Properties&quot;: <span>{</span>
-            &quot;Parameters&quot;: <span>{</span>
-                &quot;character_set_database&quot;: &quot;utf32&quot;
-            },
+            &quot;Description&quot;: &quot;CloudFormation Sample Aurora Cluster Parameter Group&quot;,
             &quot;Family&quot;: &quot;aurora5.6&quot;,
-            &quot;Description&quot;: &quot;Asampleparametergroup&quot;
+            &quot;Parameters&quot;: <span>{</span>
+                &quot;time_zone&quot;: &quot;US/Eastern&quot;,
+                &quot;character_set_database&quot;: &quot;utf32&quot;
+            }
         }
-    }
-}</code></pre></div>
+    }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-rds-dbclusterparametergroup--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- 
-RDSDBClusterParameterGroup: 
-  Properties: 
-    Description: &quot;A sample parameter group&quot;
+                                    <h4 id="aws-resource-rds-dbclusterparametergroup--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">RDSDBClusterParameterGroup:
+  Type: &apos;AWS::RDS::DBClusterParameterGroup&apos;
+  Properties:
+    Description: CloudFormation Sample Aurora Cluster Parameter Group
     Family: aurora5.6
-    Parameters: 
-      character_set_database: utf32
-  Type: &quot;AWS::RDS::DBClusterParameterGroup&quot;
-</code></pre></div>
+    Parameters:
+      time_zone: US/Eastern
+      character_set_database: utf32</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>

@@ -541,9 +541,15 @@ Properties:
                                        <dt><a id="cfn-rds-dbinstance-availabilityzone"></a><span class="term"><code class="code">AvailabilityZone</code></span></dt>
                                        <dd>
                                           
-                                          <p>The Availability Zone that the database instance will be created in.</p>
+                                          <p>
+                                             The Availability Zone (AZ) where the database will be created. For information on
+                                             AWS Regions and Availability Zones, see 
+                                             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html">Regions
+                                                and Availability Zones</a>.
+                                             
+                                          </p>
                                           
-                                          <p>Default: A random, system-chosen Availability Zone in the endpoint&apos;s region.</p>
+                                          <p>Default: A random, system-chosen Availability Zone in the endpoint&apos;s AWS Region.</p>
                                           
                                           <p>
                                              Example: <code class="code">us-east-1d</code>
@@ -551,11 +557,27 @@ Properties:
                                           </p>
                                           
                                           <p>
-                                             Constraint: The AvailabilityZone parameter cannot be specified if the MultiAZ parameter
-                                             is set to <code class="code">true</code>. 
-                                             The specified Availability Zone must be in the same region as the current endpoint.
+                                             Constraint: The <code class="code">AvailabilityZone</code> parameter can&apos;t be specified if the DB instance is a Multi-AZ deployment. 
+                                             The specified Availability Zone must be in the same AWS Region as the current endpoint.
                                              
                                           </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If you&apos;re creating a DB instance in an RDS on VMware environment,
+                                                   specify the identifier of the custom Availability Zone to create the DB instance
+                                                   in.
+                                                </p>
+                                                <p>For more information about RDS on VMware, see the 
+                                                   <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html">
+                                                      <em>RDS on VMware User Guide.</em>
+                                                      </a>
+                                                   
+                                                </p>
+                                             </div>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -1357,77 +1379,11 @@ Properties:
                                              Management (IAM) accounts to database accounts. By default, mapping is disabled.
                                           </p>
                                           
-                                          <p>You can enable IAM database authentication for the following database engines:</p>
                                           
-                                          
-                                          <p>
-                                             <b>Amazon Aurora</b>
-                                             
-                                          </p>
-                                          
-                                          <p>Not applicable. Mapping AWS IAM accounts to database accounts is managed by the DB
+                                          <p>This setting doesn&apos;t apply to Amazon Aurora. Mapping AWS IAM accounts to database
+                                             accounts is managed by the DB
                                              cluster.
                                           </p>
-                                          
-                                          
-                                          <p>
-                                             <b>MySQL</b>
-                                             
-                                          </p>
-                                          
-                                          <div class="itemizedlist">
-                                              
-                                              
-                                              
-                                             
-                                             <ul class="itemizedlist" type="disc">
-                                                <li class="listitem">
-                                                   
-                                                   <p>For MySQL 5.6, minor version 5.6.34 or higher</p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>For MySQL 5.7, minor version 5.7.16 or higher</p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>For MySQL 8.0, minor version 8.0.16 or higher</p>
-                                                   
-                                                </li>
-                                             </ul>
-                                          </div>
-                                          
-                                          
-                                          <p>
-                                             <b>PostgreSQL</b>
-                                             
-                                          </p>
-                                          
-                                          <div class="itemizedlist">
-                                              
-                                              
-                                              
-                                             
-                                             <ul class="itemizedlist" type="disc">
-                                                <li class="listitem">
-                                                   
-                                                   <p>For PostgreSQL 9.5, minor version 9.5.15 or higher</p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>For PostgreSQL 9.6, minor version 9.6.11 or higher</p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>PostgreSQL 10.6, 10.7, and 10.9</p>
-                                                   
-                                                </li>
-                                             </ul>
-                                          </div>
                                           
                                           
                                           <p>For more information, see 
@@ -1575,7 +1531,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
                                        </dd>
                                        <dt><a id="cfn-rds-dbinstance-engineversion"></a><span class="term"><code class="code">EngineVersion</code></span></dt>
                                        <dd>

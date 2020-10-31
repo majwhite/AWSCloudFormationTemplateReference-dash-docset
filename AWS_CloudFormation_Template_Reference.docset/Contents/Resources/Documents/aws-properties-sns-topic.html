@@ -23,7 +23,10 @@
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                     <div class="awsdocs-note-text">
-                                       <p>One user can create a maximum of 100,000 topics.</p>
+                                       <p>One account can create a maximum of 100,000 standard topics and 1,000 FIFO topics.
+                                          For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/sns.html">Amazon Simple Notification
+                                             Service endpoints and quotas</a> in the <em>AWS General Reference</em>.
+                                       </p>
                                     </div>
                                  </div>
                                  <h2 id="aws-properties-sns-topic-syntax">Syntax</h2>
@@ -34,6 +37,7 @@
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-sns-topic-contentbaseddeduplication">ContentBasedDeduplication</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-sns-topic-displayname">DisplayName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-sns-topic-fifotopic">FifoTopic</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-sns-topic-kmsmasterkeyid">KmsMasterKeyId</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-sns-topic-subscription">Subscription</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-sns-subscription.html">Subscription</a>, ... ]</code>,
       &quot;<a href="#cfn-sns-topic-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
@@ -46,6 +50,7 @@
 Properties: 
   <a href="#cfn-sns-topic-contentbaseddeduplication">ContentBasedDeduplication</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-sns-topic-displayname">DisplayName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-sns-topic-fifotopic">FifoTopic</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-sns-topic-kmsmasterkeyid">KmsMasterKeyId</a>: <code class="replaceable">String</code>
   <a href="#cfn-sns-topic-subscription">Subscription</a>: <code class="replaceable">
     - <a href="./aws-properties-sns-subscription.html">Subscription</a></code>
@@ -59,7 +64,39 @@ Properties:
                                        <dt><a id="cfn-sns-topic-contentbaseddeduplication"></a><span class="term"><code class="code">ContentBasedDeduplication</code></span></dt>
                                        <dd>
                                           
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          
+                                          <p>Enables content-based deduplication for FIFO topics.</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>By default, <code class="code">ContentBasedDeduplication</code> is set to <code class="code">false</code>.
+                                                      If you create a FIFO topic and this attribute is <code class="code">false</code>, you must
+                                                      specify a value for the <code class="code">MessageDeduplicationId</code> parameter for the
+                                                      <a href="https://docs.aws.amazon.com/sns/latest/api/API_Publish.html">Publish</a> action. 
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>When you set <code class="code">ContentBasedDeduplication</code> to <code class="code">true</code>, 
+                                                      Amazon SNS uses a SHA-256 hash to generate the <code class="code">MessageDeduplicationId</code> using 
+                                                      the body of the message (but not the attributes of the message).
+                                                   </p>
+                                                   
+                                                   <p>(Optional) To override the generated value, you can specify a value
+                                                      for the the <code class="code">MessageDeduplicationId</code> parameter for the <code class="code">Publish</code>
+                                                      action.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -77,6 +114,18 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-sns-topic-fifotopic"></a><span class="term"><code class="code">FifoTopic</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>Set to true to create a FIFO topic.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-sns-topic-kmsmasterkeyid"></a><span class="term"><code class="code">KmsMasterKeyId</code></span></dt>
                                        <dd>
@@ -223,6 +272,7 @@ Properties:
                                  <h2 id="aws-properties-sns-topic--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
+                                     
                                     
                                     <ul class="itemizedlist" type="disc">
                                        <li class="listitem">
@@ -234,6 +284,13 @@ Properties:
                                                 Guide</em>
                                              
                                           </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>The <a href="https://docs.aws.amazon.com/sns/latest/dg/fifo-topic-code-examples.html#fifo-topic-cfn">Using AWS CloudFormation</a>
+                                             code example for FIFO topics in the <em>Amazon Simple Notification Service Developer
+                                                Guide</em></p>
                                           
                                        </li>
                                     </ul>

@@ -27,19 +27,16 @@
                                     		       
                                     <ul class="itemizedlist" type="disc">
                                        <li class="listitem">
-                                          				           
-                                          <p>Use the <code class="code">S3OriginConfig</code> type to specify an Amazon S3 bucket that is
-                                             					<em>
-                                                <b>not</b>
-                                                </em> configured with static
-                                             					website hosting.
+                                          
+                                          <p>Use <code class="code">S3OriginConfig</code> to specify an Amazon S3 bucket that is not
+                                             					configured with static website hosting.
                                           </p>
                                           			         
                                        </li>
                                        <li class="listitem">
                                           				           
-                                          <p>Use the <code class="code">CustomOriginConfig</code> type to specify various other kinds of
-                                             					content containers or HTTP servers, including:
+                                          <p>Use <code class="code">CustomOriginConfig</code> to specify all other kinds of origins,
+                                             					including:
                                           </p>
                                           				           
                                           <div class="itemizedlist">
@@ -62,7 +59,7 @@
                                                 </li>
                                                 <li class="listitem">
                                                    						               
-                                                   <p>An AWS Elemental MediaPackage origin</p>
+                                                   <p>An AWS Elemental MediaPackage endpoint</p>
                                                    					             
                                                 </li>
                                                 <li class="listitem">
@@ -98,6 +95,7 @@
   &quot;<a href="#cfn-cloudfront-distribution-origin-id">Id</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-cloudfront-distribution-origin-origincustomheaders">OriginCustomHeaders</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-cloudfront-distribution-origincustomheader.html">OriginCustomHeader</a>, ... ]</code>,
   &quot;<a href="#cfn-cloudfront-distribution-origin-originpath">OriginPath</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-cloudfront-distribution-origin-originshield">OriginShield</a>&quot; : <code class="replaceable"><a href="./aws-properties-cloudfront-distribution-originshield.html">OriginShield</a></code>,
   &quot;<a href="#cfn-cloudfront-distribution-origin-s3originconfig">S3OriginConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-cloudfront-distribution-s3originconfig.html">S3OriginConfig</a></code>
 }
 </code></pre></div>
@@ -111,6 +109,8 @@
   <a href="#cfn-cloudfront-distribution-origin-origincustomheaders">OriginCustomHeaders</a>: <code class="replaceable">
     - <a href="./aws-properties-cloudfront-distribution-origincustomheader.html">OriginCustomHeader</a></code>
   <a href="#cfn-cloudfront-distribution-origin-originpath">OriginPath</a>: <code class="replaceable">String</code>
+  <a href="#cfn-cloudfront-distribution-origin-originshield">OriginShield</a>: <code class="replaceable">
+    <a href="./aws-properties-cloudfront-distribution-originshield.html">OriginShield</a></code>
   <a href="#cfn-cloudfront-distribution-origin-s3originconfig">S3OriginConfig</a>: <code class="replaceable">
     <a href="./aws-properties-cloudfront-distribution-s3originconfig.html">S3OriginConfig</a></code>
 </code></pre></div>
@@ -164,13 +164,12 @@
                                        <dt><a id="cfn-cloudfront-distribution-origin-customoriginconfig"></a><span class="term"><code class="code">CustomOriginConfig</code></span></dt>
                                        <dd>
                                           		       
-                                          <p>Use this type to specify an origin that is a content container or HTTP server,
-                                             			including an Amazon S3 bucket that is configured with static website hosting. To
-                                             specify an
-                                             			Amazon S3 bucket that is <em>
-                                                <b>not</b>
-                                                </em> configured
-                                             			with static website hosting, use the <code class="code">S3OriginConfig</code> type instead.
+                                          <p>Use this type to specify an origin that is not an Amazon S3 bucket, with one exception.
+                                             If the
+                                             			Amazon S3 bucket is configured with static website hosting, use this type. If the
+                                             Amazon S3 bucket
+                                             			is not configured with static website hosting, use the <code class="code">S3OriginConfig</code> type
+                                             			instead.
                                           </p>
                                           	     
                                           <p><em>Required</em>: Conditional
@@ -212,9 +211,9 @@
                                        <dt><a id="cfn-cloudfront-distribution-origin-origincustomheaders"></a><span class="term"><code class="code">OriginCustomHeaders</code></span></dt>
                                        <dd> 
                                           		       
-                                          <p>A list of HTTP header names and values that CloudFront adds to requests it sends to
-                                             the
-                                             			origin.
+                                          <p>A list of HTTP header names and values that CloudFront adds to the requests that it
+                                             sends to
+                                             the origin.
                                           </p>
                                           		       
                                           <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/add-origin-custom-headers.html">Adding Custom Headers to Origin Requests</a> in the
@@ -244,15 +243,30 @@
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-cloudfront-distribution-origin-originshield"></a><span class="term"><code class="code">OriginShield</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>CloudFront Origin Shield. Using Origin Shield can help reduce the load on your
+                                             origin.
+                                          </p>
+                                          		       
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html">Using Origin Shield</a> in the <em>Amazon CloudFront Developer Guide</em>.
+                                          </p>
+                                          	     
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-cloudfront-distribution-originshield.html">OriginShield</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-cloudfront-distribution-origin-s3originconfig"></a><span class="term"><code class="code">S3OriginConfig</code></span></dt>
                                        <dd> 
                                           		       
-                                          <p>Use this type to specify an origin that is an Amazon S3 bucket that is <em>
-                                                <b>not</b>
-                                                </em> configured with static website hosting. To specify
-                                             			any other type of origin, including an Amazon S3 bucket that is configured with
-                                             static
-                                             			website hosting, use the <code class="code">CustomOriginConfig</code> type instead.
+                                          <p>Use this type to specify an origin that is an Amazon S3 bucket that is not configured
+                                             with static
+                                             			website hosting. To specify any other type of origin, including an Amazon S3 bucket
+                                             that is
+                                             			configured with static website hosting, use the <code class="code">CustomOriginConfig</code> type
+                                             			instead.
                                           </p>
                                           	     
                                           <p><em>Required</em>: Conditional

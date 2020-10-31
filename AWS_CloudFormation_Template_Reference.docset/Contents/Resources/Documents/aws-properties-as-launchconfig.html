@@ -16,39 +16,37 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">LaunchConfiguration</code> resource specifies the Amazon EC2 Auto Scaling launch
+                                 <p>The <code class="code">AWS::AutoScaling::LaunchConfiguration</code> resource specifies the launch
                                     configuration that can be used by an Auto Scaling group to configure Amazon EC2 instances.
                                     
                                  </p>
-                                 <div class="awsdocs-note awsdocs-important">
-                                    <div class="awsdocs-note-title">
-                                       <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
-                                    <div class="awsdocs-note-text">
-                                       <p>When you update the launch configuration, AWS CloudFormation deletes that resource
-                                          and
-                                          creates a new launch configuration with the updated properties and a new name. This
-                                          update
-                                          action does not deploy any change across the running Amazon EC2 instances in the Auto
-                                          Scaling group. In other words, after you associate a new launch configuration with
-                                          an Auto
-                                          Scaling group, all new instances will get the updated configuration, but existing
-                                          instances
-                                          continue to run with the configuration that they were originally launched with. This
-                                          works
-                                          the same way as any other Auto Scaling group that uses a launch configuration. 
-                                       </p>
-                                       <p>If you want to update existing instances when you update the
-                                          <code class="code">AWS::AutoScaling::LaunchConfiguration</code> resource, you must specify an <a href="aws-attribute-updatepolicy.html">UpdatePolicy
-                                             attribute</a> for the Auto Scaling group. You can find sample update policies for
-                                          rolling updates in <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-autoscaling.html">Auto scaling template
-                                             snippets</a>.
-                                       </p>
-                                    </div>
-                                 </div>
+                                 <p>When you update the launch configuration for an Auto Scaling group, AWS CloudFormation
+                                    deletes that resource and creates a new launch configuration with the updated properties
+                                    and a
+                                    new name. Existing instances are not affected. To update existing instances when you
+                                    update
+                                    the <code class="code">AWS::AutoScaling::LaunchConfiguration</code> resource, you can specify an <a href="aws-attribute-updatepolicy.html">UpdatePolicy
+                                       attribute</a> for the group. You can find sample update policies for rolling updates in
+                                    <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-autoscaling.html">Auto scaling template
+                                       snippets</a>. 
+                                 </p>
                                  <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateLaunchConfiguration.html">CreateLaunchConfiguration</a> in the <em>Amazon EC2 Auto Scaling API
                                        Reference</em> and <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html">Launch configurations</a> in
                                     the <em>Amazon EC2 Auto Scaling User Guide</em>.
                                  </p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>To configure Amazon EC2 instances launched as part of the Auto Scaling group, you
+                                          can
+                                          specify a launch template or a launch configuration. We recommend that you use a <a href="aws-resource-ec2-launchtemplate.html">launch
+                                             template</a> to make sure that you can use the latest features of Amazon EC2, such as
+                                          Dedicated Hosts and T2 Unlimited instances. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html">Creating
+                                             a launch template for an Auto Scaling group</a>.
+                                       </p>
+                                    </div>
+                                 </div>
                                  <h2 id="aws-properties-as-launchconfig-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -68,6 +66,7 @@
       &quot;<a href="#cfn-as-launchconfig-kernelid">KernelId</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-as-launchconfig-keyname">KeyName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-autoscaling-launchconfig-launchconfigurationname">LaunchConfigurationName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-autoscaling-launchconfig-metadataoptions">MetadataOptions</a>&quot; : <code class="replaceable"><a href="./aws-properties-autoscaling-launchconfig-metadataoption.html">MetadataOption</a></code>,
       &quot;<a href="#cfn-as-launchconfig-placementtenancy">PlacementTenancy</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-as-launchconfig-ramdiskid">RamDiskId</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-as-launchconfig-securitygroups">SecurityGroups</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
@@ -94,6 +93,8 @@ Properties:
   <a href="#cfn-as-launchconfig-kernelid">KernelId</a>: <code class="replaceable">String</code>
   <a href="#cfn-as-launchconfig-keyname">KeyName</a>: <code class="replaceable">String</code>
   <a href="#cfn-autoscaling-launchconfig-launchconfigurationname">LaunchConfigurationName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-autoscaling-launchconfig-metadataoptions">MetadataOptions</a>: <code class="replaceable">
+    <a href="./aws-properties-autoscaling-launchconfig-metadataoption.html">MetadataOption</a></code>
   <a href="#cfn-as-launchconfig-placementtenancy">PlacementTenancy</a>: <code class="replaceable">String</code>
   <a href="#cfn-as-launchconfig-ramdiskid">RamDiskId</a>: <code class="replaceable">String</code>
   <a href="#cfn-as-launchconfig-securitygroups">SecurityGroups</a>: <code class="replaceable">
@@ -199,8 +200,8 @@ Properties:
                                              are
                                              incurred when you enable EBS optimization for an instance type that is not EBS-optimized
                                              by
-                                             default. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html">Amazon EBS&#x2013;optimized instances</a> in the
-                                             <em>Amazon EC2 User Guide for Linux Instances</em>. 
+                                             default. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html">Amazon EBS&#x2013;optimized instances</a> in
+                                             the <em>Amazon EC2 User Guide for Linux Instances</em>. 
                                           </p>
                                           
                                           <p>The default value is <code class="code">false</code>. 
@@ -251,12 +252,9 @@ Properties:
                                              Use
                                              this property if you want the launch configuration to use settings from an existing
                                              Amazon EC2
-                                             instance. 
-                                          </p>
-                                          
-                                          <p>When you use an instance to create a launch configuration, all properties are derived
-                                             from
-                                             the instance with the exception of <code class="code">BlockDeviceMapping</code> and
+                                             instance. When you use an instance to create a launch configuration, all properties
+                                             are
+                                             derived from the instance with the exception of <code class="code">BlockDeviceMapping</code> and
                                              <code class="code">AssociatePublicIpAddress</code>. You can override any properties from the instance by
                                              specifying them in the launch configuration. 
                                           </p>
@@ -342,8 +340,8 @@ Properties:
                                                    an
                                                    AMI that is configured to allow users another way to log in. For information on creating
                                                    a
-                                                   key pair, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2 key pairs and Linux instances</a> in the <em>Amazon EC2 User Guide for Linux
-                                                      Instances</em>. 
+                                                   key pair, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon EC2 key pairs and Linux instances</a> in the <em>Amazon EC2 User Guide
+                                                      for Linux Instances</em>. 
                                                 </p>
                                              </div>
                                           </div>
@@ -370,6 +368,18 @@ Properties:
                                           <p><em>Pattern</em>: <code class="code">[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
+                                       <dt><a id="cfn-autoscaling-launchconfig-metadataoptions"></a><span class="term"><code class="code">MetadataOptions</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The metadata options for the instances. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds">Configuring the Instance Metadata Options</a> in the
+                                             <em>Amazon EC2 Auto Scaling User Guide</em>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-autoscaling-launchconfig-metadataoption.html">MetadataOption</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
                                        <dt><a id="cfn-as-launchconfig-placementtenancy"></a><span class="term"><code class="code">PlacementTenancy</code></span></dt>
                                        <dd>
                                           
@@ -381,11 +391,12 @@ Properties:
                                           </p>
                                           
                                           <p>If you specify this property, you must specify at least one subnet in the
-                                             <code class="code">VPCZoneIdentifier</code> property of the <a href="aws-properties-as-group.html">AWS::AutoScaling::AutoScalingGroup</a> resource. 
+                                             <code class="code">VPCZoneIdentifier</code> property of the <a href="aws-properties-as-group.html">AWS::AutoScaling::AutoScalingGroup</a> resource.
                                           </p>
                                           
-                                          <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-vpc-tenancy">Instance placement
-                                                tenancy</a> in the <em>Amazon EC2 Auto Scaling User Guide</em>. 
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html">Configuring instance
+                                                tenancy with Amazon EC2 Auto Scaling</a> in the <em>Amazon EC2 Auto Scaling User
+                                                Guide</em>. 
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -423,9 +434,7 @@ Properties:
                                           
                                           <p>A list that contains the security groups to assign to the instances in the Auto Scaling
                                              group. The list can contain both the IDs of existing security groups and references
-                                             to 
-                                             <a href="aws-properties-ec2-security-group.html">SecurityGroup</a> 
-                                             resources created in the template.
+                                             to <a href="aws-properties-ec2-security-group.html">SecurityGroup</a> resources created in the template.
                                           </p>
                                           
                                           <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html">Security groups for your
@@ -442,9 +451,12 @@ Properties:
                                        <dd>
                                           
                                           <p>The maximum hourly price you are willing to pay for any Spot Instances launched to
-                                             fulfill the request. Spot Instances are launched when the 
-                                             price you specify exceeds the current Spot price. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-spot-instances.html">Requesting Spot Instances for fault-tolerant and flexible applications </a> in the <em>Amazon EC2 Auto Scaling User
-                                                Guide</em>.
+                                             fulfill
+                                             the request. Spot Instances are launched when the price you specify exceeds the current
+                                             Spot
+                                             price. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-spot-instances.html">Requesting Spot Instances for
+                                                fault-tolerant and flexible applications </a> in the <em>Amazon EC2 Auto Scaling
+                                                User Guide</em>.
                                           </p>
                                           
                                           <div class="awsdocs-note">
@@ -492,8 +504,7 @@ Properties:
                                     function, <code class="code">Ref</code> returns the resource name. For example:
                                     <code class="code">mystack-mylaunchconfig-1DDYF1E3B3I</code>.
                                  </p>
-                                 <p>For more information about using the <code class="code">Ref</code> function, see 
-                                    <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                     
                                  </p>
                                  <h2 id="aws-properties-as-launchconfig--examples">Examples</h2>
@@ -512,7 +523,7 @@ Properties:
                                     is
                                     attached to. 
                                  </p>
-                                 <p>CloudFormation supports Parameter Store parameters from the AWS Systems Manager
+                                 <p>CloudFormation supports parameters from the AWS Systems Manager
                                     Parameter Store. In this example, the <code class="code">ImageId</code> property of the
                                     AWS::AutoScaling::LaunchConfiguration references the latest Amazon Linux 2 AMI (EBS-backed
                                     image) from the Parameter Store. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html">AWS Systems
@@ -726,9 +737,9 @@ Resources:
                                        </li>
                                     </ul>
                                  </div>
-                                 <p>For more information about IOPS performance with provisioned IOPS volumes, see 
-                                    <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops">Provisioned IOPS SSD (<code class="code">io1</code> and <code class="code">io2</code>) volumes</a> in the <em>Amazon Elastic Compute Cloud
-                                       User Guide</em>.
+                                 <p>For more information about IOPS performance with provisioned IOPS volumes, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops">Provisioned IOPS
+                                       SSD (<code class="code">io1</code> and <code class="code">io2</code>) volumes</a> in the <em>Amazon
+                                       Elastic Compute Cloud User Guide</em>.
                                  </p>
                                  <p>For more performance tips, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSPerformance.html">Amazon EBS volume performance on Linux
                                        instances</a> in the <em>Amazon Elastic Compute Cloud User Guide</em>. 

@@ -16,15 +16,11 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Specifies an Amazon EC2 Auto Scaling scaling policy so that the Auto Scaling group
-                                    can
-                                    change the number of instances available for your application in response to changing
-                                    demand.
-                                 </p>
-                                 <p>If you create either a step scaling policy or a simple scaling policy, you must also
-                                    create a CloudWatch alarm that monitors a CloudWatch metric for your Auto Scaling
-                                    group. Note
-                                    that you can associate a CloudWatch alarm with only one scaling policy. 
+                                 <p>The AWS::AutoScaling::ScalingPolicy resource specifies an Amazon EC2 Auto Scaling
+                                    scaling
+                                    policy so that the Auto Scaling group can change the number of instances available
+                                    for your
+                                    application in response to changing demand.
                                  </p>
                                  <p>For more information about using scaling policies to scale your Auto Scaling group
                                     automatically, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html">Dynamic scaling</a> in the
@@ -319,7 +315,7 @@ Properties:
                                           </div>
                                           
                                           <p>If you specify <code class="code">ALBRequestCountPerTarget</code> for the metric, you must specify the
-                                             <code class="code">ResourceLabel</code> parameter with the
+                                             <code class="code">ResourceLabel</code> property with the
                                              <code class="code">PredefinedMetricSpecification</code>.
                                           </p>
                                           
@@ -563,11 +559,13 @@ Resources:
         TargetValue: !Ref ALBRequestCountTargetValue</code></pre></div>
                                  <h3 id="aws-properties-as-policy--examples--Step_scaling_policy">Step scaling policy</h3>
                                  <p>The following example creates a scaling policy with the <code class="code">StepScaling</code>
-                                    policy type and the <code class="code">ChangeInCapacity</code> adjustment type. When an associated
-                                    alarm is triggered, the policy increases the capacity of the Auto Scaling group based
-                                    on
-                                    the following step adjustments (assuming a CloudWatch alarm threshold of 70 percent):
-                                    
+                                    policy type and the <code class="code">ChangeInCapacity</code> adjustment type. You must also create a
+                                    CloudWatch alarm that monitors a CloudWatch metric for your Auto Scaling group. You
+                                    can associate a CloudWatch alarm with only one scaling policy. 
+                                 </p>
+                                 <p>When the associated alarm is triggered, the policy increases the capacity of the Auto
+                                    Scaling group based on the following step adjustments (assuming a CloudWatch alarm
+                                    threshold of 70 percent): 
                                  </p>
                                  <div class="itemizedlist">
                                      
@@ -656,7 +654,9 @@ Resources:
                                  <h3 id="aws-properties-as-policy--examples--Simple_scaling_policy">Simple scaling policy</h3>
                                  <p>The following example creates a scaling policy with the <code class="code">SimpleScaling</code>
                                     policy type and the <code class="code">ChangeInCapacity</code> adjustment type. The policy increases
-                                    capacity by one when it is triggered.
+                                    capacity by one when it is triggered. You must also create a CloudWatch alarm that
+                                    monitors a CloudWatch metric for your Auto Scaling group. You can associate a
+                                    CloudWatch alarm with only one scaling policy. 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-properties-as-policy--examples--Simple_scaling_policy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
