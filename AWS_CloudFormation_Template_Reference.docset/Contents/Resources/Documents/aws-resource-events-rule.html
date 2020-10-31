@@ -16,23 +16,23 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::Events::Rule</code> resource creates a rule that matches incoming events and routes 
-                                    them to one or more targets for processing. For more information, see 
-                                    <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/what-is-amazon-eventbridge.html">What Is Amazon Eventbridge?</a>.
-                                    
-                                    
+                                 <p>The <code class="code">AWS::Events::Rule</code> resource creates a rule that matches incoming events
+                                    and routes them to one or more targets for processing. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/what-is-amazon-eventbridge.html">What
+                                       Is Amazon Eventbridge?</a>. 
                                  </p>
-                                 <p>A rule must contain at least an <code class="code">EventPattern</code> or <code class="code">ScheduleExpression</code>. Rules with 
-                                    <code class="code">EventPattern</code> are triggered when a matching event is observed. 
-                                    Rules with <code class="code">ScheduleExpression</code> self-trigger based on the given schedule. 
-                                    A rule can have both an <code class="code">EventPattern</code> and a <code class="code">ScheduleExpression</code>, in which case the rule 
-                                    triggers on matching events as well as on a schedule.
+                                 <p>A rule must contain at least one <code class="code">EventPattern</code> or
+                                    <code class="code">ScheduleExpression</code>. Rules with <code class="code">EventPattern</code> are triggered when a
+                                    matching event is observed. Rules with <code class="code">ScheduleExpression</code> self-trigger based on
+                                    the given schedule. A rule can have both an <code class="code">EventPattern</code> and a
+                                    <code class="code">ScheduleExpression</code>, in which case the rule triggers on matching events as well
+                                    as on a schedule.
                                  </p>
-                                 <p>Most services in AWS treat <code class="code">:</code> or <code class="code">/</code> as the same character in Amazon Resource Names (ARNs). 
-                                    However, EventBridge uses an exact match in event patterns and rules. Be sure to use
-                                    the
-                                    correct ARN characters when creating event patterns so that they match the ARN
-                                    syntax in the event that you want to match.
+                                 <p>Most services in AWS treat <code class="code">:</code> or <code class="code">/</code> as the same character in
+                                    Amazon Resource Names (ARNs). However, EventBridge uses an exact match in event patterns
+                                    and
+                                    rules. Be sure to use the correct ARN characters when creating event patterns so that
+                                    they
+                                    match the ARN syntax in the event that you want to match.
                                  </p>
                                  <h2 id="aws-resource-events-rule-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -83,8 +83,10 @@ Properties:
                                        <dd>
                                           
                                           <p>The event bus to associate with this rule. If you omit this, the default event bus
-                                             is used.
+                                             is
+                                             used.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -99,24 +101,20 @@ Properties:
                                           
                                           
                                           <p>Describes which events are routed to the specified target. For more information, see
-                                             <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html">Events and Event Patterns in EventBridge</a> in the 
-                                             <em>Amazon EventBridge User Guide</em>.
+                                             <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html">Events and Event
+                                                Patterns in EventBridge</a> in the <em>Amazon EventBridge User
+                                                Guide</em>.
                                           </p>
                                           
                                           <p>When using CloudFormation, you must enclose each part of the event pattern in square
                                              brackets, as follows:
                                           </p>
                                           
-                                          <p><code class="code">&quot;EventPattern&quot;: <span>{</span>
-                                                &quot;source&quot;: [
-                                                &quot;aws.ec2&quot;
-                                                ],
-                                                &quot;detail-type&quot;: [
-                                                &quot;EC2 Instance State-change Notification&quot;
-                                                ]
-                                                }</code></p>
+                                          <p><code class="code">&quot;EventPattern&quot;: <span>{</span> &quot;source&quot;: [ &quot;aws.ec2&quot; ], &quot;detail-type&quot;: [ &quot;EC2 Instance
+                                                State-change Notification&quot; ] }</code></p>
                                           
-                                          <p>A rule must contain either <code class="code">EventPattern</code> or <code class="code">ScheduleExpression</code>.
+                                          <p>To create a rule, you must include at least one <code class="code">EventPattern</code> or
+                                             <code class="code">ScheduleExpression</code>. You can create a rule that includes both.
                                           </p>
                                           
                                           
@@ -130,18 +128,18 @@ Properties:
                                        <dd>
                                           
                                           <p>The name of the rule. If you don&apos;t specify a name, AWS CloudFormation generates a
-                                             unique physical 
-                                             ID and uses that ID for the rule name. 
+                                             unique
+                                             physical ID and uses that ID for the rule name. 
                                           </p>
                                           
                                           <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>If you specify a name, you can&apos;t perform updates 
-                                                   that require replacement of this resource. You can perform updates 
-                                                   that require no or some interruption. If you must replace the resource, 
-                                                   specify a new name.
+                                                <p>If you specify a name, you can&apos;t perform updates that require replacement of this
+                                                   resource. You can perform updates that require no or some interruption. If you must
+                                                   replace
+                                                   the resource, specify a new name.
                                                 </p>
                                              </div>
                                           </div>
@@ -161,9 +159,10 @@ Properties:
                                           <p>The Amazon Resource Name (ARN) of the role that is used for target invocation.</p>
                                           
                                           <p>If you&apos;re setting an event bus in another account as the target and that account granted
-                                             permission to your account through an organization 
-                                             instead of directly by the account ID, you must specify a <code class="code">RoleArn</code> with proper permissions in the <code class="code">Target</code> structure, instead
-                                             of here in this parameter.
+                                             permission to your account through an organization instead of directly by the account
+                                             ID, you
+                                             must specify a <code class="code">RoleArn</code> with proper permissions in the <code class="code">Target</code>
+                                             structure, instead of here in this parameter.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -177,11 +176,13 @@ Properties:
                                        <dt><a id="cfn-events-rule-scheduleexpression"></a><span class="term"><code class="code">ScheduleExpression</code></span></dt>
                                        <dd>
                                           
-                                          <p>The scheduling expression that determines when and how often the rule runs. 
-                                             For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/scheduled-events.html">Schedule Expressions for Rules</a>.
+                                          <p>The scheduling expression that determines when and how often the rule runs. For more
+                                             information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/scheduled-events.html">Schedule Expressions for
+                                                Rules</a>.
                                           </p>
                                           
-                                          <p>A rule must contain either <code class="code">ScheduleExpression</code> or <code class="code">EventPattern</code>.
+                                          <p>A rule must contain either <code class="code">ScheduleExpression</code> or
+                                             <code class="code">EventPattern</code>.
                                           </p>
                                           
                                           
@@ -208,18 +209,25 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>The AWS resources that are invoked when the rule is triggered.
-                                             For information about valid targets, see <a href="https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutTargets.html">PutTargets</a>.
+                                          <p>The AWS resources that are invoked when the rule is triggered. For information about
+                                             valid
+                                             targets, see <a href="https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutTargets.html">PutTargets</a>.
                                           </p>
                                           
                                           
                                           
-                                          <p>If you&apos;re setting the event bus of another account as the target and 
-                                             that account granted permission to your account through an organization instead of
-                                             
-                                             directly by the account ID, you must specify a <code class="code">RoleArn</code> with proper 
-                                             permissions in the <code class="code">Target</code> structure. For more information, see 
-                                             <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html">Sending and Receiving Events Between AWS Accounts</a> in the <em>Amazon EventBridge User Guide</em>.
+                                          <p>If you&apos;re setting the event bus of another account as the target and that account
+                                             granted
+                                             permission to your account through an organization instead of directly by the account
+                                             ID, you
+                                             must specify a <code class="code">RoleArn</code> with proper permissions in the <code class="code">Target</code>
+                                             structure. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html">Sending and
+                                                Receiving Events Between AWS Accounts</a> in the <em>Amazon EventBridge User
+                                                Guide</em>.
+                                          </p>
+                                          
+                                          <p>To learn more using a dead-letter queue to send events that fail to be delivered to
+                                             a target, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/rule-dlq.html">Event retry policy and using dead-letter queues</a>.
                                           </p>
                                           
                                           
@@ -233,7 +241,8 @@ Properties:
                                  <h2 id="aws-resource-events-rule-return-values">Return values</h2>
                                  <h3 id="aws-resource-events-rule-return-values-ref">Ref</h3>
                                  <p>
-                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns event rule ID, such as <code class="code">mystack-ScheduledRule-ABCDEFGHIJK</code>. 
+                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns event rule ID, such as
+                                    <code class="code">mystack-ScheduledRule-ABCDEFGHIJK</code>. 
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
@@ -244,7 +253,7 @@ Properties:
                                        <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ARN of the rule, such as 
+                                          <p>The ARN of the rule, such as
                                              <code class="code">arn:aws:events:us-east-2:123456789012:rule/example</code>.
                                           </p>
                                           
@@ -253,13 +262,64 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-events-rule--examples">Examples</h2>
-                                 <h3 id="aws-resource-events-rule--examples--Regularly_Invoke_Lambda_Function">Regularly Invoke Lambda Function</h3>
+                                 <h3 id="aws-resource-events-rule--examples--Create_a_rule_that_includes_a_dead-letter_queue_for_a_target">Create a rule that includes a dead-letter queue for a target</h3>
+                                 <p>The following example demonstrates how to send all EC2 events to an SQS queue, and
+                                    include a dead-letter queue and retry policy settings for the target of the rule.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-events-rule--examples--Create_a_rule_that_includes_a_dead-letter_queue_for_a_target--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+   &quot;MyNewEventsRule&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::Events::Rule&quot;,
+      &quot;Properties&quot;: <span>{</span>
+         &quot;Description&quot;: &quot;Test Events Rule&quot;,
+         &quot;Name&quot;: &quot;mynewabc&quot;,
+         &quot;EventPattern&quot;: <span>{</span>
+            &quot;source&quot;: [
+               &quot;aws.ec2&quot;
+            ]
+         },
+         &quot;State&quot;: &quot;ENABLED&quot;,
+         &quot;Targets&quot;: [
+            <span>{</span>
+               &quot;Arn&quot;: &quot;arn:aws:sqs:us-west-2:081035103721:demoSQS&quot;,
+               &quot;Id&quot;: &quot;Id1234&quot;,
+               &quot;RetryPolicy&quot;: <span>{</span>
+                  &quot;MaximumRetryAttempts&quot;: 4,
+                  &quot;MaximumEventAgeInSeconds&quot;: 400
+               },
+               &quot;DeadLetterConfig&quot;: <span>{</span>
+                  &quot;Arn&quot;: &quot;arn:aws:sqs:us-west-2:081035103721:demoDLQ&quot;
+               }
+            }
+         ]
+      }
+   }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-events-rule--examples--Create_a_rule_that_includes_a_dead-letter_queue_for_a_target--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyNewEventsRule:
+  Type: &apos;AWS::Events::Rule&apos;
+  Properties:
+    Description: Test Events Rule
+    Name: mynewabc
+    EventPattern:
+      source:
+        - aws.ec2
+    State: ENABLED
+    Targets:
+      - Arn: &apos;arn:aws:sqs:us-west-2:081035103721:demoSQS&apos;
+        Id: Id1234
+        RetryPolicy:
+          MaximumRetryAttempts: 4
+          MaximumEventAgeInSeconds: 400
+        DeadLetterConfig:
+          Arn: &apos;arn:aws:sqs:us-west-2:081035103721:demoDLQ&apos;</code></pre></div>
+                                 <h3 id="aws-resource-events-rule--examples--Regularly_invoke_Lambda_function">Regularly invoke Lambda function</h3>
                                  <p>The following example creates a rule that invokes the specified Lambda function every
                                     10 minutes. 
                                     The <code class="code">PermissionForEventsToInvokeLambda</code> resource grants EventBridge permission to invoke the associated function. 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-events-rule--examples--Regularly_Invoke_Lambda_Function--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;ScheduledRule&quot;: <span>{</span>
+                                    <h4 id="aws-resource-events-rule--examples--Regularly_invoke_Lambda_function--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;ScheduledRule&quot;: <span>{</span>
   &quot;Type&quot;: &quot;AWS::Events::Rule&quot;,
   &quot;Properties&quot;: <span>{</span>
     &quot;Description&quot;: &quot;ScheduledRule&quot;,
@@ -281,7 +341,7 @@ Properties:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-events-rule--examples--Regularly_Invoke_Lambda_Function--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ScheduledRule: 
+                                    <h4 id="aws-resource-events-rule--examples--Regularly_invoke_Lambda_function--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ScheduledRule: 
   Type: AWS::Events::Rule
   Properties: 
     Description: &quot;ScheduledRule&quot;
@@ -297,8 +357,7 @@ Properties:
 PermissionForEventsToInvokeLambda: 
   Type: AWS::Lambda::Permission
   Properties: 
-    FunctionName: 
-      Ref: &quot;LambdaFunction&quot;
+    FunctionName: !Ref &quot;LambdaFunction&quot;
     Action: &quot;lambda:InvokeFunction&quot;
     Principal: &quot;events.amazonaws.com&quot;
     SourceArn: 

@@ -378,6 +378,67 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
+                                 <h2 id="aws-properties-ec2-elb--examples">Examples</h2>
+                                 <h3 id="aws-properties-ec2-elb--examples--"></h3>
+                                 <p>The following example specifies a Classic Load Balancer with a secure listener.</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-ec2-elb--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;MyLoadBalancer&quot; : <span>{</span>
+    &quot;Type&quot;: &quot;AWS::ElasticLoadBalancing::LoadBalancer&quot;,
+    &quot;Properties&quot;: <span>{</span>
+        &quot;AvailabilityZones&quot;: [ &quot;us-east-2a&quot; ],
+        &quot;CrossZone&quot;: &quot;true&quot;,
+        &quot;Listeners&quot;: [<span>{</span>
+            &quot;InstancePort&quot;: &quot;80&quot;,
+            &quot;InstanceProtocol&quot;: &quot;HTTP&quot;,
+            &quot;LoadBalancerPort&quot;: &quot;443&quot;,
+            &quot;Protocol&quot;: &quot;HTTPS&quot;,
+            &quot;PolicyNames&quot;: [ &quot;My-SSLNegotiation-Policy&quot; ],
+            &quot;SSLCertificateId&quot;: &quot;arn:aws:iam::123456789012:server-certificate/my-server-certificate&quot;
+        }],
+        &quot;HealthCheck&quot;: <span>{</span>
+            &quot;Target&quot;: &quot;HTTP:80/&quot;,
+            &quot;HealthyThreshold&quot;: &quot;2&quot;,
+            &quot;UnhealthyThreshold&quot;: &quot;3&quot;,
+            &quot;Interval&quot;: &quot;10&quot;,
+            &quot;Timeout&quot;: &quot;5&quot;
+        },
+        &quot;Policies&quot;: [<span>{</span>
+            &quot;PolicyName&quot;: &quot;My-SSLNegotiation-Policy&quot;,
+            &quot;PolicyType&quot;: &quot;SSLNegotiationPolicyType&quot;,
+            &quot;Attributes&quot;: [<span>{</span>
+                &quot;Name&quot;: &quot;Reference-Security-Policy&quot;,
+                &quot;Value&quot;: &quot;ELBSecurityPolicy-TLS-1-2-2017-01&quot;
+            }]
+        }]
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-ec2-elb--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyLoadBalancer:
+    Type: AWS::ElasticLoadBalancing::LoadBalancer
+    Properties:
+      AvailabilityZones:
+      - &quot;us-east-2a&quot;
+      CrossZone: true
+      Listeners:
+      - InstancePort: &apos;80&apos;
+        InstanceProtocol: HTTP
+        LoadBalancerPort: &apos;443&apos;
+        Protocol: HTTPS
+        PolicyNames: 
+        - My-SSLNegotiation-Policy
+        SSLCertificateId: arn:aws:iam::123456789012:server-certificate/my-server-certificate
+      HealthCheck:
+        Target: HTTP:80/
+        HealthyThreshold: &apos;2&apos;
+        UnhealthyThreshold: &apos;3&apos;
+        Interval: &apos;10&apos;
+        Timeout: &apos;5&apos;
+      Policies:
+      - PolicyName: My-SSLNegotiation-Policy
+        PolicyType: SSLNegotiationPolicyType
+        Attributes:
+        - Name: Reference-Security-Policy
+          Value: ELBSecurityPolicy-TLS-1-2-2017-01</code></pre></div>
                                  <h2 id="aws-properties-ec2-elb--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      

@@ -35,7 +35,6 @@
       &quot;<a href="#cfn-transfer-server-identityprovidertype">IdentityProviderType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-transfer-server-loggingrole">LoggingRole</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-transfer-server-protocols">Protocols</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-transfer-server-protocol.html">Protocol</a>, ... ]</code>,
-      &quot;<a href="#cfn-transfer-server-securitypolicyname">SecurityPolicyName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-transfer-server-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
 }
@@ -53,7 +52,6 @@ Properties:
   <a href="#cfn-transfer-server-loggingrole">LoggingRole</a>: <code class="replaceable">String</code>
   <a href="#cfn-transfer-server-protocols">Protocols</a>: <code class="replaceable">
     - <a href="./aws-properties-transfer-server-protocol.html">Protocol</a></code>
-  <a href="#cfn-transfer-server-securitypolicyname">SecurityPolicyName</a>: <code class="replaceable">String</code>
   <a href="#cfn-transfer-server-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
 </code></pre></div>
@@ -207,13 +205,11 @@ Properties:
                                        <dt><a id="cfn-transfer-server-identityprovidertype"></a><span class="term"><code class="code">IdentityProviderType</code></span></dt>
                                        <dd>
                                           
-                                          <p>Specifies the mode of authentication for a file transfer protocol-enabled server.
-                                             The
-                                             default value is <code class="code">SERVICE_MANAGED</code>, which allows you to store and access user
-                                             credentials within the AWS Transfer Family service. Use the <code class="code">API_GATEWAY</code> value to
-                                             integrate with an identity provider of your choosing. The <code class="code">API_GATEWAY</code> setting
-                                             requires you to provide an API Gateway endpoint URL to call for authentication using
-                                             the
+                                          <p>Specifies the mode of authentication for a server. The default value is
+                                             <code class="code">SERVICE_MANAGED</code>, which allows you to store and access user credentials within
+                                             the AWS Transfer Family service. Use the <code class="code">API_GATEWAY</code> value to integrate with an
+                                             identity provider of your choosing. The <code class="code">API_GATEWAY</code> setting requires you to
+                                             provide an API Gateway endpoint URL to call for authentication using the
                                              <code class="code">IdentityProviderDetails</code> parameter.
                                           </p>
                                           
@@ -253,25 +249,10 @@ Properties:
                                           <p><em>Maximum</em>: <code class="code">3</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
-                                       <dt><a id="cfn-transfer-server-securitypolicyname"></a><span class="term"><code class="code">SecurityPolicyName</code></span></dt>
-                                       <dd>
-                                          
-                                          <p>Specifies the name of the security policy that is attached to the server.</p>
-                                          
-                                          <p><em>Required</em>: No
-                                          </p>
-                                          <p><em>Type</em>: String
-                                          </p>
-                                          <p><em>Maximum</em>: <code class="code">100</code></p>
-                                          <p><em>Pattern</em>: <code class="code">TransferSecurityPolicy-.+</code></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                                       </dd>
                                        <dt><a id="cfn-transfer-server-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
                                           
-                                          <p>Key-value pairs that can be used to group and search for file transfer protocol-enabled
-                                             servers.
-                                          </p>
+                                          <p>Key-value pairs that can be used to group and search for servers.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -332,79 +313,71 @@ Properties:
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-transfer-server--examples--Create_a_server_with_VPC_hosted_endpoint_type--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-    &quot;MyTransferServer&quot;: <span>{</span>
-        &quot;Type&quot;: &quot;AWS::Transfer::Server&quot;,
-        &quot;Properties&quot;: <span>{</span>
-            &quot;EndpointDetails&quot;: <span>{</span>
-                &quot;AddressAllocationIds&quot;: [
-                    <span>{</span>
-                        &quot;Ref&quot;: &quot;MyTransferServerAddressAllocationId01&quot;
-                    },
-                    <span>{</span>
-                        &quot;Ref&quot;: &quot;MyTransferServerAddressAllocationId02&quot;
-                    }
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Description&quot;: &quot;creates SFTP Server&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;MyTransferServer&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::Transfer::Server&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;EndpointDetails&quot;: <span>{</span>
+                    &quot;AddressAllocationIds&quot;: [
+                        &quot;AddressAllocationId-1&quot;,
+                        &quot;AddressAllocationId-2&quot;
+                    ],
+                    &quot;SubnetIds&quot;: [
+                        &quot;SubnetId-1&quot;,
+                        &quot;SubnetId-2&quot;
+                    ],
+                    &quot;VpcId&quot;: &quot;VpcId&quot;
+                },
+                &quot;EndpointType&quot;: &quot;VPC&quot;,
+                &quot;LoggingRole&quot;: &quot;Logging-Role-ARN&quot;,
+                &quot;Protocols&quot;: [
+                    &quot;SFTP&quot;
                 ],
-                &quot;SubnetIds&quot;: [
+                &quot;SecurityPolicyName&quot;: &quot;Security-Policy-Name&quot;,
+                &quot;IdentityProviderDetails&quot;: <span>{</span>
+                    &quot;InvocationRole&quot;: &quot;Invocation-Role-ARN&quot;,
+                    &quot;Url&quot;: &quot;API_GATEWAY-Invocation-URL&quot;
+                },
+                &quot;IdentityProviderType&quot;: &quot;API_GATEWAY&quot;,
+                &quot;Tags&quot;: [
                     <span>{</span>
-                        &quot;Ref&quot;: &quot;MyTransferServerSubnet01&quot;
-                    },
-                    <span>{</span>
-                        &quot;Ref&quot;: &quot;MyTransferServerSubnet02&quot;
+                        &quot;Key&quot;: &quot;KeyName&quot;,
+                        &quot;Value&quot;: &quot;ValueName&quot;
                     }
                 ]
-            },
-            &quot;EndpointType&quot;: &quot;VPC&quot;,
-            &quot;IdentityProviderDetails&quot;: <span>{</span>
-                &quot;InvocationRole&quot;: <span>{</span>
-                    &quot;Ref&quot;: &quot;MyTransferServerIdentityProviderInvocationRole&quot;
-                },
-                &quot;Url&quot;: <span>{</span>
-                    &quot;Ref&quot;: &quot;MyTransferServerIdentityProviderUrl&quot;
-                }
-            },
-            &quot;IdentityProviderType&quot;: &quot;API_GATEWAY&quot;,
-            &quot;LoggingRole&quot;: <span>{</span>
-                &quot;Ref&quot;: &quot;AWSTransferLoggingAccess&quot;
-            },
-            &quot;Protocols&quot;: &quot;SFTP&quot;,
-            &quot;SecurityPolicy&quot;: <span>{</span>
-                &quot;Ref&quot;: &quot;TransferSecurityPolicy-2020-06&quot;
-            },
-            &quot;Tags&quot;: [
-                <span>{</span>
-                    &quot;Key&quot;: &quot;KeyName&quot;,
-                    &quot;Value&quot;: &quot;ValueName&quot;
-                }
-            ]
+            }
         }
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-transfer-server--examples--Create_a_server_with_VPC_hosted_endpoint_type--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyTransferServer:
-  Type : AWS::Transfer::Server
-  Properties :
-    EndpointDetails:
-      AddressAllocationIds:
-        - Ref: MyTransferServerAddressAllocationId01
-        - Ref: MyTransferServerAddressAllocationId02
-      SubnetIds:
-        - Ref: MyTransferServerSubnet01
-        - Ref: MyTransferServerSubnet02
-    EndpointType: VPC
-    IdentityProviderDetails: 
-      InvocationRole:
-        Ref: MyTransferServerIdentityProviderInvocationRole
-      Url:
-        Ref: MyTransferServerIdentityProviderUrl
-    IdentityProviderType: API_GATEWAY
-    LoggingRole:
-      Ref: AWSTransferLoggingAccess
-    Protocols: SFTP
-    SecurityPolicy:
-      Ref: TransferSecurityPolicy-2020-06
-    Tags: 
-      - Key: KeyName
-        Value: ValueName</code></pre></div>
+                                    <h4 id="aws-resource-transfer-server--examples--Create_a_server_with_VPC_hosted_endpoint_type--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+Description: creates SFTP Server
+Resources:
+    MyTransferServer:
+      Type : AWS::Transfer::Server
+      Properties :
+        EndpointDetails:
+          AddressAllocationIds:
+            - AddressAllocationId-1
+            - AddressAllocationId-2
+          SubnetIds:
+            - SubnetId-1
+            - SubnetId-2
+          VpcId: VpcId
+        EndpointType: VPC
+        LoggingRole: Logging-Role-ARN
+        Protocols: 
+            - SFTP
+        SecurityPolicyName: Security-Policy-Name
+        IdentityProviderDetails: 
+            InvocationRole: Invocation-Role-ARN
+            Url: API_GATEWAY-Invocation-URL
+        IdentityProviderType: API_GATEWAY
+        Tags: 
+          - Key: KeyName
+            Value: ValueName</code></pre></div>
                                  <h2 id="aws-resource-transfer-server--seealso">See also</h2>
                                  <p><a href="https://docs.aws.amazon.com/transfer/latest/userguide/API_CreateServer.html">CreateServer</a> in the <em>AWS Transfer Family User
                                        Guide</em>.

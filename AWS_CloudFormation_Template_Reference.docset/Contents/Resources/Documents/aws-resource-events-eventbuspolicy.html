@@ -16,21 +16,20 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::Events::EventBusPolicy</code> resource creates an event bus policy for Amazon EventBridge. 
-                                    An event bus policy enables your account to receive events from other AWS accounts.
-                                    These events can trigger 
-                                    EventBridge rules created in your account. For more information, see 
-                                    <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html">Sending and Receiving Events Between AWS Accounts</a> 
-                                    in the <em>Amazon EventBridge User Guide</em>.
+                                 <p>The <code class="code">AWS::Events::EventBusPolicy</code> resource creates an event bus policy for
+                                    Amazon EventBridge. An event bus policy enables your account to receive events from
+                                    other AWS
+                                    accounts. These events can trigger EventBridge rules created in your account. For
+                                    more
+                                    information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html">Sending and
+                                       Receiving Events Between AWS Accounts</a> in the <em>Amazon EventBridge User
+                                       Guide</em>.
                                  </p>
-                                 <p>If you grant permissions using <code class="code">Condition</code> and specifying an organization, then accounts in that 
-                                    organization must specify a <code class="code">RoleArn</code> with proper permissions 
-                                    when they use <code class="code">PutTarget</code> to add your account&apos;s event bus as a 
-                                    target.
+                                 <p>If you grant permissions using <code class="code">Condition</code> and specifying an organization, then
+                                    accounts in that organization must specify a <code class="code">RoleArn</code> with proper permissions when
+                                    they use <code class="code">PutTarget</code> to add your account&apos;s event bus as a target.
                                  </p>
-                                 <p>The permission policy on the default event bus can&apos;t exceed 10 KB in
-                                    size.
-                                 </p>
+                                 <p>The permission policy on the default event bus can&apos;t exceed 10 KB in size.</p>
                                  <h2 id="aws-resource-events-eventbuspolicy-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -62,7 +61,8 @@ Properties:
                                        <dd>
                                           
                                           <p>The action that you are enabling the other account to perform. Currently, this must
-                                             be <code class="code">events:PutEvents</code>.
+                                             be
+                                             <code class="code">events:PutEvents</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -79,23 +79,23 @@ Properties:
                                           
                                           
                                           
-                                          <p><code class="code">Condition</code> is a JSON string that you can use to limit the event bus permissions that you&apos;re
-                                             granting only to accounts that fulfill the condition. 
-                                             Currently, the only supported condition is membership in a certain AWS organization.
-                                             For more information about AWS Organizations, 
-                                             see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html">What Is AWS Organizations?</a> in the 
-                                             <em>AWS Organizations User Guide</em>.
+                                          <p><code class="code">Condition</code> is a JSON string that you can use to limit the event bus
+                                             permissions that you&apos;re granting only to accounts that fulfill the condition. Currently,
+                                             the
+                                             only supported condition is membership in a certain AWS organization. For more information
+                                             about AWS Organizations, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html">What Is AWS
+                                                Organizations?</a> in the <em>AWS Organizations User Guide</em>.
                                           </p>
                                           
                                           <p>
-                                             <code class="code">Condition</code> is a property of the 
-                                             <a href="aws-resource-events-eventbuspolicy.html"> AWS::Events::EventBusPolicy</a> resource type.
-                                          </p>
-                                          <p>If you specify <code class="code">Condition</code> with an AWS organization ID and specify &quot;*&quot; as the value
-                                             for <code class="code">Principal</code>, you grant permission to all the accounts in the named organization.
+                                             <code class="code">Condition</code> is a property of the <a href="aws-resource-events-eventbuspolicy.html">
+                                                AWS::Events::EventBusPolicy</a> resource type.
                                           </p>
                                           
-                                          
+                                          <p>If you specify <code class="code">Condition</code> with an AWS organization ID and specify &quot;*&quot; as the
+                                             value for <code class="code">Principal</code>, you grant permission to all the accounts in the named
+                                             organization.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -119,18 +119,17 @@ Properties:
                                        <dd>
                                           
                                           <p>The 12-digit AWS account ID that you are permitting to put events to your default
-                                             event bus. Specify &quot;*&quot; to permit any account to put events to your default event
-                                             bus.
+                                             event
+                                             bus. Specify &quot;*&quot; to permit any account to put events to your default event bus.
                                           </p>
                                           
                                           
-                                          <p>If you specify &quot;*&quot; without specifying <code class="code">Condition</code>, avoid creating rules
-                                             that may match undesirable events. To create more secure rules, make sure that the
-                                             event
-                                             pattern for each rule contains an <code class="code">account</code> field with a specific account ID
-                                             from which to receive events. Rules with an account field do not match any events
-                                             sent
-                                             from other accounts.
+                                          <p>If you specify &quot;*&quot; without specifying <code class="code">Condition</code>, avoid creating rules that
+                                             may match undesirable events. To create more secure rules, make sure that the event
+                                             pattern
+                                             for each rule contains an <code class="code">account</code> field with a specific account ID from which to
+                                             receive events. Rules with an account field do not match any events sent from other
+                                             accounts.
                                           </p>
                                           
                                           
@@ -147,8 +146,9 @@ Properties:
                                        <dd>
                                           
                                           <p>An identifier string for the external account that you&apos;re granting permissions to.
-                                             If you later want to revoke
-                                             the permission for this external account, you must specify this <code class="code">StatementId</code>.
+                                             If you
+                                             later want to revoke the permission for this external account, you must specify this
+                                             <code class="code">StatementId</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -165,7 +165,8 @@ Properties:
                                  <h2 id="aws-resource-events-eventbuspolicy-return-values">Return values</h2>
                                  <h3 id="aws-resource-events-eventbuspolicy-return-values-ref">Ref</h3>
                                  <p>
-                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the event bus policy ID, such as <code class="code">EventBusPolicy-1aBCdeFGh2J3</code>.
+                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the event bus policy ID, such as
+                                    <code class="code">EventBusPolicy-1aBCdeFGh2J3</code>.
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>

@@ -66,15 +66,12 @@ Properties:
                                        <dt><a id="cfn-transfer-user-homedirectory"></a><span class="term"><code class="code">HomeDirectory</code></span></dt>
                                        <dd>
                                           
-                                          <p>The landing directory (folder) for a user when they log in to the file transfer
-                                             protocol-enabled server using the client.
+                                          <p>The landing directory (folder) for a user when they log in to the server using the
+                                             client.
                                           </p>
                                           
                                           
-                                          <p>An example is
-                                             <em>
-                                                <code class="code">your-Amazon-S3-bucket-name&gt;/home/username</code>
-                                                </em>.
+                                          <p>A <code class="code">HomeDirectory</code> example is <code class="code">/bucket_name/home/mydirectory</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -89,18 +86,19 @@ Properties:
                                        <dd>
                                           
                                           <p>Logical directory mappings that specify what Amazon S3 paths and keys should be visible
-                                             to
-                                             your user and how you want to make them visible. You will need to specify the
-                                             &quot;<code class="code">Entry</code>&quot; and &quot;<code class="code">Target</code>&quot; pair, where <code class="code">Entry</code> shows how the
-                                             path is made visible and <code class="code">Target</code> is the actual Amazon S3 path. If you only specify
-                                             a target, it will be displayed as is. You will need to also make sure that your IAM
-                                             role
-                                             provides access to paths in <code class="code">Target</code>. The following is an example.
+                                             to your user and how you want to make them visible. You will need to specify the
+                                             &quot;<code class="code">Entry</code>&quot; and &quot;<code class="code">Target</code>&quot; pair, where <code class="code">Entry</code> shows how
+                                             the path is made visible and <code class="code">Target</code> is the actual Amazon S3 path. If you only
+                                             specify a target, it will be displayed as is. You will need to also make sure that
+                                             your IAM
+                                             role provides access to paths in <code class="code">Target</code>. The following is an example.
                                           </p>
                                           
                                           
+                                          
+                                          
                                           <p>
-                                             <code class="code">&apos;[ &quot;/bucket2/documentation&quot;, <span>{</span> &quot;Entry&quot;: &quot;your-personal-report.pdf&quot;, &quot;Target&quot;:
+                                             <code class="code">&apos;[ <span>{</span> &quot;Entry&quot;: &quot;your-personal-report.pdf&quot;, &quot;Target&quot;:
                                                 &quot;/bucket3/customized-reports/$<span>{</span>transfer:UserName}.pdf&quot; } ]&apos;</code>
                                              
                                           </p>
@@ -108,8 +106,9 @@ Properties:
                                           
                                           <p>In most cases, you can use this value instead of the scope-down policy to lock your
                                              user
-                                             down to the designated home directory (&quot;chroot&quot;). To do this, you can set <code class="code">Entry</code>
-                                             to &apos;/&apos; and set <code class="code">Target</code> to the HomeDirectory parameter value.
+                                             down to the designated home directory (&quot;chroot&quot;). To do this, you can set
+                                             <code class="code">Entry</code> to &apos;/&apos; and set <code class="code">Target</code> to the HomeDirectory parameter
+                                             value.
                                           </p>
                                           
                                           
@@ -118,13 +117,12 @@ Properties:
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
                                                 <p>If the target of a logical directory entry does not exist in Amazon S3, the entry
-                                                   will
-                                                   be ignored. As a workaround, you can use the Amazon S3 API to create 0 byte objects
-                                                   as place
-                                                   holders for your directory. If using the CLI, use the <code class="code">s3api</code> call instead of
-                                                   <code class="code">s3</code> so you can use the put-object operation. For example, you use the
-                                                   following: <code class="code">aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make
-                                                   sure that the end of the key name ends in a &apos;/&apos; for it to be considered a folder.
+                                                   will be ignored. As a workaround, you can use the Amazon S3 API to create 0 byte objects
+                                                   as place holders for your directory. If using the CLI, use the <code class="code">s3api</code> call
+                                                   instead of <code class="code">s3</code> so you can use the put-object operation. For example, you use
+                                                   the following: <code class="code">aws s3api put-object --bucket bucketname --key
+                                                      path/to/folder/</code>. Make sure that the end of the key name ends in a &apos;/&apos; for it
+                                                   to be considered a folder.
                                                 </p>
                                              </div>
                                           </div>
@@ -139,10 +137,9 @@ Properties:
                                        <dd>
                                           
                                           <p>The type of landing directory (folder) you want your users&apos; home directory to be when
-                                             they log into the file transfer protocol-enabled server. If you set it to <code class="code">PATH</code>,
-                                             the user will see the absolute Amazon S3 bucket paths as is in their file transfer
-                                             protocol
-                                             clients. If you set it <code class="code">LOGICAL</code>, you will need to provide mappings in the
+                                             they log into the server. If you set it to <code class="code">PATH</code>, the user will see the absolute
+                                             Amazon S3 bucket paths as is in their file transfer protocol clients. If you set it
+                                             <code class="code">LOGICAL</code>, you will need to provide mappings in the
                                              <code class="code">HomeDirectoryMappings</code> for how you want to make Amazon S3 paths visible to your
                                              users.
                                           </p>
@@ -173,8 +170,8 @@ Properties:
                                                    JSON
                                                    blob and pass it in the <code class="code">Policy</code> argument.
                                                 </p>
-                                                <p>For an example of a scope-down policy, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down">Creating a
-                                                      Scope-Down Policy</a>.
+                                                <p>For an example of a scope-down policy, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/scope-down-policy.html">Example scope-down
+                                                      policy</a>.
                                                 </p>
                                                 <p>For more information, see <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html">AssumeRole</a> in the
                                                    <em>AWS Security Token Service API Reference</em>.
@@ -197,9 +194,9 @@ Properties:
                                              users when
                                              transferring files into and out of your Amazon S3 bucket or buckets. The IAM role
                                              should also
-                                             contain a trust relationship that allows the file transfer protocol-enabled server
-                                             to access
-                                             your resources when servicing your users&apos; transfer requests.
+                                             contain a trust relationship that allows the server to access your resources when
+                                             servicing
+                                             your users&apos; transfer requests.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -214,8 +211,8 @@ Properties:
                                        <dt><a id="cfn-transfer-user-serverid"></a><span class="term"><code class="code">ServerId</code></span></dt>
                                        <dd>
                                           
-                                          <p>A system-assigned unique identifier for a file transfer protocol-enabled server instance.
-                                             This is the specific server that you added your user to.
+                                          <p>A system-assigned unique identifier for a server instance. This is the specific server
+                                             that you added your user to.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -257,12 +254,11 @@ Properties:
                                        <dt><a id="cfn-transfer-user-username"></a><span class="term"><code class="code">UserName</code></span></dt>
                                        <dd>
                                           
-                                          <p>A unique string that identifies a user and is associated with a file transfer
-                                             protocol-enabled server as specified by the <code class="code">ServerId</code>. This user name must be a
-                                             minimum of 3 and a maximum of 100 characters long. The following are valid characters:
-                                             a-z,
-                                             A-Z, 0-9, underscore &apos;_&apos;, hyphen &apos;-&apos;, period &apos;.&apos;, and at sign &apos;@&apos;. The user name can&apos;t
-                                             start with a hyphen, period, and at sign.
+                                          <p>A unique string that identifies a user and is associated with a as specified by the
+                                             <code class="code">ServerId</code>. This user name must be a minimum of 3 and a maximum of 100 characters
+                                             long. The following are valid characters: a-z, A-Z, 0-9, underscore &apos;_&apos;, hyphen
+                                             &apos;-&apos;, period &apos;.&apos;, and at sign &apos;@&apos;. The user name can&apos;t start
+                                             with a hyphen, period, or at sign.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes

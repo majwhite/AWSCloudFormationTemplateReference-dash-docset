@@ -65,13 +65,59 @@ Properties:
                                           <p><em>Minimum</em>: <code class="code">3</code></p>
                                           <p><em>Maximum</em>: <code class="code">64</code></p>
                                           <p><em>Pattern</em>: <code class="code">[a-zA-Z0-9_.-]+</code></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-timestream-table-retentionproperties"></a><span class="term"><code class="code">RetentionProperties</code></span></dt>
                                        <dd>
                                           
-                                          <p>The retention duration for the memory store and magnetic store.</p>
+                                          <p>The retention duration for the memory store and magnetic store. This object has the
+                                             following attributes:
+                                          </p>
                                           
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   <p><em>MemoryStoreRetentionPeriodInHours</em>: Retention duration for memory store, in hours.
+                                                   </p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><em>MagneticStoreRetentionPeriodInDays</em>: Retention duration for magnetic store, in days.
+                                                   </p>
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>Both attributes are of type <code class="code">string</code>. 
+                                             Both attributes are <b>required</b> when <code class="code">RetentionProperties</code> is specified.
+                                          </p>
+                                          
+                                          
+                                          <p>See the following examples:</p>
+                                          
+                                          <p><b>JSON</b></p>
+                                          <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class=""><span>{</span>
+    &quot;Type&quot; : &quot;AWS::Timestream::Table&quot;, 
+    &quot;Properties&quot; : <span>{</span>
+        &quot;DatabaseName&quot; : &quot;TestDatabase&quot;, 
+        &quot;TableName&quot; : &quot;TestTable&quot;, 
+        &quot;RetentionProperties&quot; : <span>{</span>
+            &quot;MemoryStoreRetentionPeriodInHours&quot;: &quot;24&quot;,
+            &quot;MagneticStoreRetentionPeriodInDays&quot;: &quot;7&quot;
+        }
+    } 
+}</code></pre>
+                                          <p><b>YAML</b></p>
+                                          <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">Type: AWS::Timestream::Table
+DependsOn: TestDatabase
+Properties:
+    TableName: &quot;TestTable&quot;
+    DatabaseName: &quot;TestDatabase&quot;
+    RetentionProperties:
+        MemoryStoreRetentionPeriodInHours: &quot;24&quot;
+        MagneticStoreRetentionPeriodInDays: &quot;7&quot;</code></pre>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Json
@@ -90,11 +136,13 @@ Properties:
                                           <p><em>Minimum</em>: <code class="code">3</code></p>
                                           <p><em>Maximum</em>: <code class="code">64</code></p>
                                           <p><em>Pattern</em>: <code class="code">[a-zA-Z0-9_.-]+</code></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-timestream-table-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The tags to add to the table</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
@@ -104,6 +152,29 @@ Properties:
                                  </div>
                                  <h2 id="aws-resource-timestream-table-return-values">Return values</h2>
                                  <h3 id="aws-resource-timestream-table-return-values-ref">Ref</h3>
+                                 <p>
+                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the table name <code class="code">TABLE_NAME</code> in the form <code class="code">DATABASE_NAME|TABLE_NAME</code>.
+                                    <code class="code">DATABASE_NAME</code> is the name of the Timestream database that the table is contained in.
+                                    
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-timestream-table-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> returns a value for the specified attribute of this type. The following are the available
+                                    attributes:
+                                 </p>
+                                 <h4 id="aws-resource-timestream-table-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The <code class="code">arn</code> of the table.
+                                          </p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
