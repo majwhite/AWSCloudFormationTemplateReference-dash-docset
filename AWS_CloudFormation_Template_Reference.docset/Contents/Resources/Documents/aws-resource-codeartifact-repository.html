@@ -31,9 +31,12 @@
   &quot;Type&quot; : &quot;AWS::CodeArtifact::Repository&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-codeartifact-repository-description">Description</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-codeartifact-repository-domainname">DomainName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-codeartifact-repository-domainowner">DomainOwner</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-codeartifact-repository-externalconnections">ExternalConnections</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-codeartifact-repository-permissionspolicydocument">PermissionsPolicyDocument</a>&quot; : <code class="replaceable">Json</code>,
       &quot;<a href="#cfn-codeartifact-repository-repositoryname">RepositoryName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-codeartifact-repository-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
       &quot;<a href="#cfn-codeartifact-repository-upstreams">Upstreams</a>&quot; : <code class="replaceable">[ String, ... ]</code>
     }
 }
@@ -42,10 +45,14 @@
                                     <h3 id="aws-resource-codeartifact-repository-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::CodeArtifact::Repository
 Properties: 
   <a href="#cfn-codeartifact-repository-description">Description</a>: <code class="replaceable">String</code>
+  <a href="#cfn-codeartifact-repository-domainname">DomainName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-codeartifact-repository-domainowner">DomainOwner</a>: <code class="replaceable">String</code>
   <a href="#cfn-codeartifact-repository-externalconnections">ExternalConnections</a>: <code class="replaceable">
     - String</code>
   <a href="#cfn-codeartifact-repository-permissionspolicydocument">PermissionsPolicyDocument</a>: <code class="replaceable">Json</code>
   <a href="#cfn-codeartifact-repository-repositoryname">RepositoryName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-codeartifact-repository-tags">Tags</a>: <code class="replaceable">
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
   <a href="#cfn-codeartifact-repository-upstreams">Upstreams</a>: <code class="replaceable">
     - String</code>
 </code></pre></div>
@@ -67,6 +74,42 @@ Properties:
                                           <p><em>Maximum</em>: <code class="code">1000</code></p>
                                           <p><em>Pattern</em>: <code class="code">\P<span>{</span>C}+</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-codeartifact-repository-domainname"></a><span class="term"><code class="code">DomainName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>
+                                             The name of the domain that contains the repository.
+                                             
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">2</code></p>
+                                          <p><em>Maximum</em>: <code class="code">50</code></p>
+                                          <p><em>Pattern</em>: <code class="code">[a-z][a-z0-9\-]<span>{</span>0,48}[a-z0-9]</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-codeartifact-repository-domainowner"></a><span class="term"><code class="code">DomainOwner</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>
+                                             The 12-digit account number of the AWS account that owns the domain that contains
+                                             the repository. It does not include 
+                                             dashes or spaces.
+                                             
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">12</code></p>
+                                          <p><em>Maximum</em>: <code class="code">12</code></p>
+                                          <p><em>Pattern</em>: <code class="code">[0-9]<span>{</span>12}</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-codeartifact-repository-externalconnections"></a><span class="term"><code class="code">ExternalConnections</code></span></dt>
                                        <dd>
@@ -106,6 +149,16 @@ Properties:
                                           <p><em>Maximum</em>: <code class="code">100</code></p>
                                           <p><em>Pattern</em>: <code class="code">[A-Za-z0-9][A-Za-z0-9._\-]<span>{</span>1,99}</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-codeartifact-repository-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A list of tags to be applied to the repository.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-codeartifact-repository-upstreams"></a><span class="term"><code class="code">Upstreams</code></span></dt>
                                        <dd>

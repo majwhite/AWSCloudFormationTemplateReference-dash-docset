@@ -135,8 +135,8 @@ Properties:
                                           <p>The key-value pair for tagging the EC2 Fleet request on creation. The value for
                                              <code class="code">ResourceType</code> must be <code class="code">fleet</code>, otherwise the fleet request fails.
                                              To tag instances at launch, specify the tags in the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template">launch
-                                                template</a>. For information about tagging after launch, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources">Tagging Your
-                                                Resources</a>. 
+                                                template</a>. For information about tagging after launch, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources">Tagging your
+                                                resources</a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -168,16 +168,48 @@ Properties:
                                        <dt><a id="cfn-ec2-ec2fleet-type"></a><span class="term"><code class="code">Type</code></span></dt>
                                        <dd>
                                           
-                                          <p>The type of the request. By default, the EC2 Fleet places an asynchronous request
-                                             for your
-                                             desired capacity, and maintains it by replenishing interrupted Spot Instances
-                                             (<code class="code">maintain</code>). A value of <code class="code">instant</code> places a synchronous one-time
-                                             request, and returns errors for any instances that could not be launched. A value
-                                             of
-                                             <code class="code">request</code> places an asynchronous one-time request without maintaining
-                                             capacity or submitting requests in alternative capacity pools if capacity is unavailable.
-                                             For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-request-type">EC2 Fleet
-                                                Request Types</a> in the <em>Amazon Elastic Compute Cloud User Guide</em>.
+                                          <p>The type of request. The default value is <code class="code">maintain</code>.
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">maintain</code> - The EC2 Fleet plaees an asynchronous request for your desired
+                                                      capacity, and continues to maintain your desired Spot capacity by replenishing
+                                                      interrupted Spot Instances.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">request</code> - The EC2 Fleet places an asynchronous one-time request for your
+                                                      desired capacity, but does submit Spot requests in alternative capacity pools if Spot
+                                                      capacity is unavailable, and does not maintain Spot capacity if Spot Instances are
+                                                      interrupted.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">instant</code> - The EC2 Fleet places a synchronous one-time request for your
+                                                      desired capacity, and returns errors for any instances that could not be
+                                                      launched.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-request-type">EC2 Fleet
+                                                request types</a> in the <em>Amazon Elastic Compute Cloud User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No

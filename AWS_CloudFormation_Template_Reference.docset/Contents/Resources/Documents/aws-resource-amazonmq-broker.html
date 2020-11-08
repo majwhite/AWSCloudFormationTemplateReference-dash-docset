@@ -186,8 +186,8 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>Enables automatic upgrades to new minor versions for brokers, as Apache releases the
-                                             versions. The automatic upgrades occur during the maintenance window of the broker
+                                          <p>Enables automatic upgrades to new minor versions for brokers, as new engine versions
+                                             are released. The automatic upgrades occur during the maintenance window of the broker
                                              or after a
                                              manual broker reboot.
                                           </p>
@@ -218,7 +218,7 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>A list of information about the configuration.</p>
+                                          <p>A list of information about the configuration. Does not apply to RabbitMQ brokers.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-amazonmq-broker-configurationid.html">ConfigurationId</a></p>
@@ -233,6 +233,7 @@ Properties:
                                           <div class="itemizedlist">
                                               
                                               
+                                              
                                              
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
@@ -240,6 +241,9 @@ Properties:
                                                 </li>
                                                 <li class="listitem">
                                                    <p><code class="code">ACTIVE_STANDBY_MULTI_AZ</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">CLUSTER_MULTI_AZ</code></p>
                                                 </li>
                                              </ul>
                                           </div>
@@ -264,7 +268,7 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.</p>
+                                          <p>The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ</p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -374,10 +378,13 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>The list of groups (2 maximum) that define which subnets and IP ranges the broker
-                                             can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one
-                                             subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment
-                                             requires two subnets.
+                                          <p>The list of groups that define which subnets and IP ranges the broker can use from
+                                             different Availability Zones.
+                                             A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet).
+                                             An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ
+                                             deployment (RABBITMQ)
+                                             has no subnet requirements when deployed with public accessibility, deployment without
+                                             public accessibility requires at least one subnet.
                                           </p>
                                           <p><em>Required</em>: No
                                           </p>
@@ -405,7 +412,7 @@ Properties:
                                           <p>The list of ActiveMQ users (persons or applications) who can access queues and topics.
                                              This value can contain only alphanumeric characters, dashes, periods, underscores,
                                              and tildes
-                                             (- . _ ~). This value must be 2-100 characters long.
+                                             (- . _ ~). This value must be 2-100 characters long. Does not apply to RabbitMQ brokers.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -483,7 +490,9 @@ Properties:
                                        <dt><a id="IpAddresses-fn::getatt"></a><span class="term"><code class="code">IpAddresses</code></span></dt>
                                        <dd>
                                           
-                                          <p>The IP addresses of each broker instance as a list of strings.</p>
+                                          <p>The IP addresses of each broker instance as a list of strings. Does not apply to RabbitMQ
+                                             brokers.
+                                          </p>
                                           
                                           <p>
                                              <code class="code">[&apos;198.51.100.2&apos;, &apos;203.0.113.9&apos;]</code>
@@ -545,7 +554,7 @@ Properties:
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-amazonmq-broker--examples--Basic_Amazon_MQ_Broker--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Description&quot;: &quot;Create a basic AmazonMQ broker&quot;,
+  &quot;Description&quot;: &quot;Create a basic ActiveMQ broker&quot;,
   &quot;Resources&quot;: <span>{</span>
     &quot;BasicBroker&quot;: <span>{</span>
       &quot;Type&quot;: &quot;AWS::AmazonMQ::Broker&quot;,
@@ -571,9 +580,37 @@ Properties:
     }
   }
 }</code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-amazonmq-broker--examples--Basic_Amazon_MQ_Broker--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+        &quot;Description&quot;: &quot;Create a basic RabbitMQ broker&quot;,
+        &quot;Resources&quot;: <span>{</span>
+        &quot;BasicBroker&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::AmazonMQ::Broker&quot;,
+        &quot;Properties&quot;: <span>{</span>
+        &quot;AutoMinorVersionUpgrade&quot;: &quot;false&quot;,
+        &quot;BrokerName&quot;: &quot;MyBasicBroker&quot;,
+        &quot;DeploymentMode&quot;: &quot;SINGLE_INSTANCE&quot;,
+        &quot;EngineType&quot;: &quot;RabbitMQ&quot;,
+        &quot;EngineVersion&quot;: &quot;3.8.6&quot;,
+        &quot;HostInstanceType&quot;: &quot;mq.t3.micro&quot;,
+        &quot;PubliclyAccessible&quot;: &quot;true&quot;,
+        &quot;Users&quot;: [
+        <span>{</span>
+        &quot;ConsoleAccess&quot;: &quot;true&quot;,
+        &quot;Groups&quot;: [
+        &quot;MyGroup&quot;
+        ],
+        &quot;Password&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqPassword&quot; },
+        &quot;Username&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqUsername&quot; }
+        }
+        ]
+      }
+    }
+  }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h4 id="aws-resource-amazonmq-broker--examples--Basic_Amazon_MQ_Broker--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- 
-Description: &quot;Create a basic AmazonMQ broker&quot;
+Description: &quot;Create a basic ActiveMQ broker&quot;
 Resources: 
   BasicBroker:
     Type: &quot;AWS::AmazonMQ::Broker&quot;
@@ -594,13 +631,36 @@ Resources:
             Ref: &quot;BrokerPassword&quot;            
           Username: 
             Ref: &quot;BrokerUsername&quot;</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-amazonmq-broker--examples--Basic_Amazon_MQ_Broker--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- 
+Description: &quot;Create a basic RabbitMQ broker&quot;
+Resources: 
+  BasicBroker:
+    Type: &quot;AWS::AmazonMQ::Broker&quot;
+    Properties: 
+      AutoMinorVersionUpgrade: &quot;false&quot;
+      BrokerName: MyBasicBroker
+      DeploymentMode: SINGLE_INSTANCE
+      EngineType: RabbitMQ
+      EngineVersion: &quot;3.8.6&quot;
+      HostInstanceType: mq.t3.micro
+      PubliclyAccessible: &quot;true&quot;
+      Users: 
+        - 
+          ConsoleAccess: &quot;true&quot;
+          Groups: 
+            - MyGroup
+          Password: 
+            Ref: &quot;BrokerPassword&quot;            
+          Username: 
+            Ref: &quot;BrokerUsername&quot;</code></pre></div>
                                  <h3 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker">Complex Amazon MQ Broker</h3>
                                  <p>The following example creates a complex Amazon MQ broker with two users that don&apos;t
                                     belong to a group and one user that belongs in a group. 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Description&quot;: &quot;Create a complex AmazonMQ broker&quot;,
+  &quot;Description&quot;: &quot;Create a complex ActiveMQ broker&quot;,
   &quot;Resources&quot;: <span>{</span>
     &quot;ComplexBroker&quot;: <span>{</span>
       &quot;Type&quot;: &quot;AWS::AmazonMQ::Broker&quot;,
@@ -652,8 +712,39 @@ Resources:
     }
   }
 }</code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+&quot;Description&quot;: &quot;Create a complex RabbitMQ broker&quot;,
+&quot;Resources&quot;: <span>{</span>
+  &quot;ComplexBroker&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::AmazonMQ::Broker&quot;,
+    &quot;Properties&quot;: <span>{</span>
+      &quot;AutoMinorVersionUpgrade&quot;: &quot;false&quot;,
+      &quot;BrokerName&quot;: &quot;MyComplexBroker&quot;,
+     }
+    },
+    &quot;DeploymentMode&quot;: &quot;SINGLE_INSTANCE&quot;,
+    &quot;EngineType&quot;: &quot;RabbitMQ&quot;,
+    &quot;EngineVersion&quot;: &quot;3.8.6&quot;,
+    &quot;HostInstanceType&quot;: &quot;mq.t3.micro&quot;,
+    &quot;Logs&quot;: <span>{</span>
+      &quot;General&quot;: true
+    },
+    &quot;MaintenanceWindowStartTime&quot;: <span>{</span>
+      &quot;DayOfWeek&quot;: &quot;Monday&quot;,
+      &quot;TimeOfDay&quot;: &quot;22:45&quot;,
+      &quot;TimeZone&quot;: &quot;America/Los_Angeles&quot;
+    },
+    &quot;PubliclyAccessible&quot;: &quot;true&quot;,        
+    &quot;Users&quot;: [<span>{</span>
+      &quot;ConsoleAccess&quot;: &quot;true&quot;,
+      &quot;Password&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqPassword1&quot; },
+      &quot;Username&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqUsername1&quot; }]
+    }
+  }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: Create a complex AmazonMQ broker
+                                    <h4 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: Create a complex ActiveMQ broker
 Resources:
   ComplexBroker:
     Type: &apos;AWS::AmazonMQ::Broker&apos;
@@ -695,6 +786,30 @@ Resources:
           Password: !Ref AmazonMqPassword3
           Username: !Ref AmazonMqUsername3
 </code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: Create a complex RabbitMQ broker
+Resources:
+  ComplexBroker:
+    Type: &apos;AWS::AmazonMQ::Broker&apos;
+    Properties:
+      AutoMinorVersionUpgrade: &apos;false&apos;
+      BrokerName: MyComplexBroker
+        DeploymentMode: SINGLE_INSTANCE
+        EngineType: RabbitMQ
+        EngineVersion: 3.8.6
+        HostInstanceType: mq.t3.micro
+        Logs:
+          General: true
+        MaintenanceWindowStartTime:
+          DayOfWeek: Monday
+          TimeOfDay: &apos;22:45&apos;
+          TimeZone: America/Los_Angeles
+        PubliclyAccessible: &apos;true&apos;
+        Users:
+          - ConsoleAccess: &apos;true&apos;
+          Password: !Ref AmazonMqPassword1
+          Username: !Ref AmazonMqUsername1
+      </code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>

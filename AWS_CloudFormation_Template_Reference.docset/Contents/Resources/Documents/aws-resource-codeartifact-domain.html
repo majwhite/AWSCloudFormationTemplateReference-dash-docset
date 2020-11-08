@@ -33,7 +33,9 @@
   &quot;Type&quot; : &quot;AWS::CodeArtifact::Domain&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-codeartifact-domain-domainname">DomainName</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-codeartifact-domain-permissionspolicydocument">PermissionsPolicyDocument</a>&quot; : <code class="replaceable">Json</code>
+      &quot;<a href="#cfn-codeartifact-domain-encryptionkey">EncryptionKey</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-codeartifact-domain-permissionspolicydocument">PermissionsPolicyDocument</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-codeartifact-domain-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
 }
 </code></pre></div>
@@ -41,7 +43,10 @@
                                     <h3 id="aws-resource-codeartifact-domain-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::CodeArtifact::Domain
 Properties: 
   <a href="#cfn-codeartifact-domain-domainname">DomainName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-codeartifact-domain-encryptionkey">EncryptionKey</a>: <code class="replaceable">String</code>
   <a href="#cfn-codeartifact-domain-permissionspolicydocument">PermissionsPolicyDocument</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-codeartifact-domain-tags">Tags</a>: <code class="replaceable">
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
 </code></pre></div>
                                  <h2 id="aws-resource-codeartifact-domain-properties">Properties</h2>
                                  <div class="variablelist">
@@ -63,6 +68,23 @@ Properties:
                                           <p><em>Pattern</em>: <code class="code">[a-z][a-z0-9\-]<span>{</span>0,48}[a-z0-9]</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
+                                       <dt><a id="cfn-codeartifact-domain-encryptionkey"></a><span class="term"><code class="code">EncryptionKey</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>
+                                             The key used to encrypt the domain.
+                                             
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">1011</code></p>
+                                          <p><em>Pattern</em>: <code class="code">\S+</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
                                        <dt><a id="cfn-codeartifact-domain-permissionspolicydocument"></a><span class="term"><code class="code">PermissionsPolicyDocument</code></span></dt>
                                        <dd>
                                           
@@ -72,6 +94,16 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: Json
                                           </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-codeartifact-domain-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A list of tags to be applied to the domain.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>
@@ -148,12 +180,12 @@ Properties:
     }
   }
 }</code></pre></div>
-                                 <h3 id="aws-resource-codeartifact-domain--examples--Create_a_domain_with_an_attached_AWS_KMS_permissions_policy">Create a domain with an attached AWS KMS permissions policy</h3>
+                                 <h3 id="aws-resource-codeartifact-domain--examples--Create_a_domain_with_an_attached_AWS_KMS_encryption_key_and_IAM_permissions_policy">Create a domain with an attached AWS KMS encryption key and IAM permissions policy</h3>
                                  <p>The following example creates a CodeArtifact domain named <em>my-domain</em> 
-                                    and attaches an AWS KMS permissions policy.
+                                    and attaches an AWS KMS encryption key and IAM permissions policy.
                                  </p>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-codeartifact-domain--examples--Create_a_domain_with_an_attached_AWS_KMS_permissions_policy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+                                    <h4 id="aws-resource-codeartifact-domain--examples--Create_a_domain_with_an_attached_AWS_KMS_encryption_key_and_IAM_permissions_policy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
   MyCodeArtifactDomain:
     Type: &apos;AWS::CodeArtifact::Domain&apos;
     Properties:
@@ -178,7 +210,7 @@ Properties:
                 AWS: &quot;arn:aws:iam::123456789012:root&quot;
               Resource: &quot;*&quot;</code></pre></div>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-codeartifact-domain--examples--Create_a_domain_with_an_attached_AWS_KMS_permissions_policy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-codeartifact-domain--examples--Create_a_domain_with_an_attached_AWS_KMS_encryption_key_and_IAM_permissions_policy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Resources&quot;: <span>{</span>
     &quot;MyCodeArtifactDomain&quot;: <span>{</span>
       &quot;Type&quot;: &quot;AWS::CodeArtifact::Domain&quot;,
