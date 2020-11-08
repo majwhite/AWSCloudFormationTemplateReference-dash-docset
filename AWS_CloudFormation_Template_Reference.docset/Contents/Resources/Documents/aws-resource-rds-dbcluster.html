@@ -24,7 +24,7 @@
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                     <div class="awsdocs-note-text">
-                                       <p>You can only create this resource in regions where Amazon Aurora is
+                                       <p>You can only create this resource in AWS Regions where Amazon Aurora is
                                           supported.
                                        </p>
                                     </div>
@@ -510,31 +510,27 @@ Properties:
                                        <dt><a id="cfn-rds-dbcluster-enginemode"></a><span class="term"><code class="code">EngineMode</code></span></dt>
                                        <dd>
                                           
-                                          <p>The DB engine mode of the DB cluster, either <code class="code">provisioned</code> <code class="code">serverless</code>, 
-                                             <code class="code">parallelquery</code>, or <code class="code">multimaster</code>.
+                                          <p>The DB engine mode of the DB cluster, either <code class="code">provisioned</code> 
+                                             <code class="code">serverless</code>, 
+                                             <code class="code">parallelquery</code>, <code class="code">global</code>, or <code class="code">multimaster</code>.
                                           </p>
                                           
-                                          <p>The <code class="code">parallelquery</code> engine mode is not required for Aurora MySQL version 1.23 and higher 1.x versions,
+                                          <p>The <code class="code">parallelquery</code> engine mode isn&apos;t required for Aurora MySQL version 1.23 and higher 1.x versions,
                                              
                                              and version 2.09 and higher 2.x versions.
+                                          </p>
+                                          
+                                          <p>The <code class="code">global</code> engine mode isn&apos;t required for Aurora MySQL version 1.22 and higher 1.x versions,
+                                             
+                                             and <code class="code">global</code> engine mode isn&apos;t required for any 2.x versions.
                                           </p>
                                           
                                           <p>The <code class="code">multimaster</code> engine mode only applies for DB clusters created with Aurora MySQL version 5.6.10a.
                                           </p>
                                           
-                                          <p>For Aurora PostgreSQL, <code class="code">parallelquery</code> and <code class="code">multimaster</code> engine modes are not required.
+                                          <p>For Aurora PostgreSQL, the <code class="code">global</code> engine mode isn&apos;t required, and both the <code class="code">parallelquery</code> 
+                                             and the <code class="code">multimaster</code> engine modes currently aren&apos;t supported.
                                           </p>
-                                          
-                                          <div class="awsdocs-note">
-                                             <div class="awsdocs-note-title">
-                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
-                                             <div class="awsdocs-note-text">
-                                                <p>
-                                                   The <code class="code">global</code> engine mode isn&apos;t supported.
-                                                   
-                                                </p>
-                                             </div>
-                                          </div>
                                           
                                           <p>Limitations and requirements apply to some DB engine modes. For more information,
                                              see the 
@@ -544,7 +540,7 @@ Properties:
                                           <div class="itemizedlist">
                                               
                                               
-                                             
+                                              
                                               
                                              
                                              <ul class="itemizedlist" type="disc">
@@ -562,6 +558,15 @@ Properties:
                                                    <p>
                                                       <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations">
                                                          Limitations of Parallel Query</a>
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations">
+                                                         Limitations of Aurora Global Databases</a>
                                                       
                                                    </p>
                                                    
@@ -620,10 +625,30 @@ Properties:
                                        <dd>
                                           
                                           <p>
-                                             The global cluster ID of an Aurora cluster that becomes the primary cluster
-                                             in the new global database cluster.
+                                             If you are configuring an Aurora global database cluster and want your Aurora DB cluster
+                                             to be a member in the global database cluster, 
+                                             specify the global cluster ID of the global database cluster.
                                              
                                           </p>
+                                          
+                                          <p>
+                                             If you aren&apos;t configuring a global database cluster, don&apos;t specify this property.
+                                             
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>To remove the DB cluster from a global database cluster, specify an empty value for
+                                                   the <code class="code">GlobalClusterIdentifier</code> property.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p>For information about Aurora global databases, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html">
+                                                Working with Amazon Aurora Global Databases</a> in the <em>Amazon Aurora User Guide</em>.
+                                          </p>   
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -1054,7 +1079,7 @@ Properties:
                                  <h2 id="aws-resource-rds-dbcluster-return-values">Return values</h2>
                                  <h3 id="aws-resource-rds-dbcluster-return-values-ref">Ref</h3>
                                  <p>
-                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the name of the DB cluster.
+                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the name of the DB cluster as an uppercase string.
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
@@ -1072,7 +1097,7 @@ Properties:
                                        <dd>
                                           
                                           <p>The connection endpoint for the DB cluster. For example:
-                                             <code class="code">mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com</code>
+                                             <code class="code">mystack-mydbcluster-123456789012.us-east-2.rds.amazonaws.com</code>
                                              
                                           </p>
                                           
@@ -1083,15 +1108,14 @@ Properties:
                                           <p>The port number that will accept connections on this DB cluster. For example:
                                              <code class="code">3306</code>
                                              
-                                          </p>
-                                          
+                                          </p>                
                                           
                                        </dd>
                                        <dt><a id="ReadEndpoint.Address-fn::getatt"></a><span class="term"><code class="code">ReadEndpoint.Address</code></span></dt>
                                        <dd>
                                           
                                           <p>The reader endpoint for the DB cluster. For example:
-                                             <code class="code">mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com</code>
+                                             <code class="code">mystack-mydbcluster-ro-123456789012.us-east-2.rds.amazonaws.com</code>
                                              
                                           </p>
                                           

@@ -66,6 +66,7 @@
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-autoscaling-autoscalinggroup-autoscalinggroupname">AutoScalingGroupName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-as-group-availabilityzones">AvailabilityZones</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+      &quot;<a href="#cfn-as-group-capacityrebalance">CapacityRebalance</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-as-group-cooldown">Cooldown</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-as-group-desiredcapacity">DesiredCapacity</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-as-group-healthcheckgraceperiod">HealthCheckGracePeriod</a>&quot; : <code class="replaceable">Integer</code>,
@@ -97,6 +98,7 @@ Properties:
   <a href="#cfn-autoscaling-autoscalinggroup-autoscalinggroupname">AutoScalingGroupName</a>: <code class="replaceable">String</code>
   <a href="#cfn-as-group-availabilityzones">AvailabilityZones</a>: <code class="replaceable">
     - String</code>
+  <a href="#cfn-as-group-capacityrebalance">CapacityRebalance</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-as-group-cooldown">Cooldown</a>: <code class="replaceable">String</code>
   <a href="#cfn-as-group-desiredcapacity">DesiredCapacity</a>: <code class="replaceable">String</code>
   <a href="#cfn-as-group-healthcheckgraceperiod">HealthCheckGracePeriod</a>: <code class="replaceable">Integer</code>
@@ -161,6 +163,17 @@ Properties:
                                           <p><em>Required</em>: Conditional
                                           </p>
                                           <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-as-group-capacityrebalance"></a><span class="term"><code class="code">CapacityRebalance</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Indicates whether capacity rebalance is enabled.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
@@ -328,7 +341,7 @@ Properties:
                                        <dd>
                                           
                                           <p>A list of Classic Load Balancers associated with this Auto Scaling group. For Application
-                                             Load Balancers and Network Load Balancers, specify <code class="code">TargetGroupARNs</code>. 
+                                             Load Balancers and Network Load Balancers, specify <code class="code">TargetGroupARNs</code> instead. 
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -469,14 +482,10 @@ Properties:
                                        <dt><a id="cfn-as-group-placementgroup"></a><span class="term"><code class="code">PlacementGroup</code></span></dt>
                                        <dd>
                                           
-                                          <p>The name of an existing placement group into which you want to launch your instances.
-                                             A
-                                             placement group is a logical grouping of instances within a single Availability Zone.
-                                             You
-                                             cannot specify multiple Availability Zones and a placement group. For more information,
-                                             see
-                                             <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">Placement
-                                                Groups</a> in the <em>Amazon EC2 User Guide for Linux Instances</em>.
+                                          <p>The name of the placement group into which you want to launch your instances. A placement
+                                             group is a logical grouping of instances within a single Availability Zone. For more
+                                             information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">Placement Groups</a> in the
+                                             <em>Amazon EC2 User Guide for Linux Instances</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -568,8 +577,8 @@ Properties:
                                              in those Availability Zones. 
                                           </p>
                                           
-                                          <p>If this resource has a public IP address and is also in a VPC that is defined in the
-                                             same
+                                          <p>If this resource specifies public subnets and is also in a VPC that is defined in
+                                             the same
                                              stack template, you must use the <a href="aws-attribute-dependson.html">DependsOn
                                                 attribute</a> to declare a dependency on the <a href="aws-resource-ec2-vpc-gateway-attachment.html">VPC-gateway attachment</a>.
                                           </p>

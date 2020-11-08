@@ -16,7 +16,10 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">MetadataOption</code> property type specifies Not currently supported by AWS CloudFormation. for an <a href="./aws-properties-as-launchconfig.html">AWS::AutoScaling::LaunchConfiguration</a>.
+                                 <p>
+                                    <code class="code">MetadataOption</code> is a property of <a href="aws-properties-as-launchconfig.html">AWS::AutoScaling::LaunchConfiguration</a> that describes metadata options for the instances.
+                                 </p>
+                                 <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds">Configuring the Instance Metadata Options</a> in the <em>Amazon EC2 Auto Scaling User Guide</em>.
                                  </p>
                                  <h2 id="aws-properties-autoscaling-launchconfig-metadataoption-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -37,29 +40,74 @@
                                     <dl>
                                        <dt><a id="cfn-autoscaling-launchconfig-metadataoption-httpendpoint"></a><span class="term"><code class="code">HttpEndpoint</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>This parameter enables or disables the HTTP metadata endpoint on your instances. If
+                                             the parameter is not specified, the default state is <code class="code">enabled</code>.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If you specify a value of <code class="code">disabled</code>, you will not be able to access
+                                                   your instance metadata. 
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Allowed values</em>: <code class="code">disabled | enabled</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-autoscaling-launchconfig-metadataoption-httpputresponsehoplimit"></a><span class="term"><code class="code">HttpPutResponseHopLimit</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The desired HTTP PUT response hop limit for instance metadata requests. The larger
+                                             the
+                                             number, the further instance metadata requests can travel.
+                                          </p>
+                                          
+                                          <p>Default: 1</p>
+                                          
+                                          <p>Possible values: Integers from 1 to 64</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
                                           </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">64</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-autoscaling-launchconfig-metadataoption-httptokens"></a><span class="term"><code class="code">HttpTokens</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The state of token usage for your instance metadata requests. If the parameter is
+                                             not
+                                             specified in the request, the default state is <code class="code">optional</code>.
+                                          </p>
+                                          
+                                          <p>If the state is <code class="code">optional</code>, you can choose to retrieve instance metadata
+                                             with or without a signed token header on your request. If you retrieve the IAM role
+                                             credentials without a token, the version 1.0 role credentials are returned. If you
+                                             retrieve the IAM role credentials using a valid signed token, the version 2.0 role
+                                             credentials are returned.
+                                          </p>
+                                          
+                                          <p>If the state is <code class="code">required</code>, you must send a signed token header with any
+                                             instance metadata retrieval requests. In this state, retrieving the IAM role credentials
+                                             always returns the version 2.0 credentials; the version 1.0 credentials are not
+                                             available.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Allowed values</em>: <code class="code">optional | required</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>
