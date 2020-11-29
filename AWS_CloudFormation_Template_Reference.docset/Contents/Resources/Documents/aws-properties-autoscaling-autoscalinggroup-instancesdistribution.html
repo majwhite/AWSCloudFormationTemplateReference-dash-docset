@@ -21,7 +21,7 @@
                                     group. The instances distribution specifies the distribution of On-Demand Instances
                                     and Spot
                                     Instances, the maximum price to pay for Spot Instances, and how the Auto Scaling group
-                                    allocates instance types to fulfill On-Demand and Spot capacity. 
+                                    allocates instance types to fulfill On-Demand and Spot capacities. 
                                  </p>
                                  <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling groups with multiple
                                        instance types and purchase options</a> in the <em>Amazon EC2 Auto Scaling User
@@ -53,15 +53,16 @@
                                        <dt><a id="cfn-autoscaling-autoscalinggroup-instancesdistribution-ondemandallocationstrategy"></a><span class="term"><code class="code">OnDemandAllocationStrategy</code></span></dt>
                                        <dd>
                                           
-                                          <p>Indicates how to allocate instance types to fulfill On-Demand capacity. </p>
-                                          
-                                          <p>The only valid value is <code class="code">prioritized</code>, which is also the default value. This
-                                             strategy uses the order of instance type overrides for <a href="aws-properties-autoscaling-autoscalinggroup-launchtemplate.html">LaunchTemplate</a> to define the launch priority of each instance type. The first
-                                             instance type in the array is prioritized higher than the last. If all your On-Demand
-                                             capacity
-                                             cannot be fulfilled using your highest priority instance, then the Auto Scaling groups
-                                             launches the remaining capacity using the second priority instance type, and so on.
-                                             
+                                          <p>Indicates how to allocate instance types to fulfill On-Demand capacity. The only valid
+                                             value is <code class="code">prioritized</code>, which is also the default value. This strategy uses the
+                                             order of instance type in the overrides to define the launch priority of each instance
+                                             type.
+                                             The first instance type in the array is prioritized higher than the last. If all your
+                                             On-Demand capacity cannot be fulfilled using your highest priority instance, then
+                                             the Auto
+                                             Scaling groups launches the remaining capacity using the second priority instance
+                                             type, and so
+                                             on. 
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -75,21 +76,21 @@
                                           
                                           <p>The minimum amount of the Auto Scaling group&apos;s capacity that must be fulfilled by
                                              On-Demand Instances. This base portion is provisioned first as your group scales.
-                                          </p>
-                                          
-                                          <p>The default value is <code class="code">0</code>. If you leave this property set to <code class="code">0</code>,
-                                             On-Demand Instances are launched as a percentage of the Auto Scaling group&apos;s desired
-                                             capacity,
-                                             per the <code class="code">OnDemandPercentageAboveBaseCapacity</code> setting.
+                                             Defaults to
+                                             0 if not specified. If you specify weights for the instance types in the overrides,
+                                             set the
+                                             value of <code class="code">OnDemandBaseCapacity</code> in terms of the number of capacity units, and not
+                                             the number of instances.
                                           </p>
                                           
                                           <div class="awsdocs-note">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>An update to this property means a gradual replacement of instances to maintain the
-                                                   specified number of On-Demand Instances for your base capacity. When replacing instances,
-                                                   Amazon EC2 Auto Scaling launches new instances before terminating the old ones. 
+                                                <p>An update to this setting means a gradual replacement of instances to adjust the current
+                                                   On-Demand Instance levels. When replacing instances, Amazon EC2 Auto Scaling launches
+                                                   new
+                                                   instances before terminating the old ones.
                                                 </p>
                                              </div>
                                           </div>
@@ -104,24 +105,20 @@
                                        <dd>
                                           
                                           <p>Controls the percentages of On-Demand Instances and Spot Instances for your additional
-                                             capacity beyond <code class="code">OnDemandBaseCapacity</code>.
-                                          </p>
-                                          
-                                          <p>The range is 0&#x2013;100. The default value is <code class="code">100</code>. If you leave this property set
-                                             to <code class="code">100</code>, the percentages are 100% for On-Demand Instances and 0% for Spot
-                                             Instances. 
+                                             capacity beyond <code class="code">OnDemandBaseCapacity</code>. Expressed as a number (for example, 20
+                                             specifies 20% On-Demand Instances, 80% Spot Instances). Defaults to 100 if not specified.
+                                             If
+                                             set to 100, only On-Demand Instances are provisioned.
                                           </p>
                                           
                                           <div class="awsdocs-note">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>An update to this property means a gradual replacement of instances to maintain the
-                                                   percentage of On-Demand Instances for your additional capacity above the base capacity.
-                                                   When
-                                                   replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating
-                                                   the
-                                                   old ones. 
+                                                <p>An update to this setting means a gradual replacement of instances to adjust the current
+                                                   On-Demand and Spot Instance levels for your additional capacity above the base capacity.
+                                                   When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating
+                                                   the old ones.
                                                 </p>
                                              </div>
                                           </div>
@@ -135,16 +132,14 @@
                                        <dt><a id="cfn-autoscaling-autoscalinggroup-instancesdistribution-spotallocationstrategy"></a><span class="term"><code class="code">SpotAllocationStrategy</code></span></dt>
                                        <dd>
                                           
-                                          <p>Indicates how to allocate Spot capacity across Spot pools.</p>
-                                          
-                                          <p>If the allocation strategy is <code class="code">lowest-price</code>, the Auto Scaling group launches
+                                          <p>Indicates how to allocate Spot capacity across Spot Instances pools. If the allocation
+                                             strategy is <code class="code">capacity-optimized</code> (recommended), the Auto Scaling group launches
+                                             instances using Spot pools that are optimally chosen based on the available Spot capacity.
+                                             If
+                                             the allocation strategy is <code class="code">lowest-price</code>, the Auto Scaling group launches
                                              instances using the Spot pools with the lowest price, and evenly allocates your instances
-                                             across the number of Spot pools that you specify. If the allocation strategy is
-                                             <code class="code">capacity-optimized</code>, the Auto Scaling group launches instances using Spot pools
-                                             that are optimally chosen based on the available Spot capacity. 
-                                          </p>
-                                          
-                                          <p>The default is <code class="code">lowest-price</code>.
+                                             across the number of Spot pools that you specify. Defaults to <code class="code">lowest-price</code> if not
+                                             specified.
                                           </p>
                                           
                                           <p>Valid values: <code class="code">lowest-price</code> | <code class="code">capacity-optimized</code>
@@ -160,12 +155,14 @@
                                        <dt><a id="cfn-autoscaling-autoscalinggroup-instancesdistribution-spotinstancepools"></a><span class="term"><code class="code">SpotInstancePools</code></span></dt>
                                        <dd>
                                           
-                                          <p>The number of Spot pools to use to allocate your Spot capacity. The Spot pools are
-                                             determined from the different instance types in the Overrides array of <a href="aws-properties-autoscaling-autoscalinggroup-launchtemplate.html">LaunchTemplate</a>. The range is 1&#x2013;20. The default value is 2. 
+                                          <p>The number of Spot Instance pools to use to allocate your Spot capacity. The Spot
+                                             pools
+                                             are determined from the different instance types in the overrides. Defaults to 2 if
+                                             not
+                                             specified. Valid only when the Spot allocation strategy is <code class="code">lowest-price</code>.
                                           </p>
                                           
-                                          <p>Valid only when the Spot allocation strategy is <code class="code">lowest-price</code>. 
-                                          </p>
+                                          <p>Valid Range: Minimum value of 1. Maximum value of 20.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -178,9 +175,11 @@
                                           
                                           <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. If
                                              you
-                                             leave the value of this property blank (which is the default), the maximum Spot price
-                                             is set
-                                             at the On-Demand price. 
+                                             leave the value at its default (empty), Amazon EC2 Auto Scaling uses the On-Demand
+                                             price
+                                             as the maximum Spot price. To remove a value that you previously set, include the
+                                             property but
+                                             specify an empty string (&quot;&quot;) for the value. 
                                           </p>
                                           
                                           <p>Valid Range: Minimum value of 0.001</p>

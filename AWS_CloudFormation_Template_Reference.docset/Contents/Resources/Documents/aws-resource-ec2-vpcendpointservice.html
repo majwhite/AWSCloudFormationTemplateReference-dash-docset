@@ -16,12 +16,35 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Specifies a VPC endpoint service configuration to which service consumers (AWS accounts,
-                                    IAM users, and IAM roles) can connect. Service consumers can create an interface VPC
-                                    endpoint to connect to your service.
+                                 <p>Creates a VPC endpoint service configuration to which service consumers (AWS accounts,
+                                    IAM users, and IAM roles) can connect.
                                  </p>
-                                 <p>To create an endpoint service configuration, you must first create a Network Load
-                                    Balancer for your service.
+                                 <p>To create an endpoint service configuration, you must first create one of the
+                                    following for your service:
+                                 </p>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p>A <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html">Network Load Balancer</a>. Service consumers connect to your service using an
+                                             interface endpoint.
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>A <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/introduction.html">Gateway Load Balancer</a>. Service consumers connect to your service using a
+                                             Gateway Load Balancer endpoint.
+                                          </p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html">VPC Endpoint Services</a> in the
+                                    <em>Amazon Virtual Private Cloud User Guide</em>. 
                                  </p>
                                  <h2 id="aws-resource-ec2-vpcendpointservice-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -30,6 +53,7 @@
   &quot;Type&quot; : &quot;AWS::EC2::VPCEndpointService&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-ec2-vpcendpointservice-acceptancerequired">AcceptanceRequired</a>&quot; : <code class="replaceable">Boolean</code>,
+      &quot;<a href="#cfn-ec2-vpcendpointservice-gatewayloadbalancerarns">GatewayLoadBalancerArns</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-ec2-vpcendpointservice-networkloadbalancerarns">NetworkLoadBalancerArns</a>&quot; : <code class="replaceable">[ String, ... ]</code>
     }
 }
@@ -38,6 +62,8 @@
                                     <h3 id="aws-resource-ec2-vpcendpointservice-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::EC2::VPCEndpointService
 Properties: 
   <a href="#cfn-ec2-vpcendpointservice-acceptancerequired">AcceptanceRequired</a>: <code class="replaceable">Boolean</code>
+  <a href="#cfn-ec2-vpcendpointservice-gatewayloadbalancerarns">GatewayLoadBalancerArns</a>: <code class="replaceable">
+    - String</code>
   <a href="#cfn-ec2-vpcendpointservice-networkloadbalancerarns">NetworkLoadBalancerArns</a>: <code class="replaceable">
     - String</code>
 </code></pre></div>
@@ -54,6 +80,17 @@ Properties:
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ec2-vpcendpointservice-gatewayloadbalancerarns"></a><span class="term"><code class="code">GatewayLoadBalancerArns</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Names (ARNs) of one or more Gateway Load Balancers.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>

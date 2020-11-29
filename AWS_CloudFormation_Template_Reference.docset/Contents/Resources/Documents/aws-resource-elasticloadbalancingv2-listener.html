@@ -24,8 +24,8 @@
   &quot;Type&quot; : &quot;AWS::ElasticLoadBalancingV2::Listener&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-elasticloadbalancingv2-listener-alpnpolicy">AlpnPolicy</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
-      &quot;<a href="#cfn-elasticloadbalancingv2-listener-certificates">Certificates</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-elasticloadbalancingv2-listener-certificates.html">Certificate</a>, ... ]</code>,
-      &quot;<a href="#cfn-elasticloadbalancingv2-listener-defaultactions">DefaultActions</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-elasticloadbalancingv2-listener-defaultactions.html">Action</a>, ... ]</code>,
+      &quot;<a href="#cfn-elasticloadbalancingv2-listener-certificates">Certificates</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-elasticloadbalancingv2-listener-certificate.html">Certificate</a>, ... ]</code>,
+      &quot;<a href="#cfn-elasticloadbalancingv2-listener-defaultactions">DefaultActions</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-elasticloadbalancingv2-listener-action.html">Action</a>, ... ]</code>,
       &quot;<a href="#cfn-elasticloadbalancingv2-listener-loadbalancerarn">LoadBalancerArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-elasticloadbalancingv2-listener-port">Port</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-elasticloadbalancingv2-listener-protocol">Protocol</a>&quot; : <code class="replaceable">String</code>,
@@ -39,9 +39,9 @@ Properties:
   <a href="#cfn-elasticloadbalancingv2-listener-alpnpolicy">AlpnPolicy</a>: <code class="replaceable">
     - String</code>
   <a href="#cfn-elasticloadbalancingv2-listener-certificates">Certificates</a>: <code class="replaceable">
-    - <a href="./aws-properties-elasticloadbalancingv2-listener-certificates.html">Certificate</a></code>
+    - <a href="./aws-properties-elasticloadbalancingv2-listener-certificate.html">Certificate</a></code>
   <a href="#cfn-elasticloadbalancingv2-listener-defaultactions">DefaultActions</a>: <code class="replaceable">
-    - <a href="./aws-properties-elasticloadbalancingv2-listener-defaultactions.html">Action</a></code>
+    - <a href="./aws-properties-elasticloadbalancingv2-listener-action.html">Action</a></code>
   <a href="#cfn-elasticloadbalancingv2-listener-loadbalancerarn">LoadBalancerArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-elasticloadbalancingv2-listener-port">Port</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-elasticloadbalancingv2-listener-protocol">Protocol</a>: <code class="replaceable">String</code>
@@ -73,7 +73,7 @@ Properties:
                                           
                                           <p><em>Required</em>: Conditional
                                           </p>
-                                          <p><em>Type</em>: List of <a href="./aws-properties-elasticloadbalancingv2-listener-certificates.html">Certificate</a></p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-elasticloadbalancingv2-listener-certificate.html">Certificate</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-elasticloadbalancingv2-listener-defaultactions"></a><span class="term"><code class="code">DefaultActions</code></span></dt>
@@ -86,7 +86,7 @@ Properties:
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
-                                          <p><em>Type</em>: List of <a href="./aws-properties-elasticloadbalancingv2-listener-defaultactions.html">Action</a></p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-elasticloadbalancingv2-listener-action.html">Action</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-elasticloadbalancingv2-listener-loadbalancerarn"></a><span class="term"><code class="code">LoadBalancerArn</code></span></dt>
@@ -103,9 +103,11 @@ Properties:
                                        <dt><a id="cfn-elasticloadbalancingv2-listener-port"></a><span class="term"><code class="code">Port</code></span></dt>
                                        <dd>
                                           
-                                          <p>The port on which the load balancer is listening.</p>
+                                          <p>The port on which the load balancer is listening. You cannot specify a port for a
+                                             Gateway Load Balancer.
+                                          </p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
                                           </p>
@@ -116,17 +118,19 @@ Properties:
                                        <dt><a id="cfn-elasticloadbalancingv2-listener-protocol"></a><span class="term"><code class="code">Protocol</code></span></dt>
                                        <dd>
                                           
-                                          <p>The protocol for connections from clients to the load balancer. For Application Load
-                                             Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers,
-                                             the
-                                             supported protocols are TCP, TLS, UDP, and TCP_UDP.
+                                          <p>The protocol for connections from clients to the load balancer. 
+                                             For Application Load Balancers, the supported protocols are HTTP and HTTPS. 
+                                             For Network Load Balancers, the supported protocols are TCP, TLS, UDP, and TCP_UDP.
+                                             
+                                             You can&#x2019;t specify the UDP or TCP_UDP protocol if dual-stack mode is enabled. 
+                                             You cannot specify a protocol for a Gateway Load Balancer.
                                           </p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed values</em>: <code class="code">HTTP | HTTPS | TCP | TCP_UDP | TLS | UDP</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">GENEVE | HTTP | HTTPS | TCP | TCP_UDP | TLS | UDP</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-elasticloadbalancingv2-listener-sslpolicy"></a><span class="term"><code class="code">SslPolicy</code></span></dt>
@@ -134,98 +138,11 @@ Properties:
                                           
                                           <p>[HTTPS and TLS listeners] The security policy that defines which protocols and ciphers
                                              are
-                                             supported. The following are the possible values:
+                                             supported.
                                           </p>
                                           
-                                          <div class="itemizedlist">
-                                              
-                                              
-                                              
-                                              
-                                              
-                                              
-                                              
-                                              
-                                              
-                                             
-                                             <ul class="itemizedlist" type="disc">
-                                                <li class="listitem">
-                                                   
-                                                   <p>
-                                                      <code class="code">ELBSecurityPolicy-2016-08</code>
-                                                      
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>
-                                                      <code class="code">ELBSecurityPolicy-TLS-1-0-2015-04</code>
-                                                      
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>
-                                                      <code class="code">ELBSecurityPolicy-TLS-1-1-2017-01</code>
-                                                      
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>
-                                                      <code class="code">ELBSecurityPolicy-TLS-1-2-2017-01</code>
-                                                      
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>
-                                                      <code class="code">ELBSecurityPolicy-TLS-1-2-Ext-2018-06</code>
-                                                      
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>
-                                                      <code class="code">ELBSecurityPolicy-FS-2018-06</code>
-                                                      
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>
-                                                      <code class="code">ELBSecurityPolicy-FS-1-1-2019-08</code>
-                                                      
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>
-                                                      <code class="code">ELBSecurityPolicy-FS-1-2-2019-08</code>
-                                                      
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>
-                                                      <code class="code">ELBSecurityPolicy-FS-1-2-Res-2019-08</code>
-                                                      
-                                                   </p>
-                                                   
-                                                </li>
-                                             </ul>
-                                          </div>
-                                          
-                                          <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies">Security Policies</a> in the <em>Application Load Balancers Guide</em> and
-                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies">Security Policies</a> in the <em>Network Load Balancers Guide</em>.
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies">Security policies</a> in the <em>Application Load Balancers Guide</em> and
+                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies">Security policies</a> in the <em>Network Load Balancers Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -243,6 +160,16 @@ Properties:
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
+                                 <h3 id="aws-resource-elasticloadbalancingv2-listener-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <h4 id="aws-resource-elasticloadbalancingv2-listener-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="ListenerArn-fn::getatt"></a><span class="term"><code class="code">ListenerArn</code></span></dt>
+                                       <dd>
+                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                       </dd>
+                                    </dl>
+                                 </div>
                                  <h2 id="aws-resource-elasticloadbalancingv2-listener--examples">Examples</h2>
                                  <p>The following example creates a listener with a default action that redirects HTTP
                                     requests on port 80

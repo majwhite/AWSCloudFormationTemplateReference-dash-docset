@@ -69,10 +69,7 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>Read-only. Specifies the URLs for a push input. The input is
-                                             pushing to these addresses in order to deliver to MediaLive. You
-                                             don&apos;t set these values.
-                                          </p>
+                                          <p>Destination settings for PUSH type inputs.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="./aws-properties-medialive-input-inputdestinationrequest.html">InputDestinationRequest</a></p>
@@ -82,9 +79,7 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>Include this element only for an INPUT_DEVICE type of input.
-                                             Settings for the devices.
-                                          </p>
+                                          <p>Settings for the devices.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="./aws-properties-medialive-input-inputdevicesettings.html">InputDeviceSettings</a></p>
@@ -94,9 +89,7 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>A list of security groups referenced by IDs to attach to the
-                                             input.
-                                          </p>
+                                          <p>A list of security groups referenced by IDs to attach to the input.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of String
@@ -107,12 +100,12 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>Include this element only for a MEDIACONNECT type of input. A
-                                             list of the MediaConnect Flows that you want to use in this
-                                             input. You can specify as few as one Flow and presently, as many
-                                             as two. The only requirement is when you have more than one is
-                                             that each Flow is in a separate Availability Zone as this ensures
-                                             your EML input is redundant to AZ issues.
+                                          <p>A list of the MediaConnect Flows that you want to use in this input. You can specify
+                                             as few as one
+                                             Flow and presently, as many as two. The only requirement is when you have more than
+                                             one is that each Flow is in a
+                                             separate Availability Zone as this ensures your EML input is redundant to AZ issues.
+                                             
                                           </p>
                                           <p><em>Required</em>: No
                                           </p>
@@ -123,7 +116,7 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>Name of the input. Required.</p>
+                                          <p>Name of the input.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -134,9 +127,7 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>The Amazon Resource Name (ARN) of the role this input assumes
-                                             during and after creation.
-                                          </p>
+                                          <p>The Amazon Resource Name (ARN) of the role this input assumes during and after creation.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -147,8 +138,10 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>Include this element only if the input is a pull input.
-                                             Specifies the source URLs for the input.
+                                          <p>The source URLs for a PULL-type input. Every PULL type input needs
+                                             exactly two source URLs for redundancy.
+                                             Only specify sources for PULL type Inputs. Leave Destinations empty.
+                                             
                                           </p>
                                           <p><em>Required</em>: No
                                           </p>
@@ -168,12 +161,7 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-medialive-input-type"></a><span class="term"><code class="code">Type</code></span></dt>
                                        <dd>
-                                          
-                                          <p>You must include this element. It sets the type of the input,
-                                             which then determines which other elements you must include in
-                                             this CreateInput element.
-                                          </p>
-                                          
+                                          <p>Not currently supported by AWS CloudFormation.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -183,8 +171,14 @@ Properties:
                                        <dt><a id="cfn-medialive-input-vpc"></a><span class="term"><code class="code">Vpc</code></span></dt>
                                        <dd>
                                           
-                                          <p>Include this element only for a VPC type of input.</p>
                                           
+                                          <p>Settings for a private VPC Input.
+                                             When this property is specified, the input destination addresses will be created in
+                                             a VPC rather than with public Internet addresses.
+                                             This property requires setting the roleArn property on Input creation.
+                                             Not compatible with the inputSecurityGroups property.
+                                             
+                                          </p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-medialive-input-inputvpcrequest.html">InputVpcRequest</a></p>

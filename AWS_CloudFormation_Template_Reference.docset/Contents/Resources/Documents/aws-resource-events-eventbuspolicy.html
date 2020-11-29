@@ -40,6 +40,7 @@
       &quot;<a href="#cfn-events-eventbuspolicy-condition">Condition</a>&quot; : <code class="replaceable"><a href="./aws-properties-events-eventbuspolicy-condition.html">Condition</a></code>,
       &quot;<a href="#cfn-events-eventbuspolicy-eventbusname">EventBusName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-events-eventbuspolicy-principal">Principal</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-events-eventbuspolicy-statement">Statement</a>&quot; : <code class="replaceable">Json</code>,
       &quot;<a href="#cfn-events-eventbuspolicy-statementid">StatementId</a>&quot; : <code class="replaceable">String</code>
     }
 }
@@ -52,6 +53,7 @@ Properties:
     <a href="./aws-properties-events-eventbuspolicy-condition.html">Condition</a></code>
   <a href="#cfn-events-eventbuspolicy-eventbusname">EventBusName</a>: <code class="replaceable">String</code>
   <a href="#cfn-events-eventbuspolicy-principal">Principal</a>: <code class="replaceable">String</code>
+  <a href="#cfn-events-eventbuspolicy-statement">Statement</a>: <code class="replaceable">Json</code>
   <a href="#cfn-events-eventbuspolicy-statementid">StatementId</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-resource-events-eventbuspolicy-properties">Properties</h2>
@@ -65,7 +67,7 @@ Properties:
                                              <code class="code">events:PutEvents</code>.
                                           </p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -133,13 +135,26 @@ Properties:
                                           </p>
                                           
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Minimum</em>: <code class="code">1</code></p>
                                           <p><em>Maximum</em>: <code class="code">12</code></p>
                                           <p><em>Pattern</em>: <code class="code">(\d<span>{</span>12}|\*)</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-events-eventbuspolicy-statement"></a><span class="term"><code class="code">Statement</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A statement in the policy attached to the event bus to manage access to send events
+                                             to it.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Json
+                                          </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-events-eventbuspolicy-statementid"></a><span class="term"><code class="code">StatementId</code></span></dt>
@@ -179,18 +194,26 @@ Properties:
                                     <h4 id="aws-resource-events-eventbuspolicy--examples--Grant_Permission_to_One_Account--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;SampleEventBusPolicy&quot;: <span>{</span>
     &quot;Type&quot;: &quot;AWS::Events::EventBusPolicy&quot;,
     &quot;Properties&quot;: <span>{</span>
-        &quot;Action&quot;: &quot;events:PutEvents&quot;,
-        &quot;Principal&quot;: &quot;111122223333&quot;,
-        &quot;StatementId&quot;: &quot;MyStatement&quot;
+        &quot;StatementId&quot;: &quot;MyStatement&quot;,
+        &quot;Statement&quot;: <span>{</span>
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Principal&quot; : <span>{</span>&quot;AWS&quot; : &quot;arn:aws:iam::123456789012:root&quot;},
+            &quot;Action&quot;: &quot;events:PutEvents&quot;,
+            &quot;Resource&quot;: &quot;arn:aws:events:us-east-1:111122223333:event-bus/default&quot;
+        }
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h4 id="aws-resource-events-eventbuspolicy--examples--Grant_Permission_to_One_Account--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">SampleEventBusPolicy: 
     Type: AWS::Events::EventBusPolicy
     Properties: 
-        Action: &quot;events:PutEvents&quot;
-        Principal: &quot;111122223333&quot;
-        StatementId: &quot;MyStatement&quot;</code></pre></div>
+        StatementId: &quot;MyStatement&quot;
+        Statement: 
+            Effect: &quot;Allow&quot;
+            Principal: 
+                AWS: &quot;arn:aws:iam::123456789012:root&quot;
+            Action: &quot;events:PutEvents&quot;
+            Resource: &quot;arn:aws:events:us-east-1:111122223333:event-bus/default&quot;</code></pre></div>
                                  <h3 id="aws-resource-events-eventbuspolicy--examples--Grant_Permission_to_an_Organization">Grant Permission to an Organization</h3>
                                  <p>The following example grants permission to all AWS accounts in the organization with
                                     an organization ID of <code class="code">o-1234567890</code>.
@@ -199,13 +222,15 @@ Properties:
                                     <h4 id="aws-resource-events-eventbuspolicy--examples--Grant_Permission_to_an_Organization--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;SampleEventBusPolicy&quot;: <span>{</span>
     &quot;Type&quot;: &quot;AWS::Events::EventBusPolicy&quot;,
     &quot;Properties&quot;: <span>{</span>
-        &quot;Action&quot;: &quot;events:PutEvents&quot;,
-        &quot;Principal&quot;: &quot;*&quot;,
         &quot;StatementId&quot;: &quot;MyStatement&quot;,
-        &quot;Condition&quot;: <span>{</span>
-            &quot;Type&quot;: &quot;StringEquals&quot;,
-            &quot;Key&quot;: &quot;aws:PrincipalOrgID&quot;,
-            &quot;Value&quot;: &quot;o-1234567890&quot;
+        &quot;Statement&quot;: <span>{</span>
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Principal&quot; : <span>{</span>&quot;AWS&quot; : &quot;arn:aws:iam::123456789012:root&quot;},
+            &quot;Action&quot;: &quot;events:PutEvents&quot;,
+            &quot;Resource&quot;: &quot;arn:aws:events:us-east-1:111122223333:event-bus/default&quot;,
+            &quot;Condition&quot;: <span>{</span>
+                &quot;StringEquals&quot;: <span>{</span>&quot;aws:PrincipalOrgID&quot;: &quot;o-1234567890&quot;}
+             }
         }
     }
 }</code></pre></div>
@@ -213,13 +238,58 @@ Properties:
                                     <h4 id="aws-resource-events-eventbuspolicy--examples--Grant_Permission_to_an_Organization--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">SampleEventBusPolicy: 
     Type: AWS::Events::EventBusPolicy
     Properties: 
-        Action: &quot;events:PutEvents&quot;
-        Principal: &quot;*&quot;
         StatementId: &quot;MyStatement&quot;
-        Condition: 
-            Type: &quot;StringEquals&quot;
-            Key: &quot;aws:PrincipalOrgID&quot;
-            Value: &quot;o-1234567890&quot;</code></pre></div>
+        Statement: 
+            Effect: &quot;Allow&quot;
+            Principal: 
+                 AWS: &quot;arn:aws:iam::123456789012:root&quot;
+            Action: &quot;events:PutEvents&quot;
+            Resource: &quot;arn:aws:events:us-east-1:111122223333:event-bus/default&quot;
+            Condition:
+                StringEquals:
+                    &quot;aws:PrincipalOrgID&quot;: &quot;o-1234567890&quot;</code></pre></div>
+                                 <h3 id="aws-resource-events-eventbuspolicy--examples--Deny_policy_using_multiple_principals_and_actions">Deny policy using multiple principals and actions</h3>
+                                 <p>The following example demonstrates a deny policy statement using multiple principals
+                                    and actions.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-events-eventbuspolicy--examples--Deny_policy_using_multiple_principals_and_actions--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;SampleDenyEventBusPolicy&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::Events::EventBusPolicy&quot;,
+    &quot;Properties&quot;: <span>{</span>
+        &quot;StatementId&quot;: &quot;MyDenyStatement&quot;,
+        &quot;Statement&quot;: <span>{</span>
+            &quot;Effect&quot;: &quot;Deny&quot;,
+            &quot;Principal&quot; : 
+                <span>{</span>&quot;AWS&quot; : [&quot;arn:aws:iam::123456789012:root&quot;, &quot;arn:aws:iam::999988887777:user/bob&quot;]},
+            &quot;Action&quot;: [
+                &quot;events:PutEvents&quot;,
+                &quot;events:PutRule&quot;
+            ],
+            &quot;Resource&quot;: &quot;arn:aws:events:us-east-1:111122223333:event-bus/default&quot;,
+            &quot;Condition&quot;: <span>{</span>
+                &quot;StringEquals&quot;: <span>{</span>&quot;aws:PrincipalOrgID&quot;: &quot;o-1234567890&quot;}
+             }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-events-eventbuspolicy--examples--Deny_policy_using_multiple_principals_and_actions--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">SampleEventBusPolicy: 
+    Type: AWS::Events::EventBusPolicy
+    Properties: 
+        StatementId: &quot;MyDenyStatement&quot;
+        Statement: 
+            Effect: &quot;Deny&quot;
+            Principal: 
+                AWS: 
+                    - &quot;arn:aws:iam::123456789012:root&quot;
+                    - &quot;arn:aws:iam::999988887777:user/bob&quot;
+            Action: 
+                - &quot;events:PutEvents&quot;
+                -  &quot;events:PutRule&quot;
+            Resource: &quot;arn:aws:events:us-east-1:111122223333:event-bus/default&quot;
+            Condition:
+                StringEquals:
+                    &quot;aws:PrincipalOrgID&quot;: &quot;o-1234567890&quot;</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>

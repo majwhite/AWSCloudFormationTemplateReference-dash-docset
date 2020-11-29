@@ -24,12 +24,15 @@
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-properties-synthetics-canary-runconfig-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;<a href="#cfn-synthetics-canary-runconfig-activetracing">ActiveTracing</a>&quot; : <code class="replaceable">Boolean</code>,
+  &quot;<a href="#cfn-synthetics-canary-runconfig-environmentvariables">EnvironmentVariables</a>&quot; : <code class="replaceable"><span>{</span><code class="replaceable">Key</code> : <code class="replaceable">Value</code>, ...}</code>,
   &quot;<a href="#cfn-synthetics-canary-runconfig-memoryinmb">MemoryInMB</a>&quot; : <code class="replaceable">Integer</code>,
   &quot;<a href="#cfn-synthetics-canary-runconfig-timeoutinseconds">TimeoutInSeconds</a>&quot; : <code class="replaceable">Integer</code>
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-properties-synthetics-canary-runconfig-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-synthetics-canary-runconfig-activetracing">ActiveTracing</a>: <code class="replaceable">Boolean</code>
+  <a href="#cfn-synthetics-canary-runconfig-environmentvariables">EnvironmentVariables</a>: <code class="replaceable">
+    <code class="replaceable">Key</code> : <code class="replaceable">Value</code></code>
   <a href="#cfn-synthetics-canary-runconfig-memoryinmb">MemoryInMB</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-synthetics-canary-runconfig-timeoutinseconds">TimeoutInSeconds</a>: <code class="replaceable">Integer</code>
 </code></pre></div>
@@ -38,10 +41,47 @@
                                     <dl>
                                        <dt><a id="cfn-synthetics-canary-runconfig-activetracing"></a><span class="term"><code class="code">ActiveTracing</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active
+                                             tracing 
+                                             enables this canary run to be displayed in the ServiceLens and X-Ray service maps
+                                             even if the 
+                                             canary does not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing
+                                             
+                                             incurs charges. For more information, see 
+                                             <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html">Canaries and X-Ray tracing</a>.
+                                          </p>
+                                          
+                                          <p> You can enable active tracing only for canaries that use version <code class="code">syn-nodejs-2.0</code> or later 
+                                             for their canary runtime.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-synthetics-canary-runconfig-environmentvariables"></a><span class="term"><code class="code">EnvironmentVariables</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies the keys and values to use for any environment variables
+                                             used in the canary script. Use the following format:
+                                          </p>
+                                          
+                                          <p><span>{</span> &quot;key1&quot; : &quot;value1&quot;, &quot;key2&quot; : &quot;value2&quot;, ...}
+                                          </p>
+                                          
+                                          <p>Keys must start with a letter and be at least two characters. The total size
+                                             of your environment variables cannot exceed 4 KB. You can&apos;t specify any Lambda
+                                             reserved environment variables as the keys for your environment variables. For 
+                                             more information about reserved keys, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime">
+                                                Runtime environment variables</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Map of String
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>

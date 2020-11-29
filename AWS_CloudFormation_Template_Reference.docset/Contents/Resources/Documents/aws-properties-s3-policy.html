@@ -17,12 +17,16 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>Applies an Amazon S3 bucket policy to an Amazon S3 bucket. If you are using an identity
-                                    other than the root user of the AWS account that owns the bucket, the calling identity
-                                    must have the <code class="code">PutBucketPolicy</code> permissions on the specified bucket and belong to the bucket owner&apos;s account in order
-                                    to use this operation.
+                                    other than
+                                    the root user of the AWS account that owns the bucket, the calling identity must have
+                                    the
+                                    <code class="code">PutBucketPolicy</code> permissions on the specified bucket and belong to the
+                                    bucket owner&apos;s account in order to use this operation.
                                  </p>
-                                 <p>If you don&apos;t have <code class="code">PutBucketPolicy</code> permissions, Amazon S3 returns a <code class="code">403 Access Denied</code> error. If you have the correct permissions, but you&apos;re not using an identity that
-                                    belongs to the bucket owner&apos;s account, Amazon S3 returns a <code class="code">405 Method Not Allowed</code> error.
+                                 <p>If you don&apos;t have <code class="code">PutBucketPolicy</code> permissions, Amazon S3 returns a <code class="code">403
+                                       Access Denied</code> error. If you have the correct permissions, but you&apos;re not using an
+                                    identity that belongs to the bucket owner&apos;s account, Amazon S3 returns a <code class="code">405 Method Not
+                                       Allowed</code> error.
                                  </p>
                                  <div class="awsdocs-note awsdocs-important">
                                     <div class="awsdocs-note-title">
@@ -30,12 +34,12 @@
                                     <div class="awsdocs-note-text">
                                        <p> As a security precaution, the root user of the AWS account that owns a bucket can
                                           always use this operation, even if the policy explicitly denies the root user the
-                                          ability to perform this action.
-                                          
+                                          ability to perform this action. 
                                        </p>
                                     </div>
                                  </div>
-                                 <p>For more information about bucket policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html">Using Bucket Policies and User Policies</a>.
+                                 <p>For more information about bucket policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html">Using Bucket Policies and User
+                                       Policies</a>.
                                  </p>
                                  <p>The following operations are related to <code class="code">PutBucketPolicy</code>:
                                  </p>
@@ -97,12 +101,17 @@ Properties:
                                        <dt><a id="aws-properties-s3-policy-policydocument"></a><span class="term"><code class="code">PolicyDocument</code></span></dt>
                                        <dd>
                                           
-                                          <p>
-                                             A policy document containing permissions to add to the specified bucket. For
-                                             more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-policy-language-overview.html">Access Policy Language Overview</a> in the
-                                             <em>Amazon Simple Storage Service Developer Guide</em>.
-                                             
+                                          <p> A policy document containing permissions to add to the specified bucket.
+                                             In IAM, you must provide policy documents in JSON format. However, in CloudFormation
+                                             you can provide the policy in JSON or YAML format because CloudFormation converts
+                                             YAML
+                                             to JSON before submitting it to IAM.
+                                             For more information, see the AWS::IAM::Policy <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html#cfn-iam-policy-policydocument">PolicyDocument</a> resource description in this guide and 
+                                             <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-policy-language-overview.html">Access Policy Language Overview</a> in the <em>Amazon Simple Storage Service
+                                                Developer Guide</em>.
                                           </p>
+                                          
+                                          
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -114,39 +123,54 @@ Properties:
                                  </div>
                                  <h2 id="aws-properties-s3-policy--examples">Examples</h2>
                                  <h3 id="aws-properties-s3-policy--examples--Bucket_policy_that_allows_GET_requests_from_specific_referers">Bucket policy that allows GET requests from specific referers</h3>
-                                 <p>
-                                    The following sample is a bucket policy that is attached to the DOC-EXAMPLE-BUCKET
-                                    bucket and allows GET requests that originate from www.example.com and example.net:
-                                    
+                                 <p> The following sample is a bucket policy that is attached to the
+                                    DOC-EXAMPLE-BUCKET bucket and allows GET requests that originate from www.example.com
+                                    and example.net: 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-properties-s3-policy--examples--Bucket_policy_that_allows_GET_requests_from_specific_referers--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">
-&quot;SampleBucketPolicy&quot; : <span>{</span>
-  &quot;Type&quot; : &quot;AWS::S3::BucketPolicy&quot;,
-  &quot;Properties&quot; : <span>{</span>
-    &quot;Bucket&quot; : <span>{</span>&quot;Ref&quot; : &quot;DOC-EXAMPLE-BUCKET&quot;},
-    &quot;PolicyDocument&quot;: <span>{</span>
-      &quot;Statement&quot;:[<span>{</span>
-	    &quot;Action&quot;:[&quot;s3:GetObject&quot;],
-	    &quot;Effect&quot;:&quot;Allow&quot;,
-	    &quot;Resource&quot;: <span>{</span> &quot;Fn::Join&quot; : [&quot;&quot;, [&quot;arn:aws:s3:::&quot;, <span>{</span> &quot;Ref&quot; : &quot;DOC-EXAMPLE-BUCKET&quot; } , &quot;/*&quot; ]]},
-	    &quot;Principal&quot;:&quot;*&quot;,
-        &quot;Condition&quot;:<span>{</span>
-          &quot;StringLike&quot;:<span>{</span>
-            &quot;aws:Referer&quot;:[
-              &quot;http://www.example.com/*&quot;,
-              &quot;http://example.net/*&quot;
-            ]
+                                    <h4 id="aws-properties-s3-policy--examples--Bucket_policy_that_allows_GET_requests_from_specific_referers--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;SampleBucketPolicy&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::S3::BucketPolicy&quot;,
+    &quot;Properties&quot;: <span>{</span>
+      &quot;Bucket&quot;: <span>{</span>
+        &quot;Ref&quot;: &quot;DOC-EXAMPLE-BUCKET&quot;
+      },
+      &quot;PolicyDocument&quot;: <span>{</span>
+        &quot;Statement&quot;: [
+          <span>{</span>
+            &quot;Action&quot;: [
+              &quot;s3:GetObject&quot;
+            ],
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Resource&quot;: <span>{</span>
+              &quot;Fn::Join&quot;: [
+                &quot;&quot;,
+                [
+                  &quot;arn:aws:s3:::&quot;,
+                  <span>{</span>
+                    &quot;Ref&quot;: &quot;DOC-EXAMPLE-BUCKET&quot;
+                  },
+                  &quot;/*&quot;
+                ]
+              ]
+            },
+            &quot;Principal&quot;: &quot;*&quot;,
+            &quot;Condition&quot;: <span>{</span>
+              &quot;StringLike&quot;: <span>{</span>
+                &quot;aws:Referer&quot;: [
+                  &quot;http://www.example.com/*&quot;,
+                  &quot;http://example.net/*&quot;
+                ]
+              }
+            }
           }
-        }
-      }]
+        ]
+      }
     }
   }
-}            
-         </code></pre></div>
+} </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-properties-s3-policy--examples--Bucket_policy_that_allows_GET_requests_from_specific_referers--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">
-SampleBucketPolicy:
+                                    <h4 id="aws-properties-s3-policy--examples--Bucket_policy_that_allows_GET_requests_from_specific_referers--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">SampleBucketPolicy:
   Type: &apos;AWS::S3::BucketPolicy&apos;
   Properties:
     Bucket:
@@ -167,8 +191,7 @@ SampleBucketPolicy:
             StringLike:
               &apos;aws:Referer&apos;:
                 - &apos;http://www.example.com/*&apos;
-                - &apos;http://example.net/*&apos;
-         </code></pre></div>
+                - &apos;http://example.net/*&apos; </code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>

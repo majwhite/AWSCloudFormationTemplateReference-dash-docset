@@ -17,8 +17,11 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>Describes the default server-side encryption to apply to new objects in the bucket.
-                                    If a PUT Object request doesn&apos;t specify any server-side encryption, this default encryption
-                                    will be applied. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html">PUT Bucket encryption</a> in the <em>Amazon Simple Storage Service API Reference</em>.
+                                    If a
+                                    PUT Object request doesn&apos;t specify any server-side encryption, this default encryption
+                                    will
+                                    be applied. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html">PUT Bucket encryption</a> in
+                                    the <em>Amazon Simple Storage Service API Reference</em>.
                                  </p>
                                  <h2 id="aws-properties-s3-bucket-serversideencryptionbydefault-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -57,10 +60,15 @@
                                              
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
+                                                   
                                                    <p>Key ID: <code class="code">1234abcd-12ab-34cd-56ef-1234567890ab</code></p>
+                                                   
                                                 </li>
                                                 <li class="listitem">
-                                                   <p>Key ARN: <code class="code">arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code></p>
+                                                   
+                                                   <p>Key ARN:
+                                                      <code class="code">arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code></p>
+                                                   
                                                 </li>
                                              </ul>
                                           </div>
@@ -70,7 +78,9 @@
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
                                                 <p>Amazon S3 only supports symmetric CMKs and not asymmetric CMKs. For more information,
-                                                   see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using Symmetric and Asymmetric Keys</a> in the <em>AWS Key Management Service Developer Guide</em>.
+                                                   see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using Symmetric and
+                                                      Asymmetric Keys</a> in the <em>AWS Key Management Service Developer
+                                                      Guide</em>.
                                                 </p>
                                              </div>
                                           </div>
@@ -95,18 +105,53 @@
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-properties-s3-bucket-serversideencryptionbydefault--seealso">See also</h2>
-                                 <div class="itemizedlist">
-                                     
-                                    
-                                    <ul class="itemizedlist" type="disc">
-                                       <li class="listitem">
-                                          
-                                          <p>AWS::S3::Bucket <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--examples">Examples</a></p>
-                                          
-                                       </li>
-                                    </ul>
-                                 </div>
+                                 <h2 id="aws-properties-s3-bucket-serversideencryptionbydefault--examples">Examples</h2>
+                                 <h3 id="aws-properties-s3-bucket-serversideencryptionbydefault--examples--Create_a_bucket_with_default_encryption">Create a bucket with default encryption</h3>
+                                 <p>The following example creates a bucket with server-side bucket encryption
+                                    configured. This example uses KMS-managed keys. You can use S3-managed keys instead
+                                    by modifying the <a href="aws-properties-s3-bucket-serversideencryptionbydefault.html">Amazon S3 Bucket ServerSideEncryptionByDefault</a> property.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-serversideencryptionbydefault--examples--Create_a_bucket_with_default_encryption--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+  &quot;Description&quot;: &quot;S3 bucket with default encryption&quot;,
+  &quot;Resources&quot;: <span>{</span>
+    &quot;EncryptedS3Bucket&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;BucketName&quot;: <span>{</span>
+          &quot;Fn::Sub&quot;: &quot;encryptedbucket-$<span>{</span>AWS::Region}-$<span>{</span>AWS::AccountId}&quot;
+        },
+        &quot;BucketEncryption&quot;: <span>{</span>
+          &quot;ServerSideEncryptionConfiguration&quot;: [
+            <span>{</span>
+              &quot;ServerSideEncryptionByDefault&quot;: <span>{</span>
+                &quot;SSEAlgorithm&quot;: &quot;aws:kms&quot;,
+                &quot;KMSMasterKeyID&quot;: &quot;KMS-KEY-ARN&quot;
+              }
+            }
+          ]
+        }
+      },
+      &quot;DeletionPolicy&quot;: &quot;Delete&quot;
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-serversideencryptionbydefault--examples--Create_a_bucket_with_default_encryption--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+Description: S3 bucket with default encryption
+Resources:
+  EncryptedS3Bucket:
+    Type: &apos;AWS::S3::Bucket&apos;
+    Properties:
+      BucketName:
+        &apos;Fn::Sub&apos;: &apos;encryptedbucket-$<span>{</span>AWS::Region}-$<span>{</span>AWS::AccountId}&apos;
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: &apos;aws:kms&apos;
+              KMSMasterKeyID: KMS-KEY-ARN
+    DeletionPolicy: Delete</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>

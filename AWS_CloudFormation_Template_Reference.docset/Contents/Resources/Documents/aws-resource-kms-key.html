@@ -16,21 +16,25 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::KMS::Key</code> resource specifies a symmetric <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">customer master key</a> (CMK)
-                                    in AWS Key Management Service (AWS KMS). You can use symmetric CMKs to encrypt and
-                                    decrypt
-                                    small amounts of data, but they are more commonly used to generate symmetric data
-                                    keys and
-                                    asymmetric data key pairs. You can also use symmetric CMKs to encrypt data stored
-                                    in AWS
+                                 <p>The <code class="code">AWS::KMS::Key</code> resource specifies a <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">symmetric or asymmetric</a> <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">customer master key</a> (CMK)
+                                    in AWS Key Management Service (AWS KMS).
+                                 </p>
+                                 <p>You can use symmetric CMKs to encrypt and decrypt
+                                    small amounts of data, but they are more commonly used to generate data keys and
+                                    data key pairs. You can also use symmetric CMKs to encrypt data stored in AWS
                                     services that are <a href="http://aws.amazon.com/kms/features/#AWS_Service_Integration" target="_blank"><span>integrated with AWS KMS</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/overview.html">What is AWS Key Management Service?</a> in the <em>AWS Key Management Service Developer Guide</em>.
                                  </p>
-                                 <div class="awsdocs-note">
+                                 <p>You can use asymmetric CMKs to encrypt and decrypt data or sign messages and verify
+                                    signatures.
+                                 </p>
+                                 <div class="awsdocs-note awsdocs-important">
                                     <div class="awsdocs-note-title">
-                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                       <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                     <div class="awsdocs-note-text">
-                                       <p>AWS KMS does not currently support creating asymmetric CMKs with a CloudFormation
-                                          template.
+                                       <p>If you change the value of a <code class="code">Replacement</code> property, such as <code class="code">KeyUsage</code> or <code class="code">KeySpec</code>, on an existing CMK, the existing CMK is <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html">scheduled for deletion</a> and a new CMK is created with the specified value.
+                                       </p>
+                                       <p>While scheduled for deletion, the existing CMK becomes unusable. If you don&apos;t <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html#deleting-keys-scheduling-key-deletion">cancel the scheduled deletion</a> of the existing CMK outside of CloudFormation, all data encrypted under the existing
+                                          CMK becomes unrecoverable when the CMK is deleted.
                                        </p>
                                     </div>
                                  </div>
@@ -43,7 +47,8 @@
       &quot;<a href="#cfn-kms-key-description">Description</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-kms-key-enabled">Enabled</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-kms-key-enablekeyrotation">EnableKeyRotation</a>&quot; : <code class="replaceable">Boolean</code>,
-      &quot;<a href="#cfn-kms-key-keypolicy">KeyPolicy</a>&quot; : <code class="replaceable"></code>,
+      &quot;<a href="#cfn-kms-key-keypolicy">KeyPolicy</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-kms-key-keyspec">KeySpec</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-kms-key-keyusage">KeyUsage</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-kms-key-pendingwindowindays">PendingWindowInDays</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-kms-key-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
@@ -56,7 +61,8 @@ Properties:
   <a href="#cfn-kms-key-description">Description</a>: <code class="replaceable">String</code>
   <a href="#cfn-kms-key-enabled">Enabled</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-kms-key-enablekeyrotation">EnableKeyRotation</a>: <code class="replaceable">Boolean</code>
-  <a href="#cfn-kms-key-keypolicy">KeyPolicy</a>: <code class="replaceable"></code>
+  <a href="#cfn-kms-key-keypolicy">KeyPolicy</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-kms-key-keyspec">KeySpec</a>: <code class="replaceable">String</code>
   <a href="#cfn-kms-key-keyusage">KeyUsage</a>: <code class="replaceable">String</code>
   <a href="#cfn-kms-key-pendingwindowindays">PendingWindowInDays</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-kms-key-tags">Tags</a>: <code class="replaceable">
@@ -197,28 +203,232 @@ Properties:
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
-                                          <p><em>Type</em>: 
+                                          <p><em>Type</em>: Json
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
-                                       <dt><a id="cfn-kms-key-keyusage"></a><span class="term"><code class="code">KeyUsage</code></span></dt>
+                                       <dt><a id="cfn-kms-key-keyspec"></a><span class="term"><code class="code">KeySpec</code></span></dt>
                                        <dd>
                                           
                                           
-                                          
-                                          <p>Determines the cryptographic operations for which you can use the CMK. The default
-                                             value, <code class="code">ENCRYPT_DECRYPT</code>, is the only valid value for symmetric CMKs. You
-                                             can&apos;t change the <code class="code">KeyUsage</code> value after the CMK is created.
+                                          <p>Specifies the type of CMK to create. The default value, <code class="code">SYMMETRIC_DEFAULT</code>,
+                                             creates a CMK with a 256-bit symmetric key for encryption and decryption. For help
+                                             choosing a
+                                             key spec for your CMK, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-choose.html">How to Choose Your CMK
+                                                Configuration</a> in the <em>AWS Key Management Service Developer
+                                                Guide</em>.
                                           </p>
                                           
-                                          <p><em>Allowed Values</em>: ENCRYPT_DECRYPT
+                                          <p>The <code class="code">KeySpec</code> property (<code class="code">CustomerMasterKeySpec</code> type) determines whether the CMK contains a symmetric key
+                                             or an asymmetric key pair. It also determines the encryption algorithms or signing
+                                             algorithms
+                                             that the CMK supports. You can&apos;t change the <code class="code">KeySpec</code> after the CMK
+                                             is created. To further restrict the algorithms that can be used with the CMK, use
+                                             a condition
+                                             key in its key policy or IAM policy. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-algorithm">kms:EncryptionAlgorithm</a> or <a href="https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-signing-algorithm">kms:Signing Algorithm</a> in the <em>AWS Key Management Service Developer
+                                                Guide</em>.
                                           </p>
+                                          
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If you change the <code class="code">KeySpec</code> of an existing CMK, the existing CMK is scheduled for deletion and a new CMK is created
+                                                   with the specified <code class="code">KeySpec</code> value. While the scheduled deletion is pending, you can&apos;t use the existing CMK. Unless
+                                                   you <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html#deleting-keys-scheduling-key-deletion">cancel the scheduled deletion</a> of the CMK outside of CloudFormation, all data encrypted under the existing CMK becomes
+                                                   unrecoverable when the CMK is deleted.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p><a href="http://aws.amazon.com/kms/features/#AWS_Service_Integration" target="_blank"><span>AWS services that
+                                                         are integrated with AWS KMS</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> use symmetric CMKs to protect your data. These
+                                                   services do not support asymmetric CMKs. For help determining whether a CMK is symmetric
+                                                   or
+                                                   asymmetric, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/find-symm-asymm.html">Identifying Symmetric and Asymmetric
+                                                      CMKs</a> in the <em>AWS Key Management Service Developer
+                                                      Guide</em>.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p>AWS KMS supports the following key specs for CMKs:</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>Symmetric key (default)</p>
+                                                   
+                                                   <div class="itemizedlist">
+                                                       
+                                                      
+                                                      <ul class="itemizedlist" type="disc">
+                                                         <li class="listitem">
+                                                            
+                                                            <p><code class="code">SYMMETRIC_DEFAULT</code> (AES-256-GCM)
+                                                            </p>
+                                                            
+                                                         </li>
+                                                      </ul>
+                                                   </div>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Asymmetric RSA key pairs</p>
+                                                   
+                                                   <div class="itemizedlist">
+                                                       
+                                                       
+                                                       
+                                                      
+                                                      <ul class="itemizedlist" type="disc">
+                                                         <li class="listitem">
+                                                            
+                                                            <p><code class="code">RSA_2048</code></p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p><code class="code">RSA_3072</code></p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p><code class="code">RSA_4096</code></p>
+                                                            
+                                                         </li>
+                                                      </ul>
+                                                   </div>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Asymmetric NIST-recommended elliptic curve key pairs</p>
+                                                   
+                                                   <div class="itemizedlist">
+                                                       
+                                                       
+                                                       
+                                                      
+                                                      <ul class="itemizedlist" type="disc">
+                                                         <li class="listitem">
+                                                            
+                                                            <p><code class="code">ECC_NIST_P256</code> (secp256r1)
+                                                            </p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p><code class="code">ECC_NIST_P384</code> (secp384r1)
+                                                            </p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p><code class="code">ECC_NIST_P521</code> (secp521r1)
+                                                            </p>
+                                                            
+                                                         </li>
+                                                      </ul>
+                                                   </div>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Other asymmetric elliptic curve key pairs</p>
+                                                   
+                                                   <div class="itemizedlist">
+                                                       
+                                                      
+                                                      <ul class="itemizedlist" type="disc">
+                                                         <li class="listitem">
+                                                            
+                                                            <p><code class="code">ECC_SECG_P256K1</code> (secp256k1), commonly used for
+                                                               cryptocurrencies.
+                                                            </p>
+                                                            
+                                                         </li>
+                                                      </ul>
+                                                   </div>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>    
                                           
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-kms-key-keyusage"></a><span class="term"><code class="code">KeyUsage</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>Determines the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations">cryptographic operations</a> for which you can use the CMK. The default value
+                                             is <code class="code">ENCRYPT_DECRYPT</code>. This property is required only for asymmetric CMKs. You
+                                             can&apos;t change the <code class="code">KeyUsage</code> value after the CMK is created.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If you change the <code class="code">KeyUsage</code> of an existing CMK, the existing CMK is scheduled for deletion and a new CMK is created
+                                                   with the specified <code class="code">KeyUsage</code> value. While the scheduled deletion is pending, you can&apos;t use the existing CMK. Unless
+                                                   you <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html#deleting-keys-scheduling-key-deletion">cancel the scheduled deletion</a> of the CMK outside of CloudFormation, all data encrypted under the existing CMK becomes
+                                                   unrecoverable when the CMK is deleted.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p>Select only one valid value.</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>For symmetric CMKs, omit the property or specify <code class="code">ENCRYPT_DECRYPT</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>For asymmetric CMKs with RSA key material, specify <code class="code">ENCRYPT_DECRYPT</code> or
+                                                      <code class="code">SIGN_VERIFY</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>For asymmetric CMKs with ECC key material, specify <code class="code">SIGN_VERIFY</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">ENCRYPT_DECRYPT | SIGN_VERIFY</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-kms-key-pendingwindowindays"></a><span class="term"><code class="code">PendingWindowInDays</code></span></dt>
                                        <dd>

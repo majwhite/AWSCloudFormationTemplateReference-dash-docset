@@ -87,10 +87,12 @@
       &quot;<a href="#cfn-lambda-eventsourcemapping-maximumrecordageinseconds">MaximumRecordAgeInSeconds</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-lambda-eventsourcemapping-maximumretryattempts">MaximumRetryAttempts</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-lambda-eventsourcemapping-parallelizationfactor">ParallelizationFactor</a>&quot; : <code class="replaceable">Integer</code>,
+      &quot;<a href="#cfn-lambda-eventsourcemapping-partialbatchresponse">PartialBatchResponse</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-lambda-eventsourcemapping-queues">Queues</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-lambda-eventsourcemapping-sourceaccessconfigurations">SourceAccessConfigurations</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-lambda-eventsourcemapping-sourceaccessconfiguration.html">SourceAccessConfiguration</a>, ... ]</code>,
       &quot;<a href="#cfn-lambda-eventsourcemapping-startingposition">StartingPosition</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-lambda-eventsourcemapping-topics">Topics</a>&quot; : <code class="replaceable">[ String, ... ]</code>
+      &quot;<a href="#cfn-lambda-eventsourcemapping-topics">Topics</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+      &quot;<a href="#cfn-lambda-eventsourcemapping-tumblingwindowinseconds">TumblingWindowInSeconds</a>&quot; : <code class="replaceable">Integer</code>
     }
 }
 </code></pre></div>
@@ -108,6 +110,7 @@ Properties:
   <a href="#cfn-lambda-eventsourcemapping-maximumrecordageinseconds">MaximumRecordAgeInSeconds</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-lambda-eventsourcemapping-maximumretryattempts">MaximumRetryAttempts</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-lambda-eventsourcemapping-parallelizationfactor">ParallelizationFactor</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-lambda-eventsourcemapping-partialbatchresponse">PartialBatchResponse</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-lambda-eventsourcemapping-queues">Queues</a>: <code class="replaceable">
     - String</code>
   <a href="#cfn-lambda-eventsourcemapping-sourceaccessconfigurations">SourceAccessConfigurations</a>: <code class="replaceable">
@@ -115,6 +118,7 @@ Properties:
   <a href="#cfn-lambda-eventsourcemapping-startingposition">StartingPosition</a>: <code class="replaceable">String</code>
   <a href="#cfn-lambda-eventsourcemapping-topics">Topics</a>: <code class="replaceable">
     - String</code>
+  <a href="#cfn-lambda-eventsourcemapping-tumblingwindowinseconds">TumblingWindowInSeconds</a>: <code class="replaceable">Integer</code>
 </code></pre></div>
                                  <h2 id="aws-resource-lambda-eventsourcemapping-properties">Properties</h2>
                                  <div class="variablelist">
@@ -148,7 +152,7 @@ Properties:
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <b>Amazon Simple Queue Service</b> - Default 10. Max 10.
+                                                      <b>Amazon Simple Queue Service</b> - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.
                                                    </p>
                                                    
                                                 </li>
@@ -316,8 +320,8 @@ Properties:
                                        <dt><a id="cfn-lambda-eventsourcemapping-maximumbatchingwindowinseconds"></a><span class="term"><code class="code">MaximumBatchingWindowInSeconds</code></span></dt>
                                        <dd>
                                           
-                                          <p>(Streams) The maximum amount of time to gather records before invoking the function,
-                                             in seconds.
+                                          <p>(Streams and SQS standard queues) The maximum amount of time to gather records before
+                                             invoking the function, in seconds.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -372,6 +376,15 @@ Properties:
                                           </p>
                                           <p><em>Minimum</em>: <code class="code">1</code></p>
                                           <p><em>Maximum</em>: <code class="code">10</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-lambda-eventsourcemapping-partialbatchresponse"></a><span class="term"><code class="code">PartialBatchResponse</code></span></dt>
+                                       <dd>
+                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-lambda-eventsourcemapping-queues"></a><span class="term"><code class="code">Queues</code></span></dt>
@@ -442,6 +455,15 @@ Properties:
                                           <p><em>Type</em>: List of String
                                           </p>
                                           <p><em>Maximum</em>: <code class="code">1</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-lambda-eventsourcemapping-tumblingwindowinseconds"></a><span class="term"><code class="code">TumblingWindowInSeconds</code></span></dt>
+                                       <dd>
+                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>

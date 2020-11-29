@@ -51,25 +51,27 @@
                                        <dt><a id="cfn-s3-bucket-replicationrule-deletemarkerreplication"></a><span class="term"><code class="code">DeleteMarkerReplication</code></span></dt>
                                        <dd>
                                           
-                                          <p>Specifies whether Amazon S3 replicates the delete markers. If you specify a <code class="code">Filter</code>, you must specify this element. However, in the latest version of replication configuration
-                                             (when <code class="code">Filter</code> is specified), Amazon S3 doesn&apos;t replicate delete markers. Therefore, the <code class="code">DeleteMarkerReplication</code> element can contain only &lt;Status&gt;Disabled&lt;/Status&gt;. For an example configuration,
-                                             see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config">Basic Rule Configuration</a>.
-                                             
+                                          <p>Specifies whether Amazon S3 replicates delete markers. If you specify a <code class="code">Filter</code>
+                                             in your replication configuration, you must also include a
+                                             <code class="code">DeleteMarkerReplication</code> element. If your <code class="code">Filter</code> includes a
+                                             <code class="code">Tag</code> element, the <code class="code">DeleteMarkerReplication</code>
+                                             <code class="code">Status</code> must be set to Disabled, because Amazon S3 does not support replicating
+                                             delete markers for tag-based rules. For an example configuration, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config">Basic
+                                                Rule Configuration</a>. 
                                           </p>
                                           
+                                          <p>For more information about delete marker replication, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html">Basic Rule Configuration</a>. 
+                                          </p>
                                           
                                           <div class="awsdocs-note">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p> If you don&apos;t specify the <code class="code">Filter</code> element, Amazon S3 assumes that the replication
-                                                   configuration is the earlier version, V1. In the earlier version, Amazon S3 handled
+                                                <p>If you are using an earlier version of the replication configuration, Amazon S3 handles
                                                    replication of delete markers differently. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations">Backward Compatibility</a>.
                                                 </p>
                                              </div>
                                           </div>
-                                          
-                                          
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -79,8 +81,8 @@
                                        <dt><a id="cfn-s3-bucket-replicationconfiguration-rules-destination"></a><span class="term"><code class="code">Destination</code></span></dt>
                                        <dd>
                                           
-                                          <p>A container for information about the replication destination
-                                             and its configurations including enabling the S3 Replication Time Control (S3 RTC).
+                                          <p>A container for information about the replication destination and its configurations
+                                             including enabling the S3 Replication Time Control (S3 RTC).
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -94,8 +96,8 @@
                                           
                                           <p>A filter that identifies the subset of objects to which the replication rule applies.
                                              A
-                                             <code class="code">Filter</code> must specify exactly one <code class="code">Prefix</code>, <code class="code">TagFilter</code>, or an
-                                             <code class="code">And</code> child element.
+                                             <code class="code">Filter</code> must specify exactly one <code class="code">Prefix</code>,
+                                             <code class="code">TagFilter</code>, or an <code class="code">And</code> child element.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -120,10 +122,9 @@
                                        <dd>
                                           
                                           <p>An object key name prefix that identifies the object or objects to which the rule
-                                             applies.
-                                             The maximum prefix length is 1,024 characters. To include all objects in a bucket,
-                                             specify
-                                             an empty string. 
+                                             applies. The maximum prefix length is 1,024 characters. To include all objects in
+                                             a bucket,
+                                             specify an empty string. 
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -139,8 +140,7 @@
                                              configuration, Amazon S3 prioritizes the rules to prevent conflicts when filtering.
                                              If two or
                                              more rules identify the same object based on a specified filter, the rule with higher
-                                             priority
-                                             takes precedence. For example:
+                                             priority takes precedence. For example:
                                           </p>
                                           
                                           <div class="itemizedlist">
@@ -150,9 +150,8 @@
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
                                                    
-                                                   <p>Same object quality prefix-based filter criteria if prefixes you specified in multiple
-                                                      rules
-                                                      overlap 
+                                                   <p>Same object quality prefix-based filter criteria if prefixes you specified in
+                                                      multiple rules overlap 
                                                    </p>
                                                    
                                                 </li>
@@ -164,7 +163,8 @@
                                              </ul>
                                           </div>
                                           
-                                          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html">Replication</a> in the <em>Amazon Simple Storage Service Developer Guide</em>.
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html">Replication</a> in the
+                                             <em>Amazon Simple Storage Service Developer Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -177,11 +177,10 @@
                                        <dd>
                                           
                                           <p>A container that describes additional filters for identifying the source objects that
-                                             you
-                                             want to replicate. You can choose to enable or disable the replication of these objects.
-                                             Currently, Amazon S3 supports only the filter that you can specify for objects created
-                                             with
-                                             server-side encryption using a customer master key (CMK) stored in AWS Key Management
+                                             you want to replicate. You can choose to enable or disable the replication of these
+                                             objects. Currently, Amazon S3 supports only the filter that you can specify for objects
+                                             created
+                                             with server-side encryption using a customer master key (CMK) stored in AWS Key Management
                                              Service (SSE-KMS).
                                           </p>
                                           

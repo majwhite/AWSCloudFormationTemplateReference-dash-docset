@@ -19,12 +19,17 @@
                                  <p>Specifies a VPC endpoint for a service. An endpoint enables you to create a
                                     private connection between your VPC and the service. The service may be provided by
                                     AWS,
-                                    an AWS Marketplace partner, or another AWS account. For more information, see <a href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-endpoints.html">VPC Endpoints</a> in the <em>Amazon Virtual Private Cloud User Guide</em>.
+                                    an AWS Marketplace Partner, or another AWS account. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html">VPC Endpoints</a> in
+                                    the <em>Amazon Virtual Private Cloud User Guide</em>.
                                  </p>
-                                 <p>A <code class="code">gateway</code> endpoint serves as a target for a route in your route table
-                                    for traffic destined for the AWS service. You can specify an endpoint policy to attach
-                                    to the endpoint that will control access to the service from your VPC. You can also
+                                 <p>A <code class="code">gateway</code> endpoint serves as a target for a route in your route table for
+                                    traffic destined for the AWS service. You can specify an endpoint policy to attach
+                                    to
+                                    the endpoint, which will control access to the service from your VPC. You can also
                                     specify the VPC route tables that use the endpoint.
+                                 </p>
+                                 <p>For information about connectivity when you use a gateway endpoint to connect to an
+                                    Amazon S3 bucket from an EC2 instance, see <a href="http://aws.amazon.com/premiumsupport/knowledge-center/connect-s3-vpc-endpoint" target="_blank"><span>Why can&#x2019;t I connect to an S3 bucket using a gateway VPC endpoint</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                  </p>
                                  <p>An <code class="code">interface</code> endpoint is a network interface in your subnet that
                                     serves as an endpoint for communicating with the specified service. You can specify
@@ -33,8 +38,8 @@
                                     the
                                     endpoint network interface.
                                  </p>
-                                 <p>For information about connectivity when you use a gateway endpoint to connect to an
-                                    Amazon S3 bucket from an EC2 instance, see <a href="http://aws.amazon.com/premiumsupport/knowledge-center/connect-s3-vpc-endpoint" target="_blank"><span>Why can&#x2019;t I connect to an S3 bucket using a gateway VPC endpoint</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                 <p>A <code class="code">GatewayLoadBalancer</code> endpoint is a network interface in your subnet that serves an endpoint for communicating
+                                    with a Gateway Load Balancer that you&apos;ve configured as a VPC endpoint service.
                                  </p>
                                  <h2 id="aws-resource-ec2-vpcendpoint-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -74,7 +79,8 @@ Properties:
                                        <dt><a id="cfn-ec2-vpcendpoint-policydocument"></a><span class="term"><code class="code">PolicyDocument</code></span></dt>
                                        <dd>
                                           
-                                          <p>A policy to attach to the endpoint that controls access to the
+                                          <p>(Interface and gateway endpoints) A policy to attach to the endpoint that controls
+                                             access to the
                                              service. The policy must be in valid JSON format. If this parameter is not specified,
                                              we
                                              attach a default policy that allows full access to the service.
@@ -153,11 +159,11 @@ Properties:
                                        <dt><a id="cfn-ec2-vpcendpoint-subnetids"></a><span class="term"><code class="code">SubnetIds</code></span></dt>
                                        <dd>
                                           
-                                          <p>(Interface endpoint) The ID of one or more subnets in which to create an endpoint
-                                             network interface.
+                                          <p>(Interface and Gateway Load Balancer endpoints) The ID of one or more subnets in which
+                                             to create an endpoint
+                                             network interface. For a Gateway Load Balancer endpoint, you can specify one subnet
+                                             only.
                                           </p>
-                                          
-                                          <p>This field is required when the endpoint is an interface.</p>
                                           
                                           <p><em>Required</em>: Conditional
                                           </p>
@@ -176,7 +182,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed values</em>: <code class="code">Gateway | Interface</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">Gateway | GatewayLoadBalancer | Interface</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-ec2-vpcendpoint-vpcid"></a><span class="term"><code class="code">VpcId</code></span></dt>

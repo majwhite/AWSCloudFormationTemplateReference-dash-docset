@@ -35,8 +35,10 @@
                                        <dd>
                                           
                                           <p>Specifies the default server-side encryption to apply to new objects in the bucket.
-                                             If a PUT Object request doesn&apos;t specify any server-side encryption, this default encryption
-                                             will be applied.
+                                             If a
+                                             PUT Object request doesn&apos;t specify any server-side encryption, this default encryption
+                                             will
+                                             be applied.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -46,6 +48,53 @@
                                        </dd>
                                     </dl>
                                  </div>
+                                 <h2 id="aws-properties-s3-bucket-serversideencryptionrule--examples">Examples</h2>
+                                 <h3 id="aws-properties-s3-bucket-serversideencryptionrule--examples--Create_a_bucket_with_default_encryption">Create a bucket with default encryption</h3>
+                                 <p>The following example creates a bucket with server-side bucket encryption
+                                    configured. This example uses KMS-managed keys. You can use S3-managed keys instead
+                                    by modifying the <a href="aws-properties-s3-bucket-serversideencryptionbydefault.html">Amazon S3 Bucket ServerSideEncryptionByDefault</a> property.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-serversideencryptionrule--examples--Create_a_bucket_with_default_encryption--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+  &quot;Description&quot;: &quot;S3 bucket with default encryption&quot;,
+  &quot;Resources&quot;: <span>{</span>
+    &quot;EncryptedS3Bucket&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;BucketName&quot;: <span>{</span>
+          &quot;Fn::Sub&quot;: &quot;encryptedbucket-$<span>{</span>AWS::Region}-$<span>{</span>AWS::AccountId}&quot;
+        },
+        &quot;BucketEncryption&quot;: <span>{</span>
+          &quot;ServerSideEncryptionConfiguration&quot;: [
+            <span>{</span>
+              &quot;ServerSideEncryptionByDefault&quot;: <span>{</span>
+                &quot;SSEAlgorithm&quot;: &quot;aws:kms&quot;,
+                &quot;KMSMasterKeyID&quot;: &quot;KMS-KEY-ARN&quot;
+              }
+            }
+          ]
+        }
+      },
+      &quot;DeletionPolicy&quot;: &quot;Delete&quot;
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-serversideencryptionrule--examples--Create_a_bucket_with_default_encryption--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+Description: S3 bucket with default encryption
+Resources:
+  EncryptedS3Bucket:
+    Type: &apos;AWS::S3::Bucket&apos;
+    Properties:
+      BucketName:
+        &apos;Fn::Sub&apos;: &apos;encryptedbucket-$<span>{</span>AWS::Region}-$<span>{</span>AWS::AccountId}&apos;
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: &apos;aws:kms&apos;
+              KMSMasterKeyID: KMS-KEY-ARN
+    DeletionPolicy: Delete</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
