@@ -211,6 +211,171 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
+                                 <h2 id="aws-resource-appflow-flow--examples">Examples</h2>
+                                 <h3 id="aws-resource-appflow-flow--examples--Test_flow_for_CloudFormation_from_Salesforce_to_Amazon_S3">Test flow for CloudFormation from Salesforce to Amazon S3</h3>
+                                 <p>The following example shows a test event flow for CloudFormation using Salesforce
+                                    as the source and Amazon S3 as the destination.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-appflow-flow--examples--Test_flow_for_CloudFormation_from_Salesforce_to_Amazon_S3--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">
+<span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;:&quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;TestFlow&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::AppFlow::Flow&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;flowName&quot;: &quot;MyEventFlow&quot;,
+                &quot;description&quot;: &quot;Test event flow for CloudFormation from salesforce to s3&quot;,
+                &quot;triggerConfig&quot;: <span>{</span>
+                    &quot;triggerType&quot;: &quot;Event&quot;
+                 },
+                &quot;sourceFlowConfig&quot;: <span>{</span>
+                    &quot;connectorType&quot;: &quot;Salesforce&quot;,
+                    &quot;connectorProfileName&quot;: &quot;TestConnectorProfile&quot;,
+                    &quot;sourceConnectorProperties&quot;: <span>{</span>
+                        &quot;Salesforce&quot;: <span>{</span>
+                            &quot;object&quot;: &quot;Account&quot;,
+                            &quot;enableDynamicFieldUpdate&quot;: false,
+                            &quot;includeDeletedRecords&quot;: true
+                        }
+                    }
+                },
+                &quot;destinationFlowConfigList&quot;: [
+                    <span>{</span>
+                        &quot;connectorType&quot;: &quot;S3&quot;,
+                        &quot;destinationConnectorProperties&quot;: <span>{</span>
+                            &quot;S3&quot;: <span>{</span>
+                                &quot;bucketName&quot;: &quot;TestOutputBucket&quot;,
+                                &quot;s3OutputFormatConfig&quot;: <span>{</span>
+                                    &quot;fileType&quot;: &quot;JSON&quot;,
+                                    &quot;aggregationConfig&quot;: <span>{</span>
+                                        &quot;aggregationType&quot;: &quot;None&quot;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                &quot;tasks&quot;: [
+                    <span>{</span>
+                        &quot;taskType&quot;: &quot;Filter&quot;,
+                        &quot;sourceFields&quot;: [
+                            &quot;Id&quot;,
+                            &quot;Name&quot;
+                        ],
+                        &quot;connectorOperator&quot;: <span>{</span>
+&quot;Salesforce&quot;: &quot;PROJECTION&quot;
+                            }
+                     },
+                    <span>{</span>
+                        &quot;taskType&quot;: &quot;Map&quot;,
+                        &quot;sourceFields&quot;: [
+                            &quot;Id&quot;
+                        ],
+                        &quot;taskProperties&quot;: [
+                            <span>{</span>
+                                &quot;Key&quot;: &quot;SOURCE_DATA_TYPE&quot;,
+                                &quot;Value&quot;: &quot;id&quot;
+                            },
+                             <span>{</span>
+                                &quot;Key&quot;: &quot;DESTINATION_DATA_TYPE&quot;,
+                                &quot;Value&quot;: &quot;id&quot;
+                            }
+                        ],
+                        &quot;destinationField&quot;: &quot;Id&quot;,
+                        &quot;connectorOperator&quot;: <span>{</span>
+                            &quot;Salesforce&quot;: &quot;NO_OP&quot;
+                        }
+                    },
+                    <span>{</span>
+                        &quot;taskType&quot;: &quot;Map&quot;,
+                        &quot;sourceFields&quot;: [
+                            &quot;Name&quot;
+                        ],
+                        &quot;taskProperties&quot;: [
+                            <span>{</span>
+                                &quot;Key&quot;: &quot;SOURCE_DATA_TYPE&quot;,
+                                &quot;Value&quot;: &quot;string&quot;
+                            },
+                            <span>{</span>
+                                &quot;Key&quot;: &quot;DESTINATION_DATA_TYPE&quot;,
+                                &quot;Value&quot;: &quot;string&quot;
+                            }
+                        ],
+                        &quot;destinationField&quot;: &quot;Name&quot;,
+                        &quot;connectorOperator&quot;: <span>{</span>
+                            &quot;Salesforce&quot;: &quot;NO_OP&quot;
+                        }
+                    }
+                ],
+                &quot;tags&quot;: [
+                    <span>{</span>
+                        &quot;Key&quot;: &quot;testKey&quot;,
+                        &quot;Value&quot;: &quot;testValue&quot;
+                    }
+                ]
+            }
+        }
+    }
+}
+      </code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-appflow-flow--examples--Test_flow_for_CloudFormation_from_Salesforce_to_Amazon_S3--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">
+AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+Resources:
+  TestFlow:
+    Type: AWS::AppFlow::Flow
+    Properties:
+      FlowName: MyEventFlow
+      Description: Test flow for CloudFormation from salesforce to s3
+      TriggerConfig:
+        TriggerType: Event
+      SourceFlowConfig:
+        ConnectorType: Salesforce
+        ConnectorProfileName: TestConnectorProfile
+        SourceConnectorProperties:
+          Salesforce:
+            Object: Account
+            EnableDynamicFieldUpdate: false
+            IncludeDeletedRecords: true
+      DestinationFlowConfigList:
+        - ConnectorType: S3
+          DestinationConnectorProperties:
+            S3:
+              BucketName: TestOutputBucket
+              S3OutputFormatConfig:
+                 FileType: JSON
+                AggregationConfig:
+                AggregationType: None
+      Tasks:
+        - TaskType: Filter
+          ConnectorOperator:
+            Salesforce: PROJECTION
+          SourceFields:
+            - Id
+        - TaskType: Map
+          SourceFields:
+            - Id
+          TaskProperties:
+            - Key: SOURCE_DATA_TYPE
+              Value: id
+            - Key: DESTINATION_DATA_TYPE
+              Value: id
+          DestinationField: Id
+          ConnectorOperator:
+            Salesforce: NO_OP
+        - TaskType: Map
+          SourceFields:
+            - Name
+          TaskProperties:
+            - Key: SOURCE_DATA_TYPE
+              Value: string
+            - Key: DESTINATION_DATA_TYPE
+              Value: string
+          DestinationField: Name
+          ConnectorOperator:
+            Salesforce: NO_OP
+</code></pre></div>
                                  <h2 id="aws-resource-appflow-flow--seealso">See also</h2>
                                  <div class="itemizedlist">
                                     

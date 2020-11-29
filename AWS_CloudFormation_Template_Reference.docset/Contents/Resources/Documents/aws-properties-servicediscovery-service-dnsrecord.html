@@ -121,92 +121,40 @@
                                           
                                           <p>The following values are supported:</p>
                                           
-                                          
-                                          <p><b>A</b></p>
-                                          
-                                          <p>Route 53 returns the IP address of the resource in IPv4 format, such as 192.0.2.44.</p>
-                                          
-                                          
-                                          <p><b>AAAA</b></p>
-                                          
-                                          <p>Route 53 returns the IP address of the resource in IPv6 format, such as
-                                             2001:0db8:85a3:0000:0000:abcd:0001:2345.
-                                          </p>
-                                          
-                                          
-                                          <p><b>CNAME</b></p>
-                                          
-                                          <p>Route 53 returns the domain name of the resource, such as www.example.com. Note the
-                                             following:
-                                          </p>
-                                          
-                                          <div class="itemizedlist">
+                                          <div class="variablelist">
+                                              
                                               
                                               
                                               
                                              
-                                             <ul class="itemizedlist" type="disc">
-                                                <li class="listitem">
+                                             <dl>
+                                                
+                                                <dt><a id="cfn-servicediscovery-service-dnsrecord-type"></a><span class="term">A</span></dt>
+                                                
+                                                <dd>
                                                    
-                                                   <p>You specify the domain name that you want to route traffic to when you register an
-                                                      instance. For more
-                                                      information, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html#cloudmap-RegisterInstance-request-Attributes">Attributes</a> in the topic <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html">RegisterInstance</a>.
+                                                   <p>Route 53 returns the IP address of the resource in IPv4 format, such as 192.0.2.44.</p>
+                                                   
+                                                </dd>
+                                                 
+                                                
+                                                <dt><a id="cfn-servicediscovery-service-dnsrecord-type"></a><span class="term">AAAA</span></dt>
+                                                
+                                                <dd>
+                                                   
+                                                   <p>Route 53 returns the IP address of the resource in IPv6 format, such as
+                                                      2001:0db8:85a3:0000:0000:abcd:0001:2345.
                                                    </p>
                                                    
-                                                </li>
-                                                <li class="listitem">
+                                                </dd>
+                                                 
+                                                
+                                                <dt><a id="cfn-servicediscovery-service-dnsrecord-type"></a><span class="term">CNAME</span></dt>
+                                                
+                                                <dd>
                                                    
-                                                   <p>You must specify <code class="code">WEIGHTED</code> for the value of <code class="code">RoutingPolicy</code>.
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>You can&apos;t specify both <code class="code">CNAME</code> for <code class="code">Type</code> and settings for
-                                                      <code class="code">HealthCheckConfig</code>. If you do, the request will fail with an <code class="code">InvalidInput</code>
-                                                      error.
-                                                   </p>
-                                                   
-                                                </li>
-                                             </ul>
-                                          </div>
-                                          
-                                          
-                                          <p><b>SRV</b></p>
-                                          
-                                          <p>Route 53 returns the value for an SRV record. The value for an SRV record uses the
-                                             following values:
-                                          </p>
-                                          
-                                          
-                                          <p><code class="code">priority weight port service-hostname</code></p>
-                                          
-                                          
-                                          <p>Note the following about the values:</p>
-                                          
-                                          <div class="itemizedlist">
-                                              
-                                              
-                                              
-                                             
-                                             <ul class="itemizedlist" type="disc">
-                                                <li class="listitem">
-                                                   
-                                                   <p>The values of <code class="code">priority</code> and <code class="code">weight</code> are both set to <code class="code">1</code> and can&apos;t be
-                                                      changed. 
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>The value of <code class="code">port</code> comes from the value that you specify for the
-                                                      <code class="code">AWS_INSTANCE_PORT</code> attribute when you submit a <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html">RegisterInstance</a> request. 
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>The value of <code class="code">service-hostname</code> is a concatenation of the following values:
+                                                   <p>Route 53 returns the domain name of the resource, such as www.example.com. Note the
+                                                      following:
                                                    </p>
                                                    
                                                    <div class="itemizedlist">
@@ -217,42 +165,115 @@
                                                       <ul class="itemizedlist" type="disc">
                                                          <li class="listitem">
                                                             
-                                                            <p>The value that you specify for <code class="code">InstanceId</code> when you register an instance.
+                                                            <p>You specify the domain name that you want to route traffic to when you register an
+                                                               instance. For more
+                                                               information, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html#cloudmap-RegisterInstance-request-Attributes">Attributes</a> in the topic <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html">RegisterInstance</a>.
                                                             </p>
                                                             
                                                          </li>
                                                          <li class="listitem">
                                                             
-                                                            <p>The name of the service.</p>
+                                                            <p>You must specify <code class="code">WEIGHTED</code> for the value of <code class="code">RoutingPolicy</code>.
+                                                            </p>
                                                             
                                                          </li>
                                                          <li class="listitem">
                                                             
-                                                            <p>The name of the namespace. </p>
+                                                            <p>You can&apos;t specify both <code class="code">CNAME</code> for <code class="code">Type</code> and settings for
+                                                               <code class="code">HealthCheckConfig</code>. If you do, the request will fail with an <code class="code">InvalidInput</code>
+                                                               error.
+                                                            </p>
                                                             
                                                          </li>
                                                       </ul>
                                                    </div>
                                                    
+                                                </dd>
+                                                 
+                                                
+                                                <dt><a id="cfn-servicediscovery-service-dnsrecord-type"></a><span class="term">SRV</span></dt>
+                                                
+                                                <dd>
                                                    
-                                                   <p>For example, if the value of <code class="code">InstanceId</code> is <code class="code">test</code>, the name of the service is
-                                                      <code class="code">backend</code>, and the name of the namespace is <code class="code">example.com</code>, the value of
-                                                      <code class="code">service-hostname</code> is:
+                                                   <p>Route 53 returns the value for an SRV record. The value for an SRV record uses the
+                                                      following values:
                                                    </p>
                                                    
+                                                   <p><code class="code">priority weight port service-hostname</code></p>
                                                    
-                                                   <p><code class="code">test.backend.example.com</code></p>
+                                                   <p>Note the following about the values:</p>
                                                    
-                                                </li>
-                                             </ul>
+                                                   <div class="itemizedlist">
+                                                       
+                                                       
+                                                       
+                                                      
+                                                      <ul class="itemizedlist" type="disc">
+                                                         <li class="listitem">
+                                                            
+                                                            <p>The values of <code class="code">priority</code> and <code class="code">weight</code> are both set to <code class="code">1</code> and can&apos;t be
+                                                               changed. 
+                                                            </p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p>The value of <code class="code">port</code> comes from the value that you specify for the <code class="code">AWS_INSTANCE_PORT</code>
+                                                               attribute when you submit a <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html">RegisterInstance</a> request. 
+                                                            </p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p>The value of <code class="code">service-hostname</code> is a concatenation of the following values:
+                                                            </p>
+                                                            
+                                                            <div class="itemizedlist">
+                                                                
+                                                                
+                                                                
+                                                               
+                                                               <ul class="itemizedlist" type="disc">
+                                                                  <li class="listitem">
+                                                                     
+                                                                     <p>The value that you specify for <code class="code">InstanceId</code> when you register an instance.
+                                                                     </p>
+                                                                     
+                                                                  </li>
+                                                                  <li class="listitem">
+                                                                     
+                                                                     <p>The name of the service.</p>
+                                                                     
+                                                                  </li>
+                                                                  <li class="listitem">
+                                                                     
+                                                                     <p>The name of the namespace. </p>
+                                                                     
+                                                                  </li>
+                                                               </ul>
+                                                            </div>
+                                                            
+                                                            <p>For example, if the value of <code class="code">InstanceId</code> is <code class="code">test</code>, the name of the service is
+                                                               <code class="code">backend</code>, and the name of the namespace is <code class="code">example.com</code>, the value of
+                                                               <code class="code">service-hostname</code> is:
+                                                            </p>
+                                                            
+                                                            <p><code class="code">test.backend.example.com</code></p>
+                                                            
+                                                         </li>
+                                                      </ul>
+                                                   </div>
+                                                   
+                                                   <p>If you specify settings for an SRV record and if you specify values for <code class="code">AWS_INSTANCE_IPV4</code>,
+                                                      <code class="code">AWS_INSTANCE_IPV6</code>, or both in the <code class="code">RegisterInstance</code> request, AWS Cloud Map automatically
+                                                      creates <code class="code">A</code> and/or <code class="code">AAAA</code> records that have the same name as the value of
+                                                      <code class="code">service-hostname</code> in the SRV record. You can ignore these records.
+                                                   </p>
+                                                   
+                                                </dd>
+                                                
+                                             </dl>
                                           </div>
-                                          
-                                          
-                                          <p>If you specify settings for an SRV record and if you specify values for <code class="code">AWS_INSTANCE_IPV4</code>,
-                                             <code class="code">AWS_INSTANCE_IPV6</code>, or both in the <code class="code">RegisterInstance</code> request, AWS Cloud Map
-                                             automatically creates <code class="code">A</code> and/or <code class="code">AAAA</code> records that have the same name as the value of
-                                             <code class="code">service-hostname</code> in the SRV record. You can ignore these records.
-                                          </p>
                                           
                                           
                                           <p><em>Required</em>: Yes

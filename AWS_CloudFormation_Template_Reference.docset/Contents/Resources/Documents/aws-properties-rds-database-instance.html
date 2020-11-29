@@ -541,15 +541,9 @@ Properties:
                                        <dt><a id="cfn-rds-dbinstance-availabilityzone"></a><span class="term"><code class="code">AvailabilityZone</code></span></dt>
                                        <dd>
                                           
-                                          <p>
-                                             The Availability Zone (AZ) where the database will be created. For information on
-                                             AWS Regions and Availability Zones, see 
-                                             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html">Regions
-                                                and Availability Zones</a>.
-                                             
-                                          </p>
+                                          <p>The Availability Zone that the database instance will be created in.</p>
                                           
-                                          <p>Default: A random, system-chosen Availability Zone in the endpoint&apos;s AWS Region.</p>
+                                          <p>Default: A random, system-chosen Availability Zone in the endpoint&apos;s region.</p>
                                           
                                           <p>
                                              Example: <code class="code">us-east-1d</code>
@@ -557,27 +551,11 @@ Properties:
                                           </p>
                                           
                                           <p>
-                                             Constraint: The <code class="code">AvailabilityZone</code> parameter can&apos;t be specified if the DB instance is a Multi-AZ deployment. 
-                                             The specified Availability Zone must be in the same AWS Region as the current endpoint.
+                                             Constraint: The AvailabilityZone parameter cannot be specified if the MultiAZ parameter
+                                             is set to <code class="code">true</code>. 
+                                             The specified Availability Zone must be in the same region as the current endpoint.
                                              
                                           </p>
-                                          
-                                          <div class="awsdocs-note">
-                                             <div class="awsdocs-note-title">
-                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
-                                             <div class="awsdocs-note-text">
-                                                <p>If you&apos;re creating a DB instance in an RDS on VMware environment,
-                                                   specify the identifier of the custom Availability Zone to create the DB instance
-                                                   in.
-                                                </p>
-                                                <p>For more information about RDS on VMware, see the 
-                                                   <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html">
-                                                      <em>RDS on VMware User Guide.</em>
-                                                      </a>
-                                                   
-                                                </p>
-                                             </div>
-                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -2263,11 +2241,19 @@ Properties:
                                           <p> Default: <code class="code">io1</code> if the <code class="code">Iops</code> parameter is specified, otherwise
                                              <code class="code">standard</code>
                                              
-                                          </p>
+                                          </p>        
                                           
                                           <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html">Amazon RDS DB Instance
                                                 Storage</a> in the <em>Amazon RDS User Guide</em>.
                                           </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This setting doesn&apos;t apply to Amazon Aurora.</p>
+                                             </div>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>

@@ -154,10 +154,12 @@ Properties:
                                        <dt><a id="cfn-as-group-availabilityzones"></a><span class="term"><code class="code">AvailabilityZones</code></span></dt>
                                        <dd>
                                           
-                                          <p>A list of Availability Zones where instances in the Auto Scaling group can
-                                             be created. 
-                                             You must specify one of the following properties: <code class="code">VPCZoneIdentifier</code> or <code class="code">AvailabilityZones</code>. If your account supports EC2-Classic and VPC, this property is required to create
-                                             an Auto Scaling group that launches instances into EC2-Classic. 
+                                          <p>A list of Availability Zones where instances in the Auto Scaling group can be created.
+                                             You
+                                             must specify one of the following properties: <code class="code">VPCZoneIdentifier</code> or
+                                             <code class="code">AvailabilityZones</code>. If your account supports EC2-Classic and VPC, this property
+                                             is required to create an Auto Scaling group that launches instances into EC2-Classic.
+                                             
                                           </p>
                                           
                                           <p><em>Required</em>: Conditional
@@ -169,7 +171,10 @@ Properties:
                                        <dt><a id="cfn-as-group-capacityrebalance"></a><span class="term"><code class="code">CapacityRebalance</code></span></dt>
                                        <dd>
                                           
-                                          <p>Indicates whether capacity rebalance is enabled.</p>
+                                          <p>Indicates whether Capacity Rebalancing is enabled. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html">Amazon EC2 Auto
+                                                Scaling Capacity Rebalancing</a> in the <em>Amazon EC2 Auto Scaling User
+                                                Guide</em>. 
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -312,12 +317,13 @@ Properties:
                                        <dd>
                                           
                                           <p>Properties used to specify the <a href="aws-resource-ec2-launchtemplate.html">launch
-                                                template</a> and version to use to launch instances. You can alternatively associate a launch
-                                             template to the Auto Scaling group by specifying
-                                             a <code class="code">MixedInstancesPolicy</code>.
+                                                template</a> and version to use to launch instances. You can alternatively associate a
+                                             launch template to the Auto Scaling group by specifying a
+                                             <code class="code">MixedInstancesPolicy</code>.
                                           </p>
                                           
-                                          <p>If you omit this property, you must specify <code class="code">MixedInstancesPolicy</code>, <code class="code">LaunchConfigurationName</code>, or <code class="code">InstanceId</code>.
+                                          <p>If you omit this property, you must specify <code class="code">MixedInstancesPolicy</code>,
+                                             <code class="code">LaunchConfigurationName</code>, or <code class="code">InstanceId</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: Conditional
@@ -341,7 +347,8 @@ Properties:
                                        <dd>
                                           
                                           <p>A list of Classic Load Balancers associated with this Auto Scaling group. For Application
-                                             Load Balancers and Network Load Balancers, specify <code class="code">TargetGroupARNs</code> instead. 
+                                             Load Balancers, Network Load Balancers, and Gateway Load Balancers, specify the
+                                             <code class="code">TargetGroupARNs</code> property instead. 
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -356,9 +363,8 @@ Properties:
                                           <p>The maximum amount of time, in seconds, that an instance can be in service. The default
                                              is
                                              null. If specified, the value must be either 0 or a number equal to or greater than
-                                             604,800
-                                             seconds (7 days). For more
-                                             information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto Scaling
+                                             86,400
+                                             seconds (1 day). For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html">Replacing Auto Scaling
                                                 instances based on maximum instance lifetime</a> in the <em>Amazon EC2 Auto
                                                 Scaling User Guide</em>.
                                           </p>
@@ -426,14 +432,12 @@ Properties:
                                           <p>The policy includes properties that not only define the distribution of On-Demand
                                              Instances and Spot Instances, the maximum price to pay for Spot Instances, and how
                                              the Auto
-                                             Scaling group allocates instance types to fulfill On-Demand and Spot capacity, but
+                                             Scaling group allocates instance types to fulfill On-Demand and Spot capacities, but
                                              also the
                                              properties that specify the instance configuration information&#x2014;the launch template
                                              and
-                                             instance types.
+                                             instance types. The policy can also include a weight for each instance type.
                                           </p>
-                                          
-                                          <p>The policy can also include a weight for each instance type.</p>
                                           
                                           <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html">Auto Scaling groups with multiple
                                                 instance types and purchase options</a> in the <em>Amazon EC2 Auto Scaling User
@@ -531,10 +535,10 @@ Properties:
                                        <dt><a id="cfn-as-group-targetgrouparns"></a><span class="term"><code class="code">TargetGroupARNs</code></span></dt>
                                        <dd>
                                           
-                                          <p>A list of Amazon Resource Names (ARN) of load balancer target groups to associate
-                                             with the
-                                             Auto Scaling group. Instances are registered as targets in a target group, and traffic
-                                             is
+                                          <p>One or more Amazon Resource Names (ARN) of load balancer target groups to associate
+                                             with
+                                             the Auto Scaling group. Instances are registered as targets in a target group, and
+                                             traffic is
                                              routed to the target group. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html">Elastic Load Balancing and
                                                 Amazon EC2 Auto Scaling</a> in the <em>Amazon EC2 Auto Scaling User
                                                 Guide</em>. 
@@ -627,10 +631,10 @@ Properties:
                                     (<code class="code">LaunchTemplate</code>) properties. Each of these parameters is a variable that
                                     you can specify when you create or update the stack.
                                  </p>
-                                 <p>CloudFormation supports parameters from the AWS Systems Manager
-                                    Parameter Store. In this example, the <code class="code">ImageId</code> property of the
-                                    AWS::EC2::LaunchTemplate references the latest Amazon Linux 2 AMI from the Parameter
-                                    Store. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html">AWS Systems
+                                 <p>CloudFormation supports parameters from the AWS Systems Manager Parameter Store. In
+                                    this example, the <code class="code">ImageId</code> property of the AWS::EC2::LaunchTemplate references
+                                    the latest Amazon Linux 2 AMI from the Parameter Store. For more information, see
+                                    <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html">AWS Systems
                                        Manager Parameter Store</a> in the <em>AWS Systems Manager User
                                        Guide</em> and the blog post <a href="http://aws.amazon.com/blogs/compute/query-for-the-latest-amazon-linux-ami-ids-using-aws-systems-manager-parameter-store/" target="_blank"><span>Query for the latest Amazon Linux AMI IDs using AWS Systems Manager Parameter
                                           Store</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> on the AWS Compute Blog.

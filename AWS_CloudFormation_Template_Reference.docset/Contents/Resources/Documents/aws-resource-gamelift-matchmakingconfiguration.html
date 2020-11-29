@@ -17,15 +17,16 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>The <code class="code">AWS::GameLift::MatchmakingConfiguration</code> resource defines a new
-                                    matchmaking configuration for use with FlexMatch. A matchmaking configuration sets
-                                    out
-                                    guidelines for matching players and starting game sessions for the match. You can
-                                    set up
-                                    multiple matchmaking configurations to handle the scenarios needed for your game.
-                                    Requests for
-                                    matchmaking specify which configuration to use and provides the player attribute values
-                                    that
-                                    are required for the configuration.
+                                    matchmaking configuration for use with FlexMatch. Whether you&apos;re using FlexMatch with
+                                    GameLift hosting or as a 
+                                    standalone matchmaking service, the matchmaking configuration sets out rules for matching
+                                    players and forming teams. 
+                                    If you&apos;re using GameLift hosting, it also defines how to start game sessions for each
+                                    match. Your matchmaking system 
+                                    can use multiple configurations to handle different game scenarios. All matchmaking
+                                    requests identify the 
+                                    matchmaking configuration to use and provide player attributes that are consistent
+                                    with that configuration.
                                  </p>
                                  <h2 id="aws-resource-gamelift-matchmakingconfiguration-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -77,8 +78,10 @@ Properties:
                                        <dd>
                                           
                                           <p>A flag that determines whether a match that was created with this configuration must
-                                             be accepted by the matched players. To require acceptance, set to
-                                             <code class="code">TRUE</code>.
+                                             be accepted by the matched players. To require acceptance, set to <code class="code">TRUE</code>.
+                                             With this option enabled, matchmaking tickets use the status
+                                             <code class="code">REQUIRES_ACCEPTANCE</code> to indicate when a completed potential match is
+                                             waitiing for player accepance. 
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -90,11 +93,8 @@ Properties:
                                        <dt><a id="cfn-gamelift-matchmakingconfiguration-acceptancetimeoutseconds"></a><span class="term"><code class="code">AcceptanceTimeoutSeconds</code></span></dt>
                                        <dd>
                                           
-                                          <p>The length of time (in seconds) to wait for players to accept a proposed match. If
-                                             any
-                                             player rejects the match or fails to accept before the timeout, the ticket continues
-                                             to
-                                             look for an acceptable match.
+                                          <p>The length of time (in seconds) to wait for players to accept a proposed match, if
+                                             acceptance is required.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -113,7 +113,8 @@ Properties:
                                              assume that the configuration&apos;s rule set specifies a match for a single 12-person
                                              team. If
                                              the additional player count is set to 2, only 10 players are initially selected for
-                                             the match.
+                                             the match. This parameter is not used if <code class="code">FlexMatchMode</code> is set to
+                                             <code class="code">STANDALONE</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -130,8 +131,9 @@ Properties:
                                              configuration. Specify <code class="code">MANUAL</code> when your game manages backfill requests manually
                                              or does not use the match backfill feature. Specify <code class="code">AUTOMATIC</code> to have GameLift
                                              create a <code class="code">StartMatchBackfill</code> request whenever a game session has one or more open
-                                             slots. Learn more about manual and automatic backfill in <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html">Backfill Existing Games with
-                                                FlexMatch</a>. 
+                                             slots. Learn more about manual and automatic backfill in <a href="https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-backfill.html">Backfill Existing Games with
+                                                FlexMatch</a>. Automatic backfill is not
+                                             available when <code class="code">FlexMatchMode</code> is set to <code class="code">STANDALONE</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -171,11 +173,43 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-gamelift-matchmakingconfiguration-flexmatchmode"></a><span class="term"><code class="code">FlexMatchMode</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>Indicates whether this matchmaking configuration is being used with GameLift managed
+                                             hosting or
+                                             as a standalone matchmaking solution. 
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <b>STANDALONE</b> - FlexMatch forms matches and returns
+                                                      match information, including players and team assignments, in a 
+                                                      <a href="https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html#match-events-matchmakingsucceeded">
+                                                         MatchmakingSucceeded</a> event.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <b>WITH_QUEUE</b> - FlexMatch forms matches and uses the specified GameLift queue to
+                                                      start a game session for the match. 
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Allowed values</em>: <code class="code">STANDALONE | WITH_QUEUE</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-gamelift-matchmakingconfiguration-gameproperties"></a><span class="term"><code class="code">GameProperties</code></span></dt>
@@ -184,7 +218,8 @@ Properties:
                                           <p>A set of custom properties for a game session, formatted as key-value pairs. These
                                              properties are passed to a game server process with a request to start a new game
                                              session. See
-                                             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession"> Start a Game Session</a>. 
+                                             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession"> Start a Game Session</a>.
+                                             This parameter is not used if <code class="code">FlexMatchMode</code> is set to <code class="code">STANDALONE</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -198,7 +233,9 @@ Properties:
                                           
                                           <p>A set of custom game session properties, formatted as a single string value. This
                                              data is passed to a game server process with a request to start a new game session.
-                                             See <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start a Game Session</a>. 
+                                             
+                                             See <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start a Game Session</a>.
+                                             This parameter is not used if<code class="code">FlexMatchMode</code> is set to <code class="code">STANDALONE</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -213,11 +250,12 @@ Properties:
                                        <dd>
                                           
                                           <p>Amazon Resource Name (<a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a>) that is assigned to a GameLift game session queue resource and uniquely identifies
-                                             it. ARNs are unique across all Regions. These queues are used when placing game sessions
-                                             for matches that are
-                                             created with this matchmaking configuration. Queues can be located in any
-                                             Region.
-                                          </p>
+                                             it. ARNs are unique across all Regions. Queues can be located in any Region. Queues
+                                             are used to start new
+                                             GameLift-hosted game sessions for matches that are created with this matchmaking
+                                             configuration. If <code class="code">FlexMatchMode</code> is set to <code class="code">STANDALONE</code>, do not
+                                             set this parameter.
+                                          </p>    
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -243,8 +281,8 @@ Properties:
                                        <dt><a id="cfn-gamelift-matchmakingconfiguration-notificationtarget"></a><span class="term"><code class="code">NotificationTarget</code></span></dt>
                                        <dd>
                                           
-                                          <p>An SNS topic ARN that is set up to receive matchmaking notifications. See <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html">
-                                                Setting up Notifications for Matchmaking</a> for more information.
+                                          <p>An SNS topic ARN that is set up to receive matchmaking notifications. See <a href="https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html">
+                                                Setting up notifications for matchmaking</a> for more information.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -328,15 +366,20 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-gamelift-matchmakingconfiguration--examples">Examples</h2>
-                                 <h3 id="aws-resource-gamelift-matchmakingconfiguration--examples--Create_a_Matchmaking_Configuration_with_a_Rule_Set_and_a_Game_Session_Queue">Create a Matchmaking Configuration with a Rule Set and a Game Session Queue</h3>
-                                 <p>The following example creates a matchmaking configuration for a game. It also uses
-                                    a
+                                 <h3 id="aws-resource-gamelift-matchmakingconfiguration--examples--Create_a_matchmaking_configuration_for_use_with_GameLift_managed_hosting">Create a matchmaking configuration for use with GameLift managed hosting</h3>
+                                 <p>The following example creates a matchmaking configuration for a game that is being
+                                    hosted on
+                                    GameLift servers, identifying a game session queue and providing a set of game properties
+                                    to be passed on
+                                    to new game sessions. Player acceptance is required, with a 60-second timeout, and
+                                    auto-backfill is enabled. 
+                                    The example uses a
                                     <code class="code">Ref</code> intrinsic function to specify the game session queue and rule set, which are also
                                     in
                                     the template. 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-gamelift-matchmakingconfiguration--examples--Create_a_Matchmaking_Configuration_with_a_Rule_Set_and_a_Game_Session_Queue--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-gamelift-matchmakingconfiguration--examples--Create_a_matchmaking_configuration_for_use_with_GameLift_managed_hosting--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
     &quot;Resources&quot;: <span>{</span>
         &quot;QueueResource&quot;: <span>{</span>
             &quot;Type&quot;: &quot;AWS::GameLift::GameSessionQueue&quot;,
@@ -362,7 +405,8 @@ Properties:
                 &quot;AdditionalPlayerCount&quot;: 8,
                 &quot;BackfillMode&quot;: &quot;AUTOMATIC&quot;,
                 &quot;CustomEventData&quot;: &quot;MyCustomEventData&quot;,
-                &quot;Description&quot;: &quot;A basic matchmaking configuration&quot;,
+                &quot;Description&quot;: &quot;A basic matchmaking configuration for a GameLift-hosted game&quot;,
+                &quot;FlexMatchMode&quot;: &quot;WITH_QUEUE&quot;,
                 &quot;GameSessionData&quot;: &quot;MyGameSessionData&quot;,
                 &quot;GameProperties&quot;: [
                     <span>{</span>
@@ -395,7 +439,7 @@ Properties:
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-gamelift-matchmakingconfiguration--examples--Create_a_Matchmaking_Configuration_with_a_Rule_Set_and_a_Game_Session_Queue--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+                                    <h4 id="aws-resource-gamelift-matchmakingconfiguration--examples--Create_a_matchmaking_configuration_for_use_with_GameLift_managed_hosting--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
   QueueResource:
     Type: &quot;AWS::GameLift::GameSessionQueue&quot;
     Properties:
@@ -424,7 +468,8 @@ Properties:
       AdditionalPlayerCount: 8
       BackfillMode: &quot;AUTOMATIC&quot;
       CustomEventData: &quot;MyCustomEventData&quot;
-      Description: &quot;A basic matchmaking configuration&quot;
+      Description: &quot;A basic matchmaking configuration for a GameLift-hosted game&quot;
+      FlexMatchMode: &quot;WITH_QUEUE&quot;
       GameSessionData: &quot;MyGameSessionData&quot;
       GameProperties:
         - Key: &quot;level&quot;
@@ -438,6 +483,81 @@ Properties:
     DependsOn:
       - QueueResource
       - MatchmakingRuleSetResource</code></pre></div>
+                                 <h3 id="aws-resource-gamelift-matchmakingconfiguration--examples--Create_a_matchmaking_configuration_for_a_standalone_FlexMatch_system">Create a matchmaking configuration for a standalone FlexMatch system</h3>
+                                 <p>The following example creates a matchmaking configuration for a game that is hosted
+                                    on resources
+                                    other than GameLift game servers. This includes games that are hosted on Amazon EC2
+                                    with GameLift FleetIQ. 
+                                    This configuration omits the game session queue, game properties and session data,
+                                    and additional player count.
+                                    Player acceptance is required, with a 60-second timeout. It uses a
+                                    <code class="code">Ref</code> intrinsic function to specify the rule set, which is also in
+                                    the template. 
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-gamelift-matchmakingconfiguration--examples--Create_a_matchmaking_configuration_for_a_standalone_FlexMatch_system--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Resources&quot;: <span>{</span>
+        &quot;MatchmakingRuleSetResource&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::GameLift::MatchmakingRuleSet&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;Name&quot;: &quot;MyRuleSet&quot;,
+                &quot;RuleSetBody&quot;: <span>{</span>
+                    &quot;Fn::Sub&quot;: &quot;<span>{</span>\&quot;name\&quot;: \&quot;MyMatchmakingRuleSet\&quot;,\&quot;ruleLanguageVersion\&quot;: \&quot;1.0\&quot;, \&quot;teams\&quot;: [<span>{</span>\&quot;name\&quot;: \&quot;MyTeam\&quot;,\&quot;minPlayers\&quot;: 1,\&quot;maxPlayers\&quot;: 20}]}&quot;
+                }
+            }            
+        },
+        &quot;MatchmakingConfigurationResource&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::GameLift::MatchmakingConfiguration&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;Name&quot;: &quot;MyMatchmakingConfiguration&quot;,
+                &quot;AcceptanceRequired&quot;: true,
+                &quot;AcceptanceTimeoutSeconds&quot;: 60,
+                &quot;BackfillMode&quot;: &quot;MANUAL&quot;,
+                &quot;CustomEventData&quot;: &quot;MyCustomEventData&quot;,
+                &quot;Description&quot;: &quot;A basic standalone matchmaking configuration&quot;,
+                &quot;FlexMatchMode&quot;: &quot;STANDALONE&quot;,
+                &quot;RequestTimeoutSeconds&quot;: 100,
+                &quot;RuleSetName&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;MatchmakingRuleSetResource&quot;
+                }
+            },
+            &quot;DependsOn&quot;: [
+                &quot;MatchmakingRuleSetResource&quot;
+            ]
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-gamelift-matchmakingconfiguration--examples--Create_a_matchmaking_configuration_for_a_standalone_FlexMatch_system--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+    MatchmakingRuleSetResource:
+        Type: &quot;AWS::GameLift::MatchmakingRuleSet&quot;
+        Properties:
+            Name: &quot;MyRuleSet&quot;
+            # Rule set body for a game of 20 players
+            RuleSetBody: !Sub |
+            <span>{</span>
+                &quot;name&quot;: &quot;MyMatchmakingRuleSet&quot;,
+                &quot;ruleLanguageVersion&quot;: &quot;1.0&quot;,
+                &quot;teams&quot;: [<span>{</span>
+                    &quot;name&quot;: &quot;MyTeam&quot;,
+                    &quot;minPlayers&quot;: 1,
+                    &quot;maxPlayers&quot;: 20
+                }]
+            }
+    MatchmakingConfigurationResource:
+        Type: &quot;AWS::GameLift::MatchmakingConfiguration&quot;
+        Properties:
+            Name: &quot;MyMatchmakingConfiguration&quot;
+            AcceptanceRequired: true
+            AcceptanceTimeoutSeconds: 60
+            BackfillMode: &quot;MANUAL&quot;
+            CustomEventData: &quot;MyCustomEventData&quot;
+            Description: &quot;A basic standalone matchmaking configuration&quot;
+            FlexMatchMode: &quot;STANDALONE&quot;
+            RequestTimeoutSeconds: 100
+            RuleSetName: !Ref MatchmakingRuleSetResource
+        DependsOn:
+          - MatchmakingRuleSetResource</code></pre></div>
                                  <h2 id="aws-resource-gamelift-matchmakingconfiguration--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
@@ -452,7 +572,7 @@ Properties:
                                        </li>
                                        <li class="listitem">
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/gamelift/latest/developerguide/matchmaker-build.html">Setting Up GameLift FlexMatch Matchmakers</a> in the <em>Amazon GameLift Developer Guide</em>
+                                             <a href="https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/matchmaker-build.html">Setting Up GameLift FlexMatch Matchmakers</a> in the <em>Amazon GameLift Developer Guide</em>
                                              
                                           </p>
                                        </li>

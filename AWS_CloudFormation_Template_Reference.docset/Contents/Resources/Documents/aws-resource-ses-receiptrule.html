@@ -93,28 +93,115 @@ Properties:
                                  <p>Specifies a receipt rule for incoming email.</p>
                                  <h3 id="aws-resource-ses-receiptrule--examples--"></h3>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ses-receiptrule--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;, &quot;Description&quot;: &quot;AWS
-                SES ReceiptRule Sample Template&quot;, &quot;Parameters&quot;: <span>{</span> &quot;RuleSetName&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot;
-                }, &quot;ReceiptRuleName1&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot; }, &quot;ReceiptRuleName2&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot;
-                }, &quot;TlsPolicy&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot; }, &quot;HeaderName&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot; },
-                &quot;HeaderValue&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot; } }, &quot;Resources&quot;: <span>{</span> &quot;ReceiptRule1&quot;: <span>{</span> &quot;Type&quot;:
-                &quot;AWS::SES::ReceiptRule&quot;, &quot;Properties&quot;: <span>{</span> &quot;RuleSetName&quot;: <span>{</span> &quot;Ref&quot;: &quot;RuleSetName&quot; },
-                &quot;Rule&quot;: <span>{</span> &quot;Name&quot;: <span>{</span> &quot;Ref&quot;: &quot;ReceiptRuleName1&quot; }, &quot;Enabled&quot;: true, &quot;ScanEnabled&quot;:
-                true, &quot;TlsPolicy&quot;: <span>{</span> &quot;Ref&quot;: &quot;TlsPolicy&quot; }, &quot;Actions&quot;: [ <span>{</span> &quot;AddHeaderAction&quot;: <span>{</span>
-                &quot;HeaderName&quot;: <span>{</span> &quot;Ref&quot;: &quot;HeaderName&quot; }, &quot;HeaderValue&quot;: <span>{</span> &quot;Ref&quot;: &quot;HeaderValue&quot; } } } ]
-                } } }, &quot;ReceiptRule2&quot;: <span>{</span> &quot;Type&quot;: &quot;AWS::SES::ReceiptRule&quot;, &quot;Properties&quot;: <span>{</span>
-                &quot;RuleSetName&quot;: <span>{</span> &quot;Ref&quot;: &quot;RuleSetName&quot; }, &quot;After&quot;: <span>{</span> &quot;Ref&quot;: &quot;ReceiptRule1&quot; }, &quot;Rule&quot;:
-                <span>{</span> &quot;Name&quot;: <span>{</span> &quot;Ref&quot;: &quot;ReceiptRuleName2&quot; } } } } } }</code></pre></div>
+                                    <h4 id="aws-resource-ses-receiptrule--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Description&quot;: &quot;AWS SES ReceiptRule Sample Template&quot;,
+    &quot;Parameters&quot;: <span>{</span>
+        &quot;RuleSetName&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;ReceiptRuleName1&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;ReceiptRuleName2&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;TlsPolicy&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;HeaderName&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;HeaderValue&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        }
+    },
+    &quot;Resources&quot;: <span>{</span>
+        &quot;ReceiptRule1&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::SES::ReceiptRule&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;RuleSetName&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;RuleSetName&quot;
+                },
+                &quot;Rule&quot;: <span>{</span>
+                    &quot;Name&quot;: <span>{</span>
+                        &quot;Ref&quot;: &quot;ReceiptRuleName1&quot;
+                    },
+                    &quot;Enabled&quot;: true,
+                    &quot;ScanEnabled&quot;: true,
+                    &quot;TlsPolicy&quot;: <span>{</span>
+                        &quot;Ref&quot;: &quot;TlsPolicy&quot;
+                    },
+                    &quot;Actions&quot;: [
+                        <span>{</span>
+                            &quot;AddHeaderAction&quot;: <span>{</span>
+                                &quot;HeaderName&quot;: <span>{</span>
+                                    &quot;Ref&quot;: &quot;HeaderName&quot;
+                                },
+                                &quot;HeaderValue&quot;: <span>{</span>
+                                    &quot;Ref&quot;: &quot;HeaderValue&quot;
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        &quot;ReceiptRule2&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::SES::ReceiptRule&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;RuleSetName&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;RuleSetName&quot;
+                },
+                &quot;After&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;ReceiptRule1&quot;
+                },
+                &quot;Rule&quot;: <span>{</span>
+                    &quot;Name&quot;: <span>{</span>
+                        &quot;Ref&quot;: &quot;ReceiptRuleName2&quot;
+                    }
+                }
+            }
+        }
+    }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ses-receiptrule--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09 Description: &apos;AWS SES
-                ReceiptRule Sample Template&apos; Parameters: RuleSetName: Type: String ReceiptRuleName1:
-                Type: String ReceiptRuleName2: Type: String TlsPolicy: Type: String HeaderName:
-                Type: String HeaderValue: Type: String Resources: ReceiptRule1: Type:
-                AWS::SES::ReceiptRule Properties: RuleSetName: !Ref RuleSetName Rule: Name: !Ref
-                ReceiptRuleName1 Enabled: true ScanEnabled: true TlsPolicy: !Ref TlsPolicy Actions:
-                - AddHeaderAction: HeaderName: !Ref HeaderName HeaderValue: !Ref HeaderValue
-                ReceiptRule2: Type: AWS::SES::ReceiptRule Properties: RuleSetName: !Ref RuleSetName
-                After: !Ref ReceiptRule1 Rule: Name: !Ref ReceiptRuleName2</code></pre></div>
+                                    <h4 id="aws-resource-ses-receiptrule--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Description: AWS SES ReceiptRule Sample Template
+Parameters:
+  RuleSetName:
+    Type: String
+  ReceiptRuleName1:
+    Type: String
+  ReceiptRuleName2:
+    Type: String
+  TlsPolicy:
+    Type: String
+  HeaderName:
+    Type: String
+  HeaderValue:
+    Type: String
+Resources:
+  ReceiptRule1:
+    Type: &apos;AWS::SES::ReceiptRule&apos;
+    Properties:
+      RuleSetName: !Ref RuleSetName
+      Rule:
+        Name: !Ref ReceiptRuleName1
+        Enabled: true
+        ScanEnabled: true
+        TlsPolicy: !Ref TlsPolicy
+        Actions:
+          - AddHeaderAction:
+              HeaderName: !Ref HeaderName
+              HeaderValue: !Ref HeaderValue
+  ReceiptRule2:
+    Type: &apos;AWS::SES::ReceiptRule&apos;
+    Properties:
+      RuleSetName: !Ref RuleSetName
+      After: !Ref ReceiptRule1
+      Rule:
+        Name: !Ref ReceiptRuleName2</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>

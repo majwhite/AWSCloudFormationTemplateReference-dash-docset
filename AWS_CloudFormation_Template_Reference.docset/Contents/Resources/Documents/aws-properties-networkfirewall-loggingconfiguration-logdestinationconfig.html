@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-properties-networkfirewall-loggingconfiguration-logdestinationconfig">AWS::NetworkFirewall::LoggingConfiguration LogDestinationConfig</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>Defines where AWS Network Firewall sends logs for the firewall for one log type. This
+                                    is used
+                                    in <a href="./aws-resource-networkfirewall-loggingconfiguration.html">AWS::NetworkFirewall::LoggingConfiguration</a>. You can send each type of log to an Amazon S3 bucket, a CloudWatch log group, or
+                                    a Kinesis Data Firehose delivery stream.
+                                 </p>
+                                 <p>Network Firewall generates logs for stateful rule groups. You can save alert and flow
+                                    log
+                                    types. The stateful rules engine records flow logs for all network traffic that it
+                                    receives. 
+                                    It records alert logs for traffic that matches stateful rules that have the rule
+                                    action set to <code class="code">DROP</code> or <code class="code">ALERT</code>. 
+                                 </p>
+                                 <h2 id="aws-properties-networkfirewall-loggingconfiguration-logdestinationconfig-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-properties-networkfirewall-loggingconfiguration-logdestinationconfig-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-networkfirewall-loggingconfiguration-logdestinationconfig-logdestination">LogDestination</a>&quot; : <code class="replaceable"><span>{</span><code class="replaceable">Key</code> : <code class="replaceable">Value</code>, ...}</code>,
+  &quot;<a href="#cfn-networkfirewall-loggingconfiguration-logdestinationconfig-logdestinationtype">LogDestinationType</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-networkfirewall-loggingconfiguration-logdestinationconfig-logtype">LogType</a>&quot; : <code class="replaceable">String</code>
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-properties-networkfirewall-loggingconfiguration-logdestinationconfig-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-networkfirewall-loggingconfiguration-logdestinationconfig-logdestination">LogDestination</a>: <code class="replaceable">
+    <code class="replaceable">Key</code> : <code class="replaceable">Value</code></code>
+  <a href="#cfn-networkfirewall-loggingconfiguration-logdestinationconfig-logdestinationtype">LogDestinationType</a>: <code class="replaceable">String</code>
+  <a href="#cfn-networkfirewall-loggingconfiguration-logdestinationconfig-logtype">LogType</a>: <code class="replaceable">String</code>
+</code></pre></div>
+                                 <h2 id="aws-properties-networkfirewall-loggingconfiguration-logdestinationconfig-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-networkfirewall-loggingconfiguration-logdestinationconfig-logdestination"></a><span class="term"><code class="code">LogDestination</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The named location for the logs, provided in a key:value mapping that is specific
+                                             to the
+                                             chosen destination type. 
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>For an Amazon S3 bucket, provide the name of the bucket, with key <code class="code">bucketName</code>,
+                                                      and optionally provide a prefix, with key <code class="code">prefix</code>. The following example
+                                                      specifies an Amazon S3 bucket named
+                                                      <code class="code">DOC-EXAMPLE-BUCKET</code> and the prefix <code class="code">alerts</code>: 
+                                                   </p>
+                                                   
+                                                   <p>
+                                                      <code class="code">&quot;LogDestination&quot;: <span>{</span> &quot;bucketName&quot;: &quot;DOC-EXAMPLE-BUCKET&quot;, &quot;prefix&quot;: &quot;alerts&quot;
+                                                         }</code>
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>For a CloudWatch log group, provide the name of the CloudWatch log group, with key
+                                                      <code class="code">logGroup</code>. The following example specifies a log group named
+                                                      <code class="code">alert-log-group</code>: 
+                                                   </p>
+                                                   
+                                                   <p>
+                                                      <code class="code">&quot;LogDestination&quot;: <span>{</span> &quot;logGroup&quot;: &quot;alert-log-group&quot; }</code>
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>For a Kinesis Data Firehose delivery stream, provide the name of the delivery stream,
+                                                      with key
+                                                      <code class="code">deliveryStream</code>. The following example specifies a delivery stream
+                                                      named <code class="code">alert-delivery-stream</code>: 
+                                                   </p>
+                                                   
+                                                   <p>
+                                                      <code class="code">&quot;LogDestination&quot;: <span>{</span> &quot;deliveryStream&quot;: &quot;alert-delivery-stream&quot;
+                                                         }</code>
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: Map of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-networkfirewall-loggingconfiguration-logdestinationconfig-logdestinationtype"></a><span class="term"><code class="code">LogDestinationType</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The type of storage destination to send these logs to. You can send logs to an Amazon
+                                             S3 bucket,
+                                             a CloudWatch log group, or a Kinesis Data Firehose delivery stream.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">CloudWatchLogs | KinesisDataFirehose | S3</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-networkfirewall-loggingconfiguration-logdestinationconfig-logtype"></a><span class="term"><code class="code">LogType</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The type of log to send. Alert logs report traffic that matches a stateful rule with
+                                             an action setting that sends an alert log message. Flow logs are
+                                             standard network traffic flow logs. 
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">ALERT | FLOW</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

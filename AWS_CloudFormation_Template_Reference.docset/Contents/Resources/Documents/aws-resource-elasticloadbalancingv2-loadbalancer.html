@@ -59,9 +59,10 @@ Properties:
                                        <dt><a id="cfn-elasticloadbalancingv2-loadbalancer-ipaddresstype"></a><span class="term"><code class="code">IpAddressType</code></span></dt>
                                        <dd>
                                           
-                                          <p>The IP address type. The possible values are <code class="code">ipv4</code> (for IPv4 addresses) and
-                                             <code class="code">dualstack</code> (for IPv4 and IPv6 addresses). Internal load balancers must use
-                                             <code class="code">ipv4</code>. Network Load Balancers must use <code class="code">ipv4</code>.
+                                          <p>The IP address type. The possible values are <code class="code">ipv4</code> (for IPv4 addresses) 
+                                             and <code class="code">dualstack</code> (for IPv4 and IPv6 addresses). Internal load balancers must 
+                                             use <code class="code">ipv4</code>. You can&#x2019;t specify <code class="code">dualstack</code> for a load balancer with  
+                                             a UDP or TCP_UDP listener.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -127,6 +128,8 @@ Properties:
                                           
                                           <p>The default is an Internet-facing load balancer.</p>
                                           
+                                          <p>You cannot specify a scheme for a Gateway Load Balancer.</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -165,11 +168,18 @@ Properties:
                                           </p>
                                           
                                           <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones.
-                                             You can specify one Elastic IP address per subnet if you need static IP addresses
-                                             for
-                                             your internet-facing load balancer. For internal load balancers, you can specify one
-                                             
-                                             private IP address per subnet from the IPv4 range of the subnet.
+                                             You
+                                             can specify one Elastic IP address per subnet if you need static IP addresses for
+                                             your
+                                             internet-facing load balancer. For internal load balancers, you can specify one private
+                                             IP
+                                             address per subnet from the IPv4 range of the subnet. For internet-facing load balancer,
+                                             you
+                                             can specify one IPv6 address per subnet.
+                                          </p>
+                                          
+                                          <p>[Gateway Load Balancers] You can specify subnets from one or more Availability
+                                             Zones. You cannot specify Elastic IP addresses for your subnets.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -221,7 +231,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed values</em>: <code class="code">application | network</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">application | gateway | network</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                     </dl>

@@ -66,6 +66,7 @@
   &quot;<a href="#cfn-cloudfront-distribution-cachebehavior-realtimelogconfigarn">RealtimeLogConfigArn</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-cloudfront-distribution-cachebehavior-smoothstreaming">SmoothStreaming</a>&quot; : <code class="replaceable">Boolean</code>,
   &quot;<a href="#cfn-cloudfront-distribution-cachebehavior-targetoriginid">TargetOriginId</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-cloudfront-distribution-cachebehavior-trustedkeygroups">TrustedKeyGroups</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
   &quot;<a href="#cfn-cloudfront-distribution-cachebehavior-trustedsigners">TrustedSigners</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
   &quot;<a href="#cfn-cloudfront-distribution-cachebehavior-viewerprotocolpolicy">ViewerProtocolPolicy</a>&quot; : <code class="replaceable">String</code>
 }
@@ -90,6 +91,8 @@
   <a href="#cfn-cloudfront-distribution-cachebehavior-realtimelogconfigarn">RealtimeLogConfigArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-cloudfront-distribution-cachebehavior-smoothstreaming">SmoothStreaming</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-cloudfront-distribution-cachebehavior-targetoriginid">TargetOriginId</a>: <code class="replaceable">String</code>
+  <a href="#cfn-cloudfront-distribution-cachebehavior-trustedkeygroups">TrustedKeyGroups</a>: <code class="replaceable">
+    - String</code>
   <a href="#cfn-cloudfront-distribution-cachebehavior-trustedsigners">TrustedSigners</a>: <code class="replaceable">
     - String</code>
   <a href="#cfn-cloudfront-distribution-cachebehavior-viewerprotocolpolicy">ViewerProtocolPolicy</a>: <code class="replaceable">String</code>
@@ -449,18 +452,55 @@
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-cloudfront-distribution-cachebehavior-trustedkeygroups"></a><span class="term"><code class="code">TrustedKeyGroups</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>A list of key groups that CloudFront can use to validate signed URLs or signed cookies.</p>
+                                          		       
+                                          <p>When a cache behavior contains trusted key groups, CloudFront requires signed URLs
+                                             or signed
+                                             			cookies for all requests that match the cache behavior. The URLs or cookies must
+                                             be
+                                             			signed with a private key whose corresponding public key is in the key group. The
+                                             signed
+                                             			URL or cookie contains information about which public key CloudFront should use
+                                             to verify the
+                                             			signature. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving private content</a> in the <em>Amazon CloudFront Developer Guide</em>.
+                                          </p>
+                                          	     
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-cloudfront-distribution-cachebehavior-trustedsigners"></a><span class="term"><code class="code">TrustedSigners</code></span></dt>
                                        <dd>
-                                          		
-                                          <p>Specifies the AWS accounts, if any, that you want to allow to create signed URLs
-                                             			for private content.
+                                          		       
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>We recommend using <code class="code">TrustedKeyGroups</code> instead of
+                                                   				<code class="code">TrustedSigners</code>.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          		       
+                                          <p>A list of AWS account IDs whose public keys CloudFront can use to validate signed
+                                             URLs or signed
+                                             			cookies.
                                           </p>
-                                          		
-                                          <p>If you want to require signed URLs in requests for objects in the target origin
-                                             			that match the <code class="code">PathPattern</code> for this cache behavior, specify a list of AWS
-                                             			account IDs. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content
-                                                			through CloudFront</a> in the <em>Amazon CloudFront Developer
-                                                			Guide</em>.
+                                          		       
+                                          <p>When a cache behavior contains trusted signers, CloudFront requires signed URLs or
+                                             signed cookies
+                                             			for all requests that match the cache behavior. The URLs or cookies must be signed
+                                             with
+                                             			the private key of a CloudFront key pair in the trusted signer&#x2019;s AWS account. The
+                                             signed URL
+                                             			or cookie contains information about which public key CloudFront should use to
+                                             verify the
+                                             			signature. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving private content</a> in the <em>Amazon CloudFront Developer Guide</em>.
                                           </p>
                                           	     
                                           <p><em>Required</em>: No

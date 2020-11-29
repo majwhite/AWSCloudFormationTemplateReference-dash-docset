@@ -16,9 +16,7 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Configures the output captions encode for the EBU-TT format.
-                                    This element belongs to CaptionDestinationSettings .
-                                 </p>
+                                 <p>Ebu Tt DDestination Settings</p>
                                  <h2 id="aws-properties-medialive-channel-ebuttddestinationsettings-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -40,9 +38,10 @@
                                        <dd>
                                           
                                           
-                                          <p>Fills the gap between the lines (in multi-line captions) with
-                                             the captions background color (as specified in the input
-                                             captions).
+                                          <p>Specifies how to handle the gap between the lines (in multi-line captions).
+                                             
+                                             - enabled: Fill with the captions background color (as specified in the input captions).
+                                             - disabled: Leave the gap unfilled.
                                           </p>
                                           <p><em>Required</em>: No
                                           </p>
@@ -54,11 +53,19 @@
                                        <dd>
                                           
                                           
-                                          <p>Specify font families for the captions, as a comma-separated
-                                             list of font names, in order of preference. The name can be a
-                                             font family (e.g. &quot;Arial&quot;), or a generic font family (e.g.
-                                             &quot;serif&quot;), or &quot;default&quot; (let the downstream player choose the
-                                             font).
+                                          <p>Specifies the font family to include in the font data attached to the EBU-TT captions.
+                                             Valid only if styleControl is set to include. If you leave this field empty, the font
+                                             family is set to &quot;monospaced&quot;. (If styleControl is set to exclude, the font family
+                                             is always set to &quot;monospaced&quot;.)
+                                             
+                                             You specify only the font family. All other style information (color, bold, position
+                                             and so on) is copied from the input captions. The size is always set to 100% to allow
+                                             the downstream player to choose the size.
+                                             
+                                             - Enter a list of font families, as a comma-separated list of font names, in order
+                                             of preference. The name can be a font family (such as &#x201C;Arial&#x201D;), or a generic font
+                                             family (such as &#x201C;serif&#x201D;), or &#x201C;default&#x201D; (to let the downstream player choose the font).
+                                             - Leave blank to set the family to &#x201C;monospace&#x201D;.
                                           </p>
                                           <p><em>Required</em>: No
                                           </p>
@@ -70,9 +77,15 @@
                                        <dd>
                                           
                                           
-                                          <p>When set to passthrough, passes through style and position
-                                             information from a TTML-like input source (TTML, SMPTE-TT,
-                                             CFF-TT) to the CFF-TT output or EBU-TT-D output.
+                                          <p>Specifies the style information (font color, font position, and so on) to include
+                                             in the font data that is attached to the EBU-TT captions.
+                                             
+                                             - include: Take the style information (font color, font position, and so on) from
+                                             the source captions and include that information in the font data attached to the
+                                             EBU-TT captions. This option is valid only if the source captions are Embedded or
+                                             Teletext.
+                                             - exclude: In the font data attached to the EBU-TT captions, set the font family to
+                                             &quot;monospaced&quot;. Do not include any other style information.
                                           </p>
                                           <p><em>Required</em>: No
                                           </p>

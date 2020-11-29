@@ -85,42 +85,156 @@ Properties:
                                  <p>Specifies an event destination for a configuration set.</p>
                                  <h3 id="aws-resource-ses-configurationseteventdestination--examples--"></h3>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ses-configurationseteventdestination--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;, &quot;Description&quot;: &quot;AWS
-                SES ConfigurationSetEventDestination Sample Template&quot;, &quot;Parameters&quot;: <span>{</span>
-                &quot;ConfigSetName&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot; }, &quot;EventDestinationName&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot; },
-                &quot;EventType1&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot; }, &quot;EventType2&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot; },
-                &quot;EventType3&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot; }, &quot;DimensionName1&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot; },
-                &quot;DimensionValueSource1&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot; }, &quot;DefaultDimensionValue1&quot;: <span>{</span> &quot;Type&quot;:
-                &quot;String&quot; }, &quot;DimensionName2&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot; }, &quot;DimensionValueSource2&quot;: <span>{</span>
-                &quot;Type&quot;: &quot;String&quot; }, &quot;DefaultDimensionValue2&quot;: <span>{</span> &quot;Type&quot;: &quot;String&quot; } }, &quot;Resources&quot;: <span>{</span>
-                &quot;ConfigSet&quot;: <span>{</span> &quot;Type&quot;: &quot;AWS::SES::ConfigurationSet&quot;, &quot;Properties&quot;: <span>{</span> &quot;Name&quot;: <span>{</span>
-                &quot;Ref&quot;: &quot;ConfigSetName&quot; } } }, &quot;CWEventDestination&quot;: <span>{</span> &quot;Type&quot;:
-                &quot;AWS::SES::ConfigurationSetEventDestination&quot;, &quot;Properties&quot;: <span>{</span>
-                &quot;ConfigurationSetName&quot;: <span>{</span> &quot;Ref&quot;: &quot;ConfigSet&quot; }, &quot;EventDestination&quot;: <span>{</span> &quot;Name&quot;: <span>{</span>
-                &quot;Ref&quot;: &quot;EventDestinationName&quot; }, &quot;Enabled&quot;: true, &quot;MatchingEventTypes&quot;: [ <span>{</span> &quot;Ref&quot;:
-                &quot;EventType1&quot; }, <span>{</span> &quot;Ref&quot;: &quot;EventType2&quot; }, <span>{</span> &quot;Ref&quot;: &quot;EventType3&quot; } ],
-                &quot;CloudWatchDestination&quot;: <span>{</span> &quot;DimensionConfigurations&quot;: [ <span>{</span> &quot;DimensionName&quot;: <span>{</span> &quot;Ref&quot;:
-                &quot;DimensionName1&quot; }, &quot;DimensionValueSource&quot;: <span>{</span> &quot;Ref&quot;: &quot;DimensionValueSource1&quot; },
-                &quot;DefaultDimensionValue&quot;: <span>{</span> &quot;Ref&quot;: &quot;DefaultDimensionValue1&quot; } }, <span>{</span> &quot;DimensionName&quot;: <span>{</span>
-                &quot;Ref&quot;: &quot;DimensionName2&quot; }, &quot;DimensionValueSource&quot;: <span>{</span> &quot;Ref&quot;: &quot;DimensionValueSource2&quot;
-                }, &quot;DefaultDimensionValue&quot;: <span>{</span> &quot;Ref&quot;: &quot;DefaultDimensionValue2&quot; } } ] } } } } }
-                }</code></pre></div>
+                                    <h4 id="aws-resource-ses-configurationseteventdestination--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Description&quot;: &quot;AWS SES ConfigurationSetEventDestination Sample Template&quot;,
+    &quot;Parameters&quot;: <span>{</span>
+        &quot;ConfigSetName&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;EventDestinationName&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;EventType1&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;EventType2&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;EventType3&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;DimensionName1&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;DimensionValueSource1&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;DefaultDimensionValue1&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;DimensionName2&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;DimensionValueSource2&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;DefaultDimensionValue2&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        }
+    },
+    &quot;Resources&quot;: <span>{</span>
+        &quot;ConfigSet&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::SES::ConfigurationSet&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;Name&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;ConfigSetName&quot;
+                }
+            }
+        },
+        &quot;CWEventDestination&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::SES::ConfigurationSetEventDestination&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;ConfigurationSetName&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;ConfigSet&quot;
+                },
+                &quot;EventDestination&quot;: <span>{</span>
+                    &quot;Name&quot;: <span>{</span>
+                        &quot;Ref&quot;: &quot;EventDestinationName&quot;
+                    },
+                    &quot;Enabled&quot;: true,
+                    &quot;MatchingEventTypes&quot;: [
+                        <span>{</span>
+                            &quot;Ref&quot;: &quot;EventType1&quot;
+                        },
+                        <span>{</span>
+                            &quot;Ref&quot;: &quot;EventType2&quot;
+                        },
+                        <span>{</span>
+                            &quot;Ref&quot;: &quot;EventType3&quot;
+                        }
+                    ],
+                    &quot;CloudWatchDestination&quot;: <span>{</span>
+                        &quot;DimensionConfigurations&quot;: [
+                            <span>{</span>
+                                &quot;DimensionName&quot;: <span>{</span>
+                                    &quot;Ref&quot;: &quot;DimensionName1&quot;
+                                },
+                                &quot;DimensionValueSource&quot;: <span>{</span>
+                                    &quot;Ref&quot;: &quot;DimensionValueSource1&quot;
+                                },
+                                &quot;DefaultDimensionValue&quot;: <span>{</span>
+                                    &quot;Ref&quot;: &quot;DefaultDimensionValue1&quot;
+                                }
+                            },
+                            <span>{</span>
+                                &quot;DimensionName&quot;: <span>{</span>
+                                    &quot;Ref&quot;: &quot;DimensionName2&quot;
+                                },
+                                &quot;DimensionValueSource&quot;: <span>{</span>
+                                    &quot;Ref&quot;: &quot;DimensionValueSource2&quot;
+                                },
+                                &quot;DefaultDimensionValue&quot;: <span>{</span>
+                                    &quot;Ref&quot;: &quot;DefaultDimensionValue2&quot;
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ses-configurationseteventdestination--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09 Description: &apos;AWS SES
-                ConfigurationSetEventDestination Sample Template&apos; Parameters: ConfigSetName: Type:
-                String EventDestinationName: Type: String EventType1: Type: String EventType2: Type:
-                String EventType3: Type: String DimensionName1: Type: String DimensionValueSource1:
-                Type: String DefaultDimensionValue1: Type: String DimensionName2: Type: String
-                DimensionValueSource2: Type: String DefaultDimensionValue2: Type: String Resources:
-                ConfigSet: Type: AWS::SES::ConfigurationSet Properties: Name: !Ref ConfigSetName
-                CWEventDestination: Type: AWS::SES::ConfigurationSetEventDestination Properties:
-                ConfigurationSetName: !Ref ConfigSet EventDestination: Name: !Ref
-                EventDestinationName Enabled: true MatchingEventTypes: - !Ref EventType1 - !Ref
-                EventType2 - !Ref EventType3 CloudWatchDestination: DimensionConfigurations: -
-                DimensionName: !Ref DimensionName1 DimensionValueSource: !Ref DimensionValueSource1
-                DefaultDimensionValue: !Ref DefaultDimensionValue1 - DimensionName: !Ref
-                DimensionName2 DimensionValueSource: !Ref DimensionValueSource2
-                DefaultDimensionValue: !Ref DefaultDimensionValue2</code></pre></div>
+                                    <h4 id="aws-resource-ses-configurationseteventdestination--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Description: AWS SES ConfigurationSetEventDestination Sample Template
+Parameters:
+  ConfigSetName:
+    Type: String
+  EventDestinationName:
+    Type: String
+  EventType1:
+    Type: String
+  EventType2:
+    Type: String
+  EventType3:
+    Type: String
+  DimensionName1:
+    Type: String
+  DimensionValueSource1:
+    Type: String
+  DefaultDimensionValue1:
+    Type: String
+  DimensionName2:
+    Type: String
+  DimensionValueSource2:
+    Type: String
+  DefaultDimensionValue2:
+    Type: String
+Resources:
+  ConfigSet:
+    Type: &apos;AWS::SES::ConfigurationSet&apos;
+    Properties:
+      Name: !Ref ConfigSetName
+  CWEventDestination:
+    Type: &apos;AWS::SES::ConfigurationSetEventDestination&apos;
+    Properties:
+      ConfigurationSetName: !Ref ConfigSet
+      EventDestination:
+        Name: !Ref EventDestinationName
+        Enabled: true
+        MatchingEventTypes:
+          - !Ref EventType1
+          - !Ref EventType2
+          - !Ref EventType3
+        CloudWatchDestination:
+          DimensionConfigurations:
+            - DimensionName: !Ref DimensionName1
+              DimensionValueSource: !Ref DimensionValueSource1
+              DefaultDimensionValue: !Ref DefaultDimensionValue1
+            - DimensionName: !Ref DimensionName2
+              DimensionValueSource: !Ref DimensionValueSource2
+              DefaultDimensionValue: !Ref DefaultDimensionValue2</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
