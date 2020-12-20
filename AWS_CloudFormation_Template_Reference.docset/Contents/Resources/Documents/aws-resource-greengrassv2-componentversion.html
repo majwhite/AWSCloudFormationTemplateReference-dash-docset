@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-greengrassv2-componentversion">AWS::GreengrassV2::ComponentVersion</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>Creates a component. Components are software that run on Greengrass core devices.
+                                    After
+                                    you develop and test a component on your core device, you can use this operation to
+                                    upload
+                                    your component to AWS IoT Greengrass. Then, you can deploy the component to other
+                                    core
+                                    devices.
+                                 </p>
+                                 <p>You can use this operation to do the following:</p>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p><b>Create components from recipes</b></p>
+                                          
+                                          <p>Create a component from a recipe, which is a file that defines the component&apos;s
+                                             metadata, parameters, dependencies, lifecycle, artifacts, and platform capability.
+                                             For
+                                             more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html">AWS IoT Greengrass
+                                                component recipe reference</a> in the <em>AWS IoT Greengrass V2 Developer
+                                                Guide</em>.
+                                          </p>
+                                          
+                                          <p>To create a component from a recipe, specify <code class="code">inlineRecipe</code> when you call
+                                             this operation.
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p><b>Create components from Lambda functions</b></p>
+                                          
+                                          <p>Create a component from an AWS Lambda function that runs on AWS IoT Greengrass. This
+                                             creates a recipe and artifacts from the Lambda function&apos;s deployment package. You
+                                             can use
+                                             this operation to migrate Lambda functions from AWS IoT Greengrass V1 to AWS IoT
+                                             Greengrass V2.
+                                          </p>
+                                          
+                                          <p>This function only accepts Lambda functions that use the following runtimes:</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>Python 2.7 &#x2013; <code class="code">python2.7</code></p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Python 3.7 &#x2013; <code class="code">python3.7</code></p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Python 3.8 &#x2013; <code class="code">python3.8</code></p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Java 8 &#x2013; <code class="code">java8</code></p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Node.js 10 &#x2013; <code class="code">nodejs10.x</code></p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Node.js 12 &#x2013; <code class="code">nodejs12.x</code></p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>To create a component from a Lambda function, specify <code class="code">lambdaFunction</code> when
+                                             you call this operation.
+                                          </p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <h2 id="aws-resource-greengrassv2-componentversion-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-greengrassv2-componentversion-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::GreengrassV2::ComponentVersion&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-greengrassv2-componentversion-inlinerecipe">InlineRecipe</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-greengrassv2-componentversion-lambdafunction">LambdaFunction</a>&quot; : <code class="replaceable"><a href="./aws-properties-greengrassv2-componentversion-lambdafunctionrecipesource.html">LambdaFunctionRecipeSource</a></code>,
+      &quot;<a href="#cfn-greengrassv2-componentversion-tags">Tags</a>&quot; : <code class="replaceable"><span>{</span><code class="replaceable">Key</code> : <code class="replaceable">Value</code>, ...}</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-greengrassv2-componentversion-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::GreengrassV2::ComponentVersion
+Properties: 
+  <a href="#cfn-greengrassv2-componentversion-inlinerecipe">InlineRecipe</a>: <code class="replaceable">String</code>
+  <a href="#cfn-greengrassv2-componentversion-lambdafunction">LambdaFunction</a>: <code class="replaceable">
+    <a href="./aws-properties-greengrassv2-componentversion-lambdafunctionrecipesource.html">LambdaFunctionRecipeSource</a></code>
+  <a href="#cfn-greengrassv2-componentversion-tags">Tags</a>: <code class="replaceable">
+    <code class="replaceable">Key</code> : <code class="replaceable">Value</code></code>
+</code></pre></div>
+                                 <h2 id="aws-resource-greengrassv2-componentversion-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-greengrassv2-componentversion-inlinerecipe"></a><span class="term"><code class="code">InlineRecipe</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The recipe to use to create the component. The recipe defines the component&apos;s metadata,
+                                             parameters, dependencies, lifecycle, artifacts, and platform compatibility.
+                                          </p>
+                                          
+                                          <p>You must specify either <code class="code">InlineRecipe</code> or <code class="code">LambdaFunction</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-greengrassv2-componentversion-lambdafunction"></a><span class="term"><code class="code">LambdaFunction</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The parameters to create a component from a Lambda function.</p>
+                                          
+                                          <p>You must specify either <code class="code">InlineRecipe</code> or <code class="code">LambdaFunction</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-greengrassv2-componentversion-lambdafunctionrecipesource.html">LambdaFunctionRecipeSource</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-greengrassv2-componentversion-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>An array of key-value pairs to apply to this resource.</p>
+                                          
+                                          <p>For more information, see <a href="aws-properties-resource-tags.html">Tag</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Map of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-greengrassv2-componentversion-return-values">Return values</h2>
+                                 <h3 id="aws-resource-greengrassv2-componentversion-return-values-ref">Ref</h3>
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the <code class="code">Arn</code>.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-greengrassv2-componentversion-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-greengrassv2-componentversion-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ARN of the component version.</p>
+                                          
+                                       </dd>
+                                       <dt><a id="ComponentName-fn::getatt"></a><span class="term"><code class="code">ComponentName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name of the component.</p>
+                                          
+                                       </dd>
+                                       <dt><a id="ComponentVersion-fn::getatt"></a><span class="term"><code class="code">ComponentVersion</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The version of the component.</p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the AWS Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

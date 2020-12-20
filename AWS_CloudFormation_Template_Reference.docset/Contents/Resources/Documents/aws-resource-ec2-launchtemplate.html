@@ -108,9 +108,56 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-ec2-launchtemplate--examples">Examples</h2>
-                                 <h3 id="aws-resource-ec2-launchtemplate--examples--Launch_Template_with_an_IAM_Instance_Profile">Launch Template with an IAM Instance Profile</h3>
+                                 <h3 id="aws-resource-ec2-launchtemplate--examples--Launch_template_with_an_IAM_instance_profile">Launch template with an IAM instance profile</h3>
+                                 <p>The following example creates a launch template and an instance profile. The instance
+                                    profile contains 
+                                    the IAM role named <code class="code">MyAdminRole</code> and can provide the role&apos;s temporary credentials to an 
+                                    application that runs on the instances created by this launch template.
+                                 </p>
+                                 <p>The launch template also prevents accidental instance termination when using the Amazon
+                                    EC2 console, 
+                                    CLI, or API, by specifying <code class="code">true</code> for the <code class="code">DisableApiTermination</code> property. 
+                                    If the instances created by this launch template are launched in a default VPC, they
+                                    receive a public 
+                                    IP address by default. If the instances are launched in a nondefault VPC, they do
+                                    not receive a public 
+                                    IP address by default.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ec2-launchtemplate--examples--Launch_template_with_an_IAM_instance_profile--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;AWSTemplateFormatVersion&quot;:&quot;2010-09-09&quot;,
+  &quot;Resources&quot;:<span>{</span>
+    &quot;MyIamInstanceProfile&quot;:<span>{</span>
+      &quot;Type&quot;:&quot;AWS::IAM::InstanceProfile&quot;,
+      &quot;Properties&quot;:<span>{</span>
+        &quot;InstanceProfileName&quot;:&quot;MyIamInstanceProfile&quot;,
+        &quot;Path&quot;:&quot;/&quot;,
+        &quot;Roles&quot;:[&quot;MyAdminRole&quot;]
+      }
+    },
+    &quot;MyLaunchTemplate&quot;:<span>{</span>
+      &quot;Type&quot;:&quot;AWS::EC2::LaunchTemplate&quot;,
+      &quot;Properties&quot;:<span>{</span>
+        &quot;LaunchTemplateName&quot;:&quot;MyLaunchTemplate&quot;,
+        &quot;LaunchTemplateData&quot;:<span>{</span>
+          &quot;IamInstanceProfile&quot;:<span>{</span>
+          &quot;Arn&quot;:<span>{</span>&quot;Fn::GetAtt&quot;: [&quot;MyIamInstanceProfile&quot;, &quot;Arn&quot;]}
+          },
+          &quot;DisableApiTermination&quot;:&quot;true&quot;,
+          &quot;ImageId&quot;:&quot;ami-04d5cc9b88example&quot;,
+          &quot;InstanceType&quot;:&quot;t2.micro&quot;,
+          &quot;KeyName&quot;:&quot;MyKeyPair&quot;,
+          &quot;SecurityGroupIds&quot;:[
+            &quot;sg-083cd3bfb8example&quot;
+          ]
+        }
+      }
+    }
+  }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ec2-launchtemplate--examples--Launch_Template_with_an_IAM_Instance_Profile--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+                                    <h4 id="aws-resource-ec2-launchtemplate--examples--Launch_template_with_an_IAM_instance_profile--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+Resources:
   MyIamInstanceProfile:
     Type: AWS::IAM::InstanceProfile
     Properties:
@@ -121,50 +168,158 @@ Properties:
   MyLaunchTemplate:
     Type: AWS::EC2::LaunchTemplate
     Properties:
+      LaunchTemplateName: MyLaunchTemplate
       LaunchTemplateData:
-        InstanceType: c4.large
-        DisableApiTermination: &apos;true&apos;
-        KeyName: MyKeyPair
-        ImageId: ami-04d5cc9b88example
         IamInstanceProfile:
-          Arn:
-            Fn::GetAtt:
+          Arn: !GetAtt
             - MyIamInstanceProfile
             - Arn
+        DisableApiTermination: true
+        ImageId: ami-04d5cc9b88example
+        InstanceType: t2.micro
+        KeyName: MyKeyPair
         SecurityGroupIds:
-        - sg-083cd3bfb8example
-      LaunchTemplateName: MyLaunchTemplate
-         </code></pre></div>
-                                 <h3 id="aws-resource-ec2-launchtemplate--examples--"></h3>
+          - sg-083cd3bfb8example</code></pre></div>
+                                 <h3 id="aws-resource-ec2-launchtemplate--examples--Launch_template_with_defined_block_device_mapping">Launch template with defined block device mapping</h3>
+                                 <p>The following example creates a launch template with a block device mapping: an encrypted
+                                    22 gigabyte EBS volume mapped to /dev/xvdcz. The /dev/xvdcz volume uses the General
+                                    Purpose SSD
+                                    (gp2) volume type and is deleted when terminating the instance it is attached to.
+                                    This example
+                                    uses the Fn::Sub function to customize the name of the launch template to include
+                                    the stack
+                                    name.
+                                 </p>
+                                 <p>The launch template also provisions T2 instances in unlimited mode by specifying a
+                                    value of
+                                    <code class="code">unlimited</code> for the <code class="code">CPUCredits</code> property. Because <code class="code">Monitoring</code> 
+                                    is enabled, EC2 metric data will be available at 1-minute intervals (known as detailed
+                                    monitoring) 
+                                    through CloudWatch.
+                                 </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ec2-launchtemplate--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-    &quot;Resources&quot;: <span>{</span>
-        &quot;MyIamInstanceProfile&quot;: <span>{</span>
-            &quot;Type&quot;: &quot;AWS::IAM::InstanceProfile&quot;,
-            &quot;Properties&quot;: <span>{</span>
-                &quot;InstanceProfileName&quot; : &quot;MyIamInstanceProfile&quot;,
-                    &quot;Path&quot; : &quot;/&quot;,
-                    &quot;Roles&quot; : [&quot;MyAdminRole&quot;]
-            }
-        },
-        &quot;MyLaunchTemplate&quot;: <span>{</span>
-            &quot;Type&quot;: &quot;AWS::EC2::LaunchTemplate&quot;,
-            &quot;Properties&quot;: <span>{</span>
-                &quot;LaunchTemplateData&quot; : <span>{</span>
-                    &quot;InstanceType&quot; : &quot;c4.large&quot;,
-                    &quot;DisableApiTermination&quot; : &quot;true&quot;,
-                    &quot;KeyName&quot; : &quot;MyKeyPair&quot;,
-                    &quot;ImageId&quot; : &quot;ami-04d5cc9b88example&quot;,
-                    &quot;IamInstanceProfile&quot; : <span>{</span>
-                    &quot;Arn&quot; : <span>{</span>&quot;Fn::GetAtt&quot;: [&quot;MyIamInstanceProfile&quot;, &quot;Arn&quot;]}
-                    },
-                    &quot;SecurityGroupIds&quot; : [&quot;sg-083cd3bfb8example&quot;]
-                },
-                &quot;LaunchTemplateName&quot; : &quot;MyLaunchTemplate&quot;
-            }
-        }		
+                                    <h4 id="aws-resource-ec2-launchtemplate--examples--Launch_template_with_defined_block_device_mapping--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+  &quot;Resources&quot;:<span>{</span>
+    &quot;myLaunchTemplate&quot;:<span>{</span>
+      &quot;Type&quot;:&quot;AWS::EC2::LaunchTemplate&quot;,
+      &quot;Properties&quot;:<span>{</span>
+        &quot;LaunchTemplateName&quot;:<span>{</span>&quot;Fn::Sub&quot;:&quot;$<span>{</span>AWS::StackName}-launch-template&quot;},
+        &quot;LaunchTemplateData&quot;:<span>{</span>
+          &quot;BlockDeviceMappings&quot;:[<span>{</span>
+            &quot;Ebs&quot;:<span>{</span>
+              &quot;VolumeSize&quot;:&quot;22&quot;,
+              &quot;VolumeType&quot;:&quot;gp2&quot;,
+              &quot;DeleteOnTermination&quot;: true,
+              &quot;Encrypted&quot;: true
+            },
+            &quot;DeviceName&quot;:&quot;/dev/xvdcz&quot;
+          }],
+          &quot;CreditSpecification&quot;:<span>{</span>
+            &quot;CpuCredits&quot;:&quot;unlimited&quot;
+          },
+          &quot;Monitoring&quot;:<span>{</span>&quot;Enabled&quot;:true},
+          &quot;ImageId&quot;:&quot;ami-04d5cc9b88example&quot;,
+          &quot;InstanceType&quot;:&quot;t2.micro&quot;,
+          &quot;KeyName&quot;:&quot;MyKeyPair&quot;,
+          &quot;SecurityGroupIds&quot;:[&quot;sg-7c2270198example&quot;, &quot;sg-903004f88example&quot;]
+        }
+      }
     }
+  }
 }</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ec2-launchtemplate--examples--Launch_template_with_defined_block_device_mapping--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+Resources:
+  myLaunchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    Properties: 
+      LaunchTemplateName: !Sub $<span>{</span>AWS::StackName}-launch-template
+      LaunchTemplateData: 
+        BlockDeviceMappings: 
+          - Ebs:
+              VolumeSize: 22
+              VolumeType: gp2
+              DeleteOnTermination: true
+              Encrypted: true
+            DeviceName: /dev/xvdcz
+        CreditSpecification: 
+          CpuCredits: Unlimited
+        Monitoring: 
+          Enabled: true
+        ImageId: ami-04d5cc9b88example
+        InstanceType: t2.micro
+        KeyName: MyKeyPair
+        SecurityGroupIds: 
+          - sg-7c2270198example
+          - sg-903004f88example</code></pre></div>
+                                 <h3 id="aws-resource-ec2-launchtemplate--examples--Launch_template_with_public_IP_addresses_for_Amazon_EC2_Auto_Scaling">Launch template with public IP addresses for Amazon EC2 Auto Scaling</h3>
+                                 <p>The following example creates and configures a launch template to assign public IP
+                                    addresses to instances 
+                                    launched in a nondefault VPC. Note that when you specify a network interface for Amazon
+                                    EC2 Auto Scaling, 
+                                    specify the VPC subnets as properties of the Auto Scaling group, and not in the launch
+                                    template (because they will be ignored).
+                                 </p>
+                                 <p>This example launch template also sets the instance placement tenancy to <code class="code">dedicated</code>.
+                                 </p>
+                                 <p>For more information about creating launch templates for Amazon EC2 Auto Scaling,
+                                    see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html">Creating a launch template for an Auto Scaling group</a> 
+                                    in the <em>Amazon EC2 Auto Scaling User Guide</em>.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ec2-launchtemplate--examples--Launch_template_with_public_IP_addresses_for_Amazon_EC2_Auto_Scaling--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;AWSTemplateFormatVersion&quot;:&quot;2010-09-09&quot;,
+  &quot;Resources&quot;:<span>{</span>
+    &quot;myLaunchTemplate&quot;:<span>{</span>
+      &quot;Type&quot;:&quot;AWS::EC2::LaunchTemplate&quot;,
+      &quot;Properties&quot;:<span>{</span>
+        &quot;LaunchTemplateName&quot;:<span>{</span>
+          &quot;Fn::Sub&quot;:&quot;$<span>{</span>AWS::StackName}-launch-template-for-auto-scaling&quot;
+        },
+        &quot;LaunchTemplateData&quot;:<span>{</span>
+          &quot;NetworkInterfaces&quot;:[
+            <span>{</span>
+              &quot;DeviceIndex&quot;:0,
+              &quot;AssociatePublicIpAddress&quot;:true,
+              &quot;Groups&quot;:[
+                &quot;sg-7c2270198example&quot;,
+                &quot;sg-903004f88example&quot;
+              ],
+              &quot;DeleteOnTermination&quot;:true
+            }
+          ],
+          &quot;Placement&quot;:<span>{</span>
+            &quot;Tenancy&quot;: &quot;dedicated&quot;
+          },
+          &quot;ImageId&quot;:&quot;ami-04d5cc9b88example&quot;,
+          &quot;InstanceType&quot;:&quot;t2.micro&quot;,
+          &quot;KeyName&quot;:&quot;MyKeyPair&quot;
+        }
+      }
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ec2-launchtemplate--examples--Launch_template_with_public_IP_addresses_for_Amazon_EC2_Auto_Scaling--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  myLaunchTemplate:
+    Type: &apos;AWS::EC2::LaunchTemplate&apos;
+    Properties:
+      LaunchTemplateName: !Sub &apos;$<span>{</span>AWS::StackName}-launch-template-for-auto-scaling&apos;
+      LaunchTemplateData:
+        NetworkInterfaces:
+          - DeviceIndex: 0
+            AssociatePublicIpAddress: true
+            Groups:
+              - sg-7c2270198example
+              - sg-903004f88example
+            DeleteOnTermination: true
+        Placement:
+          Tenancy: dedicated
+        ImageId: ami-04d5cc9b88example
+        InstanceType: t2.micro
+        KeyName: MyKeyPair</code></pre></div>
                                  <h2 id="aws-resource-ec2-launchtemplate--seealso">See also</h2>
                                  <div class="itemizedlist">
                                     				         

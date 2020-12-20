@@ -16,7 +16,8 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Hls Group Settings</p>
+                                 <p>The settings for an HLS output group.</p>
+                                 <p>The parent of this entity is OutputGroupSettings.</p>
                                  <h2 id="aws-properties-medialive-channel-hlsgroupsettings-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -116,10 +117,10 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-admarkers"></a><span class="term"><code class="code">AdMarkers</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>Choose one or more ad marker types to pass SCTE35 signals through to this group of
+                                          <p>Chooses one or more ad marker types to pass SCTE35 signals through to this group of
                                              Apple HLS outputs.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of String
@@ -129,11 +130,11 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-baseurlcontent"></a><span class="term"><code class="code">BaseUrlContent</code></span></dt>
                                        <dd>
                                           
-                                          
                                           <p>A partial URI prefix that will be prepended to each output in the media .m3u8 file.
-                                             Can be used if base manifest is delivered from a different URL than the main .m3u8
-                                             file.
+                                             The partial URI prefix can be used if the base manifest is delivered from a different
+                                             URL than the main .m3u8 file.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -159,11 +160,11 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-baseurlmanifest"></a><span class="term"><code class="code">BaseUrlManifest</code></span></dt>
                                        <dd>
                                           
-                                          
                                           <p>A partial URI prefix that will be prepended to each output in the media .m3u8 file.
-                                             Can be used if base manifest is delivered from a different URL than the main .m3u8
-                                             file.
+                                             The partial URI prefix can be used if the base manifest is delivered from a different
+                                             URL than the main .m3u8 file.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -189,10 +190,10 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-captionlanguagemappings"></a><span class="term"><code class="code">CaptionLanguageMappings</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>Mapping of up to 4 caption channels to caption languages.  Is only meaningful if captionLanguageSetting
-                                             is set to &quot;insert&quot;.
+                                          <p>A mapping of up to 4 captions channels to captions languages. This is meaningful only
+                                             if captionLanguageSetting is set to &quot;insert.&quot;
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="./aws-properties-medialive-channel-captionlanguagemapping.html">CaptionLanguageMapping</a></p>
@@ -201,17 +202,20 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-captionlanguagesetting"></a><span class="term"><code class="code">CaptionLanguageSetting</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>Applies only to 608 Embedded output captions.
-                                             insert: Include CLOSED-CAPTIONS lines in the manifest. Specify at least one language
-                                             in the CC1 Language Code field. One CLOSED-CAPTION line is added for each Language
-                                             Code you specify. Make sure to specify the languages in the order in which they appear
-                                             in the original source (if the source is embedded format) or the order of the caption
-                                             selectors (if the source is other than embedded). Otherwise, languages in the manifest
-                                             will not match up properly with the output captions.
-                                             none: Include CLOSED-CAPTIONS=NONE line in the manifest.
-                                             omit: Omit any CLOSED-CAPTIONS line from the manifest.
+                                          <p>Applies only to 608 embedded output captions. Insert: Include CLOSED-CAPTIONS lines
+                                             in
+                                             the manifest. Specify at least one language in the CC1 Language Code field. One
+                                             CLOSED-CAPTION line is added for each Language Code that you specify. Make sure to
+                                             specify the languages in the order in which they appear in the original source (if
+                                             the
+                                             source is embedded format) or the order of the captions selectors (if the source is
+                                             other than embedded). Otherwise, languages in the manifest will not match properly
+                                             with
+                                             the output captions. None: Include the CLOSED-CAPTIONS=NONE line in the manifest.
+                                             Omit:
+                                             Omit any CLOSED-CAPTIONS line from the manifest.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -221,10 +225,10 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-clientcache"></a><span class="term"><code class="code">ClientCache</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>When set to &quot;disabled&quot;, sets the #EXT-X-ALLOW-CACHE:no tag in the manifest, which
+                                          <p>When set to &quot;disabled,&quot; sets the #EXT-X-ALLOW-CACHE:no tag in the manifest, which
                                              prevents clients from saving media segments for later replay.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -234,8 +238,10 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-codecspecification"></a><span class="term"><code class="code">CodecSpecification</code></span></dt>
                                        <dd>
                                           
+                                          <p>The specification to use (RFC-6381 or the default RFC-4281) during m3u8 playlist
+                                             generation.
+                                          </p>
                                           
-                                          <p>Specification to use (RFC-6381 or the default RFC-4281) during m3u8 playlist generation.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -245,11 +251,12 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-constantiv"></a><span class="term"><code class="code">ConstantIv</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>For use with encryptionType. This is a 128-bit, 16-byte hex value represented by a
-                                             32-character text string. If ivSource is set to &quot;explicit&quot; then this parameter is
-                                             required and is used as the IV for encryption.
+                                          <p>Used with encryptionType. This is a 128-bit, 16-byte hex value that is represented
+                                             by
+                                             a 32-character text string. If ivSource is set to &quot;explicit,&quot; this parameter is required
+                                             and is used as the IV for encryption.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -259,10 +266,10 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-destination"></a><span class="term"><code class="code">Destination</code></span></dt>
                                        <dd>
                                           
-                                          
                                           <p>A directory or HTTP destination for the HLS segments, manifest files, and encryption
                                              keys (if enabled).
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-medialive-channel-outputlocationref.html">OutputLocationRef</a></p>
@@ -271,8 +278,8 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-directorystructure"></a><span class="term"><code class="code">DirectoryStructure</code></span></dt>
                                        <dd>
                                           
+                                          <p>Places segments in subdirectories.</p>
                                           
-                                          <p>Place segments in subdirectories.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -282,10 +289,11 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-encryptiontype"></a><span class="term"><code class="code">EncryptionType</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>Encrypts the segments with the given encryption scheme.  Exclude this parameter if
-                                             no encryption is desired.
+                                          <p>Encrypts the segments with the specified encryption scheme. Exclude this parameter
+                                             if
+                                             you don&apos;t want encryption.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -295,8 +303,8 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-hlscdnsettings"></a><span class="term"><code class="code">HlsCdnSettings</code></span></dt>
                                        <dd>
                                           
+                                          <p>The parameters that control interactions with the CDN.</p>
                                           
-                                          <p>Parameters that control interactions with the CDN.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-medialive-channel-hlscdnsettings.html">HlsCdnSettings</a></p>
@@ -316,15 +324,16 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-iframeonlyplaylists"></a><span class="term"><code class="code">IFrameOnlyPlaylists</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>DISABLED: Do not create an I-frame-only manifest, but do create the master and media
-                                             manifests (according to the Output Selection field).
-                                             
-                                             STANDARD: Create an I-frame-only manifest for each output that contains video, as
-                                             well as the other manifests (according to the Output Selection field). The I-frame
-                                             manifest contains a #EXT-X-I-FRAMES-ONLY tag to indicate it is I-frame only, and one
-                                             or more #EXT-X-BYTERANGE entries identifying the I-frame position. For example, #EXT-X-BYTERANGE:160364@1461888&quot;
+                                          <p>DISABLED: Don&apos;t create an I-frame-only manifest, but do create the master and media
+                                             manifests (according to the Output Selection field). STANDARD: Create an I-frame-only
+                                             manifest for each output that contains video, as well as the other manifests (according
+                                             to the Output Selection field). The I-frame manifest contains a #EXT-X-I-FRAMES-ONLY
+                                             tag
+                                             to indicate it is I-frame only, and one or more #EXT-X-BYTERANGE entries identifying
+                                             the
+                                             I-frame position. For example, #EXT-X-BYTERANGE:160364@1461888&quot;.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -334,13 +343,11 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-indexnsegments"></a><span class="term"><code class="code">IndexNSegments</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>Applies only if Mode field is LIVE.
-                                             
-                                             Specifies the maximum number of segments in the media manifest file. After this maximum,
-                                             older segments are removed from the media manifest. This number must be smaller than
-                                             the number in the Keep Segments field.
+                                          <p>Applies only if the Mode field is LIVE. Specifies the maximum number of segments in
+                                             the media manifest file. After this maximum, older segments are removed from the media
+                                             manifest. This number must be less than or equal to the Keep Segments field.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
@@ -350,8 +357,8 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-inputlossaction"></a><span class="term"><code class="code">InputLossAction</code></span></dt>
                                        <dd>
                                           
+                                          <p>A parameter that controls output group behavior on an input loss.</p>
                                           
-                                          <p>Parameter that control output group behavior on input loss.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -361,11 +368,13 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-ivinmanifest"></a><span class="term"><code class="code">IvInManifest</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>For use with encryptionType. The IV (Initialization Vector) is a 128-bit number used
-                                             in conjunction with the key for encrypting blocks. If set to &quot;include&quot;, IV is listed
-                                             in the manifest, otherwise the IV is not in the manifest.
+                                          <p>Used with encryptionType. The IV (initialization vector) is a 128-bit number used
+                                             in
+                                             conjunction with the key for encrypting blocks. If set to &quot;include,&quot; the IV is listed
+                                             in
+                                             the manifest. Otherwise, the IV is not in the manifest.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -375,12 +384,13 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-ivsource"></a><span class="term"><code class="code">IvSource</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>For use with encryptionType. The IV (Initialization Vector) is a 128-bit number used
-                                             in conjunction with the key for encrypting blocks. If this setting is &quot;followsSegmentNumber&quot;,
-                                             it will cause the IV to change every segment (to match the segment number). If this
-                                             is set to &quot;explicit&quot;, you must enter a constantIv value.
+                                          <p>Used with encryptionType. The IV (initialization vector) is a 128-bit number used
+                                             in
+                                             conjunction with the key for encrypting blocks. If this setting is
+                                             &quot;followsSegmentNumber,&quot; it causes the IV to change every segment (to match the segment
+                                             number). If this is set to &quot;explicit,&quot; you must enter a constantIv value.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -390,18 +400,10 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-keepsegments"></a><span class="term"><code class="code">KeepSegments</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>Applies only if Mode field is LIVE.
-                                             
-                                             Specifies the number of media segments to retain in the destination directory. This
-                                             number should be bigger than indexNSegments (Num segments). We recommend (value =
-                                             (2 x indexNsegments) + 1).
-                                             
-                                             If this &quot;keep segments&quot; number is too low, the following might happen: the player
-                                             is still reading a media manifest file that lists this segment, but that segment has
-                                             been removed from the destination directory (as directed by indexNSegments). This
-                                             situation would result in a 404 HTTP error on the player.
+                                          <p>Applies only if the Mode field is LIVE. Specifies the number of media segments (.ts
+                                             files) to retain in the destination directory.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
@@ -411,11 +413,12 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-keyformat"></a><span class="term"><code class="code">KeyFormat</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>The value specifies how the key is represented in the resource identified by the URI.
-                                             If parameter is absent, an implicit value of &quot;identity&quot; is used.  A reverse DNS string
-                                             can also be given.
+                                          <p>Specifies how the key is represented in the resource identified by the URI. If the
+                                             parameter is absent, an implicit value of &quot;identity&quot; is used. A reverse DNS string
+                                             can
+                                             also be specified.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -425,10 +428,10 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-keyformatversions"></a><span class="term"><code class="code">KeyFormatVersions</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>Either a single positive integer version value or a slash delimited list of version
+                                          <p>Either a single positive integer version value or a slash-delimited list of version
                                              values (1/2/3).
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -438,8 +441,8 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-keyprovidersettings"></a><span class="term"><code class="code">KeyProviderSettings</code></span></dt>
                                        <dd>
                                           
-                                          
                                           <p>The key provider settings.</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-medialive-channel-keyprovidersettings.html">KeyProviderSettings</a></p>
@@ -448,8 +451,8 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-manifestcompression"></a><span class="term"><code class="code">ManifestCompression</code></span></dt>
                                        <dd>
                                           
-                                          
                                           <p>When set to gzip, compresses HLS playlist.</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -459,10 +462,10 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-manifestdurationformat"></a><span class="term"><code class="code">ManifestDurationFormat</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>Indicates whether the output manifest should use floating point or integer values
+                                          <p>Indicates whether the output manifest should use a floating point or integer values
                                              for segment duration.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -472,10 +475,10 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-minsegmentlength"></a><span class="term"><code class="code">MinSegmentLength</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>When set, minimumSegmentLength is enforced by looking ahead and back within the specified
-                                             range for a nearby avail and extending the segment size if needed.
+                                          <p>When set, minimumSegmentLength is enforced by looking ahead and back within the
+                                             specified range for a nearby avail and extending the segment size if needed.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
@@ -485,18 +488,16 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-mode"></a><span class="term"><code class="code">Mode</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>If &quot;vod&quot;, all segments are indexed and kept permanently in the
-                                             destination and manifest. If &quot;live&quot;, only the number segments
-                                             specified in keepSegments and indexNSegments are kept; newer
-                                             segments replace older segments, which may prevent players from
-                                             rewinding all the way to the beginning of the channel. VOD mode
-                                             uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is
-                                             running, converting it to a &quot;VOD&quot; type manifest on completion of
-                                             the stream.
-                                             
-                                             
+                                          <p>If &quot;vod,&quot; all segments are indexed and kept permanently in the destination and
+                                             manifest. If &quot;live,&quot; only the number segments specified in keepSegments and
+                                             indexNSegments are kept. Newer segments replace older segments, which might prevent
+                                             players from rewinding all the way to the beginning of the channel. VOD mode uses
+                                             HLS
+                                             EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, converting it to a &quot;VOD&quot;
+                                             type
+                                             manifest on completion of the stream.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -506,15 +507,12 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-outputselection"></a><span class="term"><code class="code">OutputSelection</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>MANIFESTS_AND_SEGMENTS: Generates manifests (master manifest, if applicable, and media
-                                             manifests) for this output group.
-                                             
-                                             VARIANT_MANIFESTS_AND_SEGMENTS: Generates media manifests for this output group, but
-                                             not a master manifest.
-                                             
-                                             SEGMENTS_ONLY: Does not generate any manifests for this output group.
+                                          <p>MANIFESTSANDSEGMENTS: Generates manifests (the master manifest, if applicable, and
+                                             media manifests) for this output group. SEGMENTSONLY: Doesn&apos;t generate any manifests
+                                             for
+                                             this output group.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -524,12 +522,12 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-programdatetime"></a><span class="term"><code class="code">ProgramDateTime</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value
-                                             is calculated as follows: either the program date and time are initialized using the
-                                             input timecode source, or the time is initialized using the input timecode source
+                                          <p>Includes or excludes the EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The
+                                             value is calculated as follows: Either the program date and time are initialized using
+                                             the input timecode source, or the time is initialized using the input timecode source
                                              and the date is initialized using the timestampOffset.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -539,8 +537,8 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-programdatetimeperiod"></a><span class="term"><code class="code">ProgramDateTimePeriod</code></span></dt>
                                        <dd>
                                           
+                                          <p>The period of insertion of the EXT-X-PROGRAM-DATE-TIME entry, in seconds.</p>
                                           
-                                          <p>Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
@@ -550,21 +548,21 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-redundantmanifest"></a><span class="term"><code class="code">RedundantManifest</code></span></dt>
                                        <dd>
                                           
-                                          
                                           <p>ENABLED: The master manifest (.m3u8 file) for each pipeline includes information about
                                              both pipelines: first its own media files, then the media files of the other pipeline.
-                                             This feature allows playout device that support stale manifest detection to switch
+                                             This feature allows a playout device that supports stale manifest detection to switch
                                              from one manifest to the other, when the current manifest seems to be stale. There
-                                             are still two destinations and two master manifests, but both master manifests reference
-                                             the media files from both pipelines.
-                                             
-                                             DISABLED: The master manifest (.m3u8 file) for each pipeline includes information
-                                             about its own pipeline only.
-                                             
-                                             For an HLS output group with MediaPackage as the destination, the DISABLED behavior
-                                             is always followed. MediaPackage regenerates the manifests it serves to players so
-                                             a redundant manifest from MediaLive is irrelevant.
+                                             are
+                                             still two destinations and two master manifests, but both master manifests reference
+                                             the
+                                             media files from both pipelines. DISABLED: The master manifest (.m3u8 file) for each
+                                             pipeline includes information about its own pipeline only. For an HLS output group
+                                             with
+                                             MediaPackage as the destination, the DISABLED behavior is always followed. MediaPackage
+                                             regenerates the manifests it serves to players, so a redundant manifest from MediaLive
+                                             is irrelevant.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -574,8 +572,10 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-segmentationmode"></a><span class="term"><code class="code">SegmentationMode</code></span></dt>
                                        <dd>
                                           
+                                          <p>useInputSegmentation has been deprecated. The configured segment size is always
+                                             used.
+                                          </p>
                                           
-                                          <p>useInputSegmentation has been deprecated. The configured segment size is always used.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -585,11 +585,11 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-segmentlength"></a><span class="term"><code class="code">SegmentLength</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments
-                                             will end on the next keyframe after this number of seconds, so actual segment length
-                                             may be longer.
+                                          <p>The length of the MPEG-2 Transport Stream segments to create, in seconds. Note that
+                                             segments will end on the next keyframe after this number of seconds, so the actual
+                                             segment length might be longer.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
@@ -599,10 +599,10 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-segmentspersubdirectory"></a><span class="term"><code class="code">SegmentsPerSubdirectory</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>Number of segments to write to a subdirectory before starting a new one. directoryStructure
-                                             must be subdirectoryPerStream for this setting to have an effect.
+                                          <p>The number of segments to write to a subdirectory before starting a new one. For this
+                                             setting to have an effect, directoryStructure must be subdirectoryPerStream.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
@@ -612,10 +612,11 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-streaminfresolution"></a><span class="term"><code class="code">StreamInfResolution</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of variant
-                                             manifest.
+                                          <p>The include or exclude RESOLUTION attribute for a video in the EXT-X-STREAM-INF tag
+                                             of
+                                             a variant manifest.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -625,8 +626,8 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-timedmetadataid3frame"></a><span class="term"><code class="code">TimedMetadataId3Frame</code></span></dt>
                                        <dd>
                                           
+                                          <p>Indicates the ID3 frame that has the timecode.</p>
                                           
-                                          <p>Indicates ID3 frame that has the timecode.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -636,8 +637,8 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-timedmetadataid3period"></a><span class="term"><code class="code">TimedMetadataId3Period</code></span></dt>
                                        <dd>
                                           
+                                          <p>The timed metadata interval, in seconds.</p>
                                           
-                                          <p>Timed Metadata interval in seconds.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
@@ -647,8 +648,8 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-timestampdeltamilliseconds"></a><span class="term"><code class="code">TimestampDeltaMilliseconds</code></span></dt>
                                        <dd>
                                           
-                                          
                                           <p>Provides an extra millisecond delta offset to fine tune the timestamps.</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
@@ -658,15 +659,18 @@
                                        <dt><a id="cfn-medialive-channel-hlsgroupsettings-tsfilemode"></a><span class="term"><code class="code">TsFileMode</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>SEGMENTED_FILES: Emit the program as segments - multiple .ts media files.
-                                             
-                                             SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts media
-                                             file. The media manifest includes #EXT-X-BYTERANGE tags to index segments for playback.
-                                             A typical use for this value is when sending the output to AWS Elemental MediaConvert,
-                                             which can accept only a single media file. Playback while the channel is running is
-                                             not guaranteed due to HTTP server caching.
+                                          <p>SEGMENTEDFILES: Emits the program as
+                                             segments
+                                             -multiple .ts media files. SINGLEFILE:
+                                             Applies only if the Mode field is VOD. Emits the program as a single .ts media file.
+                                             The
+                                             media manifest includes #EXT-X-BYTERANGE tags to index segments for playback. A typical
+                                             use for this value is when sending the output to AWS Elemental MediaConvert, which
+                                             can
+                                             accept only a single media file. Playback while the channel is running is not guaranteed
+                                             due to HTTP server caching.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
