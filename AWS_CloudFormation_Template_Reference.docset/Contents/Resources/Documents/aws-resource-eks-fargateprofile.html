@@ -34,7 +34,7 @@
                                  <p>When you create a Fargate profile, you must specify a pod execution role to use with
                                     the
                                     pods that are scheduled with the profile. This role is added to the cluster&apos;s Kubernetes
-                                    <a href="https://kubernetes.io/docs/admin/authorization/rbac/" target="_blank"><span>Role Based Access
+                                    <a href="https://kubernetes.io/docs/admin/authorization/rbac/" rel="noopener noreferrer" target="_blank"><span>Role Based Access
                                           Control</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> (RBAC) for authorization so that the <code class="code">kubelet</code> that is
                                     running on the Fargate infrastructure can register with your Amazon EKS cluster so
                                     that it can
@@ -207,6 +207,53 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
+                                 <h2 id="aws-resource-eks-fargateprofile--examples">Examples</h2>
+                                 <h3 id="aws-resource-eks-fargateprofile--examples--Create_a_Fargate_profile">Create a Fargate profile</h3>
+                                 <p>The following example creates a Fargate profile for pods deployed to a
+                                    namespace with the name <code class="code">my-namespace</code> that have a label with a key
+                                    value pair assigned to them.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-eks-fargateprofile--examples--Create_a_Fargate_profile--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+   &quot;Resources&quot; : <span>{</span>
+      &quot;EKSFargateProfile&quot; : <span>{</span>
+         &quot;Type&quot; : &quot;AWS::EKS::FargateProfile&quot;,
+         &quot;Properties&quot; : <span>{</span>
+            &quot;FargateProfileName&quot; : &quot;my-fargate-profile&quot;,
+            &quot;ClusterName&quot; : &quot;my-cluster&quot;,
+            &quot;PodExecutionRoleArn&quot; : &quot;arn:aws:iam::012345678910:role/AmazonEKSFargatePodExecutionRole&quot;,
+            &quot;Subnets&quot; : [ &quot;subnet-6782e71e&quot;, &quot;subnet-e7e761ac&quot; ],
+            &quot;Selectors&quot; : [
+               <span>{</span>
+                  &quot;Namespace&quot; : &quot;my-namespace&quot;,
+                  &quot;Labels&quot; : [
+                     <span>{</span>
+                        &quot;Key&quot; : &quot;my-key&quot;,
+                        &quot;Value&quot; : &quot;my-value&quot;
+                     }
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-eks-fargateprofile--examples--Create_a_Fargate_profile--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  EKSFargateProfile:
+    Type: &apos;AWS::EKS::FargateProfile&apos;
+    Properties:
+      FargateProfileName: my-fargate-profile
+      ClusterName: my-cluster
+      PodExecutionRoleArn: &apos;arn:aws:iam::012345678910:role/AmazonEKSFargatePodExecutionRole&apos;
+      Subnets:
+        - subnet-6782e71e
+        - subnet-e7e761ac
+      Selectors:
+        - Namespace: my-namespace
+          Labels:
+            - Key: my-key
+              Value: my-value</code></pre></div>
                                  <h2 id="aws-resource-eks-fargateprofile--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      

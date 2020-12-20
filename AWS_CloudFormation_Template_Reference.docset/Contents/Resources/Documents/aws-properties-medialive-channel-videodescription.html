@@ -16,7 +16,8 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Video settings for this stream.</p>
+                                 <p>Encoding information for one output video.</p>
+                                 <p>The parent of this entity is EncoderSettings.</p>
                                  <h2 id="aws-properties-medialive-channel-videodescription-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -46,8 +47,8 @@
                                        <dt><a id="cfn-medialive-channel-videodescription-codecsettings"></a><span class="term"><code class="code">CodecSettings</code></span></dt>
                                        <dd>
                                           
+                                          <p>The video codec settings.</p>
                                           
-                                          <p>Video codec settings.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-medialive-channel-videocodecsettings.html">VideoCodecSettings</a></p>
@@ -56,12 +57,13 @@
                                        <dt><a id="cfn-medialive-channel-videodescription-height"></a><span class="term"><code class="code">Height</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>Output video height, in pixels. Must be an even number. For most codecs, you can leave
-                                             this field and width blank in order to use the height and width (resolution) from
-                                             the source. Note, however, that leaving blank is not recommended. For the Frame Capture
-                                             codec, height and width are required.
+                                          <p>The output video height, in pixels. This must be an even number. For most codecs,
+                                             you
+                                             can keep this field and width blank in order to use the height and width (resolution)
+                                             from the source. Note that we don&apos;t recommend keeping the field blank. For the Frame
+                                             Capture codec, height and width are required.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
@@ -71,10 +73,10 @@
                                        <dt><a id="cfn-medialive-channel-videodescription-name"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>The name of this VideoDescription. Outputs will use this name to uniquely identify
-                                             this Description.  Description names should be unique within this Live Event.
+                                          <p>The name of this VideoDescription. Outputs use this name to uniquely identify this
+                                             description. Description names should be unique within this channel.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -84,19 +86,18 @@
                                        <dt><a id="cfn-medialive-channel-videodescription-respondtoafd"></a><span class="term"><code class="code">RespondToAfd</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>Indicates how MediaLive will respond to the AFD values that might be in the input
-                                             video. If you do not know what AFD signaling is, or if your downstream system has
-                                             not given you guidance, choose PASSTHROUGH.
-                                             RESPOND: MediaLive clips the input video using a formula that uses the AFD values
-                                             (configured in afdSignaling ), the input display aspect ratio, and the output display
-                                             aspect ratio. MediaLive also includes the AFD values in the output, unless the codec
-                                             for this encode is FRAME_CAPTURE.
-                                             PASSTHROUGH: MediaLive ignores the AFD values and does not clip the video. But MediaLive
-                                             does include the values in the output.
-                                             NONE: MediaLive does not clip the input video and does not include the AFD values
-                                             in the output
+                                          <p>Indicates how to respond to the AFD values in the input stream. RESPOND causes input
+                                             video to be clipped, depending on the AFD value, input display aspect ratio, and output
+                                             display aspect ratio, and (except for the FRAMECAPTURE codec) includes the values
+                                             in the
+                                             output. PASSTHROUGH (does not apply to FRAMECAPTURE codec) ignores the AFD values
+                                             and
+                                             includes the values in the output, so input video is not clipped. NONE ignores the
+                                             AFD
+                                             values and does not include the values through to the output, so input video is not
+                                             clipped.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -106,12 +107,13 @@
                                        <dt><a id="cfn-medialive-channel-videodescription-scalingbehavior"></a><span class="term"><code class="code">ScalingBehavior</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>STRETCH_TO_OUTPUT configures the output position to stretch the video to the specified
-                                             output resolution (height and width). This option will override any position value.
-                                             DEFAULT may insert black boxes (pillar boxes or letter boxes) around the video to
-                                             provide the specified output resolution.
+                                          <p>STRETCHTOOUTPUT configures the output position to stretch the video to the specified
+                                             output resolution (height and width). This option overrides any position value. DEFAULT
+                                             might insert black boxes (pillar boxes or letter boxes) around the video to provide
+                                             the
+                                             specified output resolution.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -121,10 +123,10 @@
                                        <dt><a id="cfn-medialive-channel-videodescription-sharpness"></a><span class="term"><code class="code">Sharpness</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>Changes the strength of the anti-alias filter used for scaling. 0 is the softest setting,
-                                             100 is the sharpest. A setting of 50 is recommended for most content.
+                                          <p>Changes the strength of the anti-alias filter used for scaling. 0 is the softest
+                                             setting, and 100 is the sharpest. We recommend a setting of 50 for most content.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
@@ -134,12 +136,14 @@
                                        <dt><a id="cfn-medialive-channel-videodescription-width"></a><span class="term"><code class="code">Width</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>Output video width, in pixels. Must be an even number. For most codecs, you can leave
-                                             this field and height blank in order to use the height and width (resolution) from
-                                             the source. Note, however, that leaving blank is not recommended. For the Frame Capture
+                                          <p>The output video width, in pixels. It must be an even number. For most codecs, you
+                                             can
+                                             keep this field and height blank in order to use the height and width (resolution)
+                                             from
+                                             the source. Note that we don&apos;t recommend keeping the field blank. For the Frame Capture
                                              codec, height and width are required.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer

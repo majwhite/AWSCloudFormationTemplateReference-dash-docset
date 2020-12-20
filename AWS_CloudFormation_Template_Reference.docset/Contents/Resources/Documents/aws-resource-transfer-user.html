@@ -325,67 +325,72 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-transfer-user--examples">Examples</h2>
+                                 <p></p>
                                  <h3 id="aws-resource-transfer-user--examples--Associate_a_user_with_a_server">Associate a user with a server</h3>
                                  <p>The following example associates a user with a server.</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-transfer-user--examples--Associate_a_user_with_a_server--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;transfer_user&quot;: <span>{</span>
-    &quot;Type&quot;: &quot;AWS::Transfer::User&quot;,
-    &quot;Properties&quot;: <span>{</span>
-      &quot;HomeDirectoryMappings&quot;: [
-        <span>{</span>
-          &quot;Entry&quot;: &quot;/our-personal-report.pdf&quot;,
-          &quot;Target&quot;: &quot;/bucket3/customized-reports/$<span>{</span>transfer:UserName}.pdf&quot;
+    &quot;Resources&quot;: <span>{</span>
+        &quot;transferUser&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::Transfer::User&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;HomeDirectoryMappings&quot;: [
+                    <span>{</span>
+                        &quot;Entry&quot;: &quot;/our-personal-report.pdf&quot;,
+                        &quot;Target&quot;: &quot;/bucket3/customized-reports/$<span>{</span>transfer:UserName}.pdf&quot;
+                    }
+                ],
+                &quot;HomeDirectoryType&quot;: &quot;LOGICAL&quot;,
+                &quot;Policy&quot;: <span>{</span>
+                    &quot;Version&quot;: &quot;2012-10-17T00:00:00.000Z&quot;,
+                    &quot;Statement&quot;: <span>{</span>
+                        &quot;Sid&quot;: &quot;AllowFullAccessToBucket&quot;,
+                        &quot;Action&quot;: &quot;s3:*&quot;,
+                        &quot;Effect&quot;: &quot;Allow&quot;,
+                        &quot;Resource&quot;: &quot;arn:aws:s3:::bucket_name arn:aws:s3:::bucket_name/*&quot;
+                    }
+                },
+                &quot;Role&quot;: &quot;arn:aws:iam::176354371281:role/Transfer_role&quot;,
+                &quot;ServerId&quot;: &quot;s-01234567890abcdef&quot;,
+                &quot;SshPublicKeys&quot;: [
+                    &quot;AAAAB3NzaC1yc2EAAAADAQABAAABAQCOtfCAis3aHfM6yc8KWAlMQxVDBHyccCde9MdLf4DQNXn8HjAHf+Bc1vGGCAREFUL1NO2PEEKING3ALLOWEDfIf+JBecywfO35Cm6IKIV0JF2YOPXvOuQRs80hQaBUvQL9xw6VEb4xzbit2QB6&quot;
+                ],
+                &quot;Tags&quot;: [
+                    <span>{</span>
+                        &quot;Key&quot;: &quot;KeyName&quot;,
+                        &quot;Value&quot;: &quot;ValueName&quot;
+                    }
+                ],
+                &quot;UserName&quot;: &quot;username&quot;
+            }
         }
-      ],
-      &quot;HomeDirectoryType&quot;: &quot;LOGICAL&quot;,
-      &quot;Policy&quot;: <span>{</span>
-        &quot;Version&quot;: &quot;2012-10-17T00:00:00.000Z&quot;,
-        &quot;Statement&quot;: <span>{</span>
-          &quot;Sid&quot;: &quot;AllowFullAccessToBucket&quot;,
-          &quot;Action&quot;: &quot;s3:*&quot;,
-          &quot;Effect&quot;: &quot;Allow&quot;,
-          &quot;Resource&quot;: &quot;arn:aws:s3:::bucket_name arn:aws:s3:::bucket_name/*&quot;
-        }
-      },
-      &quot;Role&quot;: &quot;arn:aws:iam::176354371281:role/Transfer_role&quot;,
-      &quot;ServerId&quot;: &quot;s-01234567890abcdef&quot;,
-      &quot;SshPublicKeys&quot;: &quot;AAAAB3NzaC1yc2EAAAADAQABAAABAQCOtfCAis3aHfM6yc8KWAlMQxVDBHyccCde9MdLf4DQNXn8HjAHf+Bc1vGGCAREFUL1NO2PEEKING3ALLOWEDfIf+JBecywfO35Cm6IKIV0JF2YOPXvOuQRs80hQaBUvQL9xw6VEb4xzbit2QB6&quot;,
-      &quot;Tags&quot;: [
-        <span>{</span>
-          &quot;Key&quot;: &quot;KeyName&quot;,
-          &quot;Value&quot;: &quot;ValueName&quot;
-        }
-      ],
-      &quot;UserName&quot;: &quot;username&quot;
     }
-  }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-transfer-user--examples--Associate_a_user_with_a_server--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">transfer_user:
-  Type : AWS::Transfer::User
-  Properties :
-    HomeDirectoryMappings: 
-      - Entry: /our-personal-report.pdf
-        Target: /bucket3/customized-reports/$<span>{</span>transfer:UserName}.pdf
-    HomeDirectoryType: LOGICAL
-    Policy:
-      Version: 2012-10-17
-      Statement:
-        Sid: AllowFullAccessToBucket
-        Action: s3:*
-        Effect: Allow
-        Resource:
-          arn:aws:s3:::bucket_name
-          arn:aws:s3:::bucket_name/*
-    Role: arn:aws:iam::176354371281:role/Transfer_role
-    ServerId: s-01234567890abcdef
-    SshPublicKeys: AAAAB3NzaC1yc2EAAAADAQABAAABAQCOtfCAis3aHfM6yc8KWAlMQxVDBHyccCde9MdLf4DQNXn8HjAHf+Bc1vGGCAREFUL1NO2PEEKING3ALLOWEDfIf+JBecywfO35Cm6IKIV0JF2YOPXvOuQRs80hQaBUvQL9xw6VEb4xzbit2QB6
-    Tags:
-      - Key: KeyName
-        Value: ValueName
-    UserName: username
-</code></pre></div>
+                                    <h4 id="aws-resource-transfer-user--examples--Associate_a_user_with_a_server--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  transferUser:
+    Type: &apos;AWS::Transfer::User&apos;
+    Properties:
+      HomeDirectoryMappings:
+        - Entry: /our-personal-report.pdf
+          Target: &apos;/bucket3/customized-reports/$<span>{</span>transfer:UserName}.pdf&apos;
+      HomeDirectoryType: LOGICAL
+      Policy:
+        Version: &apos;2012-10-17T00:00:00.000Z&apos;
+        Statement:
+          Sid: AllowFullAccessToBucket
+          Action: &apos;s3:*&apos;
+          Effect: Allow
+          Resource: &apos;arn:aws:s3:::bucket_name arn:aws:s3:::bucket_name/*&apos;
+      Role: &apos;arn:aws:iam::176354371281:role/Transfer_role&apos;
+      ServerId: s-01234567890abcdef
+      SshPublicKeys:
+        - &gt;-
+          AAAAB3NzaC1yc2EAAAADAQABAAABAQCOtfCAis3aHfM6yc8KWAlMQxVDBHyccCde9MdLf4DQNXn8HjAHf+Bc1vGGCAREFUL1NO2PEEKING3ALLOWEDfIf+JBecywfO35Cm6IKIV0JF2YOPXvOuQRs80hQaBUvQL9xw6VEb4xzbit2QB6
+      Tags:
+        - Key: KeyName
+          Value: ValueName
+      UserName: username</code></pre></div>
                                  <h2 id="aws-resource-transfer-user--seealso">See also</h2>
                                  <p><a href="https://docs.aws.amazon.com/transfer/latest/userguide/API_CreateUser.html">CreateUser</a> in the <em>AWS Transfer Family User
                                        Guide</em>.

@@ -20,8 +20,8 @@
                                     input.
                                  </p>
                                  <p>A MediaLive input holds information that describes how the MediaLive channel is
-                                    connected to the upstream system that is providing the source content that is to
-                                    be transcoded. 
+                                    connected to the upstream system that is providing the source content that is to be
+                                    transcoded. 
                                  </p>
                                  <h2 id="aws-resource-medialive-input-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -68,8 +68,10 @@ Properties:
                                        <dt><a id="cfn-medialive-input-destinations"></a><span class="term"><code class="code">Destinations</code></span></dt>
                                        <dd>
                                           
+                                          <p>The destination settings for push types of inputs. If the input is a pull type, these
+                                             settings don&apos;t apply. 
+                                          </p>
                                           
-                                          <p>Destination settings for PUSH type inputs.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="./aws-properties-medialive-input-inputdestinationrequest.html">InputDestinationRequest</a></p>
@@ -88,8 +90,10 @@ Properties:
                                        <dt><a id="cfn-medialive-input-inputsecuritygroups"></a><span class="term"><code class="code">InputSecurityGroups</code></span></dt>
                                        <dd>
                                           
+                                          <p>The list of input security groups (referenced by IDs) to attach to the input if the
+                                             input is a push type.
+                                          </p>
                                           
-                                          <p>A list of security groups referenced by IDs to attach to the input.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of String
@@ -99,14 +103,8 @@ Properties:
                                        <dt><a id="cfn-medialive-input-mediaconnectflows"></a><span class="term"><code class="code">MediaConnectFlows</code></span></dt>
                                        <dd>
                                           
+                                          <p>Settings that apply only if the input is a MediaConnect input.</p>
                                           
-                                          <p>A list of the MediaConnect Flows that you want to use in this input. You can specify
-                                             as few as one
-                                             Flow and presently, as many as two. The only requirement is when you have more than
-                                             one is that each Flow is in a
-                                             separate Availability Zone as this ensures your EML input is redundant to AZ issues.
-                                             
-                                          </p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="./aws-properties-medialive-input-mediaconnectflowrequest.html">MediaConnectFlowRequest</a></p>
@@ -115,8 +113,8 @@ Properties:
                                        <dt><a id="cfn-medialive-input-name"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
                                           
+                                          <p>A name for the input.</p>
                                           
-                                          <p>Name of the input.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -126,8 +124,13 @@ Properties:
                                        <dt><a id="cfn-medialive-input-rolearn"></a><span class="term"><code class="code">RoleArn</code></span></dt>
                                        <dd>
                                           
+                                          <p>The IAM role for MediaLive to assume when creating a MediaConnect input or Amazon
+                                             VPC
+                                             input. This doesn&apos;t apply to other types of inputs. The role is identified by its
+                                             ARN.
+                                             
+                                          </p>
                                           
-                                          <p>The Amazon Resource Name (ARN) of the role this input assumes during and after creation.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -137,12 +140,10 @@ Properties:
                                        <dt><a id="cfn-medialive-input-sources"></a><span class="term"><code class="code">Sources</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>The source URLs for a PULL-type input. Every PULL type input needs
-                                             exactly two source URLs for redundancy.
-                                             Only specify sources for PULL type Inputs. Leave Destinations empty.
-                                             
+                                          <p>The source settings for a pull type of input. These settings don&apos;t apply if the input
+                                             is a push type. 
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="./aws-properties-medialive-input-inputsourcerequest.html">InputSourceRequest</a></p>
@@ -151,8 +152,8 @@ Properties:
                                        <dt><a id="cfn-medialive-input-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
                                           
+                                          <p>A collection of tags for this input. Each tag is a key-value pair.</p>
                                           
-                                          <p>A collection of key-value pairs.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Json
@@ -161,7 +162,9 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-medialive-input-type"></a><span class="term"><code class="code">Type</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The type for this input.</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -171,14 +174,8 @@ Properties:
                                        <dt><a id="cfn-medialive-input-vpc"></a><span class="term"><code class="code">Vpc</code></span></dt>
                                        <dd>
                                           
+                                          <p>Settings that apply only if the input is an Amazon VPC input. </p>
                                           
-                                          <p>Settings for a private VPC Input.
-                                             When this property is specified, the input destination addresses will be created in
-                                             a VPC rather than with public Internet addresses.
-                                             This property requires setting the roleArn property on Input creation.
-                                             Not compatible with the inputSecurityGroups property.
-                                             
-                                          </p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-medialive-input-inputvpcrequest.html">InputVpcRequest</a></p>
@@ -188,9 +185,9 @@ Properties:
                                  </div>
                                  <h2 id="aws-resource-medialive-input-return-values">Return values</h2>
                                  <h3 id="aws-resource-medialive-input-return-values-ref">Ref</h3>
-                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the ID of the input.
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the name of the input.
                                  </p>
-                                 <p>For example: <code class="code"><span>{</span> &quot;Ref&quot;: &quot;1234567&quot; }</code></p>
+                                 <p>For example: <code class="code"><span>{</span> &quot;Ref&quot;: &quot;myInput&quot; }</code></p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
                                  <h3 id="aws-resource-medialive-input-return-values-fn--getatt">Fn::GetAtt</h3>
@@ -200,8 +197,6 @@ Properties:
                                  
                                  <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
                                  </p>
-                                 <p>The IP addresses are in a string format that shows a list. For example
-                                    <code class="code">[rtp://203.0.113.28:5000, rtp://203.0.113.33:5005]</code></p>
                                  <h4 id="aws-resource-medialive-input-return-values-fn--getatt-fn--getatt"></h4>
                                  <div class="variablelist">
                                     <dl>
@@ -209,19 +204,20 @@ Properties:
                                        <dd>
                                           
                                           <p>The ARN of the MediaLive input. For example:
-                                             arn:aws:medialive:us-west-1:111122223333:medialive:input:1234567. MediaLive
-                                             creates this ARN when it creates the input. 
+                                             arn:aws:medialive:us-west-1:111122223333:medialive:input:1234567. MediaLive creates
+                                             this
+                                             ARN when it creates the input. 
                                           </p>
                                           
                                        </dd>
                                        <dt><a id="Destinations-fn::getatt"></a><span class="term"><code class="code">Destinations</code></span></dt>
                                        <dd>
                                           
-                                          <p>For a push input, the destination or destinations for the
-                                             input. The destinations are the IP addresses on MediaLive
-                                             where the upstream system pushes the content for this input.
-                                             MediaLive creates these IP addresses when it creates the
-                                             input. 
+                                          <p>For a push input, the destination or destinations for the input. The destinations
+                                             are
+                                             the IP addresses on MediaLive where the upstream system pushes the content to for
+                                             this
+                                             input. MediaLive creates these IP addresses when it creates the input. 
                                           </p>
                                           
                                        </dd>
@@ -229,8 +225,8 @@ Properties:
                                        <dd>
                                           
                                           <p>For a pull input, the source or sources for the input. The sources are the IP
-                                             addresses on the upstream system where MediaLive pulls the content from for this
-                                             input. You included these IP addresses in the create request.
+                                             addresses on the upstream system where MediaLive pulls the content from for this input.
+                                             You included these IP addresses in the create request.
                                           </p>
                                           
                                        </dd>

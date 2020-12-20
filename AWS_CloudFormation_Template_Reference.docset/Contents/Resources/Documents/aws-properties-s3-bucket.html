@@ -517,21 +517,22 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-properties-s3-bucket--examples">Examples</h2>
+                                 <p></p>
                                  <h3 id="aws-properties-s3-bucket--examples--Create_an_S3_bucket">Create an S3 bucket</h3>
                                  <p>The following example creates an S3 bucket with a <code class="code">Retain</code> deletion
                                     policy.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-properties-s3-bucket--examples--Create_an_S3_bucket--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Resources&quot;: <span>{</span>
-    &quot;S3Bucket&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
-      &quot;DeletionPolicy&quot;: &quot;Retain&quot;,
-      &quot;Properties&quot;: <span>{</span>
-        &quot;BucketName&quot;: &quot;DOC-EXAMPLE-BUCKET&quot;
-      }
+    &quot;Resources&quot;: <span>{</span>
+        &quot;S3Bucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+            &quot;DeletionPolicy&quot;: &quot;Retain&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;BucketName&quot;: &quot;DOC-EXAMPLE-BUCKET&quot;
+            }
+        }
     }
-  }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h4 id="aws-properties-s3-bucket--examples--Create_an_S3_bucket--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
@@ -549,165 +550,165 @@ Properties:
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-properties-s3-bucket--examples--Associate_a_replication_configuration_IAM_role_with_an_S3_bucket--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Resources&quot;: <span>{</span>
-    &quot;RecordServiceS3Bucket&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
-      &quot;DeletionPolicy&quot;: &quot;Retain&quot;,
-      &quot;Properties&quot;: <span>{</span>
-        &quot;ReplicationConfiguration&quot;: <span>{</span>
-          &quot;Role&quot;: <span>{</span>
-            &quot;Fn::GetAtt&quot;: [
-              &quot;WorkItemBucketBackupRole&quot;,
-              &quot;Arn&quot;
-            ]
-          },
-          &quot;Rules&quot;: [
-            <span>{</span>
-              &quot;Destination&quot;: <span>{</span>
-                &quot;Bucket&quot;: <span>{</span>
-                  &quot;Fn::Join&quot;: [
-                    &quot;&quot;,
-                    [
-                      &quot;arn:aws:s3:::&quot;,
-                      <span>{</span>
-                        &quot;Fn::Join&quot;: [
-                          &quot;-&quot;,
-                          [
-                            <span>{</span>
-                              &quot;Ref&quot;: &quot;AWS::Region&quot;
-                            },
-                            <span>{</span>
-                              &quot;Ref&quot;: &quot;AWS::StackName&quot;
-                            },
-                            &quot;replicationbucket&quot;
-                          ]
+    &quot;Resources&quot;: <span>{</span>
+        &quot;RecordServiceS3Bucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+            &quot;DeletionPolicy&quot;: &quot;Retain&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;ReplicationConfiguration&quot;: <span>{</span>
+                    &quot;Role&quot;: <span>{</span>
+                        &quot;Fn::GetAtt&quot;: [
+                            &quot;WorkItemBucketBackupRole&quot;,
+                            &quot;Arn&quot;
                         ]
-                      }
+                    },
+                    &quot;Rules&quot;: [
+                        <span>{</span>
+                            &quot;Destination&quot;: <span>{</span>
+                                &quot;Bucket&quot;: <span>{</span>
+                                    &quot;Fn::Join&quot;: [
+                                        &quot;&quot;,
+                                        [
+                                            &quot;arn:aws:s3:::&quot;,
+                                            <span>{</span>
+                                                &quot;Fn::Join&quot;: [
+                                                    &quot;-&quot;,
+                                                    [
+                                                        <span>{</span>
+                                                            &quot;Ref&quot;: &quot;AWS::Region&quot;
+                                                        },
+                                                        <span>{</span>
+                                                            &quot;Ref&quot;: &quot;AWS::StackName&quot;
+                                                        },
+                                                        &quot;replicationbucket&quot;
+                                                    ]
+                                                ]
+                                            }
+                                        ]
+                                    ]
+                                },
+                                &quot;StorageClass&quot;: &quot;STANDARD&quot;
+                            },
+                            &quot;Id&quot;: &quot;Backup&quot;,
+                            &quot;Prefix&quot;: &quot;&quot;,
+                            &quot;Status&quot;: &quot;Enabled&quot;
+                        }
                     ]
-                  ]
                 },
-                &quot;StorageClass&quot;: &quot;STANDARD&quot;
-              },
-              &quot;Id&quot;: &quot;Backup&quot;,
-              &quot;Prefix&quot;: &quot;&quot;,
-              &quot;Status&quot;: &quot;Enabled&quot;
+                &quot;VersioningConfiguration&quot;: <span>{</span>
+                    &quot;Status&quot;: &quot;Enabled&quot;
+                }
             }
-          ]
         },
-        &quot;VersioningConfiguration&quot;: <span>{</span>
-          &quot;Status&quot;: &quot;Enabled&quot;
-        }
-      }
-    },
-    &quot;WorkItemBucketBackupRole&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;AWS::IAM::Role&quot;,
-      &quot;Properties&quot;: <span>{</span>
-        &quot;AssumeRolePolicyDocument&quot;: <span>{</span>
-          &quot;Statement&quot;: [
-            <span>{</span>
-              &quot;Action&quot;: [
-                &quot;sts:AssumeRole&quot;
-              ],
-              &quot;Effect&quot;: &quot;Allow&quot;,
-              &quot;Principal&quot;: <span>{</span>
-                &quot;Service&quot;: [
-                  &quot;s3.amazonaws.com&quot;
+        &quot;WorkItemBucketBackupRole&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::IAM::Role&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;AssumeRolePolicyDocument&quot;: <span>{</span>
+                    &quot;Statement&quot;: [
+                        <span>{</span>
+                            &quot;Action&quot;: [
+                                &quot;sts:AssumeRole&quot;
+                            ],
+                            &quot;Effect&quot;: &quot;Allow&quot;,
+                            &quot;Principal&quot;: <span>{</span>
+                                &quot;Service&quot;: [
+                                    &quot;s3.amazonaws.com&quot;
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        &quot;BucketBackupPolicy&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::IAM::Policy&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;PolicyDocument&quot;: <span>{</span>
+                    &quot;Statement&quot;: [
+                        <span>{</span>
+                            &quot;Action&quot;: [
+                                &quot;s3:GetReplicationConfiguration&quot;,
+                                &quot;s3:ListBucket&quot;
+                            ],
+                            &quot;Effect&quot;: &quot;Allow&quot;,
+                            &quot;Resource&quot;: [
+                                <span>{</span>
+                                    &quot;Fn::Join&quot;: [
+                                        &quot;&quot;,
+                                        [
+                                            &quot;arn:aws:s3:::&quot;,
+                                            <span>{</span>
+                                                &quot;Ref&quot;: &quot;RecordServiceS3Bucket&quot;
+                                            }
+                                        ]
+                                    ]
+                                }
+                            ]
+                        },
+                        <span>{</span>
+                            &quot;Action&quot;: [
+                                &quot;s3:GetObjectVersion&quot;,
+                                &quot;s3:GetObjectVersionAcl&quot;
+                            ],
+                            &quot;Effect&quot;: &quot;Allow&quot;,
+                            &quot;Resource&quot;: [
+                                <span>{</span>
+                                    &quot;Fn::Join&quot;: [
+                                        &quot;&quot;,
+                                        [
+                                            &quot;arn:aws:s3:::&quot;,
+                                            <span>{</span>
+                                                &quot;Ref&quot;: &quot;RecordServiceS3Bucket&quot;
+                                            },
+                                            &quot;/*&quot;
+                                        ]
+                                    ]
+                                }
+                            ]
+                        },
+                        <span>{</span>
+                            &quot;Action&quot;: [
+                                &quot;s3:ReplicateObject&quot;,
+                                &quot;s3:ReplicateDelete&quot;
+                            ],
+                            &quot;Effect&quot;: &quot;Allow&quot;,
+                            &quot;Resource&quot;: [
+                                <span>{</span>
+                                    &quot;Fn::Join&quot;: [
+                                        &quot;&quot;,
+                                        [
+                                            &quot;arn:aws:s3:::&quot;,
+                                            <span>{</span>
+                                                &quot;Fn::Join&quot;: [
+                                                    &quot;-&quot;,
+                                                    [
+                                                        <span>{</span>
+                                                            &quot;Ref&quot;: &quot;AWS::Region&quot;
+                                                        },
+                                                        <span>{</span>
+                                                            &quot;Ref&quot;: &quot;AWS::StackName&quot;
+                                                        },
+                                                        &quot;replicationbucket&quot;
+                                                    ]
+                                                ]
+                                            },
+                                            &quot;/*&quot;
+                                        ]
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                &quot;PolicyName&quot;: &quot;BucketBackupPolicy&quot;,
+                &quot;Roles&quot;: [
+                    <span>{</span>
+                        &quot;Ref&quot;: &quot;WorkItemBucketBackupRole&quot;
+                    }
                 ]
-              }
             }
-          ]
         }
-      }
-    },
-    &quot;BucketBackupPolicy&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;AWS::IAM::Policy&quot;,
-      &quot;Properties&quot;: <span>{</span>
-        &quot;PolicyDocument&quot;: <span>{</span>
-          &quot;Statement&quot;: [
-            <span>{</span>
-              &quot;Action&quot;: [
-                &quot;s3:GetReplicationConfiguration&quot;,
-                &quot;s3:ListBucket&quot;
-              ],
-              &quot;Effect&quot;: &quot;Allow&quot;,
-              &quot;Resource&quot;: [
-                <span>{</span>
-                  &quot;Fn::Join&quot;: [
-                    &quot;&quot;,
-                    [
-                      &quot;arn:aws:s3:::&quot;,
-                      <span>{</span>
-                        &quot;Ref&quot;: &quot;RecordServiceS3Bucket&quot;
-                      }
-                    ]
-                  ]
-                }
-              ]
-            },
-            <span>{</span>
-              &quot;Action&quot;: [
-                &quot;s3:GetObjectVersion&quot;,
-                &quot;s3:GetObjectVersionAcl&quot;
-              ],
-              &quot;Effect&quot;: &quot;Allow&quot;,
-              &quot;Resource&quot;: [
-                <span>{</span>
-                  &quot;Fn::Join&quot;: [
-                    &quot;&quot;,
-                    [
-                      &quot;arn:aws:s3:::&quot;,
-                      <span>{</span>
-                        &quot;Ref&quot;: &quot;RecordServiceS3Bucket&quot;
-                      },
-                      &quot;/*&quot;
-                    ]
-                  ]
-                }
-              ]
-            },
-            <span>{</span>
-              &quot;Action&quot;: [
-                &quot;s3:ReplicateObject&quot;,
-                &quot;s3:ReplicateDelete&quot;
-              ],
-              &quot;Effect&quot;: &quot;Allow&quot;,
-              &quot;Resource&quot;: [
-                <span>{</span>
-                  &quot;Fn::Join&quot;: [
-                    &quot;&quot;,
-                    [
-                      &quot;arn:aws:s3:::&quot;,
-                      <span>{</span>
-                        &quot;Fn::Join&quot;: [
-                          &quot;-&quot;,
-                          [
-                            <span>{</span>
-                              &quot;Ref&quot;: &quot;AWS::Region&quot;
-                            },
-                            <span>{</span>
-                              &quot;Ref&quot;: &quot;AWS::StackName&quot;
-                            },
-                            &quot;replicationbucket&quot;
-                          ]
-                        ]
-                      },
-                      &quot;/*&quot;
-                    ]
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        &quot;PolicyName&quot;: &quot;BucketBackupPolicy&quot;,
-        &quot;Roles&quot;: [
-          <span>{</span>
-            &quot;Ref&quot;: &quot;WorkItemBucketBackupRole&quot;
-          }
-        ]
-      }
     }
-  }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h4 id="aws-properties-s3-bucket--examples--Associate_a_replication_configuration_IAM_role_with_an_S3_bucket--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
@@ -716,21 +717,19 @@ Properties:
     DeletionPolicy: Retain
     Properties:
       ReplicationConfiguration:
-        Role:
-          &apos;Fn::GetAtt&apos;:
-            - WorkItemBucketBackupRole
-            - Arn
+        Role: !GetAtt
+          - WorkItemBucketBackupRole
+          - Arn
         Rules:
           - Destination:
-              Bucket:
-                &apos;Fn::Join&apos;:
-                  - &apos;&apos;
-                  - - &apos;arn:aws:s3:::&apos;
-                    - &apos;Fn::Join&apos;:
-                        - &apos;-&apos;
-                        - - Ref: &apos;AWS::Region&apos;
-                          - Ref: &apos;AWS::StackName&apos;
-                          - replicationbucket
+              Bucket: !Join
+                - &apos;&apos;
+                - - &apos;arn:aws:s3:::&apos;
+                  - !Join
+                    - &apos;-&apos;
+                    - - !Ref &apos;AWS::Region&apos;
+                      - !Ref &apos;AWS::StackName&apos;
+                      - replicationbucket
               StorageClass: STANDARD
             Id: Backup
             Prefix: &apos;&apos;
@@ -758,37 +757,37 @@ Properties:
               - &apos;s3:ListBucket&apos;
             Effect: Allow
             Resource:
-              - &apos;Fn::Join&apos;:
-                  - &apos;&apos;
-                  - - &apos;arn:aws:s3:::&apos;
-                    - Ref: RecordServiceS3Bucket
+              - !Join
+                - &apos;&apos;
+                - - &apos;arn:aws:s3:::&apos;
+                  - !Ref RecordServiceS3Bucket
           - Action:
               - &apos;s3:GetObjectVersion&apos;
               - &apos;s3:GetObjectVersionAcl&apos;
             Effect: Allow
             Resource:
-              - &apos;Fn::Join&apos;:
-                  - &apos;&apos;
-                  - - &apos;arn:aws:s3:::&apos;
-                    - Ref: RecordServiceS3Bucket
-                    - /*
+              - !Join
+                - &apos;&apos;
+                - - &apos;arn:aws:s3:::&apos;
+                  - !Ref RecordServiceS3Bucket
+                  - /*
           - Action:
               - &apos;s3:ReplicateObject&apos;
               - &apos;s3:ReplicateDelete&apos;
             Effect: Allow
             Resource:
-              - &apos;Fn::Join&apos;:
-                  - &apos;&apos;
-                  - - &apos;arn:aws:s3:::&apos;
-                    - &apos;Fn::Join&apos;:
-                        - &apos;-&apos;
-                        - - Ref: &apos;AWS::Region&apos;
-                          - Ref: &apos;AWS::StackName&apos;
-                          - replicationbucket
-                    - /*
+              - !Join
+                - &apos;&apos;
+                - - &apos;arn:aws:s3:::&apos;
+                  - !Join
+                    - &apos;-&apos;
+                    - - !Ref &apos;AWS::Region&apos;
+                      - !Ref &apos;AWS::StackName&apos;
+                      - replicationbucket
+                  - /*
       PolicyName: BucketBackupPolicy
       Roles:
-        - Ref: WorkItemBucketBackupRole</code></pre></div>
+        - !Ref WorkItemBucketBackupRole</code></pre></div>
                                  <h3 id="aws-properties-s3-bucket--examples--Configure_a_static_website_with_a_routing_rule">Configure a static website with a routing rule</h3>
                                  <p>In this example, <code class="code">AWS::S3::Bucket&apos;s Fn::GetAtt</code> values are used to
                                     provide outputs. If an HTTP 404 error occurs, the routing rule redirects requests
@@ -805,65 +804,65 @@ Properties:
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-properties-s3-bucket--examples--Configure_a_static_website_with_a_routing_rule--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Resources&quot;: <span>{</span>
-    &quot;S3Bucket&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
-      &quot;Properties&quot;: <span>{</span>
-        &quot;AccessControl&quot;: &quot;PublicRead&quot;,
-        &quot;BucketName&quot;: &quot;public-bucket&quot;,
-        &quot;MetricsConfigurations&quot;: [
-          <span>{</span>
-            &quot;Id&quot;: &quot;EntireBucket&quot;
-          }
-        ],
-        &quot;WebsiteConfiguration&quot;: <span>{</span>
-          &quot;IndexDocument&quot;: &quot;index.html&quot;,
-          &quot;ErrorDocument&quot;: &quot;error.html&quot;,
-          &quot;RoutingRules&quot;: [
-            <span>{</span>
-              &quot;RoutingRuleCondition&quot;: <span>{</span>
-                &quot;HttpErrorCodeReturnedEquals&quot;: &quot;404&quot;,
-                &quot;KeyPrefixEquals&quot;: &quot;out1/&quot;
-              },
-              &quot;RedirectRule&quot;: <span>{</span>
-                &quot;HostName&quot;: &quot;ec2-11-22-333-44.compute-1.amazonaws.com&quot;,
-                &quot;ReplaceKeyPrefixWith&quot;: &quot;report-404/&quot;
-              }
-            }
-          ]
+    &quot;Resources&quot;: <span>{</span>
+        &quot;S3Bucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;AccessControl&quot;: &quot;PublicRead&quot;,
+                &quot;BucketName&quot;: &quot;public-bucket&quot;,
+                &quot;MetricsConfigurations&quot;: [
+                    <span>{</span>
+                        &quot;Id&quot;: &quot;EntireBucket&quot;
+                    }
+                ],
+                &quot;WebsiteConfiguration&quot;: <span>{</span>
+                    &quot;IndexDocument&quot;: &quot;index.html&quot;,
+                    &quot;ErrorDocument&quot;: &quot;error.html&quot;,
+                    &quot;RoutingRules&quot;: [
+                        <span>{</span>
+                            &quot;RoutingRuleCondition&quot;: <span>{</span>
+                                &quot;HttpErrorCodeReturnedEquals&quot;: &quot;404&quot;,
+                                &quot;KeyPrefixEquals&quot;: &quot;out1/&quot;
+                            },
+                            &quot;RedirectRule&quot;: <span>{</span>
+                                &quot;HostName&quot;: &quot;ec2-11-22-333-44.compute-1.amazonaws.com&quot;,
+                                &quot;ReplaceKeyPrefixWith&quot;: &quot;report-404/&quot;
+                            }
+                        }
+                    ]
+                }
+            },
+            &quot;DeletionPolicy&quot;: &quot;Retain&quot;
         }
-      },
-      &quot;DeletionPolicy&quot;: &quot;Retain&quot;
-    }
-  },
-  &quot;Outputs&quot;: <span>{</span>
-    &quot;WebsiteURL&quot;: <span>{</span>
-      &quot;Value&quot;: <span>{</span>
-        &quot;Fn::GetAtt&quot;: [
-          &quot;S3Bucket&quot;,
-          &quot;WebsiteURL&quot;
-        ]
-      },
-      &quot;Description&quot;: &quot;URL for website hosted on S3&quot;
     },
-    &quot;S3BucketSecureURL&quot;: <span>{</span>
-      &quot;Value&quot;: <span>{</span>
-        &quot;Fn::Join&quot;: [
-          &quot;&quot;,
-          [
-            &quot;https://&quot;,
-            <span>{</span>
-              &quot;Fn::GetAtt&quot;: [
-                &quot;S3Bucket&quot;,
-                &quot;DomainName&quot;
-              ]
-            }
-          ]
-        ]
-      },
-      &quot;Description&quot;: &quot;Name of S3 bucket to hold website content&quot;
+    &quot;Outputs&quot;: <span>{</span>
+        &quot;WebsiteURL&quot;: <span>{</span>
+            &quot;Value&quot;: <span>{</span>
+                &quot;Fn::GetAtt&quot;: [
+                    &quot;S3Bucket&quot;,
+                    &quot;WebsiteURL&quot;
+                ]
+            },
+            &quot;Description&quot;: &quot;URL for website hosted on S3&quot;
+        },
+        &quot;S3BucketSecureURL&quot;: <span>{</span>
+            &quot;Value&quot;: <span>{</span>
+                &quot;Fn::Join&quot;: [
+                    &quot;&quot;,
+                    [
+                        &quot;https://&quot;,
+                        <span>{</span>
+                            &quot;Fn::GetAtt&quot;: [
+                                &quot;S3Bucket&quot;,
+                                &quot;DomainName&quot;
+                            ]
+                        }
+                    ]
+                ]
+            },
+            &quot;Description&quot;: &quot;Name of S3 bucket to hold website content&quot;
+        }
     }
-  }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h4 id="aws-properties-s3-bucket--examples--Configure_a_static_website_with_a_routing_rule--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
@@ -887,19 +886,17 @@ Properties:
     DeletionPolicy: Retain
 Outputs:
   WebsiteURL:
-    Value:
-      &apos;Fn::GetAtt&apos;:
-        - S3Bucket
-        - WebsiteURL
+    Value: !GetAtt
+      - S3Bucket
+      - WebsiteURL
     Description: URL for website hosted on S3
   S3BucketSecureURL:
-    Value:
-      &apos;Fn::Join&apos;:
-        - &apos;&apos;
-        - - &apos;https://&apos;
-          - &apos;Fn::GetAtt&apos;:
-              - S3Bucket
-              - DomainName
+    Value: !Join
+      - &apos;&apos;
+      - - &apos;https://&apos;
+        - !GetAtt
+          - S3Bucket
+          - DomainName
     Description: Name of S3 bucket to hold website content</code></pre></div>
                                  <h3 id="aws-properties-s3-bucket--examples--Enable_cross-origin_resource_sharing">Enable cross-origin resource sharing</h3>
                                  <p>The following example template shows a public S3 bucket with two cross-origin
@@ -907,65 +904,65 @@ Outputs:
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-properties-s3-bucket--examples--Enable_cross-origin_resource_sharing--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
-  &quot;Resources&quot;: <span>{</span>
-    &quot;S3Bucket&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
-      &quot;Properties&quot;: <span>{</span>
-        &quot;AccessControl&quot;: &quot;PublicRead&quot;,
-        &quot;CorsConfiguration&quot;: <span>{</span>
-          &quot;CorsRules&quot;: [
-            <span>{</span>
-              &quot;AllowedHeaders&quot;: [
-                &quot;*&quot;
-              ],
-              &quot;AllowedMethods&quot;: [
-                &quot;GET&quot;
-              ],
-              &quot;AllowedOrigins&quot;: [
-                &quot;*&quot;
-              ],
-              &quot;ExposedHeaders&quot;: [
-                &quot;Date&quot;
-              ],
-              &quot;Id&quot;: &quot;myCORSRuleId1&quot;,
-              &quot;MaxAge&quot;: &quot;3600&quot;
-            },
-            <span>{</span>
-              &quot;AllowedHeaders&quot;: [
-                &quot;x-amz-*&quot;
-              ],
-              &quot;AllowedMethods&quot;: [
-                &quot;DELETE&quot;
-              ],
-              &quot;AllowedOrigins&quot;: [
-                &quot;http://www.example.com&quot;,
-                &quot;http://www.example.net&quot;
-              ],
-              &quot;ExposedHeaders&quot;: [
-                &quot;Connection&quot;,
-                &quot;Server&quot;,
-                &quot;Date&quot;
-              ],
-              &quot;Id&quot;: &quot;myCORSRuleId2&quot;,
-              &quot;MaxAge&quot;: &quot;1800&quot;
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;S3Bucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;AccessControl&quot;: &quot;PublicRead&quot;,
+                &quot;CorsConfiguration&quot;: <span>{</span>
+                    &quot;CorsRules&quot;: [
+                        <span>{</span>
+                            &quot;AllowedHeaders&quot;: [
+                                &quot;*&quot;
+                            ],
+                            &quot;AllowedMethods&quot;: [
+                                &quot;GET&quot;
+                            ],
+                            &quot;AllowedOrigins&quot;: [
+                                &quot;*&quot;
+                            ],
+                            &quot;ExposedHeaders&quot;: [
+                                &quot;Date&quot;
+                            ],
+                            &quot;Id&quot;: &quot;myCORSRuleId1&quot;,
+                            &quot;MaxAge&quot;: &quot;3600&quot;
+                        },
+                        <span>{</span>
+                            &quot;AllowedHeaders&quot;: [
+                                &quot;x-amz-*&quot;
+                            ],
+                            &quot;AllowedMethods&quot;: [
+                                &quot;DELETE&quot;
+                            ],
+                            &quot;AllowedOrigins&quot;: [
+                                &quot;http://www.example.com&quot;,
+                                &quot;http://www.example.net&quot;
+                            ],
+                            &quot;ExposedHeaders&quot;: [
+                                &quot;Connection&quot;,
+                                &quot;Server&quot;,
+                                &quot;Date&quot;
+                            ],
+                            &quot;Id&quot;: &quot;myCORSRuleId2&quot;,
+                            &quot;MaxAge&quot;: &quot;1800&quot;
+                        }
+                    ]
+                }
             }
-          ]
         }
-      }
+    },
+    &quot;Outputs&quot;: <span>{</span>
+        &quot;BucketName&quot;: <span>{</span>
+            &quot;Value&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;S3Bucket&quot;
+            },
+            &quot;Description&quot;: &quot;Name of the sample Amazon S3 bucket with CORS enabled.&quot;
+        }
     }
-  },
-  &quot;Outputs&quot;: <span>{</span>
-    &quot;BucketName&quot;: <span>{</span>
-      &quot;Value&quot;: <span>{</span>
-        &quot;Ref&quot;: &quot;S3Bucket&quot;
-      },
-      &quot;Description&quot;: &quot;Name of the sample Amazon S3 bucket with CORS enabled.&quot;
-    }
-  }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-properties-s3-bucket--examples--Enable_cross-origin_resource_sharing--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+                                    <h4 id="aws-properties-s3-bucket--examples--Enable_cross-origin_resource_sharing--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Resources:
   S3Bucket:
     Type: &apos;AWS::S3::Bucket&apos;
@@ -998,8 +995,7 @@ Resources:
             MaxAge: &apos;1800&apos;
 Outputs:
   BucketName:
-    Value:
-      Ref: S3Bucket
+    Value: !Ref S3Bucket
     Description: Name of the sample Amazon S3 bucket with CORS enabled.</code></pre></div>
                                  <h3 id="aws-properties-s3-bucket--examples--Manage_the_lifecycle_for_S3_objects">Manage the lifecycle for S3 objects</h3>
                                  <p>The following example template shows an S3 bucket with a lifecycle configuration
@@ -1008,42 +1004,42 @@ Outputs:
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-properties-s3-bucket--examples--Manage_the_lifecycle_for_S3_objects--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
-  &quot;Resources&quot;: <span>{</span>
-    &quot;S3Bucket&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
-      &quot;Properties&quot;: <span>{</span>
-        &quot;AccessControl&quot;: &quot;Private&quot;,
-        &quot;LifecycleConfiguration&quot;: <span>{</span>
-          &quot;Rules&quot;: [
-            <span>{</span>
-              &quot;Id&quot;: &quot;GlacierRule&quot;,
-              &quot;Prefix&quot;: &quot;glacier&quot;,
-              &quot;Status&quot;: &quot;Enabled&quot;,
-              &quot;ExpirationInDays&quot;: &quot;365&quot;,
-              &quot;Transitions&quot;: [
-                <span>{</span>
-                  &quot;TransitionInDays&quot;: &quot;1&quot;,
-                  &quot;StorageClass&quot;: &quot;GLACIER&quot;
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;S3Bucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;AccessControl&quot;: &quot;Private&quot;,
+                &quot;LifecycleConfiguration&quot;: <span>{</span>
+                    &quot;Rules&quot;: [
+                        <span>{</span>
+                            &quot;Id&quot;: &quot;GlacierRule&quot;,
+                            &quot;Prefix&quot;: &quot;glacier&quot;,
+                            &quot;Status&quot;: &quot;Enabled&quot;,
+                            &quot;ExpirationInDays&quot;: &quot;365&quot;,
+                            &quot;Transitions&quot;: [
+                                <span>{</span>
+                                    &quot;TransitionInDays&quot;: &quot;1&quot;,
+                                    &quot;StorageClass&quot;: &quot;GLACIER&quot;
+                                }
+                            ]
+                        }
+                    ]
                 }
-              ]
             }
-          ]
         }
-      }
+    },
+    &quot;Outputs&quot;: <span>{</span>
+        &quot;BucketName&quot;: <span>{</span>
+            &quot;Value&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;S3Bucket&quot;
+            },
+            &quot;Description&quot;: &quot;Name of the sample Amazon S3 bucket with a lifecycle configuration.&quot;
+        }
     }
-  },
-  &quot;Outputs&quot;: <span>{</span>
-    &quot;BucketName&quot;: <span>{</span>
-      &quot;Value&quot;: <span>{</span>
-        &quot;Ref&quot;: &quot;S3Bucket&quot;
-      },
-      &quot;Description&quot;: &quot;Name of the sample Amazon S3 bucket with a lifecycle configuration.&quot;
-    }
-  }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-properties-s3-bucket--examples--Manage_the_lifecycle_for_S3_objects--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+                                    <h4 id="aws-properties-s3-bucket--examples--Manage_the_lifecycle_for_S3_objects--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Resources:
   S3Bucket:
     Type: &apos;AWS::S3::Bucket&apos;
@@ -1060,8 +1056,7 @@ Resources:
                 StorageClass: GLACIER
 Outputs:
   BucketName:
-    Value:
-      Ref: S3Bucket
+    Value: !Ref S3Bucket
     Description: Name of the sample Amazon S3 bucket with a lifecycle configuration.</code></pre></div>
                                  <h3 id="aws-properties-s3-bucket--examples--Log_access_requests_for_a_specific_S3_bucket">Log access requests for a specific S3 bucket</h3>
                                  <p>The following example template creates two S3 buckets. The
@@ -1102,15 +1097,14 @@ Outputs:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-properties-s3-bucket--examples--Log_access_requests_for_a_specific_S3_bucket--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+                                    <h4 id="aws-properties-s3-bucket--examples--Log_access_requests_for_a_specific_S3_bucket--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Resources:
   S3Bucket:
     Type: &apos;AWS::S3::Bucket&apos;
     Properties:
       AccessControl: Private
       LoggingConfiguration:
-        DestinationBucketName:
-          Ref: LoggingBucket
+        DestinationBucketName: !Ref LoggingBucket
         LogFilePrefix: testing-logs
   LoggingBucket:
     Type: &apos;AWS::S3::Bucket&apos;
@@ -1118,8 +1112,7 @@ Resources:
       AccessControl: LogDeliveryWrite
 Outputs:
   BucketName:
-    Value:
-      Ref: S3Bucket
+    Value: !Ref S3Bucket
     Description: Name of the sample Amazon S3 bucket with a logging configuration.</code></pre></div>
                                  <h3 id="aws-properties-s3-bucket--examples--Receive_S3_bucket_notifications_to_an_SNS_topic">Receive S3 bucket notifications to an SNS topic</h3>
                                  <p>The following example template shows an Amazon S3 bucket with a notification
@@ -1128,34 +1121,34 @@ Outputs:
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-properties-s3-bucket--examples--Receive_S3_bucket_notifications_to_an_SNS_topic--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
-  &quot;Resources&quot;: <span>{</span>
-    &quot;S3Bucket&quot;: <span>{</span>
-      &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
-      &quot;Properties&quot;: <span>{</span>
-        &quot;AccessControl&quot;: &quot;Private&quot;,
-        &quot;NotificationConfiguration&quot;: <span>{</span>
-          &quot;TopicConfigurations&quot;: [
-            <span>{</span>
-              &quot;Topic&quot;: &quot;arn:aws:sns:us-east-1:123456789012:TestTopic&quot;,
-              &quot;Event&quot;: &quot;s3:ReducedRedundancyLostObject&quot;
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;S3Bucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;AccessControl&quot;: &quot;Private&quot;,
+                &quot;NotificationConfiguration&quot;: <span>{</span>
+                    &quot;TopicConfigurations&quot;: [
+                        <span>{</span>
+                            &quot;Topic&quot;: &quot;arn:aws:sns:us-east-1:123456789012:TestTopic&quot;,
+                            &quot;Event&quot;: &quot;s3:ReducedRedundancyLostObject&quot;
+                        }
+                    ]
+                }
             }
-          ]
         }
-      }
+    },
+    &quot;Outputs&quot;: <span>{</span>
+        &quot;BucketName&quot;: <span>{</span>
+            &quot;Value&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;S3Bucket&quot;
+            },
+            &quot;Description&quot;: &quot;Name of the sample Amazon S3 bucket with a notification configuration.&quot;
+        }
     }
-  },
-  &quot;Outputs&quot;: <span>{</span>
-    &quot;BucketName&quot;: <span>{</span>
-      &quot;Value&quot;: <span>{</span>
-        &quot;Ref&quot;: &quot;S3Bucket&quot;
-      },
-      &quot;Description&quot;: &quot;Name of the sample Amazon S3 bucket with a notification configuration.&quot;
-    }
-  }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-properties-s3-bucket--examples--Receive_S3_bucket_notifications_to_an_SNS_topic--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+                                    <h4 id="aws-properties-s3-bucket--examples--Receive_S3_bucket_notifications_to_an_SNS_topic--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Resources:
   S3Bucket:
     Type: &apos;AWS::S3::Bucket&apos;
@@ -1167,8 +1160,7 @@ Resources:
             Event: &apos;s3:ReducedRedundancyLostObject&apos;
 Outputs:
   BucketName:
-    Value:
-      Ref: S3Bucket
+    Value: !Ref S3Bucket
     Description: Name of the sample Amazon S3 bucket with a notification configuration.</code></pre></div>
                                  <h3 id="aws-properties-s3-bucket--examples--Replicate_objects_and_store_them_in_another_S3_bucket">Replicate objects and store them in another S3 bucket</h3>
                                  <p>The following example includes two replication rules. Amazon S3 replicates objects
@@ -1178,55 +1170,60 @@ Outputs:
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-properties-s3-bucket--examples--Replicate_objects_and_store_them_in_another_S3_bucket--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;S3Bucket&quot;: <span>{</span>
-    &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
-    &quot;Properties&quot;: <span>{</span>
-      &quot;VersioningConfiguration&quot;: <span>{</span>
-        &quot;Status&quot;: &quot;Enabled&quot;
-      },
-      &quot;ReplicationConfiguration&quot;: <span>{</span>
-        &quot;Role&quot;: &quot;arn:aws:iam::123456789012:role/replication_role&quot;,
-        &quot;Rules&quot;: [
-          <span>{</span>
-            &quot;Id&quot;: &quot;MyRule1&quot;,
-            &quot;Status&quot;: &quot;Enabled&quot;,
-            &quot;Prefix&quot;: &quot;MyPrefix&quot;,
-            &quot;Destination&quot;: <span>{</span>
-              &quot;Bucket&quot;: &quot;arn:aws:s3:::my-replication-bucket&quot;,
-              &quot;StorageClass&quot;: &quot;STANDARD&quot;
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;S3Bucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;VersioningConfiguration&quot;: <span>{</span>
+                    &quot;Status&quot;: &quot;Enabled&quot;
+                },
+                &quot;ReplicationConfiguration&quot;: <span>{</span>
+                    &quot;Role&quot;: &quot;arn:aws:iam::123456789012:role/replication_role&quot;,
+                    &quot;Rules&quot;: [
+                        <span>{</span>
+                            &quot;Id&quot;: &quot;MyRule1&quot;,
+                            &quot;Status&quot;: &quot;Enabled&quot;,
+                            &quot;Prefix&quot;: &quot;MyPrefix&quot;,
+                            &quot;Destination&quot;: <span>{</span>
+                                &quot;Bucket&quot;: &quot;arn:aws:s3:::my-replication-bucket&quot;,
+                                &quot;StorageClass&quot;: &quot;STANDARD&quot;
+                            }
+                        },
+                        <span>{</span>
+                            &quot;Status&quot;: &quot;Enabled&quot;,
+                            &quot;Prefix&quot;: &quot;MyOtherPrefix&quot;,
+                            &quot;Destination&quot;: <span>{</span>
+                                &quot;Bucket&quot;: &quot;arn:aws:s3:::my-replication-bucket&quot;
+                            }
+                        }
+                    ]
+                }
             }
-          },
-          <span>{</span>
-            &quot;Status&quot;: &quot;Enabled&quot;,
-            &quot;Prefix&quot;: &quot;MyOtherPrefix&quot;,
-            &quot;Destination&quot;: <span>{</span>
-              &quot;Bucket&quot;: &quot;arn:aws:s3:::my-replication-bucket&quot;
-            }
-          }
-        ]
-      }
+        }
     }
-  }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-properties-s3-bucket--examples--Replicate_objects_and_store_them_in_another_S3_bucket--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">S3Bucket:
-  Type: &apos;AWS::S3::Bucket&apos;
-  Properties:
-    VersioningConfiguration:
-      Status: Enabled
-    ReplicationConfiguration:
-      Role: &apos;arn:aws:iam::123456789012:role/replication_role&apos;
-      Rules:
-        - Id: MyRule1
-          Status: Enabled
-          Prefix: MyPrefix
-          Destination:
-            Bucket: &apos;arn:aws:s3:::my-replication-bucket&apos;
-            StorageClass: STANDARD
-        - Status: Enabled
-          Prefix: MyOtherPrefix
-          Destination:
-            Bucket: &apos;arn:aws:s3:::my-replication-bucket&apos;</code></pre></div>
+                                    <h4 id="aws-properties-s3-bucket--examples--Replicate_objects_and_store_them_in_another_S3_bucket--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  S3Bucket:
+    Type: &apos;AWS::S3::Bucket&apos;
+    Properties:
+      VersioningConfiguration:
+        Status: Enabled
+      ReplicationConfiguration:
+        Role: &apos;arn:aws:iam::123456789012:role/replication_role&apos;
+        Rules:
+          - Id: MyRule1
+            Status: Enabled
+            Prefix: MyPrefix
+            Destination:
+              Bucket: &apos;arn:aws:s3:::my-replication-bucket&apos;
+              StorageClass: STANDARD
+          - Status: Enabled
+            Prefix: MyOtherPrefix
+            Destination:
+              Bucket: &apos;arn:aws:s3:::my-replication-bucket&apos;</code></pre></div>
                                  <h3 id="aws-properties-s3-bucket--examples--Specify_analytics_and_inventory_configurations_for_an_S3_bucket">Specify analytics and inventory configurations for an S3 bucket</h3>
                                  <p>The following example specifies analytics and inventory results to be generated
                                     for an S3 bucket, including the format of the results and the bucket to which they
@@ -1344,6 +1341,7 @@ Resources:
                                        </li>
                                     </ul>
                                  </div>
+                                 <p></p>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>

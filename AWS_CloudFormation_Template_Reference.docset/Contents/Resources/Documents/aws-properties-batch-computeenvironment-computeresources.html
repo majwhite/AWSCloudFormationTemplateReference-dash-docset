@@ -16,7 +16,7 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Details of the compute resources managed by the compute environment. This parameter
+                                 <p>Details about the compute resources managed by the compute environment. This parameter
                                     is required for managed
                                     compute environments. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in the
                                     <em>AWS Batch User Guide</em>.
@@ -74,23 +74,85 @@
                                        <dt><a id="cfn-batch-computeenvironment-computeresources-allocationstrategy"></a><span class="term"><code class="code">AllocationStrategy</code></span></dt>
                                        <dd>
                                           
-                                          <p>The allocation strategy to use for the compute resource in case not enough instances
-                                             of the best fitting
-                                             instance type can be allocated. This could be due to availability of the instance
-                                             type in the region or <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service limits</a>. If this is
-                                             not specified, the default is <code class="code">BEST_FIT</code>, which will use only the best fitting instance type, waiting for
-                                             additional capacity if it&apos;s not available. This allocation strategy keeps costs lower
-                                             but can limit scaling. If you
-                                             are using Spot Fleets with <code class="code">BEST_FIT</code> then the Spot Fleet IAM Role must be specified.
-                                             <code class="code">BEST_FIT_PROGRESSIVE</code> will select additional instance types that are large enough to meet the
-                                             requirements of the jobs in the queue, with a preference for instance types with a
-                                             lower cost per vCPU.
-                                             <code class="code">SPOT_CAPACITY_OPTIMIZED</code> is only available for Spot Instance compute resources and will select
-                                             additional instance types that are large enough to meet the requirements of the jobs
-                                             in the queue, with a preference
-                                             for instance types that are less likely to be interrupted. For more information, see
-                                             <a href="https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html">Allocation Strategies</a> in the
-                                             <em>AWS Batch User Guide</em>.
+                                          <p>The allocation strategy to use for the compute resource if not enough instances of
+                                             the best fitting instance
+                                             type can be allocated. This might be because of availability of the instance type
+                                             in the Region or <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service limits</a>. For more
+                                             information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html">Allocation
+                                                Strategies</a> in the <em>AWS Batch User Guide</em>.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This parameter isn&apos;t applicable to jobs running on Fargate resources, and shouldn&apos;t
+                                                   be specified.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <div class="variablelist">
+                                              
+                                              
+                                              
+                                             
+                                             <dl>
+                                                
+                                                <dt><a id="cfn-batch-computeenvironment-computeresources-allocationstrategy"></a><span class="term">BEST_FIT (default)</span></dt>
+                                                
+                                                <dd>
+                                                   
+                                                   <p>AWS Batch selects an instance type that best fits the needs of the jobs with a preference
+                                                      for the lowest-cost
+                                                      instance type. If additional instances of the selected instance type aren&apos;t available,
+                                                      AWS Batch will wait for the
+                                                      additional instances to be available. If there are not enough instances available,
+                                                      or if the user is hitting
+                                                      <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service limits</a>
+                                                      then additional jobs aren&apos;t run until currently running jobs have completed. This
+                                                      allocation strategy keeps costs
+                                                      lower but can limit scaling. If you are using Spot Fleets with <code class="code">BEST_FIT</code> then the Spot Fleet IAM Role
+                                                      must be specified.
+                                                   </p>
+                                                   
+                                                </dd>
+                                                 
+                                                
+                                                <dt><a id="cfn-batch-computeenvironment-computeresources-allocationstrategy"></a><span class="term">BEST_FIT_PROGRESSIVE</span></dt>
+                                                
+                                                <dd>
+                                                   
+                                                   <p>AWS Batch will select additional instance types that are large enough to meet the
+                                                      requirements of the jobs in
+                                                      the queue, with a preference for instance types with a lower cost per unit vCPU. If
+                                                      additional instances of the
+                                                      previously selected instance types aren&apos;t available, AWS Batch will select new instance
+                                                      types.
+                                                   </p>
+                                                   
+                                                </dd>
+                                                 
+                                                
+                                                <dt><a id="cfn-batch-computeenvironment-computeresources-allocationstrategy"></a><span class="term">SPOT_CAPACITY_OPTIMIZED</span></dt>
+                                                
+                                                <dd>
+                                                   
+                                                   <p>AWS Batch will select one or more instance types that are large enough to meet the
+                                                      requirements of the jobs in
+                                                      the queue, with a preference for instance types that are less likely to be interrupted.
+                                                      This allocation strategy
+                                                      is only available for Spot Instance compute resources.
+                                                   </p>
+                                                   
+                                                </dd>
+                                                
+                                             </dl>
+                                          </div>
+                                          
+                                          <p>With both <code class="code">BEST_FIT_PROGRESSIVE</code> and <code class="code">SPOT_CAPACITY_OPTIMIZED</code> strategies, AWS Batch might
+                                             need to go above <code class="code">maxvCpus</code> to meet your capacity requirements. In this event, AWS Batch never exceeds
+                                             <code class="code">maxvCpus</code> by more than a single instance.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -107,12 +169,22 @@
                                              price for that
                                              instance type before instances are launched. For example, if your maximum percentage
                                              is 20%, then the Spot price must
-                                             be below 20% of the current On-Demand price for that Amazon EC2 instance. You always
-                                             pay the lowest (market) price and
+                                             be less than 20% of the current On-Demand price for that Amazon EC2 instance. You
+                                             always pay the lowest (market) price and
                                              never more than your maximum percentage. If you leave this field empty, the default
                                              value is 100% of the On-Demand
                                              price.
                                           </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This parameter isn&apos;t applicable to jobs running on Fargate resources, and shouldn&apos;t
+                                                   be specified.
+                                                </p>
+                                             </div>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -123,7 +195,20 @@
                                        <dt><a id="cfn-batch-computeenvironment-computeresources-desiredvcpus"></a><span class="term"><code class="code">DesiredvCpus</code></span></dt>
                                        <dd>
                                           
-                                          <p>The desired number of Amazon EC2 vCPUS in the compute environment.</p>
+                                          <p>The desired number of Amazon EC2 vCPUS in the compute environment. AWS Batch modifies
+                                             this value between the minimum
+                                             and maximum values, based on job queue demand.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This parameter isn&apos;t applicable to jobs running on Fargate resources, and shouldn&apos;t
+                                                   be specified.
+                                                </p>
+                                             </div>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -133,7 +218,23 @@
                                        </dd>
                                        <dt><a id="cfn-batch-computeenvironment-computeresources-ec2configuration"></a><span class="term"><code class="code">Ec2Configuration</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          
+                                          <p>Provides information used to select Amazon Machine Images (AMIs) for EC2 instances
+                                             in the compute environment.
+                                             If <code class="code">Ec2Configuration</code> isn&apos;t specified, the default is <code class="code">ECS_AL1</code>.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This parameter isn&apos;t applicable to jobs running on Fargate resources, and shouldn&apos;t
+                                                   be specified.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="./aws-properties-batch-computeenvironment-ec2configurationobject.html">Ec2ConfigurationObject</a></p>
@@ -142,7 +243,20 @@
                                        <dt><a id="cfn-batch-computeenvironment-computeresources-ec2keypair"></a><span class="term"><code class="code">Ec2KeyPair</code></span></dt>
                                        <dd>
                                           
-                                          <p>The Amazon EC2 key pair that is used for instances launched in the compute environment.</p>
+                                          <p>The Amazon EC2 key pair that&apos;s used for instances launched in the compute environment.
+                                             You can use this key pair to
+                                             log in to your instances with SSH.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This parameter isn&apos;t applicable to jobs running on Fargate resources, and shouldn&apos;t
+                                                   be specified.
+                                                </p>
+                                             </div>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -153,10 +267,37 @@
                                        <dt><a id="cfn-batch-computeenvironment-computeresources-imageid"></a><span class="term"><code class="code">ImageId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The Amazon Machine Image (AMI) ID used for instances launched in the compute
-                                             environment. This parameter is overridden by
-                                             the <code class="code">imageIdOverride</code> member of the <code class="code">Ec2Configuration</code> structure.
+                                          <p>The Amazon Machine Image (AMI) ID used for instances launched in the compute environment.
+                                             This parameter is
+                                             overridden by the <code class="code">imageIdOverride</code> member of the <code class="code">Ec2Configuration</code> structure.
                                           </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This parameter isn&apos;t applicable to jobs running on Fargate resources, and shouldn&apos;t
+                                                   be specified.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>The AMI that you choose for a compute environment must match the architecture of the
+                                                   instance types that
+                                                   you intend to use for that compute environment. For example, if your compute environment
+                                                   uses A1 instance types,
+                                                   the compute resource AMI that you choose must support ARM instances. Amazon ECS vends
+                                                   both x86 and ARM versions of the
+                                                   Amazon ECS-optimized Amazon Linux 2 AMI. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#ecs-optimized-ami-linux-variants.html">Amazon ECS-optimized
+                                                      Amazon Linux 2 AMI</a>
+                                                   in the <em>Amazon Elastic Container Service Developer Guide</em>.
+                                                </p>
+                                             </div>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -179,7 +320,17 @@
                                                 Role</a> in the <em>AWS Batch User Guide</em>.
                                           </p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This parameter isn&apos;t applicable to jobs running on Fargate resources, and shouldn&apos;t
+                                                   be specified.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -188,14 +339,51 @@
                                        <dt><a id="cfn-batch-computeenvironment-computeresources-instancetypes"></a><span class="term"><code class="code">InstanceTypes</code></span></dt>
                                        <dd>
                                           
-                                          <p>The instances types that may be launched. You can specify instance families to launch
+                                          <p>The instances types that can be launched. You can specify instance families to launch
                                              any instance type within
                                              those families (for example, <code class="code">c5</code> or <code class="code">p3</code>), or you can specify specific sizes within a family
-                                             (such as <code class="code">c5.8xlarge</code>). You can also choose <code class="code">optimal</code> to select instance types (from the C, M,
-                                             and R instance families) on the fly that match the demand of your job queues.
+                                             (such as <code class="code">c5.8xlarge</code>). You can also choose <code class="code">optimal</code> to select instance types (from the C4,
+                                             M4, and R4 instance families) on the fly that match the demand of your job queues.
                                           </p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This parameter isn&apos;t applicable to jobs running on Fargate resources, and shouldn&apos;t
+                                                   be specified.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>When you create a compute environment, the instance types that you select for the
+                                                   compute environment must
+                                                   share the same architecture. For example, you can&apos;t mix x86 and ARM instances in the
+                                                   same compute
+                                                   environment.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>Currently, <code class="code">optimal</code> uses instance types from the C4, M4, and R4 instance families. In Regions that
+                                                   don&apos;t have instance types from those instance families, instance types from the C5,
+                                                   M5. and R5 instance families are
+                                                   used.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of String
                                           </p>
@@ -213,6 +401,16 @@
                                              the <em>AWS Batch User Guide</em>.
                                           </p>
                                           
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This parameter isn&apos;t applicable to jobs running on Fargate resources, and shouldn&apos;t
+                                                   be specified.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-batch-computeenvironment-launchtemplatespecification.html">LaunchTemplateSpecification</a></p>
@@ -222,6 +420,18 @@
                                        <dd>
                                           
                                           <p>The maximum number of Amazon EC2 vCPUs that an environment can reach.</p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>With both <code class="code">BEST_FIT_PROGRESSIVE</code> and <code class="code">SPOT_CAPACITY_OPTIMIZED</code> allocation strategies,
+                                                   AWS Batch might need to go above <code class="code">maxvCpus</code> to meet your capacity requirements. In this event, AWS Batch will
+                                                   never go above <code class="code">maxvCpus</code> by more than a single instance (e.g., no more than a single instance from among
+                                                   those specified in your compute environment).
+                                                </p>
+                                             </div>
+                                          </div>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -237,7 +447,17 @@
                                              <code class="code">DISABLED</code>).
                                           </p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This parameter isn&apos;t applicable to jobs running on Fargate resources, and shouldn&apos;t
+                                                   be specified.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
                                           </p>
@@ -256,6 +476,16 @@
                                                 Linux Instances</em>.
                                           </p>
                                           
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This parameter isn&apos;t applicable to jobs running on Fargate resources, and shouldn&apos;t
+                                                   be specified.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -268,26 +498,51 @@
                                           <p>The Amazon EC2 security groups associated with instances launched in the compute environment.
                                              One or more security
                                              groups must be specified, either in <code class="code">securityGroupIds</code> or using a launch template referenced in
-                                             <code class="code">launchTemplate</code>. If security groups are specified using both <code class="code">securityGroupIds</code> and
-                                             <code class="code">launchTemplate</code>, the values in <code class="code">securityGroupIds</code> will be used.
+                                             <code class="code">launchTemplate</code>. This parameter is required for jobs running on Fargate resources and must contain
+                                             at
+                                             least one security group. (Fargate does not support launch templates.) If security
+                                             groups are specified using both
+                                             <code class="code">securityGroupIds</code> and <code class="code">launchTemplate</code>, the values in <code class="code">securityGroupIds</code> will be
+                                             used.
                                           </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of String
                                           </p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-batch-computeenvironment-computeresources-spotiamfleetrole"></a><span class="term"><code class="code">SpotIamFleetRole</code></span></dt>
                                        <dd>
                                           
                                           <p>The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a
-                                             <code class="code">SPOT</code> compute environment.
-                                             This role is required if the allocation
-                                             strategy set to <code class="code">BEST_FIT</code> or if the allocation strategy is not specified. For more
-                                             information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html">Amazon EC2 Spot Fleet
-                                                Role</a> in the <em>AWS Batch User Guide</em>.
+                                             <code class="code">SPOT</code> compute environment. This role is
+                                             required if the allocation strategy set to <code class="code">BEST_FIT</code> or if the allocation strategy isn&apos;t specified. For
+                                             more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html">Amazon EC2 Spot
+                                                Fleet Role</a> in the <em>AWS Batch User Guide</em>.
                                           </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This parameter isn&apos;t applicable to jobs running on Fargate resources, and shouldn&apos;t
+                                                   be specified.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>To tag your Spot Instances on creation, the Spot Fleet IAM role specified here must
+                                                   use the newer <b>AmazonEC2SpotFleetTaggingRole</b> managed policy. The previously recommended <b>AmazonEC2SpotFleetRole</b> managed policy doesn&apos;t have the required permissions to tag Spot
+                                                   Instances. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#spot-instance-no-tag">Spot Instances not tagged on
+                                                      creation</a> in the <em>AWS Batch User Guide</em>.
+                                                </p>
+                                             </div>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -298,31 +553,45 @@
                                        <dt><a id="cfn-batch-computeenvironment-computeresources-subnets"></a><span class="term"><code class="code">Subnets</code></span></dt>
                                        <dd>
                                           
-                                          <p>The VPC subnets into which the compute resources are launched. For more information,
-                                             see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">VPCs and Subnets</a> in the <em>Amazon
-                                                VPC User Guide</em>.
+                                          <p>The VPC subnets into which the compute resources are launched. These subnets must
+                                             be within the same VPC. This
+                                             parameter is required for jobs running on Fargate resources, where it can contain
+                                             up to 16 subnets. For more
+                                             information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">VPCs and Subnets</a> in
+                                             the <em>Amazon VPC User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: List of String
                                           </p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-batch-computeenvironment-computeresources-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
                                           
-                                          <p>Key-value pair tags to be applied to resources that are launched in the compute environment.
-                                             For AWS Batch, these
-                                             take the form of &quot;String1&quot;: &quot;String2&quot;, where String1 is the tag key and String2 is
-                                             the tag value&#x2014;for example, <span>{</span>
-                                             &quot;Name&quot;: &quot;AWS Batch Instance - C4OnDemand&quot; }.
-                                             These tags can not be updated or removed after the compute environment has been created;
-                                             any changes require creating
-                                             a new compute environment and removing the old compute environment. These tags are
-                                             not seen when using the AWS Batch
-                                             ListTagsForResource API operation.
+                                          <p>Key-value pair tags to be applied to EC2 resources that are launched in the compute
+                                             environment. For AWS Batch,
+                                             these take the form of &quot;String1&quot;: &quot;String2&quot;, where String1 is the tag key and String2
+                                             is the tag value&#x2212;for
+                                             example, <span>{</span> &quot;Name&quot;: &quot;AWS Batch Instance - C4OnDemand&quot; }. This is helpful for recognizing your
+                                             AWS Batch instances in the
+                                             Amazon EC2 console. These tags can&apos;t be updated or removed after the compute environment
+                                             has been created; any changes
+                                             require creating a new compute environment and removing the old compute environment.
+                                             These tags are not seen when
+                                             using the AWS Batch <code class="code">ListTagsForResource</code> API operation.
                                           </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This parameter isn&apos;t applicable to jobs running on Fargate resources, and shouldn&apos;t
+                                                   be specified.
+                                                </p>
+                                             </div>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -333,14 +602,23 @@
                                        <dt><a id="cfn-batch-computeenvironment-computeresources-type"></a><span class="term"><code class="code">Type</code></span></dt>
                                        <dd>
                                           
-                                          <p>The type of compute environment: <code class="code">EC2</code> or <code class="code">SPOT</code>.
+                                          <p>The type of compute environment: <code class="code">EC2</code>, <code class="code">SPOT</code>, <code class="code">FARGATE</code>, or
+                                             <code class="code">FARGATE_SPOT</code>. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in the
+                                             <em>AWS Batch User Guide</em>.
                                           </p>
+                                          
+                                          
+                                          <p> If you choose <code class="code">SPOT</code>, you must also specify an Amazon EC2 Spot Fleet role with the
+                                             <code class="code">spotIamFleetRole</code> parameter. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html">Amazon EC2 Spot Fleet role</a> in the
+                                             <em>AWS Batch User Guide</em>.
+                                          </p>
+                                          
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed values</em>: <code class="code">EC2 | SPOT</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">EC2 | FARGATE | FARGATE_SPOT | SPOT</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                     </dl>

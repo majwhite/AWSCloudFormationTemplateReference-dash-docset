@@ -17,8 +17,9 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>The <code class="code">AWS::Lambda::Function</code> resource creates a Lambda function. To create a function, you need a
-                                    <a href="https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html">deployment package</a> and an
-                                    <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role">execution role</a>. The deployment package contains your function code. The execution role grants the
+                                    <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html">deployment package</a> and an
+                                    <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html">execution role</a>.
+                                    The deployment package contains your function code. The execution role grants the
                                     function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming
                                     and AWS X-Ray for
                                     request tracing.
@@ -30,16 +31,17 @@
   &quot;Type&quot; : &quot;AWS::Lambda::Function&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-lambda-function-code">Code</a>&quot; : <code class="replaceable"><a href="./aws-properties-lambda-function-code.html">Code</a></code>,
-      &quot;<a href="#cfn-lambda-function-codesigningconfigarn">CodeSigningConfigArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-lambda-function-deadletterconfig">DeadLetterConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-lambda-function-deadletterconfig.html">DeadLetterConfig</a></code>,
       &quot;<a href="#cfn-lambda-function-description">Description</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-lambda-function-environment">Environment</a>&quot; : <code class="replaceable"><a href="./aws-properties-lambda-function-environment.html">Environment</a></code>,
       &quot;<a href="#cfn-lambda-function-filesystemconfigs">FileSystemConfigs</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-lambda-function-filesystemconfig.html">FileSystemConfig</a>, ... ]</code>,
       &quot;<a href="#cfn-lambda-function-functionname">FunctionName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-lambda-function-handler">Handler</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-lambda-function-imageconfig">ImageConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-lambda-function-imageconfig.html">ImageConfig</a></code>,
       &quot;<a href="#cfn-lambda-function-kmskeyarn">KmsKeyArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-lambda-function-layers">Layers</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-lambda-function-memorysize">MemorySize</a>&quot; : <code class="replaceable">Integer</code>,
+      &quot;<a href="#cfn-lambda-function-packagetype">PackageType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-lambda-function-reservedconcurrentexecutions">ReservedConcurrentExecutions</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-lambda-function-role">Role</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-lambda-function-runtime">Runtime</a>&quot; : <code class="replaceable">String</code>,
@@ -55,7 +57,6 @@
 Properties: 
   <a href="#cfn-lambda-function-code">Code</a>: <code class="replaceable">
     <a href="./aws-properties-lambda-function-code.html">Code</a></code>
-  <a href="#cfn-lambda-function-codesigningconfigarn">CodeSigningConfigArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-lambda-function-deadletterconfig">DeadLetterConfig</a>: <code class="replaceable">
     <a href="./aws-properties-lambda-function-deadletterconfig.html">DeadLetterConfig</a></code>
   <a href="#cfn-lambda-function-description">Description</a>: <code class="replaceable">String</code>
@@ -65,10 +66,13 @@ Properties:
     - <a href="./aws-properties-lambda-function-filesystemconfig.html">FileSystemConfig</a></code>
   <a href="#cfn-lambda-function-functionname">FunctionName</a>: <code class="replaceable">String</code>
   <a href="#cfn-lambda-function-handler">Handler</a>: <code class="replaceable">String</code>
+  <a href="#cfn-lambda-function-imageconfig">ImageConfig</a>: <code class="replaceable">
+    <a href="./aws-properties-lambda-function-imageconfig.html">ImageConfig</a></code>
   <a href="#cfn-lambda-function-kmskeyarn">KmsKeyArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-lambda-function-layers">Layers</a>: <code class="replaceable">
     - String</code>
   <a href="#cfn-lambda-function-memorysize">MemorySize</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-lambda-function-packagetype">PackageType</a>: <code class="replaceable">String</code>
   <a href="#cfn-lambda-function-reservedconcurrentexecutions">ReservedConcurrentExecutions</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-lambda-function-role">Role</a>: <code class="replaceable">String</code>
   <a href="#cfn-lambda-function-runtime">Runtime</a>: <code class="replaceable">String</code>
@@ -91,15 +95,6 @@ Properties:
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-lambda-function-code.html">Code</a></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                                       </dd>
-                                       <dt><a id="cfn-lambda-function-codesigningconfigarn"></a><span class="term"><code class="code">CodeSigningConfigArn</code></span></dt>
-                                       <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
-                                          <p><em>Required</em>: No
-                                          </p>
-                                          <p><em>Type</em>: String
-                                          </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-lambda-function-deadletterconfig"></a><span class="term"><code class="code">DeadLetterConfig</code></span></dt>
@@ -187,12 +182,20 @@ Properties:
                                              see <a href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html">Programming Model</a>.
                                           </p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Maximum</em>: <code class="code">128</code></p>
                                           <p><em>Pattern</em>: <code class="code">[^\s]+</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-lambda-function-imageconfig"></a><span class="term"><code class="code">ImageConfig</code></span></dt>
+                                       <dd>
+                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-lambda-function-imageconfig.html">ImageConfig</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-lambda-function-kmskeyarn"></a><span class="term"><code class="code">KmsKeyArn</code></span></dt>
@@ -227,9 +230,9 @@ Properties:
                                        <dt><a id="cfn-lambda-function-memorysize"></a><span class="term"><code class="code">MemorySize</code></span></dt>
                                        <dd>
                                           
-                                          <p>The amount of memory that your function has access to. Increasing the function&apos;s memory
-                                             also increases its CPU
-                                             allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
+                                          <p>The amount of memory available to the function at runtime. Increasing the function&apos;s
+                                             memory also increases its CPU
+                                             allocation. The default value is 128 MB. The value can be any multiple of 1 MB.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -237,7 +240,20 @@ Properties:
                                           <p><em>Type</em>: Integer
                                           </p>
                                           <p><em>Minimum</em>: <code class="code">128</code></p>
-                                          <p><em>Maximum</em>: <code class="code">3008</code></p>
+                                          <p><em>Maximum</em>: <code class="code">10240</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-lambda-function-packagetype"></a><span class="term"><code class="code">PackageType</code></span></dt>
+                                       <dd> 
+                                          
+                                          <p>The type of deployment package. Set to <code class="code">Image</code> for container image and set <code class="code">Zip</code> for .zip file archive.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">Image | Zip</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-lambda-function-reservedconcurrentexecutions"></a><span class="term"><code class="code">ReservedConcurrentExecutions</code></span></dt>
@@ -270,7 +286,7 @@ Properties:
                                           <p>The identifier of the function&apos;s <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">runtime</a>.
                                           </p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -360,6 +376,7 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-lambda-function--examples">Examples</h2>
+                                 <p></p>
                                  <h3 id="aws-resource-lambda-function--examples--Function">Function</h3>
                                  <p>Create a Node.js function.</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -429,22 +446,22 @@ Resources:
                                     <h4 id="aws-resource-lambda-function--examples--VPC_Function--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
 Description: VPC function.
 Resources:
-  Function: 
+  Function:
     Type: AWS::Lambda::Function
-    Properties: 
+    Properties:
       Handler: index.handler
       Role: arn:aws:iam::123456789012:role/lambda-role
-      Code: 
+      Code:
         S3Bucket: my-bucket
         S3Key: function.zip
       Runtime: nodejs12.x
       Timeout: 5
       TracingConfig:
         Mode: Active
-      VpcConfig: 
-        SecurityGroupIds: 
+      VpcConfig:
+        SecurityGroupIds:
           - sg-085912345678492fb
-        SubnetIds: 
+        SubnetIds:
           - subnet-071f712345678e7c8
           - subnet-07fd123456788a036</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>

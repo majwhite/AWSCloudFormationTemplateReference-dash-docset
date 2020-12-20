@@ -30,6 +30,8 @@
       &quot;<a href="#cfn-batch-jobdefinition-jobdefinitionname">JobDefinitionName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-batch-jobdefinition-nodeproperties">NodeProperties</a>&quot; : <code class="replaceable"><a href="./aws-properties-batch-jobdefinition-nodeproperties.html">NodeProperties</a></code>,
       &quot;<a href="#cfn-batch-jobdefinition-parameters">Parameters</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-batch-jobdefinition-platformcapabilities">PlatformCapabilities</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+      &quot;<a href="#cfn-batch-jobdefinition-propagatetags">PropagateTags</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-batch-jobdefinition-retrystrategy">RetryStrategy</a>&quot; : <code class="replaceable"><a href="./aws-properties-batch-jobdefinition-retrystrategy.html">RetryStrategy</a></code>,
       &quot;<a href="#cfn-batch-jobdefinition-tags">Tags</a>&quot; : <code class="replaceable">Json</code>,
       &quot;<a href="#cfn-batch-jobdefinition-timeout">Timeout</a>&quot; : <code class="replaceable"><a href="./aws-properties-batch-jobdefinition-timeout.html">Timeout</a></code>,
@@ -46,6 +48,9 @@ Properties:
   <a href="#cfn-batch-jobdefinition-nodeproperties">NodeProperties</a>: <code class="replaceable">
     <a href="./aws-properties-batch-jobdefinition-nodeproperties.html">NodeProperties</a></code>
   <a href="#cfn-batch-jobdefinition-parameters">Parameters</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-batch-jobdefinition-platformcapabilities">PlatformCapabilities</a>: <code class="replaceable">
+    - String</code>
+  <a href="#cfn-batch-jobdefinition-propagatetags">PropagateTags</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-batch-jobdefinition-retrystrategy">RetryStrategy</a>: <code class="replaceable">
     <a href="./aws-properties-batch-jobdefinition-retrystrategy.html">RetryStrategy</a></code>
   <a href="#cfn-batch-jobdefinition-tags">Tags</a>: <code class="replaceable">Json</code>
@@ -82,6 +87,16 @@ Properties:
                                           
                                           <p>An object with various properties specific to multi-node parallel jobs.</p>
                                           
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If the job runs on Fargate resources, then you must not specify <code class="code">nodeProperties</code>; use
+                                                   <code class="code">containerProperties</code> instead.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-batch-jobdefinition-nodeproperties.html">NodeProperties</a></p>
@@ -101,6 +116,38 @@ Properties:
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Json
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-batch-jobdefinition-platformcapabilities"></a><span class="term"><code class="code">PlatformCapabilities</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The platform capabilities required by the job definition. If no value is specified,
+                                             it defaults to
+                                             <code class="code">EC2</code>. Jobs run on Fargate resources specify <code class="code">FARGATE</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-batch-jobdefinition-propagatetags"></a><span class="term"><code class="code">PropagateTags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies whether to propagate the tags from the job or job definition to the corresponding
+                                             Amazon ECS task. If no
+                                             value is specified, the tags aren&apos;t propagated. Tags can only be propagated to the
+                                             tasks during task creation. For
+                                             tags with the same name, job tags are given priority over job definitions tags. If
+                                             the total number of combined tags
+                                             from the job and job definition is over 50, the job is moved to the <code class="code">FAILED</code> state.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
@@ -130,7 +177,7 @@ Properties:
                                           
                                           <p>The timeout configuration for jobs that are submitted with this job definition. You
                                              can specify a timeout
-                                             duration after which AWS Batch terminates your jobs if they have not finished.
+                                             duration after which AWS Batch terminates your jobs if they haven&apos;t finished.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -141,7 +188,19 @@ Properties:
                                        <dt><a id="cfn-batch-jobdefinition-type"></a><span class="term"><code class="code">Type</code></span></dt>
                                        <dd>
                                           
-                                          <p>The type of job definition.</p>
+                                          <p>The type of job definition. For more information about multi-node parallel jobs, see
+                                             <a href="https://docs.aws.amazon.com/batch/latest/userguide/multi-node-job-def.html">Creating a multi-node parallel job definition</a> in the
+                                             <em>AWS Batch User Guide</em>.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If the job is run on Fargate resources, then <code class="code">multinode</code> isn&apos;t supported.
+                                                </p>
+                                             </div>
+                                          </div>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -160,6 +219,7 @@ Properties:
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
                                  <h2 id="aws-resource-batch-jobdefinition--examples">Examples</h2>
+                                 <p></p>
                                  <h3 id="aws-resource-batch-jobdefinition--examples--Test_nvidia-smi">Test nvidia-smi</h3>
                                  <p>The following example tests the <code class="code">nvidia-smi</code> command on a GPU instance to verify that the GPU is
                                     working inside the container. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/example-job-definitions.html#example-test-gpu">Test GPU Functionality</a> in the

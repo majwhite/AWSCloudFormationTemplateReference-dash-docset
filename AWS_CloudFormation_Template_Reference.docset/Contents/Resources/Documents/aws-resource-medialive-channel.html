@@ -19,9 +19,9 @@
                                  <p>The AWS::MediaLive::Channel resource is a MediaLive resource type that creates a
                                     channel.
                                  </p>
-                                 <p>A MediaLive channel ingests and transcodes (decodes and encodes) source content
-                                    from the inputs that are attached to that channel, and packages the new content
-                                    into outputs. 
+                                 <p>A MediaLive channel ingests and transcodes (decodes and encodes) source content from
+                                    the inputs that are attached to that channel, and packages the new content into outputs.
+                                    
                                  </p>
                                  <h2 id="aws-resource-medialive-channel-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -64,10 +64,10 @@ Properties:
                                        <dt><a id="cfn-medialive-channel-channelclass"></a><span class="term"><code class="code">ChannelClass</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE
-                                             for a channel with one pipeline.
+                                          <p>The class for this channel. For a channel with two pipelines, the class is STANDARD.
+                                             For a channel with one pipeline, the class is SINGLE_PIPELINE.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -77,8 +77,10 @@ Properties:
                                        <dt><a id="cfn-medialive-channel-destinations"></a><span class="term"><code class="code">Destinations</code></span></dt>
                                        <dd>
                                           
+                                          <p>The settings that identify the destination for the outputs in this MediaLive output
+                                             package.
+                                          </p>
                                           
-                                          <p>User-specified id. This is used in an output group or an output.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="./aws-properties-medialive-channel-outputdestination.html">OutputDestination</a></p>
@@ -87,8 +89,8 @@ Properties:
                                        <dt><a id="cfn-medialive-channel-encodersettings"></a><span class="term"><code class="code">EncoderSettings</code></span></dt>
                                        <dd>
                                           
+                                          <p>The encoding configuration for the output content.</p>
                                           
-                                          <p>Encoder Settings</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-medialive-channel-encodersettings.html">EncoderSettings</a></p>
@@ -97,8 +99,8 @@ Properties:
                                        <dt><a id="cfn-medialive-channel-inputattachments"></a><span class="term"><code class="code">InputAttachments</code></span></dt>
                                        <dd>
                                           
+                                          <p>The list of input attachments for the channel.</p>
                                           
-                                          <p>List of input attachments for channel.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="./aws-properties-medialive-channel-inputattachment.html">InputAttachment</a></p>
@@ -107,8 +109,11 @@ Properties:
                                        <dt><a id="cfn-medialive-channel-inputspecification"></a><span class="term"><code class="code">InputSpecification</code></span></dt>
                                        <dd>
                                           
+                                          <p>The input specification for this channel. It specifies the key characteristics of
+                                             the
+                                             inputs for this channel: the maximum bitrate, the resolution, and the codec. 
+                                          </p>
                                           
-                                          <p>Specification of network and file inputs for this channel</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-medialive-channel-inputspecification.html">InputSpecification</a></p>
@@ -117,8 +122,10 @@ Properties:
                                        <dt><a id="cfn-medialive-channel-loglevel"></a><span class="term"><code class="code">LogLevel</code></span></dt>
                                        <dd>
                                           
+                                          <p>The verbosity for logging activity for this channel. Charges for logging (which are
+                                             generated through Amazon CloudWatch Logging) are higher for higher verbosities. 
+                                          </p>
                                           
-                                          <p>The log level to write to CloudWatch Logs.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -128,8 +135,10 @@ Properties:
                                        <dt><a id="cfn-medialive-channel-name"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
                                           
+                                          <p>A name for this audio selector. The AudioDescription (in an output) references this
+                                             name in order to identify a specific input audio to include in that output.
+                                          </p>
                                           
-                                          <p>Name of channel.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -139,8 +148,10 @@ Properties:
                                        <dt><a id="cfn-medialive-channel-rolearn"></a><span class="term"><code class="code">RoleArn</code></span></dt>
                                        <dd>
                                           
+                                          <p>The IAM role for MediaLive to assume when running this channel. The role is identified
+                                             by its ARN. 
+                                          </p>
                                           
-                                          <p>An optional Amazon Resource Name (ARN) of the role to assume when running the Channel.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -150,8 +161,8 @@ Properties:
                                        <dt><a id="cfn-medialive-channel-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
                                           
+                                          <p>A collection of tags for this channel. Each tag is a key-value pair.</p>
                                           
-                                          <p>A collection of key-value pairs.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Json
@@ -188,8 +199,8 @@ Properties:
                                        <dt><a id="Inputs-fn::getatt"></a><span class="term"><code class="code">Inputs</code></span></dt>
                                        <dd>
                                           
-                                          <p>The inputs that are attached to this channel. The inputs are identified by their
-                                             IDs (not by their names or their ARNs).
+                                          <p>The inputs that are attached to this channel. The inputs are identified by their IDs
+                                             (not by their names or their ARNs).
                                           </p>
                                           
                                        </dd>

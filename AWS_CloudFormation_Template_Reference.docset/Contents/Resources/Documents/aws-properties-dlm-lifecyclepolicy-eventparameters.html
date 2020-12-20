@@ -16,8 +16,7 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">EventParameters</code> property type specifies Not currently supported by AWS CloudFormation. for an <a href="./aws-resource-dlm-lifecyclepolicy.html">AWS::DLM::LifecyclePolicy</a>.
-                                 </p>
+                                 <p>Specifies an event that triggers an event-based policy.</p>
                                  <h2 id="aws-properties-dlm-lifecyclepolicy-eventparameters-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -38,29 +37,54 @@
                                     <dl>
                                        <dt><a id="cfn-dlm-lifecyclepolicy-eventparameters-descriptionregex"></a><span class="term"><code class="code">DescriptionRegex</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          		       
+                                          <p>The snapshot description that can trigger the policy. The description pattern is specified
+                                             using 
+                                             			a regular expression. The policy runs only if a snapshot with a description that
+                                             matches the 
+                                             			specified pattern is shared with your account.
+                                          </p>
+                                          		       
+                                          <p>For example, specifying <code class="code">^.*Created for policy: policy-1234567890abcdef0.*$</code>  
+                                             			configures the policy to run only if snapshots created by policy <code class="code">policy-1234567890abcdef0</code> 
+                                             			are shared with your account.
+                                          </p>
+                                          	     
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Minimum</em>: <code class="code">0</code></p>
+                                          <p><em>Maximum</em>: <code class="code">1000</code></p>
+                                          <p><em>Pattern</em>: <code class="code">[\p<span>{</span>all}]*</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-dlm-lifecyclepolicy-eventparameters-eventtype"></a><span class="term"><code class="code">EventType</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          		       
+                                          <p>The type of event. Currently, only snapshot sharing events are supported.</p>
+                                          	     
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Allowed values</em>: <code class="code">shareSnapshot</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-dlm-lifecyclepolicy-eventparameters-snapshotowner"></a><span class="term"><code class="code">SnapshotOwner</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          		       
+                                          <p>The IDs of the AWS accounts that can trigger policy by sharing snapshots with your
+                                             account. The 
+                                             			policy only runs if one of the specified AWS accounts shares a snapshot with your
+                                             account.
+                                          </p>
+                                          	     
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: List of String
                                           </p>
+                                          <p><em>Maximum</em>: <code class="code">50</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>
