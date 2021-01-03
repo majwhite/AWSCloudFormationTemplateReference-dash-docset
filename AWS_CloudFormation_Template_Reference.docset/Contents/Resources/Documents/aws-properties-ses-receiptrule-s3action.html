@@ -170,6 +170,54 @@
                                        </dd>
                                     </dl>
                                  </div>
+                                 <h2 id="aws-properties-ses-receiptrule-s3action--examples">Examples</h2>
+                                 <h3 id="aws-properties-ses-receiptrule-s3action--examples--S3_Action_in_SES_RuleSet">S3 Action in SES RuleSet</h3>
+                                 <p>The following example creates an S3 Action in a SES RuleSet. </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-ses-receiptrule-s3action--examples--S3_Action_in_SES_RuleSet--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;SesRuleSet&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::SES::ReceiptRuleSet&quot;
+    },
+    &quot;SesRule&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::SES::ReceiptRule&quot;,
+        &quot;Properties&quot;: <span>{</span>
+            &quot;Rule&quot;: <span>{</span>
+                &quot;Recipients&quot;: [
+                    &quot;String&quot;
+                ],
+                &quot;Actions&quot;: [
+                    <span>{</span>
+                        &quot;S3Action&quot;: <span>{</span>
+                            &quot;BucketName&quot;: <span>{</span>
+                                &quot;Ref&quot;: &quot;Bucket&quot;
+                            }
+                        }
+                    }
+                ],
+                &quot;Enabled&quot;: true,
+                &quot;ScanEnabled&quot;: true
+            },
+            &quot;RuleSetName&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;SesRuleSet&quot;
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-ses-receiptrule-s3action--examples--S3_Action_in_SES_RuleSet--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">SesRuleSet:
+  Type: &apos;AWS::SES::ReceiptRuleSet&apos;
+SesRule:
+  Type: &apos;AWS::SES::ReceiptRule&apos;
+  Properties:
+    Rule:
+      Recipients:
+        - String
+      Actions:
+        - S3Action:
+            BucketName: !Ref Bucket
+      Enabled: true
+      ScanEnabled: true
+    RuleSetName: !Ref SesRuleSet</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
