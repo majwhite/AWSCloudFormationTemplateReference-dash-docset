@@ -16,7 +16,7 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::MWAA::Environment</code> resource.
+                                 <p>The <code class="code">AWS::MWAA::Environment</code> resource creates an Amazon MWAA environment with Apache Airflow.
                                  </p>
                                  <h2 id="aws-resource-mwaa-environment-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -77,9 +77,17 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-airflowconfigurationoptions"></a><span class="term"><code class="code">AirflowConfigurationOptions</code></span></dt>
                                        <dd>
                                           
-                                          <p>The custom configuration options to use to override default Apache Airflow configuration
-                                             options in your environment.
+                                          <p>Key/value pairs representing Apache Airflow configuration variables. Apache Airflow
+                                             configuration is divided into sections. The keys of the key/value pairs are prefixed
+                                             by
+                                             their section. For example:
                                           </p>
+                                          
+                                          <p><code class="code">[webserver]</code></p>
+                                          
+                                          <p><code class="code">default_ui_timezone=UTC</code></p>
+                                          
+                                          <p>Is represented as: <code class="code">&quot;webserver.default_ui_timezone&quot;: &quot;UTC&quot;</code></p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -89,7 +97,7 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-airflowversion"></a><span class="term"><code class="code">AirflowVersion</code></span></dt>
                                        <dd>
                                           
-                                          <p>The version of Apache Airflow to use for the environment.</p>        
+                                          <p>The version of Apache Airflow to use for the environment.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -100,7 +108,7 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-dags3path"></a><span class="term"><code class="code">DagS3Path</code></span></dt>
                                        <dd>
                                           
-                                          <p>The path to the DAGs folder in the S3 bucket.</p>        
+                                          <p>The path to the DAGs folder in the S3 bucket.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -111,7 +119,7 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-environmentclass"></a><span class="term"><code class="code">EnvironmentClass</code></span></dt>
                                        <dd>
                                           
-                                          <p>The instance class to use to create the environment.</p>        
+                                          <p>The instance class to use to create the environment.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -122,7 +130,7 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-executionrolearn"></a><span class="term"><code class="code">ExecutionRoleArn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ARN of the IAM role to use as the execution role for the environment.</p>        
+                                          <p>The ARN of the IAM role to use as the execution role for the environment.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -133,7 +141,10 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-kmskey"></a><span class="term"><code class="code">KmsKey</code></span></dt>
                                        <dd>
                                           
-                                          <p></p>        
+                                          <p>The AWS Key Management Service (KMS) key to encrypt and decrypt the data in your
+                                             environment. You can use an AWS KMS key managed by MWAA, or a custom KMS key
+                                             (advanced).
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -144,7 +155,7 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-loggingconfiguration"></a><span class="term"><code class="code">LoggingConfiguration</code></span></dt>
                                        <dd>
                                           
-                                          <p>Specifies the logging settings for the environment.</p>        
+                                          <p>Specifies the logging settings for the environment.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -154,7 +165,7 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-maxworkers"></a><span class="term"><code class="code">MaxWorkers</code></span></dt>
                                        <dd>
                                           
-                                          <p>The maximum number of workers to scale up to in the environment.</p>        
+                                          <p>The maximum number of workers to scale up to in the environment.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -165,7 +176,9 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-networkconfiguration"></a><span class="term"><code class="code">NetworkConfiguration</code></span></dt>
                                        <dd>
                                           
-                                          <p></p>        
+                                          <p>The VPC networking components to use for your Amazon MWAA environment. The VPC network
+                                             must include at least two private subnets and one VPC security group.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -175,7 +188,7 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-pluginss3objectversion"></a><span class="term"><code class="code">PluginsS3ObjectVersion</code></span></dt>
                                        <dd>
                                           
-                                          <p>The version of the plugins.zip in file to use from the S3 bucket.</p>        
+                                          <p>The version of the plugins.zip in file to use from the S3 bucket.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -186,7 +199,7 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-pluginss3path"></a><span class="term"><code class="code">PluginsS3Path</code></span></dt>
                                        <dd>
                                           
-                                          <p>The S3 URI to the plugins.zip file to use for the environment.</p>        
+                                          <p>The S3 URI to the plugins.zip file to use for the environment.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -197,7 +210,7 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-requirementss3objectversion"></a><span class="term"><code class="code">RequirementsS3ObjectVersion</code></span></dt>
                                        <dd>
                                           
-                                          <p>The version of the requirements.txt in file to use from the S3 bucket.</p>        
+                                          <p>The version of the requirements.txt in file to use from the S3 bucket.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -208,7 +221,7 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-requirementss3path"></a><span class="term"><code class="code">RequirementsS3Path</code></span></dt>
                                        <dd>
                                           
-                                          <p>The S3 URI to the requirements.txt file to use for the environment.</p>        
+                                          <p>The S3 URI to the requirements.txt file to use for the environment.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -221,7 +234,7 @@ Properties:
                                           
                                           <p>The ARN of the S3 bucket to use to store your DAGs and associated support files for
                                              the environment.
-                                          </p>        
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -232,7 +245,7 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
                                           
-                                          <p></p>        
+                                          <p>The metadata tags you want to attach to your environment.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -242,7 +255,11 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-webserveraccessmode"></a><span class="term"><code class="code">WebserverAccessMode</code></span></dt>
                                        <dd>
                                           
-                                          <p></p>        
+                                          <p>The mode to access the Apache Airflow web server. Use a public network to allow access
+                                             to the Apache Airflow UI in your environment over the Internet. You can manage
+                                             permissions by using an IAM policy. Choose a private network to limits access to Apache
+                                             Airflow to only users within your VPC.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -253,7 +270,7 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-webserverurl"></a><span class="term"><code class="code">WebserverUrl</code></span></dt>
                                        <dd>
                                           
-                                          <p>The URL to access the Apache Airflow UI in the environment.</p>        
+                                          <p>The URL to access the Apache Airflow UI in the environment.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -266,8 +283,9 @@ Properties:
                                           
                                           <p>The day and time of the week to start weekly maintenance updates of your environment,
                                              in the format DAY:HH:MM, such as TUE:03:30. You can specify a start time in 30 minute
-                                             increments only. Supported input includes the following: MON|TUE|WED|THU|FRI|SAT|SUN:([01]\\d|2[0-3]):(00|30)
-                                          </p>        
+                                             increments only. Supported input includes the following:
+                                             MON|TUE|WED|THU|FRI|SAT|SUN:([01]\\d|2[0-3]):(00|30)
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -279,33 +297,53 @@ Properties:
                                  </div>
                                  <h2 id="aws-resource-mwaa-environment-return-values">Return values</h2>
                                  <h3 id="aws-resource-mwaa-environment-return-values-ref">Ref</h3>
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the environment details.
+                                 </p>
                                  <h3 id="aws-resource-mwaa-environment-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
                                  <h4 id="aws-resource-mwaa-environment-return-values-fn--getatt-fn--getatt"></h4>
                                  <div class="variablelist">
                                     <dl>
                                        <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The ARN for the environment.</p>
+                                          
                                        </dd>
                                        <dt><a id="CreatedAt-fn::getatt"></a><span class="term"><code class="code">CreatedAt</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The time and date at which that the environment was created.</p>
+                                          
                                        </dd>
                                        <dt><a id="LastUpdate-fn::getatt"></a><span class="term"><code class="code">LastUpdate</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>A time stamp for time of the last update to the environment.</p>
+                                          
                                        </dd>
                                        <dt><a id="Name-fn::getatt"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The name of the environment.</p>
+                                          
                                        </dd>
                                        <dt><a id="ServiceRoleArn-fn::getatt"></a><span class="term"><code class="code">ServiceRoleArn</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The ARN of the role used for the environment.</p>
+                                          
                                        </dd>
                                        <dt><a id="Status-fn::getatt"></a><span class="term"><code class="code">Status</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The status of the environment.</p>
+                                          
                                        </dd>
                                     </dl>
                                  </div>

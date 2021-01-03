@@ -218,7 +218,7 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>A list of information about the configuration. Does not apply to RabbitMQ brokers.</p>
+                                          <p>A list of information about the configuration.<span> Does not apply to RabbitMQ brokers.</span></p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-amazonmq-broker-configurationid.html">ConfigurationId</a></p>
@@ -268,7 +268,8 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ</p>
+                                          <p>The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ<span> and RABBITMQ</span>.
+                                          </p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -327,7 +328,7 @@ Properties:
                                           
                                           
                                           <p>The scheduled time period relative to UTC during which Amazon MQ begins to apply pending
-                                             updates or patches to the broker..
+                                             updates or patches to the broker.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -383,11 +384,9 @@ Properties:
                                              Zones. Amazon MQ will not be able to create
                                              VPC endpoints for your broker with multiple subnets in the same Availability Zone.
                                              A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet).
-                                             An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ
-                                             deployment (RABBITMQ)
-                                             has no subnet requirements when deployed with public accessibility, deployment without
-                                             public accessibility requires at least one subnet.
-                                          </p>
+                                             An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets.<span> A CLUSTER_MULTI_AZ deployment (RABBITMQ)
+                                                has no subnet requirements when deployed with public accessibility, deployment without
+                                                public accessibility requires at least one subnet.</span></p>
                                           
                                           <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
@@ -428,10 +427,10 @@ Properties:
                                           
                                           
                                           <p>The list of ActiveMQ users (persons or applications) who can access queues and topics.
-                                             For RabbitMQ brokers, one and only one administrative user is accepted and created
-                                             when a broker is first provisioned.
-                                             All subsequent broker users are created by via the RabbitMQ web console or by using
-                                             the RabbitMQ management API.
+                                             <span>For RabbitMQ brokers, one and only one administrative user is accepted and created
+                                                when a broker is first provisioned.
+                                                All subsequent RabbitMQ users are created by via the RabbitMQ web console or by using
+                                                the RabbitMQ management API.</span>
                                              This value can contain only alphanumeric characters, dashes, periods, underscores,
                                              and tildes
                                              (- . _ ~). This value must be 2-100 characters long.
@@ -512,9 +511,7 @@ Properties:
                                        <dt><a id="IpAddresses-fn::getatt"></a><span class="term"><code class="code">IpAddresses</code></span></dt>
                                        <dd>
                                           
-                                          <p>The IP addresses of each broker instance as a list of strings. Does not apply to RabbitMQ
-                                             brokers.
-                                          </p>
+                                          <p>The IP addresses of each broker instance as a list of strings.<span> Does not apply to RabbitMQ brokers.</span></p>
                                           
                                           <p>
                                              <code class="code">[&apos;198.51.100.2&apos;, &apos;203.0.113.9&apos;]</code>
@@ -570,10 +567,20 @@ Properties:
                                  </div>
                                  <h2 id="aws-resource-amazonmq-broker--examples">Examples</h2>
                                  <h3 id="aws-resource-amazonmq-broker--examples--Basic_Amazon_MQ_Broker">Basic Amazon MQ Broker</h3>
-                                 <p>The following example creates a basic Amazon MQ broker with one user that belongs
-                                    to a
-                                    group. 
+                                 <p>The following examples creates a basic Amazon MQ broker. The RabbitMQ example creates
+                                    a broker with one administrative user,
+                                    while the ActiveMQ example creates a broker with one user that belongs to a group.
                                  </p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>We don&apos;t recommend including plaintext passwords in AWS CloudFormation templates.
+                                          To
+                                          securely retrieve your user credentials, add a <code class="code">Ref</code> to your template.
+                                       </p>
+                                    </div>
+                                 </div>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-amazonmq-broker--examples--Basic_Amazon_MQ_Broker--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Description&quot;: &quot;Create a basic ActiveMQ broker&quot;,
@@ -582,7 +589,7 @@ Properties:
       &quot;Type&quot;: &quot;AWS::AmazonMQ::Broker&quot;,
       &quot;Properties&quot;: <span>{</span>
         &quot;AutoMinorVersionUpgrade&quot;: &quot;false&quot;,
-        &quot;BrokerName&quot;: &quot;MyBasicBroker&quot;,
+        &quot;BrokerName&quot;: &quot;MyBasicActiveBroker&quot;,
         &quot;DeploymentMode&quot;: &quot;SINGLE_INSTANCE&quot;,
         &quot;EngineType&quot;: &quot;ActiveMQ&quot;,
         &quot;EngineVersion&quot;: &quot;5.15.0&quot;,
@@ -610,7 +617,7 @@ Properties:
     &quot;Type&quot;: &quot;AWS::AmazonMQ::Broker&quot;,
     &quot;Properties&quot;: <span>{</span>
       &quot;AutoMinorVersionUpgrade&quot;: &quot;false&quot;,
-      &quot;BrokerName&quot;: &quot;MyBasicBroker&quot;,
+      &quot;BrokerName&quot;: &quot;MyBasicRabbitBroker&quot;,
       &quot;DeploymentMode&quot;: &quot;SINGLE_INSTANCE&quot;,
       &quot;EngineType&quot;: &quot;RabbitMQ&quot;,
       &quot;EngineVersion&quot;: &quot;3.8.6&quot;,
@@ -634,7 +641,7 @@ Resources:
     Type: &quot;AWS::AmazonMQ::Broker&quot;
     Properties: 
       AutoMinorVersionUpgrade: &quot;false&quot;
-      BrokerName: MyBasicBroker
+      BrokerName: MyBasicActiveBroker
       DeploymentMode: SINGLE_INSTANCE
       EngineType: ActiveMQ
       EngineVersion: &quot;5.15.0&quot;
@@ -646,9 +653,9 @@ Resources:
           Groups: 
             - MyGroup
           Password: 
-            Ref: &quot;BrokerPassword&quot;            
+            Ref: AmazonMqPassword           
           Username: 
-            Ref: &quot;BrokerUsername&quot;</code></pre></div>
+            Ref: AmazonMqUsername</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h4 id="aws-resource-amazonmq-broker--examples--Basic_Amazon_MQ_Broker--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- 
 Description: &quot;Create a basic RabbitMQ broker&quot;
@@ -657,7 +664,7 @@ Resources:
     Type: &quot;AWS::AmazonMQ::Broker&quot;
     Properties: 
       AutoMinorVersionUpgrade: &quot;false&quot;
-      BrokerName: MyBasicBroker
+      BrokerName: MyBasicRabbitBroker
       DeploymentMode: SINGLE_INSTANCE
       EngineType: RabbitMQ
       EngineVersion: &quot;3.8.6&quot;
@@ -666,17 +673,16 @@ Resources:
       Users: 
         - 
           Password: 
-            Ref: &quot;BrokerPassword&quot;            
+            Ref: AmazonMqPassword            
           Username: 
-            Ref: &quot;BrokerUsername&quot;</code></pre></div>
+            Ref: AmazonMqUsername</code></pre></div>
                                  <h3 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker">Complex Amazon MQ Broker</h3>
                                  <p>The following example creates a complex Amazon MQ broker. The ActiveMQ example
                                     creates a broker with two users that don&apos;t belong to a group and one user that belongs
                                     in a group.
-                                    The RabbitMQ broker example creates one administrator user, which can then create
-                                    and manage other
-                                    users via the RabbitMQ web console or the management API.
-                                 </p>
+                                    <span>The RabbitMQ example creates one administrator user, which can then create and manage
+                                       other
+                                       users via the RabbitMQ web console or the management API.</span></p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Description&quot;: &quot;Create a complex ActiveMQ broker&quot;,
@@ -685,7 +691,7 @@ Resources:
       &quot;Type&quot;: &quot;AWS::AmazonMQ::Broker&quot;,
       &quot;Properties&quot;: <span>{</span>
         &quot;AutoMinorVersionUpgrade&quot;: &quot;false&quot;,
-        &quot;BrokerName&quot;: &quot;MyComplexBroker&quot;,
+        &quot;BrokerName&quot;: &quot;MyComplexActiveBroker&quot;,
         &quot;Configuration&quot;: <span>{</span>
           &quot;Id&quot;: <span>{</span> &quot;Ref&quot;: &quot;Configuration1&quot; },
           &quot;Revision&quot; : <span>{</span> &quot;Fn::GetAtt&quot;: [&quot;Configuration1&quot;, &quot;Revision&quot;] }
@@ -714,8 +720,8 @@ Resources:
         ],         
         &quot;Users&quot;: [<span>{</span>
           &quot;ConsoleAccess&quot;: &quot;true&quot;,
-          &quot;Password&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqPassword1&quot; },
-          &quot;Username&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqUsername1&quot; }
+          &quot;Password&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqPassword&quot; },
+          &quot;Username&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqUsername&quot; }
         }, <span>{</span>
           &quot;Password&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqPassword2&quot; },
           &quot;Username&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqUsername2&quot; }
@@ -733,32 +739,40 @@ Resources:
 }</code></pre></div>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-&quot;Description&quot;: &quot;Create a complex RabbitMQ broker&quot;,
-&quot;Resources&quot;: <span>{</span>
-  &quot;ComplexBroker&quot;: <span>{</span>
-    &quot;Type&quot;: &quot;AWS::AmazonMQ::Broker&quot;,
-    &quot;Properties&quot;: <span>{</span>
-      &quot;AutoMinorVersionUpgrade&quot;: &quot;false&quot;,
-      &quot;BrokerName&quot;: &quot;MyComplexBroker&quot;,
-     }
-    },
-    &quot;DeploymentMode&quot;: &quot;SINGLE_INSTANCE&quot;,
-    &quot;EngineType&quot;: &quot;RabbitMQ&quot;,
-    &quot;EngineVersion&quot;: &quot;3.8.6&quot;,
-    &quot;HostInstanceType&quot;: &quot;mq.t3.micro&quot;,
-    &quot;Logs&quot;: <span>{</span>
-      &quot;General&quot;: true
-    },
-    &quot;MaintenanceWindowStartTime&quot;: <span>{</span>
-      &quot;DayOfWeek&quot;: &quot;Monday&quot;,
-      &quot;TimeOfDay&quot;: &quot;22:45&quot;,
-      &quot;TimeZone&quot;: &quot;America/Los_Angeles&quot;
-    },
-    &quot;PubliclyAccessible&quot;: &quot;true&quot;,        
-    &quot;Users&quot;: [<span>{</span>
-      &quot;Password&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqPassword1&quot; },
-      &quot;Username&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqUsername1&quot; }]
-    }
+  &quot;Description&quot;: &quot;Create a single-instance RabbitMQ broker without public accessibility&quot;,
+  &quot;Resources&quot;: <span>{</span>
+    &quot;ComplexBroker&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::AmazonMQ::Broker&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;AutoMinorVersionUpgrade&quot;: &quot;true&quot;,
+        &quot;BrokerName&quot;: &quot;MyComplexRabbitBroker&quot;,
+        &quot;DeploymentMode&quot;: &quot;SINGLE_INSTANCE&quot;,
+        &quot;EngineType&quot;: &quot;RabbitMQ&quot;,
+        &quot;EngineVersion&quot;: &quot;3.8.6&quot;,
+        &quot;HostInstanceType&quot;: &quot;mq.t3.micro&quot;,
+        &quot;Logs&quot;: <span>{</span>
+          &quot;General&quot;: true
+        },
+        &quot;MaintenanceWindowStartTime&quot;: <span>{</span>
+          &quot;DayOfWeek&quot;: &quot;Monday&quot;,
+          &quot;TimeOfDay&quot;: &quot;22:45&quot;,
+          &quot;TimeZone&quot;: &quot;America/Los_Angeles&quot;
+        },
+        &quot;PubliclyAccessible&quot;: &quot;false&quot;,
+        &quot;SecurityGroups&quot;: [
+          &quot;sg-1a234b5cd6efgh7i8&quot;
+        ],
+        &quot;SubnetIds&quot;: [
+          &quot;subnet-123456b7891abcd1f&quot;
+        ],
+        &quot;Users&quot;: [
+          <span>{</span>
+            &quot;Password&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqPassword&quot; },
+            &quot;Username&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqUsername&quot; }
+          }
+        ]
+      }
+    }   
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
@@ -768,7 +782,7 @@ Resources:
     Type: &apos;AWS::AmazonMQ::Broker&apos;
     Properties:
       AutoMinorVersionUpgrade: &apos;false&apos;
-      BrokerName: MyComplexBroker
+      BrokerName: MyComplexActiveBroker
       Configuration:
         Id: !Ref Configuration1
         Revision: !GetAtt 
@@ -794,8 +808,8 @@ Resources:
         - subnet-67d8e90f
       Users:
         - ConsoleAccess: &apos;true&apos;
-          Password: !Ref AmazonMqPassword1
-          Username: !Ref AmazonMqUsername1
+          Password: !Ref AmazonMqPassword
+          Username: !Ref AmazonMqUsername
         - Password: !Ref AmazonMqPassword2
           Username: !Ref AmazonMqUsername2
         - Groups:
@@ -805,13 +819,13 @@ Resources:
           Username: !Ref AmazonMqUsername3
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: Create a complex RabbitMQ broker
+                                    <h4 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: Create a single-instance RabbitMQ broker without public accessibility
 Resources:
   ComplexBroker:
     Type: &apos;AWS::AmazonMQ::Broker&apos;
     Properties:
-      AutoMinorVersionUpgrade: &apos;false&apos;
-      BrokerName: MyComplexBroker
+      AutoMinorVersionUpgrade: false
+      BrokerName: MyComplexRabbitBroker
       DeploymentMode: SINGLE_INSTANCE
       EngineType: RabbitMQ
       EngineVersion: 3.8.6
@@ -822,10 +836,14 @@ Resources:
         DayOfWeek: Monday
         TimeOfDay: &apos;22:45&apos;
         TimeZone: America/Los_Angeles
-      PubliclyAccessible: &apos;true&apos;
+      PubliclyAccessible: false
+      SecurityGroups:
+        - &apos;sg-1a234b5cd6efgh7i8&apos;
+      SubnetIds:
+        - &apos;subnet-123456b7891abcd1f&apos;
       Users:
-        - Password: !Ref AmazonMqPassword1
-          Username: !Ref AmazonMqUsername1
+        - Password: !Ref AmazonMqPassword
+          Username: !Ref AmazonMqUsername
       </code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
