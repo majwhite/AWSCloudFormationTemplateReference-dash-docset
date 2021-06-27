@@ -36,6 +36,7 @@
       &quot;<a href="#cfn-transfer-user-homedirectorymappings">HomeDirectoryMappings</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-transfer-user-homedirectorymapentry.html">HomeDirectoryMapEntry</a>, ... ]</code>,
       &quot;<a href="#cfn-transfer-user-homedirectorytype">HomeDirectoryType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-transfer-user-policy">Policy</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-transfer-user-posixprofile">PosixProfile</a>&quot; : <code class="replaceable"><a href="./aws-properties-transfer-user-posixprofile.html">PosixProfile</a></code>,
       &quot;<a href="#cfn-transfer-user-role">Role</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-transfer-user-serverid">ServerId</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-transfer-user-sshpublickeys">SshPublicKeys</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-transfer-user-sshpublickey.html">SshPublicKey</a>, ... ]</code>,
@@ -52,6 +53,8 @@ Properties:
     - <a href="./aws-properties-transfer-user-homedirectorymapentry.html">HomeDirectoryMapEntry</a></code>
   <a href="#cfn-transfer-user-homedirectorytype">HomeDirectoryType</a>: <code class="replaceable">String</code>
   <a href="#cfn-transfer-user-policy">Policy</a>: <code class="replaceable">String</code>
+  <a href="#cfn-transfer-user-posixprofile">PosixProfile</a>: <code class="replaceable">
+    <a href="./aws-properties-transfer-user-posixprofile.html">PosixProfile</a></code>
   <a href="#cfn-transfer-user-role">Role</a>: <code class="replaceable">String</code>
   <a href="#cfn-transfer-user-serverid">ServerId</a>: <code class="replaceable">String</code>
   <a href="#cfn-transfer-user-sshpublickeys">SshPublicKeys</a>: <code class="replaceable">
@@ -69,7 +72,6 @@ Properties:
                                           <p>The landing directory (folder) for a user when they log in to the server using the
                                              client.
                                           </p>
-                                          
                                           
                                           <p>A <code class="code">HomeDirectory</code> example is <code class="code">/bucket_name/home/mydirectory</code>.
                                           </p>
@@ -120,7 +122,7 @@ Properties:
                                                    will be ignored. As a workaround, you can use the Amazon S3 API to create 0 byte objects
                                                    as place holders for your directory. If using the CLI, use the <code class="code">s3api</code> call
                                                    instead of <code class="code">s3</code> so you can use the put-object operation. For example, you use
-                                                   the following: <code class="code">aws s3api put-object --bucket bucketname --key
+                                                   the following: <code class="code">AWS s3api put-object --bucket bucketname --key
                                                       path/to/folder/</code>. Make sure that the end of the key name ends in a &apos;/&apos; for it
                                                    to be considered a folder.
                                                 </p>
@@ -137,11 +139,11 @@ Properties:
                                        <dd>
                                           
                                           <p>The type of landing directory (folder) you want your users&apos; home directory to be when
-                                             they log into the server. If you set it to <code class="code">PATH</code>, the user will see the absolute
-                                             Amazon S3 bucket paths as is in their file transfer protocol clients. If you set it
-                                             <code class="code">LOGICAL</code>, you will need to provide mappings in the
-                                             <code class="code">HomeDirectoryMappings</code> for how you want to make Amazon S3 paths visible to your
-                                             users.
+                                             they log into the server.
+                                             If you set it to <code class="code">PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file
+                                             transfer protocol clients.
+                                             If you set it <code class="code">LOGICAL</code>, you will need to provide mappings in the <code class="code">HomeDirectoryMappings</code> for how you want to make Amazon
+                                             S3 or EFS paths visible to your users.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -186,17 +188,36 @@ Properties:
                                           <p><em>Maximum</em>: <code class="code">2048</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-transfer-user-posixprofile"></a><span class="term"><code class="code">PosixProfile</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>Specifies the full POSIX identity, including user ID (<code class="code">Uid</code>), group ID
+                                             (<code class="code">Gid</code>), and any secondary groups IDs (<code class="code">SecondaryGids</code>), that controls
+                                             your users&apos; access to your Amazon Elastic File System (Amazon EFS) file systems. The
+                                             POSIX
+                                             permissions that are set on files and directories in your file system determine the
+                                             level of
+                                             access your users get when transferring files into and out of your Amazon EFS file
+                                             systems.
+                                          </p>
+                                          
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-transfer-user-posixprofile.html">PosixProfile</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-transfer-user-role"></a><span class="term"><code class="code">Role</code></span></dt>
                                        <dd>
                                           
-                                          <p>The IAM role that controls your users&apos; access to your Amazon S3 bucket. The policies
-                                             attached to this role will determine the level of access you want to provide your
-                                             users when
-                                             transferring files into and out of your Amazon S3 bucket or buckets. The IAM role
-                                             should also
-                                             contain a trust relationship that allows the server to access your resources when
-                                             servicing
-                                             your users&apos; transfer requests.
+                                          <p>Specifies the Amazon Resource Name (ARN) of the IAM role that controls your users&apos;
+                                             access to your Amazon S3 bucket or EFS
+                                             file system. The policies attached to this role determine the level of access that
+                                             you want to provide your users when transferring
+                                             files into and out of your Amazon S3 bucket or EFS file system. The IAM role should
+                                             also contain a trust relationship that allows the
+                                             server to access your resources when servicing your users&apos; transfer requests.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -329,68 +350,82 @@ Properties:
                                  <h3 id="aws-resource-transfer-user--examples--Associate_a_user_with_a_server">Associate a user with a server</h3>
                                  <p>The following example associates a user with a server.</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-transfer-user--examples--Associate_a_user_with_a_server--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-    &quot;Resources&quot;: <span>{</span>
-        &quot;transferUser&quot;: <span>{</span>
-            &quot;Type&quot;: &quot;AWS::Transfer::User&quot;,
-            &quot;Properties&quot;: <span>{</span>
-                &quot;HomeDirectoryMappings&quot;: [
-                    <span>{</span>
-                        &quot;Entry&quot;: &quot;/our-personal-report.pdf&quot;,
-                        &quot;Target&quot;: &quot;/bucket3/customized-reports/$<span>{</span>transfer:UserName}.pdf&quot;
-                    }
-                ],
-                &quot;HomeDirectoryType&quot;: &quot;LOGICAL&quot;,
-                &quot;Policy&quot;: <span>{</span>
-                    &quot;Version&quot;: &quot;2012-10-17T00:00:00.000Z&quot;,
-                    &quot;Statement&quot;: <span>{</span>
-                        &quot;Sid&quot;: &quot;AllowFullAccessToBucket&quot;,
-                        &quot;Action&quot;: &quot;s3:*&quot;,
-                        &quot;Effect&quot;: &quot;Allow&quot;,
-                        &quot;Resource&quot;: &quot;arn:aws:s3:::bucket_name arn:aws:s3:::bucket_name/*&quot;
-                    }
-                },
-                &quot;Role&quot;: &quot;arn:aws:iam::176354371281:role/Transfer_role&quot;,
-                &quot;ServerId&quot;: &quot;s-01234567890abcdef&quot;,
-                &quot;SshPublicKeys&quot;: [
-                    &quot;AAAAB3NzaC1yc2EAAAADAQABAAABAQCOtfCAis3aHfM6yc8KWAlMQxVDBHyccCde9MdLf4DQNXn8HjAHf+Bc1vGGCAREFUL1NO2PEEKING3ALLOWEDfIf+JBecywfO35Cm6IKIV0JF2YOPXvOuQRs80hQaBUvQL9xw6VEb4xzbit2QB6&quot;
-                ],
-                &quot;Tags&quot;: [
-                    <span>{</span>
-                        &quot;Key&quot;: &quot;KeyName&quot;,
-                        &quot;Value&quot;: &quot;ValueName&quot;
-                    }
-                ],
-                &quot;UserName&quot;: &quot;username&quot;
+                                    <h4 id="aws-resource-transfer-user--examples--Associate_a_user_with_a_server--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;User&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::Transfer::User&quot;,
+      &quot;Properties&quot;: <span>{</span>
+         &quot;HomeDirectoryMappings&quot;: [
+            <span>{</span>
+               &quot;Entry&quot;: &quot;/our-personal-report.pdf&quot;,
+               &quot;Target&quot;: &quot;/my-bucket/customized-reports/$<span>{</span>transfer:UserName}.pdf&quot;
             }
-        }
-    }
+         ],
+         &quot;HomeDirectoryType&quot;: &quot;LOGICAL&quot;,
+         &quot;Policy&quot;: <span>{</span>
+           &quot;Fn::Sub&quot;: <span>{</span>
+             &quot;Version&quot;: &quot;2012-10-17T00:00:00.000Z&quot;,
+             &quot;Statement&quot;: <span>{</span>
+               &quot;Sid&quot;: &quot;AllowFullAccessToBucket&quot;,
+               &quot;Action&quot;: &quot;s3:*&quot;,
+               &quot;Effect&quot;: &quot;Allow&quot;,
+               &quot;Resource&quot;: [
+                  &quot;arn:$<span>{</span>AWS::Partition}:s3:::my-bucket&quot;,
+                  &quot;arn:$<span>{</span>AWS::Partition}:s3:::my-bucket/*&quot;
+               ]
+             }
+          }
+       },
+       &quot;Role&quot;: <span>{</span>
+         &quot;Fn::Sub&quot;: &quot;arn:$<span>{</span>AWS::Partition}:iam::$<span>{</span>AWS::AccountId}:role/Admin&quot;
+       },
+       &quot;ServerId&quot;: <span>{</span>
+         &quot;Fn::GetAtt&quot;: &quot;Server.ServerId&quot;
+       },
+       &quot;SshPublicKeys&quot;: [
+         &quot;ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAn5ZA7REHaFT40KsZzYnuS7vzdP8n46akEpXLpzrOkbRPEqoOXlDk8f+2SrnANUGfjVVnTqhdrI7S90B4lyBIdWdinhVUK+W0we8j6nCMhtnjigXs6dtxvESUEzrWLWlQpPNJXDSnZEEWoQ/q7W4xXynD6GM3pko36ipA5Xv6hQWC7faYOb2FWLzN1NsngaowO1R6FRau+/oIu&quot;
+       ],
+       &quot;Tags&quot;: [
+         <span>{</span>
+           &quot;Key&quot;: &quot;KeyName&quot;,
+           &quot;Value&quot;: &quot;ValueName&quot;
+         }
+       ],
+       &quot;UserName&quot;: &quot;my-user&quot;
+     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-transfer-user--examples--Associate_a_user_with_a_server--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
-  transferUser:
-    Type: &apos;AWS::Transfer::User&apos;
-    Properties:
-      HomeDirectoryMappings:
-        - Entry: /our-personal-report.pdf
-          Target: &apos;/bucket3/customized-reports/$<span>{</span>transfer:UserName}.pdf&apos;
-      HomeDirectoryType: LOGICAL
-      Policy:
-        Version: &apos;2012-10-17T00:00:00.000Z&apos;
-        Statement:
-          Sid: AllowFullAccessToBucket
-          Action: &apos;s3:*&apos;
-          Effect: Allow
-          Resource: &apos;arn:aws:s3:::bucket_name arn:aws:s3:::bucket_name/*&apos;
-      Role: &apos;arn:aws:iam::176354371281:role/Transfer_role&apos;
-      ServerId: s-01234567890abcdef
-      SshPublicKeys:
-        - &gt;-
-          AAAAB3NzaC1yc2EAAAADAQABAAABAQCOtfCAis3aHfM6yc8KWAlMQxVDBHyccCde9MdLf4DQNXn8HjAHf+Bc1vGGCAREFUL1NO2PEEKING3ALLOWEDfIf+JBecywfO35Cm6IKIV0JF2YOPXvOuQRs80hQaBUvQL9xw6VEb4xzbit2QB6
-      Tags:
-        - Key: KeyName
-          Value: ValueName
-      UserName: username</code></pre></div>
+                                    <h4 id="aws-resource-transfer-user--examples--Associate_a_user_with_a_server--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">
+User:
+  Type: AWS::Transfer::User
+  Properties:
+  HomeDirectoryMappings:
+    - Entry: /our-personal-report.pdf
+      Target: /my-bucket/customized-reports/$<span>{</span>transfer:UserName}.pdf
+  HomeDirectoryType: LOGICAL
+  Policy:
+    Fn::Sub: |
+      <span>{</span>
+        &quot;Version&quot;: &quot;2012-10-17T00:00:00.000Z&quot;,
+        &quot;Statement&quot;: <span>{</span>
+          &quot;Sid&quot;: &quot;AllowFullAccessToBucket&quot;,
+          &quot;Action&quot;: &quot;s3:*&quot;,
+          &quot;Effect&quot;: &quot;Allow&quot;,
+          &quot;Resource&quot;: [
+            &quot;arn:$<span>{</span>AWS::Partition}:s3:::my-bucket&quot;,
+            &quot;arn:$<span>{</span>AWS::Partition}:s3:::my-bucket/*&quot;
+          ]
+        }
+      }
+  Role:
+    Fn::Sub: arn:$<span>{</span>AWS::Partition}:iam::$<span>{</span>AWS::AccountId}:role/Admin
+  ServerId:
+    Fn::GetAtt: Server.ServerId
+  SshPublicKeys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAn5ZA7REHaFT40KsZzYnuS7vzdP8n46akEpXLpzrOkbRPEqoOXlDk8f+2SrnANUGfjVVnTqhdrI7S90B4lyBIdWdinhVUK+W0we8j6nCMhtnjigXs6dtxvESUEzrWLWlQpPNJXDSnZEEWoQ/q7W4xXynD6GM3pko36ipA5Xv6hQWC7faYOb2FWLzN1NsngaowO1R6FRau+/oIu
+  Tags:
+    - Key: KeyName
+      Value: ValueName
+  UserName: my-user
+</code></pre></div>
                                  <h2 id="aws-resource-transfer-user--seealso">See also</h2>
                                  <p><a href="https://docs.aws.amazon.com/transfer/latest/userguide/API_CreateUser.html">CreateUser</a> in the <em>AWS Transfer Family User
                                        Guide</em>.
@@ -405,7 +440,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

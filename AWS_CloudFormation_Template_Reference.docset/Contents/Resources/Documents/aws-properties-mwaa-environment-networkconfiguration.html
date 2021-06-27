@@ -16,20 +16,22 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The Network Configuration to update of your Amazon MWAA environment.</p>
+                                 <p>The VPC networking components used to secure and enable network traffic between the
+                                    AWS resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.
+                                 </p>
                                  <h2 id="aws-properties-mwaa-environment-networkconfiguration-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-properties-mwaa-environment-networkconfiguration-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;<a href="#cfn-mwaa-environment-networkconfiguration-securitygroupids">SecurityGroupIds</a>&quot; : <code class="replaceable"><a href="./aws-properties-mwaa-environment-securitygrouplist.html">SecurityGroupList</a></code>,
-  &quot;<a href="#cfn-mwaa-environment-networkconfiguration-subnetids">SubnetIds</a>&quot; : <code class="replaceable"><a href="./aws-properties-mwaa-environment-subnetlist.html">SubnetList</a></code>
+  &quot;<a href="#cfn-mwaa-environment-networkconfiguration-securitygroupids">SecurityGroupIds</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+  &quot;<a href="#cfn-mwaa-environment-networkconfiguration-subnetids">SubnetIds</a>&quot; : <code class="replaceable">[ String, ... ]</code>
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-properties-mwaa-environment-networkconfiguration-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-mwaa-environment-networkconfiguration-securitygroupids">SecurityGroupIds</a>: <code class="replaceable">
-    <a href="./aws-properties-mwaa-environment-securitygrouplist.html">SecurityGroupList</a></code>
+    - String</code>
   <a href="#cfn-mwaa-environment-networkconfiguration-subnetids">SubnetIds</a>: <code class="replaceable">
-    <a href="./aws-properties-mwaa-environment-subnetlist.html">SubnetList</a></code>
+    - String</code>
 </code></pre></div>
                                  <h2 id="aws-properties-mwaa-environment-networkconfiguration-properties">Properties</h2>
                                  <div class="variablelist">
@@ -37,26 +39,28 @@
                                        <dt><a id="cfn-mwaa-environment-networkconfiguration-securitygroupids"></a><span class="term"><code class="code">SecurityGroupIds</code></span></dt>
                                        <dd>
                                           
-                                          <p>A JSON list of 1 or more security group IDs, by name, that are in the same VPC as
-                                             the
-                                             subnets.
+                                          <p>A list of one or more security group IDs. Accepts up to 5 security group IDs. A security
+                                             group must be attached to the same VPC as the subnets. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html">Security in your VPC on Amazon MWAA</a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: <a href="./aws-properties-mwaa-environment-securitygrouplist.html">SecurityGroupList</a></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-mwaa-environment-networkconfiguration-subnetids"></a><span class="term"><code class="code">SubnetIds</code></span></dt>
                                        <dd>
                                           
-                                          <p>Provide a JSON list of 2 subnet IDs by name. These must be private subnets, in the
-                                             same VPC, in two different availability zones.
+                                          <p>A list of subnet IDs. <b>Required</b> to create an environment. Must be private subnets in two different availability zones.
+                                             A subnet must be attached to the same VPC as the security group. To learn more, see
+                                             <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: <a href="./aws-properties-mwaa-environment-subnetlist.html">SubnetList</a></p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                     </dl>
@@ -71,7 +75,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

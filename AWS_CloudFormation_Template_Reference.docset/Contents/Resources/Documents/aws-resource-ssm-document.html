@@ -16,40 +16,78 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::SSM::Document</code> resource creates a Systems Manager (SSM) document in
-                                    AWS Systems Manager. This document defines the actions that Systems Manager performs
-                                    on your
-                                    AWS resources.
+                                 <p>The <code class="code">AWS::SSM::Document</code> resource creates a Systems Manager (SSM) document in AWS Systems Manager. This document
+                                    defines the actions that Systems Manager performs on your AWS
+                                    resources.
                                  </p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>This resource does not support CloudFormation drift detection.</p>
+                                    </div>
+                                 </div>
                                  <h2 id="aws-resource-ssm-document-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-resource-ssm-document-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::SSM::Document&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-ssm-document-attachments">Attachments</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-ssm-document-attachmentssource.html">AttachmentsSource</a>, ... ]</code>,
       &quot;<a href="#cfn-ssm-document-content">Content</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-ssm-document-documentformat">DocumentFormat</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-document-documenttype">DocumentType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-document-name">Name</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-ssm-document-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
+      &quot;<a href="#cfn-ssm-document-requires">Requires</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-ssm-document-documentrequires.html">DocumentRequires</a>, ... ]</code>,
+      &quot;<a href="#cfn-ssm-document-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
+      &quot;<a href="#cfn-ssm-document-targettype">TargetType</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ssm-document-versionname">VersionName</a>&quot; : <code class="replaceable">String</code>
     }
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-ssm-document-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::SSM::Document
 Properties: 
+  <a href="#cfn-ssm-document-attachments">Attachments</a>: <code class="replaceable">
+    - <a href="./aws-properties-ssm-document-attachmentssource.html">AttachmentsSource</a></code>
   <a href="#cfn-ssm-document-content">Content</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-ssm-document-documentformat">DocumentFormat</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-document-documenttype">DocumentType</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-document-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ssm-document-requires">Requires</a>: <code class="replaceable">
+    - <a href="./aws-properties-ssm-document-documentrequires.html">DocumentRequires</a></code>
   <a href="#cfn-ssm-document-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
+  <a href="#cfn-ssm-document-targettype">TargetType</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ssm-document-versionname">VersionName</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-resource-ssm-document-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-ssm-document-attachments"></a><span class="term"><code class="code">Attachments</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A list of key-value pairs that describe attachments to a version of a document.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-ssm-document-attachmentssource.html">AttachmentsSource</a></p>
+                                          <p><em>Maximum</em>: <code class="code">20</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
                                        <dt><a id="cfn-ssm-document-content"></a><span class="term"><code class="code">Content</code></span></dt>
                                        <dd>
                                           
-                                          <p>The content for the new SSM document in JSON or YAML format.</p>
+                                          <p>The content for the new SSM document in JSON or YAML.</p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This parameter also supports <code class="code">String</code> data types.
+                                                </p>
+                                             </div>
+                                          </div>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -58,15 +96,36 @@ Properties:
                                           <p><em>Minimum</em>: <code class="code">1</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
-                                       <dt><a id="cfn-ssm-document-documenttype"></a><span class="term"><code class="code">DocumentType</code></span></dt>
+                                       <dt><a id="cfn-ssm-document-documentformat"></a><span class="term"><code class="code">DocumentFormat</code></span></dt>
                                        <dd>
                                           
+                                          <p>Specify the document format for the request. The document format can be JSON or YAML.
+                                             JSON is the default format.
+                                          </p>
                                           
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p><code class="code">TEXT</code> is not supported, even though it is listed in the <code class="code">Allowed
+                                                      values</code>.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">JSON | TEXT | YAML</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ssm-document-documenttype"></a><span class="term"><code class="code">DocumentType</code></span></dt>
+                                       <dd>
                                           
                                           <p>The type of document to create.</p>
                                           
                                           <p><em>Allowed Values</em>: <code class="code">ApplicationConfigurationSchema</code> |
-                                             <code class="code">Automation</code> | <code class="code">ChangeCalendar</code> | <code class="code">Command</code> |
+                                             <code class="code">Automation</code> | <code class="code">Automation.ChangeTemplate</code> | <code class="code">Command</code> |
                                              <code class="code">DeploymentStrategy</code> | <code class="code">Package</code> | <code class="code">Policy</code> |
                                              <code class="code">Session</code></p>
                                           
@@ -79,7 +138,7 @@ Properties:
                                        <dt><a id="cfn-ssm-document-name"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
                                           
-                                          <p>A name for the Systems Manager document.</p>
+                                          <p>A name for the SSM document.</p>
                                           
                                           <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
@@ -131,6 +190,26 @@ Properties:
                                           <p><em>Pattern</em>: <code class="code">^[a-zA-Z0-9_\-.]<span>{</span>3,128}$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
+                                       <dt><a id="cfn-ssm-document-requires"></a><span class="term"><code class="code">Requires</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A list of SSM documents required by a document. This parameter is used exclusively
+                                             by
+                                             AWS AppConfig. When a user creates an AWS AppConfig configuration in an SSM document,
+                                             the user must also
+                                             specify a required document for validation purposes. In this case, an
+                                             <code class="code">ApplicationConfiguration</code> document requires an
+                                             <code class="code">ApplicationConfigurationSchema</code> document for validation purposes. For more
+                                             information, see <a href="https://docs.aws.amazon.com/appconfig/latest/userguide/what-is-appconfig.html">What is AWS AppConfig?</a> in the
+                                             <em>
+                                                AWS AppConfig User Guide</em>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-ssm-document-documentrequires.html">DocumentRequires</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
                                        <dt><a id="cfn-ssm-document-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
                                           
@@ -144,6 +223,44 @@ Properties:
                                           <p><em>Maximum</em>: <code class="code">1000</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-ssm-document-targettype"></a><span class="term"><code class="code">TargetType</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specify a target type to define the kinds of resources the document can run on. For
+                                             example,
+                                             to run a document on EC2 instances, specify the following value: <code class="code">/AWS::EC2::Instance</code>. If you
+                                             specify a value of &apos;/&apos; the document can run on all types of resources. If you don&apos;t
+                                             specify a
+                                             value, the document can&apos;t run on any resources. For a list of valid resource types,
+                                             see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS resource and property types
+                                                reference</a> in the <em>AWS CloudFormation User Guide</em>. 
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Maximum</em>: <code class="code">200</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^\/[\w\.\-\:\/]*$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ssm-document-versionname"></a><span class="term"><code class="code">VersionName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>An optional field specifying the version of the artifact you are creating with the
+                                             document.
+                                             For example, &quot;Release 12, Update 6&quot;. This value is unique across all versions of a
+                                             document, and
+                                             can&apos;t be changed.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Pattern</em>: <code class="code">^[a-zA-Z0-9_\-.]<span>{</span>1,128}$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-ssm-document-return-values">Return values</h2>
@@ -156,7 +273,8 @@ Properties:
                                  </p>
                                  <h2 id="aws-resource-ssm-document--examples">Examples</h2>
                                  <h3 id="aws-resource-ssm-document--examples--Create_a_document_that_runs_commands_on_an_EC2_Linux_instance">Create a document that runs commands on an EC2 Linux instance</h3>
-                                 <p>The following SSM document runs the commands you specify on your target EC2 Linux
+                                 <p>The following SSM document runs the commands you specify on your target Amazon EC2
+                                    Linux
                                     instance. You specify the commands parameter value when you run the document using
                                     Run
                                     Command.
@@ -214,14 +332,14 @@ Properties:
     &quot;Name&quot;: &quot;CFN_2.2_command_ex&quot;
   }
 }</code></pre></div>
-                                 <h3 id="aws-resource-ssm-document--examples--Join_a_managed_instance_to_a_directory_in_AWS_Directory_Service">Join a managed instance to a directory in AWS Directory Service</h3>
+                                 <h3 id="aws-resource-ssm-document--examples--Join_a_managed_instance_to_a_directory_in_">Join a managed instance to a directory in AWS Directory Service</h3>
                                  <p>The following SSM document joins instances to a directory in AWS Directory Service.
                                     The three runtime configuration parameters specify which directory the instance joins.
                                     You
                                     specify these parameter values when you associate the document with an instance.
                                  </p>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-document--examples--Join_a_managed_instance_to_a_directory_in_AWS_Directory_Service--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">document: 
+                                    <h4 id="aws-resource-ssm-document--examples--Join_a_managed_instance_to_a_directory_in_--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">document: 
   Type: AWS::SSM::Document
   Properties:
     Content:
@@ -247,7 +365,7 @@ Properties:
             directoryName: &quot;<span>{</span><span>{</span> directoryName }}&quot;
             dnsIpAddresses: &quot;<span>{</span><span>{</span> dnsIpAddresses }}&quot;</code></pre></div>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-document--examples--Join_a_managed_instance_to_a_directory_in_AWS_Directory_Service--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;document&quot; : <span>{</span>
+                                    <h4 id="aws-resource-ssm-document--examples--Join_a_managed_instance_to_a_directory_in_--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;document&quot; : <span>{</span>
     &quot;Type&quot;: &quot;AWS::SSM::Document&quot;,
     &quot;Properties&quot;: <span>{</span>
         &quot;Content&quot;: <span>{</span>
@@ -375,6 +493,32 @@ Properties:
         }
     }
 }</code></pre></div>
+                                 <h3 id="aws-resource-ssm-document--examples--Create_a__document_that_enables_you_to_send_JSON_content_as_a_string">Create a Systems Manager document that enables you to send JSON content as a string</h3>
+                                 <p>The following example creates a new Systems Manager command document. The document
+                                    enables you to send JSON content as a string.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-document--examples--Create_a__document_that_enables_you_to_send_JSON_content_as_a_string--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">---
+Type: AWS::SSM::Document
+Properties:
+  Content: &apos;<span>{</span>&quot;schemaVersion&quot;: &quot;2.2&quot;,  &quot;description&quot;: &quot;Command Document Example JSON
+    Template&quot;,  &quot;parameters&quot;: <span>{</span>    &quot;Message&quot;: <span>{</span>      &quot;type&quot;: &quot;String&quot;, &quot;description&quot;:
+    &quot;Example&quot;,      &quot;default&quot;: &quot;Hello World&quot;    }  },  &quot;mainSteps&quot;: [    <span>{</span> &quot;action&quot;:
+    &quot;aws:runPowerShellScript&quot;,      &quot;name&quot;: &quot;example&quot;,      &quot;inputs&quot;: <span>{</span>        &quot;runCommand&quot;:
+    [ &quot;Write-Output <span>{</span><span>{</span>Message}}&quot; ]      }    }  ]}&apos;
+  DocumentType: Command
+  DocumentFormat: JSON</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-document--examples--Create_a__document_that_enables_you_to_send_JSON_content_as_a_string--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Type: AWS::SSM::Document
+Properties:
+  Content: &apos;<span>{</span>&quot;schemaVersion&quot;: &quot;2.2&quot;,  &quot;description&quot;: &quot;Command Document Example JSON
+    Template&quot;,  &quot;parameters&quot;: <span>{</span>    &quot;Message&quot;: <span>{</span>      &quot;type&quot;: &quot;String&quot;, &quot;description&quot;:
+    &quot;Example&quot;,      &quot;default&quot;: &quot;Hello World&quot;    }  },  &quot;mainSteps&quot;: [    <span>{</span> &quot;action&quot;:
+    &quot;aws:runPowerShellScript&quot;,      &quot;name&quot;: &quot;example&quot;,      &quot;inputs&quot;: <span>{</span>        &quot;runCommand&quot;:
+    [ &quot;Write-Output <span>{</span><span>{</span>Message}}&quot; ]      }    }  ]}&apos;
+  DocumentType: Command
+  DocumentFormat: JSON</code></pre></div>
                                  <h2 id="aws-resource-ssm-document--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
@@ -400,7 +544,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

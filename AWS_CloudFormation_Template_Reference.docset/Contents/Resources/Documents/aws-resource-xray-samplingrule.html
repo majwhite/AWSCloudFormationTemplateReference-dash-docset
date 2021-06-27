@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-xray-samplingrule">AWS::XRay::SamplingRule</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>Use the <code class="code">AWS::XRay::SamplingRule</code> resource to specify a sampling rule, which controls sampling behavior for instrumented
+                                    applications.
+                                    A new sampling rule is created by specifying a <code class="code">SamplingRule</code>. To change the configuration of an existing sampling rule, specify a <code class="code">SamplingRuleUpdate</code>.
+                                    
+                                 </p>
+                                 <p>Services retrieve rules with <a href="https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html">GetSamplingRules</a>, and evaluate each rule in ascending
+                                    order of <em>priority</em> for each request. If a rule matches, the service records a trace, borrowing it from
+                                    the reservoir size. After 10 seconds, the service
+                                    reports back to X-Ray with <a href="https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html">GetSamplingTargets</a> to get updated versions of
+                                    each in-use rule. The updated rule contains a trace quota that the service can use
+                                    instead
+                                    of borrowing from the reservoir.        
+                                    
+                                 </p>
+                                 <h2 id="aws-resource-xray-samplingrule-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-xray-samplingrule-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::XRay::SamplingRule&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-xray-samplingrule-rulename">RuleName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-xray-samplingrule-samplingrule">SamplingRule</a>&quot; : <code class="replaceable"><a href="./aws-properties-xray-samplingrule-samplingrule.html">SamplingRule</a></code>,
+      &quot;<a href="#cfn-xray-samplingrule-samplingruleupdate">SamplingRuleUpdate</a>&quot; : <code class="replaceable"><a href="./aws-properties-xray-samplingrule-samplingruleupdate.html">SamplingRuleUpdate</a></code>,
+      &quot;<a href="#cfn-xray-samplingrule-tags">Tags</a>&quot; : <code class="replaceable">[ Json, ... ]</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-xray-samplingrule-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::XRay::SamplingRule
+Properties: 
+  <a href="#cfn-xray-samplingrule-rulename">RuleName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-xray-samplingrule-samplingrule">SamplingRule</a>: <code class="replaceable">
+    <a href="./aws-properties-xray-samplingrule-samplingrule.html">SamplingRule</a></code>
+  <a href="#cfn-xray-samplingrule-samplingruleupdate">SamplingRuleUpdate</a>: <code class="replaceable">
+    <a href="./aws-properties-xray-samplingrule-samplingruleupdate.html">SamplingRuleUpdate</a></code>
+  <a href="#cfn-xray-samplingrule-tags">Tags</a>: <code class="replaceable">
+    - Json</code>
+</code></pre></div>
+                                 <h2 id="aws-resource-xray-samplingrule-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-xray-samplingrule-rulename"></a><span class="term"><code class="code">RuleName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name of the sampling rule. Specify a rule by either name or ARN, but not both.
+                                             Used only when deleting a sampling rule. When creating or updating a sampling rule,
+                                             use the 
+                                             <code class="code">RuleName</code> or <code class="code">RuleARN</code> properties within <code class="code">SamplingRule</code> or <code class="code">SamplingRuleUpdate</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">32</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-xray-samplingrule-samplingrule"></a><span class="term"><code class="code">SamplingRule</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The sampling rule to be created.</p>
+                                          
+                                          <p>Must be provided if creating a new sampling rule. Not valid when updating an existing
+                                             sampling rule.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Conditional
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-xray-samplingrule-samplingrule.html">SamplingRule</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-xray-samplingrule-samplingruleupdate"></a><span class="term"><code class="code">SamplingRuleUpdate</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A document specifying changes to a sampling rule&apos;s configuration.</p>
+                                          
+                                          <p>Must be provided if updating an existing sampling rule. Not valid when creating a
+                                             new sampling rule.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>The <code class="code">Version</code> of a sampling rule cannot be updated, and is not part of <code class="code">SamplingRuleUpdate</code>.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: Conditional
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-xray-samplingrule-samplingruleupdate.html">SamplingRuleUpdate</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-xray-samplingrule-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>An array of key-value pairs to apply to this resource.</p>
+                                          
+                                          <p>For more information, see <a href="aws-properties-resource-tags.html">Tag</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of Json
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-xray-samplingrule-return-values">Return values</h2>
+                                 <h3 id="aws-resource-xray-samplingrule-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <h4 id="aws-resource-xray-samplingrule-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="RuleARN-fn::getatt"></a><span class="term"><code class="code">RuleARN</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The sampling rule ARN that was created or updated.</p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-xray-samplingrule--examples">Examples</h2>
+                                 <p></p>
+                                 <h3 id="aws-resource-xray-samplingrule--examples--Create_sampling_rule">Create sampling rule</h3>
+                                 <p>This example creates a new sampling rule called MySamplingRule.</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-xray-samplingrule--examples--Create_sampling_rule--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">
+<span>{</span>
+   &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09T00:00:00.000Z&quot;,
+   &quot;Resources&quot;: <span>{</span>
+        &quot;SamplingRule&quot;: <span>{</span>
+         &quot;Type&quot;: &quot;AWS::XRay::SamplingRule&quot;,
+         &quot;Properties&quot;: <span>{</span>
+            &quot;SamplingRule&quot;: <span>{</span>
+               &quot;RuleName&quot;: &quot;MySamplingRule&quot;,
+               &quot;ResourceARN&quot;: &quot;*&quot;,
+               &quot;Priority&quot;: 2,
+               &quot;FixedRate&quot;: 0.05,
+               &quot;ReservoirSize&quot;: 50,
+               &quot;ServiceName&quot;: &quot;MyServiceName&quot;,
+               &quot;ServiceType&quot;: &quot;MyServiceType&quot;,
+               &quot;Host&quot;: &quot;MyHost&quot;,
+               &quot;HTTPMethod&quot;: &quot;GET&quot;,
+               &quot;URLPath&quot;: &quot;*&quot;,
+               &quot;Version&quot;: 1
+            }
+         }
+      }
+   }
+}
+         </code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-xray-samplingrule--examples--Create_sampling_rule--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+   SamplingRule:
+      Type: AWS::XRay::SamplingRule
+      Properties:
+         SamplingRule:
+            RuleName: MySamplingRule
+            ResourceARN: &quot;*&quot;
+            Priority: 2
+            FixedRate: 0.05
+            ReservoirSize: 50
+            ServiceName: &quot;MyServiceName&quot;
+            ServiceType: &quot;MyServiceType&quot;
+            Host: &quot;MyHost&quot;
+            HTTPMethod: &quot;GET&quot;
+            URLPath: &quot;*&quot;
+            Version: 1
+         </code></pre></div>
+                                 <h3 id="aws-resource-xray-samplingrule--examples--Update_sampling_rule">Update sampling rule</h3>
+                                 <p>This example updates an existing sampling rule called MySamplingRule.</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-xray-samplingrule--examples--Update_sampling_rule--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">
+<span>{</span>
+   &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09T00:00:00.000Z&quot;,
+   &quot;Resources&quot;: <span>{</span>
+        &quot;SamplingRule&quot;: <span>{</span>
+         &quot;Type&quot;: &quot;AWS::XRay::SamplingRule&quot;,
+         &quot;Properties&quot;: <span>{</span>
+            &quot;SamplingRuleUpdate&quot;: <span>{</span>
+               &quot;RuleName&quot;: &quot;MySamplingRule&quot;,
+               &quot;ResourceARN&quot;: &quot;*&quot;,
+               &quot;Priority&quot;: 1,
+               &quot;FixedRate&quot;: 0.07,
+               &quot;ReservoirSize&quot;: 20,
+               &quot;ServiceName&quot;: &quot;MyServiceName&quot;,
+               &quot;ServiceType&quot;: &quot;MyServiceType&quot;,
+               &quot;Host&quot;: &quot;MyHost&quot;,
+               &quot;HTTPMethod&quot;: &quot;GET&quot;,
+               &quot;URLPath&quot;: &quot;*&quot;
+            }
+         }
+      }
+   }
+}
+         </code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-xray-samplingrule--examples--Update_sampling_rule--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+   SamplingRule:
+      Type: AWS::XRay::SamplingRule
+      Properties:
+         SamplingRuleUpdate:
+            RuleName: MySamplingRule
+            ResourceARN: &quot;*&quot;
+            Priority: 1
+            FixedRate: 0.07
+            ReservoirSize: 20
+            ServiceName: &quot;MyServiceName&quot;
+            ServiceType: &quot;MyServiceType&quot;
+            Host: &quot;MyHost&quot;
+            HTTPMethod: &quot;GET&quot;
+            URLPath: &quot;*&quot;
+         </code></pre></div>
+                                 <h2 id="aws-resource-xray-samplingrule--seealso">See also</h2>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                              
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p><a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-console-sampling.html">Configuring sampling rules in the X-Ray console</a></p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p><a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-api-sampling.html">Using sampling rules with the X-Ray API</a></p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p><a href="https://docs.aws.amazon.com/xray/latest/api/API_CreateSamplingRule.html">CreateSamplingRule</a> action in the X-Ray API Reference
+                                          </p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <p></p>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

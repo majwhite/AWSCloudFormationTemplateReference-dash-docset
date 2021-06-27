@@ -16,7 +16,7 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::CodeArtifact::Repository</code> resource creates an AWS CodeArtifact repository.
+                                 <p>The <code class="code">AWS::CodeArtifact::Repository</code> resource creates an AWS CodeArtifact repository. 
                                     CodeArtifact <em>repositories</em> contain a set of package versions. 
                                     For more information about repositories, see the
                                     <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/codeartifact-concepts.html#welcome-concepts-repository">Repository concepts information</a> 
@@ -72,7 +72,7 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Maximum</em>: <code class="code">1000</code></p>
-                                          <p><em>Pattern</em>: <code class="code">\P<span>{</span>C}+</code></p>
+                                          <p><em>Pattern</em>: <code class="code">\P<span>{</span>C}*</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-codeartifact-repository-domainname"></a><span class="term"><code class="code">DomainName</code></span></dt>
@@ -339,6 +339,61 @@ Properties:
     }
   }
 }</code></pre></div>
+                                 <h3 id="aws-resource-codeartifact-repository--examples--Create_a_domain_and_repository_with_tags">Create a domain and repository with tags</h3>
+                                 <p>The following example creates a CodeArtifact domain named <em>my-domain</em> and a CodeArtifact 
+                                    repository named <em>my-repo</em> inside it with two tags. One tag consists of a key 
+                                    named <code class="code">keyname1</code> and a value of <code class="code">value1</code>. The other 
+                                    consists of a key named <code class="code">keyname2</code> and a value of <code class="code">value2</code>.
+                                 </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-codeartifact-repository--examples--Create_a_domain_and_repository_with_tags--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  MyCodeArtifactDomain:
+    Type: &apos;AWS::CodeArtifact::Domain&apos;
+    Properties:
+      DomainName: &quot;my-domain&quot;
+  MyCodeArtifactRepository:
+    Type: &apos;AWS::CodeArtifact::Repository&apos;
+    Properties:
+      RepositoryName: &quot;my-repo&quot;
+      DomainName: !GetAtt MyCodeArtifactDomain.Name
+      Tags:
+        - Key: &quot;keyname1&quot;
+          Value: &quot;value1&quot;
+        - Key: &quot;keyname2&quot;
+          Value: &quot;value2&quot;</code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-codeartifact-repository--examples--Create_a_domain_and_repository_with_tags--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Resources&quot;: <span>{</span>
+    &quot;MyCodeArtifactDomain&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::CodeArtifact::Domain&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;DomainName&quot;: &quot;my-domain&quot;
+      }
+    },
+    &quot;MyCodeArtifactRepository&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::CodeArtifact::Repository&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;RepositoryName&quot;: &quot;my-repo&quot;,
+        &quot;DomainName&quot;: <span>{</span>
+          &quot;Fn::GetAtt&quot;: [
+            &quot;MyCodeArtifactDomain&quot;,
+            &quot;Name&quot;
+          ]
+        },
+        &quot;Tags&quot; : [
+          <span>{</span>
+            &quot;Key&quot; : &quot;keyname1&quot;,
+            &quot;Value&quot; : &quot;value1&quot;
+          },
+          <span>{</span>
+            &quot;Key&quot; : &quot;keyname2&quot;,
+            &quot;Value&quot; : &quot;value2&quot;
+          }
+        ]
+      }
+    }
+  }
+}</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -349,7 +404,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

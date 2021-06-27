@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-properties-ecr-repository-encryptionconfiguration">AWS::ECR::Repository EncryptionConfiguration</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The encryption configuration for the repository. This determines how the contents
+                                    of
+                                    your repository are encrypted at rest.
+                                 </p>
+                                 <p>By default, when no encryption configuration is set or the <code class="code">AES256</code>
+                                    encryption type is used, Amazon ECR uses server-side encryption with Amazon S3-managed
+                                    encryption
+                                    keys which encrypts your data at rest using an AES-256 encryption algorithm. This
+                                    does
+                                    not require any action on your part.
+                                 </p>
+                                 <p>For more control over the encryption of the contents of your repository, you can use
+                                    server-side encryption with customer master keys (CMKs) stored in AWS Key Management
+                                    Service (AWS KMS) to
+                                    encrypt your images. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html">Amazon ECR encryption at
+                                       rest</a> in the <em>Amazon Elastic Container Registry User Guide</em>.
+                                 </p>
+                                 <h2 id="aws-properties-ecr-repository-encryptionconfiguration-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-properties-ecr-repository-encryptionconfiguration-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-ecr-repository-encryptionconfiguration-encryptiontype">EncryptionType</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-ecr-repository-encryptionconfiguration-kmskey">KmsKey</a>&quot; : <code class="replaceable">String</code>
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-properties-ecr-repository-encryptionconfiguration-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-ecr-repository-encryptionconfiguration-encryptiontype">EncryptionType</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ecr-repository-encryptionconfiguration-kmskey">KmsKey</a>: <code class="replaceable">String</code>
+</code></pre></div>
+                                 <h2 id="aws-properties-ecr-repository-encryptionconfiguration-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-ecr-repository-encryptionconfiguration-encryptiontype"></a><span class="term"><code class="code">EncryptionType</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The encryption type to use.</p>
+                                          
+                                          <p>If you use the <code class="code">KMS</code> encryption type, the contents of the repository will
+                                             be encrypted using server-side encryption with customer master keys (CMKs) stored
+                                             in
+                                             AWS KMS. When you use AWS KMS to encrypt your data, you can either use the default
+                                             AWS
+                                             managed CMK for Amazon ECR, or specify your own CMK, which you already created. For
+                                             more
+                                             information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">Protecting Data Using Server-Side
+                                                Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS)</a> in the
+                                             <em>Amazon Simple Storage Service Console Developer Guide.</em>.
+                                          </p>
+                                          
+                                          <p>If you use the <code class="code">AES256</code> encryption type, Amazon ECR uses server-side encryption
+                                             with Amazon S3-managed encryption keys which encrypts the images in the repository
+                                             using an
+                                             AES-256 encryption algorithm. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html">Protecting data using
+                                                server-side encryption with Amazon S3-managed encryption keys (SSE-S3)</a> in the
+                                             <em>Amazon Simple Storage Service Console Developer Guide.</em>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">AES256 | KMS</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ecr-repository-encryptionconfiguration-kmskey"></a><span class="term"><code class="code">KmsKey</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>If you use the <code class="code">KMS</code> encryption type, specify the CMK to use for
+                                             encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must
+                                             exist in the same Region as the repository. If no key is specified, the default AWS
+                                             managed CMK for Amazon ECR will be used.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">2048</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

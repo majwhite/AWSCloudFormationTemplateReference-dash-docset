@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-autoscaling-warmpool">AWS::AutoScaling::WarmPool</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The AWS::AutoScaling::WarmPool resource creates a pool of pre-initialized EC2 instances
+                                    that 
+                                    sits alongside the Auto Scaling group. Whenever your application needs to scale out,
+                                    the Auto 
+                                    Scaling group can draw on the warm pool to meet its new desired capacity. 
+                                 </p>
+                                 <p>When you create a warm pool, you can define a minimum size. When your Auto Scaling
+                                    group scales out and the size of the 
+                                    warm pool shrinks, Amazon EC2 Auto Scaling launches new instances into the warm pool
+                                    to maintain its minimum size. 
+                                 </p>
+                                 <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PutWarmPool.html">PutWarmPool</a> in the
+                                    <em>Amazon EC2 Auto Scaling API Reference</em> and <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html">Warm 
+                                       pools for Amazon EC2 Auto Scaling</a> in the <em>Amazon EC2 Auto Scaling User Guide</em>.
+                                 </p>
+                                 <h2 id="aws-resource-autoscaling-warmpool-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-autoscaling-warmpool-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::AutoScaling::WarmPool&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-autoscaling-warmpool-autoscalinggroupname">AutoScalingGroupName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-autoscaling-warmpool-maxgrouppreparedcapacity">MaxGroupPreparedCapacity</a>&quot; : <code class="replaceable">Integer</code>,
+      &quot;<a href="#cfn-autoscaling-warmpool-minsize">MinSize</a>&quot; : <code class="replaceable">Integer</code>,
+      &quot;<a href="#cfn-autoscaling-warmpool-poolstate">PoolState</a>&quot; : <code class="replaceable">String</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-autoscaling-warmpool-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::AutoScaling::WarmPool
+Properties: 
+  <a href="#cfn-autoscaling-warmpool-autoscalinggroupname">AutoScalingGroupName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-autoscaling-warmpool-maxgrouppreparedcapacity">MaxGroupPreparedCapacity</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-autoscaling-warmpool-minsize">MinSize</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-autoscaling-warmpool-poolstate">PoolState</a>: <code class="replaceable">String</code>
+</code></pre></div>
+                                 <h2 id="aws-resource-autoscaling-warmpool-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-autoscaling-warmpool-autoscalinggroupname"></a><span class="term"><code class="code">AutoScalingGroupName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name of the Auto Scaling group.</p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">255</code></p>
+                                          <p><em>Pattern</em>: <code class="code">[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-autoscaling-warmpool-maxgrouppreparedcapacity"></a><span class="term"><code class="code">MaxGroupPreparedCapacity</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies the maximum number of instances that are allowed to be in the warm pool
+                                             or
+                                             in any state except <code class="code">Terminated</code> for the Auto Scaling group. This is an optional
+                                             property. Specify it only if you do not want the warm pool size to be determined by
+                                             the
+                                             difference between the group&apos;s maximum capacity and its desired capacity. 
+                                          </p>
+                                          
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If a value for <code class="code">MaxGroupPreparedCapacity</code> is not specified, Amazon EC2 Auto Scaling
+                                                   launches and maintains the difference between the group&apos;s maximum capacity and its
+                                                   desired capacity. If you specify a value for <code class="code">MaxGroupPreparedCapacity</code>,
+                                                   Amazon EC2 Auto Scaling uses the difference between the <code class="code">MaxGroupPreparedCapacity</code> and
+                                                   the desired capacity instead. 
+                                                </p>
+                                                <p>The size of the warm pool is dynamic. Only when
+                                                   <code class="code">MaxGroupPreparedCapacity</code> and <code class="code">MinSize</code> are set to the
+                                                   same value does the warm pool have an absolute size.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p>If the desired capacity of the Auto Scaling group is higher than the
+                                             <code class="code">MaxGroupPreparedCapacity</code>, the capacity of the warm pool is 0, unless
+                                             you specify a value for <code class="code">MinSize</code>. To remove a value that you previously set,
+                                             include the property but specify -1 for the value. 
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">-1</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-autoscaling-warmpool-minsize"></a><span class="term"><code class="code">MinSize</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies the minimum number of instances to maintain in the warm pool. This helps
+                                             you
+                                             to ensure that there is always a certain number of warmed instances available to handle
+                                             traffic spikes. Defaults to 0 if not specified.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">0</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-autoscaling-warmpool-poolstate"></a><span class="term"><code class="code">PoolState</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Sets the instance state to transition to after the lifecycle actions are complete.
+                                             Default is <code class="code">Stopped</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">Running | Stopped</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-autoscaling-warmpool--examples">Examples</h2>
+                                 <p>The following example defines a warm pool for an Auto Scaling group.</p>
+                                 <p>For examples of CloudFormation stack templates with warm pools, see our <a href="https://github.com/aws-samples/amazon-ec2-auto-scaling-group-examples" rel="noopener noreferrer" target="_blank"><span>GitHub
+                                          repository</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>. 
+                                 </p>
+                                 <h3 id="aws-resource-autoscaling-warmpool--examples--Auto_Scaling_group_with_warm_pool">Auto Scaling group with warm pool</h3>
+                                 <p>The following template snippet shows an AWS::AutoScaling::WarmPool resource 
+                                    for an Auto Scaling group where you specify values for the <code class="code">MinSize</code> and <code class="code">PoolState</code> properties.
+                                    
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-autoscaling-warmpool--examples--Auto_Scaling_group_with_warm_pool--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Resources&quot;:<span>{</span>
+    &quot;myWarmPool&quot;:<span>{</span>
+      &quot;Type&quot;:&quot;AWS::AutoScaling::WarmPool&quot;,
+      &quot;Properties&quot;:<span>{</span>
+        &quot;AutoScalingGroupName&quot;:<span>{</span>
+          &quot;Ref&quot;:&quot;myASG&quot;
+        },
+        &quot;MinSize&quot;:30,
+        &quot;PoolState&quot;:&quot;Stopped&quot;
+      }
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-autoscaling-warmpool--examples--Auto_Scaling_group_with_warm_pool--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Resources:
+  myWarmPool: 
+    Type: AWS::AutoScaling::WarmPool
+    Properties:
+      AutoScalingGroupName: !Ref myASG
+      MinSize: 30
+      PoolState: Stopped
+</code></pre></div>
+                                 <h2 id="aws-resource-autoscaling-warmpool--seealso">See also</h2>
+                                 <div class="itemizedlist">
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p><a href="http://aws.amazon.com/blogs/compute/scaling-your-applications-faster-with-ec2-auto-scaling-warm-pools/" rel="noopener noreferrer" target="_blank"><span>Scaling your applications faster with EC2 Auto Scaling Warm Pools</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> on the AWS Compute Blog
+                                          </p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <p></p>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

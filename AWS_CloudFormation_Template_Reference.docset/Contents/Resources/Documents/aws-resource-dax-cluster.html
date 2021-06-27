@@ -24,6 +24,7 @@
   &quot;Type&quot; : &quot;AWS::DAX::Cluster&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-dax-cluster-availabilityzones">AvailabilityZones</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+      &quot;<a href="#cfn-dax-cluster-clusterendpointencryptiontype">ClusterEndpointEncryptionType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-dax-cluster-clustername">ClusterName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-dax-cluster-description">Description</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-dax-cluster-iamrolearn">IAMRoleARN</a>&quot; : <code class="replaceable">String</code>,
@@ -44,6 +45,7 @@
 Properties: 
   <a href="#cfn-dax-cluster-availabilityzones">AvailabilityZones</a>: <code class="replaceable">
     - String</code>
+  <a href="#cfn-dax-cluster-clusterendpointencryptiontype">ClusterEndpointEncryptionType</a>: <code class="replaceable">String</code>
   <a href="#cfn-dax-cluster-clustername">ClusterName</a>: <code class="replaceable">String</code>
   <a href="#cfn-dax-cluster-description">Description</a>: <code class="replaceable">String</code>
   <a href="#cfn-dax-cluster-iamrolearn">IAMRoleARN</a>: <code class="replaceable">String</code>
@@ -76,6 +78,43 @@ Properties:
                                           <p><em>Type</em>: List of String
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-dax-cluster-clusterendpointencryptiontype"></a><span class="term"><code class="code">ClusterEndpointEncryptionType</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The encryption type of the cluster&apos;s endpoint. Available values are:</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">NONE</code> - The cluster&apos;s endpoint will be unencrypted.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">TLS</code> - The cluster&apos;s endpoint will be encrypted with Transport
+                                                      Layer Security, and will provide an x509 certificate for
+                                                      authentication.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>The default value is <code class="code">NONE</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">NONE | TLS</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-dax-cluster-clustername"></a><span class="term"><code class="code">ClusterName</code></span></dt>
                                        <dd>
@@ -129,8 +168,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Update requires</em>: Updates are not supported.
-                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-dax-cluster-notificationtopicarn"></a><span class="term"><code class="code">NotificationTopicARN</code></span></dt>
                                        <dd>
@@ -295,12 +333,18 @@ Properties:
                                        <dt><a id="ClusterDiscoveryEndpoint-fn::getatt"></a><span class="term"><code class="code">ClusterDiscoveryEndpoint</code></span></dt>
                                        <dd>
                                           
-                                          <p>Returns the configuration endpoint of the DAX cluster. For example:</p>
+                                          <p>Returns the endpoint of the DAX cluster. For example:</p>
                                           <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight"><span>{</span> &quot;Fn::GetAtt&quot;: [&quot;<code class="replaceable">MyDAXCluster</code>&quot;, &quot;ClusterDiscoveryEndpoint&quot;] }</code></pre>
                                           <p>Returns a value similar to the following:</p>
                                           <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="nohighlight">mydaxcluster.0h3d6x.clustercfg.dax.use1.cache.amazonaws.com:8111</code></pre>
                                           
                                           </dd>
+                                       <dt><a id="ClusterDiscoveryEndpointURL-fn::getatt"></a><span class="term"><code class="code">ClusterDiscoveryEndpointURL</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Returns the endpoint URL of the DAX cluster.</p>
+                                          
+                                       </dd>
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-dax-cluster--examples">Examples</h2>
@@ -438,7 +482,7 @@ Outputs:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

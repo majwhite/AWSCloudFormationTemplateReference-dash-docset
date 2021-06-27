@@ -16,9 +16,10 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::SageMaker::Pipeline</code> resource creates
-                                    shell scripts that run when you create and/or start a SageMaker Pipeline. For information
-                                    about SageMaker Pipelines, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines.html">SageMaker Pipelines</a> in the <em>Amazon SageMaker Developer
+                                 <p>The <code class="code">AWS::SageMaker::Pipeline</code> resource creates shell scripts that run when
+                                    you create and/or start a SageMaker Pipeline. For information about SageMaker Pipelines,
+                                    see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines.html">SageMaker
+                                       Pipelines</a> in the <em>Amazon SageMaker Developer
                                        Guide</em>.
                                  </p>
                                  <h2 id="aws-resource-sagemaker-pipeline-syntax">Syntax</h2>
@@ -53,7 +54,9 @@ Properties:
                                        <dt><a id="cfn-sagemaker-pipeline-pipelinedefinition"></a><span class="term"><code class="code">PipelineDefinition</code></span></dt>
                                        <dd>
                                           
-                                          <p>The definition of the pipeline. This can be either a JSON string or an Amazon S3 location.</p>
+                                          <p>The definition of the pipeline. This can be either a JSON string or an Amazon S3
+                                             location.
+                                          </p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -141,74 +144,69 @@ Properties:
                                     configuration.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-sagemaker-pipeline--examples--SageMaker_Pipeline_Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "># Pipeline definition given as a JSON string
-                <span>{</span>
-                &quot;Resources&quot;: <span>{</span>
-                &quot;MyPipeline&quot;: <span>{</span>
-                &quot;Type&quot;: &quot;AWS::SageMaker::Pipeline&quot;,
-                &quot;Properties&quot;: <span>{</span>
-                &quot;PipelineName&quot;: &quot;my-pipeline&quot;,
-                &quot;PipelineDisplayName&quot;: &quot;my-pipeline-display-name&quot;,
-                &quot;PipelineDescription&quot;: &quot;Basic test pipeline&quot;,
-                &quot;PipelineDefinition&quot;: <span>{</span>
-                &quot;PipelineDefinitionBody&quot;: &quot;<span>{</span>\&quot;Version\&quot;:\&quot;2020-12-01\&quot;,\&quot;Parameters\&quot;:[<span>{</span>\&quot;Name\&quot;:\&quot;InputDataSource\&quot;,\&quot;DefaultValue\&quot;:\&quot;\&quot;},<span>{</span>\&quot;Name\&quot;:\&quot;InstanceCount\&quot;,\&quot;Type\&quot;:\&quot;Integer\&quot;,\&quot;DefaultValue\&quot;:1}],\&quot;Steps\&quot;:[<span>{</span>\&quot;Name\&quot;:\&quot;Training1\&quot;,\&quot;Type\&quot;:\&quot;Training\&quot;,\&quot;Arguments\&quot;:<span>{</span>\&quot;InputDataConfig\&quot;:[<span>{</span>\&quot;DataSource\&quot;:<span>{</span>\&quot;S3DataSource\&quot;:<span>{</span>\&quot;S3Uri\&quot;:<span>{</span>\&quot;Get\&quot;:\&quot;Parameters.InputDataSource\&quot;}}}}],\&quot;OutputDataConfig\&quot;:<span>{</span>\&quot;S3OutputPath\&quot;:\&quot;s3://my-s3-bucket/\&quot;},\&quot;ResourceConfig\&quot;:<span>{</span>\&quot;InstanceType\&quot;:\&quot;ml.m5.large\&quot;,\&quot;InstanceCount\&quot;:<span>{</span>\&quot;Get\&quot;:\&quot;Parameters.InstanceCount\&quot;},\&quot;VolumeSizeInGB\&quot;:1024}}}]}&quot;
-                },
-                &quot;RoleArn&quot;: &quot;arn:aws:iam::<span>{</span>account-id}:root&quot;
-                }
-                }
-                }
-                }
-            </code></pre></div>
+                                    <h4 id="aws-resource-sagemaker-pipeline--examples--SageMaker_Pipeline_Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "># Pipeline definition given as a JSON string 
+<span>{</span>
+   &quot;Resources&quot;: <span>{</span>
+      &quot;MyPipeline&quot;: <span>{</span>
+         &quot;Type&quot;: &quot;AWS::SageMaker::Pipeline&quot;,
+         &quot;Properties&quot;: <span>{</span>
+            &quot;PipelineName&quot;: &quot;&lt;pipeline-name&gt;&quot;,
+            &quot;PipelineDisplayName&quot;: &quot;&lt;pipeline-display-name&gt;&quot;,
+            &quot;PipelineDescription&quot;: &quot;&lt;pipeline-description&gt;&quot;,
+            &quot;PipelineDefinition&quot;: <span>{</span>
+               &quot;PipelineDefinitionBody&quot;: &quot;<span>{</span>\&quot;Version\&quot;:\&quot;2020-12-01\&quot;,\&quot;Parameters\&quot;:[<span>{</span>\&quot;Name\&quot;:\&quot;InputDataSource\&quot;,\&quot;DefaultValue\&quot;:\&quot;\&quot;},<span>{</span>\&quot;Name\&quot;:\&quot;InstanceCount\&quot;,\&quot;Type\&quot;:\&quot;Integer\&quot;,\&quot;DefaultValue\&quot;:1}],\&quot;Steps\&quot;:[<span>{</span>\&quot;Name\&quot;:\&quot;Training1\&quot;,\&quot;Type\&quot;:\&quot;Training\&quot;,\&quot;Arguments\&quot;:<span>{</span>\&quot;InputDataConfig\&quot;:[<span>{</span>\&quot;DataSource\&quot;:<span>{</span>\&quot;S3DataSource\&quot;:<span>{</span>\&quot;S3Uri\&quot;:<span>{</span>\&quot;Get\&quot;:\&quot;Parameters.InputDataSource\&quot;}}}}],\&quot;OutputDataConfig\&quot;:<span>{</span>\&quot;S3OutputPath\&quot;:\&quot;s3://my-s3-bucket/\&quot;},\&quot;ResourceConfig\&quot;:<span>{</span>\&quot;InstanceType\&quot;:\&quot;ml.m5.large\&quot;,\&quot;InstanceCount\&quot;:<span>{</span>\&quot;Get\&quot;:\&quot;Parameters.InstanceCount\&quot;},\&quot;VolumeSizeInGB\&quot;:1024}}}]}&quot;
+            },
+            &quot;RoleArn&quot;: &quot;arn:aws:iam::&lt;account-id&gt;:root&quot;
+         }
+      }
+   }</code></pre></div>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-sagemaker-pipeline--examples--SageMaker_Pipeline_Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "># Pipeline definition given as an S3 string
-                <span>{</span>
-                &quot;Resources&quot;: <span>{</span>
-                &quot;MyPipeline&quot;: <span>{</span>
-                &quot;Type&quot;: &quot;AWS::SageMaker::Pipeline&quot;,
-                &quot;Properties&quot;: <span>{</span>
-                &quot;PipelineName&quot;: &quot;my-pipeline&quot;,
-                &quot;PipelineDisplayName&quot;: &quot;my-pipeline-display-name&quot;,
-                &quot;PipelineDescription&quot;: &quot;Basic test pipeline&quot;,
-                &quot;PipelineDefinition&quot;: <span>{</span>
-                &quot;PipelineDefinitionS3Location&quot;: <span>{</span>
-                &quot;Bucket&quot;: &quot;my-bucket&quot;,
-                &quot;Key&quot;: &quot;my-pipeline.json&quot;
-                }
-                },
-                &quot;RoleArn&quot;: &quot;arn:aws:iam::<span>{</span>account-id}:root&quot;
-                }
-                }
-                }
-                }
-            </code></pre></div>
+                                    <h4 id="aws-resource-sagemaker-pipeline--examples--SageMaker_Pipeline_Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "># Pipeline definition given as an S3 string 
+<span>{</span>
+   &quot;Resources&quot;: <span>{</span>
+      &quot;MyPipeline&quot;: <span>{</span>
+         &quot;Type&quot;: &quot;AWS::SageMaker::Pipeline&quot;,
+         &quot;Properties&quot;: <span>{</span>
+            &quot;PipelineName&quot;: &quot;&lt;pipeline-name&gt;&quot;,
+            &quot;PipelineDisplayName&quot;: &quot;&lt;pipeline-display-name&gt;&quot;,
+            &quot;PipelineDescription&quot;: &quot;&lt;pipeline-description&gt;&quot;,
+            &quot;PipelineDefinition&quot;: <span>{</span>
+               &quot;PipelineDefinitionS3Location&quot;: <span>{</span>
+                  &quot;Bucket&quot;: &quot;&lt;S3-bucket-location&gt;&quot;,
+                  &quot;Key&quot;: &quot;&lt;S3-bucket-key&gt;&quot;
+               }
+            },
+            &quot;RoleArn&quot;: &quot;arn:aws:iam::&lt;account-id&gt;:root&quot;
+         }
+      }
+   }
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-sagemaker-pipeline--examples--SageMaker_Pipeline_Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml "># Pipeline definition given as a JSON string
-                Resources:
-                MyPipeline:
-                Type: AWS::SageMaker::Pipeline
-                Properties:
-                PipelineName: &quot;my-pipeline&quot;
-                PipelineDisplayName: &quot;my-pipeline-display-name&quot;
-                PipelineDescription: &quot;Basic test pipeline&quot;
-                PipelineDefinition:
-                PipelineDefinitionBody: &quot;<span>{</span>\&quot;Version\&quot;:\&quot;2020-12-01\&quot;,\&quot;Parameters\&quot;:[<span>{</span>\&quot;Name\&quot;:\&quot;InputDataSource\&quot;,\&quot;DefaultValue\&quot;:\&quot;\&quot;},<span>{</span>\&quot;Name\&quot;:\&quot;InstanceCount\&quot;,\&quot;Type\&quot;:\&quot;Integer\&quot;,\&quot;DefaultValue\&quot;:1}],\&quot;Steps\&quot;:[<span>{</span>\&quot;Name\&quot;:\&quot;Training1\&quot;,\&quot;Type\&quot;:\&quot;Training\&quot;,\&quot;Arguments\&quot;:<span>{</span>\&quot;InputDataConfig\&quot;:[<span>{</span>\&quot;DataSource\&quot;:<span>{</span>\&quot;S3DataSource\&quot;:<span>{</span>\&quot;S3Uri\&quot;:<span>{</span>\&quot;Get\&quot;:\&quot;Parameters.InputDataSource\&quot;}}}}],\&quot;OutputDataConfig\&quot;:<span>{</span>\&quot;S3OutputPath\&quot;:\&quot;s3://my-s3-bucket/\&quot;},\&quot;ResourceConfig\&quot;:<span>{</span>\&quot;InstanceType\&quot;:\&quot;ml.m5.large\&quot;,\&quot;InstanceCount\&quot;:<span>{</span>\&quot;Get\&quot;:\&quot;Parameters.InstanceCount\&quot;},\&quot;VolumeSizeInGB\&quot;:1024}}}]}&quot;
-                RoleArn: &quot;arn:aws:iam::<span>{</span>account-id}:root&quot;
-            </code></pre></div>
+                                    <h4 id="aws-resource-sagemaker-pipeline--examples--SageMaker_Pipeline_Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml "># Pipeline definition given as a JSON string 
+Resources:
+  MyAwesomePipeline:
+    Type: AWS::SageMaker::Pipeline
+    Properties:
+      PipelineName: &quot;&lt;pipeline-name&gt;&quot;
+      PipelineDisplayName: &quot;&lt;pipeline-display-name&gt;&quot;
+      PipelineDescription: &quot;&lt;pipeline-description&gt;&quot;
+      PipelineDefinition:
+        PipelineDefinitionBody: &quot;<span>{</span>\&quot;Version\&quot;:\&quot;2020-12-01\&quot;,\&quot;Parameters\&quot;:[<span>{</span>\&quot;Name\&quot;:\&quot;InputDataSource\&quot;,\&quot;DefaultValue\&quot;:\&quot;\&quot;},<span>{</span>\&quot;Name\&quot;:\&quot;InstanceCount\&quot;,\&quot;Type\&quot;:\&quot;Integer\&quot;,\&quot;DefaultValue\&quot;:1}],\&quot;Steps\&quot;:[<span>{</span>\&quot;Name\&quot;:\&quot;Training1\&quot;,\&quot;Type\&quot;:\&quot;Training\&quot;,\&quot;Arguments\&quot;:<span>{</span>\&quot;InputDataConfig\&quot;:[<span>{</span>\&quot;DataSource\&quot;:<span>{</span>\&quot;S3DataSource\&quot;:<span>{</span>\&quot;S3Uri\&quot;:<span>{</span>\&quot;Get\&quot;:\&quot;Parameters.InputDataSource\&quot;}}}}],\&quot;OutputDataConfig\&quot;:<span>{</span>\&quot;S3OutputPath\&quot;:\&quot;s3://my-s3-bucket/\&quot;},\&quot;ResourceConfig\&quot;:<span>{</span>\&quot;InstanceType\&quot;:\&quot;ml.m5.large\&quot;,\&quot;InstanceCount\&quot;:<span>{</span>\&quot;Get\&quot;:\&quot;Parameters.InstanceCount\&quot;},\&quot;VolumeSizeInGB\&quot;:1024}}}]}&quot;
+      RoleArn: &quot;arn:aws:iam::&lt;account-id&gt;:root&quot;</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-sagemaker-pipeline--examples--SageMaker_Pipeline_Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml "># Pipeline definition given as an S3 location
-                Resources:
-                MyAwesomePipeline:
-                Type: AWS::SageMaker::Pipeline
-                Properties:
-                PipelineName: &quot;my-pipeline&quot;
-                PipelineDisplayName: &quot;my-pipeline-display-name&quot;
-                PipelineDescription: &quot;Basic test pipeline&quot;
-                PipelineDefinition:
-                PipelineDefinitionS3Location:
-                Bucket: &quot;my-bucket&quot;
-                Key: &quot;my-pipeline.json&quot;
-                RoleArn: &quot;arn:aws:iam::<span>{</span>account-id}:root&quot;
-            </code></pre></div>
+                                    <h4 id="aws-resource-sagemaker-pipeline--examples--SageMaker_Pipeline_Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml "># Pipeline definition given as an S3 location Resources:
+Resources:
+  MyAwesomePipeline:
+    Type: AWS::SageMaker::Pipeline
+    Properties:
+      PipelineName: &quot;&lt;pipeline-name&gt;&quot;
+      PipelineDisplayName: &quot;&lt;pipeline-display-name&gt;&quot;
+      PipelineDescription: &quot;&lt;pipeline-description&gt;&quot;
+      PipelineDefinition:
+        PipelineDefinitionS3Location:
+          Bucket: &quot;&lt;S3-bucket-location&gt;&quot;
+          Key: &quot;&lt;S3-bucket-key&gt;&quot;
+      RoleArn: &quot;arn:aws:iam::&lt;account-id&gt;:root&quot;</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -219,7 +217,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -16,11 +16,11 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Specifies a limit to how long a model training or compilation job can run. It also
-                                    specifies how long you are willing to wait for a managed spot training job to complete.
-                                    When the job reaches the time limit, Amazon SageMaker ends the training or compilation
-                                    job. Use this
-                                    API to cap model training costs.
+                                 <p>Specifies a limit to how long a model training job, model compilation job, or
+                                    hyperparameter tuning job can run. It also specifies how long a managed Spot training
+                                    job has to complete. When the job reaches the time limit, Amazon SageMaker ends the
+                                    training or
+                                    compilation job. Use this API to cap model training costs.
                                  </p>
                                  <p>To stop a job, Amazon SageMaker sends the algorithm the <code class="code">SIGTERM</code> signal, which delays
                                     job termination for 120 seconds. Algorithms can use this 120-second window to save
@@ -62,11 +62,17 @@
                                        <dt><a id="cfn-sagemaker-monitoringschedule-stoppingcondition-maxruntimeinseconds"></a><span class="term"><code class="code">MaxRuntimeInSeconds</code></span></dt>
                                        <dd>
                                           
-                                          <p>The maximum length of time, in seconds, that the training or compilation job can run.
-                                             If job does not complete during this time, Amazon SageMaker ends the job. If value
-                                             is not specified,
-                                             default value is 1 day. The maximum value is 28 days.
+                                          <p>The maximum length of time, in seconds, that a training or compilation job can run.
+                                             If
+                                             the job does not complete during this time, Amazon SageMaker ends the job.
                                           </p>
+                                          
+                                          <p>When <code class="code">RetryStrategy</code> is specified in the job request,
+                                             <code class="code">MaxRuntimeInSeconds</code> specifies the maximum time for all of the attempts
+                                             in total, not each individual attempt.
+                                          </p>
+                                          
+                                          <p>The default value is 1 day. The maximum value is 28 days.</p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -87,7 +93,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

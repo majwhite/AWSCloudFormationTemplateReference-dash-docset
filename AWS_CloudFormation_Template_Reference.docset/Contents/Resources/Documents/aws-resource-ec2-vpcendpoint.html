@@ -19,13 +19,13 @@
                                  <p>Specifies a VPC endpoint for a service. An endpoint enables you to create a
                                     private connection between your VPC and the service. The service may be provided by
                                     AWS,
-                                    an AWS Marketplace Partner, or another AWS account. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html">VPC Endpoints</a> in
-                                    the <em>Amazon Virtual Private Cloud User Guide</em>.
+                                    an AWS Marketplace Partner, or another AWS account.
+                                    For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints.html">VPC Endpoints</a> in the <em>AWS PrivateLink User Guide</em>.
                                  </p>
                                  <p>A <code class="code">gateway</code> endpoint serves as a target for a route in your route table for
-                                    traffic destined for the AWS service. You can specify an endpoint policy to attach
-                                    to
-                                    the endpoint, which will control access to the service from your VPC. You can also
+                                    traffic destined for the AWS service. You can specify an endpoint policy 
+                                    to attach to the endpoint, which controls access to the service from your VPC. You
+                                    can also
                                     specify the VPC route tables that use the endpoint.
                                  </p>
                                  <p>For information about connectivity when you use a gateway endpoint to connect to an
@@ -81,9 +81,15 @@ Properties:
                                           
                                           <p>(Interface and gateway endpoints) A policy to attach to the endpoint that controls
                                              access to the
-                                             service. The policy must be in valid JSON format. If this parameter is not specified,
-                                             we
-                                             attach a default policy that allows full access to the service.
+                                             service. If this parameter is not specified, we attach a default policy that allows
+                                             full access to 
+                                             the service.
+                                          </p>
+                                          
+                                          <p>For CloudFormation templates in YAML, you can provide the policy in JSON or YAML format.
+                                             AWS CloudFormation
+                                             converts YAML policies to JSON format before calling the API to create or modify the
+                                             VPC endpoint.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -257,33 +263,34 @@ Properties:
                                  </div>
                                  <h2 id="aws-resource-ec2-vpcendpoint--examples">Examples</h2>
                                  <p></p>
-                                 <h3 id="aws-resource-ec2-vpcendpoint--examples--VPC_Endpoint">VPC Endpoint</h3>
+                                 <h3 id="aws-resource-ec2-vpcendpoint--examples--VPC_endpoint">VPC endpoint</h3>
                                  <p>The following example specifies a VPC endpoint that allows only the s3:GetObject action
                                     on the examplebucket bucket. Traffic to S3 within subnets that are associated with
                                     the routetableA and routetableB route tables is automatically routed through the VPC
                                     endpoint. 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ec2-vpcendpoint--examples--VPC_Endpoint--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">
-&quot;S3Endpoint&quot; : <span>{</span>
-   &quot;Type&quot; : &quot;AWS::EC2::VPCEndpoint&quot;,
-   &quot;Properties&quot; : <span>{</span>
-      &quot;PolicyDocument&quot; : <span>{</span>
-         &quot;Version&quot;:&quot;2012-10-17&quot;,
-         &quot;Statement&quot;:[<span>{</span>
-            &quot;Effect&quot;:&quot;Allow&quot;,
-            &quot;Principal&quot;: &quot;*&quot;,
-            &quot;Action&quot;:[&quot;s3:GetObject&quot;],
-            &quot;Resource&quot;:[&quot;arn:aws:s3:::examplebucket/*&quot;]
-         }]
-   },
-   &quot;RouteTableIds&quot; : [ <span>{</span>&quot;Ref&quot; : &quot;routetableA&quot;}, <span>{</span>&quot;Ref&quot; : &quot;routetableB&quot;} ],
-   &quot;ServiceName&quot; : <span>{</span> &quot;Fn::Sub&quot;: &quot;com.amazonaws.$<span>{</span>AWS::Region}.s3&quot; },
-   &quot;VpcId&quot; : <span>{</span>&quot;Ref&quot; : &quot;VPCID&quot;}
- }
+                                    <h4 id="aws-resource-ec2-vpcendpoint--examples--VPC_endpoint--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+   &quot;S3Endpoint&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::EC2::VPCEndpoint&quot;,
+	  &quot;Properties&quot;: <span>{</span>
+         &quot;PolicyDocument&quot;: <span>{</span>
+            &quot;Version&quot;: &quot;2012-10-17&quot;,
+            &quot;Statement&quot;: [<span>{</span>
+               &quot;Effect&quot;: &quot;Allow&quot;,
+               &quot;Principal&quot;: &quot;*&quot;,
+               &quot;Action&quot;: [&quot;s3:GetObject&quot;],
+               &quot;Resource&quot;: [&quot;arn:aws:s3:::examplebucket/*&quot;]
+            }]
+         },
+         &quot;RouteTableIds&quot;: [<span>{</span>&quot;Ref&quot;: &quot;routetableA&quot;}, <span>{</span>&quot;Ref&quot;: &quot;routetableB&quot;}],
+         &quot;ServiceName&quot;: <span>{</span>&quot;Fn::Sub&quot;: &quot;com.amazonaws.$<span>{</span>AWS::Region}.s3&quot;},
+         &quot;VpcId&quot;: <span>{</span>&quot;Ref&quot;: &quot;VPCID&quot;}
+      }
+   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ec2-vpcendpoint--examples--VPC_Endpoint--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">S3Endpoint:
+                                    <h4 id="aws-resource-ec2-vpcendpoint--examples--VPC_endpoint--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">S3Endpoint:
   Type: &apos;AWS::EC2::VPCEndpoint&apos;
   Properties:
     PolicyDocument:
@@ -310,7 +317,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

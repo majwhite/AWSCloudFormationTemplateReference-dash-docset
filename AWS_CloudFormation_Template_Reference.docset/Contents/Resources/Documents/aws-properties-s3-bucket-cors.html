@@ -19,8 +19,7 @@
                                  <p>Describes the cross-origin access configuration for objects in an Amazon S3 bucket.
                                     For more
                                     information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html">Enabling
-                                       Cross-Origin Resource Sharing</a> in the <em>Amazon Simple Storage Service Developer
-                                       Guide</em>.
+                                       Cross-Origin Resource Sharing</a> in the <em>Amazon S3 User Guide</em>.
                                  </p>
                                  <h2 id="aws-properties-s3-bucket-cors-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -51,19 +50,107 @@
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-properties-s3-bucket-cors--seealso">See also</h2>
-                                 <div class="itemizedlist">
-                                     
-                                    
-                                    <ul class="itemizedlist" type="disc">
-                                       <li class="listitem">
-                                          
-                                          <p>AWS::S3::Bucket <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--examples">Examples</a></p>
-                                          
-                                       </li>
-                                    </ul>
-                                 </div>
+                                 <h2 id="aws-properties-s3-bucket-cors--examples">Examples</h2>
                                  <p></p>
+                                 <h3 id="aws-properties-s3-bucket-cors--examples--Enable_cross-origin_resource_sharing">Enable cross-origin resource sharing</h3>
+                                 <p>The following example template shows a public S3 bucket with two cross-origin resource
+                                    sharing rules.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-cors--examples--Enable_cross-origin_resource_sharing--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;S3Bucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;AccessControl&quot;: &quot;PublicRead&quot;,
+                &quot;CorsConfiguration&quot;: <span>{</span>
+                    &quot;CorsRules&quot;: [
+                        <span>{</span>
+                            &quot;AllowedHeaders&quot;: [
+                                &quot;*&quot;
+                            ],
+                            &quot;AllowedMethods&quot;: [
+                                &quot;GET&quot;
+                            ],
+                            &quot;AllowedOrigins&quot;: [
+                                &quot;*&quot;
+                            ],
+                            &quot;ExposedHeaders&quot;: [
+                                &quot;Date&quot;
+                            ],
+                            &quot;Id&quot;: &quot;myCORSRuleId1&quot;,
+                            &quot;MaxAge&quot;: 3600
+                        },
+                        <span>{</span>
+                            &quot;AllowedHeaders&quot;: [
+                                &quot;x-amz-*&quot;
+                            ],
+                            &quot;AllowedMethods&quot;: [
+                                &quot;DELETE&quot;
+                            ],
+                            &quot;AllowedOrigins&quot;: [
+                                &quot;http://www.example.com&quot;,
+                                &quot;http://www.example.net&quot;
+                            ],
+                            &quot;ExposedHeaders&quot;: [
+                                &quot;Connection&quot;,
+                                &quot;Server&quot;,
+                                &quot;Date&quot;
+                            ],
+                            &quot;Id&quot;: &quot;myCORSRuleId2&quot;,
+                            &quot;MaxAge&quot;: 1800
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    &quot;Outputs&quot;: <span>{</span>
+        &quot;BucketName&quot;: <span>{</span>
+            &quot;Value&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;S3Bucket&quot;
+            },
+            &quot;Description&quot;: &quot;Name of the sample Amazon S3 bucket with CORS enabled.&quot;
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-cors--examples--Enable_cross-origin_resource_sharing--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  S3Bucket:
+    Type: &apos;AWS::S3::Bucket&apos;
+    Properties:
+      AccessControl: PublicRead
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - &apos;*&apos;
+            AllowedMethods:
+              - GET
+            AllowedOrigins:
+              - &apos;*&apos;
+            ExposedHeaders:
+              - Date
+            Id: myCORSRuleId1
+            MaxAge: 3600
+          - AllowedHeaders:
+              - x-amz-*
+            AllowedMethods:
+              - DELETE
+            AllowedOrigins:
+              - &apos;http://www.example.com&apos;
+              - &apos;http://www.example.net&apos;
+            ExposedHeaders:
+              - Connection
+              - Server
+              - Date
+            Id: myCORSRuleId2
+            MaxAge: 1800
+Outputs:
+  BucketName:
+    Value: !Ref S3Bucket
+    Description: Name of the sample Amazon S3 bucket with CORS enabled.</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -74,7 +161,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

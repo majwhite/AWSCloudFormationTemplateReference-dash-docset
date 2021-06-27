@@ -44,7 +44,8 @@
                                           		       
                                           <p>The <em>base</em> value designates how many tasks, at a minimum, to run on
                                              			the specified capacity provider. Only one capacity provider in a capacity provider
-                                             			strategy can have a <em>base</em> defined.
+                                             			strategy can have a <em>base</em> defined. If no value is specified, the
+                                             			default value of <code class="code">0</code> is used.
                                           </p>
                                           	     
                                           <p><em>Required</em>: No
@@ -70,17 +71,29 @@
                                        <dd>
                                           		       
                                           <p>The <em>weight</em> value designates the relative percentage of the total
-                                             			number of tasks launched that should use the specified capacity provider.
+                                             			number of tasks launched that should use the specified capacity provider. The
+                                             				<code class="code">weight</code> value is taken into consideration after the <code class="code">base</code>
+                                             			value, if defined, is satisfied.
                                           </p>
                                           		       
-                                          <p>For example, if you have a strategy that contains two capacity providers and both
-                                             have
-                                             			a weight of <code class="code">1</code>, then when the <code class="code">base</code> is satisfied, the tasks will
-                                             			be split evenly across the two capacity providers. Using that same logic, if you
-                                             specify
-                                             			a weight of <code class="code">1</code> for <em>capacityProviderA</em> and a weight of
-                                             				<code class="code">4</code> for <em>capacityProviderB</em>, then for every one task
-                                             			that is run using <em>capacityProviderA</em>, four tasks would use
+                                          <p>If no <code class="code">weight</code> value is specified, the default value of <code class="code">0</code> is
+                                             			used. When multiple capacity providers are specified within a capacity provider
+                                             			strategy, at least one of the capacity providers must have a weight value greater
+                                             than
+                                             			zero and any capacity providers with a weight of <code class="code">0</code> will not be used to
+                                             			place tasks. If you specify multiple capacity providers in a strategy that all
+                                             have a
+                                             			weight of <code class="code">0</code>, any <code class="code">RunTask</code> or <code class="code">CreateService</code> actions
+                                             			using the capacity provider strategy will fail.
+                                          </p>
+                                          		       
+                                          <p>An example scenario for using weights is defining a strategy that contains two
+                                             			capacity providers and both have a weight of <code class="code">1</code>, then when the
+                                             				<code class="code">base</code> is satisfied, the tasks will be split evenly across the two
+                                             			capacity providers. Using that same logic, if you specify a weight of <code class="code">1</code> for
+                                             				<em>capacityProviderA</em> and a weight of <code class="code">4</code> for
+                                             				<em>capacityProviderB</em>, then for every one task that is run using
+                                             				<em>capacityProviderA</em>, four tasks would use
                                              				<em>capacityProviderB</em>.
                                           </p>
                                           	     
@@ -104,7 +117,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -38,9 +38,11 @@
       &quot;<a href="#cfn-apigateway-restapi-bodys3location">BodyS3Location</a>&quot; : <code class="replaceable"><a href="./aws-properties-apigateway-restapi-s3location.html">S3Location</a></code>,
       &quot;<a href="#cfn-apigateway-restapi-clonefrom">CloneFrom</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-apigateway-restapi-description">Description</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-apigateway-restapi-disableexecuteapiendpoint">DisableExecuteApiEndpoint</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-apigateway-restapi-endpointconfiguration">EndpointConfiguration</a>&quot; : <code class="replaceable"><a href="./aws-properties-apigateway-restapi-endpointconfiguration.html">EndpointConfiguration</a></code>,
       &quot;<a href="#cfn-apigateway-restapi-failonwarnings">FailOnWarnings</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-apigateway-restapi-minimumcompressionsize">MinimumCompressionSize</a>&quot; : <code class="replaceable">Integer</code>,
+      &quot;<a href="#cfn-apigateway-restapi-mode">Mode</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-apigateway-restapi-name">Name</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-apigateway-restapi-parameters">Parameters</a>&quot; : <code class="replaceable"><span>{</span><code class="replaceable">Key</code> : <code class="replaceable">Value</code>, ...}</code>,
       &quot;<a href="#cfn-apigateway-restapi-policy">Policy</a>&quot; : <code class="replaceable">Json</code>,
@@ -59,10 +61,12 @@ Properties:
     <a href="./aws-properties-apigateway-restapi-s3location.html">S3Location</a></code>
   <a href="#cfn-apigateway-restapi-clonefrom">CloneFrom</a>: <code class="replaceable">String</code>
   <a href="#cfn-apigateway-restapi-description">Description</a>: <code class="replaceable">String</code>
+  <a href="#cfn-apigateway-restapi-disableexecuteapiendpoint">DisableExecuteApiEndpoint</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-apigateway-restapi-endpointconfiguration">EndpointConfiguration</a>: <code class="replaceable">
     <a href="./aws-properties-apigateway-restapi-endpointconfiguration.html">EndpointConfiguration</a></code>
   <a href="#cfn-apigateway-restapi-failonwarnings">FailOnWarnings</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-apigateway-restapi-minimumcompressionsize">MinimumCompressionSize</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-apigateway-restapi-mode">Mode</a>: <code class="replaceable">String</code>
   <a href="#cfn-apigateway-restapi-name">Name</a>: <code class="replaceable">String</code>
   <a href="#cfn-apigateway-restapi-parameters">Parameters</a>: <code class="replaceable">
     <code class="replaceable">Key</code> : <code class="replaceable">Value</code></code>
@@ -105,7 +109,7 @@ Properties:
                                        <dt><a id="cfn-apigateway-restapi-binarymediatypes"></a><span class="term"><code class="code">BinaryMediaTypes</code></span></dt>
                                        <dd>
                                           
-                                          <p>The list of binary media types that are supported by the <code class="code">RestApi</code> resource, such as <code class="code">image/png</code> or <code class="code">application/octet-stream</code>. By default, <code class="code">RestApi</code> supports only UTF-8-encoded text payloads. Duplicates are not allowed. For more information,
+                                          <p>The list of binary media types that are supported by the <code class="code">RestApi</code> resource. Use <code class="code">~1</code> instead of <code class="code">/</code> in the media types, for example <code class="code">image~1png</code> or <code class="code">application~1octet-stream</code>. By default, <code class="code">RestApi</code> supports only UTF-8-encoded text payloads. Duplicates are not allowed. For more information,
                                              see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-payload-encodings.html">Enable Support for Binary Payloads in API Gateway</a> in the <em>API Gateway Developer Guide</em>.
                                           </p>
                                           
@@ -164,6 +168,19 @@ Properties:
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-apigateway-restapi-disableexecuteapiendpoint"></a><span class="term"><code class="code">DisableExecuteApiEndpoint</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies whether clients can invoke your API by using the default <code class="code">execute-api</code> endpoint. By default, clients can invoke your API with the default https://<span>{</span>api_id}.execute-api.<span>{</span>region}.amazonaws.com endpoint. To require that clients use a custom domain name to
+                                             invoke your API, disable the default endpoint.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-apigateway-restapi-endpointconfiguration"></a><span class="term"><code class="code">EndpointConfiguration</code></span></dt>
                                        <dd>
                                           
@@ -202,6 +219,37 @@ Properties:
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-apigateway-restapi-mode"></a><span class="term"><code class="code">Mode</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>This property applies only when you use OpenAPI to define your REST API. The <code class="code">Mode</code> determines how API Gateway handles resource updates.
+                                          </p>
+                                          
+                                          <p>Valid values are <code class="code">overwrite</code> or <code class="code">merge</code>. 
+                                          </p>
+                                          
+                                          <p>For <code class="code">overwrite</code>, the new API definition replaces the existing one. The existing
+                                             API identifier remains unchanged.
+                                          </p>
+                                          
+                                          <p> For <code class="code">merge</code>, the new API definition takes precedence, but any container types such as
+                                             endpoint configurations and binary media types are merged with the existing API.
+                                             Use <code class="code">merge</code> to define top-level <code class="code">RestApi</code> properties in addition to using
+                                             OpenAPI. Generally, it&apos;s preferred to use API Gateway&apos;s OpenAPI extensions to
+                                             model these properties.
+                                          </p>
+                                          
+                                          <p>If you don&apos;t specify this property, a default value is chosen. For REST APIs created
+                                             before
+                                             March 29, 2021, the default is <code class="code">overwrite</code>.  Otherwise, the default value is <code class="code">merge</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
@@ -493,7 +541,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

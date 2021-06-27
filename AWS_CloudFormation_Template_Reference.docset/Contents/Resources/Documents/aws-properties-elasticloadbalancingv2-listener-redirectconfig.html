@@ -93,7 +93,8 @@
                                        <dt><a id="cfn-elasticloadbalancingv2-listener-redirectconfig-host"></a><span class="term"><code class="code">Host</code></span></dt>
                                        <dd>
                                           
-                                          <p>The hostname. This component is not percent-encoded. The hostname can contain #<span>{</span>host}.
+                                          <p>The hostname. This component is not percent-encoded. The hostname can contain
+                                             #<span>{</span>host}.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -178,6 +179,53 @@
                                        </dd>
                                     </dl>
                                  </div>
+                                 <h2 id="aws-properties-elasticloadbalancingv2-listener-redirectconfig--examples">Examples</h2>
+                                 <p>The following example creates a listener with a default action that redirects HTTP
+                                    requests on port 80 to HTTPS requests on port 443, retaining the original host name,
+                                    path, and query string.
+                                 </p>
+                                 <h3 id="aws-properties-elasticloadbalancingv2-listener-redirectconfig--examples--"></h3>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-elasticloadbalancingv2-listener-redirectconfig--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">HTTPlistener:
+   Type: &quot;AWS::ElasticLoadBalancingV2::Listener&quot;
+   Properties:
+     DefaultActions:
+       - Type: &quot;redirect&quot;
+       RedirectConfig:
+         Protocol: &quot;HTTPS&quot;
+         Port: 443
+         Host: &quot;#<span>{</span>host}&quot;
+         Path: &quot;/#<span>{</span>path}&quot;
+         Query: &quot;#<span>{</span>query}&quot;
+         StatusCode: &quot;HTTP_301&quot;
+      LoadBalancerArn: !Ref myLoadBalancer
+      Port: 80
+      Protocol: &quot;HTTP&quot;</code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-elasticloadbalancingv2-listener-redirectconfig--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;HTTPlistener&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::ElasticLoadBalancingV2::Listener&quot;,
+    &quot;Properties&quot;: <span>{</span>
+        &quot;DefaultActions&quot;: [
+            <span>{</span>
+               &quot;Type&quot;: &quot;redirect&quot;,
+               &quot;RedirectConfig&quot;: <span>{</span>
+               &quot;Protocol&quot;: &quot;HTTPS&quot;,
+               &quot;Port&quot;: 443,
+               &quot;Host&quot;: &quot;#<span>{</span>host}&quot;,
+               &quot;Path&quot;: &quot;/#<span>{</span>path}&quot;,
+               &quot;Query&quot;: &quot;#<span>{</span>query}&quot;,
+               &quot;StatusCode&quot;: &quot;HTTP_301&quot;
+              }
+            }
+          ],
+          &quot;LoadBalancerArn&quot;: <span>{</span>
+               &quot;Ref&quot;: &quot;myLoadBalancer&quot;
+           },
+            &quot;Port&quot;: 80,
+            &quot;Protocol&quot;: &quot;HTTP&quot;
+       }
+  }
+         </code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -188,7 +236,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

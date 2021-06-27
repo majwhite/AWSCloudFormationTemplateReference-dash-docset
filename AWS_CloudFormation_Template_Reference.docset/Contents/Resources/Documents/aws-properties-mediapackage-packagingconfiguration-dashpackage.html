@@ -25,6 +25,7 @@
                                     <h3 id="aws-properties-mediapackage-packagingconfiguration-dashpackage-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;<a href="#cfn-mediapackage-packagingconfiguration-dashpackage-dashmanifests">DashManifests</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-mediapackage-packagingconfiguration-dashmanifest.html">DashManifest</a>, ... ]</code>,
   &quot;<a href="#cfn-mediapackage-packagingconfiguration-dashpackage-encryption">Encryption</a>&quot; : <code class="replaceable"><a href="./aws-properties-mediapackage-packagingconfiguration-dashencryption.html">DashEncryption</a></code>,
+  &quot;<a href="#cfn-mediapackage-packagingconfiguration-dashpackage-includeencoderconfigurationinsegments">IncludeEncoderConfigurationInSegments</a>&quot; : <code class="replaceable">Boolean</code>,
   &quot;<a href="#cfn-mediapackage-packagingconfiguration-dashpackage-periodtriggers">PeriodTriggers</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
   &quot;<a href="#cfn-mediapackage-packagingconfiguration-dashpackage-segmentdurationseconds">SegmentDurationSeconds</a>&quot; : <code class="replaceable">Integer</code>,
   &quot;<a href="#cfn-mediapackage-packagingconfiguration-dashpackage-segmenttemplateformat">SegmentTemplateFormat</a>&quot; : <code class="replaceable">String</code>
@@ -35,6 +36,7 @@
     - <a href="./aws-properties-mediapackage-packagingconfiguration-dashmanifest.html">DashManifest</a></code>
   <a href="#cfn-mediapackage-packagingconfiguration-dashpackage-encryption">Encryption</a>: <code class="replaceable">
     <a href="./aws-properties-mediapackage-packagingconfiguration-dashencryption.html">DashEncryption</a></code>
+  <a href="#cfn-mediapackage-packagingconfiguration-dashpackage-includeencoderconfigurationinsegments">IncludeEncoderConfigurationInSegments</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-mediapackage-packagingconfiguration-dashpackage-periodtriggers">PeriodTriggers</a>: <code class="replaceable">
     - String</code>
   <a href="#cfn-mediapackage-packagingconfiguration-dashpackage-segmentdurationseconds">SegmentDurationSeconds</a>: <code class="replaceable">Integer</code>
@@ -63,17 +65,52 @@
                                           <p><em>Type</em>: <a href="./aws-properties-mediapackage-packagingconfiguration-dashencryption.html">DashEncryption</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-mediapackage-packagingconfiguration-dashpackage-includeencoderconfigurationinsegments"></a><span class="term"><code class="code">IncludeEncoderConfigurationInSegments</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>When includeEncoderConfigurationInSegments is set to true, MediaPackage places your
+                                             encoder&apos;s Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter
+                                             Set (VPS) metadata in every video segment instead of in the init fragment. This lets
+                                             you use different SPS/PPS/VPS settings for your assets during content playback.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-mediapackage-packagingconfiguration-dashpackage-periodtriggers"></a><span class="term"><code class="code">PeriodTriggers</code></span></dt>
                                        <dd>
                                           
-                                          <p>A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over
-                                             HTTP
-                                             (DASH) Media Presentation Description (MPD) is partitioned into multiple periods.
-                                             If empty,
-                                             the content isl not partitioned into more than one period. If the list contains &quot;ADS&quot;,
-                                             new
-                                             periods are created where the Asset contains SCTE-35 ad markers. 
+                                          <p>Controls whether MediaPackage produces single-period or multi-period DASH manifests.
+                                             For more information about periods, see <a href="https://docs.aws.amazon.com/mediapackage/latest/ug/multi-period.html">Multi-period DASH in AWS Elemental MediaPackage</a>.
                                           </p>
+                                          
+                                          <p>Valid values:</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="userinput">ADS</code> - MediaPackage will produce multi-period DASH manifests. Periods are created based
+                                                      on the SCTE-35 ad markers present in the input manifest.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <em>No value</em> - MediaPackage will produce single-period DASH manifests. This is the default setting.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -124,7 +161,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

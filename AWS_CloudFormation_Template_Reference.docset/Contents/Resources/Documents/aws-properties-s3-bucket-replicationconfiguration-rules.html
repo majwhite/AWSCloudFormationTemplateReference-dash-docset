@@ -96,8 +96,8 @@
                                           
                                           <p>A filter that identifies the subset of objects to which the replication rule applies.
                                              A
-                                             <code class="code">Filter</code> must specify exactly one <code class="code">Prefix</code>,
-                                             <code class="code">TagFilter</code>, or an <code class="code">And</code> child element.
+                                             <code class="code">Filter</code> must specify exactly one <code class="code">Prefix</code>, <code class="code">TagFilter</code>, or
+                                             an <code class="code">And</code> child element.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -127,6 +127,18 @@
                                              specify an empty string. 
                                           </p>
                                           
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>Replacement must be made for object keys containing special characters (such as carriage
+                                                   returns) when using 
+                                                   XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
+                                                      XML related object key constraints</a>.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -148,7 +160,7 @@
                                           </p>
                                           
                                           <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html">Replication</a> in the
-                                             <em>Amazon Simple Storage Service Developer Guide</em>.
+                                             <em>Amazon S3 User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -161,7 +173,8 @@
                                        <dd>
                                           
                                           <p>A container that describes additional filters for identifying the source objects that
-                                             you want to replicate. You can choose to enable or disable the replication of these
+                                             you
+                                             want to replicate. You can choose to enable or disable the replication of these
                                              objects.
                                           </p>
                                           
@@ -184,6 +197,317 @@
                                        </dd>
                                     </dl>
                                  </div>
+                                 <h2 id="aws-properties-s3-bucket-replicationconfiguration-rules--examples">Examples</h2>
+                                 <p></p>
+                                 <h3 id="aws-properties-s3-bucket-replicationconfiguration-rules--examples--Associate_a_replication_configuration_IAM_role_with_an_S3_bucket">Associate a replication configuration IAM role with an S3 bucket</h3>
+                                 <p>The following example creates an S3 bucket and grants it permission to write to a
+                                    replication bucket by using an AWS Identity and Access Management (IAM) role. To avoid
+                                    a
+                                    circular dependency, the role&apos;s policy is declared as a separate resource. The bucket
+                                    depends on the <code class="code">WorkItemBucketBackupRole</code> role. If the policy is included in
+                                    the role, the role also depends on the bucket.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-replicationconfiguration-rules--examples--Associate_a_replication_configuration_IAM_role_with_an_S3_bucket--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Resources&quot;: <span>{</span>
+        &quot;RecordServiceS3Bucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+            &quot;DeletionPolicy&quot;: &quot;Retain&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;ReplicationConfiguration&quot;: <span>{</span>
+                    &quot;Role&quot;: <span>{</span>
+                        &quot;Fn::GetAtt&quot;: [
+                            &quot;WorkItemBucketBackupRole&quot;,
+                            &quot;Arn&quot;
+                        ]
+                    },
+                    &quot;Rules&quot;: [
+                        <span>{</span>
+                            &quot;Destination&quot;: <span>{</span>
+                                &quot;Bucket&quot;: <span>{</span>
+                                    &quot;Fn::Join&quot;: [
+                                        &quot;&quot;,
+                                        [
+                                            &quot;arn:aws:s3:::&quot;,
+                                            <span>{</span>
+                                                &quot;Fn::Join&quot;: [
+                                                    &quot;-&quot;,
+                                                    [
+                                                        <span>{</span>
+                                                            &quot;Ref&quot;: &quot;AWS::Region&quot;
+                                                        },
+                                                        <span>{</span>
+                                                            &quot;Ref&quot;: &quot;AWS::StackName&quot;
+                                                        },
+                                                        &quot;replicationbucket&quot;
+                                                    ]
+                                                ]
+                                            }
+                                        ]
+                                    ]
+                                },
+                                &quot;StorageClass&quot;: &quot;STANDARD&quot;
+                            },
+                            &quot;Id&quot;: &quot;Backup&quot;,
+                            &quot;Prefix&quot;: &quot;&quot;,
+                            &quot;Status&quot;: &quot;Enabled&quot;
+                        }
+                    ]
+                },
+                &quot;VersioningConfiguration&quot;: <span>{</span>
+                    &quot;Status&quot;: &quot;Enabled&quot;
+                }
+            }
+        },
+        &quot;WorkItemBucketBackupRole&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::IAM::Role&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;AssumeRolePolicyDocument&quot;: <span>{</span>
+                    &quot;Statement&quot;: [
+                        <span>{</span>
+                            &quot;Action&quot;: [
+                                &quot;sts:AssumeRole&quot;
+                            ],
+                            &quot;Effect&quot;: &quot;Allow&quot;,
+                            &quot;Principal&quot;: <span>{</span>
+                                &quot;Service&quot;: [
+                                    &quot;s3.amazonaws.com&quot;
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        &quot;BucketBackupPolicy&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::IAM::Policy&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;PolicyDocument&quot;: <span>{</span>
+                    &quot;Statement&quot;: [
+                        <span>{</span>
+                            &quot;Action&quot;: [
+                                &quot;s3:GetReplicationConfiguration&quot;,
+                                &quot;s3:ListBucket&quot;
+                            ],
+                            &quot;Effect&quot;: &quot;Allow&quot;,
+                            &quot;Resource&quot;: [
+                                <span>{</span>
+                                    &quot;Fn::Join&quot;: [
+                                        &quot;&quot;,
+                                        [
+                                            &quot;arn:aws:s3:::&quot;,
+                                            <span>{</span>
+                                                &quot;Ref&quot;: &quot;RecordServiceS3Bucket&quot;
+                                            }
+                                        ]
+                                    ]
+                                }
+                            ]
+                        },
+                        <span>{</span>
+                            &quot;Action&quot;: [
+                                &quot;s3:GetObjectVersion&quot;,
+                                &quot;s3:GetObjectVersionAcl&quot;
+                            ],
+                            &quot;Effect&quot;: &quot;Allow&quot;,
+                            &quot;Resource&quot;: [
+                                <span>{</span>
+                                    &quot;Fn::Join&quot;: [
+                                        &quot;&quot;,
+                                        [
+                                            &quot;arn:aws:s3:::&quot;,
+                                            <span>{</span>
+                                                &quot;Ref&quot;: &quot;RecordServiceS3Bucket&quot;
+                                            },
+                                            &quot;/*&quot;
+                                        ]
+                                    ]
+                                }
+                            ]
+                        },
+                        <span>{</span>
+                            &quot;Action&quot;: [
+                                &quot;s3:ReplicateObject&quot;,
+                                &quot;s3:ReplicateDelete&quot;
+                            ],
+                            &quot;Effect&quot;: &quot;Allow&quot;,
+                            &quot;Resource&quot;: [
+                                <span>{</span>
+                                    &quot;Fn::Join&quot;: [
+                                        &quot;&quot;,
+                                        [
+                                            &quot;arn:aws:s3:::&quot;,
+                                            <span>{</span>
+                                                &quot;Fn::Join&quot;: [
+                                                    &quot;-&quot;,
+                                                    [
+                                                        <span>{</span>
+                                                            &quot;Ref&quot;: &quot;AWS::Region&quot;
+                                                        },
+                                                        <span>{</span>
+                                                            &quot;Ref&quot;: &quot;AWS::StackName&quot;
+                                                        },
+                                                        &quot;replicationbucket&quot;
+                                                    ]
+                                                ]
+                                            },
+                                            &quot;/*&quot;
+                                        ]
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                &quot;PolicyName&quot;: &quot;BucketBackupPolicy&quot;,
+                &quot;Roles&quot;: [
+                    <span>{</span>
+                        &quot;Ref&quot;: &quot;WorkItemBucketBackupRole&quot;
+                    }
+                ]
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-replicationconfiguration-rules--examples--Associate_a_replication_configuration_IAM_role_with_an_S3_bucket--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  RecordServiceS3Bucket:
+    Type: &apos;AWS::S3::Bucket&apos;
+    DeletionPolicy: Retain
+    Properties:
+      ReplicationConfiguration:
+        Role: !GetAtt
+          - WorkItemBucketBackupRole
+          - Arn
+        Rules:
+          - Destination:
+              Bucket: !Join
+                - &apos;&apos;
+                - - &apos;arn:aws:s3:::&apos;
+                  - !Join
+                    - &apos;-&apos;
+                    - - !Ref &apos;AWS::Region&apos;
+                      - !Ref &apos;AWS::StackName&apos;
+                      - replicationbucket
+              StorageClass: STANDARD
+            Id: Backup
+            Prefix: &apos;&apos;
+            Status: Enabled
+      VersioningConfiguration:
+        Status: Enabled
+  WorkItemBucketBackupRole:
+    Type: &apos;AWS::IAM::Role&apos;
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+              - &apos;sts:AssumeRole&apos;
+            Effect: Allow
+            Principal:
+              Service:
+                - s3.amazonaws.com
+  BucketBackupPolicy:
+    Type: &apos;AWS::IAM::Policy&apos;
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Action:
+              - &apos;s3:GetReplicationConfiguration&apos;
+              - &apos;s3:ListBucket&apos;
+            Effect: Allow
+            Resource:
+              - !Join
+                - &apos;&apos;
+                - - &apos;arn:aws:s3:::&apos;
+                  - !Ref RecordServiceS3Bucket
+          - Action:
+              - &apos;s3:GetObjectVersion&apos;
+              - &apos;s3:GetObjectVersionAcl&apos;
+            Effect: Allow
+            Resource:
+              - !Join
+                - &apos;&apos;
+                - - &apos;arn:aws:s3:::&apos;
+                  - !Ref RecordServiceS3Bucket
+                  - /*
+          - Action:
+              - &apos;s3:ReplicateObject&apos;
+              - &apos;s3:ReplicateDelete&apos;
+            Effect: Allow
+            Resource:
+              - !Join
+                - &apos;&apos;
+                - - &apos;arn:aws:s3:::&apos;
+                  - !Join
+                    - &apos;-&apos;
+                    - - !Ref &apos;AWS::Region&apos;
+                      - !Ref &apos;AWS::StackName&apos;
+                      - replicationbucket
+                  - /*
+      PolicyName: BucketBackupPolicy
+      Roles:
+        - !Ref WorkItemBucketBackupRole</code></pre></div>
+                                 <h3 id="aws-properties-s3-bucket-replicationconfiguration-rules--examples--Enable_versioning_and_replicate_objects">Enable versioning and replicate objects</h3>
+                                 <p>The following example enables versioning and two replication rules. The rules copy
+                                    objects prefixed with either <code class="code">MyPrefix</code> and <code class="code">MyOtherPrefix</code> and
+                                    stores the copied objects in a bucket named <code class="code">my-replication-bucket</code>.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-replicationconfiguration-rules--examples--Enable_versioning_and_replicate_objects--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;S3Bucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;VersioningConfiguration&quot;: <span>{</span>
+                    &quot;Status&quot;: &quot;Enabled&quot;
+                },
+                &quot;ReplicationConfiguration&quot;: <span>{</span>
+                    &quot;Role&quot;: &quot;arn:aws:iam::123456789012:role/replication_role&quot;,
+                    &quot;Rules&quot;: [
+                        <span>{</span>
+                            &quot;Id&quot;: &quot;MyRule1&quot;,
+                            &quot;Status&quot;: &quot;Enabled&quot;,
+                            &quot;Prefix&quot;: &quot;MyPrefix&quot;,
+                            &quot;Destination&quot;: <span>{</span>
+                                &quot;Bucket&quot;: &quot;arn:aws:s3:::my-replication-bucket&quot;,
+                                &quot;StorageClass&quot;: &quot;STANDARD&quot;
+                            }
+                        },
+                        <span>{</span>
+                            &quot;Status&quot;: &quot;Enabled&quot;,
+                            &quot;Prefix&quot;: &quot;MyOtherPrefix&quot;,
+                            &quot;Destination&quot;: <span>{</span>
+                                &quot;Bucket&quot;: &quot;arn:aws:s3:::my-replication-bucket&quot;
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-replicationconfiguration-rules--examples--Enable_versioning_and_replicate_objects--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  S3Bucket:
+    Type: &apos;AWS::S3::Bucket&apos;
+    Properties:
+      VersioningConfiguration:
+        Status: Enabled
+      ReplicationConfiguration:
+        Role: &apos;arn:aws:iam::123456789012:role/replication_role&apos;
+        Rules:
+          - Id: MyRule1
+            Status: Enabled
+            Prefix: MyPrefix
+            Destination:
+              Bucket: &apos;arn:aws:s3:::my-replication-bucket&apos;
+              StorageClass: STANDARD
+          - Status: Enabled
+            Prefix: MyOtherPrefix
+            Destination:
+              Bucket: &apos;arn:aws:s3:::my-replication-bucket&apos;</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -194,7 +518,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

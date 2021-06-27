@@ -16,15 +16,6 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <div class="awsdocs-note">
-                                    <div class="awsdocs-note-title">
-                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
-                                    <div class="awsdocs-note-text">
-                                       <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate
-                                          your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  
-                                       </p>
-                                    </div>
-                                 </div>
                                  <p>The part of a web request that you want AWS WAF to inspect. Include the <code class="code">FieldToMatch</code> types that you want to inspect, with additional specifications as needed, according
                                     to the type. 
                                  </p>
@@ -34,6 +25,7 @@
                                     <h3 id="aws-properties-wafv2-rulegroup-fieldtomatch-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;<a href="#cfn-wafv2-rulegroup-fieldtomatch-allqueryarguments">AllQueryArguments</a>&quot; : <code class="replaceable">Json</code>,
   &quot;<a href="#cfn-wafv2-rulegroup-fieldtomatch-body">Body</a>&quot; : <code class="replaceable">Json</code>,
+  &quot;<a href="#cfn-wafv2-rulegroup-fieldtomatch-jsonbody">JsonBody</a>&quot; : <code class="replaceable"><a href="./aws-properties-wafv2-rulegroup-jsonbody.html">JsonBody</a></code>,
   &quot;<a href="#cfn-wafv2-rulegroup-fieldtomatch-method">Method</a>&quot; : <code class="replaceable">Json</code>,
   &quot;<a href="#cfn-wafv2-rulegroup-fieldtomatch-querystring">QueryString</a>&quot; : <code class="replaceable">Json</code>,
   &quot;<a href="#cfn-wafv2-rulegroup-fieldtomatch-singleheader">SingleHeader</a>&quot; : <code class="replaceable">Json</code>,
@@ -44,6 +36,8 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-properties-wafv2-rulegroup-fieldtomatch-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-wafv2-rulegroup-fieldtomatch-allqueryarguments">AllQueryArguments</a>: <code class="replaceable">Json</code>
   <a href="#cfn-wafv2-rulegroup-fieldtomatch-body">Body</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-wafv2-rulegroup-fieldtomatch-jsonbody">JsonBody</a>: <code class="replaceable">
+    <a href="./aws-properties-wafv2-rulegroup-jsonbody.html">JsonBody</a></code>
   <a href="#cfn-wafv2-rulegroup-fieldtomatch-method">Method</a>: <code class="replaceable">Json</code>
   <a href="#cfn-wafv2-rulegroup-fieldtomatch-querystring">QueryString</a>: <code class="replaceable">Json</code>
   <a href="#cfn-wafv2-rulegroup-fieldtomatch-singleheader">SingleHeader</a>: <code class="replaceable">Json</code>
@@ -74,18 +68,37 @@
                                           </p>
                                           
                                           <p>Note that only the first 8 KB (8192 bytes) of the request body are forwarded to AWS
-                                             WAF for inspection. If you don&apos;t need to inspect more than 8 KB, you can guarantee
-                                             that you don&apos;t allow additional bytes in by combining a statement that inspects the
-                                             body of the web request, such as ByteMatchStatement or RegexPatternSetReferenceStatement,
-                                             with a SizeConstraintStatement that enforces an 8 KB size limit on the body of the
-                                             request. AWS WAF doesn&apos;t support inspecting the entire contents of web requests whose
-                                             bodies exceed the 8 KB limit.
+                                             WAF for inspection by the underlying host service. If you don&apos;t need to inspect more
+                                             than 8 KB, you can guarantee that you don&apos;t allow additional bytes in by combining
+                                             a statement that inspects the body of the web request, such as the <code class="code">ByteMatchStatement</code> or <code class="code">RegexPatternSetReferenceStatement</code>, with a <code class="code">SizeConstraintStatement</code> that enforces an 8 KB size limit on the body of the request. AWS WAF doesn&apos;t support
+                                             inspecting the entire contents of web requests whose bodies exceed the 8 KB limit.
                                           </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Json
                                           </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-wafv2-rulegroup-fieldtomatch-jsonbody"></a><span class="term"><code class="code">JsonBody</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Inspect the request body as JSON. The request body immediately follows the request
+                                             headers. This is the part of a request that contains any 
+                                             additional data that you want to send to your web server as the HTTP request body,
+                                             such as data from a form. 
+                                          </p>
+                                          
+                                          <p>Note that only the first 8 KB (8192 bytes) of the request body are forwarded to AWS
+                                             WAF for inspection by the underlying host service. If you don&apos;t need to inspect more
+                                             than 8 KB, you can guarantee that you don&apos;t allow additional bytes in by combining
+                                             a statement that inspects the body of the web request, such as the <code class="code">ByteMatchStatement</code> or <code class="code">RegexPatternSetReferenceStatement</code>, with a <code class="code">SizeConstraintStatement</code> that enforces an 8 KB size limit on the body of the request. AWS WAF doesn&apos;t support
+                                             inspecting the entire contents of web requests whose bodies exceed the 8 KB limit.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-wafv2-rulegroup-jsonbody.html">JsonBody</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-wafv2-rulegroup-fieldtomatch-method"></a><span class="term"><code class="code">Method</code></span></dt>
@@ -163,7 +176,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -25,6 +25,7 @@
   &quot;<a href="#cfn-dlm-lifecyclepolicy-crossregioncopyrule-copytags">CopyTags</a>&quot; : <code class="replaceable">Boolean</code>,
   &quot;<a href="#cfn-dlm-lifecyclepolicy-crossregioncopyrule-encrypted">Encrypted</a>&quot; : <code class="replaceable">Boolean</code>,
   &quot;<a href="#cfn-dlm-lifecyclepolicy-crossregioncopyrule-retainrule">RetainRule</a>&quot; : <code class="replaceable"><a href="./aws-properties-dlm-lifecyclepolicy-crossregioncopyretainrule.html">CrossRegionCopyRetainRule</a></code>,
+  &quot;<a href="#cfn-dlm-lifecyclepolicy-crossregioncopyrule-target">Target</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-dlm-lifecyclepolicy-crossregioncopyrule-targetregion">TargetRegion</a>&quot; : <code class="replaceable">String</code>
 }
 </code></pre></div>
@@ -34,6 +35,7 @@
   <a href="#cfn-dlm-lifecyclepolicy-crossregioncopyrule-encrypted">Encrypted</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-dlm-lifecyclepolicy-crossregioncopyrule-retainrule">RetainRule</a>: <code class="replaceable">
     <a href="./aws-properties-dlm-lifecyclepolicy-crossregioncopyretainrule.html">CrossRegionCopyRetainRule</a></code>
+  <a href="#cfn-dlm-lifecyclepolicy-crossregioncopyrule-target">Target</a>: <code class="replaceable">String</code>
   <a href="#cfn-dlm-lifecyclepolicy-crossregioncopyrule-targetregion">TargetRegion</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-properties-dlm-lifecyclepolicy-crossregioncopyrule-properties">Properties</h2>
@@ -42,10 +44,9 @@
                                        <dt><a id="cfn-dlm-lifecyclepolicy-crossregioncopyrule-cmkarn"></a><span class="term"><code class="code">CmkArn</code></span></dt>
                                        <dd>
                                           		       
-                                          <p>The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use for
-                                             EBS
-                                             			encryption. If this parameter is not specified, your AWS managed CMK for EBS is
-                                             			used.
+                                          <p>The Amazon Resource Name (ARN) of the AWS KMS key to use for EBS encryption. If this
+                                             
+                                             			parameter is not specified, the default KMS key for the account is used.
                                           </p>
                                           	     
                                           <p><em>Required</em>: No
@@ -60,7 +61,10 @@
                                        <dt><a id="cfn-dlm-lifecyclepolicy-crossregioncopyrule-copytags"></a><span class="term"><code class="code">CopyTags</code></span></dt>
                                        <dd>
                                           		       
-                                          <p>Copy all user-defined tags from the source snapshot to the copied snapshot.</p>
+                                          <p>Indicates whether to copy all user-defined tags from the source snapshot to the cross-Region
+                                             
+                                             			snapshot copy.
+                                          </p>
                                           	     
                                           <p><em>Required</em>: No
                                           </p>
@@ -85,19 +89,49 @@
                                        <dt><a id="cfn-dlm-lifecyclepolicy-crossregioncopyrule-retainrule"></a><span class="term"><code class="code">RetainRule</code></span></dt>
                                        <dd>
                                           		       
-                                          <p>The retention rule.</p>
+                                          <p>The retention rule that indicates how long snapshot copies are to be retained in the
+                                             
+                                             			destination Region.
+                                          </p>
                                           	     
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-dlm-lifecyclepolicy-crossregioncopyretainrule.html">CrossRegionCopyRetainRule</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-dlm-lifecyclepolicy-crossregioncopyrule-target"></a><span class="term"><code class="code">Target</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>The target Region or the Amazon Resource Name (ARN) of the target Outpost for the
+                                             
+                                             			snapshot copies.
+                                          </p>
+                                          		       
+                                          <p>Use this parameter instead of <b>TargetRegion</b>. Do not 
+                                             			specify both.
+                                          </p>
+                                          	     
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">0</code></p>
+                                          <p><em>Maximum</em>: <code class="code">2048</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^[\w:\-\/\*]+$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-dlm-lifecyclepolicy-crossregioncopyrule-targetregion"></a><span class="term"><code class="code">TargetRegion</code></span></dt>
                                        <dd>
                                           		       
-                                          <p>The target Region.</p>
+                                          <p>Avoid using this parameter when creating new policies. Instead, use <b>Target</b>
+                                             			to specify a target Region or a target Outpost for snapshot copies.
+                                          </p>
+                                          		       
+                                          <p>For policies created before the <b>Target</b> parameter 
+                                             			was introduced, this parameter indicates the target Region for snapshot copies.
+                                          </p>
                                           	     
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -118,7 +152,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

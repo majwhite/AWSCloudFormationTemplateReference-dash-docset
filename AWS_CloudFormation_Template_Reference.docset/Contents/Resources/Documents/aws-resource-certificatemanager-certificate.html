@@ -20,7 +20,7 @@
                                     Certificate Manager (ACM) certificate that you can use to enable secure connections.
                                     For
                                     example, you can deploy an ACM certificate to an Elastic Load Balancer to enable HTTPS
-                                    support. For more information, see <a href="https://docs.aws.amazon.com/acm/latest/APIReference/API_RequestCertificate.html">RequestCertificate</a> in 
+                                    support. For more information, see <a href="https://docs.aws.amazon.com/acm/latest/APIReference/API_RequestCertificate.html">RequestCertificate</a> in
                                     the AWS Certificate Manager API Reference.
                                  </p>
                                  <div class="awsdocs-note awsdocs-important">
@@ -38,9 +38,7 @@
                                           Further stack operations are delayed until you validate the certificate request, either
                                           by acting upon the instructions in the validation email, or by adding a CNAME record
                                           to
-                                          your DNS configuration. For more information, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html">Use Email to Validate Domain
-                                             Ownership</a> and <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html">Use DNS to Validate Domain
-                                             Ownership</a>.
+                                          your DNS configuration. For more information, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html">Option 1: DNS Validation</a> and <a href="https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html">Option 2: Email Validation</a>.
                                        </p>
                                     </div>
                                  </div>
@@ -107,16 +105,17 @@ Properties:
                                        <dt><a id="cfn-certificatemanager-certificate-certificatetransparencyloggingpreference"></a><span class="term"><code class="code">CertificateTransparencyLoggingPreference</code></span></dt>
                                        <dd>
                                           
-                                          <p>You can opt out of certificate transparency logging by specifying the        
+                                          <p>You can opt out of certificate transparency logging by specifying the
                                              <code class="code">DISABLED</code> option. Opt in by specifying <code class="code">ENABLED</code>.
                                           </p>
                                           
                                           <p>If you do not specify a certificate transparency logging preference on a new
                                              CloudFormation template, or if you remove the logging preference from an existing
-                                             template, this is the same as explicitly enabling the preference.
-                                          </p>      
+                                             template,
+                                             this is the same as explicitly enabling the preference.
+                                          </p>
                                           
-                                          <p>Changing the  certificate transparency logging preference will update the existing
+                                          <p>Changing the certificate transparency logging preference will update the existing
                                              resource by calling <code class="code">UpdateCertificateOptions</code> on the certificate. This action
                                              will not create a new resource.
                                           </p>
@@ -195,6 +194,8 @@ Properties:
                                                 email</a>. We recommend that you use DNS validation.
                                           </p>
                                           
+                                          <p>If not specified, this property defaults to email validation.</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -219,25 +220,24 @@ Properties:
                                     certificate.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-certificatemanager-certificate--examples--Declaring_an_Amazon_Certificate_Manager_Certificate_Resource--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;mycert&quot; : <span>{</span>
-  &quot;Type&quot; : &quot;AWS::CertificateManager::Certificate&quot;,
-  &quot;Properties&quot; : <span>{</span>
-    &quot;DomainName&quot; : &quot;example.com&quot;,
-    &quot;DomainValidationOptions&quot; : [<span>{</span>
-      &quot;DomainName&quot; : &quot;example.com&quot;,
-      &quot;ValidationDomain&quot; : &quot;example.com&quot;
-    }]
+                                    <h4 id="aws-resource-certificatemanager-certificate--examples--Declaring_an_Amazon_Certificate_Manager_Certificate_Resource--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Resources&quot;:<span>{</span>
+    &quot;MyCertificate&quot;:<span>{</span>
+      &quot;Type&quot;:&quot;AWS::CertificateManager::Certificate&quot;,
+      &quot;Properties&quot;:<span>{</span>
+        &quot;DomainName&quot;:&quot;example.com&quot;,
+        &quot;ValidationMethod&quot;:&quot;DNS&quot;
+      }
+    }
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-certificatemanager-certificate--examples--Declaring_an_Amazon_Certificate_Manager_Certificate_Resource--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">mycert:
-  Type: AWS::CertificateManager::Certificate
-  Properties:
-    DomainName: example.com
-    DomainValidationOptions:
-          - DomainName: example.com
-            ValidationDomain: example.com
-</code></pre></div>
+                                    <h4 id="aws-resource-certificatemanager-certificate--examples--Declaring_an_Amazon_Certificate_Manager_Certificate_Resource--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  MyCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: example.com
+      ValidationMethod: DNS</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -248,7 +248,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

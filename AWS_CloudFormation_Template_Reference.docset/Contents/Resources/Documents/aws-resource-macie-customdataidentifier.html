@@ -18,13 +18,12 @@
                                  </div>
                                  <p>The <code class="code">AWS::Macie::CustomDataIdentifier</code> resource is a set of criteria that
                                     you define to detect sensitive data in one or more data sources. Each identifier
-                                    specifies a regular expression (regex) that defines a text pattern to match in the
-                                    data.
+                                    specifies a regular expression (<em>regex</em>) that defines a text pattern to match in the data.
                                     It can also specify character sequences, such as words and phrases, and a proximity
                                     rule
                                     that refine the analysis of a data source. By using custom data identifiers, you can
-                                    tailor your analysis to meet your organization&apos;s specific needs, and supplement the
-                                    built-in data identifiers that Amazon Macie provides.
+                                    tailor your analysis to meet your organization&apos;s specific needs and supplement the
+                                    built-in, managed data identifiers that Amazon Macie provides.
                                  </p>
                                  <p>A <code class="code">Session</code> must exist for the account before you can create a
                                     <code class="code">CustomDataIdentifier</code>. Use a <a href="aws-attribute-dependson.html">DependsOn
@@ -64,7 +63,9 @@ Properties:
                                        <dt><a id="cfn-macie-customdataidentifier-description"></a><span class="term"><code class="code">Description</code></span></dt>
                                        <dd>
                                           
-                                          <p>The description of the custom data identifier.</p>
+                                          <p>The description of the custom data identifier. The description can
+                                             contain as many as 512 characters.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -80,7 +81,7 @@ Properties:
                                              this
                                              array, Amazon Macie ignores it. The array can contain as many as 10 ignore words.
                                              Each
-                                             ignore word can contain 4 - 90 characters.
+                                             ignore word can contain 4-90 characters. Ignore words are case sensitive.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -94,8 +95,8 @@ Properties:
                                           
                                           <p>An array that lists specific character sequences (keywords), one of which must be
                                              within proximity (<code class="code">MaximumMatchDistance</code>) of the regular expression to match.
-                                             The array can contain as many as 50 keywords. Each keyword can contain 4 - 90
-                                             characters. 
+                                             The array can contain as many as 50 keywords. Each keyword can contain 3-90
+                                             characters. Keywords aren&apos;t case sensitive.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -108,11 +109,9 @@ Properties:
                                        <dd>
                                           
                                           <p>The maximum number of characters that can exist between text that matches the regex
-                                             pattern and the character sequences specified by the <code class="code">Keywords</code> array. Amazon
-                                             Macie includes or excludes a result based on the proximity of a keyword to text that
-                                             matches the regex pattern. The distance can be 1 - 300 characters. The default value
-                                             is
-                                             50.
+                                             pattern and the character sequences specified by the <code class="code">Keywords</code> array. Amazon Macie includes or excludes a result based on the proximity of a keyword
+                                             to text that matches the regex pattern. The distance can be 1-300 characters. The
+                                             default value is 50.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -124,7 +123,7 @@ Properties:
                                        <dt><a id="cfn-macie-customdataidentifier-name"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
                                           
-                                          <p>A custom name for the custom data identifier. The name can contain as many as 120
+                                          <p>A custom name for the custom data identifier. The name can contain as many as 128
                                              characters.
                                           </p>
                                           
@@ -143,8 +142,8 @@ Properties:
                                        <dt><a id="cfn-macie-customdataidentifier-regex"></a><span class="term"><code class="code">Regex</code></span></dt>
                                        <dd>
                                           
-                                          <p>The regular expression (regex) that defines the pattern to match. The expression can
-                                             contain as many as 500 characters.
+                                          <p>The regular expression (<em>regex</em>) that defines the pattern to match. The expression can
+                                             contain as many as 512 characters.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -204,13 +203,13 @@ Properties:
                                  <p>The following example demonstrates how to declare an
                                     <code class="code">AWS::Macie::CustomDataIdentifier</code> resource.
                                  </p>
-                                 <h3 id="aws-resource-macie-customdataidentifier--examples--Creating_a_Macie_CustomDataIdentifier">Creating a Macie CustomDataIdentifier</h3>
-                                 <p>This example creates a custom data identifier that detects 6-digit employee
+                                 <h3 id="aws-resource-macie-customdataidentifier--examples--Creating_a_custom_data_identifier">Creating a custom data identifier</h3>
+                                 <p>This example creates a custom data identifier that detects six-digit employee
                                     IDs that are located near the specified keywords. If the match is a sample
                                     value, such as those provided in the ignore words, it is skipped.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-macie-customdataidentifier--examples--Creating_a_Macie_CustomDataIdentifier--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-macie-customdataidentifier--examples--Creating_a_custom_data_identifier--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
     &quot;Type&quot;: &quot;AWS::Macie::CustomDataIdentifier&quot;,
     &quot;DependsOn&quot;: &quot;Session&quot;,
     &quot;Properties&quot;: <span>{</span>
@@ -229,7 +228,7 @@ Properties:
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-macie-customdataidentifier--examples--Creating_a_Macie_CustomDataIdentifier--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Macie::CustomDataIdentifier
+                                    <h4 id="aws-resource-macie-customdataidentifier--examples--Creating_a_custom_data_identifier--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Macie::CustomDataIdentifier
 DependsOn: &quot;Session&quot;
 Properties:
     Description: &quot;My custom data identifier&quot;
@@ -241,7 +240,7 @@ Properties:
         - &quot;Employee ID&quot;
     MaximumMatchDistance: 20
     Name: EmployeeIDCustomDataIdentifier
-    Regex: \d<span>{</span>6}</code></pre></div>
+    Regex: &quot;\\d<span>{</span>6}&quot;</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -252,7 +251,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

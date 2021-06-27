@@ -18,7 +18,7 @@
                                  </div>
                                  <p>Specifies the inventory configuration for an Amazon S3 bucket. For more information,
                                     see
-                                    <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html">GET Bucket inventory</a> in the <em>Amazon Simple Storage Service API Reference</em>.
+                                    <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html">GET Bucket inventory</a> in the <em>Amazon S3 API Reference</em>.
                                     
                                  </p>
                                  <h2 id="aws-properties-s3-bucket-inventoryconfiguration-syntax">Syntax</h2>
@@ -105,6 +105,14 @@
                                           
                                           <p>Contains the optional fields that are included in the inventory results.</p>
                                           
+                                          <p><em>Valid values</em>: <code class="code"> Size | LastModifiedDate | StorageClass | ETag |
+                                                IsMultipartUploaded | ReplicationStatus | EncryptionStatus | ObjectLockRetainUntilDate
+                                                |
+                                                ObjectLockMode | ObjectLockLegalHoldStatus | IntelligentTieringAccessTier | BucketKeyStatus
+                                                </code>
+                                             
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of String
@@ -125,9 +133,9 @@
                                        <dt><a id="cfn-s3-bucket-inventoryconfiguration-schedulefrequency"></a><span class="term"><code class="code">ScheduleFrequency</code></span></dt>
                                        <dd>
                                           
-                                          <p>Specifies the schedule for generating inventory results. Valid Values: Daily | Weekly.
-                                             
-                                          </p>
+                                          <p>Specifies the schedule for generating inventory results.</p>
+                                          
+                                          <p><em>Allowed values</em>: <code class="code">Daily</code> | <code class="code">Weekly</code></p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -137,19 +145,111 @@
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-properties-s3-bucket-inventoryconfiguration--seealso">See also</h2>
-                                 <div class="itemizedlist">
-                                     
-                                    
-                                    <ul class="itemizedlist" type="disc">
-                                       <li class="listitem">
-                                          
-                                          <p>AWS::S3::Bucket <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--examples">Examples</a></p>
-                                          
-                                       </li>
-                                    </ul>
-                                 </div>
+                                 <h2 id="aws-properties-s3-bucket-inventoryconfiguration--examples">Examples</h2>
                                  <p></p>
+                                 <h3 id="aws-properties-s3-bucket-inventoryconfiguration--examples--Specify_analytics_and_inventory_configurations_for_an_S3_bucket">Specify analytics and inventory configurations for an S3 bucket</h3>
+                                 <p>The following example specifies analytics and inventory results to be generated for
+                                    an S3 bucket, including the format of the results and the destination bucket.
+                                    The inventory list generates reports weekly and includes the current version of each
+                                    object.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-inventoryconfiguration--examples--Specify_analytics_and_inventory_configurations_for_an_S3_bucket--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Description&quot;: &quot;S3 Bucket with Inventory and Analytics Configurations&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;Helper&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;
+        },
+        &quot;S3Bucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;AnalyticsConfigurations&quot;: [
+                    <span>{</span>
+                        &quot;Id&quot;: &quot;AnalyticsConfigurationId&quot;,
+                        &quot;StorageClassAnalysis&quot;: <span>{</span>
+                            &quot;DataExport&quot;: <span>{</span>
+                                &quot;Destination&quot;: <span>{</span>
+                                    &quot;BucketArn&quot;: <span>{</span>
+                                        &quot;Fn::GetAtt&quot;: [
+                                            &quot;Helper&quot;,
+                                            &quot;Arn&quot;
+                                        ]
+                                    },
+                                    &quot;Format&quot;: &quot;CSV&quot;,
+                                    &quot;Prefix&quot;: &quot;AnalyticsDestinationPrefix&quot;
+                                },
+                                &quot;OutputSchemaVersion&quot;: &quot;V_1&quot;
+                            }
+                        },
+                        &quot;Prefix&quot;: &quot;AnalyticsConfigurationPrefix&quot;,
+                        &quot;TagFilters&quot;: [
+                            <span>{</span>
+                                &quot;Key&quot;: &quot;AnalyticsTagKey&quot;,
+                                &quot;Value&quot;: &quot;AnalyticsTagValue&quot;
+                            }
+                        ]
+                    }
+                ],
+                &quot;InventoryConfigurations&quot;: [
+                    <span>{</span>
+                        &quot;Id&quot;: &quot;InventoryConfigurationId&quot;,
+                        &quot;Destination&quot;: <span>{</span>
+                            &quot;BucketArn&quot;: <span>{</span>
+                                &quot;Fn::GetAtt&quot;: [
+                                    &quot;Helper&quot;,
+                                    &quot;Arn&quot;
+                                ]
+                            },
+                            &quot;Format&quot;: &quot;CSV&quot;,
+                            &quot;Prefix&quot;: &quot;InventoryDestinationPrefix&quot;
+                        },
+                        &quot;Enabled&quot;: true,
+                        &quot;IncludedObjectVersions&quot;: &quot;Current&quot;,
+                        &quot;Prefix&quot;: &quot;InventoryConfigurationPrefix&quot;,
+                        &quot;ScheduleFrequency&quot;: &quot;Weekly&quot;
+                    }
+                ]
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-inventoryconfiguration--examples--Specify_analytics_and_inventory_configurations_for_an_S3_bucket--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Description: S3 Bucket with Inventory and Analytics Configurations
+Resources:
+  Helper:
+    Type: &apos;AWS::S3::Bucket&apos;
+  S3Bucket:
+    Type: &apos;AWS::S3::Bucket&apos;
+    Properties:
+      AnalyticsConfigurations:
+        - Id: AnalyticsConfigurationId
+          StorageClassAnalysis:
+            DataExport:
+              Destination:
+                BucketArn: !GetAtt
+                  - Helper
+                  - Arn
+                Format: CSV
+                Prefix: AnalyticsDestinationPrefix
+              OutputSchemaVersion: V_1
+          Prefix: AnalyticsConfigurationPrefix
+          TagFilters:
+            - Key: AnalyticsTagKey
+              Value: AnalyticsTagValue
+      InventoryConfigurations:
+        - Id: InventoryConfigurationId
+          Destination:
+            BucketArn: !GetAtt
+              - Helper
+              - Arn
+            Format: CSV
+            Prefix: InventoryDestinationPrefix
+          Enabled: true
+          IncludedObjectVersions: Current
+          Prefix: InventoryConfigurationPrefix
+          ScheduleFrequency: Weekly</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -160,7 +260,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

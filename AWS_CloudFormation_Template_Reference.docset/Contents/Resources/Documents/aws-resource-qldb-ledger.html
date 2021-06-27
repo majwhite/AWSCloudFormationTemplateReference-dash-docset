@@ -16,7 +16,7 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::QLDB::Ledger</code> resource creates a new Amazon Quantum Ledger Database
+                                 <p>The <code class="code">AWS::QLDB::Ledger</code> resource specifies a new Amazon Quantum Ledger Database
                                     (Amazon QLDB) ledger in your AWS account. Amazon QLDB is a fully managed ledger database
                                     that provides a transparent, immutable, and cryptographically verifiable transaction
                                     log
@@ -60,10 +60,7 @@ Properties:
                                           
                                           <p>If deletion protection is enabled, you must first disable it before you can delete
                                              the
-                                             ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable
-                                             it by calling the
-                                             <code class="code">UpdateLedger</code> operation to set the flag to <code class="code">false</code>. The QLDB
-                                             console disables deletion protection for you when you use it to delete a ledger.
+                                             ledger. You can disable it by calling the <code class="code">UpdateLedger</code> operation to set the flag to <code class="code">false</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -76,8 +73,8 @@ Properties:
                                        <dd>
                                           
                                           <p>The name of the ledger that you want to create. The name must be unique among all
-                                             of
-                                             your ledgers in the current AWS Region.
+                                             of the
+                                             ledgers in your AWS account in the current Region.
                                           </p>
                                           
                                           <p>Naming constraints for ledger names are defined in <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming">Quotas in Amazon QLDB</a>
@@ -96,14 +93,68 @@ Properties:
                                        <dt><a id="cfn-qldb-ledger-permissionsmode"></a><span class="term"><code class="code">PermissionsMode</code></span></dt>
                                        <dd>
                                           
-                                          <p>The permissions mode to assign to the ledger that you want to create.</p>
+                                          <p>The permissions mode to assign to the ledger that you want to create. This parameter
+                                             can
+                                             have one of the following values:
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">ALLOW_ALL</code>: A legacy permissions mode that enables access control with
+                                                      API-level granularity for ledgers.
+                                                   </p>
+                                                   
+                                                   <p>This mode allows users who have the <code class="code">SendCommand</code> API permission for
+                                                      this ledger to run all PartiQL commands (hence, <code class="code">ALLOW_ALL</code>) on any tables
+                                                      in the specified ledger. This mode disregards any table-level or command-level IAM
+                                                      permissions policies that you create for the ledger.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">STANDARD</code>: (<em>Recommended</em>) A permissions mode that
+                                                      enables access control with finer granularity for ledgers, tables, and PartiQL
+                                                      commands.
+                                                   </p>
+                                                   
+                                                   <p>By default, this mode denies all user requests to run any PartiQL commands on any
+                                                      tables in this ledger. To allow PartiQL commands to run, you must create IAM
+                                                      permissions policies for specific table resources and PartiQL actions, in addition
+                                                      to
+                                                      the <code class="code">SendCommand</code> API permission for the ledger. For information, see
+                                                      <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html">Getting
+                                                         started with the standard permissions mode</a> in the <em>Amazon QLDB
+                                                         Developer Guide</em>.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>We strongly recommend using the <code class="code">STANDARD</code> permissions mode to maximize
+                                                   the security of your ledger data.
+                                                </p>
+                                             </div>
+                                          </div>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed values</em>: <code class="code">ALLOW_ALL</code></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                          <p><em>Allowed values</em>: <code class="code">ALLOW_ALL | STANDARD</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-qldb-ledger-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
@@ -139,8 +190,7 @@ Properties:
                                  <p></p>
                                  <h3 id="aws-resource-qldb-ledger--examples--Amazon_QLDB_Ledger">Amazon QLDB Ledger</h3>
                                  <p>The following example describes an Amazon QLDB ledger with a
-                                    <code class="code">PermissionsMode</code> of <code class="code">ALLOW_ALL</code>. The only permissions mode
-                                    currently supported for a QLDB ledger is <code class="code">ALLOW_ALL</code>.
+                                    <code class="code">PermissionsMode</code> of <code class="code">STANDARD</code>.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-qldb-ledger--examples--Amazon_QLDB_Ledger--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -151,7 +201,7 @@ Properties:
       &quot;Properties&quot;: <span>{</span>
         &quot;DeletionProtection&quot;: true,
         &quot;Name&quot;: &quot;exampleLedger&quot;,
-        &quot;PermissionsMode&quot;: &quot;ALLOW_ALL&quot;,
+        &quot;PermissionsMode&quot;: &quot;STANDARD&quot;,
         &quot;Tags&quot;: [
           <span>{</span>
             &quot;Key&quot;: &quot;Domain&quot;,
@@ -170,7 +220,7 @@ Resources:
     Properties:
       DeletionProtection: true
       Name: &quot;exampleLedger&quot;
-      PermissionsMode: &quot;ALLOW_ALL&quot;
+      PermissionsMode: &quot;STANDARD&quot;
       Tags:
         - Key: Domain
           Value: Test</code></pre></div>
@@ -199,7 +249,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

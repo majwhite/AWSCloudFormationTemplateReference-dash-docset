@@ -31,8 +31,9 @@
   &quot;<a href="#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-onunauthenticatedrequest">OnUnauthenticatedRequest</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-scope">Scope</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-sessioncookiename">SessionCookieName</a>&quot; : <code class="replaceable">String</code>,
-  &quot;<a href="#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-sessiontimeout">SessionTimeout</a>&quot; : <code class="replaceable">Long</code>,
+  &quot;<a href="#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-sessiontimeout">SessionTimeout</a>&quot; : <code class="replaceable">Integer</code>,
   &quot;<a href="#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-tokenendpoint">TokenEndpoint</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-useexistingclientsecret">UseExistingClientSecret</a>&quot; : <code class="replaceable">Boolean</code>,
   &quot;<a href="#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-userinfoendpoint">UserInfoEndpoint</a>&quot; : <code class="replaceable">String</code>
 }
 </code></pre></div>
@@ -46,8 +47,9 @@
   <a href="#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-onunauthenticatedrequest">OnUnauthenticatedRequest</a>: <code class="replaceable">String</code>
   <a href="#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-scope">Scope</a>: <code class="replaceable">String</code>
   <a href="#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-sessioncookiename">SessionCookieName</a>: <code class="replaceable">String</code>
-  <a href="#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-sessiontimeout">SessionTimeout</a>: <code class="replaceable">Long</code>
+  <a href="#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-sessiontimeout">SessionTimeout</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-tokenendpoint">TokenEndpoint</a>: <code class="replaceable">String</code>
+  <a href="#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-useexistingclientsecret">UseExistingClientSecret</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-userinfoendpoint">UserInfoEndpoint</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-properties-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-properties">Properties</h2>
@@ -94,8 +96,9 @@
                                        <dd>
                                           
                                           <p>The OAuth 2.0 client secret. This parameter is required if you are creating a rule.
-                                             If you are modifying a rule,
-                                             you can omit this parameter if you set <code class="code">UseExistingClientSecret</code> to true.
+                                             If you
+                                             are modifying a rule, you can omit this parameter if you set
+                                             <code class="code">UseExistingClientSecret</code> to true.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -142,7 +145,8 @@
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>authenticate<code class="code"></code> - Redirect the request to the IdP authorization endpoint. This is the default value.
+                                                   <p>authenticate<code class="code"></code> - Redirect the request to the IdP authorization endpoint. This is
+                                                      the default value.
                                                    </p>
                                                    
                                                 </li>
@@ -159,11 +163,13 @@
                                        <dt><a id="cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-scope"></a><span class="term"><code class="code">Scope</code></span></dt>
                                        <dd>
                                           
-                                          <p>The set of user claims to be requested from the IdP. The default is <code class="code">openid</code>.
+                                          <p>The set of user claims to be requested from the IdP. The default is
+                                             <code class="code">openid</code>.
                                           </p>
                                           
                                           <p>To verify which scope values your IdP supports and how to separate multiple values,
-                                             see the documentation for your IdP.
+                                             see
+                                             the documentation for your IdP.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -175,7 +181,9 @@
                                        <dt><a id="cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-sessioncookiename"></a><span class="term"><code class="code">SessionCookieName</code></span></dt>
                                        <dd>
                                           
-                                          <p>The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.</p>
+                                          <p>The name of the cookie used to maintain session information. The default is
+                                             AWSELBAuthSessionCookie.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -192,7 +200,7 @@
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: Long
+                                          <p><em>Type</em>: Integer
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
@@ -200,12 +208,27 @@
                                        <dd>
                                           
                                           <p>The token endpoint of the IdP. This must be a full URL, including the HTTPS protocol,
-                                             the domain, and the path.
+                                             the
+                                             domain, and the path.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-elasticloadbalancingv2-listenerrule-authenticateoidcconfig-useexistingclientsecret"></a><span class="term"><code class="code">UseExistingClientSecret</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Indicates whether to use the existing client secret when modifying a rule. If you
+                                             are
+                                             creating a rule, you can omit this parameter or set it to false.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
@@ -234,7 +257,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

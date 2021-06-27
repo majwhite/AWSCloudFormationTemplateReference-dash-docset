@@ -18,8 +18,8 @@
                                  </div>
                                  <p>The <code class="code">AWS::EFS::FileSystem</code> resource creates a new, empty file system in
                                     Amazon Elastic File System (Amazon EFS). You must create a mount target 
-                                    (<a href="aws-resource-efs-mounttarget.html">AWS::EFS::MountTarget</a>) to mount your EFS file system on an Amazon Elastic
-                                    Compute Cloud (Amazon EC2) instance or another compute resource.
+                                    (<a href="aws-resource-efs-mounttarget.html">AWS::EFS::MountTarget</a>) to mount your EFS file system on an 
+                                    Amazon EC2  or other AWS cloud compute resource.
                                     
                                  </p>
                                  <h2 id="aws-resource-efs-filesystem-syntax">Syntax</h2>
@@ -28,7 +28,9 @@
                                     <h3 id="aws-resource-efs-filesystem-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::EFS::FileSystem&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-efs-filesystem-availabilityzonename">AvailabilityZoneName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-efs-filesystem-backuppolicy">BackupPolicy</a>&quot; : <code class="replaceable"><a href="./aws-properties-efs-filesystem-backuppolicy.html">BackupPolicy</a></code>,
+      &quot;<a href="#cfn-efs-filesystem-bypasspolicylockoutsafetycheck">BypassPolicyLockoutSafetyCheck</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-efs-filesystem-encrypted">Encrypted</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-efs-filesystem-filesystempolicy">FileSystemPolicy</a>&quot; : <code class="replaceable">Json</code>,
       &quot;<a href="#cfn-efs-filesystem-filesystemtags">FileSystemTags</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-efs-filesystem-elasticfilesystemtag.html">ElasticFileSystemTag</a>, ... ]</code>,
@@ -43,8 +45,10 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-efs-filesystem-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::EFS::FileSystem
 Properties: 
+  <a href="#cfn-efs-filesystem-availabilityzonename">AvailabilityZoneName</a>: <code class="replaceable">String</code>
   <a href="#cfn-efs-filesystem-backuppolicy">BackupPolicy</a>: <code class="replaceable">
     <a href="./aws-properties-efs-filesystem-backuppolicy.html">BackupPolicy</a></code>
+  <a href="#cfn-efs-filesystem-bypasspolicylockoutsafetycheck">BypassPolicyLockoutSafetyCheck</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-efs-filesystem-encrypted">Encrypted</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-efs-filesystem-filesystempolicy">FileSystemPolicy</a>: <code class="replaceable">Json</code>
   <a href="#cfn-efs-filesystem-filesystemtags">FileSystemTags</a>: <code class="replaceable">
@@ -59,6 +63,36 @@ Properties:
                                  <h2 id="aws-resource-efs-filesystem-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-efs-filesystem-availabilityzonename"></a><span class="term"><code class="code">AvailabilityZoneName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Used to create a file system that uses One Zone storage classes. It specifies the
+                                             AWS
+                                             Availability Zone in which to create the file system. Use the format <code class="code">us-east-1a</code>
+                                             to specify the Availability Zone. For
+                                             more information about One Zone storage classes, see <a href="https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html">Using EFS storage classes</a> in the <em>Amazon EFS User Guide</em>.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>One Zone storage classes are not available in all Availability Zones in AWS Regions
+                                                   where
+                                                   Amazon EFS is available.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">64</code></p>
+                                          <p><em>Pattern</em>: <code class="code">.+</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
                                        <dt><a id="cfn-efs-filesystem-backuppolicy"></a><span class="term"><code class="code">BackupPolicy</code></span></dt>
                                        <dd>
                                           
@@ -70,13 +104,21 @@ Properties:
                                           <p><em>Type</em>: <a href="./aws-properties-efs-filesystem-backuppolicy.html">BackupPolicy</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-efs-filesystem-bypasspolicylockoutsafetycheck"></a><span class="term"><code class="code">BypassPolicyLockoutSafetyCheck</code></span></dt>
+                                       <dd>
+                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-efs-filesystem-encrypted"></a><span class="term"><code class="code">Encrypted</code></span></dt>
                                        <dd>
                                           
                                           <p>A Boolean value that, if true, creates an encrypted file system. When creating an
                                              encrypted file system, you have the option of specifying a KmsKeyId for an existing
-                                             AWS Key Management Service (AWS
-                                             KMS) customer master key (CMK). If you don&apos;t specify a CMK, then the default CMK for
+                                             AWS KMS key. If you don&apos;t specify a KMS key, then the default KMS key for
                                              Amazon EFS, <code class="code">/aws/elasticfilesystem</code>, is used to protect the encrypted file system.
                                              
                                           </p>
@@ -93,7 +135,7 @@ Properties:
                                           
                                           <p>The <code class="code">FileSystemPolicy</code> for the EFS file system. A file system policy is an IAM resource policy used to control
                                              NFS access to an EFS file system. 
-                                             For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html">Using IAM to Control NFS Access to Amazon EFS</a>
+                                             For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html">Using IAM to control NFS access to Amazon EFS</a>
                                              in the <em>Amazon EFS User Guide</em>.
                                           </p>
                                           
@@ -101,16 +143,21 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: Json
                                           </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">20000</code></p>
+                                          <p><em>Pattern</em>: <code class="code">[\s\S]+</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-efs-filesystem-filesystemtags"></a><span class="term"><code class="code">FileSystemTags</code></span></dt>
                                        <dd>
                                           
-                                          <p>A value that specifies to create one or more tags associated with the file system.
-                                             Each
+                                          <p>Use to create one or more tags associated with the file system. Each
                                              tag is a user-defined key-value pair. Name your file system on creation by including
                                              a
-                                             <code class="code">&quot;Key&quot;:&quot;Name&quot;,&quot;Value&quot;:&quot;<span>{</span>value}&quot;</code> key-value pair.
+                                             <code class="code">&quot;Key&quot;:&quot;Name&quot;,&quot;Value&quot;:&quot;<span>{</span>value}&quot;</code> key-value pair. Each key must be unique. For more 
+                                             information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a>
+                                             in the <em>
+                                                AWS General Reference Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -121,11 +168,11 @@ Properties:
                                        <dt><a id="cfn-efs-filesystem-kmskeyid"></a><span class="term"><code class="code">KmsKeyId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ID of the AWS KMS customer master key (CMK) to be used to protect the encrypted
-                                             file system. This
-                                             parameter is only required if you want to use a nondefault CMK. If this parameter
+                                          <p>The ID of the AWS KMS key to be used to protect the encrypted file system. This
+                                             parameter is only required if you want to use a nondefault KMS key. If this parameter
                                              is not
-                                             specified, the default CMK for Amazon EFS is used. This ID can be in one of the following
+                                             specified, the default KMS key for Amazon EFS is used. This ID can be in one of the
+                                             following
                                              formats:
                                           </p>
                                           
@@ -175,14 +222,14 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Maximum</em>: <code class="code">2048</code></p>
-                                          <p><em>Pattern</em>: <code class="code">^([0-9a-f]<span>{</span>8}-[0-9a-f]<span>{</span>4}-[0-9a-f]<span>{</span>4}-[0-9a-f]<span>{</span>4}-[0-9a-f]<span>{</span>12}|alias/[a-zA-Z0-9/_-]+|(arn:aws[-a-z]*:kms:[a-z0-9-]+:\d<span>{</span>12}:((key/[0-9a-f]<span>{</span>8}-[0-9a-f]<span>{</span>4}-[0-9a-f]<span>{</span>4}-[0-9a-f]<span>{</span>4}-[0-9a-f]<span>{</span>12})|(alias/[a-zA-Z0-9/_-]+))))$</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^([0-9a-f]<span>{</span>8}-[0-9a-f]<span>{</span>4}-[0-9a-f]<span>{</span>4}-[0-9a-f]<span>{</span>4}-[0-9a-f]<span>{</span>12}|mrk-[0-9a-f]<span>{</span>32}|alias/[a-zA-Z0-9/_-]+|(arn:aws[-a-z]*:kms:[a-z0-9-]+:\d<span>{</span>12}:((key/[0-9a-f]<span>{</span>8}-[0-9a-f]<span>{</span>4}-[0-9a-f]<span>{</span>4}-[0-9a-f]<span>{</span>4}-[0-9a-f]<span>{</span>12})|(key/mrk-[0-9a-f]<span>{</span>32})|(alias/[a-zA-Z0-9/_-]+))))$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-efs-filesystem-lifecyclepolicies"></a><span class="term"><code class="code">LifecyclePolicies</code></span></dt>
                                        <dd>
                                           
-                                          <p>A list of policies used by EFS lifecycle management to transition files to the Infrequent
-                                             Access (IA) storage class.
+                                          <p>A list of one LifecyclePolicy that tells EFS lifecycle management when to transition
+                                             files to the Infrequent Access (IA) storage classes.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -201,6 +248,15 @@ Properties:
                                              can&apos;t be changed after the file system has been created.
                                           </p>
                                           
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>The <code class="code">maxIO</code> mode is not supported on file systems using One Zone storage classes.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -212,11 +268,10 @@ Properties:
                                        <dd>
                                           
                                           <p>The throughput, measured in MiB/s, that you want to provision for a file system that
-                                             you&apos;re creating. Valid values are 1-1024. Required if <code class="code">ThroughputMode</code> is set to <code class="code">provisioned</code>. The upper limit for throughput is 1024 MiB/s. 
-                                             You can get this limit increased by contacting AWS Support. For more information,
-                                             see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS Limits That You Can Increase</a>
-                                             in the <em>Amazon EFS User Guide.</em>
-                                             
+                                             you&apos;re creating. Valid values are 1-1024. Required if <code class="code">ThroughputMode</code> is set
+                                             to <code class="code">provisioned</code>. The upper limit for throughput is 1024 MiB/s. To increase this
+                                             limit, contact AWS Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS quotas that you can increase</a>
+                                             in the <em>Amazon EFS User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: Conditional
@@ -228,17 +283,18 @@ Properties:
                                        <dt><a id="cfn-efs-filesystem-throughputmode"></a><span class="term"><code class="code">ThroughputMode</code></span></dt>
                                        <dd>
                                           
-                                          <p>The throughput mode for the file system to be created. There are two throughput modes
-                                             to
-                                             choose from for your file system: <code class="code">bursting</code> and <code class="code">provisioned</code>. If you set <code class="code">ThroughputMode</code> to <code class="code">provisioned</code>, 
-                                             you must also set a value for <code class="code">ProvisionedThroughPutInMibps</code>. You can decrease your file
-                                             system&apos;s throughput in Provisioned Throughput mode or change between the throughput
-                                             modes
-                                             as long as it&#x2019;s been more than 24 hours since the last decrease or throughput mode
-                                             change. For more, 
-                                             see <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput">Specifying Throughput with Provisioned Mode</a>
-                                             in the <em>Amazon EFS User Guide.</em>
-                                             
+                                          <p>Specifies the throughput mode for the file system, either <code class="code">bursting</code> or
+                                             <code class="code">provisioned</code>. If you set <code class="code">ThroughputMode</code> to
+                                             <code class="code">provisioned</code>, you must also set a value for
+                                             <code class="code">ProvisionedThroughputInMibps</code>. After you create the file system, you can
+                                             decrease your file system&apos;s throughput in Provisioned Throughput mode or change between
+                                             the throughput modes, as long as it&#x2019;s been more than 24 hours since the last decrease
+                                             or
+                                             throughput mode change. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput">Specifying throughput with
+                                                provisioned mode</a> in the <em>Amazon EFS User Guide</em>. 
+                                          </p>
+                                          
+                                          <p>Default is <code class="code">bursting</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -274,22 +330,72 @@ Properties:
                                     <dl>
                                        <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the EFS file system. For example: <code class="code">arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-12345678</code></p>
+                                          
                                        </dd>
                                        <dt><a id="FileSystemId-fn::getatt"></a><span class="term"><code class="code">FileSystemId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ID of the EFS file system. For example: <code class="code">fs-0123456</code></p>
+                                          <p>The ID of the EFS file system. For example: <code class="code">fs-12345678</code></p>
                                           
                                        </dd>
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-efs-filesystem--examples">Examples</h2>
                                  <p></p>
-                                 <h3 id="aws-resource-efs-filesystem--examples--Create_an_Encrypted_File_System">Create an Encrypted File System</h3>
-                                 <p>The following example declares an encrypted Amazon EFS file system.</p>
+                                 <h3 id="aws-resource-efs-filesystem--examples--Create_an_encrypted_EFS_file_system_using_EFS_Standard_storage_classes">Create an encrypted EFS file system using EFS Standard storage classes</h3>
+                                 <p>The following example declares an Amazon EFS file system with the followiing attributes:</p>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          <p>Uses EFS Standard storage classes.</p>
+                                       </li>
+                                       <li class="listitem">
+                                          <p>maxIO performance mode.</p>
+                                       </li>
+                                       <li class="listitem">
+                                          <p>Lifecycle management enabled.</p>
+                                       </li>
+                                       <li class="listitem">
+                                          <p>Encrypted at rest.</p>
+                                       </li>
+                                       <li class="listitem">
+                                          <p>Automatic daily backups are enabled.</p>
+                                       </li>
+                                       <li class="listitem">
+                                          <p>File system policy granting read-only access to the EfsReadOnly IAM role.</p>
+                                       </li>
+                                       <li class="listitem">
+                                          <p>File system access:</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   <p>Mount targets in three Availability Zones.</p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p>An access point providing an application-specific entry point to the file system.</p>
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-efs-filesystem--examples--Create_an_Encrypted_File_System--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;<span>{</span>
+                                    <h4 id="aws-resource-efs-filesystem--examples--Create_an_encrypted_EFS_file_system_using_EFS_Standard_storage_classes--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;<span>{</span>
     &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
     &quot;Resources&quot;: <span>{</span>
         &quot;MountTargetVPC&quot;: <span>{</span>
@@ -315,7 +421,7 @@ Properties:
                 &quot;VpcId&quot;: <span>{</span>
                     &quot;Ref&quot;: &quot;MountTargetVPC&quot;
                 },
-                &quot;AvailabilityZone&quot;: &quot;us-east-1a&quot;
+                &quot;AvailabilityZone&quot;: &quot;us-east-1b&quot;
             }
         },
         &quot;MountTargetSubnetThree&quot;: <span>{</span>
@@ -325,7 +431,7 @@ Properties:
                 &quot;VpcId&quot;: <span>{</span>
                     &quot;Ref&quot;: &quot;MountTargetVPC&quot;
                 },
-                &quot;AvailabilityZone&quot;: &quot;us-east-1a&quot;
+                &quot;AvailabilityZone&quot;: &quot;us-east-1c
             }
         },
        &quot;FileSystemResource&quot;: <span>{</span>
@@ -352,7 +458,7 @@ Properties:
                             &quot;Action&quot;: [
                                 &quot;elasticfilesystem:ClientMount&quot;
                             ],
-                            &quot;Principal&quot;:  <span>{</span>&quot;AWS&quot;: &quot;arn:aws:iam::111122223333:root&quot;}
+                            &quot;Principal&quot;:  <span>{</span>&quot;AWS&quot;: &quot;arn:aws:iam::111122223333:role/EfsReadOnly&quot;}
                         }
                     ]
                 },
@@ -394,8 +500,7 @@ Properties:
                             &quot;Action&quot;: [
                                 &quot;kms:*&quot;
                             ],
-                            &quot;Resource&quot;: &quot;*&quot;,
-                            &quot;AWS&quot;: &quot;*&quot;
+                            &quot;Resource&quot;: &quot;*&quot;
                         }
                     ]
                 }
@@ -485,7 +590,7 @@ Properties:
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-efs-filesystem--examples--Create_an_Encrypted_File_System--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+                                    <h4 id="aws-resource-efs-filesystem--examples--Create_an_encrypted_EFS_file_system_using_EFS_Standard_storage_classes--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Resources:
   MountTargetVPC:
     Type: AWS::EC2::VPC
@@ -497,21 +602,21 @@ Resources:
     Properties:
       CidrBlock: 172.31.1.0/24
       VpcId: !Ref MountTargetVPC
-      AvailabilityZone: &quot;us-east-1a&quot;
+     AvailabilityZone: &quot;us-east-1a&quot;
 
   MountTargetSubnetTwo:
     Type: AWS::EC2::Subnet
     Properties:
       CidrBlock: 172.31.2.0/24
       VpcId: !Ref MountTargetVPC
-      AvailabilityZone: &quot;us-east-1a&quot;
+      AvailabilityZone: &quot;us-east-1b&quot;
 
   MountTargetSubnetThree:
     Type: AWS::EC2::Subnet
     Properties:
       CidrBlock: 172.31.3.0/24
       VpcId: !Ref MountTargetVPC
-      AvailabilityZone: &quot;us-east-1a&quot;
+      AvailabilityZone: &quot;us-east-1c&quot;
  
   FileSystemResource:
     Type: &apos;AWS::EFS::FileSystem&apos;
@@ -531,7 +636,8 @@ Resources:
           - Effect: &quot;Allow&quot;
             Action:
               - &quot;elasticfilesystem:ClientMount&quot;
-            Principal:&apos;arn:aws:iam::111122223333:root&apos;
+            Principal:
+                AWS: &apos;arn:aws:iam::111122223333:role/EfsReadOnly&apos;
       KmsKeyId: !GetAtt 
         - key
         - Arn
@@ -552,8 +658,8 @@ Resources:
                   - &apos;:root&apos;
             Action:
               - &apos;kms:*&apos;
-            Resource: &apos;*&apos;
-            AWS: &quot;*&quot;
+            Resource: 
+              - &apos;*&apos;
 
   MountTargetResource1:
     Type: AWS::EFS::MountTarget
@@ -595,6 +701,229 @@ Resources:
           OwnerUid: &quot;7987987&quot;
           Permissions: &quot;0755&quot;
         Path: &quot;/testcfn/abc&quot;</code></pre></div>
+                                 <h3 id="aws-resource-efs-filesystem--examples--Create_a_file_system_using_EFS_One_Zone_storage_classes">Create a file system using EFS One Zone storage classes</h3>
+                                 <p>The following example declares an encrypted Amazon EFS file system using One Zone
+                                    storage classes in the us-east-1a Availability Zone.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-efs-filesystem--examples--Create_a_file_system_using_EFS_One_Zone_storage_classes--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;<span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;MountTargetVPC&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::EC2::VPC&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;CidrBlock&quot;: &quot;172.31.0.0/16&quot;
+            }
+        },
+        &quot;MountTargetSubnetOne&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::EC2::Subnet&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;CidrBlock&quot;: &quot;172.31.1.0/24&quot;,
+                &quot;VpcId&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;MountTargetVPC&quot;
+                },
+                &quot;AvailabilityZone&quot;: &quot;us-east-1a&quot;
+            }
+        },
+       &quot;FileSystemResource&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::EFS::FileSystem&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;AvailabilityZoneName&quot;: &quot;us-east-1a&quot;,
+                &quot;LifecyclePolicies&quot;:[
+                    <span>{</span>
+                        &quot;TransitionToIA&quot; : &quot;AFTER_30_DAYS&quot;
+                    }
+                ],    
+                &quot;Encrypted&quot;: true,
+                &quot;FileSystemTags&quot;: [
+                    <span>{</span>
+                        &quot;Key&quot;: &quot;Name&quot;,
+                        &quot;Value&quot;: &quot;TestFileSystem&quot;
+                    }
+                ],
+                &quot;FileSystemPolicy&quot;: <span>{</span>
+                    &quot;Version&quot;: &quot;2012-10-17&quot;,
+                    &quot;Statement&quot;: [
+                        <span>{</span>
+                            &quot;Effect&quot;: &quot;Allow&quot;,
+                            &quot;Action&quot;: [
+                                &quot;elasticfilesystem:ClientMount&quot;
+                            ],
+                            &quot;Principal&quot;:  <span>{</span>&quot;AWS&quot;: &quot;arn:aws:iam::111122223333:role/EfsReadOnly&quot;}
+                        }
+                    ]
+                },
+                &quot;BackupPolicy&quot;: <span>{</span>
+                    &quot;Status&quot;: &quot;ENABLED&quot;
+                    },
+                &quot;KmsKeyId&quot;: <span>{</span>
+                    &quot;Fn::GetAtt&quot;: [
+                        &quot;key&quot;,
+                        &quot;Arn&quot;
+                    ]
+                }
+            } 
+        },
+        &quot;key&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::KMS::Key&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;KeyPolicy&quot;: <span>{</span>
+                    &quot;Version&quot;: &quot;2012-10-17&quot;,
+                    &quot;Id&quot;: &quot;key-default-1&quot;,
+                    &quot;Statement&quot;: [
+                        <span>{</span>
+                            &quot;Sid&quot;: &quot;Allow administration of the key&quot;,
+                            &quot;Effect&quot;: &quot;Allow&quot;,
+                            &quot;Principal&quot;: <span>{</span>
+                                &quot;AWS&quot;: <span>{</span>
+                                    &quot;Fn::Join&quot;: [
+                                        &quot;&quot;,
+                                        [
+                                            &quot;arn:aws:iam::&quot;,
+                                            <span>{</span>
+                                                &quot;Ref&quot;: &quot;AWS::AccountId&quot;
+                                            },
+                                            &quot;:root&quot;
+                                        ]
+                                    ]
+                                }
+                            },
+                            &quot;Action&quot;: [
+                                &quot;kms:*&quot;
+                            ],
+                            &quot;Resource&quot;: &quot;*&quot;
+                        }
+                    ]
+                }
+            }
+        },
+        &quot;MountTargetResource1&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::EFS::MountTarget&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;FileSystemId&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;FileSystemResource&quot;
+                },
+                &quot;SubnetId&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;MountTargetSubnetOne&quot;
+                },
+                &quot;SecurityGroups&quot;: [
+                    <span>{</span>
+                        &quot;Fn::GetAtt&quot;: [
+                            &quot;MountTargetVPC&quot;,
+                            &quot;DefaultSecurityGroup&quot;
+                        ]
+                    }
+                ]
+            }
+        },
+        &quot;AccessPointResource&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::EFS::AccessPoint&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;FileSystemId&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;FileSystemResource&quot;
+                },
+                &quot;PosixUser&quot;: <span>{</span>
+                    &quot;Uid&quot;: &quot;13234&quot;,
+                    &quot;Gid&quot;: &quot;1322&quot;,
+                    &quot;SecondaryGids&quot;: [
+                        &quot;1344&quot;,
+                        &quot;1452&quot;
+                    ]
+                },
+                &quot;RootDirectory&quot;: <span>{</span>
+                    &quot;CreationInfo&quot;: <span>{</span>
+                        &quot;OwnerGid&quot;: &quot;708798&quot;,
+                        &quot;OwnerUid&quot;: &quot;7987987&quot;,
+                        &quot;Permissions&quot;: &quot;0755&quot;
+                    },
+                    &quot;Path&quot;: &quot;/testcfn/abc&quot;
+                }
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-efs-filesystem--examples--Create_a_file_system_using_EFS_One_Zone_storage_classes--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  MountTargetVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 172.31.0.0/16
+ 
+  MountTargetSubnetOne:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: 172.31.1.0/24
+      VpcId: !Ref MountTargetVPC
+      AvailabilityZone: &quot;us-east-1a&quot;
+ 
+  FileSystemResource:
+    Type: &apos;AWS::EFS::FileSystem&apos;
+    Properties:
+      AvailabilityZoneName: us-east-1a
+      BackupPolicy:
+        Status: ENABLED
+      Encrypted: true
+      LifecyclePolicies:
+        - TransitionToIA: AFTER_30_DAYS
+      FileSystemTags:
+        - Key: Name
+          Value: TestFileSystem
+      FileSystemPolicy:
+        Version: &quot;2012-10-17&quot;
+        Statement:
+          - Effect: &quot;Allow&quot;
+            Action:
+              - &quot;elasticfilesystem:ClientMount&quot;
+            Principal:
+                AWS: &apos;arn:aws:iam::111122223333:role/EfsReadOnly&apos;
+      KmsKeyId: !GetAtt 
+        - key
+        - Arn
+  key:
+    Type: AWS::KMS::Key
+    Properties:
+      KeyPolicy:
+        Version: 2012-10-17
+        Id: key-default-1
+        Statement:
+          - Sid: Allow administration of the key
+            Effect: Allow
+            Principal:
+              AWS: !Join 
+                - &apos;&apos;
+                - - &apos;arn:aws:iam::&apos;
+                  - !Ref &apos;AWS::AccountId&apos;
+                  - &apos;:root&apos;
+            Action:
+              - &apos;kms:*&apos;
+            Resource: 
+              - &apos;*&apos;
+
+  MountTargetResource1:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !Ref FileSystemResource
+      SubnetId: !Ref MountTargetSubnetOne
+      SecurityGroups:
+      - !GetAtt MountTargetVPC.DefaultSecurityGroup
+ 
+  AccessPointResource:
+    Type: &apos;AWS::EFS::AccessPoint&apos;
+    Properties:
+      FileSystemId: !Ref FileSystemResource
+      PosixUser:
+        Uid: &quot;13234&quot;
+        Gid: &quot;1322&quot;
+        SecondaryGids:
+          - &quot;1344&quot;
+          - &quot;1452&quot;
+      RootDirectory:
+        CreationInfo:
+          OwnerGid: &quot;708798&quot;
+          OwnerUid: &quot;7987987&quot;
+          Permissions: &quot;0755&quot;
+        Path: &quot;/testcfn/abc&quot;</code></pre></div>
                                  <h2 id="aws-resource-efs-filesystem--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
@@ -604,7 +933,7 @@ Resources:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html">Amazon EFS: How It Works</a>
+                                             <a href="https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html">Amazon EFS: How it works</a>
                                              
                                           </p>
                                           
@@ -612,7 +941,7 @@ Resources:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/efs/latest/ug/creating-using-fs.html">Creating an Amazon Elastic File System</a>
+                                             <a href="https://docs.aws.amazon.com/efs/latest/ug/creating-using-fs.html">Creating an Amazon EFS file system</a>
                                              
                                           </p>
                                           
@@ -630,7 +959,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

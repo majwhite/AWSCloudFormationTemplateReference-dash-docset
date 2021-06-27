@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-iot-accountauditconfiguration">AWS::IoT::AccountAuditConfiguration</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>Use the <code class="code">AWS::IoT::AccountAuditConfiguration</code> resource to configure or
+                                    reconfigure the Device Defender audit settings for your account. Settings include
+                                    how audit
+                                    notifications are sent and which audit checks are enabled or disabled. For API reference,
+                                    see <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_UpdateAccountAuditConfiguration.html">UpdateAccountAuditConfiguration</a> and for detailed information on all available audit checks, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-audit-checks.html">Audit checks</a>.
+                                 </p>
+                                 <h2 id="aws-resource-iot-accountauditconfiguration-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-iot-accountauditconfiguration-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::IoT::AccountAuditConfiguration&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-iot-accountauditconfiguration-accountid">AccountId</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-iot-accountauditconfiguration-auditcheckconfigurations">AuditCheckConfigurations</a>&quot; : <code class="replaceable"><a href="./aws-properties-iot-accountauditconfiguration-auditcheckconfigurations.html">AuditCheckConfigurations</a></code>,
+      &quot;<a href="#cfn-iot-accountauditconfiguration-auditnotificationtargetconfigurations">AuditNotificationTargetConfigurations</a>&quot; : <code class="replaceable"><a href="./aws-properties-iot-accountauditconfiguration-auditnotificationtargetconfigurations.html">AuditNotificationTargetConfigurations</a></code>,
+      &quot;<a href="#cfn-iot-accountauditconfiguration-rolearn">RoleArn</a>&quot; : <code class="replaceable">String</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-iot-accountauditconfiguration-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::IoT::AccountAuditConfiguration
+Properties: 
+  <a href="#cfn-iot-accountauditconfiguration-accountid">AccountId</a>: <code class="replaceable">String</code>
+  <a href="#cfn-iot-accountauditconfiguration-auditcheckconfigurations">AuditCheckConfigurations</a>: <code class="replaceable">
+    <a href="./aws-properties-iot-accountauditconfiguration-auditcheckconfigurations.html">AuditCheckConfigurations</a></code>
+  <a href="#cfn-iot-accountauditconfiguration-auditnotificationtargetconfigurations">AuditNotificationTargetConfigurations</a>: <code class="replaceable">
+    <a href="./aws-properties-iot-accountauditconfiguration-auditnotificationtargetconfigurations.html">AuditNotificationTargetConfigurations</a></code>
+  <a href="#cfn-iot-accountauditconfiguration-rolearn">RoleArn</a>: <code class="replaceable">String</code>
+</code></pre></div>
+                                 <h2 id="aws-resource-iot-accountauditconfiguration-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-iot-accountauditconfiguration-accountid"></a><span class="term"><code class="code">AccountId</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ID of the account. You can use the expression <code class="code">!Sub &quot;$<span>{</span>AWS::AccountId}&quot;</code> to use your account ID.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-iot-accountauditconfiguration-auditcheckconfigurations"></a><span class="term"><code class="code">AuditCheckConfigurations</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies which audit checks are enabled and disabled for this account.</p>
+                                          
+                                          <p>Some data collection might start immediately when certain checks are enabled. When
+                                             a check is disabled, any data collected so far in relation to the check is deleted.
+                                             To disable a check, set the value of the <code class="code">Enabled:</code> key to <code class="code">false</code>.
+                                          </p>
+                                          
+                                          <p>If an enabled check is removed from the template, it will also be disabled.</p>
+                                          
+                                          <p>You can&apos;t disable a check if it&apos;s used by any scheduled audit. You must delete the
+                                             check
+                                             from the scheduled audit or delete the scheduled audit itself to disable the check.
+                                          </p>
+                                          
+                                          <p>For more information on avialbe auidt checks see <a href="aws-properties-iot-accountauditconfiguration-auditcheckconfigurations.html">AWS::IoT::AccountAuditConfiguration AuditCheckConfigurations</a></p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-iot-accountauditconfiguration-auditcheckconfigurations.html">AuditCheckConfigurations</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-iot-accountauditconfiguration-auditnotificationtargetconfigurations"></a><span class="term"><code class="code">AuditNotificationTargetConfigurations</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Information about the targets to which audit notifications are sent.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-iot-accountauditconfiguration-auditnotificationtargetconfigurations.html">AuditNotificationTargetConfigurations</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-iot-accountauditconfiguration-rolearn"></a><span class="term"><code class="code">RoleArn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the role that grants permission to AWS IoT to access
+                                             information about your devices, policies, certificates, and other items as required
+                                             when performing an audit.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-iot-accountauditconfiguration-return-values">Return values</h2>
+                                 <h3 id="aws-resource-iot-accountauditconfiguration-return-values-ref">Ref</h3>
+                                 <p>
+                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the account ID. 
+                                    
+                                 </p>
+                                 <h2 id="aws-resource-iot-accountauditconfiguration--examples">Examples</h2>
+                                 <p></p>
+                                 <h3 id="aws-resource-iot-accountauditconfiguration--examples--"></h3>
+                                 <p></p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-iot-accountauditconfiguration--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+  &quot;Description&quot;: &quot;Amazon Web Services IoT AccountAuditConfiguration Sample Template&quot;,
+  &quot;Resources&quot;: <span>{</span>
+    &quot;MyAccountAuditConfiguration&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::IoT::AccountAuditConfiguration&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;AccountId&quot;: &quot;$<span>{</span>AWS::AccountId}&quot;,
+        &quot;AuditCheckConfigurations&quot;: <span>{</span>
+          &quot;AuthenticatedCognitoRoleOverlyPermissiveCheck&quot;: <span>{</span>
+            &quot;Enabled&quot;: true
+          },
+          &quot;CaCertificateExpiringCheck&quot;: <span>{</span>
+            &quot;Enabled&quot;: true
+          },
+          &quot;CaCertificateKeyQualityCheck&quot;: <span>{</span>
+            &quot;Enabled&quot;: true
+          },
+          &quot;ConflictingClientIdsCheck&quot;: <span>{</span>
+            &quot;Enabled&quot;: true
+          },
+          &quot;DeviceCertificateExpiringCheck&quot;: <span>{</span>
+            &quot;Enabled&quot;: true
+          },
+          &quot;DeviceCertificateKeyQualityCheck&quot;: <span>{</span>
+            &quot;Enabled&quot;: true
+          },
+          &quot;DeviceCertificateSharedCheck&quot;: <span>{</span>
+            &quot;Enabled&quot;: true
+          },
+          &quot;IotPolicyOverlyPermissiveCheck&quot;: <span>{</span>
+            &quot;Enabled&quot;: true
+          },
+          &quot;IotRoleAliasAllowsAccessToUnusedServicesCheck&quot;: <span>{</span>
+            &quot;Enabled&quot;: true
+          },
+          &quot;IotRoleAliasOverlyPermissiveCheck&quot;: <span>{</span>
+            &quot;Enabled&quot;: true
+          },
+          &quot;LoggingDisabledCheck&quot;: <span>{</span>
+            &quot;Enabled&quot;: true
+          },
+          &quot;RevokedCaCertificateStillActiveCheck&quot;: <span>{</span>
+            &quot;Enabled&quot;: true
+          },
+          &quot;RevokedDeviceCertificateStillActiveCheck&quot;: <span>{</span>
+            &quot;Enabled&quot;: true
+          },
+          &quot;UnauthenticatedCognitoRoleOverlyPermissiveCheck&quot;: <span>{</span>
+            &quot;Enabled&quot;: true
+          }
+        },
+        &quot;AuditNotificationTargetConfigurations&quot;: <span>{</span>
+          &quot;Sns&quot;: <span>{</span>
+            &quot;TargetArn&quot;: &quot;arn:aws:sns:us-east-1:123456789012:AuditNotifications&quot;,
+            &quot;RoleArn&quot;: &quot;arn:aws:iam::123456789012:role/RoleForIoTAuditNotifications&quot;,
+            &quot;Enabled&quot;: true
+          }
+        },
+        &quot;RoleArn&quot;: &quot;arn:aws:iam::123456789012:role/service-role/AWSIoTDeviceDefenderAudit&quot;
+      }
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-iot-accountauditconfiguration--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Description: Amazon Web Services IoT AccountAuditConfiguration Sample Template
+Resources:
+  MyAccountAuditConfiguration:
+    Type: &apos;AWS::IoT::AccountAuditConfiguration&apos;
+    Properties:
+      AccountId: !Sub &apos;$<span>{</span>AWS::AccountId}&apos;
+      AuditCheckConfigurations:
+        AuthenticatedCognitoRoleOverlyPermissiveCheck: 
+        	Enabled: True
+        CaCertificateExpiringCheck: 
+        	Enabled: True
+        CaCertificateKeyQualityCheck: 
+        	Enabled: True
+        ConflictingClientIdsCheck: 
+        	Enabled: True
+        DeviceCertificateExpiringCheck: 
+        	Enabled: True
+        DeviceCertificateKeyQualityCheck: 
+        	Enabled: True
+        DeviceCertificateSharedCheck: 
+        	Enabled: True
+        IotPolicyOverlyPermissiveCheck: 
+        	Enabled: True
+        IotRoleAliasAllowsAccessToUnusedServicesCheck: 
+        	Enabled: True
+        IotRoleAliasOverlyPermissiveCheck: 
+        	Enabled: True
+        LoggingDisabledCheck: 
+        	Enabled: True
+        RevokedCaCertificateStillActiveCheck: 
+        	Enabled: True
+        RevokedDeviceCertificateStillActiveCheck: 
+        	Enabled: True
+        UnauthenticatedCognitoRoleOverlyPermissiveCheck: 
+        	Enabled: True
+      AuditNotificationTargetConfigurations:
+         Sns:
+           TargetArn: &apos;arn:aws:sns:us-east-1:123456789012:AuditNotifications&apos;
+           RoleArn: &apos;arn:aws:iam::123456789012:role/RoleForIoTAuditNotifications&apos;
+           Enabled: true
+      RoleArn: &apos;arn:aws:iam::123456789012:role/service-role/AWSIoTDeviceDefenderAudit&apos;</code></pre></div>
+                                 <h2 id="aws-resource-iot-accountauditconfiguration--seealso">See also</h2>
+                                 <p>When you use CloudFormation to perform drift detection for
+                                    <code class="code">AccountAuditConfiguration</code>, it won&apos;t compare values that aren&apos;t part of
+                                    the stack template. In <code class="code">AccountAuditConfiguration</code>, specifying a
+                                    configuration for every check is optional, and skipped checks are interpreted as
+                                    disabled. To have accurate drift detection with CloudFormation, include configurations
+                                    (enabled or disabled) for all the 14 audit checks in your template. For more information
+                                    on the audit checks see 
+                                    <a href="aws-properties-iot-accountauditconfiguration-auditcheckconfigurations.html">AWS::IoT::AccountAuditConfiguration AuditCheckConfigurations</a>.
+                                 </p>
+                                 <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting
+                                       unmanaged configuration changes to stacks and resources</a> in the <em>user
+                                       guide</em>.
+                                 </p>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

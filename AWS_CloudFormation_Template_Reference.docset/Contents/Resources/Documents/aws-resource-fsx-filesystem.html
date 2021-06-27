@@ -65,9 +65,7 @@ Properties:
                                        <dt><a id="cfn-fsx-filesystem-backupid"></a><span class="term"><code class="code">BackupId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ID of the backup. Specifies the backup to use if you&apos;re creating a file system
-                                             from an existing backup.
-                                          </p>
+                                          <p>The ID of the source backup. Specifies the backup you are copying.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -261,7 +259,9 @@ Properties:
                                              file server 
                                              and one for the standby file server. You specify one of these subnets as the preferred
                                              subnet 
-                                             using the <code class="code">WindowsConfiguration &gt; PreferredSubnetID</code> property.
+                                             using the <code class="code">WindowsConfiguration &gt; PreferredSubnetID</code> property. For more information, 
+                                             see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html">
+                                                Availability and durability: Single-AZ and Multi-AZ file systems</a>.
                                           </p>
                                           
                                           <p>For Windows <code class="code">SINGLE_AZ_1</code> and <code class="code">SINGLE_AZ_2</code> file system deployment types and Lustre file systems, provide exactly one subnet
@@ -324,6 +324,15 @@ Properties:
                                  <h4 id="aws-resource-fsx-filesystem-return-values-fn--getatt-fn--getatt"></h4>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="DNSName-fn::getatt"></a><span class="term"><code class="code">DNSName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Use the DNSName value to access the DNS name of your Amazon FSx file system. The DNS
+                                             name
+                                             identifies the file system.
+                                          </p>
+                                          
+                                       </dd>
                                        <dt><a id="LustreMountName-fn::getatt"></a><span class="term"><code class="code">LustreMountName</code></span></dt>
                                        <dd>
                                           
@@ -370,10 +379,11 @@ Properties:
                     }
                 ],
                 &quot;LustreConfiguration&quot;: <span>{</span>
-                    &quot;AutoImportPolicy&quot; : &quot;NEW&quot;,                    
+                    &quot;AutoImportPolicy&quot; : &quot;NEW&quot;,               
                     &quot;CopyTagsToBackups&quot; : true,
                     &quot;DeploymentType&quot;: &quot;PERSISTENT_1&quot;,
                     &quot;PerUnitStorageThroughput&quot;: 200,                    
+                    &quot;DataCompressionType&quot;: &quot;LZ4&quot;,
                     &quot;ImportPath&quot;: <span>{</span>
                         &quot;Fn::Join&quot;: [
                             &quot;&quot;,
@@ -427,6 +437,7 @@ Properties:
         CopyTagsToBackups: true
         DeploymentType: &quot;PERSISTENT_1&quot;
         PerUnitStorageThroughput: 200
+        DataCompression: &quot;LZ4&quot;
         ImportPath: !Join [&quot;&quot;, [&quot;s3://&quot;, !ImportValue LustreCFNS3ImportBucketName]]
         ExportPath: !Join [&quot;&quot;, [&quot;s3://&quot;, !ImportValue LustreCFNS3ExportPath]]
         WeeklyMaintenanceStartTime: &quot;2:20:30&quot;
@@ -438,7 +449,7 @@ Outputs:
                                  </h3>
                                  <p>The following examples create a Multi-AZ Amazon FSx for Windows File Server file system
                                     joined 
-                                    to a Self-managed active directory.
+                                    to a self-managed active directory.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-fsx-filesystem--examples--Create_an_Amazon_FSx_for_Windows_File_Server_File_System_in_a_Self-managed_Active_Directory--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -470,6 +481,9 @@ Outputs:
                 ],
                 &quot;WindowsConfiguration&quot;: <span>{</span>
                     &quot;ThroughputCapacity&quot;: 8,
+                    &quot;Aliases&quot;: [
+                        &quot;financials.corp.example.com&quot;
+                    ],
                     &quot;WeeklyMaintenanceStartTime&quot;: &quot;4:16:30&quot;,
                     &quot;DailyAutomaticBackupStartTime&quot;: &quot;01:00&quot;,
                     &quot;AutomaticBackupRetentionDays&quot;: 30,
@@ -543,6 +557,8 @@ Outputs:
           Value: windows
       WindowsConfiguration:
         ThroughputCapacity: 8
+        Aliases: 
+            - financials.corp.example.com         
         WeeklyMaintenanceStartTime: &apos;4:16:30&apos;
         DailyAutomaticBackupStartTime: &apos;01:00&apos;
         AutomaticBackupRetentionDays: 30
@@ -609,6 +625,9 @@ Outputs:
                         &quot;Fn::ImportValue&quot;: &quot;CfnFsxMadDirectoryServiceId&quot;
                     },
                     &quot;ThroughputCapacity&quot;: 8,
+                    &quot;Aliases&quot;: [
+                        &quot;financials.corp.example.com&quot;
+                    ],
                     &quot;WeeklyMaintenanceStartTime&quot;: &quot;4:16:30&quot;,
                     &quot;DailyAutomaticBackupStartTime&quot;: &quot;01:00&quot;,
                     &quot;AutomaticBackupRetentionDays&quot;: 90,
@@ -648,6 +667,8 @@ Outputs:
       WindowsConfiguration:
         ActiveDirectoryId: !ImportValue CfnFsxMadDirectoryServiceId
         ThroughputCapacity: 8
+        Aliases: 
+            - financials.corp.example.com
         WeeklyMaintenanceStartTime: &apos;4:16:30&apos;
         DailyAutomaticBackupStartTime: &apos;01:00&apos;
         AutomaticBackupRetentionDays: 90
@@ -668,7 +689,7 @@ Outputs:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

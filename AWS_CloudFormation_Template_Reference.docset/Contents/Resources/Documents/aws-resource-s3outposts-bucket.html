@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-s3outposts-bucket">AWS::S3Outposts::Bucket</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The AWS::S3Outposts::Bucket resource specifies a new Amazon S3 on Outposts bucket.
+                                    
+                                    To create an S3 on Outposts bucket, you must have S3 on Outposts capacity provisioned
+                                    on your Outpost. 
+                                    For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">
+                                       Using Amazon S3 on Outposts</a>.
+                                 </p>
+                                 <p>S3 on Outposts buckets support the following:</p>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          <p>Tags</p>
+                                       </li>
+                                       <li class="listitem">
+                                          <p>Lifecycle configuration rules for deleting expired objects</p>
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <p>For a complete list of restrictions and Amazon S3 feature limitations on S3 on Outposts,
+                                    
+                                    see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OnOutpostsRestrictionsLimitations.html">
+                                       Amazon S3 on Outposts Restrictions and Limitations</a>.
+                                 </p>
+                                 <h2 id="aws-resource-s3outposts-bucket-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-s3outposts-bucket-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::S3Outposts::Bucket&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-s3outposts-bucket-bucketname">BucketName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-s3outposts-bucket-lifecycleconfiguration">LifecycleConfiguration</a>&quot; : <code class="replaceable"><a href="./aws-properties-s3outposts-bucket-lifecycleconfiguration.html">LifecycleConfiguration</a></code>,
+      &quot;<a href="#cfn-s3outposts-bucket-outpostid">OutpostId</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-s3outposts-bucket-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-s3outposts-bucket-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::S3Outposts::Bucket
+Properties: 
+  <a href="#cfn-s3outposts-bucket-bucketname">BucketName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-s3outposts-bucket-lifecycleconfiguration">LifecycleConfiguration</a>: <code class="replaceable">
+    <a href="./aws-properties-s3outposts-bucket-lifecycleconfiguration.html">LifecycleConfiguration</a></code>
+  <a href="#cfn-s3outposts-bucket-outpostid">OutpostId</a>: <code class="replaceable">String</code>
+  <a href="#cfn-s3outposts-bucket-tags">Tags</a>: <code class="replaceable">
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
+</code></pre></div>
+                                 <h2 id="aws-resource-s3outposts-bucket-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-s3outposts-bucket-bucketname"></a><span class="term"><code class="code">BucketName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A name for the S3 on Outposts bucket. If you don&apos;t specify a name, AWS CloudFormation
+                                             generates a
+                                             unique ID and uses that ID for the bucket name.
+                                             The bucket name must contain only lowercase letters, numbers, periods (.), and dashes
+                                             (-)
+                                             and must follow <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/BucketRestrictions.html">
+                                                Amazon S3 bucket restrictions and limitations</a>.
+                                             For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/BucketRestrictions.html#bucketnamingrules">Bucket 
+                                                naming rules</a>.
+                                             
+                                          </p>
+                                          
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If you specify a name, you can&apos;t perform updates that require replacement of this
+                                                   resource. You can perform updates that require no or some interruption. If you need
+                                                   to
+                                                   replace the resource, specify a new name.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-s3outposts-bucket-lifecycleconfiguration"></a><span class="term"><code class="code">LifecycleConfiguration</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Creates a new lifecycle configuration for the S3 on Outposts bucket or replaces an
+                                             existing
+                                             lifecycle configuration. Outposts buckets only support lifecycle configurations that
+                                             delete/expire objects
+                                             after a certain period of time and abort incomplete multipart uploads.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-s3outposts-bucket-lifecycleconfiguration.html">LifecycleConfiguration</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-s3outposts-bucket-outpostid"></a><span class="term"><code class="code">OutpostId</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ID of the Outpost of the specified bucket.</p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-s3outposts-bucket-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Sets the tags for an S3 on Outposts bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html">Using Amazon S3 on Outposts</a>.
+                                          </p>
+                                          
+                                          <p>Use tags to organize your AWS bill to reflect your own cost structure. To do this,
+                                             sign up to get your 
+                                             AWS account bill with tag key values included. Then, to see the cost of combined resources,
+                                             organize your 
+                                             billing information according to resources with the same tag key values. For example,
+                                             you can tag several 
+                                             resources with a specific application name, and then organize your billing information
+                                             to see the total cost 
+                                             of that application across several services. For more information, see 
+                                             <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Cost allocation and 
+                                                tags</a>.
+                                          </p>
+                                          
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>Within a bucket, if you add a tag that has the same key as an existing tag, the new
+                                                   value overwrites 
+                                                   the old value. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/CostAllocTagging.html">
+                                                      Using cost allocation and bucket tags</a>.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          
+                                          <p>To use this resource, you must have permissions to perform the
+                                             <code class="code">s3-outposts:PutBucketTagging</code>. The S3 on Outposts bucket owner has this
+                                             permission by default and can grant this permission to others. For more information
+                                             about
+                                             permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources">Permissions 
+                                                Related to Bucket Subresource Operations</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html">Managing access permissions to your Amazon S3 resources</a>.
+                                          </p>    
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-s3outposts-bucket-return-values">Return values</h2>
+                                 <h3 id="aws-resource-s3outposts-bucket-return-values-ref">Ref</h3>
+                                 <p>
+                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the S3 on Outposts bucket Amazon Resource Name (ARN).
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-s3outposts-bucket-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-s3outposts-bucket-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Returns the ARN of the specified bucket.</p>
+                                          
+                                          <p>Example: <code class="code">arn:aws:s3Outposts:::DOC-EXAMPLE-BUCKET</code>
+                                             
+                                          </p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-s3outposts-bucket--examples">Examples</h2>
+                                 <p>The following examples creates an Amazon S3 on Outposts bucket using AWS CloudFormation</p>
+                                 <h3 id="aws-resource-s3outposts-bucket--examples--Create_an_S3_on_Outposts_bucket">Create an S3 on Outposts bucket</h3>
+                                 <p>The following example creates an S3 on Outposts bucket without tags or lifecycle configuration.</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-s3outposts-bucket--examples--Create_an_S3_on_Outposts_bucket--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Description&quot;: &quot;Bucket, no tags, no lifecycle configuration&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;ExampleS3OutpostsBucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3Outposts::Bucket&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;BucketName&quot;: &quot;DOC-EXAMPLE-BUCKET&quot;,
+                &quot;OutpostID&quot;: &quot;op-01ac5d28a6a232904&quot;
+            }
+        }
+    },
+    &quot;Outputs&quot;: <span>{</span>
+        &quot;ExampleS3OutpostsBucketARN&quot;: <span>{</span>
+            &quot;Description&quot;: &quot;The ARN of ExampleS3OutpostsBucket&quot;,
+            &quot;Value&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;ExampleS3OutpostsBucket&quot;
+            }
+        },
+        &quot;ExampleS3OutpostsStackID&quot;: <span>{</span>
+            &quot;Description&quot;: &quot;The Stack ID&quot;,
+            &quot;Value&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;AWS::StackID&quot;
+            },
+            &quot;Export&quot;: <span>{</span>
+                &quot;Name&quot;: <span>{</span>
+                    &quot;Fn::Sub&quot;: &quot;$<span>{</span>AWS::StackName}-StackID&quot;
+                }
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-s3outposts-bucket--examples--Create_an_S3_on_Outposts_bucket--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+Description: Bucket, no tags, no lifecycle configuration
+Resources:
+  ExampleS3OutpostsBucket:
+    Type: AWS::S3Outposts::Bucket
+    Properties:
+      BucketName: DOC-EXAMPLE-BUCKET
+      OutpostID: op-01ac5d28a6a232904
+Outputs:
+  ExampleS3OutpostsBucketARN:
+    Description: The ARN of ExampleS3OutpostsBucket
+    Value:
+      Ref: ExampleS3OutpostsBucket
+  ExampleS3OutpostsStackID:
+    Description: The Stack ID
+    Value:
+      Ref: AWS::StackID
+    Export:
+      Name:
+        Fn::Sub: &quot;$<span>{</span>AWS::StackName}-StackID&quot;
+      </code></pre></div>
+                                 <h3 id="aws-resource-s3outposts-bucket--examples--Creates_an_S3_on_Outposts_bucket_with_tags">Creates an S3 on Outposts bucket with tags</h3>
+                                 <p>The following example creates an S3 on Outposts bucket with tags and no lifecycle
+                                    configuration.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-s3outposts-bucket--examples--Creates_an_S3_on_Outposts_bucket_with_tags--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Description&quot;: &quot;Bucket, tags, no lifecycle configuration&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;ExampleS3OutpostsBucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3Outposts::Bucket&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;BucketName&quot;: &quot;DOC-EXAMPLE-BUCKET&quot;,
+                &quot;OutpostID&quot;: &quot;op-01ac5d28a6a232904&quot;,
+                &quot;Tags&quot;: [
+                    <span>{</span>
+                        &quot;Key&quot;: &quot;stage&quot;,
+                        &quot;Value&quot;: &quot;beta&quot;
+                    },
+                    <span>{</span>
+                        &quot;Key&quot;: &quot;purpose&quot;,
+                        &quot;Value&quot;: &quot;testing&quot;
+                    }
+                ]
+            }
+        }
+    },
+    &quot;Outputs&quot;: <span>{</span>
+        &quot;ExampleS3OutpostsBucketARN&quot;: <span>{</span>
+            &quot;Description&quot;: &quot;The ARN of ExampleS3OutpostsBucket&quot;,
+            &quot;Value&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;ExampleS3OutpostsBucket&quot;
+            }
+        },
+        &quot;ExampleS3OutpostsStackID&quot;: <span>{</span>
+            &quot;Description&quot;: &quot;The Stack ID&quot;,
+            &quot;Value&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;AWS::StackID&quot;
+            },
+            &quot;Export&quot;: <span>{</span>
+                &quot;Name&quot;: <span>{</span>
+                    &quot;Fn::Sub&quot;: &quot;$<span>{</span>AWS::StackName}-StackID&quot;
+                }
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-s3outposts-bucket--examples--Creates_an_S3_on_Outposts_bucket_with_tags--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+Description: Bucket, tags, no lifecycle configuration
+Resources:
+  ExampleS3OutpostsBucket:
+    Type: AWS::S3Outposts::Bucket
+    Properties:
+      BucketName: DOC-EXAMPLE-BUCKET
+      OutpostID: op-01ac5d28a6a232904
+      Tags:
+      - Key: stage
+        Value: beta
+      - Key: purpose
+        Value: testing
+Outputs:
+  ExampleS3OutpostsBucketARN:
+    Description: The ARN of ExampleS3OutpostsBucket
+    Value:
+      Ref: ExampleS3OutpostsBucket
+  ExampleS3OutpostsStackID:
+    Description: The Stack ID
+    Value:
+      Ref: AWS::StackID
+    Export:
+      Name:
+        Fn::Sub: &quot;$<span>{</span>AWS::StackName}-StackID&quot;</code></pre></div>
+                                 <h3 id="aws-resource-s3outposts-bucket--examples--Creates_an_S3_on_Outposts_bucket_with_tags_and_lifecycle_configuration">Creates an S3 on Outposts bucket with tags and lifecycle configuration</h3>
+                                 <p>The following example creates an S3 on Outposts bucket with tags and four lifecycle
+                                    configuration rules.
+                                    Three of the four lifecycle rules are disabled.
+                                 </p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>All lifecycle rules must have values for either <code class="code">ExpirationInDays</code>, 
+                                          <code class="code">ExpirationDate</code>, or <code class="code">DaysAfterInitiation</code> for <code class="code">AbortIncompleteMultipartUpload</code> 
+                                          to be valid.
+                                       </p>
+                                    </div>
+                                 </div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-s3outposts-bucket--examples--Creates_an_S3_on_Outposts_bucket_with_tags_and_lifecycle_configuration--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Description&quot;: &quot;Bucket, tags, lifecycle configuration&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;ExampleS3OutpostsBucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3Outposts::Bucket&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;BucketName&quot;: &quot;DOC-EXAMPLE-BUCKET&quot;,
+                &quot;OutpostID&quot;: &quot;op-01ac5d28a6a232904&quot;,
+                &quot;Tags&quot;: [
+                    <span>{</span>
+                        &quot;Key&quot;: &quot;stage&quot;,
+                        &quot;Value&quot;: &quot;beta&quot;
+                    },
+                    <span>{</span>
+                        &quot;Key&quot;: &quot;purpose&quot;,
+                        &quot;Value&quot;: &quot;testing&quot;
+                    }
+                ],
+                &quot;LifecycleConfiguration&quot;: <span>{</span>
+                    &quot;Rules&quot;: [
+                        <span>{</span>
+                            &quot;ExpirationInDays&quot;: 2,
+                            &quot;ID&quot;: &quot;rule1&quot;,
+                            &quot;Status&quot;: &quot;Enabled&quot;
+                        },
+                        <span>{</span>
+                            &quot;AbortIncompleteMultipartUpload&quot;: <span>{</span>
+                                &quot;DaysAfterInitiation&quot;: 2
+                            },
+                            &quot;ID&quot;: &quot;rule2&quot;,
+                            &quot;Status&quot;: &quot;Disabled&quot;,
+                            &quot;Filter&quot;: <span>{</span>
+                                &quot;AndOperator&quot;: <span>{</span>
+                                    &quot;Prefix&quot;: &quot;st&quot;,
+                                    &quot;Tags&quot;: [
+                                        <span>{</span>
+                                            &quot;Key&quot;: &quot;purpose&quot;,
+                                            &quot;Value&quot;: &quot;testing&quot;
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        <span>{</span>
+                            &quot;ExpirationDate&quot;: &quot;2020-02-25T00:00:00Z&quot;,
+                            &quot;ID&quot;: &quot;rule3&quot;,
+                            &quot;Status&quot;: &quot;Disabled&quot;,
+                            &quot;Filter&quot;: <span>{</span>
+                                &quot;Tag&quot;: <span>{</span>
+                                    &quot;Key&quot;: &quot;stage&quot;,
+                                    &quot;Value&quot;: &quot;beta&quot;
+                                }
+                            }
+                        },
+                        <span>{</span>
+                            &quot;ExpirationInDays&quot;: 4,
+                            &quot;ID&quot;: &quot;rule4&quot;,
+                            &quot;Status&quot;: &quot;Disabled&quot;,
+                            &quot;Filter&quot;: <span>{</span>
+                                &quot;Prefix&quot;: &quot;st&quot;
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    &quot;Outputs&quot;: <span>{</span>
+        &quot;ExampleS3OutpostsBucketARN&quot;: <span>{</span>
+            &quot;Description&quot;: &quot;The ARN of ExampleS3OutpostsBucket&quot;,
+            &quot;Value&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;ExampleS3OutpostsBucket&quot;
+            }
+        },
+        &quot;ExampleStackID&quot;: <span>{</span>
+            &quot;Description&quot;: &quot;The Stack ID&quot;,
+            &quot;Value&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;AWS::StackID&quot;
+            },
+            &quot;Export&quot;: <span>{</span>
+                &quot;Name&quot;: <span>{</span>
+                    &quot;Fn::Sub&quot;: &quot;$<span>{</span>AWS::StackName}-StackID&quot;
+                }
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-s3outposts-bucket--examples--Creates_an_S3_on_Outposts_bucket_with_tags_and_lifecycle_configuration--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+Description: Bucket, tags, lifecycle configuration
+Resources:
+  ExampleS3OutpostsBucket:
+    Type: AWS::S3Outposts::Bucket
+    Properties:
+      BucketName: DOC-EXAMPLE-BUCKET
+      OutpostID: op-01ac5d28a6a232904
+      Tags:
+      - Key: stage
+        Value: beta
+      - Key: purpose
+        Value: testing
+      LifecycleConfiguration:
+        Rules:
+        - ExpirationInDays: 2
+          ID: rule1
+          Status: Enabled
+        - AbortIncompleteMultipartUpload:
+            DaysAfterInitiation: 2
+          ID: rule2
+          Status: Disabled
+          Filter:
+            AndOperator:
+              Prefix: st
+              Tags:
+              - Key: purpose
+                Value: testing
+        - ExpirationDate: &apos;2020-02-25T00:00:00Z&apos;
+          ID: rule3
+          Status: Disabled
+          Filter:
+            Tag:
+              Key: stage
+              Value: beta
+        - ExpirationInDays: 4
+          ID: rule4
+          Status: Disabled
+          Filter:
+            Prefix: st
+Outputs:
+  ExampleS3OutpostsBucketARN:
+    Description: The ARN of ExampleS3OutpostsBucket
+    Value:
+      Ref: ExampleS3OutpostsBucket
+  ExampleStackID:
+    Description: The Stack ID
+    Value:
+      Ref: AWS::StackID
+    Export:
+      Name:
+        Fn::Sub: &quot;$<span>{</span>AWS::StackName}-StackID&quot;
+</code></pre></div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

@@ -16,12 +16,12 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The Amazon S3 buckets or AWS Lambda functions that you specify in your event selectors
-                                    for your trail to
-                                    log data events. Data events provide information about the resource operations performed
-                                    on or within a resource itself.
-                                    These are also known as data plane operations. You can specify up to 250 data resources
-                                    for a trail.
+                                 <p>The Amazon S3 buckets, AWS Lambda functions, or Amazon DynamoDB tables that you specify
+                                    in your event selectors for your trail to log data events. Data events provide information
+                                    about the resource operations performed on or within a resource itself. These are
+                                    also
+                                    known as data plane operations. You can specify up to 250 data resources for a
+                                    trail.
                                  </p>
                                  <div class="awsdocs-note">
                                     <div class="awsdocs-note-title">
@@ -84,7 +84,7 @@
                                  </div>
                                  <p>The following example demonstrates how logging works when you configure logging of
                                     AWS Lambda data events for a 
-                                    Lambda function named <em>MyLambdaFunction</em>, but not for all AWS Lambda functions.
+                                    Lambda function named <em>MyLambdaFunction</em>, but not for all Lambda functions.
                                  </p>
                                  <div class="orderedlist">
                                      
@@ -101,17 +101,16 @@
                                        </li>
                                        <li>
                                           
-                                          <p>The <code class="code">Invoke</code> API operation on <em>MyLambdaFunction</em> is an AWS Lambda API. 
+                                          <p>The <code class="code">Invoke</code> API operation on <em>MyLambdaFunction</em> is an Lambda API. 
                                              It is recorded as a data event in CloudTrail. Because the CloudTrail user specified
                                              logging data events for
                                              <em>MyLambdaFunction</em>, any invocations of that function are logged. The trail processes and logs the event.
-                                             
                                           </p>
                                           
                                        </li>
                                        <li>
                                           
-                                          <p>The <code class="code">Invoke</code> API operation on <em>MyOtherLambdaFunction</em> is an AWS Lambda API. 
+                                          <p>The <code class="code">Invoke</code> API operation on <em>MyOtherLambdaFunction</em> is an Lambda API. 
                                              Because the CloudTrail user did not specify logging data events for all Lambda functions,
                                              the <code class="code">Invoke</code> operation for <em>MyOtherLambdaFunction</em> does not match the function specified for the trail. 
                                              The trail doesn&#x2019;t log the event. 
@@ -139,13 +138,15 @@
                                        <dt><a id="cfn-cloudtrail-trail-dataresource-type"></a><span class="term"><code class="code">Type</code></span></dt>
                                        <dd>
                                           
-                                          <p>The resource type in which you want to log data events. You can specify <code class="code">AWS::S3::Object</code> or
-                                             <code class="code">AWS::Lambda::Function</code> resources.
+                                          <p>The resource type in which you want to log data events. You can specify
+                                             <code class="code">AWS::S3::Object</code>, <code class="code">AWS::Lambda::Function</code>, or
+                                             <code class="code">AWS::DynamoDB::Table</code> resources.
                                           </p>
                                           
-                                          <p>The <code class="code">AWS::S3Outposts::Object</code> resource type is not valid in basic event selectors. To log data events on this resource
-                                             type, 
-                                             use advanced event selectors.
+                                          <p>The <code class="code">AWS::S3Outposts::Object</code>, <code class="code">AWS::ManagedBlockchain::Node</code>, and
+                                             <code class="code">AWS::S3ObjectLambda::AccessPoint</code> resource types are not valid in basic
+                                             event selectors. To log data events on these resource types, use advanced event
+                                             selectors.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -168,23 +169,23 @@
                                               
                                               
                                               
+                                              
                                              
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
                                                    
                                                    <p>To log data events for all objects in all S3 buckets in your AWS account, specify
                                                       the 
-                                                      prefix as <code class="code">arn:aws:s3:::</code>. 
+                                                      prefix as <code class="code">arn:aws:s3:::</code>.
                                                    </p>
                                                    
                                                    <div class="awsdocs-note">
                                                       <div class="awsdocs-note-title">
                                                          <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                                       <div class="awsdocs-note-text">
-                                                         <p>This will also enable logging of data event activity performed by any user or role
-                                                            in your AWS account, 
+                                                         <p>This also enables logging of data event activity performed by any user or role in
+                                                            your AWS account, 
                                                             even if that activity is performed on a bucket that belongs to another AWS account.
-                                                            
                                                          </p>
                                                       </div>
                                                    </div>
@@ -208,7 +209,8 @@
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>To log data events for all functions in your AWS account, specify the prefix as
+                                                   <p>To log data events for all Lambda functions in your AWS account, specify the prefix
+                                                      as
                                                       <code class="code">arn:aws:lambda</code>.
                                                    </p>
                                                    
@@ -216,7 +218,7 @@
                                                       <div class="awsdocs-note-title">
                                                          <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                                       <div class="awsdocs-note-text">
-                                                         <p>This will also enable logging of <code class="code">Invoke</code> activity performed by any user or role in your AWS account, 
+                                                         <p>This also enables logging of <code class="code">Invoke</code> activity performed by any user or role in your AWS account, 
                                                             even if that activity is performed on a function that belongs to another AWS account.
                                                             
                                                          </p>
@@ -241,6 +243,13 @@
                                                    </div> 
                                                    
                                                 </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>To log data events for all DynamoDB tables in your AWS account, specify the prefix
+                                                      as <code class="code">arn:aws:dynamodb</code>.
+                                                   </p>
+                                                   
+                                                </li>
                                              </ul>
                                           </div>
                                           
@@ -262,7 +271,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -28,11 +28,12 @@
                                     <h3 id="aws-resource-ecr-repository-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::ECR::Repository&quot;,
   &quot;Properties&quot; : <span>{</span>
-      &quot;<a href="#cfn-ecr-repository-imagescanningconfiguration">ImageScanningConfiguration</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-ecr-repository-encryptionconfiguration">EncryptionConfiguration</a>&quot; : <code class="replaceable"><a href="./aws-properties-ecr-repository-encryptionconfiguration.html">EncryptionConfiguration</a></code>,
+      &quot;<a href="#cfn-ecr-repository-imagescanningconfiguration">ImageScanningConfiguration</a>&quot; : <code class="replaceable"><a href="./aws-properties-ecr-repository-imagescanningconfiguration.html">ImageScanningConfiguration</a></code>,
       &quot;<a href="#cfn-ecr-repository-imagetagmutability">ImageTagMutability</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ecr-repository-lifecyclepolicy">LifecyclePolicy</a>&quot; : <code class="replaceable"><a href="./aws-properties-ecr-repository-lifecyclepolicy.html">LifecyclePolicy</a></code>,
       &quot;<a href="#cfn-ecr-repository-repositoryname">RepositoryName</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-ecr-repository-repositorypolicytext">RepositoryPolicyText</a>&quot; : <code class="replaceable"></code>,
+      &quot;<a href="#cfn-ecr-repository-repositorypolicytext">RepositoryPolicyText</a>&quot; : <code class="replaceable">Json</code>,
       &quot;<a href="#cfn-ecr-repository-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
 }
@@ -40,18 +41,34 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-ecr-repository-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::ECR::Repository
 Properties: 
-  <a href="#cfn-ecr-repository-imagescanningconfiguration">ImageScanningConfiguration</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-ecr-repository-encryptionconfiguration">EncryptionConfiguration</a>: <code class="replaceable">
+    <a href="./aws-properties-ecr-repository-encryptionconfiguration.html">EncryptionConfiguration</a></code>
+  <a href="#cfn-ecr-repository-imagescanningconfiguration">ImageScanningConfiguration</a>: <code class="replaceable">
+    <a href="./aws-properties-ecr-repository-imagescanningconfiguration.html">ImageScanningConfiguration</a></code>
   <a href="#cfn-ecr-repository-imagetagmutability">ImageTagMutability</a>: <code class="replaceable">String</code>
   <a href="#cfn-ecr-repository-lifecyclepolicy">LifecyclePolicy</a>: <code class="replaceable">
     <a href="./aws-properties-ecr-repository-lifecyclepolicy.html">LifecyclePolicy</a></code>
   <a href="#cfn-ecr-repository-repositoryname">RepositoryName</a>: <code class="replaceable">String</code>
-  <a href="#cfn-ecr-repository-repositorypolicytext">RepositoryPolicyText</a>: <code class="replaceable"></code>
+  <a href="#cfn-ecr-repository-repositorypolicytext">RepositoryPolicyText</a>: <code class="replaceable">Json</code>
   <a href="#cfn-ecr-repository-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
 </code></pre></div>
                                  <h2 id="aws-resource-ecr-repository-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-ecr-repository-encryptionconfiguration"></a><span class="term"><code class="code">EncryptionConfiguration</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The encryption configuration for the repository. This determines how the contents
+                                             of
+                                             your repository are encrypted at rest.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-ecr-repository-encryptionconfiguration.html">EncryptionConfiguration</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
                                        <dt><a id="cfn-ecr-repository-imagescanningconfiguration"></a><span class="term"><code class="code">ImageScanningConfiguration</code></span></dt>
                                        <dd>
                                           
@@ -61,8 +78,7 @@ Properties:
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: Json
-                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-ecr-repository-imagescanningconfiguration.html">ImageScanningConfiguration</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-ecr-repository-imagetagmutability"></a><span class="term"><code class="code">ImageTagMutability</code></span></dt>
@@ -99,9 +115,8 @@ Properties:
                                           <p>The name to use for the repository. The repository name may be specified on its own
                                              (such as <code class="code">nginx-web-app</code>) or it can be prepended with a namespace to group
                                              the repository into a category (such as <code class="code">project-a/nginx-web-app</code>). If you
-                                             don&apos;t specify a name, AWS CloudFormation generates a unique physical ID and uses that
-                                             ID
-                                             for the repository name. For more information, see <a href="aws-properties-name.html">Name
+                                             don&apos;t specify a name, AWS CloudFormation generates a unique physical ID and uses
+                                             that ID for the repository name. For more information, see <a href="aws-properties-name.html">Name
                                                 type</a>.
                                           </p>
                                           
@@ -130,13 +145,13 @@ Properties:
                                           
                                           <p>The JSON repository policy text to apply to the repository. For more information,
                                              see
-                                             <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html">Amazon ECR Repository
-                                                Policies</a> in the <em>Amazon Elastic Container Registry User Guide</em>.
+                                             <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html">Amazon ECR repository
+                                                policies</a> in the <em>Amazon Elastic Container Registry User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: 
+                                          <p><em>Type</em>: Json
                                           </p>
                                           <p><em>Minimum</em>: <code class="code">0</code></p>
                                           <p><em>Maximum</em>: <code class="code">10240</code></p>
@@ -179,6 +194,15 @@ Properties:
                                              <code class="code">AWS::ECR::Repository</code> resource. For example,
                                              <code class="code">arn:aws:ecr:<em>eu-west-1</em>:<em>123456789012</em>:repository/<em>test-repository</em>
                                                 </code>.
+                                          </p>
+                                          
+                                       </dd>
+                                       <dt><a id="RepositoryUri-fn::getatt"></a><span class="term"><code class="code">RepositoryUri</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Returns the URI for the specified <code class="code">AWS::ECR::Repository</code> resource. For
+                                             example,
+                                             <code class="code"><em>123456789012</em>.dkr.ecr.<em>us-west-2</em>.amazonaws.com/repository</code>.
                                           </p>
                                           
                                        </dd>
@@ -246,6 +270,28 @@ Properties:
             - &quot;ecr:InitiateLayerUpload&quot;
             - &quot;ecr:UploadLayerPart&quot;
             - &quot;ecr:CompleteLayerUpload&quot;</code></pre></div>
+                                 <h3 id="aws-resource-ecr-repository--examples--Specify_a_repository_with_an_image_scanning_configuration">Specify a repository with an image scanning configuration</h3>
+                                 <p>The following example creates a repository named <code class="code">test-repository</code>
+                                    with image scanning enabled. For more information on image scanning, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html">Image scanning</a> in the <em>Amazon ECR User
+                                       Guide</em>.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ecr-repository--examples--Specify_a_repository_with_an_image_scanning_configuration--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;MyRepository&quot;: <span>{</span>
+  &quot;Type&quot;: &quot;AWS::ECR::Repository&quot;,
+  &quot;Properties&quot;: <span>{</span>
+    &quot;RepositoryName&quot; : &quot;test-repository&quot;,
+    &quot;ImageScanningConfiguration&quot; : <span>{</span>
+      &quot;ScanOnPush&quot;: &quot;true&quot;
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ecr-repository--examples--Specify_a_repository_with_an_image_scanning_configuration--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyRepository: 
+  Type: AWS::ECR::Repository
+  Properties: 
+    RepositoryName: &quot;test-repository&quot;
+    ImageScanningConfiguration: 
+      ScanOnPush: &quot;true&quot;</code></pre></div>
                                  <h3 id="aws-resource-ecr-repository--examples--Specify_a_repository_with_a_lifecycle_policy">Specify a repository with a lifecycle policy</h3>
                                  <p>The following example creates a repository with a lifecycle policy.</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -309,28 +355,6 @@ Resources:
 Outputs:    
   Arn:
     Value: !GetAtt MyRepository.Arn</code></pre></div>
-                                 <h3 id="aws-resource-ecr-repository--examples--Specify_a_repository_with_an_image_scanning_configuration">Specify a repository with an image scanning configuration</h3>
-                                 <p>The following example creates a repository named <code class="code">test-repository</code>
-                                    with image scanning enabled. For more information on image scanning, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html">Image scanning</a> in the <em>Amazon ECR User
-                                       Guide</em>.
-                                 </p>
-                                 <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ecr-repository--examples--Specify_a_repository_with_an_image_scanning_configuration--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;MyRepository&quot;: <span>{</span>
-  &quot;Type&quot;: &quot;AWS::ECR::Repository&quot;,
-  &quot;Properties&quot;: <span>{</span>
-    &quot;RepositoryName&quot; : &quot;test-repository&quot;,
-    &quot;ImageScanningConfiguration&quot; : <span>{</span>
-      &quot;scanOnPush&quot;: &quot;true&quot;
-    }
-  }
-}</code></pre></div>
-                                 <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ecr-repository--examples--Specify_a_repository_with_an_image_scanning_configuration--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyRepository: 
-  Type: AWS::ECR::Repository
-  Properties: 
-    RepositoryName: &quot;test-repository&quot;
-    ImageScanningConfiguration: 
-      scanOnPush: &quot;true&quot;</code></pre></div>
                                  <h2 id="aws-resource-ecr-repository--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
@@ -368,7 +392,7 @@ Outputs:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

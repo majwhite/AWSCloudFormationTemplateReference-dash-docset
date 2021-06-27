@@ -16,9 +16,8 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::IVS::Channel</code> resource creates a new channel. An Amazon IVS channel stores configuration information
-                                    related to
-                                    your live stream. For more information see <a href="https://docs.aws.amazon.com/ivs/latest/APIReference/API_CreateChannel.html">CreateChannel</a> in the
+                                 <p>The <code class="code">AWS::IVS::Channel</code> resource specifies an Amazon IVS channel. A channel stores configuration information
+                                    related to your live stream. For more information, see <a href="https://docs.aws.amazon.com/ivs/latest/APIReference/API_CreateChannel.html">CreateChannel</a> in the
                                     <em>Amazon Interactive Video Service API Reference</em>.
                                  </p>
                                  <div class="awsdocs-note">
@@ -41,6 +40,7 @@
       &quot;<a href="#cfn-ivs-channel-authorized">Authorized</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-ivs-channel-latencymode">LatencyMode</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ivs-channel-name">Name</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ivs-channel-recordingconfigurationarn">RecordingConfigurationArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ivs-channel-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
       &quot;<a href="#cfn-ivs-channel-type">Type</a>&quot; : <code class="replaceable">String</code>
     }
@@ -52,6 +52,7 @@ Properties:
   <a href="#cfn-ivs-channel-authorized">Authorized</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-ivs-channel-latencymode">LatencyMode</a>: <code class="replaceable">String</code>
   <a href="#cfn-ivs-channel-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ivs-channel-recordingconfigurationarn">RecordingConfigurationArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-ivs-channel-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
   <a href="#cfn-ivs-channel-type">Type</a>: <code class="replaceable">String</code>
@@ -85,7 +86,8 @@ Properties:
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">NORMAL</code>: Use NORMAL to broadcast and deliver live video up to Full HD.
+                                                      <code class="code">NORMAL</code>: Use NORMAL to broadcast and deliver live video up to Full
+                                                      HD.
                                                    </p>
                                                    
                                                 </li>
@@ -133,6 +135,28 @@ Properties:
                                           <p><em>Pattern</em>: <code class="code">^[a-zA-Z0-9-_]*$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-ivs-channel-recordingconfigurationarn"></a><span class="term"><code class="code">RecordingConfigurationArn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ARN of a RecordingConfiguration resource. An empty string indicates that recording
+                                             is disabled for the channel. A RecordingConfiguration ARN indicates that recording
+                                             is
+                                             enabled using the specified recording configuration. See the <a href="aws-resource-ivs-recordingconfiguration.html"> RecordingConfiguration</a> resource for more information and an
+                                             example.
+                                          </p>
+                                          
+                                          <p><em>Default</em>: &quot;&quot; (empty string, recording is disabled)
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">0</code></p>
+                                          <p><em>Maximum</em>: <code class="code">128</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^$|^arn:aws:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-ivs-channel-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
                                           
@@ -165,7 +189,7 @@ Properties:
                                                    <p>
                                                       <code class="code">STANDARD</code>: Multiple qualities are generated from the original input,
                                                       to automatically give viewers the best experience for their devices and network
-                                                      conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5
+                                                      conditions. Resolution can be up to 1080p and bitrate can be up to 8.5
                                                       Mbps.
                                                    </p>
                                                    
@@ -174,8 +198,8 @@ Properties:
                                                    
                                                    <p>
                                                       <code class="code">BASIC</code>: delivers the original input to viewers. The viewer&#x2019;s
-                                                      video-quality choice is limited to the original input. Vertical resolution can
-                                                      be up to 480 and bitrate can be up to 1.5 Mbps.
+                                                      video-quality choice is limited to the original input. Resolution can
+                                                      be up to 480p and bitrate can be up to 1.5 Mbps.
                                                    </p>
                                                    
                                                 </li>
@@ -201,8 +225,8 @@ Properties:
                                     <code class="code"><span>{</span> &quot;Ref&quot;: &quot;myChannel&quot; }</code>
                                     
                                  </p>
-                                 <p>For the Amazon IVS channel <code class="code">myChannel</code>, Ref
-                                    returns the channel ARN.
+                                 <p>For the Amazon IVS channel <code class="code">myChannel</code>,
+                                    <code class="code">Ref</code> returns the channel ARN.
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
@@ -246,7 +270,7 @@ Properties:
                                  <h2 id="aws-resource-ivs-channel--examples">Examples</h2>
                                  <p></p>
                                  <h3 id="aws-resource-ivs-channel--examples--Channel_and_Stream_Key_Template_Examples">Channel and Stream Key Template Examples</h3>
-                                 <p>The following examples create an Amazon IVS channel
+                                 <p>The following examples specify an Amazon IVS channel
                                     and stream key.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -368,7 +392,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

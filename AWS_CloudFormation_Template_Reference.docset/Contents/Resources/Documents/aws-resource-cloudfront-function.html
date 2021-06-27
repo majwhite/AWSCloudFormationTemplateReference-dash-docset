@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-cloudfront-function">AWS::CloudFront::Function</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>Creates a CloudFront function.</p>
+                                 <p>To create a function, you provide the function code and some configuration information
+                                    				about the function. The response contains an Amazon Resource Name (ARN) that uniquely
+                                    				identifies the function, and the function&#x2019;s stage.
+                                 </p>
+                                 <p>By default, when you create a function, it&#x2019;s in the <code class="code">DEVELOPMENT</code> stage. In this
+                                    			stage, you can <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/test-function.html">test the function</a> in the CloudFront console (or with
+                                    		    	<code class="code">TestFunction</code> in the CloudFront API).
+                                 </p>
+                                 <p>When you&#x2019;re ready to use your function with a CloudFront distribution, publish the
+                                    			    function to the <code class="code">LIVE</code> stage. You can do this in the CloudFront console, with
+                                    <code class="code">PublishFunction</code> in the CloudFront API, or by updating the
+                                    <code class="code">AWS::CloudFront::Function</code> resource with the <code class="code">AutoPublish</code>
+                                    property set to <code class="code">true</code>. When the function is published to the
+                                    <code class="code">LIVE</code> stage, you can attach it to a distribution&#x2019;s cache behavior, using the
+                                    function&#x2019;s ARN.
+                                 </p>
+                                 <p>To automatically publish the function to the <code class="code">LIVE</code> stage when it&#x2019;s
+                                    				created, set the <code class="code">AutoPublish</code> property to <code class="code">true</code>.
+                                 </p>
+                                 <h2 id="aws-resource-cloudfront-function-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-cloudfront-function-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::CloudFront::Function&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-cloudfront-function-autopublish">AutoPublish</a>&quot; : <code class="replaceable">Boolean</code>,
+      &quot;<a href="#cfn-cloudfront-function-functioncode">FunctionCode</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-cloudfront-function-functionconfig">FunctionConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-cloudfront-function-functionconfig.html">FunctionConfig</a></code>,
+      &quot;<a href="#cfn-cloudfront-function-functionmetadata">FunctionMetadata</a>&quot; : <code class="replaceable"><a href="./aws-properties-cloudfront-function-functionmetadata.html">FunctionMetadata</a></code>,
+      &quot;<a href="#cfn-cloudfront-function-name">Name</a>&quot; : <code class="replaceable">String</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-cloudfront-function-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::CloudFront::Function
+Properties: 
+  <a href="#cfn-cloudfront-function-autopublish">AutoPublish</a>: <code class="replaceable">Boolean</code>
+  <a href="#cfn-cloudfront-function-functioncode">FunctionCode</a>: <code class="replaceable">String</code>
+  <a href="#cfn-cloudfront-function-functionconfig">FunctionConfig</a>: <code class="replaceable">
+    <a href="./aws-properties-cloudfront-function-functionconfig.html">FunctionConfig</a></code>
+  <a href="#cfn-cloudfront-function-functionmetadata">FunctionMetadata</a>: <code class="replaceable">
+    <a href="./aws-properties-cloudfront-function-functionmetadata.html">FunctionMetadata</a></code>
+  <a href="#cfn-cloudfront-function-name">Name</a>: <code class="replaceable">String</code>
+</code></pre></div>
+                                 <h2 id="aws-resource-cloudfront-function-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-cloudfront-function-autopublish"></a><span class="term"><code class="code">AutoPublish</code></span></dt>
+                                       <dd>
+                                          		
+                                          <p>A flag that determines whether to automatically publish the function to the
+                                             			<code class="code">LIVE</code> stage when it&#x2019;s created. To automatically publish to the
+                                             			<code class="code">LIVE</code> stage, set this property to <code class="code">true</code>.
+                                          </p>
+                                          	
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudfront-function-functioncode"></a><span class="term"><code class="code">FunctionCode</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>The function code. For more information about writing a CloudFront function, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html">Writing function
+                                                			code for CloudFront Functions</a> in the <em>Amazon CloudFront Developer Guide</em>.
+                                          </p>
+                                          	     
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudfront-function-functionconfig"></a><span class="term"><code class="code">FunctionConfig</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>Contains configuration information about a CloudFront function.</p>
+                                          	     
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-cloudfront-function-functionconfig.html">FunctionConfig</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudfront-function-functionmetadata"></a><span class="term"><code class="code">FunctionMetadata</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>Contains metadata about a CloudFront function.</p>
+                                          	     
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-cloudfront-function-functionmetadata.html">FunctionMetadata</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudfront-function-name"></a><span class="term"><code class="code">Name</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A name to identify the function.</p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">64</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^[a-zA-Z0-9-_]<span>{</span>1,64}$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-cloudfront-function-return-values">Return values</h2>
+                                 <h3 id="aws-resource-cloudfront-function-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <h4 id="aws-resource-cloudfront-function-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="FunctionARN-fn::getatt"></a><span class="term"><code class="code">FunctionARN</code></span></dt>
+                                       <dd>
+                                          			
+                                          <p>The ARN of the function. For example:</p>
+                                          		
+                                          <p><code class="code">arn:aws:cloudfront::123456789012:function/ExampleFunction</code>.
+                                          </p>
+                                          		    
+                                          <p>To get the function ARN, use the following syntax:</p>
+                                          		
+                                          <p><code class="code">!GetAtt
+                                                			<em>Function_Logical_ID</em>.FunctionMetadata.FunctionARN</code></p>
+                                          		
+                                       </dd>
+                                       <dt><a id="FunctionMetadata.FunctionARN-fn::getatt"></a><span class="term"><code class="code">FunctionMetadata.FunctionARN</code></span></dt>
+                                       <dd>
+                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

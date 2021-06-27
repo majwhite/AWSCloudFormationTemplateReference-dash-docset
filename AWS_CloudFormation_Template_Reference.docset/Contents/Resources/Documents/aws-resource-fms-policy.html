@@ -23,6 +23,8 @@
                                      
                                      
                                      
+                                     
+                                     
                                     
                                     <ul class="itemizedlist" type="disc">
                                        <li class="listitem">
@@ -53,6 +55,21 @@
                                           
                                           <p>A security group policy, which manages VPC security groups across your AWS
                                              organization. 
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>An AWS Network Firewall policy, which provides firewall rules to filter network traffic
+                                             in specified 
+                                             Amazon VPCs.
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>A DNS Firewall policy, which provides Amazon Route 53 Resolver DNS Firewall rules
+                                             to filter DNS queries for specified Amazon VPCs.
                                           </p>
                                           
                                        </li>
@@ -338,13 +355,16 @@ Properties:
                                           <p>The type of resource protected by or in scope of the policy. This is in the format
                                              shown
                                              in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a>.
-                                             For AWS WAF and Shield Advanced, examples include
+                                             To apply this policy to multiple resource types, specify a resource type of <code class="code">ResourceTypeList</code> and then specify the resource types in a <code class="code">ResourceTypeList</code>.
+                                          </p>
+                                          
+                                          <p>For AWS WAF and Shield Advanced, example resource types include
                                              <code class="code">AWS::ElasticLoadBalancingV2::LoadBalancer</code> and
                                              <code class="code">AWS::CloudFront::Distribution</code>. For a security group common policy, valid values
                                              are <code class="code">AWS::EC2::NetworkInterface</code> and <code class="code">AWS::EC2::Instance</code>. For a
                                              security group content audit policy, valid values are <code class="code">AWS::EC2::SecurityGroup</code>,
                                              <code class="code">AWS::EC2::NetworkInterface</code>, and <code class="code">AWS::EC2::Instance</code>. For a security
-                                             group usage audit policy, the value is <code class="code">AWS::EC2::SecurityGroup</code>. For an AWS Network Firewall policy,
+                                             group usage audit policy, the value is <code class="code">AWS::EC2::SecurityGroup</code>. For an AWS Network Firewall policy or DNS Firewall policy,
                                              the value is <code class="code">AWS::EC2::VPC</code>.
                                           </p>
                                           
@@ -360,7 +380,8 @@ Properties:
                                        <dt><a id="cfn-fms-policy-resourcetypelist"></a><span class="term"><code class="code">ResourceTypeList</code></span></dt>
                                        <dd>
                                           
-                                          <p>An array of <code class="code">ResourceType</code>.
+                                          <p>An array of <code class="code">ResourceType</code> objects. Use this only to specify multiple resource types. To specify a single resource
+                                             type, use <code class="code">ResourceType</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -371,6 +392,7 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-fms-policy-securityservicepolicydata"></a><span class="term"><code class="code">SecurityServicePolicyData</code></span></dt>
                                        <dd>
+                                          
                                           
                                           <p>Details about the security service that is being used to protect the resources.</p>
                                           
@@ -387,7 +409,7 @@ Properties:
                                                       can increase by contacting AWS Support. 
                                                    </p>
                                                    
-                                                   <p>Valid values: <code class="code">WAFV2</code> | <code class="code">WAF</code> |<code class="code">SHIELD_ADVANCED</code> | <code class="code">SECURITY_GROUPS_COMMON</code> | <code class="code">SECURITY_GROUPS_CONTENT_AUDIT</code> | <code class="code">SECURITY_GROUPS_USAGE_AUDIT</code>.  
+                                                   <p>Valid values: <code class="code">WAFV2</code> | <code class="code">WAF</code> |<code class="code">SHIELD_ADVANCED</code> | <code class="code">SECURITY_GROUPS_COMMON</code> | <code class="code">SECURITY_GROUPS_CONTENT_AUDIT</code> | <code class="code">SECURITY_GROUPS_USAGE_AUDIT</code> | <code class="code">NETWORK_FIREWALL</code> | <code class="code">DNS_FIREWALL</code>.  
                                                    </p>
                                                    
                                                 </li>
@@ -397,6 +419,8 @@ Properties:
                                                    </p>
                                                    
                                                    <div class="itemizedlist">
+                                                       
+                                                       
                                                        
                                                        
                                                        
@@ -462,6 +486,25 @@ Properties:
                                                             
                                                             <p><code class="code">&quot;SecurityServicePolicyData&quot;:<span>{</span>&quot;Type&quot;:&quot;SECURITY_GROUPS_USAGE_AUDIT&quot;,&quot;ManagedServiceData&quot;:&quot;<span>{</span>\&quot;type\&quot;:\&quot;SECURITY_GROUPS_USAGE_AUDIT\&quot;,\&quot;deleteUnusedSecurityGroups\&quot;:true,\&quot;coalesceRedundantSecurityGroups\&quot;:true}&quot;},&quot;RemediationEnabled&quot;:false,&quot;Resou
                                                                   rceType&quot;:&quot;AWS::EC2::SecurityGroup&quot;}</code></p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p>Example: <code class="code">NETWORK_FIREWALL</code>
+                                                               
+                                                            </p>
+                                                            
+                                                            <p><code class="code">&quot;ManagedServiceData&quot;:&quot;<span>{</span>\&quot;type\&quot;:\&quot;NETWORK_FIREWALL\&quot;,\&quot;networkFirewallStatelessRuleGroupReferences\&quot;:[<span>{</span>\&quot;resourceARN\&quot;:\&quot;arn:aws:network-firewall:us-east-1:000000000000:stateless-rulegroup\/example\&quot;,\&quot;priority\&quot;:1}],\&quot;networkFirewallStatelessDefaultActions\&quot;:[\&quot;aws:drop\&quot;,\&quot;example\&quot;],\&quot;networkFirewallStatelessFragmentDefaultActions\&quot;:[\&quot;aws:drop\&quot;,\&quot;example\&quot;],\&quot;networkFirewallStatelessCustomActions\&quot;:[<span>{</span>\&quot;actionName\&quot;:\&quot;example\&quot;,\&quot;actionDefinition\&quot;:<span>{</span>\&quot;publishMetricAction\&quot;:<span>{</span>\&quot;dimensions\&quot;:[<span>{</span>\&quot;value\&quot;:\&quot;example\&quot;}]}}}],\&quot;networkFirewallStatefulRuleGroupReferences\&quot;:[<span>{</span>\&quot;resourceARN\&quot;:\&quot;arn:aws:network-firewall:us-east-1:000000000000:stateful-rulegroup\/example\&quot;}],\&quot;networkFirewallOrchestrationConfig\&quot;:<span>{</span>\&quot;singleFirewallEndpointPerVPC\&quot;:false,\&quot;allowedIPV4CidrList\&quot;:[]}}&quot;</code></p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p>Example: <code class="code">DNS_FIREWALL</code>
+                                                               
+                                                            </p>
+                                                            
+                                                            <p><code class="code">&quot;ManagedServiceData&quot;: &quot;<span>{</span>  \&quot;type\&quot;: \&quot;DNS_FIREWALL\&quot;,  \&quot;preProcessRuleGroups\&quot;: [<span>{</span>\&quot;ruleGroupId\&quot;: \&quot;rslvr-frg-123456\&quot;, \&quot;priority\&quot;: 11}], \&quot;postProcessRuleGroups\&quot;:
+                                                                  [<span>{</span>\&quot;ruleGroupId\&quot;: \&quot;rslvr-frg-123456\&quot;, \&quot;priority\&quot;: 9902}]}&quot;</code></p>
                                                             
                                                          </li>
                                                       </ul>
@@ -771,6 +814,106 @@ Properties:
         }
     }
 } </code></pre></div>
+                                 <h3 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_Network_Firewall_policy">Create a Firewall Manager Network Firewall policy</h3>
+                                 <p>The following shows an example Firewall Manager Network Firewall policy.  </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_Network_Firewall_policy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">PolicyNetworkFirewall:
+    Type: AWS::FMS::Policy
+    Properties:
+      ExcludeResourceTags: false
+      PolicyName: PolicyNetworkFirewall
+      RemediationEnabled: true
+      ResourceType: AWS::EC2::VPC
+      DeleteAllPolicyResources: true
+      SecurityServicePolicyData:
+        Type: NETWORK_FIREWALL
+        ManagedServiceData: &apos;
+          <span>{</span>
+            &quot;type&quot;: &quot;NETWORK_FIREWALL&quot;,
+            &quot;networkFirewallStatelessRuleGroupReferences&quot;: [
+              <span>{</span>
+                &quot;resourceARN&quot;: &quot;arn:aws:network-firewall:us-east-1:000000000000:stateless-rulegroup/example&quot;,
+                &quot;priority&quot;: 1
+              }
+            ],
+            &quot;networkFirewallStatelessDefaultActions&quot;: [
+              &quot;aws:drop&quot;,
+              &quot;example&quot;
+            ],
+            &quot;networkFirewallStatelessFragmentDefaultActions&quot;: [
+              &quot;aws:drop&quot;,
+              &quot;example&quot;
+            ],
+            &quot;networkFirewallStatelessCustomActions&quot;: [
+              <span>{</span>
+                &quot;actionName&quot;: &quot;example&quot;,
+                &quot;actionDefinition&quot;: <span>{</span>
+                  &quot;publishMetricAction&quot;: <span>{</span>
+                    &quot;dimensions&quot;: [
+                      <span>{</span>
+                        &quot;value&quot;: &quot;example&quot;
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            &quot;networkFirewallStatefulRuleGroupReferences&quot;: [
+              <span>{</span>
+                &quot;resourceARN&quot;: &quot;arn:aws:network-firewall:us-east-1:000000000000:stateful-rulegroup/example&quot;
+              }
+            ],
+            &quot;networkFirewallOrchestrationConfig&quot;: <span>{</span>
+              &quot;singleFirewallEndpointPerVPC&quot;: false,
+              &quot;allowedIPV4CidrList&quot;: []
+            }
+          }&apos; </code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_Network_Firewall_policy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;PolicyNetworkFirewall&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::FMS::Policy&quot;,
+    &quot;Properties&quot;: <span>{</span>
+        &quot;ExcludeResourceTags&quot;: false,
+        &quot;PolicyName&quot;: &quot;PolicyNetworkFirewall&quot;,
+        &quot;RemediationEnabled&quot;: true,
+        &quot;ResourceType&quot;: &quot;AWS::EC2::VPC&quot;,
+        &quot;DeleteAllPolicyResources&quot;: true,
+        &quot;SecurityServicePolicyData&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;NETWORK_FIREWALL&quot;,
+            &quot;ManagedServiceData&quot;: &quot;<span>{</span>\&quot;type\&quot;:\&quot;NETWORK_FIREWALL\&quot;,\&quot;networkFirewallStatelessRuleGroupReferences\&quot;:[<span>{</span>\&quot;resourceARN\&quot;:\&quot;arn:aws:network-firewall:us-east-1:000000000000:stateless-rulegroup\/example\&quot;,\&quot;priority\&quot;:1}],\&quot;networkFirewallStatelessDefaultActions\&quot;:[\&quot;aws:drop\&quot;,\&quot;example\&quot;],\&quot;networkFirewallStatelessFragmentDefaultActions\&quot;:[\&quot;aws:drop\&quot;,\&quot;example\&quot;],\&quot;networkFirewallStatelessCustomActions\&quot;:[<span>{</span>\&quot;actionName\&quot;:\&quot;example\&quot;,\&quot;actionDefinition\&quot;:<span>{</span>\&quot;publishMetricAction\&quot;:<span>{</span>\&quot;dimensions\&quot;:[<span>{</span>\&quot;value\&quot;:\&quot;example\&quot;}]}}}],\&quot;networkFirewallStatefulRuleGroupReferences\&quot;:[<span>{</span>\&quot;resourceARN\&quot;:\&quot;arn:aws:network-firewall:us-east-1:000000000000:stateful-rulegroup\/example\&quot;}],\&quot;networkFirewallOrchestrationConfig\&quot;:<span>{</span>\&quot;singleFirewallEndpointPerVPC\&quot;:false,\&quot;allowedIPV4CidrList\&quot;:[]}}&quot;
+        }
+    }
+} </code></pre></div>
+                                 <h3 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_DNS_Firewall_policy">Create a Firewall Manager DNS Firewall policy</h3>
+                                 <p>The following shows an example Firewall Manager DNS Firewall policy.  </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_DNS_Firewall_policy--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Policy:
+    Type: AWS::FMS::Policy
+    Properties:
+      ExcludeResourceTags: false
+      PolicyName: DnsFirewallPolicy
+      RemediationEnabled: false
+      ResourceType: AWS::EC2::VPC
+      SecurityServicePolicyData:
+        Type: DNS_FIREWALL
+        ManagedServiceData: !Sub &apos;<span>{</span>&quot;type&quot;:&quot;DNS_FIREWALL&quot;,
+                                  &quot;preProcessRuleGroups&quot;:[<span>{</span>\&quot;ruleGroupId\&quot;: \&quot;$<span>{</span>PreRuleGroupId}\&quot;, \&quot;priority\&quot;: 11}],
+                                  &quot;postProcessRuleGroups&quot;:[<span>{</span>\&quot;ruleGroupId\&quot;: \&quot;$<span>{</span>PostRuleGroupId}\&quot;, \&quot;priority\&quot;: 9902}]}&apos; </code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-fms-policy--examples--Create_a_Firewall_Manager_DNS_Firewall_policy--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Policy&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::FMS::Policy&quot;,
+    &quot;Properties&quot;: <span>{</span>
+        &quot;ExcludeResourceTags&quot;: false,
+        &quot;PolicyName&quot;: &quot;DnsFirewallPolicy&quot;,
+        &quot;RemediationEnabled&quot;: false,
+        &quot;ResourceType&quot;: &quot;AWS::EC2::VPC&quot;,
+        &quot;SecurityServicePolicyData&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;DNS_FIREWALL&quot;,
+            &quot;ManagedServiceData&quot;: <span>{</span>
+                &quot;Fn::Sub&quot;: &quot;<span>{</span>\&quot;type\&quot;:\&quot;DNS_FIREWALL\&quot;,\&quot;preProcessRuleGroups\&quot;:[<span>{</span>\&quot;ruleGroupId\&quot;: \&quot;$<span>{</span>PreRuleGroupId}\&quot;, \&quot;priority\&quot;: 11}],\&quot;postProcessRuleGroups\&quot;:[<span>{</span>\&quot;ruleGroupId\&quot;: \&quot;$<span>{</span>PostRuleGroupId}\&quot;, \&quot;priority\&quot;: 9902}]}&quot;
+            }
+        }
+    }
+} </code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -781,7 +924,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

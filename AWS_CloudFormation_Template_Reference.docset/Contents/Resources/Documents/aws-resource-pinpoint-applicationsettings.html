@@ -16,8 +16,7 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The AWS::Pinpoint::ApplicationSettings resource defines the default settings for
-                                    an Amazon Pinpoint application. In Amazon Pinpoint, an
+                                 <p>Specifies the settings for an Amazon Pinpoint application. In Amazon Pinpoint, an
                                     <em>application</em> (also referred to as an
                                     <em>app</em> or <em>project</em>) is a collection of
                                     related settings, customer information, segments, and campaigns, and other types
@@ -68,7 +67,8 @@ Properties:
                                           
                                           
                                           <p>The settings for the AWS Lambda function to use by default as a code hook for
-                                             campaigns in the application. You can override these settings for a specific
+                                             campaigns in the application. To override these settings for a specific campaign,
+                                             use the Campaign resource to define custom Lambda function settings for the
                                              campaign.
                                           </p>
                                           
@@ -94,8 +94,9 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>The default sending limits for campaigns in the application. You can override
-                                             these limits for a specific campaign.
+                                          <p>The default sending limits for campaigns in the application. To override these
+                                             limits for a specific campaign, use the Campaign resource to define custom limits
+                                             for the campaign.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -106,52 +107,31 @@ Properties:
                                        <dt><a id="cfn-pinpoint-applicationsettings-quiettime"></a><span class="term"><code class="code">QuietTime</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>The default quiet time for campaigns and journeys in the application. Quiet time
-                                             is a specific time range when messages aren&apos;t sent to endpoints, if all the
-                                             following conditions are met:
+                                          <p>The default quiet time for campaigns in the application. Quiet time is a specific
+                                             time range when campaigns don&apos;t send messages to endpoints, if all the following
+                                             conditions are met:
                                           </p>
                                           
-                                          <div class="itemizedlist">
-                                              
-                                              
-                                              
-                                             
-                                             <ul class="itemizedlist" type="disc">
-                                                <li class="listitem">
-                                                   
-                                                   <p>The <code class="code">EndpointDemographic.Timezone</code> property of the endpoint
-                                                      is set to a valid value.
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>The current time in the endpoint&apos;s time zone is later than or equal to
-                                                      the time specified by the <code class="code">QuietTime.Start</code> property for
-                                                      the application (or a campaign or journey that has custom quiet time
-                                                      settings).
-                                                   </p>
-                                                   
-                                                </li>
-                                                <li class="listitem">
-                                                   
-                                                   <p>The current time in the endpoint&apos;s time zone is earlier than or equal
-                                                      to the time specified by the <code class="code">QuietTime.End</code> property for
-                                                      the application (or a campaign or journey that has custom quiet time
-                                                      settings).
-                                                   </p>
-                                                   
-                                                </li>
-                                             </ul>
-                                          </div>
+                                          <p>- The <code class="code">EndpointDemographic.Timezone</code> property of the endpoint is set to
+                                             a valid value.
+                                          </p>
+                                          
+                                          <p>- The current time in the endpoint&apos;s time zone is later than or equal to the time
+                                             specified by the <code class="code">QuietTime.Start</code> property for the application (or a
+                                             campaign that has custom quiet time settings).
+                                          </p>
+                                          
+                                          <p>- The current time in the endpoint&apos;s time zone is earlier than or equal to the
+                                             time specified by the <code class="code">QuietTime.End</code> property for the application (or
+                                             a campaign that has custom quiet time settings).
+                                          </p>
                                           
                                           <p>If any of the preceding conditions isn&apos;t met, the endpoint will receive messages
-                                             from a campaign or journey, even if quiet time is enabled.
+                                             from a campaign, even if quiet time is enabled.
                                           </p>
                                           
-                                          <p>You can override the default quiet time settings for a specific campaign or
-                                             journey.
+                                          <p>To override the default quiet time settings for a specific campaign, use the
+                                             Campaign resource to define a custom quiet time for the campaign.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -179,7 +159,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

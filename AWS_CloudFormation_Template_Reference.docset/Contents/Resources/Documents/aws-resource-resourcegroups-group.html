@@ -18,9 +18,9 @@
                                  </div>
                                  <p>Creates a resource group with the specified name and description. You can optionally
                                     include a resource query, or a service configuration. For more information about
-                                    constructing a resource query, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag">Create a tag-based group in Resource Groups</a>. For more
-                                    information about service configurations, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource
-                                       groups</a>.
+                                    constructing a resource query, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag">Create
+                                       a tag-based group in Resource Groups</a>. For more information about service
+                                    configurations, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for Resource Groups</a>.
                                  </p>
                                  <p>
                                     <b>Minimum permissions</b>
@@ -47,9 +47,11 @@
                                     <h3 id="aws-resource-resourcegroups-group-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::ResourceGroups::Group&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-resourcegroups-group-configuration">Configuration</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-resourcegroups-group-configurationitem.html">ConfigurationItem</a>, ... ]</code>,
       &quot;<a href="#cfn-resourcegroups-group-description">Description</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-resourcegroups-group-name">Name</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-resourcegroups-group-resourcequery">ResourceQuery</a>&quot; : <code class="replaceable"><a href="./aws-properties-resourcegroups-group-resourcequery.html">ResourceQuery</a></code>,
+      &quot;<a href="#cfn-resourcegroups-group-resources">Resources</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-resourcegroups-group-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
 }
@@ -57,16 +59,46 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-resourcegroups-group-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::ResourceGroups::Group
 Properties: 
+  <a href="#cfn-resourcegroups-group-configuration">Configuration</a>: <code class="replaceable">
+    - <a href="./aws-properties-resourcegroups-group-configurationitem.html">ConfigurationItem</a></code>
   <a href="#cfn-resourcegroups-group-description">Description</a>: <code class="replaceable">String</code>
   <a href="#cfn-resourcegroups-group-name">Name</a>: <code class="replaceable">String</code>
   <a href="#cfn-resourcegroups-group-resourcequery">ResourceQuery</a>: <code class="replaceable">
     <a href="./aws-properties-resourcegroups-group-resourcequery.html">ResourceQuery</a></code>
+  <a href="#cfn-resourcegroups-group-resources">Resources</a>: <code class="replaceable">
+    - String</code>
   <a href="#cfn-resourcegroups-group-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
 </code></pre></div>
                                  <h2 id="aws-resource-resourcegroups-group-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-resourcegroups-group-configuration"></a><span class="term"><code class="code">Configuration</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The service configuration currently associated with the resource group and in effect
+                                             for the members of the resource group. A <code class="code">Configuration</code> consists of one or
+                                             more <code class="code">ConfigurationItem</code> entries. For information about service
+                                             configurations for resource groups and how to construct them, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service
+                                                configurations for resource groups</a> in the <em>AWS Resource Groups
+                                                User Guide</em>.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>You can include either a <code class="code">Configuration</code> or a
+                                                   <code class="code">ResourceQuery</code>, but not both.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: Conditional
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-resourcegroups-group-configurationitem.html">ConfigurationItem</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-resourcegroups-group-description"></a><span class="term"><code class="code">Description</code></span></dt>
                                        <dd>
                                           
@@ -81,10 +113,10 @@ Properties:
                                        <dt><a id="cfn-resourcegroups-group-name"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
                                           
-                                          <p>The name of a resource group. Specify a name that is unique in the Region. To
-                                             create multiple resource groups based on the same CloudFormation stack, use unique
-                                             names
-                                             for each.
+                                          <p>The name of a resource group. The name must be unique within the AWS
+                                             Region in which you create the resource. To create multiple resource groups based
+                                             on the
+                                             same CloudFormation stack, you must generate unique names for each.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -96,19 +128,93 @@ Properties:
                                        <dt><a id="cfn-resourcegroups-group-resourcequery"></a><span class="term"><code class="code">ResourceQuery</code></span></dt>
                                        <dd>
                                           
-                                          <p>The resource query that determines which AWS resources are members of the
-                                             associated resource group.
-                                          </p>
                                           
-                                          <p><em>Required</em>: No
+                                          <p>The resource query structure that is used to dynamically determine which AWS resources
+                                             are members of the associated resource group. For more
+                                             information about queries and how to construct them, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html">Build queries and groups in
+                                                AWS Resource Groups</a> in the <em>AWS Resource Groups User
+                                                Guide</em></p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <div class="itemizedlist">
+                                                    
+                                                    
+                                                   
+                                                   <ul class="itemizedlist" type="disc">
+                                                      <li class="listitem">
+                                                         
+                                                         <p>You can include either a <code class="code">ResourceQuery</code> or a
+                                                            <code class="code">Configuration</code>, but not both.
+                                                         </p>
+                                                         
+                                                      </li>
+                                                      <li class="listitem">
+                                                         
+                                                         <p>You can specify the group&apos;s membership either by using a
+                                                            <code class="code">ResourceQuery</code> or by using a list of <code class="code">Resources</code>,
+                                                            but not both.
+                                                         </p>
+                                                         
+                                                      </li>
+                                                   </ul>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: Conditional
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-resourcegroups-group-resourcequery.html">ResourceQuery</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-resourcegroups-group-resources"></a><span class="term"><code class="code">Resources</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A list of the Amazon Resource Names (ARNs) of AWS resources that you
+                                             want to add to the specified group.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <div class="itemizedlist">
+                                                    
+                                                    
+                                                   
+                                                   <ul class="itemizedlist" type="disc">
+                                                      <li class="listitem">
+                                                         
+                                                         <p>You can specify the group membership either by using a list of
+                                                            <code class="code">Resources</code> or by using a <code class="code">ResourceQuery</code>, but not
+                                                            both.
+                                                         </p>
+                                                         
+                                                      </li>
+                                                      <li class="listitem">
+                                                         
+                                                         <p>You can include a <code class="code">Resources</code> property only if you also specify
+                                                            a <code class="code">Configuration</code> property.
+                                                         </p>
+                                                         
+                                                      </li>
+                                                   </ul>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: Conditional
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-resourcegroups-group-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
                                           
-                                          <p>The tags associated with the specified resource group.</p>
+                                          <p>The tag key and value pairs that are attached to the resource group.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -119,7 +225,7 @@ Properties:
                                  </div>
                                  <h2 id="aws-resource-resourcegroups-group-return-values">Return values</h2>
                                  <h3 id="aws-resource-resourcegroups-group-return-values-ref">Ref</h3>
-                                 <p>The name of a resource group.</p>
+                                 <p>The name of the new resource group.</p>
                                  <h3 id="aws-resource-resourcegroups-group-return-values-fn--getatt">Fn::GetAtt</h3>
                                  <h4 id="aws-resource-resourcegroups-group-return-values-fn--getatt-fn--getatt"></h4>
                                  <div class="variablelist">
@@ -127,44 +233,50 @@ Properties:
                                        <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ARN of a resource group.</p>
+                                          <p>The ARN of the new resource group.</p>
                                           
                                        </dd>
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-resourcegroups-group--examples">Examples</h2>
-                                 <p></p>
-                                 <h3 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_Stack-Based_Group_Using_Defaults">Creating a CloudFormation Stack-Based Group Using Defaults</h3>
-                                 <p>This example creates a CloudFormation stack-based group using defaults. It
-                                    includes all supported resource types and uses the same
+                                 <p>The following examples show both the JSON and YAML templates that you can use to
+                                    create resource groups with the specified characteristics.
+                                 </p>
+                                 <h3 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_stack-based_resource_group_using_defaults">Creating a CloudFormation stack-based resource group using defaults</h3>
+                                 <p>This example creates a CloudFormation stack-based resource group using
+                                    defaults. It includes all supported resource types and uses the same
                                     <code class="code">StackIdentifier</code> as the CloudFormation stack that defines the
                                     group.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_Stack-Based_Group_Using_Defaults--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_stack-based_resource_group_using_defaults--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
     &quot;ResourceGroup&quot;: <span>{</span> 
         &quot;Type&quot;: &quot;AWS::ResourceGroups::Group&quot;,
         &quot;Properties&quot;: <span>{</span>
-            &quot;Name&quot;: &quot;MyResourceGroup&quot; 
+            &quot;Name&quot;: &quot;MyResourceGroup&quot;,
+            &quot;Description&quot;: &quot;A basic, empty resource group that is created by CFN&quot;,
         }
     } 
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_Stack-Based_Group_Using_Defaults--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ResourceGroup:
+                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_stack-based_resource_group_using_defaults--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ResourceGroup:
   Type: &quot;AWS::ResourceGroups::Group&quot; 
   Properties:
-    Name: &quot;MyMinimalResourceGroup&quot;</code></pre></div>
-                                 <h3 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_Stack-Based_Group_That_Includes_Specific_Resources">Creating a CloudFormation Stack-Based Group That Includes Specific Resources</h3>
-                                 <p>This example creates a CloudFormation stack-based group that&apos;s similar to the
-                                    group shown in the previous example. The difference is that it includes only
-                                    specific resource types: EC2 instances and DynamoDB tables.
+    Name: &quot;MyMinimalResourceGroup&quot;
+    Description: &quot;A basic, empty resource group that is created by CFN&quot;</code></pre></div>
+                                 <h3 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_stack-based_resource_group_with_specific_resources">Creating a CloudFormation stack-based resource group with specific resources</h3>
+                                 <p>This example creates a CloudFormation stack-based resource group that&apos;s
+                                    similar to the group shown in the previous example. The difference is that it
+                                    can include only resources of the specified types: EC2 instances and DynamoDB
+                                    tables.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_Stack-Based_Group_That_Includes_Specific_Resources--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_stack-based_resource_group_with_specific_resources--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
     &quot;CloudFormationStackGroupForSelectedResourceTypes&quot;: <span>{</span>
         &quot;Type&quot;: &quot;AWS::ResourceGroups::Group&quot;,
         &quot;Properties&quot;: <span>{</span>
             &quot;Name&quot;: &quot;MyCloudFormationResourceGroup-Filters&quot;,
+            &quot;Description&quot;: &quot;A basic resource group that can hold only EC2 instances or DynamoDB tables&quot;, 
             &quot;ResourceQuery&quot;: <span>{</span>
                 &quot;Query&quot;: <span>{</span>
                     &quot;ResourceTypeFilters&quot;: [
@@ -177,74 +289,77 @@ Properties:
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_Stack-Based_Group_That_Includes_Specific_Resources--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">CloudFormationStackGroupForSelectedResourceTypes:
+                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_stack-based_resource_group_with_specific_resources--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">CloudFormationStackGroupForSelectedResourceTypes:
   Type: &quot;AWS::ResourceGroups::Group&quot; 
   Properties: 
-    Name: &quot;MyCloudFormationResourceGroup-Filters&quot; 
+    Name: &quot;MyCloudFormationResourceGroup-Filters&quot;
+    Description: &quot;A basic resource group that can hold only EC2 instances or DynamoDB tables&quot;
     ResourceQuery: 
       Query: 
         ResourceTypeFilters: 
           - &quot;AWS::EC2::Instance&quot; 
           - &quot;AWS::DynamoDB::Table&quot;</code></pre></div>
-                                 <h3 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_Stack-Based_Group_Based_on_Another_Stack">Creating a CloudFormation Stack-Based Group Based on Another Stack</h3>
-                                 <p>This example creates a group that&apos;s built from another stack. The
-                                    <code class="code">StackIdentifier</code> value specifies that resources in the
-                                    <code class="code">arn:aws:cloudformation:us-east-1:0123456789:stack/stack-name/9b6f8604-4a39-490c-870b-44b0ebdd38b9</code>
-                                    stack are included in the group. The group is tagged with
-                                    <code class="code">TagKey=TagValue.</code></p>
+                                 <h3 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_stack-based_resource_group_based_on_another_stack">Creating a CloudFormation stack-based resource group based on another stack</h3>
+                                 <p>This example creates a resource group that&apos;s built from another stack. The
+                                    <code class="code">StackIdentifier</code> value specifies that resources in the stack
+                                    with the ARN <code class="code">arn:aws:cloudformation:us-east-1:123456789012:stack/stack-name/9b6f8604-4a39-490c-870b-44b0ebdd38b9</code>
+                                    are included in the group. The group itself (not its individual member
+                                    resources) is tagged with <code class="code">Env=Prod</code>.
+                                 </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_Stack-Based_Group_Based_on_Another_Stack--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_stack-based_resource_group_based_on_another_stack--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
     &quot;CloudFormationStackGroupForAnotherStack&quot;: <span>{</span>
         &quot;Type&quot;: &quot;AWS::ResourceGroups::Group&quot;,
         &quot;Properties&quot;: <span>{</span>
             &quot;Name&quot;: &quot;MyCloudFormationResourceGroupForAnotherStack&quot;,
-            &quot;Description&quot;: &quot;A group that is created via CFN&quot;,
+            &quot;Description&quot;: &quot;A resource group that is based on another CFN stack&quot;,
             &quot;ResourceQuery&quot;: <span>{</span> 
                 &quot;Type&quot;: &quot;CLOUDFORMATION_STACK_1_0&quot;,
                 &quot;Query&quot;: <span>{</span>
                     &quot;ResourceTypeFilters&quot;: [
                         &quot;AWS::AllSupported&quot; 
                     ],
-                    &quot;StackIdentifier&quot;: &quot;arn:aws:cloudformation:us-east-1:0123456789:stack/stack-name/9b6f8604-4a39-490c-870b-44b0ebdd38b9&quot;
+                    &quot;StackIdentifier&quot;: &quot;arn:aws:cloudformation:us-east-1:123456789012:stack/stack-name/9b6f8604-4a39-490c-870b-44b0ebdd38b9&quot;
                 }
             },
             &quot;Tags&quot;: [
                 <span>{</span>
-                    &quot;Key&quot;: &quot;TagKey&quot;,
-                    &quot;Value&quot;: &quot;TagValue&quot; 
+                    &quot;Key&quot;: &quot;Env&quot;,
+                    &quot;Value&quot;: &quot;Prod&quot; 
                 }
             ]
         }
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_Stack-Based_Group_Based_on_Another_Stack--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">CloudFormationStackGroupForAnotherStack:
+                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_CloudFormation_stack-based_resource_group_based_on_another_stack--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">CloudFormationStackGroupForAnotherStack:
   Type: &quot;AWS::ResourceGroups::Group&quot; 
   Properties: 
     Name: &quot;MyCloudFormationResourceGroupForAnotherStack&quot; 
-    Description: &quot;A group that is created via CFN&quot; 
+    Description: &quot;A group that is based on CFN another stack&quot; 
     ResourceQuery: 
       Type: &quot;CLOUDFORMATION_STACK_1_0&quot; 
       Query: 
         ResourceTypeFilters:
           - &quot;AWS::AllSupported&quot; 
-        StackIdentifier: &quot;arn:aws:cloudformation:us-east-1:0123456789:stack/stack-name/9b6f8604-4a39-490c-870b-44b0ebdd38b9&quot;
+        StackIdentifier: &quot;arn:aws:cloudformation:us-east-1:123456789012:stack/stack-name/9b6f8604-4a39-490c-870b-44b0ebdd38b9&quot;
     Tags: 
       -
-        Key: &quot;TagKey&quot; 
-        Value: &quot;TagValue&quot;</code></pre></div>
-                                 <h3 id="aws-resource-resourcegroups-group--examples--Creating_a_Tag-Based_Group">Creating a Tag-Based Group</h3>
-                                 <p>This example shows how to create a group based on tags. All resources that are
-                                    tagged with the <code class="code">Usage</code> key with a value of <code class="code">Integration
-                                       Tests</code> will be members of this group.
+        Key: &quot;Env&quot; 
+        Value: &quot;Prod&quot;</code></pre></div>
+                                 <h3 id="aws-resource-resourcegroups-group--examples--Creating_a_tag-based_resource_group">Creating a tag-based resource group</h3>
+                                 <p>This example shows how to create a resource group whose membership is based on
+                                    a tag query. Any resources that have tags that match the query, in this case the
+                                    key <code class="code">Usage</code> and the value <code class="code">Integration Tests</code>, are members
+                                    of this group.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_Tag-Based_Group--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_tag-based_resource_group--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
     &quot;TagBasedGroup&quot;: <span>{</span>
         &quot;Type&quot;: &quot;AWS::ResourceGroups::Group&quot;,
         &quot;Properties&quot;: <span>{</span>
             &quot;Name&quot;: &quot;MyTagBasedResourceGroup&quot;,
-            &quot;Description&quot;: &quot;A group that is created via CFN&quot;,
+            &quot;Description&quot;: &quot;A group that is based on a tag query&quot;,
             &quot;ResourceQuery&quot;: <span>{</span>
                 &quot;Type&quot;: &quot;TAG_FILTERS_1_0&quot;,
                 &quot;Query&quot;: <span>{</span>
@@ -265,11 +380,11 @@ Properties:
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_Tag-Based_Group--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">TagBasedGroup:
+                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_tag-based_resource_group--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">TagBasedGroup:
   Type: &quot;AWS::ResourceGroups::Group&quot;
   Properties:
     Name: &quot;MyTagBasedResourceGroup&quot;
-    Description: &quot;A group that is created via CFN&quot;
+    Description: &quot;A group that is based on a tag query&quot;
     ResourceQuery:
       Type:
         &quot;TAG_FILTERS_1_0&quot; 
@@ -281,6 +396,249 @@ Properties:
             Key: &quot;Usage&quot; 
             Values: 
               - &quot;Integration Tests&quot;</code></pre></div>
+                                 <h3 id="aws-resource-resourcegroups-group--examples--Creating_a_resource_group_for_EC2_capacity_reservations">Creating a resource group for EC2 capacity reservations</h3>
+                                 <p>This example creates a capacity reservations resource group by specifying a
+                                    configuration and limiting the allowed resource types. This group initially has
+                                    no members.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_resource_group_for_EC2_capacity_reservations--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+   &quot;CapacityReservationsGroupWithoutResources&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::ResourceGroups::Group&quot;,
+      &quot;Properties&quot;: <span>{</span>
+         &quot;Name&quot;: &quot;MyCapacityReservationsGroup&quot;,
+         &quot;Description&quot;: &quot;A resource group for EC2 capacity reservations&quot;,
+         &quot;Configuration&quot;: [
+            <span>{</span>
+               &quot;Type&quot;: &quot;AWS::EC2::CapacityReservationPool&quot;,
+               &quot;Parameters&quot;: []
+            },
+            <span>{</span>
+               &quot;Type&quot;: &quot;AWS::ResourceGroups::Generic&quot;,
+               &quot;Parameters&quot;: [
+                  <span>{</span>
+                     &quot;Name&quot;: &quot;allowed-resource-types&quot;,
+                     &quot;Values&quot;: [
+                        &quot;AWS::EC2::CapacityReservation&quot;
+                     ]
+                  }
+               ]
+            }
+         ]
+      }
+   }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_resource_group_for_EC2_capacity_reservations--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">CapacityReservationsGroupWithoutResources:
+  Type: &quot;AWS::ResourceGroups::Group&quot;
+  Properties:
+    Name: &quot;MyCapacityReservationsGroup&quot;
+    Description: &quot;A resource group for EC2 capacity reservations&quot;
+    Configuration:
+    - Type: &quot;AWS::EC2::CapacityReservationPool&quot;
+      Parameters: []
+    - Type: &quot;AWS::ResourceGroups::Generic&quot;
+      Parameters:
+      - Name: &quot;allowed-resource-types&quot;
+        Values:
+          - &quot;AWS::EC2::CapacityReservation&quot;</code></pre></div>
+                                 <h3 id="aws-resource-resourcegroups-group--examples--Creating_a_resource_group_for_EC2_capacity_reservations_with_initial_members">Creating a resource group for EC2 capacity reservations with initial members</h3>
+                                 <p>This example creates a capacity reservations resource group identical to the
+                                    previous example, except this one includes two initial capacity reservations as
+                                    specified in the <code class="code">Resources</code> property.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_resource_group_for_EC2_capacity_reservations_with_initial_members--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+   &quot;CapacityReservationsGroupWithResources&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::ResourceGroups::Group&quot;,
+      &quot;Properties&quot;: <span>{</span>
+         &quot;Name&quot;: &quot;MyCapacityReservationsGroup&quot;,
+         &quot;Description&quot;: &quot;A resource group for EC2 capacity reservations&quot;,
+         &quot;Configuration&quot;: [
+            <span>{</span>
+               &quot;Type&quot;: &quot;AWS::EC2::CapacityReservationPool&quot;,
+               &quot;Parameters&quot;: []
+            },
+            <span>{</span>
+               &quot;Type&quot;: &quot;AWS::ResourceGroups::Generic&quot;,
+               &quot;Parameters&quot;: [
+                  <span>{</span>
+                     &quot;Name&quot;: &quot;allowed-resource-types&quot;,
+                     &quot;Values&quot;: [
+                        &quot;AWS::EC2::CapacityReservation&quot;
+                     ]
+                  }
+               ]
+            }
+         ],
+         &quot;Resources&quot;: [
+            &quot;arn:aws:ec2:us-east-1:123456789012:capacity-reservation/cr-0d4953834cd1a96a3&quot;,
+            &quot;arn:aws:ec2:us-east-1:123456789012:capacity-reservation/cr-0069a2275c16b7333&quot;
+         ]
+      }
+   }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_a_resource_group_for_EC2_capacity_reservations_with_initial_members--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">CapacityReservationsGroupWithResources:
+  Type: &quot;AWS::ResourceGroups::Group&quot;
+  Properties:
+    Name: &quot;MyCapacityReservationsGroup&quot;
+    Description: &quot;A resource group for EC2 capacity reservations&quot;
+    Configuration:
+    - Type: &quot;AWS::EC2::CapacityReservationPool&quot;
+      Parameters: []
+    - Type: &quot;AWS::ResourceGroups::Generic&quot;
+      Parameters:
+      - Name: &quot;allowed-resource-types&quot;
+        Values:
+          - &quot;AWS::EC2::CapacityReservation&quot;
+    Resources:
+      - &quot;arn:aws:ec2:us-east-1:123456789012:capacity-reservation/cr-0d4953834cd1a96a3&quot;
+      - &quot;arn:aws:ec2:us-east-1:123456789012:capacity-reservation/cr-0069a2275c16b7333&quot;</code></pre></div>
+                                 <h3 id="aws-resource-resourcegroups-group--examples--Creating_an_EC2_hosts_resource_group">Creating an EC2 hosts resource group</h3>
+                                 <p>This example creates a host resource group. Instances in the group are
+                                    automatically configured to accept any host based license configuration, to
+                                    allow only the <code class="code">c5</code> host family, to not auto-release hosts, and to be
+                                    delete protected. The group initially has no members.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_an_EC2_hosts_resource_group--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;HostResourceGroup&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::ResourceGroups::Group&quot;,
+    &quot;Properties&quot;: <span>{</span>
+      &quot;Name&quot;: &quot;MyHostResourceGroup&quot;,
+      &quot;Description&quot;: &quot;A resource group for EC2 dedicated hosts&quot;,
+      &quot;Configuration&quot;: [
+        <span>{</span>
+          &quot;Type&quot;: &quot;AWS::EC2::HostManagement&quot;,
+          &quot;Parameters&quot;: [
+            <span>{</span>
+              &quot;Name&quot;: &quot;any-host-based-license-configuration&quot;,
+              &quot;Values&quot;: [
+                &quot;true&quot;
+              ]
+            },
+            <span>{</span>
+              &quot;Name&quot;: &quot;allowed-host-families&quot;,
+              &quot;Values&quot;: [
+                &quot;c5&quot;
+              ]
+            },
+            <span>{</span>
+              &quot;Name&quot;: &quot;auto-release-host&quot;,
+              &quot;Values&quot;: [
+                &quot;false&quot;
+              ]
+            }
+          ]
+        },
+        <span>{</span>
+          &quot;Type&quot;: &quot;AWS::ResourceGroups::Generic&quot;,
+          &quot;Parameters&quot;: [
+            <span>{</span>
+              &quot;Name&quot;: &quot;allowed-resource-types&quot;,
+              &quot;Values&quot;: [
+                &quot;AWS::EC2::Host&quot;
+              ]
+            },
+            <span>{</span>
+              &quot;Name&quot;: &quot;deletion-protection&quot;,
+              &quot;Values&quot;: [
+                &quot;UNLESS_EMPTY&quot;
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_an_EC2_hosts_resource_group--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">HostResourceGroup:
+  Type: &quot;AWS::ResourceGroups::Group&quot;
+  Properties:
+    Name: &quot;MyHostResourceGroup&quot;
+    Description: &quot;A resource group for EC2 dedicated hosts&quot;
+    Configuration:
+      - Type: &quot;AWS::EC2::HostManagement&quot;
+        Parameters:
+          - Name: &quot;any-host-based-license-configuration&quot;
+            Values:
+              - &quot;true&quot;
+          - Name: &quot;allowed-host-families&quot;
+            Values:
+              - &quot;c5&quot;
+          - Name: &quot;auto-release-host&quot;
+            Values:
+              - &quot;false&quot;
+      - Type: &quot;AWS::ResourceGroups::Generic&quot;
+        Parameters:
+          - Name: &quot;allowed-resource-types&quot;
+            Values:
+              - &quot;AWS::EC2::Host&quot;
+          - Name: &quot;deletion-protection&quot;
+            Values:
+              - &quot;UNLESS_EMPTY&quot;</code></pre></div>
+                                 <h3 id="aws-resource-resourcegroups-group--examples--Creating_an_EC2_hosts_resource_group_with_some_initial_members">Creating an EC2 hosts resource group with some initial members</h3>
+                                 <p>This example creates an EC2 host resource group that is configured to work
+                                    with a specific license configuration. The group initially contains the two
+                                    hosts specified by the <code class="code">Resources</code> property
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_an_EC2_hosts_resource_group_with_some_initial_members--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;HostResourceGroupWithResources&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::ResourceGroups::Group&quot;,
+    &quot;Properties&quot;: <span>{</span>
+      &quot;Name&quot;: &quot;MyHostResourceGroup&quot;,
+      &quot;Description&quot;: &quot;A resource group for EC2 dedicated hosts&quot;,
+      &quot;Configuration&quot;: [
+        <span>{</span>
+          &quot;Type&quot;: &quot;AWS::EC2::HostManagement&quot;,
+          &quot;Parameters&quot;: [
+            <span>{</span>
+              &quot;Name&quot;: &quot;allowed-resource-types&quot;,
+              &quot;Values&quot;: [
+                &quot;AWS::EC2::Host&quot;
+              ]
+            },
+            <span>{</span>
+              &quot;Name&quot;: &quot;deletion-protection&quot;,
+              &quot;Values&quot;: [
+                &quot;UNLESS_EMPTY&quot;
+              ]
+            }
+          ]
+        }
+      ],
+      &quot;Resources&quot;: [
+        &quot;arn:aws:ec2:us-east-1:123456789012:dedicated-host/h-0375ef7462b26b11f&quot;,
+        &quot;arn:aws:ec2:us-east-1:123456789012:dedicated-host/h-0501ab6812c719123&quot;
+      ]
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-resourcegroups-group--examples--Creating_an_EC2_hosts_resource_group_with_some_initial_members--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">HostResourceGroupWithResources:
+  Type: &quot;AWS::ResourceGroups::Group&quot;
+  Properties:
+    Name: &quot;MyHostResourceGroup&quot;
+    Description: &quot;A resource group for EC2 dedicated hosts&quot;
+    Configuration:
+      - Type: &quot;AWS::EC2::HostManagement&quot;
+        Parameters:
+          - Name: &quot;allowed-host-based-license-configurations&quot;
+            Values:
+              - &quot;arn:aws:license-manager:us-east-1:123456789012:license-configuration:lic-42bc5628e8edcee52ed797d5bebf0879&quot;
+        Parameters:
+          - Name: &quot;allowed-resource-types&quot;
+            Values:
+              - &quot;AWS::EC2::Host&quot;
+          - Name: &quot;deletion-protection&quot;
+            Values:
+              - &quot;UNLESS_EMPTY&quot;
+    Resources:
+      - &quot;arn:aws:ec2:us-east-1:123456789012:dedicated-host/h-0375ef7462b26b11f&quot;
+      - &quot;arn:aws:ec2:us-east-1:123456789012:dedicated-host/h-0501ab6812c719123&quot;</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -291,7 +649,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -26,9 +26,9 @@
   &quot;<a href="#cfn-kendra-datasource-servicenowservicecatalogconfiguration-crawlattachments">CrawlAttachments</a>&quot; : <code class="replaceable">Boolean</code>,
   &quot;<a href="#cfn-kendra-datasource-servicenowservicecatalogconfiguration-documentdatafieldname">DocumentDataFieldName</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-kendra-datasource-servicenowservicecatalogconfiguration-documenttitlefieldname">DocumentTitleFieldName</a>&quot; : <code class="replaceable">String</code>,
-  &quot;<a href="#cfn-kendra-datasource-servicenowservicecatalogconfiguration-excludeattachmentfilepatterns">ExcludeAttachmentFilePatterns</a>&quot; : <code class="replaceable"><a href="./aws-properties-kendra-datasource-datasourceinclusionsexclusionsstrings.html">DataSourceInclusionsExclusionsStrings</a></code>,
-  &quot;<a href="#cfn-kendra-datasource-servicenowservicecatalogconfiguration-fieldmappings">FieldMappings</a>&quot; : <code class="replaceable"><a href="./aws-properties-kendra-datasource-datasourcetoindexfieldmappinglist.html">DataSourceToIndexFieldMappingList</a></code>,
-  &quot;<a href="#cfn-kendra-datasource-servicenowservicecatalogconfiguration-includeattachmentfilepatterns">IncludeAttachmentFilePatterns</a>&quot; : <code class="replaceable"><a href="./aws-properties-kendra-datasource-datasourceinclusionsexclusionsstrings.html">DataSourceInclusionsExclusionsStrings</a></code>
+  &quot;<a href="#cfn-kendra-datasource-servicenowservicecatalogconfiguration-excludeattachmentfilepatterns">ExcludeAttachmentFilePatterns</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+  &quot;<a href="#cfn-kendra-datasource-servicenowservicecatalogconfiguration-fieldmappings">FieldMappings</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-kendra-datasource-datasourcetoindexfieldmapping.html">DataSourceToIndexFieldMapping</a>, ... ]</code>,
+  &quot;<a href="#cfn-kendra-datasource-servicenowservicecatalogconfiguration-includeattachmentfilepatterns">IncludeAttachmentFilePatterns</a>&quot; : <code class="replaceable">[ String, ... ]</code>
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
@@ -36,11 +36,11 @@
   <a href="#cfn-kendra-datasource-servicenowservicecatalogconfiguration-documentdatafieldname">DocumentDataFieldName</a>: <code class="replaceable">String</code>
   <a href="#cfn-kendra-datasource-servicenowservicecatalogconfiguration-documenttitlefieldname">DocumentTitleFieldName</a>: <code class="replaceable">String</code>
   <a href="#cfn-kendra-datasource-servicenowservicecatalogconfiguration-excludeattachmentfilepatterns">ExcludeAttachmentFilePatterns</a>: <code class="replaceable">
-    <a href="./aws-properties-kendra-datasource-datasourceinclusionsexclusionsstrings.html">DataSourceInclusionsExclusionsStrings</a></code>
+    - String</code>
   <a href="#cfn-kendra-datasource-servicenowservicecatalogconfiguration-fieldmappings">FieldMappings</a>: <code class="replaceable">
-    <a href="./aws-properties-kendra-datasource-datasourcetoindexfieldmappinglist.html">DataSourceToIndexFieldMappingList</a></code>
+    - <a href="./aws-properties-kendra-datasource-datasourcetoindexfieldmapping.html">DataSourceToIndexFieldMapping</a></code>
   <a href="#cfn-kendra-datasource-servicenowservicecatalogconfiguration-includeattachmentfilepatterns">IncludeAttachmentFilePatterns</a>: <code class="replaceable">
-    <a href="./aws-properties-kendra-datasource-datasourceinclusionsexclusionsstrings.html">DataSourceInclusionsExclusionsStrings</a></code>
+    - String</code>
 </code></pre></div>
                                  <h2 id="aws-properties-kendra-datasource-servicenowservicecatalogconfiguration-properties">Properties</h2>
                                  <div class="variablelist">
@@ -93,13 +93,19 @@
                                        <dt><a id="cfn-kendra-datasource-servicenowservicecatalogconfiguration-excludeattachmentfilepatterns"></a><span class="term"><code class="code">ExcludeAttachmentFilePatterns</code></span></dt>
                                        <dd>
                                           
-                                          <p>Determines the types of file attachments that are excluded from
-                                             the index.
+                                          <p>A list of regular expression patterns. Documents that match the
+                                             patterns are excluded from the index. Documents that don&apos;t match the
+                                             patterns are included in the index. If a document matches both an
+                                             exclusion pattern and an inclusion pattern, the document is not
+                                             included in the index.
                                           </p>
+                                          
+                                          <p>The regex is applied to the file name of the attachment.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: <a href="./aws-properties-kendra-datasource-datasourceinclusionsexclusionsstrings.html">DataSourceInclusionsExclusionsStrings</a></p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
                                           <p><em>Maximum</em>: <code class="code">100</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
@@ -112,20 +118,26 @@
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: <a href="./aws-properties-kendra-datasource-datasourcetoindexfieldmappinglist.html">DataSourceToIndexFieldMappingList</a></p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-kendra-datasource-datasourcetoindexfieldmapping.html">DataSourceToIndexFieldMapping</a></p>
                                           <p><em>Maximum</em>: <code class="code">100</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-kendra-datasource-servicenowservicecatalogconfiguration-includeattachmentfilepatterns"></a><span class="term"><code class="code">IncludeAttachmentFilePatterns</code></span></dt>
                                        <dd>
                                           
-                                          <p>Determines the types of file attachments that are included in the
-                                             index. 
+                                          <p>A list of regular expression patterns. Documents that match the
+                                             patterns are included in the index. Documents that don&apos;t match the
+                                             patterns are excluded from the index. If a document matches both an
+                                             exclusion pattern and an inclusion pattern, the document is not
+                                             included in the index.
                                           </p>
+                                          
+                                          <p>The regex is applied to the file name of the attachment.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: <a href="./aws-properties-kendra-datasource-datasourceinclusionsexclusionsstrings.html">DataSourceInclusionsExclusionsStrings</a></p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
                                           <p><em>Maximum</em>: <code class="code">100</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
@@ -141,7 +153,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

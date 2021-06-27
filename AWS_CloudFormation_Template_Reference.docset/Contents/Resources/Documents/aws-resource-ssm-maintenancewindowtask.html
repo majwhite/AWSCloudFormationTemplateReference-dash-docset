@@ -16,8 +16,8 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::SSM::MaintenanceWindowTask</code> resource defines information about a task
-                                    for an AWS Systems Manager maintenance window. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RegisterTaskWithMaintenanceWindow.html">RegisterTaskWithMaintenanceWindow</a> in the <em>AWS Systems Manager API
+                                 <p>The <code class="code">AWS::SSM::MaintenanceWindowTask</code> resource defines information about a
+                                    task for an AWS Systems Manager maintenance window. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_RegisterTaskWithMaintenanceWindow.html">RegisterTaskWithMaintenanceWindow</a> in the <em>AWS Systems Manager API
                                        Reference</em>.
                                  </p>
                                  <h2 id="aws-resource-ssm-maintenancewindowtask-syntax">Syntax</h2>
@@ -89,11 +89,11 @@ Properties:
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
                                                 <p>
-                                                   <code class="code">LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs,
-                                                   instead use the <code class="code">OutputS3BucketName</code> and <code class="code">OutputS3KeyPrefix</code> options
-                                                   in the <code class="code">TaskInvocationParameters</code> structure. For information about how Systems
-                                                   Manager handles these options for the supported maintenance window task types, see
-                                                   <a href="aws-properties-ssm-maintenancewindowtask-taskinvocationparameters.html">AWS Systems Manager MaintenanceWindowTask TaskInvocationParameters</a>.
+                                                   <code class="code">LoggingInfo</code> has been deprecated. To specify an Amazon S3 bucket to contain logs,
+                                                   instead use the <code class="code">OutputS3BucketName</code> and <code class="code">OutputS3KeyPrefix</code>
+                                                   options in the <code class="code">TaskInvocationParameters</code> structure. For information about
+                                                   how Systems Manager handles these options for the supported maintenance window task
+                                                   types, see <a href="aws-properties-ssm-maintenancewindowtask-taskinvocationparameters.html">AWS Systems Manager MaintenanceWindowTask TaskInvocationParameters</a>.
                                                 </p>
                                              </div>
                                           </div>
@@ -109,7 +109,7 @@ Properties:
                                           
                                           <p>The maximum number of targets this task can be run for, in parallel.</p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -124,7 +124,7 @@ Properties:
                                           
                                           <p>The maximum number of errors allowed before this task stops being scheduled.</p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -167,9 +167,9 @@ Properties:
                                        <dt><a id="cfn-ssm-maintenancewindowtask-servicerolearn"></a><span class="term"><code class="code">ServiceRoleArn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ARN of the IAM service role to use to publish Amazon Simple Notification Service
-                                             (Amazon SNS) notifications for
-                                             maintenance window Run Command tasks.
+                                          <p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service
+                                             role to use to publish Amazon Simple Notification Service 
+                                             (Amazon SNS) notifications for maintenance window Run Command tasks.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -204,7 +204,7 @@ Properties:
                                              </ul>
                                           </div>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="./aws-properties-ssm-maintenancewindowtask-target.html">Target</a></p>
                                           <p><em>Maximum</em>: <code class="code">5</code></p>
@@ -276,8 +276,9 @@ Properties:
                                                 <p>
                                                    <code class="code">TaskParameters</code> has been deprecated. To specify parameters to pass to a task
                                                    when it runs, instead use the <code class="code">Parameters</code> option in the
-                                                   <code class="code">TaskInvocationParameters</code> structure. For information about how Systems Manager
-                                                   handles these options for the supported maintenance window task types, see <a href="https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_MaintenanceWindowTaskInvocationParameters.html">MaintenanceWindowTaskInvocationParameters</a>.
+                                                   <code class="code">TaskInvocationParameters</code> structure. For information about how Systems
+                                                   Manager handles these options for the supported maintenance window task types, see
+                                                   <a href="https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_MaintenanceWindowTaskInvocationParameters.html">MaintenanceWindowTaskInvocationParameters</a>.
                                                 </p>
                                              </div>
                                           </div>
@@ -404,10 +405,9 @@ Resources:
         Ref: MaintenanceWindow
       TaskArn: AWS-RunPatchBaseline
       Targets:
-        - Key: WindowTargetIds
-          Values:
-            - Ref: MaintenanceWindowTarget
-
+      - Key: WindowTargetIds
+        Values:
+        - Ref: MaintenanceWindowTarget
   MaintenanceWindow:
     Type: AWS::SSM::MaintenanceWindow
     Properties:
@@ -417,17 +417,17 @@ Resources:
       Description: Maintenance window for instances
       Duration: 1
       Schedule: cron(20 17 ? * MON-FRI *)
-
   MaintenanceWindowTarget:
     Type: AWS::SSM::MaintenanceWindowTarget
-    Properties: 
+    Properties:
       ResourceType: RESOURCE_GROUP
       Targets:
-        - Key: resource-groups:Name
-          Values:
-            - &quot;TestResourceGroup&quot;
-      WindowId: 
-        Ref: MaintenanceWindow</code></pre></div>
+      - Key: resource-groups:Name
+        Values:
+        - TestResourceGroup
+      WindowId:
+        Ref: MaintenanceWindow
+</code></pre></div>
                                  <h3 id="aws-resource-ssm-maintenancewindowtask--examples--Create_a_Run_Command_task_that_targets_instances_using_a_maintenance_window_target_ID">Create a Run Command task that targets instances using a maintenance window target
                                     ID
                                  </h3>
@@ -477,26 +477,156 @@ Resources:
                                     <h4 id="aws-resource-ssm-maintenancewindowtask--examples--Create_a_Run_Command_task_that_targets_instances_using_a_maintenance_window_target_ID--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
 Resources:
   MaintenanceWindowRunCommandTask:
-    Type: &apos;AWS::SSM::MaintenanceWindowTask&apos;
+    Type: AWS::SSM::MaintenanceWindowTask
     Properties:
       WindowId: MaintenanceWindow
+      Targets:
+      - Key: WindowTargetIds
+        Values:
+        - MaintenanceWindowTarget
+      TaskType: RUN_COMMAND
+      TaskArn: AWS-RunPatchBaseline
+      TaskInvocationParameters:
+        MaintenanceWindowRunCommandParameters:
+          Parameters:
+            Operation:
+            - Install
+            RebootOption:
+            - NoReboot
+        MaxConcurrency: 7
+        MaxErrors: 7
+        Priority: 5
+      DependsOn: MaintenanceWindowTarget</code></pre></div>
+                                 <h3 id="aws-resource-ssm-maintenancewindowtask--examples--Create_a_Run_Command_task_that_runs_a_PowerShell_script">Create a Run Command task that runs a PowerShell script</h3>
+                                 <p>The following example demonstrates running a command with AWS-RunPowerShellScript.</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-maintenancewindowtask--examples--Create_a_Run_Command_task_that_runs_a_PowerShell_script--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Resources&quot;: <span>{</span>
+        &quot;MaintenanceWindowRunCommandTask&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::SSM::MaintenanceWindowTask&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;WindowId&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;MaintenanceWindow&quot;
+                },
+                &quot;Targets&quot;: [
+                    <span>{</span>
+                        &quot;Key&quot;: &quot;WindowTargetIds&quot;,
+                        &quot;Values&quot;: [
+                            &quot;MaintenanceWindowTarget&quot;
+                        ]
+                    }
+                ],
+                &quot;TaskType&quot;: &quot;RUN_COMMAND&quot;,
+                &quot;TaskArn&quot;: &quot;AWS-RunPowerShellScript&quot;,
+                &quot;TaskInvocationParameters&quot;: <span>{</span>
+                    &quot;MaintenanceWindowRunCommandParameters&quot;: <span>{</span>
+                        &quot;Comment&quot;: &quot;This is a comment&quot;,
+                        &quot;Parameters&quot;: <span>{</span>
+                            &quot;executionTimeout&quot;: [
+                                &quot;3600&quot;
+                            ],
+                            &quot;commands&quot;: [
+                                &quot;Get-Service myImportantService | Restart-Service\nGet-ExecutionPolicy -List\nSet-ExecutionPolicy -Scope Process AllSigned\n&quot;
+                            ]
+                        }
+                    }
+                },
+                &quot;MaxConcurrency&quot;: 7,
+                &quot;MaxErrors&quot;: 7,
+                &quot;Priority&quot;: 5
+            },
+            &quot;DependsOn&quot;: &quot;MaintenanceWindowTarget&quot;
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-maintenancewindowtask--examples--Create_a_Run_Command_task_that_runs_a_PowerShell_script--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Resources:
+  MaintenanceWindowRunCommandTask:
+    Type: &apos;AWS::SSM::MaintenanceWindowTask&apos;
+    Properties:
+      WindowId: !Ref MaintenanceWindow
       Targets:
         - Key: WindowTargetIds
           Values:
             - MaintenanceWindowTarget
       TaskType: RUN_COMMAND
-      TaskArn: AWS-RunPatchBaseline
+      TaskArn: AWS-RunPowerShellScript
       TaskInvocationParameters:
         MaintenanceWindowRunCommandParameters:
-          Comment: Running security updates for OS with no reboot
+          Comment: This is a comment
           Parameters:
-            Operation:
-              - Install
-            RebootOption:
-              - NoReboot
+            executionTimeout:
+              - &apos;3600&apos;
+            commands:
+              - Get-Service myImportantService | Restart-Service
+              - Get-ExecutionPolicy -List
+              - Set-ExecutionPolicy -Scope Process AllSigned
       MaxConcurrency: 7
-      MaxErrors: 100%
+      MaxErrors: 7
       Priority: 5
+    DependsOn: MaintenanceWindowTarget
+</code></pre></div>
+                                 <h3 id="aws-resource-ssm-maintenancewindowtask--examples--Create_a_task_that_runs_an_Automation_runbook">Create a task that runs an Automation runbook</h3>
+                                 <p>The following example creates a Systems Manager maintenance window task that uses
+                                    the runbook
+                                    		AWS-PatchInstanceWithRollback to patch instances.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-maintenancewindowtask--examples--Create_a_task_that_runs_an_Automation_runbook--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Resources&quot;: <span>{</span>
+        &quot;MaintenanceWindowStepFunctionsTask&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::SSM::MaintenanceWindowTask&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;WindowId&quot;: &quot;MaintenanceWindow&quot;,
+                &quot;Targets&quot;: [
+                    <span>{</span>
+                        &quot;Key&quot;: &quot;WindowTargetIds&quot;,
+                        &quot;Values&quot;: [
+                            &quot;MaintenanceWindowTarget&quot;
+                        ]
+                    }
+                ],
+                &quot;TaskArn&quot;: &quot;AWS-PatchInstanceWithRollback&quot;,
+                &quot;ServiceRoleArn&quot;: &quot;AutomationRole.Arn&quot;,
+                &quot;TaskType&quot;: &quot;AUTOMATION&quot;,
+                &quot;TaskInvocationParameters&quot;: <span>{</span>
+                    &quot;MaintenanceWindowAutomationParameters&quot;: <span>{</span>
+                        &quot;DocumentVersion&quot;: &quot;1&quot;,
+                        &quot;Parameters&quot;: &apos;<span>{</span> \&quot;instanceId\&quot;: \&quot;<span>{</span><span>{</span>RESOURCE_ID}}\&quot; }&apos;
+                    }
+                },
+                &quot;Priority&quot;: 1,
+                &quot;MaxConcurrency&quot;: 5,
+                &quot;MaxErrors&quot;: 5,
+                &quot;Name&quot;: &quot;AutomationTask&quot;
+            },
+            &quot;DependsOn&quot;: &quot;MaintenanceWindowTarget&quot;
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ssm-maintenancewindowtask--examples--Create_a_task_that_runs_an_Automation_runbook--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Resources:
+  MaintenanceWindowStepFunctionsTask:
+    Type: AWS::SSM::MaintenanceWindowTask
+    Properties:
+      WindowId: MaintenanceWindow
+      Targets:
+      - Key: WindowTargetIds
+        Values:
+        - MaintenanceWindowTarget
+      TaskArn: AWS-PatchInstanceWithRollback
+      ServiceRoleArn: AutomationRole.Arn
+      TaskType: AUTOMATION
+      TaskInvocationParameters:
+        MaintenanceWindowAutomationParameters:
+    DocumentVersion: 1
+    Parameters: &apos;<span>{</span> \&quot;instanceId\&quot;: \&quot;<span>{</span><span>{</span>RESOURCE_ID}}\&quot; }&apos;
+      Priority: 1
+      MaxConcurrency: 5
+      MaxErrors: 5
+      Name: AutomationTask
     DependsOn: MaintenanceWindowTarget</code></pre></div>
                                  <h3 id="aws-resource-ssm-maintenancewindowtask--examples--Create_a_Step_Functions_task_that_targets_a_maintenance_window_target_ID">Create a Step Functions task that targets a maintenance window target ID</h3>
                                  <p>The following example creates a Systems Manager maintenance window task that runs
@@ -560,7 +690,7 @@ Resources:
       MaxConcurrency: 5
       MaxErrors: 5
       Name: StepFunctionsTask
-    DependsOn: MaintenanceWindowTarget </code></pre></div>
+    DependsOn: MaintenanceWindowTarget</code></pre></div>
                                  <h3 id="aws-resource-ssm-maintenancewindowtask--examples--Create_a_Step_Functions_task_that_targets_an_instance_ID">Create a Step Functions task that targets an instance ID</h3>
                                  <p>The following example creates a Systems Manager maintenance window task that runs
                                     the
@@ -623,29 +753,66 @@ Resources:
       MaxErrors: 5
       Name: StepFunctionsTask
     DependsOn: MaintenanceWindowTarget</code></pre></div>
-                                 <h3 id="aws-resource-ssm-maintenancewindowtask--examples--Create_a_maintenance_window_with_run_command_task.">Create a maintenance window with run command task.</h3>
-                                 <p>The following examples are for the <code class="code">Parameters</code> property of the <code class="code">MaintenanceWindowRunCommandParameters</code> property type.
-                                 </p>
+                                 <h3 id="aws-resource-ssm-maintenancewindowtask--examples--Create_a_task_that_runs_an__function">Create a task that runs an AWS Lambda function</h3>
+                                 <p>The following example runs an AWS Lambda function to restart instances.</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-maintenancewindowtask--examples--Create_a_maintenance_window_with_run_command_task.--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-    &quot;Parameters&quot;: <span>{</span>
-        &quot;executionTimeout&quot;: [
-            &quot;3600&quot;
-        ],
-        &quot;commands&quot;: [
-            &quot;Get-Service myImportantService | Restart-Service\nGet-ExecutionPolicy -List\nSet-ExecutionPolicy -Scope Process AllSigned\n&quot;
-        ]
+                                    <h4 id="aws-resource-ssm-maintenancewindowtask--examples--Create_a_task_that_runs_an__function--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Resources&quot;: <span>{</span>
+        &quot;MaintenanceWindowStepFunctionsTask&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::SSM::MaintenanceWindowTask&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;WindowId&quot;: &quot;MaintenanceWindow&quot;,
+                &quot;Targets&quot;: [
+                    <span>{</span>
+                        &quot;Key&quot;: &quot;WindowTargetIds&quot;,
+                        &quot;Values&quot;: [
+                            &quot;MaintenanceWindowTarget&quot;
+                        ]
+                    }
+                ],
+                &quot;TaskArn&quot;: &quot;SSM_RestartMyInstances&quot;,
+                &quot;ServiceRoleArn&quot;: &quot;Lambda.Arn&quot;,
+                &quot;TaskType&quot;: &quot;LAMBDA&quot;,
+                &quot;TaskInvocationParameters&quot;: <span>{</span>
+                    &quot;MaintenanceWindowLambdaParameters&quot;: <span>{</span>
+                        &quot;ClientContext&quot;: &quot;ew0KICAi--truncated--0KIEXAMPLE&quot;,
+                        &quot;Qualifier&quot;: &quot;$LATEST&quot;,
+                        &quot;Payload&quot;: &quot;<span>{</span> \&quot;instanceId\&quot;: \&quot;<span>{</span><span>{</span>RESOURCE_ID}}\&quot;, \&quot;targetType\&quot;: \&quot;<span>{</span><span>{</span>TARGET_TYPE}}\&quot; }&quot;
+                    }
+                }
+            },
+            &quot;Priority&quot;: 1,
+            &quot;MaxConcurrency&quot;: 5,
+            &quot;MaxErrors&quot;: 5,
+            &quot;Name&quot;: &quot;LambdaTask&quot;
+        },
+        &quot;DependsOn&quot;: &quot;MaintenanceWindowTarget&quot;
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-maintenancewindowtask--examples--Create_a_maintenance_window_with_run_command_task.--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Parameters:
-  executionTimeout:
-    - &apos;3600&apos;
-  commands:
-    - |
-      Get-Service myImportantService | Restart-Service
-      Get-ExecutionPolicy -List
-      Set-ExecutionPolicy -Scope Process AllSigned</code></pre></div>
+                                    <h4 id="aws-resource-ssm-maintenancewindowtask--examples--Create_a_task_that_runs_an__function--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Resources:
+  MaintenanceWindowAutomationTask:
+    Type: AWS::SSM::MaintenanceWindowTask
+    Properties:
+      WindowId: MaintenanceWindow
+      Targets:
+      - Key: WindowTargetIds
+        Values:
+        - MaintenanceWindowTarget
+      TaskArn: SSM_RestartMyInstances
+      ServiceRoleArn: Lambda.Arn
+      TaskType: LAMBDA
+      TaskInvocationParameters:
+        MaintenanceWindowLambdaParameters:
+			ClientContext&quot;: &quot;ew0KICAi--truncated--0KIEXAMPLE&quot;
+			Qualifier: &apos;$LATEST&apos;
+			Payload: &apos;<span>{</span> \&quot;instanceId\&quot;: \&quot;<span>{</span><span>{</span>RESOURCE_ID}}\&quot;, \&quot;targetType\&quot;: \&quot;<span>{</span><span>{</span>TARGET_TYPE}}\&quot; }&apos;
+      Priority: 1
+      MaxConcurrency: 5
+      MaxErrors: 5
+      Name: LambdaTask
+    DependsOn: MaintenanceWindowTarget</code></pre></div>
                                  <h2 id="aws-resource-ssm-maintenancewindowtask--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
@@ -689,7 +856,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -21,7 +21,7 @@
                                     Amazon CloudWatch.
                                  </p>
                                  <p>For information about publishing email sending events to Amazon CloudWatch, see the
-                                    <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/event-publishing-add-event-destination-cloudwatch.html">Amazon SES Developer Guide</a>.
+                                    <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.
                                  </p>
                                  <h2 id="aws-properties-ses-configurationseteventdestination-dimensionconfiguration-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -44,8 +44,10 @@
                                        <dd>
                                           
                                           <p>The default value of the dimension that is published to Amazon CloudWatch if you do
-                                             not provide the value of the dimension when you send an email. The default value
-                                             must:
+                                             not provide
+                                             the value of the dimension when you send an email. The default value must meet the
+                                             
+                                             following requirements:
                                           </p>
                                           
                                           <div class="itemizedlist">
@@ -55,16 +57,14 @@
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
                                                    
-                                                   
-                                                   <p>Only contain ASCII letters (a&#x2013;z, A&#x2013;Z), numbers (0&#x2013;9), underscores (_), or
-                                                      dashes (-).
+                                                   <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9),
+                                                      underscores (_), or dashes (-).
                                                    </p>
-                                                   
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>Contain 256 or fewer characters.</p>
+                                                   <p>Contain 256 characters or fewer.</p>
                                                    
                                                 </li>
                                              </ul>
@@ -80,7 +80,8 @@
                                        <dd>
                                           
                                           <p>The name of an Amazon CloudWatch dimension associated with an email sending metric.
-                                             The name must: 
+                                             The name
+                                             must meet the following requirements:
                                           </p>
                                           
                                           <div class="itemizedlist">
@@ -90,16 +91,14 @@
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
                                                    
-                                                   
-                                                   <p>Only contain ASCII letters (a&#x2013;z, A&#x2013;Z), numbers (0&#x2013;9), underscores (_), or
-                                                      dashes (-).
+                                                   <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9),
+                                                      underscores (_), or dashes (-).
                                                    </p>
-                                                   
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>Contain 256 or fewer characters.</p>
+                                                   <p>Contain 256 characters or fewer.</p>
                                                    
                                                 </li>
                                              </ul>
@@ -114,18 +113,21 @@
                                        <dt><a id="cfn-ses-configurationseteventdestination-dimensionconfiguration-dimensionvaluesource"></a><span class="term"><code class="code">DimensionValueSource</code></span></dt>
                                        <dd>
                                           
-                                          <p>The place where Amazon SES finds the value of a dimension to publish to Amazon
-                                             CloudWatch. If you want Amazon SES to use the message tags that you specify using
-                                             an
-                                             <code class="code">X-SES-MESSAGE-TAGS</code> header or a parameter to the <code class="code">SendEmail</code>
-                                             or <code class="code">SendRawEmail</code> API, choose <code class="code">messageTag</code>. If you want Amazon SES
-                                             to use your own email headers, choose <code class="code">emailHeader</code>.
+                                          <p>The place where Amazon SES finds the value of a dimension to publish to Amazon CloudWatch.
+                                             
+                                             To use the message tags that you specify using an
+                                             <code class="code">X-SES-MESSAGE-TAGS</code> header or a parameter to the
+                                             <code class="code">SendEmail</code>/<code class="code">SendRawEmail</code> API, specify
+                                             <code class="code">messageTag</code>. To use your own email headers, specify
+                                             <code class="code">emailHeader</code>. To put a custom tag on any link included in
+                                             your email, specify <code class="code">linkTag</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Allowed values</em>: <code class="code">emailHeader | linkTag | messageTag</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>
@@ -140,7 +142,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

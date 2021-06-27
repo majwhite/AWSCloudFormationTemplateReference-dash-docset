@@ -33,7 +33,9 @@
   &quot;<a href="#cfn-mediapackage-originendpoint-dashpackage-segmentdurationseconds">SegmentDurationSeconds</a>&quot; : <code class="replaceable">Integer</code>,
   &quot;<a href="#cfn-mediapackage-originendpoint-dashpackage-segmenttemplateformat">SegmentTemplateFormat</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-mediapackage-originendpoint-dashpackage-streamselection">StreamSelection</a>&quot; : <code class="replaceable"><a href="./aws-properties-mediapackage-originendpoint-streamselection.html">StreamSelection</a></code>,
-  &quot;<a href="#cfn-mediapackage-originendpoint-dashpackage-suggestedpresentationdelayseconds">SuggestedPresentationDelaySeconds</a>&quot; : <code class="replaceable">Integer</code>
+  &quot;<a href="#cfn-mediapackage-originendpoint-dashpackage-suggestedpresentationdelayseconds">SuggestedPresentationDelaySeconds</a>&quot; : <code class="replaceable">Integer</code>,
+  &quot;<a href="#cfn-mediapackage-originendpoint-dashpackage-utctiming">UtcTiming</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-mediapackage-originendpoint-dashpackage-utctiminguri">UtcTimingUri</a>&quot; : <code class="replaceable">String</code>
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
@@ -54,6 +56,8 @@
   <a href="#cfn-mediapackage-originendpoint-dashpackage-streamselection">StreamSelection</a>: <code class="replaceable">
     <a href="./aws-properties-mediapackage-originendpoint-streamselection.html">StreamSelection</a></code>
   <a href="#cfn-mediapackage-originendpoint-dashpackage-suggestedpresentationdelayseconds">SuggestedPresentationDelaySeconds</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-mediapackage-originendpoint-dashpackage-utctiming">UtcTiming</a>: <code class="replaceable">String</code>
+  <a href="#cfn-mediapackage-originendpoint-dashpackage-utctiminguri">UtcTimingUri</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-properties-mediapackage-originendpoint-dashpackage-properties">Properties</h2>
                                  <div class="variablelist">
@@ -76,8 +80,8 @@
                                        <dt><a id="cfn-mediapackage-originendpoint-dashpackage-adtriggers"></a><span class="term"><code class="code">AdTriggers</code></span></dt>
                                        <dd>
                                           
-                                          <p>The SCTE-35 message types that MediaPackage treats as ad markers in the output manifest.
-                                             For information about SCTE-35 in MediaPackage.
+                                          <p>Specifies the SCTE-35 message types that MediaPackage treats as ad markers in the
+                                             output manifest.
                                              
                                           </p>
                                           
@@ -112,37 +116,43 @@
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="userinput">DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY</code></p>
+                                                      <code class="userinput">DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY</code>.
+                                                   </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="userinput">DISTRIBUTOR_PLACEMENT_OPPORTUNITY</code></p>
+                                                      <code class="userinput">DISTRIBUTOR_PLACEMENT_OPPORTUNITY</code>.
+                                                   </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="userinput">PROVIDER_ADVERTISEMENT</code></p>
+                                                      <code class="userinput">PROVIDER_ADVERTISEMENT</code>.
+                                                   </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="userinput">PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY</code></p>
+                                                      <code class="userinput">PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY</code>.
+                                                   </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="userinput">PROVIDER_PLACEMENT_OPPORTUNITY</code></p>
+                                                      <code class="userinput">PROVIDER_PLACEMENT_OPPORTUNITY</code>.
+                                                   </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="userinput">SPLICE_INSERT</code></p>
+                                                      <code class="userinput">SPLICE_INSERT</code>.
+                                                   </p>
                                                    
                                                 </li>
                                              </ul>
@@ -239,14 +249,35 @@
                                        <dt><a id="cfn-mediapackage-originendpoint-dashpackage-periodtriggers"></a><span class="term"><code class="code">PeriodTriggers</code></span></dt>
                                        <dd>
                                           
-                                          
-                                          <p>A list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH
-                                             manifest into multiple periods. Type <code class="userinput">ADS</code> to indicate that AWS Elemental MediaPackage must create periods in the output manifest
-                                             that correspond to SCTE-35 ad markers in the input source. Leave this value empty
-                                             to indicate that the manifest is contained all in one period.
-                                             For more information about periods in the DASH manifest, see <a href="https://docs.aws.amazon.com/mediapackage/latest/ug/multi-period.html">Multi-period DASH in AWS Elemental MediaPackage</a>.
-                                             
+                                          <p>Controls whether MediaPackage produces single-period or multi-period DASH manifests.
+                                             For more information about periods, see <a href="https://docs.aws.amazon.com/mediapackage/latest/ug/multi-period.html">Multi-period DASH in AWS Elemental MediaPackage</a>.
                                           </p>
+                                          
+                                          <p>Valid values:</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="userinput">ADS</code> - MediaPackage will produce multi-period DASH manifests. Periods are created based
+                                                      on the SCTE-35 ad markers present in the input manifest.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <em>No value</em> - MediaPackage will produce single-period DASH manifests. This is the default setting.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of String
@@ -372,6 +403,36 @@
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-mediapackage-originendpoint-dashpackage-utctiming"></a><span class="term"><code class="code">UtcTiming</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>
+                                             Determines the type of UTC timing included in the DASH Media Presentation Description
+                                             (MPD).
+                                             
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-mediapackage-originendpoint-dashpackage-utctiminguri"></a><span class="term"><code class="code">UtcTimingUri</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>
+                                             Specifies the value attribute of the UTC timing field when utcTiming is set to HTTP-ISO
+                                             or HTTP-HEAD.
+                                             
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                     </dl>
                                  </div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
@@ -384,7 +445,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

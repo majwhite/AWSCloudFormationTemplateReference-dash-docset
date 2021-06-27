@@ -26,9 +26,9 @@
   &quot;<a href="#cfn-kendra-datasource-s3datasourceconfiguration-accesscontrollistconfiguration">AccessControlListConfiguration</a>&quot; : <code class="replaceable"><a href="./aws-properties-kendra-datasource-accesscontrollistconfiguration.html">AccessControlListConfiguration</a></code>,
   &quot;<a href="#cfn-kendra-datasource-s3datasourceconfiguration-bucketname">BucketName</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-kendra-datasource-s3datasourceconfiguration-documentsmetadataconfiguration">DocumentsMetadataConfiguration</a>&quot; : <code class="replaceable"><a href="./aws-properties-kendra-datasource-documentsmetadataconfiguration.html">DocumentsMetadataConfiguration</a></code>,
-  &quot;<a href="#cfn-kendra-datasource-s3datasourceconfiguration-exclusionpatterns">ExclusionPatterns</a>&quot; : <code class="replaceable"><a href="./aws-properties-kendra-datasource-datasourceinclusionsexclusionsstrings.html">DataSourceInclusionsExclusionsStrings</a></code>,
-  &quot;<a href="#cfn-kendra-datasource-s3datasourceconfiguration-inclusionpatterns">InclusionPatterns</a>&quot; : <code class="replaceable"><a href="./aws-properties-kendra-datasource-datasourceinclusionsexclusionsstrings.html">DataSourceInclusionsExclusionsStrings</a></code>,
-  &quot;<a href="#cfn-kendra-datasource-s3datasourceconfiguration-inclusionprefixes">InclusionPrefixes</a>&quot; : <code class="replaceable"><a href="./aws-properties-kendra-datasource-datasourceinclusionsexclusionsstrings.html">DataSourceInclusionsExclusionsStrings</a></code>
+  &quot;<a href="#cfn-kendra-datasource-s3datasourceconfiguration-exclusionpatterns">ExclusionPatterns</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+  &quot;<a href="#cfn-kendra-datasource-s3datasourceconfiguration-inclusionpatterns">InclusionPatterns</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+  &quot;<a href="#cfn-kendra-datasource-s3datasourceconfiguration-inclusionprefixes">InclusionPrefixes</a>&quot; : <code class="replaceable">[ String, ... ]</code>
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
@@ -38,11 +38,11 @@
   <a href="#cfn-kendra-datasource-s3datasourceconfiguration-documentsmetadataconfiguration">DocumentsMetadataConfiguration</a>: <code class="replaceable">
     <a href="./aws-properties-kendra-datasource-documentsmetadataconfiguration.html">DocumentsMetadataConfiguration</a></code>
   <a href="#cfn-kendra-datasource-s3datasourceconfiguration-exclusionpatterns">ExclusionPatterns</a>: <code class="replaceable">
-    <a href="./aws-properties-kendra-datasource-datasourceinclusionsexclusionsstrings.html">DataSourceInclusionsExclusionsStrings</a></code>
+    - String</code>
   <a href="#cfn-kendra-datasource-s3datasourceconfiguration-inclusionpatterns">InclusionPatterns</a>: <code class="replaceable">
-    <a href="./aws-properties-kendra-datasource-datasourceinclusionsexclusionsstrings.html">DataSourceInclusionsExclusionsStrings</a></code>
+    - String</code>
   <a href="#cfn-kendra-datasource-s3datasourceconfiguration-inclusionprefixes">InclusionPrefixes</a>: <code class="replaceable">
-    <a href="./aws-properties-kendra-datasource-datasourceinclusionsexclusionsstrings.html">DataSourceInclusionsExclusionsStrings</a></code>
+    - String</code>
 </code></pre></div>
                                  <h2 id="aws-properties-kendra-datasource-s3datasourceconfiguration-properties">Properties</h2>
                                  <div class="variablelist">
@@ -97,13 +97,49 @@
                                              indexed.
                                           </p>
                                           
-                                          <p>For more information about glob patterns, see <a href="https://en.wikipedia.org/wiki/Glob_(programming)" rel="noopener noreferrer" target="_blank"><span>glob
-                                                   (programming)</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> in <em>Wikipedia</em>.
+                                          <p>Some <a href="https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters">examples</a> 
+                                             are:
                                           </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <em>*.png , *.jpg</em> will exclude 
+                                                      all PNG and JPEG image files in a directory 
+                                                      (files with the extensions .png and .jpg).
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <em>*internal*</em> will exclude all 
+                                                      files in a directory that contain &apos;internal&apos; in the file name, 
+                                                      such as &apos;internal&apos;, &apos;internal_only&apos;, &apos;company_internal&apos;.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <em>**/*internal*</em> will exclude 
+                                                      all internal-related files in a directory and its subdirectories.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: <a href="./aws-properties-kendra-datasource-datasourceinclusionsexclusionsstrings.html">DataSourceInclusionsExclusionsStrings</a></p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
                                           <p><em>Maximum</em>: <code class="code">100</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
@@ -115,13 +151,48 @@
                                              pattern, the document is not indexed.
                                           </p>
                                           
-                                          <p>For more information about glob patterns, see <a href="https://en.wikipedia.org/wiki/Glob_(programming)" rel="noopener noreferrer" target="_blank"><span>glob
-                                                   (programming)</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> in <em>Wikipedia</em>.
+                                          <p>Some <a href="https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters">examples</a> 
+                                             are:
                                           </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <em>*.txt</em> will include all text files 
+                                                      in a directory (files with the extension .txt).
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <em>**/*.txt</em> will include all text 
+                                                      files in a directory and its subdirectories.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <em>*tax*</em> will include all files in 
+                                                      a directory that contain &apos;tax&apos; in the file name, such as &apos;tax&apos;, 
+                                                      &apos;taxes&apos;, &apos;income_tax&apos;.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: <a href="./aws-properties-kendra-datasource-datasourceinclusionsexclusionsstrings.html">DataSourceInclusionsExclusionsStrings</a></p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
                                           <p><em>Maximum</em>: <code class="code">100</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
@@ -134,7 +205,8 @@
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: <a href="./aws-properties-kendra-datasource-datasourceinclusionsexclusionsstrings.html">DataSourceInclusionsExclusionsStrings</a></p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
                                           <p><em>Maximum</em>: <code class="code">100</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
@@ -150,7 +222,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -78,7 +78,22 @@ Properties:
                                           
                                           <p>The name of the database engine to be used for this DB cluster.</p>
                                           
-                                          <p><em>Required</em>: No
+                                          <p>If this property isn&apos;t specified, the database engine is derived from the source DB
+                                             cluster specified 
+                                             by the <code class="code">SourceDBClusterIdentifier</code> property.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If the <code class="code">SourceDBClusterIdentifier</code> property isn&apos;t specified, this property is required. 
+                                                   If the <code class="code">SourceDBClusterIdentifier</code> property is specified, make sure this property isn&apos;t specified.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: Conditional
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -98,9 +113,9 @@ Properties:
                                        <dt><a id="cfn-rds-globalcluster-globalclusteridentifier"></a><span class="term"><code class="code">GlobalClusterIdentifier</code></span></dt>
                                        <dd>
                                           
-                                          <p>The cluster identifier of the new global database cluster.</p>
+                                          <p>The cluster identifier of the global database cluster.</p>
                                           
-                                          <p><em>Required</em>: No
+                                          <p><em>Required</em>: Conditional
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -114,7 +129,17 @@ Properties:
                                              
                                           </p>
                                           
-                                          <p><em>Required</em>: No
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If the <code class="code">Engine</code> property isn&apos;t specified, this property is required. If the <code class="code">Engine</code> property is specified, 
+                                                   make sure this property isn&apos;t specified.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: Conditional
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -385,7 +410,7 @@ Resources:
       DBInstanceClass: db.r5.xlarge
         
      </code></pre></div>
-                                 <h3 id="aws-resource-rds-globalcluster--examples--Adding_an_AWS_Region_to_an_Aurora_database_cluster">Adding an AWS Region to an Aurora database cluster</h3>
+                                 <h3 id="aws-resource-rds-globalcluster--examples--Adding_a_Region_to_an_Aurora_database_cluster">Adding a Region to an Aurora database cluster</h3>
                                  <p>The following example creates a new Aurora DB cluster, attaches it to a global database
                                     cluster as a read-only 
                                     secondary cluster, and then adds a DB instance to the new DB cluster.
@@ -393,7 +418,7 @@ Resources:
                                  <p>Specify the <code class="code">GlobalClusterIdentifier</code> of a global database cluster with the primary DB cluster in a separate AWS Region.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-rds-globalcluster--examples--Adding_an_AWS_Region_to_an_Aurora_database_cluster--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-rds-globalcluster--examples--Adding_a_Region_to_an_Aurora_database_cluster--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
     &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
     &quot;Parameters&quot;: <span>{</span>
         &quot;GlobalClusterIdentifier&quot;: <span>{</span>
@@ -431,7 +456,7 @@ Resources:
         
      </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-rds-globalcluster--examples--Adding_an_AWS_Region_to_an_Aurora_database_cluster--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+                                    <h4 id="aws-resource-rds-globalcluster--examples--Adding_a_Region_to_an_Aurora_database_cluster--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   GlobalClusterIdentifier:
     Type: String
@@ -676,7 +701,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

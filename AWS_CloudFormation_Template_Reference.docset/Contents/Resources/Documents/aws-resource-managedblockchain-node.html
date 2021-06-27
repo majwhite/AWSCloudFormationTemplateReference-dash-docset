@@ -18,7 +18,6 @@
                                  </div>
                                  <p>Creates a node on the specified blockchain network.</p>
                                  <p>Applies to Hyperledger Fabric and Ethereum.</p>
-                                 <p>Ethereum on Managed Blockchain is in preview release and is subject to change.</p>
                                  <h2 id="aws-resource-managedblockchain-node-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -45,9 +44,11 @@ Properties:
                                        <dt><a id="cfn-managedblockchain-node-memberid"></a><span class="term"><code class="code">MemberId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The unique identifier of the member to which the node belongs.</p>
+                                          <p>The unique identifier of the member to which the node belongs. Applies only to Hyperledger
+                                             Fabric.
+                                          </p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -101,7 +102,9 @@ Properties:
                                        <dt><a id="MemberId-fn::getatt"></a><span class="term"><code class="code">MemberId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The unique identifier of the member in which the node is created.</p>
+                                          <p>The unique identifier of the member in which the node is created. Applies only to
+                                             Hyperledger Fabric.
+                                          </p>
                                           
                                        </dd>
                                        <dt><a id="NetworkId-fn::getatt"></a><span class="term"><code class="code">NetworkId</code></span></dt>
@@ -120,10 +123,56 @@ Properties:
                                  </div>
                                  <h2 id="aws-resource-managedblockchain-node--examples">Examples</h2>
                                  <p></p>
-                                 <h3 id="aws-resource-managedblockchain-node--examples--Create_a_Peer_Node_in_a_Member">Create a Peer Node in a Member</h3>
+                                 <h3 id="aws-resource-managedblockchain-node--examples--Create_a_node_on_an_Ethereum_network">Create a node on an Ethereum network</h3>
                                  <p></p>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-managedblockchain-node--examples--Create_a_Peer_Node_in_a_Member--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: &quot;Basic Node template&quot;
+                                    <h4 id="aws-resource-managedblockchain-node--examples--Create_a_node_on_an_Ethereum_network--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: &quot;Basic Ethereum node template&quot;
+Parameters:
+  NetworkId:
+    Type: String
+  InstanceType:
+    Type: String
+  AvailabilityZone: 
+    Type: String
+Resources:
+  Node:
+    Type: &quot;AWS::ManagedBlockchain::Node&quot;
+    Properties:
+      NetworkId: !Ref NetworkId
+      NodeConfiguration:
+        InstanceType: !Ref InstanceType
+        AvailabilityZone: !Ref AvailabilityZone</code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-managedblockchain-node--examples--Create_a_node_on_an_Ethereum_network--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Description&quot;: &quot;Basic Ethereum node template&quot;,
+    &quot;Parameters&quot;: <span>{</span>
+        &quot;NetworkId&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;InstanceType&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        },
+        &quot;AvailabilityZone&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;String&quot;
+        }
+    },
+    &quot;Resources&quot;: <span>{</span>
+        &quot;Node&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::ManagedBlockchain::Node&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;NetworkId&quot;: &quot;NetworkId&quot;,
+                &quot;NodeConfiguration&quot;: <span>{</span>
+                    &quot;InstanceType&quot;: &quot;InstanceType&quot;,
+                    &quot;AvailabilityZone&quot;: &quot;AvailabilityZone&quot;
+                }
+            }
+        }
+    }
+}</code></pre></div>
+                                 <h3 id="aws-resource-managedblockchain-node--examples--Create_a_node_in_a_Hyperledger_Fabric_network_member">Create a node in a Hyperledger Fabric network member</h3>
+                                 <p></p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-managedblockchain-node--examples--Create_a_node_in_a_Hyperledger_Fabric_network_member--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: &quot;Basic Hyperledger Fabric node template&quot;
 Parameters:
   NetworkId:
     Type: String
@@ -145,8 +194,8 @@ Resources:
         AvailabilityZone: !Ref AvailabilityZone
             </code></pre></div>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-managedblockchain-node--examples--Create_a_Peer_Node_in_a_Member--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Description&quot;: &quot;Basic Node template&quot;,
+                                    <h4 id="aws-resource-managedblockchain-node--examples--Create_a_node_in_a_Hyperledger_Fabric_network_member--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Description&quot;: &quot;Basic Hyperledger Fabric node template&quot;,
   &quot;Parameters&quot;: <span>{</span>
     &quot;NetworkId&quot;: <span>{</span>
       &quot;Type&quot;: &quot;String&quot;
@@ -186,7 +235,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

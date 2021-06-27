@@ -28,6 +28,7 @@
       &quot;<a href="#cfn-ecs-cluster-capacityproviders">CapacityProviders</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-ecs-cluster-clustername">ClusterName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ecs-cluster-clustersettings">ClusterSettings</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-ecs-cluster-clustersettings.html">ClusterSettings</a>, ... ]</code>,
+      &quot;<a href="#cfn-ecs-cluster-configuration">Configuration</a>&quot; : <code class="replaceable"><a href="./aws-properties-ecs-cluster-clusterconfiguration.html">ClusterConfiguration</a></code>,
       &quot;<a href="#cfn-ecs-cluster-defaultcapacityproviderstrategy">DefaultCapacityProviderStrategy</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-ecs-cluster-capacityproviderstrategyitem.html">CapacityProviderStrategyItem</a>, ... ]</code>,
       &quot;<a href="#cfn-ecs-cluster-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
@@ -41,6 +42,8 @@ Properties:
   <a href="#cfn-ecs-cluster-clustername">ClusterName</a>: <code class="replaceable">String</code>
   <a href="#cfn-ecs-cluster-clustersettings">ClusterSettings</a>: <code class="replaceable">
     - <a href="./aws-properties-ecs-cluster-clustersettings.html">ClusterSettings</a></code>
+  <a href="#cfn-ecs-cluster-configuration">Configuration</a>: <code class="replaceable">
+    <a href="./aws-properties-ecs-cluster-clusterconfiguration.html">ClusterConfiguration</a></code>
   <a href="#cfn-ecs-cluster-defaultcapacityproviderstrategy">DefaultCapacityProviderStrategy</a>: <code class="replaceable">
     - <a href="./aws-properties-ecs-cluster-capacityproviderstrategyitem.html">CapacityProviderStrategyItem</a></code>
   <a href="#cfn-ecs-cluster-tags">Tags</a>: <code class="replaceable">
@@ -51,9 +54,24 @@ Properties:
                                     <dl>
                                        <dt><a id="cfn-ecs-cluster-capacityproviders"></a><span class="term"><code class="code">CapacityProviders</code></span></dt>
                                        <dd>
-                                          		       
-                                          <p>The capacity providers associated with the cluster.</p>
-                                          	     
+                                          
+                                          <p>The short name of one or more capacity providers to associate with the cluster. A
+                                             capacity provider must be associated with a cluster before it can be included as part
+                                             of
+                                             the default capacity provider strategy of the cluster or used in a capacity provider
+                                             strategy.
+                                          </p>
+                                          
+                                          <p>If specifying a capacity provider that uses an Auto Scaling group, the capacity
+                                             provider must already be created and not already associated with another cluster.
+                                          </p>
+                                          
+                                          <p>To use an AWS Fargate capacity provider, specify either the <code class="code">FARGATE</code> or
+                                             <code class="code">FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are
+                                             available to all accounts and only need to be associated with a cluster to be
+                                             used.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of String
@@ -85,6 +103,16 @@ Properties:
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-ecs-cluster-clustersettings.html">List</a> of <a href="./aws-properties-ecs-cluster-clustersettings.html">ClusterSettings</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ecs-cluster-configuration"></a><span class="term"><code class="code">Configuration</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>The execute command configuration for the cluster.</p>
+                                          	     
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-ecs-cluster-clusterconfiguration.html">ClusterConfiguration</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-ecs-cluster-defaultcapacityproviderstrategy"></a><span class="term"><code class="code">DefaultCapacityProviderStrategy</code></span></dt>
@@ -214,7 +242,7 @@ Properties:
                                  </div>
                                  <h2 id="aws-resource-ecs-cluster--examples">Examples</h2>
                                  <p></p>
-                                 <h3 id="aws-resource-ecs-cluster--examples--Define_a_cluster_with_the_AWS_Fargate_capacity_providers_and_a_default_capacity_provider_strategy_defined">Define a cluster with the AWS Fargate capacity providers and a default capacity provider
+                                 <h3 id="aws-resource-ecs-cluster--examples--Define_a_cluster_with_the__capacity_providers_and_a_default_capacity_provider_strategy_defined">Define a cluster with the Fargate capacity providers and a default capacity provider
                                     strategy defined
                                  </h3>
                                  <p>The following example defines a cluster named <code class="code">MyFargateCluster</code>
@@ -224,7 +252,7 @@ Properties:
                                     capacity providers.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ecs-cluster--examples--Define_a_cluster_with_the_AWS_Fargate_capacity_providers_and_a_default_capacity_provider_strategy_defined--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;ECSCluster&quot;: <span>{</span>
+                                    <h4 id="aws-resource-ecs-cluster--examples--Define_a_cluster_with_the__capacity_providers_and_a_default_capacity_provider_strategy_defined--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;ECSCluster&quot;: <span>{</span>
     &quot;Type&quot;: &quot;AWS: : ECS: : Cluster&quot;,
     &quot;Properties&quot;: <span>{</span>
         &quot;ClusterName&quot;: &quot;MyFargateCluster&quot;,
@@ -245,7 +273,7 @@ Properties:
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ecs-cluster--examples--Define_a_cluster_with_the_AWS_Fargate_capacity_providers_and_a_default_capacity_provider_strategy_defined--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ECSCluster:
+                                    <h4 id="aws-resource-ecs-cluster--examples--Define_a_cluster_with_the__capacity_providers_and_a_default_capacity_provider_strategy_defined--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ECSCluster:
   Type: &apos;AWS::ECS::Cluster&apos;
   Properties:
     ClusterName: MyFargateCluster
@@ -257,6 +285,35 @@ Properties:
         Weight: 1
       - CapacityProvider: FARGATE_SPOT
         Weight: 1</code></pre></div>
+                                 <h3 id="aws-resource-ecs-cluster--examples--Define_a_cluster_with_an_ECS_Exec_configuration_defined">Define a cluster with an ECS Exec configuration defined</h3>
+                                 <p>The following example defines a cluster named <code class="code">MyCluster</code> with ECS
+                                    Exec enabled using the default logging configuration. For more information, see
+                                    <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html">Using ECS Exec for
+                                       debugging</a> in the <em>Amazon ECS Developer
+                                       Guide</em>.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ecs-cluster--examples--Define_a_cluster_with_an_ECS_Exec_configuration_defined--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;ECSCluster&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::ECS::Cluster&quot;,
+        &quot;Properties&quot;: <span>{</span>
+            &quot;ClusterName&quot;: &quot;MyCluster&quot;,
+            &quot;Configuration&quot;: <span>{</span>
+                &quot;ExecuteCommandConfiguration&quot;: <span>{</span>
+                    &quot;Logging&quot;: &quot;DEFAULT&quot;
+                }
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ecs-cluster--examples--Define_a_cluster_with_an_ECS_Exec_configuration_defined--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ECSCluster:
+  Type: &apos;AWS::ECS::Cluster&apos;
+  Properties:
+    ClusterName: MyCluster
+    Configuration:
+       ExecuteCommandConfiguration:
+          Logging: DEFAULT</code></pre></div>
                                  <h3 id="aws-resource-ecs-cluster--examples--Define_an_empty_cluster">Define an empty cluster</h3>
                                  <p>The following example defines an empty cluster named
                                     <code class="code">MyEmptyCluster</code>.
@@ -318,7 +375,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -233,7 +233,13 @@ Properties:
       &quot;Endpoint&quot;: <span>{</span>
          &quot;Type&quot;: &quot;AWS::SageMaker::Endpoint&quot;,
          &quot;Properties&quot;: <span>{</span>
-            &quot;EndpointConfigName&quot;: null
+            &quot;EndpointConfigName&quot;: <span>{</span>
+            &quot;Fn::GetAtt&quot;: [
+              &quot;EndpointConfigWithDataCapture&quot;,
+              &quot;EndpointConfigName&quot;
+             ]
+                
+            }
          }
       },
       &quot;EndpointConfigWithDataCapture&quot;: <span>{</span>
@@ -244,8 +250,20 @@ Properties:
                   &quot;InitialInstanceCount&quot;: 1,
                   &quot;InitialVariantWeight&quot;: 1,
                   &quot;InstanceType&quot;: &quot;ml.t2.large&quot;,
-                  &quot;ModelName&quot;: null,
-                  &quot;VariantName&quot;: null
+                  &quot;ModelName&quot;: <span>{</span>
+                     &quot;Fn::GetAtt&quot;: [
+                       &quot;Model&quot;,
+                       &quot;ModelName&quot;
+                      ]
+                
+                },
+                  &quot;VariantName&quot;: <span>{</span>
+                     &quot;Fn::GetAtt&quot;: [
+                       &quot;Model&quot;,
+                       &quot;ModelName&quot;
+                      ]
+                
+                }
                }
             ],
             &quot;DataCaptureConfig&quot;: <span>{</span>
@@ -276,9 +294,20 @@ Properties:
          &quot;Type&quot;: &quot;AWS::SageMaker::Model&quot;,
          &quot;Properties&quot;: <span>{</span>
             &quot;PrimaryContainer&quot;: <span>{</span>
-               &quot;Image&quot;: null
+               &quot;Image&quot;: <span>{</span> &quot;Fn::FindInMap&quot;: [
+                  &quot;RegionMap&quot;,
+                  <span>{</span>&quot;Ref&quot;: &quot;AWS::Region&quot;},
+                  &quot;MyModelImage&quot;
+                 ]
+               }
             },
-            &quot;ExecutionRoleArn&quot;: null
+            &quot;ExecutionRoleArn&quot;: <span>{</span>
+                     &quot;Fn::GetAtt&quot;: [
+                       &quot;ExecutionRole&quot;,
+                       &quot;Arn&quot;
+                      ]
+                
+                }
          }
       },
       &quot;ExecutionRole&quot;: <span>{</span>
@@ -360,7 +389,13 @@ Properties:
             },
             &quot;DataQualityJobInput&quot;: <span>{</span>
                &quot;EndpointInput&quot;: <span>{</span>
-                  &quot;EndpointName&quot;: null,
+                  &quot;EndpointName&quot;: <span>{</span>
+                     &quot;Fn::GetAtt&quot;: [
+                       &quot;Endpoint&quot;,
+                       &quot;EndpointName&quot;
+                      ]
+                
+                },
                   &quot;LocalPath&quot;: &quot;/opt/ml/processing/endpointdata&quot;
                }
             },
@@ -529,7 +564,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

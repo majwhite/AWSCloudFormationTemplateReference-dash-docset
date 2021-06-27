@@ -79,7 +79,7 @@ Properties:
                                        <dt><a id="cfn-ec2-security-group-ingress-cidrip"></a><span class="term"><code class="code">CidrIp</code></span></dt>
                                        <dd>
                                           
-                                          <p>The IPv4 ranges.</p>
+                                          <p>The IPv4 address range, in CIDR format.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -90,7 +90,7 @@ Properties:
                                        <dt><a id="cfn-ec2-security-group-ingress-cidripv6"></a><span class="term"><code class="code">CidrIpv6</code></span></dt>
                                        <dd>
                                           
-                                          <p>[VPC only] The IPv6 ranges.</p>
+                                          <p>The IPv6 address range, in CIDR format.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -269,15 +269,15 @@ Properties:
                                  </div>
                                  <h2 id="aws-properties-ec2-security-group-ingress--examples">Examples</h2>
                                  <p></p>
-                                 <h3 id="aws-properties-ec2-security-group-ingress--examples--EC2_Security_Group_and_Ingress_Rule">EC2 Security Group and Ingress Rule</h3>
-                                 <p>To declare an Amazon EC2 (non-VPC) security group and an ingress rule, use the <code class="code">SourceSecurityGroupName </code> property in the ingress rule.
+                                 <h3 id="aws-properties-ec2-security-group-ingress--examples--EC2-Classic_security_group_and_ingress_rule">EC2-Classic security group and ingress rule</h3>
+                                 <p>To declare an EC2-Classic security group and an ingress rule, use the <code class="code">SourceSecurityGroupName </code> property in the ingress rule.
                                  </p>
                                  <p>The following template example defines an EC2 security group with an ingress rule
                                     that allows incoming traffic on port 80 from any other host in the security group.
                                     
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-properties-ec2-security-group-ingress--examples--EC2_Security_Group_and_Ingress_Rule--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">
+                                    <h4 id="aws-properties-ec2-security-group-ingress--examples--EC2-Classic_security_group_and_ingress_rule--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">
 &quot;SGBase&quot;: <span>{</span>
    &quot;Type&quot;: &quot;AWS::EC2::SecurityGroup&quot;,
    &quot;Properties&quot;: <span>{</span>
@@ -310,7 +310,7 @@ Properties:
    } 
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-properties-ec2-security-group-ingress--examples--EC2_Security_Group_and_Ingress_Rule--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">SGBase:
+                                    <h4 id="aws-properties-ec2-security-group-ingress--examples--EC2-Classic_security_group_and_ingress_rule--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">SGBase:
    Type: &apos;AWS::EC2::SecurityGroup&apos;
    Properties:
       GroupDescription: Base Security Group
@@ -327,7 +327,7 @@ SGBaseIngress:
       FromPort: 80
       ToPort: 80
       SourceSecurityGroupId: !GetAtt SGBase.GroupId</code></pre></div>
-                                 <h3 id="aws-properties-ec2-security-group-ingress--examples--Allow_Traffic_from_a_Security_Group_in_a_Peered_VPC">Allow Traffic from a Security Group in a Peered VPC</h3>
+                                 <h3 id="aws-properties-ec2-security-group-ingress--examples--Allow_traffic_from_a_security_group_in_a_peered_VPC">Allow traffic from a security group in a peered VPC</h3>
                                  <p>Like the previous example, the following example allows one-way traffic from an
                                     originating (source) security group to a destination (target) security group. However,
                                     in
@@ -349,7 +349,7 @@ SGBaseIngress:
                                     ID <code class="code">sg-12345678</code>. 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-properties-ec2-security-group-ingress--examples--Allow_Traffic_from_a_Security_Group_in_a_Peered_VPC--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-properties-ec2-security-group-ingress--examples--Allow_traffic_from_a_security_group_in_a_peered_VPC--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
     &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
     &quot;Resources&quot;: <span>{</span>
         &quot;TargetSG&quot;: <span>{</span>
@@ -378,7 +378,7 @@ SGBaseIngress:
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-properties-ec2-security-group-ingress--examples--Allow_Traffic_from_a_Security_Group_in_a_Peered_VPC--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+                                    <h4 id="aws-properties-ec2-security-group-ingress--examples--Allow_traffic_from_a_security_group_in_a_peered_VPC--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Resources:
   TargetSG:
     Type: &apos;AWS::EC2::SecurityGroup&apos;
@@ -395,7 +395,7 @@ Resources:
       SourceSecurityGroupId: sg-12345678
       SourceSecurityGroupOwnerId: &apos;123456789012&apos;
 </code></pre></div>
-                                 <h3 id="aws-properties-ec2-security-group-ingress--examples--VPC_Security_Groups_with_Egress_and_Ingress_Rules">VPC Security Groups with Egress and Ingress Rules</h3>
+                                 <h3 id="aws-properties-ec2-security-group-ingress--examples--VPC_security_groups_with_egress_and_ingress_rules">VPC security groups with egress and ingress rules</h3>
                                  <p>In some cases, you might have an originating (source) security group to which you
                                     want to add an outbound rule that allows traffic to a destination (target) security
                                     group. The target security group also needs an inbound rule that allows traffic from
@@ -406,7 +406,7 @@ Resources:
                                     template example. 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-properties-ec2-security-group-ingress--examples--VPC_Security_Groups_with_Egress_and_Ingress_Rules--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Resources&quot;: <span>{</span>
+                                    <h4 id="aws-properties-ec2-security-group-ingress--examples--VPC_security_groups_with_egress_and_ingress_rules--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Resources&quot;: <span>{</span>
    &quot;SourceSG&quot;: <span>{</span>
       &quot;Type&quot;: &quot;AWS::EC2::SecurityGroup&quot;,
       &quot;Properties&quot;: <span>{</span>
@@ -463,7 +463,7 @@ Resources:
    }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-properties-ec2-security-group-ingress--examples--VPC_Security_Groups_with_Egress_and_Ingress_Rules--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">SourceSG:
+                                    <h4 id="aws-properties-ec2-security-group-ingress--examples--VPC_security_groups_with_egress_and_ingress_rules--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">SourceSG:
     Type: AWS::EC2::SecurityGroup
     Properties:
       VpcId: vpc-1a2b3c4d
@@ -501,12 +501,12 @@ InboundRule:
         Fn::GetAtt:
         - TargetSG
         - GroupId</code></pre></div>
-                                 <h3 id="aws-properties-ec2-security-group-ingress--examples--Allow__Ping_Requests">Allow  Ping Requests</h3>
+                                 <h3 id="aws-properties-ec2-security-group-ingress--examples--Allow_ping_requests">Allow ping requests</h3>
                                  <p>To allow ping requests, add the ICMP protocol type and specify 8 (echo request) for
                                     the ICMP type and either 0 or -1 (all) for the ICMP code. 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-properties-ec2-security-group-ingress--examples--Allow__Ping_Requests--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;SGPing&quot; : <span>{</span>
+                                    <h4 id="aws-properties-ec2-security-group-ingress--examples--Allow_ping_requests--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;SGPing&quot; : <span>{</span>
   &quot;Type&quot; : &quot;AWS::EC2::SecurityGroup&quot;,
   &quot;DependsOn&quot;: &quot;VPC&quot;,
   &quot;Properties&quot; : <span>{</span>
@@ -519,7 +519,7 @@ InboundRule:
    }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-properties-ec2-security-group-ingress--examples--Allow__Ping_Requests--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">SGPing:
+                                    <h4 id="aws-properties-ec2-security-group-ingress--examples--Allow_ping_requests--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">SGPing:
    Type: AWS::EC2::SecurityGroup
     DependsOn: VPC
     Properties:
@@ -545,7 +545,7 @@ InboundRule:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

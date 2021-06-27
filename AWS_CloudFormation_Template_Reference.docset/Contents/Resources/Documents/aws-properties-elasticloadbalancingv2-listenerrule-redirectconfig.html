@@ -93,7 +93,8 @@
                                        <dt><a id="cfn-elasticloadbalancingv2-listenerrule-redirectconfig-host"></a><span class="term"><code class="code">Host</code></span></dt>
                                        <dd>
                                           
-                                          <p>The hostname. This component is not percent-encoded. The hostname can contain #<span>{</span>host}.
+                                          <p>The hostname. This component is not percent-encoded. The hostname can contain
+                                             #<span>{</span>host}.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -178,6 +179,42 @@
                                        </dd>
                                     </dl>
                                  </div>
+                                 <h2 id="aws-properties-elasticloadbalancingv2-listenerrule-redirectconfig--examples">Examples</h2>
+                                 <p>This example creates a listener rule with an action that redirects HTTPS requests
+                                    on
+                                    port 443. At least one of the following components must be modified (to avoid a redirect
+                                    loop): protocol, hostname, port, or path. Components that are not modified retain
+                                    their
+                                    original values.
+                                 </p>
+                                 <h3 id="aws-properties-elasticloadbalancingv2-listenerrule-redirectconfig--examples--"></h3>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-elasticloadbalancingv2-listenerrule-redirectconfig--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;HTTPSlistenerRule&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::ElasticLoadBalancingV2::ListenerRule&quot;,
+    &quot;Properties&quot;: <span>{</span>
+        &quot;Actions&quot;: [
+            <span>{</span>
+               &quot;Type&quot;: &quot;redirect&quot;,
+               &quot;RedirectConfig&quot;: <span>{</span>
+                   &quot;Protocol&quot;: &quot;HTTPS&quot;,
+                   &quot;Port&quot;: 443,
+                   &quot;Host&quot;: &quot;#<span>{</span>host}&quot;,
+                   &quot;Path&quot;: &quot;/#<span>{</span>path}&quot;,
+                   &quot;Query&quot;: &quot;#<span>{</span>query}&quot;,
+                   &quot;StatusCode&quot;: &quot;HTTP_301&quot;
+               }
+            }
+        ],        
+        &quot;Conditions&quot;: [
+            &quot;Field&quot; : &quot;path-pattern&quot;,
+            &quot;Values&quot; : [&quot;/path&quot;]
+        ],
+        &quot;Listener&quot;: <span>{</span>
+               &quot;Ref&quot;: &quot;myHTTPListener&quot;
+        },
+        &quot;Priority&quot;: &quot;1&quot;
+    }
+}</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -188,7 +225,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

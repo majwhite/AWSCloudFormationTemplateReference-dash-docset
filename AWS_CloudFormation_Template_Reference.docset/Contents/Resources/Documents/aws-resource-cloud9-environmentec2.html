@@ -28,6 +28,7 @@
       &quot;<a href="#cfn-cloud9-environmentec2-automaticstoptimeminutes">AutomaticStopTimeMinutes</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-cloud9-environmentec2-connectiontype">ConnectionType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-cloud9-environmentec2-description">Description</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-cloud9-environmentec2-imageid">ImageId</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-cloud9-environmentec2-instancetype">InstanceType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-cloud9-environmentec2-name">Name</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-cloud9-environmentec2-ownerarn">OwnerArn</a>&quot; : <code class="replaceable">String</code>,
@@ -43,6 +44,7 @@ Properties:
   <a href="#cfn-cloud9-environmentec2-automaticstoptimeminutes">AutomaticStopTimeMinutes</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-cloud9-environmentec2-connectiontype">ConnectionType</a>: <code class="replaceable">String</code>
   <a href="#cfn-cloud9-environmentec2-description">Description</a>: <code class="replaceable">String</code>
+  <a href="#cfn-cloud9-environmentec2-imageid">ImageId</a>: <code class="replaceable">String</code>
   <a href="#cfn-cloud9-environmentec2-instancetype">InstanceType</a>: <code class="replaceable">String</code>
   <a href="#cfn-cloud9-environmentec2-name">Name</a>: <code class="replaceable">String</code>
   <a href="#cfn-cloud9-environmentec2-ownerarn">OwnerArn</a>: <code class="replaceable">String</code>
@@ -95,6 +97,72 @@ Properties:
                                           <p><em>Maximum</em>: <code class="code">200</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-cloud9-environmentec2-imageid"></a><span class="term"><code class="code">ImageId</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The identifier for the Amazon Machine Image (AMI) that&apos;s used to create the EC2 instance.
+                                             To choose an AMI for the instance, you must specify a valid AMI alias or a valid AWS
+                                             Systems Manager path.
+                                          </p>  
+                                          
+                                          <p>The default AMI is used if the parameter isn&apos;t explicitly assigned a value in the
+                                             request. 
+                                             
+                                          </p>
+                                          
+                                          <p><b>AMI aliases </b></p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   <p><b>Amazon Linux (default): <code class="code">amazonlinux-1-x86_64</code></b> 
+                                                   </p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p>Amazon Linux 2: <code class="code">amazonlinux-2-x86_64</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p>Ubuntu 18.04: <code class="code">ubuntu-18.04-x86_64</code></p>
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          
+                                          <p><b>SSM paths</b></p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   <p><b>Amazon Linux (default): <code class="code">resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64</code></b></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p>Amazon Linux 2: <code class="code">resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p>Ubuntu 18.04: <code class="code">resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64</code></p>
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Maximum</em>: <code class="code">512</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
                                        <dt><a id="cfn-cloud9-environmentec2-instancetype"></a><span class="term"><code class="code">InstanceType</code></span></dt>
                                        <dd>
                                           
@@ -126,7 +194,7 @@ Properties:
                                        <dd>
                                           
                                           <p>The Amazon Resource Name (ARN) of the environment owner. This ARN can be the ARN of
-                                             any AWS Identity and Access Management (IAM) principal. If this value is not specified,
+                                             any AWS Identity and Access Management principal. If this value is not specified,
                                              the ARN defaults to this environment&apos;s creator.
                                           </p>
                                           
@@ -134,7 +202,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Pattern</em>: <code class="code">^arn:aws:(iam|sts)::\d+:(root|(user\/[\w+=/:,.@-]<span>{</span>1,64}|federated-user\/[\w+=/:,.@-]<span>{</span>2,32}|assumed-role\/[\w+=:,.@-]<span>{</span>1,64}\/[\w+=,.@-]<span>{</span>1,64}))$</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):(iam|sts)::\d+:(root|(user\/[\w+=/:,.@-]<span>{</span>1,64}|federated-user\/[\w+=/:,.@-]<span>{</span>2,32}|assumed-role\/[\w+=:,.@-]<span>{</span>1,64}\/[\w+=,.@-]<span>{</span>1,64}))$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-cloud9-environmentec2-repositories"></a><span class="term"><code class="code">Repositories</code></span></dt>
@@ -158,8 +226,9 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Minimum</em>: <code class="code">5</code></p>
-                                          <p><em>Maximum</em>: <code class="code">30</code></p>
+                                          <p><em>Minimum</em>: <code class="code">15</code></p>
+                                          <p><em>Maximum</em>: <code class="code">24</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^(subnet-[0-9a-f]<span>{</span>8}|subnet-[0-9a-f]<span>{</span>17})$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-cloud9-environmentec2-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
@@ -218,7 +287,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

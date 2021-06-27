@@ -27,7 +27,8 @@
                                     <h3 id="aws-resource-cassandra-keyspace-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::Cassandra::Keyspace&quot;,
   &quot;Properties&quot; : <span>{</span>
-      &quot;<a href="#cfn-cassandra-keyspace-keyspacename">KeyspaceName</a>&quot; : <code class="replaceable">String</code>
+      &quot;<a href="#cfn-cassandra-keyspace-keyspacename">KeyspaceName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-cassandra-keyspace-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
 }
 </code></pre></div>
@@ -35,6 +36,8 @@
                                     <h3 id="aws-resource-cassandra-keyspace-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Cassandra::Keyspace
 Properties: 
   <a href="#cfn-cassandra-keyspace-keyspacename">KeyspaceName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-cassandra-keyspace-tags">Tags</a>: <code class="replaceable">
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
 </code></pre></div>
                                  <h2 id="aws-resource-cassandra-keyspace-properties">Properties</h2>
                                  <div class="variablelist">
@@ -42,7 +45,8 @@ Properties:
                                        <dt><a id="cfn-cassandra-keyspace-keyspacename"></a><span class="term"><code class="code">KeyspaceName</code></span></dt>
                                        <dd>
                                           
-                                          <p>The name of the keyspace to be created. If you don&apos;t specify a name, AWS
+                                          <p>The name of the keyspace to be created. The keyspace name is case sensitive. If you
+                                             don&apos;t specify a name, AWS
                                              CloudFormation generates a unique ID and uses that ID for the keyspace name. For more
                                              information, see <a href="aws-properties-name.html">Name
                                                 Type</a>.
@@ -61,6 +65,18 @@ Properties:
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
+                                       <dt><a id="cfn-cassandra-keyspace-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A list of key-value pair tags to be
+                                             attached to the resource.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-cassandra-keyspace-return-values">Return values</h2>
@@ -78,7 +94,7 @@ Properties:
                                  <p></p>
                                  <h3 id="aws-resource-cassandra-keyspace--examples--Create_a_New_Keyspace">Create a New Keyspace</h3>
                                  <p>The following example creates a new keyspace named
-                                    <code class="code">MyNewKeyspace</code>:
+                                    <code class="code">MyNewKeyspace</code> with the following tags <code class="code"><span>{</span>&apos;key1&apos;:&apos;val1&apos;, &apos;key2&apos;:&apos;val2&apos;}</code>:
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-cassandra-keyspace--examples--Create_a_New_Keyspace--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -87,7 +103,8 @@ Properties:
     &quot;MyNewKeyspace&quot;: <span>{</span>
       &quot;Type&quot;: &quot;AWS::Cassandra::Keyspace&quot;,
       &quot;Properties&quot;: <span>{</span>
-        &quot;KeyspaceName&quot;: &quot;MyNewKeyspace&quot;
+        &quot;KeyspaceName&quot;: &quot;MyNewKeyspace&quot;,
+        &quot;Tags&quot;: [<span>{</span>&quot;Key&quot;:&quot;tag1&quot;,&quot;Value&quot;:&quot;val1&quot;}, <span>{</span>&quot;Key&quot;:&quot;tag2&quot;,&quot;Value&quot;:&quot;val2&quot;}]
       }
     }
   }
@@ -98,7 +115,12 @@ Resources:
   MyNewKeyspace:
     Type: AWS::Cassandra::Keyspace
     Properties:
-      KeyspaceName: MyNewKeyspace</code></pre></div>
+      KeyspaceName: MyNewKeyspace
+      Tags:
+      - Key: tag1
+      Value: val1
+      - Key: tag2
+      Value: val2</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -109,7 +131,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

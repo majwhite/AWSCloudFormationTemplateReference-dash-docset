@@ -22,6 +22,7 @@
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-properties-medialive-channel-rtmpgroupsettings-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-medialive-channel-rtmpgroupsettings-admarkers">AdMarkers</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
   &quot;<a href="#cfn-medialive-channel-rtmpgroupsettings-authenticationscheme">AuthenticationScheme</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-medialive-channel-rtmpgroupsettings-cachefullbehavior">CacheFullBehavior</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-medialive-channel-rtmpgroupsettings-cachelength">CacheLength</a>&quot; : <code class="replaceable">Integer</code>,
@@ -31,7 +32,9 @@
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h3 id="aws-properties-medialive-channel-rtmpgroupsettings-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-medialive-channel-rtmpgroupsettings-authenticationscheme">AuthenticationScheme</a>: <code class="replaceable">String</code>
+                                    <h3 id="aws-properties-medialive-channel-rtmpgroupsettings-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-medialive-channel-rtmpgroupsettings-admarkers">AdMarkers</a>: <code class="replaceable">
+    - String</code>
+  <a href="#cfn-medialive-channel-rtmpgroupsettings-authenticationscheme">AuthenticationScheme</a>: <code class="replaceable">String</code>
   <a href="#cfn-medialive-channel-rtmpgroupsettings-cachefullbehavior">CacheFullBehavior</a>: <code class="replaceable">String</code>
   <a href="#cfn-medialive-channel-rtmpgroupsettings-cachelength">CacheLength</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-medialive-channel-rtmpgroupsettings-captiondata">CaptionData</a>: <code class="replaceable">String</code>
@@ -41,6 +44,20 @@
                                  <h2 id="aws-properties-medialive-channel-rtmpgroupsettings-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-medialive-channel-rtmpgroupsettings-admarkers"></a><span class="term"><code class="code">AdMarkers</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>Choose the ad marker type for this output group. MediaLive will create a message based
+                                             on the content of each SCTE-35 message, format it for that marker type, and insert
+                                             it in the datastream.
+                                          </p>
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-medialive-channel-rtmpgroupsettings-authenticationscheme"></a><span class="term"><code class="code">AuthenticationScheme</code></span></dt>
                                        <dd>
                                           
@@ -55,15 +72,14 @@
                                        <dt><a id="cfn-medialive-channel-rtmpgroupsettings-cachefullbehavior"></a><span class="term"><code class="code">CacheFullBehavior</code></span></dt>
                                        <dd>
                                           
-                                          <p>Controls behavior when the content cache fills up. If a remote origin server stalls
-                                             the RTMP connection and doesn&apos;t accept content fast enough, the media cache fills
-                                             up.
-                                             When the cache reaches the duration specified by cacheLength, the cache stops accepting
-                                             new content. If set to disconnectImmediately, the RTMP output forces a disconnect.
-                                             Clear
-                                             the media cache, and reconnect after restartDelay seconds. If set to waitForServer,
-                                             the
-                                             RTMP output waits up to 5 minutes to allow the origin server to begin accepting data
+                                          <p>Controls behavior when the content cache fills up. If a remote
+                                             origin server stalls the RTMP connection and doesn&apos;t accept content
+                                             fast enough, the media cache fills up. When the cache reaches the
+                                             duration specified by cacheLength, the cache stops accepting new
+                                             content. If set to disconnectImmediately, the RTMP output forces a
+                                             disconnect. Clear the media cache, and reconnect after restartDelay
+                                             seconds. If set to waitForServer, the RTMP output waits up to 5
+                                             minutes to allow the origin server to begin accepting data
                                              again.
                                           </p>
                                           
@@ -76,7 +92,9 @@
                                        <dt><a id="cfn-medialive-channel-rtmpgroupsettings-cachelength"></a><span class="term"><code class="code">CacheLength</code></span></dt>
                                        <dd>
                                           
-                                          <p>The cache length, in seconds, that is used to calculate buffer size.</p>
+                                          <p>The cache length, in seconds, that is used to calculate buffer
+                                             size.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -87,12 +105,11 @@
                                        <dt><a id="cfn-medialive-channel-rtmpgroupsettings-captiondata"></a><span class="term"><code class="code">CaptionData</code></span></dt>
                                        <dd>
                                           
-                                          <p>Controls the types of data that pass to onCaptionInfo outputs. If set to all, 608
-                                             and
-                                             708 carried DTVCC data is passed. If set to field1AndField2608, DTVCC data
-                                             is
-                                             stripped out, but 608 data from both fields is passed. If set to
-                                             field1608, only the data carried in 608 from field 1 video is passed.
+                                          <p>Controls the types of data that pass to onCaptionInfo outputs. If
+                                             set to all, 608 and 708 carried DTVCC data is passed. If set to
+                                             field1AndField2608, DTVCC data is stripped out, but 608 data from
+                                             both fields is passed. If set to field1608, only the data carried in
+                                             608 from field 1 video is passed.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -104,11 +121,10 @@
                                        <dt><a id="cfn-medialive-channel-rtmpgroupsettings-inputlossaction"></a><span class="term"><code class="code">InputLossAction</code></span></dt>
                                        <dd>
                                           
-                                          <p>Controls the behavior of this RTMP group if the input becomes unavailable.
-                                             emitOutput:
-                                             Emit a slate until the input returns. pauseOutput: Stop transmitting data until the
-                                             input returns. This does not close the underlying RTMP
-                                             connection.
+                                          <p>Controls the behavior of this RTMP group if the input becomes
+                                             unavailable. emitOutput: Emit a slate until the input returns.
+                                             pauseOutput: Stop transmitting data until the input returns. This
+                                             does not close the underlying RTMP connection.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -120,8 +136,8 @@
                                        <dt><a id="cfn-medialive-channel-rtmpgroupsettings-restartdelay"></a><span class="term"><code class="code">RestartDelay</code></span></dt>
                                        <dd>
                                           
-                                          <p>If a streaming output fails, the number of seconds to wait until a restart is
-                                             initiated. A value of 0 means never restart.
+                                          <p>If a streaming output fails, the number of seconds to wait until a
+                                             restart is initiated. A value of 0 means never restart.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -142,7 +158,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -16,22 +16,59 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The settings for Automatic Input Failover.</p>
+                                 <p>Settings to configure the conditions that will define the input as
+                                    unhealthy and that will make MediaLive fail over to the other input
+                                    in the input failover pair.
+                                 </p>
+                                 <p>The parent of this entity is InputAttachment.</p>
                                  <h2 id="aws-properties-medialive-channel-automaticinputfailoversettings-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-properties-medialive-channel-automaticinputfailoversettings-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-medialive-channel-automaticinputfailoversettings-errorcleartimemsec">ErrorClearTimeMsec</a>&quot; : <code class="replaceable">Integer</code>,
+  &quot;<a href="#cfn-medialive-channel-automaticinputfailoversettings-failoverconditions">FailoverConditions</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-medialive-channel-failovercondition.html">FailoverCondition</a>, ... ]</code>,
   &quot;<a href="#cfn-medialive-channel-automaticinputfailoversettings-inputpreference">InputPreference</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-medialive-channel-automaticinputfailoversettings-secondaryinputid">SecondaryInputId</a>&quot; : <code class="replaceable">String</code>
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h3 id="aws-properties-medialive-channel-automaticinputfailoversettings-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-medialive-channel-automaticinputfailoversettings-inputpreference">InputPreference</a>: <code class="replaceable">String</code>
+                                    <h3 id="aws-properties-medialive-channel-automaticinputfailoversettings-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-medialive-channel-automaticinputfailoversettings-errorcleartimemsec">ErrorClearTimeMsec</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-medialive-channel-automaticinputfailoversettings-failoverconditions">FailoverConditions</a>: <code class="replaceable">
+    - <a href="./aws-properties-medialive-channel-failovercondition.html">FailoverCondition</a></code>
+  <a href="#cfn-medialive-channel-automaticinputfailoversettings-inputpreference">InputPreference</a>: <code class="replaceable">String</code>
   <a href="#cfn-medialive-channel-automaticinputfailoversettings-secondaryinputid">SecondaryInputId</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-properties-medialive-channel-automaticinputfailoversettings-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-medialive-channel-automaticinputfailoversettings-errorcleartimemsec"></a><span class="term"><code class="code">ErrorClearTimeMsec</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>This clear time defines the requirement a recovered input must meet to be considered
+                                             healthy. The input must have no failover conditions for this length of time. Enter
+                                             a time in milliseconds. This value is particularly important if the input_preference
+                                             for the failover pair is set to PRIMARY_INPUT_PREFERRED, because after this time,
+                                             MediaLive will switch back to the primary input.
+                                          </p>
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-medialive-channel-automaticinputfailoversettings-failoverconditions"></a><span class="term"><code class="code">FailoverConditions</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>A list of failover conditions. If any of these conditions occur, MediaLive will perform
+                                             a failover to the other input.
+                                          </p>
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-medialive-channel-failovercondition.html">FailoverCondition</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-medialive-channel-automaticinputfailoversettings-inputpreference"></a><span class="term"><code class="code">InputPreference</code></span></dt>
                                        <dd>
                                           
@@ -68,7 +105,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

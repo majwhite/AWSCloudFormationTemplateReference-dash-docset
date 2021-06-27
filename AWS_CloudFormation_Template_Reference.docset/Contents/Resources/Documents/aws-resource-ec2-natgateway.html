@@ -16,16 +16,21 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Specifies a network address translation (NAT) gateway in the specified public 
-                                    subnet. Use a NAT gateway to allow instances in a private subnet to connect to the
-                                    Internet or to other AWS services, 
-                                    but prevent the Internet from initiating a connection with those instances. For more
-                                    information and a sample architectural 
-                                    diagram, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html">NAT Gateways</a> in the
-                                    <em>Amazon VPC User Guide</em>.
+                                 <p>Specifies a network address translation (NAT) gateway in the specified subnet. 
+                                    You can create either a public NAT gateway or a private NAT gateway. The default is
+                                    a
+                                    public NAT gateway. If you create a public NAT gateway, you must specify an elastic
+                                    IP address.
+                                 </p>
+                                 <p>With a NAT gateway, instances in a private subnet can connect to the internet, other
+                                    AWS services,
+                                    or an on-premises network using the IP address of the NAT gateway.
                                  </p>
                                  <p>If you add a default route (<code class="code">AWS::EC2::Route</code> resource) that points to a NAT gateway, specify the NAT 
                                     gateway ID for the route&apos;s <code class="code">NatGatewayId</code> property.
+                                 </p>
+                                 <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html">NAT Gateways</a> in the
+                                    <em>Amazon VPC User Guide</em>.
                                  </p>
                                  <h2 id="aws-resource-ec2-natgateway-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -34,6 +39,7 @@
   &quot;Type&quot; : &quot;AWS::EC2::NatGateway&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-ec2-natgateway-allocationid">AllocationId</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ec2-natgateway-connectivitytype">ConnectivityType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ec2-natgateway-subnetid">SubnetId</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ec2-natgateway-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
@@ -43,6 +49,7 @@
                                     <h3 id="aws-resource-ec2-natgateway-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::EC2::NatGateway
 Properties: 
   <a href="#cfn-ec2-natgateway-allocationid">AllocationId</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ec2-natgateway-connectivitytype">ConnectivityType</a>: <code class="replaceable">String</code>
   <a href="#cfn-ec2-natgateway-subnetid">SubnetId</a>: <code class="replaceable">String</code>
   <a href="#cfn-ec2-natgateway-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
@@ -53,21 +60,32 @@ Properties:
                                        <dt><a id="cfn-ec2-natgateway-allocationid"></a><span class="term"><code class="code">AllocationId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The allocation ID of an Elastic IP address to associate with the NAT gateway. 
-                                             If the Elastic IP address is associated with another resource, you must first disassociate
-                                             it.
+                                          <p>[Public NAT gateway only] The allocation ID of the Elastic IP address that&apos;s associated
+                                             with the NAT gateway.
                                           </p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
+                                       <dt><a id="cfn-ec2-natgateway-connectivitytype"></a><span class="term"><code class="code">ConnectivityType</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Indicates whether the NAT gateway supports public or private connectivity.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">private | public</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
                                        <dt><a id="cfn-ec2-natgateway-subnetid"></a><span class="term"><code class="code">SubnetId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The public subnet in which to create the NAT gateway.</p>
+                                          <p>The ID of the subnet in which the NAT gateway is located.</p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -77,9 +95,9 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-ec2-natgateway-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
-                                          
-                                          <p>The tags (key-value pairs) to associate with this resource.</p>
-                                          
+                                          		       
+                                          <p>The tags for the NAT gateway.</p>
+                                          	     
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
@@ -95,19 +113,19 @@ Properties:
                                  </p>
                                  <h2 id="aws-resource-ec2-natgateway--examples">Examples</h2>
                                  <p></p>
-                                 <h3 id="aws-resource-ec2-natgateway--examples--NAT_Gateway">NAT Gateway</h3>
+                                 <h3 id="aws-resource-ec2-natgateway--examples--NAT_gateway">NAT gateway</h3>
                                  <p>The following example creates a NAT gateway and a route that associates the NAT gateway
                                     with a route table. The route table must be associated with an Internet gateway so
                                     that the
                                     NAT gateway can connect to the Internet.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ec2-natgateway--examples--NAT_Gateway--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;NAT&quot; : <span>{</span>
+                                    <h4 id="aws-resource-ec2-natgateway--examples--NAT_gateway--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;NAT&quot; : <span>{</span>
    &quot;Type&quot; : &quot;AWS::EC2::NatGateway&quot;,
    &quot;Properties&quot; : <span>{</span>
       &quot;AllocationId&quot; : <span>{</span> &quot;Fn::GetAtt&quot; : [&quot;EIP&quot;, &quot;AllocationId&quot;]},
       &quot;SubnetId&quot; : <span>{</span> &quot;Ref&quot; : &quot;Subnet&quot;},
-      &quot;Tags&quot; : [ <span>{</span>&quot;Key&quot; : &quot;foo&quot;, &quot;Value&quot; : &quot;bar&quot; } ]
+      &quot;Tags&quot; : [ <span>{</span>&quot;Key&quot; : &quot;stack&quot;, &quot;Value&quot; : &quot;production&quot; } ]
      }
 },
 &quot;EIP&quot; : <span>{</span>
@@ -126,7 +144,7 @@ Properties:
    }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ec2-natgateway--examples--NAT_Gateway--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">NAT:
+                                    <h4 id="aws-resource-ec2-natgateway--examples--NAT_gateway--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">NAT:
    Type: AWS::EC2::NatGateway
    Properties:
       AllocationId:
@@ -136,8 +154,8 @@ Properties:
       SubnetId:
          Ref: Subnet
       Tags:
-      - Key: foo
-        Value: bar
+      - Key: stack
+        Value: production
 EIP:
    DependsOn: VPCGatewayAttach
    Type: AWS::EC2::EIP
@@ -161,7 +179,7 @@ Route:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

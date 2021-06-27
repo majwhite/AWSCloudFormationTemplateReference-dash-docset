@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-kms-replicakey">AWS::KMS::ReplicaKey</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The <code class="code">AWS::KMS::ReplicaKey</code> resource specifies a multi-Region replica key that
+                                    is based on a multi-Region primary key.
+                                 </p>
+                                 <p><em>Multi-Region keys</em> are an AWS KMS feature that lets you
+                                    create multiple interoperable CMKs in different AWS Regions. Because these
+                                    CMKs have the same key ID, key material, and other metadata, you can use them to encrypt
+                                    data
+                                    in one AWS Region and decrypt it in a different AWS Region
+                                    without making a cross-Region call or exposing the plaintext data. For more information,
+                                    see
+                                    <a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html">Using multi-Region keys</a> in the <em>AWS Key Management Service Developer
+                                       Guide</em>.
+                                 </p>
+                                 <p>A multi-Region <em>primary key</em> is a fully functional symmetric or
+                                    asymmetric CMK that is also the model for replica keys in other AWS Regions.
+                                    To create a multi-Region primary key, add an <a href="aws-resource-kms-key.html">AWS::KMS::Key</a>
+                                    resource to your CloudFormation stack. Set its <code class="code">MultiRegion</code> property to
+                                    true.
+                                 </p>
+                                 <p>A multi-Region <em>replica key</em> is a fully functional symmetric or
+                                    asymmetric CMK that has the same key ID and key material as a multi-Region primary
+                                    key, but is
+                                    located in a different AWS Region of the same AWS partition.
+                                    There can be multiple replicas of a primary key, but each must be in a different AWS
+                                    Region .
+                                 </p>
+                                 <p>A primary key and its replicas have the same key ID and key material. They also have
+                                    the
+                                    same key spec, key usage, key material origin, and automatic key rotation status.
+                                    These
+                                    properties are known as <em>shared properties</em>. If they change, AWS KMS synchronizes the change to all related multi-Region keys.
+                                    All other properties
+                                    of a replica key can differ, including its key policy, tags, aliases, and key state.
+                                    AWS KMS does not synchronize these properties.
+                                 </p>
+                                 <h2 id="aws-resource-kms-replicakey-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-kms-replicakey-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::KMS::ReplicaKey&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-kms-replicakey-description">Description</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-kms-replicakey-enabled">Enabled</a>&quot; : <code class="replaceable">Boolean</code>,
+      &quot;<a href="#cfn-kms-replicakey-keypolicy">KeyPolicy</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-kms-replicakey-pendingwindowindays">PendingWindowInDays</a>&quot; : <code class="replaceable">Integer</code>,
+      &quot;<a href="#cfn-kms-replicakey-primarykeyarn">PrimaryKeyArn</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-kms-replicakey-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-kms-replicakey-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::KMS::ReplicaKey
+Properties: 
+  <a href="#cfn-kms-replicakey-description">Description</a>: <code class="replaceable">String</code>
+  <a href="#cfn-kms-replicakey-enabled">Enabled</a>: <code class="replaceable">Boolean</code>
+  <a href="#cfn-kms-replicakey-keypolicy">KeyPolicy</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-kms-replicakey-pendingwindowindays">PendingWindowInDays</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-kms-replicakey-primarykeyarn">PrimaryKeyArn</a>: <code class="replaceable">String</code>
+  <a href="#cfn-kms-replicakey-tags">Tags</a>: <code class="replaceable">
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
+</code></pre></div>
+                                 <h2 id="aws-resource-kms-replicakey-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-kms-replicakey-description"></a><span class="term"><code class="code">Description</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A description of the CMK. Use a description that helps you decide whether the CMK
+                                             is
+                                             appropriate for a task. The default value is an empty string (no description).
+                                          </p>
+                                          
+                                          <p>The description is not a shared property of multi-Region keys. You can specify the
+                                             same
+                                             description or a different description for each key in a set of related multi-Region
+                                             keys. AWS KMS does not synchronize this property.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">0</code></p>
+                                          <p><em>Maximum</em>: <code class="code">8192</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-kms-replicakey-enabled"></a><span class="term"><code class="code">Enabled</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>Specifies whether the replica key is enabled. Disabled CMKs cannot be used in
+                                             cryptographic operations.
+                                          </p>
+                                          
+                                          <p>When <code class="code">Enabled</code> is <code class="code">true</code>, the <em>key state</em> of the
+                                             CMK is <code class="code">Enabled</code>. When <code class="code">Enabled</code> is <code class="code">false</code>, the key state of
+                                             the CMK is <code class="code">Disabled</code>. The default value is <code class="code">true</code>.
+                                          </p>
+                                          
+                                          <p>The actual key state of the replica might be affected by actions taken outside of
+                                             CloudFormation, such as running the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_EnableKey.html">EnableKey</a>, <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DisableKey.html">DisableKey</a>,
+                                             or <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_ScheduleKeyDeletion.html">ScheduleKeyDeletion</a> operations. Also, while the replica key is being created, its
+                                             key state is <code class="code">Creating</code>. When the process is complete, the key state of the replica
+                                             key changes to <code class="code">Enabled</code>. 
+                                          </p>
+                                          
+                                          <p>For information about the key states of a CMK, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">Key state: Effect on your CMK</a> in the
+                                             <em>AWS Key Management Service Developer Guide</em>. 
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-kms-replicakey-keypolicy"></a><span class="term"><code class="code">KeyPolicy</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          
+                                          <p>The key policy that authorizes use of the replica key.</p>
+                                          
+                                          <p>The key policy is not a shared property of multi-Region keys. You can specify the
+                                             same key
+                                             policy or a different key policy for each key in a set of related multi-Region keys.
+                                             AWS KMS does not synchronize this property.
+                                          </p>
+                                          
+                                          <p>The key policy must conform to the following rules.</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>The key policy must give the caller <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html">PutKeyPolicy</a> permission on
+                                                      the CMK. This reduces the risk that the CMK becomes unmanageable. For more information,
+                                                      refer to the scenario in the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam">Default key policy</a> section of the <em>
+                                                         <em>AWS Key Management Service Developer Guide</em>
+                                                         </em>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Each statement in the key policy must contain one or more principals. The principals
+                                                      in the key policy must exist and be visible to AWS KMS. When you create a new
+                                                      AWSprincipal (for example, an IAM user or role), you might need to enforce a delay
+                                                      before
+                                                      including the new principal in a key policy because the new principal might not be
+                                                      immediately visible to AWS KMS. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency">Changes that I make are not always immediately visible</a> in the <em>AWS Identity and Access Management User Guide</em>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>The key policy size limit is 32 kilobytes (32768 bytes).</p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          
+                                          <p><em>Maximum</em>: <code class="code">32768</code></p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: Json
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-kms-replicakey-pendingwindowindays"></a><span class="term"><code class="code">PendingWindowInDays</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>Specifies the number of days in the waiting period before AWS KMS deletes a
+                                             replica key that has been removed from a CloudFormation stack. Enter a value between
+                                             7 and 30
+                                             days. The default value is 30 days.
+                                          </p>
+                                          
+                                          <p>When you remove a replica key from a CloudFormation stack, AWS KMS schedules
+                                             the replica key for deletion and starts the mandatory waiting period. The
+                                             <code class="code">PendingWindowInDays</code> property determines the length of waiting period. During
+                                             the waiting period, the key state of replica key is <code class="code">Pending Deletion</code>, which
+                                             prevents it from being used in cryptographic operations. When the waiting period expires,
+                                             AWS KMS permanently deletes the replica key.
+                                          </p>
+                                          
+                                          <p>You cannot use a CloudFormation template to cancel deletion of the replica after you
+                                             remove it from the stack, regardless of the waiting period. However, if you specify
+                                             a replica
+                                             key in your template that is based on the same primary key as the original replica
+                                             key,
+                                             CloudFormation creates a new replica key with the same key ID, key material, and other
+                                             shared
+                                             properties of the original replica key. This new replica key can decrypt ciphertext
+                                             that was
+                                             encrypted under the original replica key, or any related multi-Region key.
+                                          </p>
+                                          
+                                          <p>For detailed information about deleting multi-Region keys, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-delete.html">Deleting multi-Region
+                                                keys</a> in the <em>AWS Key Management Service Developer Guide</em>.
+                                          </p>
+                                          
+                                          <p>For information about the <code class="code">PendingDeletion</code> key state, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">Key state: Effect on
+                                                your CMK</a> in the <em>AWS Key Management Service Developer Guide</em>. For
+                                             more information about deleting CMKs, see the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_ScheduleKeyDeletion.html">ScheduleKeyDeletion</a>
+                                             operation in the <em>AWS Key Management Service API Reference</em> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html">Deleting customer
+                                                master keys</a> in the <em>AWS Key Management Service Developer Guide</em>. 
+                                          </p>
+                                          
+                                          <p><em>Minimum</em>: 7
+                                          </p>
+                                          
+                                          <p><em>Maximum</em>: 30
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-kms-replicakey-primarykeyarn"></a><span class="term"><code class="code">PrimaryKeyArn</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>Specifies the multi-Region primary key to replicate. The primary key must be in a
+                                             different AWS Region of the same AWSpartition. You can create only one
+                                             replica of a given primary key in each AWS Region .
+                                          </p>
+                                          
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If you change the <code class="code">PrimaryKeyArn</code> value of a replica key, the existing
+                                                   replica key is scheduled for deletion and a new replica key is created based on the
+                                                   specified primary key. While it is scheduled for deletion, the existing replica key
+                                                   becomes
+                                                   unusable. You can cancel the scheduled deletion of the key outside of CloudFormation.
+                                                </p>
+                                                <p>However, if you inadvertently delete a replica key, you can decrypt ciphertext encrypted
+                                                   by that replica key by using any related multi-Region key. If necessary, you can recreate
+                                                   the replica in the same Region after the previous one is completely deleted. For details,
+                                                   see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-delete.html">Deleting multi-Region
+                                                      keys</a> in the <em>AWS Key Management Service Developer Guide</em></p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p>Specify the key ARN of an existing multi-Region primary key. For example,
+                                             <code class="code">arn:aws:kms:us-east-2:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">2048</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-kms-replicakey-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>Assigns one or more tags to the replica key.</p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>Tagging or untagging a CMK can allow or deny permission to the CMK. For details, see
+                                                   <a href="https://docs.aws.amazon.com/kms/latest/developerguide/abac.html">Using ABAC in
+                                                      AWS KMS</a> in the <em>AWS Key Management Service Developer
+                                                      Guide</em>.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p>Tags are not a shared property of multi-Region keys. You can specify the same tags
+                                             or
+                                             different tags for each key in a set of related multi-Region keys. AWS KMS does
+                                             not synchronize this property.
+                                          </p>
+                                          
+                                          <p>Each tag consists of a tag key and a tag value. Both the tag key and the tag value
+                                             are
+                                             required, but the tag value can be an empty (null) string. You cannot have more than
+                                             one tag
+                                             on a CMK with the same tag key. If you specify an existing tag key with a different
+                                             tag value,
+                                             AWS KMS replaces the current tag value with the specified one.
+                                          </p>
+                                          
+                                          <p>When you assign tags to an AWSresource, AWSgenerates a cost allocation report with
+                                             usage
+                                             and costs aggregated by tags. Tags can also be used to control access to a CMK. For
+                                             details,
+                                             see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html">Tagging
+                                                keys</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-kms-replicakey-return-values">Return values</h2>
+                                 <h3 id="aws-resource-kms-replicakey-return-values-ref">Ref</h3>
+                                 <p>
+                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the key ID, such as
+                                    <code class="code">mrk-1234abcd12ab34cd56ef1234567890ab</code>.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-kms-replicakey-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-kms-replicakey-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the replica key, such as
+                                             <code class="code">arn:aws:kms:us-west-2:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab</code>.
+                                          </p>
+                                          
+                                          <p>The key ARNs of related multi-Region keys differ only in the Region value. For information
+                                             about the key ARNs of multi-Region keys, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-how-it-works">How
+                                                multi-Region keys work</a> in the <em>AWS Key Management Service Developer
+                                                Guide</em>.
+                                          </p>
+                                          
+                                       </dd>
+                                       <dt><a id="KeyId-fn::getatt"></a><span class="term"><code class="code">KeyId</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The key ID of the replica key, such as
+                                             <code class="code">mrk-1234abcd12ab34cd56ef1234567890ab</code>.
+                                          </p>
+                                          
+                                          <p>Related multi-Region keys have the same key ID. For information about the key IDs
+                                             of
+                                             multi-Region keys, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-how-it-works">How
+                                                multi-Region keys work</a> in the <em>AWS Key Management Service Developer
+                                                Guide</em>.
+                                          </p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-kms-replicakey--examples">Examples</h2>
+                                 <h3 id="aws-resource-kms-replicakey--examples--Create_a_multi-Region_replica_key">Create a multi-Region replica key</h3>
+                                 <p>The following example creates a multi-Region replica key in the local Region based
+                                    on a multi-Region primary key in the US West (Oregon)
+                                    (us-west-2) Region.
+                                 </p>
+                                 <p>If the key ARN specified by the <code class="code">PrimaryKeyArn</code> property
+                                    doesn&apos;t identify a multi-Region primary key, or if a related multi-Region key already
+                                    exists in the local Region, the operation fails. The example specifies a
+                                    description, a key policy, and a waiting period for key deletion (PendingWindowInDays).
+                                    These properties are independent of the primary key and related replica keys in other
+                                    AWS
+                                    Regions.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-kms-replicakey--examples--Create_a_multi-Region_replica_key--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Resources&quot;: <span>{</span>
+    &quot;myReplicaKey&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::KMS::ReplicaKey&quot;,
+        &quot;Properties&quot;: <span>{</span>
+            &quot;PrimaryKeyArn&quot;: &quot;arn:aws:kms:us-west-2:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab&quot;,
+            &quot;Description&quot;: &quot;Example replica key&quot;,
+            &quot;EnableKeyRotation&quot;: true,
+            &quot;PendingWindowInDays&quot;: 7,
+            &quot;KeyPolicy&quot;: <span>{</span>
+                &quot;Version&quot;: &quot;2012-10-17&quot;,
+                &quot;Id&quot;: &quot;key-default-1&quot;,
+                &quot;Statement&quot;: [
+                    <span>{</span>
+                        &quot;Sid&quot;: &quot;Enable IAM User Permissions&quot;,
+                        &quot;Effect&quot;: &quot;Allow&quot;,
+                        &quot;Principal&quot;: <span>{</span>
+                            &quot;AWS&quot;: &quot;arn:aws:iam::111122223333:root&quot;
+                        },
+                        &quot;Action&quot;: &quot;kms:*&quot;,
+                        &quot;Resource&quot;: &quot;*&quot;
+                    },
+                    <span>{</span>
+                        &quot;Sid&quot;: &quot;Allow administration of the key&quot;,
+                        &quot;Effect&quot;: &quot;Allow&quot;,
+                        &quot;Principal&quot;: <span>{</span>
+                            &quot;AWS&quot;: &quot;arn:aws:iam::111122223333:role/admin&quot;
+                        },
+                        &quot;Action&quot;: [
+                            &quot;kms:Create*&quot;,
+                            &quot;kms:Delete*&quot;,
+                            &quot;kms:Disable*&quot;,
+                            &quot;kms:Describe*&quot;,
+                            &quot;kms:Enable*&quot;,
+                            &quot;kms:Get*&quot;,
+                            &quot;kms:List*&quot;,
+                            &quot;kms:Put*&quot;,
+                            &quot;kms:Revoke*&quot;,
+                            &quot;kms:UpdateAlias&quot;,                       
+                            &quot;kms:ScheduleKeyDeletion&quot;,
+                            &quot;kms:CancelKeyDeletion&quot;
+                        ],
+                        &quot;Resource&quot;: &quot;*&quot;
+                    },
+                    <span>{</span>
+                        &quot;Sid&quot;: &quot;Allow use of the key&quot;,
+                        &quot;Effect&quot;: &quot;Allow&quot;,
+                        &quot;Principal&quot;: <span>{</span>
+                            &quot;AWS&quot;: &quot;arn:aws:iam::111122223333:role/developer&quot;
+                        },
+                        &quot;Action&quot;: [
+                            &quot;kms:DescribeKey&quot;,
+                            &quot;kms:Encrypt&quot;,
+                            &quot;kms:Decrypt&quot;,
+                            &quot;kms:ReEncrypt*&quot;,
+                            &quot;kms:GenerateDataKey&quot;,
+                            &quot;kms:GenerateDataKeyWithoutPlaintext&quot;
+                        ],
+                        &quot;Resource&quot;: &quot;*&quot;
+                    }
+                ]
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-kms-replicakey--examples--Create_a_multi-Region_replica_key--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  myReplicaKey:
+    Type: &apos;AWS::KMS::ReplicaKey&apos;
+    Properties:
+      PrimaryKeyArn: &amp;gt;-
+        arn:aws:kms:us-west-2:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab
+      Description: Example replica key
+      PendingWindowInDays: 7
+      KeyPolicy:
+        Version: 2012-10-17
+        Id: key-default-1
+        Statement:
+          - Sid: Enable IAM User Permissions
+            Effect: Allow
+            Principal:
+              AWS: &apos;arn:aws:iam::111122223333:root&apos;
+            Action: &apos;kms:*&apos;
+            Resource: &apos;*&apos;
+          - Sid: Allow administration of the key
+            Effect: Allow
+            Principal:
+              AWS: &apos;arn:aws:iam::111122223333:role/admin&apos;
+            Action:
+              - &apos;kms:Create*&apos;
+              - &apos;kms:Delete*&apos;
+              - &apos;kms:Describe*&apos;
+              - &apos;kms:Disable*&apos;
+              - &apos;kms:Enable*&apos;
+              - &apos;kms:Get*&apos;
+              - &apos;kms:List*&apos;
+              - &apos;kms:Put*&apos;
+              - &apos;kms:Revoke*&apos;
+              - &apos;kms:UpdateAlias&apos;
+              - &apos;kms:UpdateDescription&apos;
+              - &apos;kms:ScheduleKeyDeletion&apos;
+              - &apos;kms:CancelKeyDeletion&apos;
+            Resource: &apos;*&apos;
+          - Sid: Allow use of the key
+            Effect: Allow
+            Principal:
+              AWS: &apos;arn:aws:iam::111122223333:role/developer&apos;
+            Action:
+              - &apos;kms:DescribeKey&apos;
+              - &apos;kms:Encrypt&apos;
+              - &apos;kms:Decrypt&apos;
+              - &apos;kms:ReEncrypt*&apos;
+              - &apos;kms:GenerateDataKey&apos;
+              - &apos;kms:GenerateDataKeyWithoutPlaintext&apos;
+            Resource: &apos;*&apos;</code></pre></div>
+                                 <h2 id="aws-resource-kms-replicakey--seealso">See also</h2>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p>
+                                             <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_ReplicateKey.html">ReplicateKey</a> in the <em>AWS Key Management Service API
+                                                Reference</em>.
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>
+                                             <a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html">Using multi-Region
+                                                Keys</a> in the <em>AWS Key Management Service Developer
+                                                Guide</em>.
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>
+                                             <a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-replicate.html">Creating multi-Region
+                                                replica keys</a> in the <em>AWS Key Management Service Developer
+                                                Guide</em>.
+                                          </p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

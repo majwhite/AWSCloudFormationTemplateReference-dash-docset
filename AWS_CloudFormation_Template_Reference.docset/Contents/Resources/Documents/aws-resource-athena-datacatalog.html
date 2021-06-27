@@ -18,8 +18,7 @@
                                  </div>
                                  <p>The AWS::Athena::DataCatalog resource specifies an Amazon Athena data catalog, which
                                     contains a name, description, type, parameters, and tags. For more information, see
-                                    <a href="https://docs.aws.amazon.com/athena/latest/APIReference/API_DataCatalog.html">DataCatalog</a>
-                                    in the <em>Amazon Athena API Reference</em>.
+                                    <a href="https://docs.aws.amazon.com/athena/latest/APIReference/API_DataCatalog.html">DataCatalog</a> in the <em>Amazon Athena API Reference</em>.
                                  </p>
                                  <h2 id="aws-resource-athena-datacatalog-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -30,7 +29,7 @@
       &quot;<a href="#cfn-athena-datacatalog-description">Description</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-athena-datacatalog-name">Name</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-athena-datacatalog-parameters">Parameters</a>&quot; : <code class="replaceable"><span>{</span><code class="replaceable">Key</code> : <code class="replaceable">Value</code>, ...}</code>,
-      &quot;<a href="#cfn-athena-datacatalog-tags">Tags</a>&quot; : <code class="replaceable"><a href="./aws-properties-athena-datacatalog-tags.html">Tags</a></code>,
+      &quot;<a href="#cfn-athena-datacatalog-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
       &quot;<a href="#cfn-athena-datacatalog-type">Type</a>&quot; : <code class="replaceable">String</code>
     }
 }
@@ -43,7 +42,7 @@ Properties:
   <a href="#cfn-athena-datacatalog-parameters">Parameters</a>: <code class="replaceable">
     <code class="replaceable">Key</code> : <code class="replaceable">Value</code></code>
   <a href="#cfn-athena-datacatalog-tags">Tags</a>: <code class="replaceable">
-    <a href="./aws-properties-athena-datacatalog-tags.html">Tags</a></code>
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
   <a href="#cfn-athena-datacatalog-type">Type</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-resource-athena-datacatalog-properties">Properties</h2>
@@ -51,7 +50,9 @@ Properties:
                                     <dl>
                                        <dt><a id="cfn-athena-datacatalog-description"></a><span class="term"><code class="code">Description</code></span></dt>
                                        <dd>
+                                          
                                           <p>A description of the data catalog.</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -60,9 +61,12 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-athena-datacatalog-name"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
+                                          
                                           <p>The name of the data catalog. The catalog name must be unique for the AWS account
-                                             and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.
+                                             and
+                                             can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.
                                           </p>
+                                          
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
@@ -70,7 +74,8 @@ Properties:
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-athena-datacatalog-parameters"></a><span class="term"><code class="code">Parameters</code></span></dt>
-                                       <dd>     
+                                       <dd>
+                                          
                                           <p>Specifies the Lambda function or functions to use for the data catalog. The mapping
                                              used depends on the catalog type. 
                                           </p>
@@ -95,8 +100,8 @@ Properties:
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>The <code class="code">LAMBDA</code> data catalog type uses one of the following sets
-                                                      of required parameters, but not both.
+                                                   <p>The <code class="code">LAMBDA</code> data catalog type uses one of the following sets of
+                                                      required parameters, but not both.
                                                    </p>
                                                    
                                                    <div class="itemizedlist">
@@ -106,9 +111,9 @@ Properties:
                                                       <ul class="itemizedlist" type="disc">
                                                          <li class="listitem">
                                                             
-                                                            <p>When one Lambda function processes metadata and another
-                                                               Lambda function reads data, the following syntax is used. Both parameters
-                                                               are required.
+                                                            <p>When one Lambda function processes metadata and another Lambda
+                                                               function reads data, the following syntax is used. Both parameters are
+                                                               required.
                                                             </p>
                                                             
                                                             <p><code class="code">metadata-function=<em>lambda_arn</em>,
@@ -117,8 +122,8 @@ Properties:
                                                          </li>
                                                          <li class="listitem">
                                                             
-                                                            <p>A composite Lambda function that processes both metadata
-                                                               and data uses the following syntax.
+                                                            <p>A composite Lambda function that processes both metadata and data uses
+                                                               the following syntax.
                                                             </p>
                                                             
                                                             <p><code class="code">function=<em>lambda_arn</em></code></p>
@@ -130,12 +135,50 @@ Properties:
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>The <code class="code">GLUE</code> type has no parameters.
+                                                   <p>The <code class="code">GLUE</code> type takes a catalog ID parameter and is required. The
+                                                      <code class="code"><em>catalog_id</em></code> is the account ID of the
+                                                      AWS account to which the Glue catalog belongs.
                                                    </p>
+                                                   
+                                                   <p><code class="code">catalog-id=<em>catalog_id</em></code></p>
+                                                   
+                                                   <div class="itemizedlist">
+                                                       
+                                                       
+                                                       
+                                                      
+                                                      <ul class="itemizedlist" type="disc">
+                                                         <li class="listitem">
+                                                            
+                                                            <p>The <code class="code">GLUE</code> data catalog type also applies to the default
+                                                               <code class="code">AwsDataCatalog</code> that already exists in your account, of
+                                                               which you can have only one and cannot modify.
+                                                            </p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p>Queries that specify a GLUE data catalog other than the default
+                                                               <code class="code">AwsDataCatalog</code> must be run on Athena engine version
+                                                               2.
+                                                            </p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p>In Regions where Athena engine version 2 is not available, creating
+                                                               new GLUE data catalogs results in an <code class="code">INVALID_INPUT</code>
+                                                               error.
+                                                            </p>
+                                                            
+                                                         </li>
+                                                      </ul>
+                                                   </div>
                                                    
                                                 </li>
                                              </ul>
                                           </div>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Map of String
@@ -144,18 +187,24 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-athena-datacatalog-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
+                                          
                                           <p>An optional list of comma separated tags (key-value pairs) that are custom attributes
                                              for the data catalog.
                                           </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: <a href="./aws-properties-athena-datacatalog-tags.html">Tags</a></p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-athena-datacatalog-type"></a><span class="term"><code class="code">Type</code></span></dt>
                                        <dd>
-                                          <p>The type of data catalog: <code class="code">LAMBDA</code> for a federated catalog, <code class="code">GLUE</code> for AWS Glue Catalog, or <code class="code">HIVE</code> for an external hive metastore.
+                                          
+                                          <p>The type of data catalog: <code class="code">LAMBDA</code> for a federated catalog,
+                                             <code class="code">GLUE</code> for AWS Glue Catalog, or <code class="code">HIVE</code> for an external hive
+                                             metastore.
                                           </p>
+                                          
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
@@ -173,7 +222,9 @@ Properties:
                                  <h2 id="aws-resource-athena-datacatalog--examples">Examples</h2>
                                  <p></p>
                                  <h3 id="aws-resource-athena-datacatalog--examples--Creating_an_Athena_Data_Catalog">Creating an Athena Data Catalog</h3>
-                                 <p>The following example template creates a custom Hive data catalog in Athena.</p>
+                                 <p>The following example template creates a custom Hive data catalog in
+                                    Athena.
+                                 </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-athena-datacatalog--examples--Creating_an_Athena_Data_Catalog--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
     &quot;Resources&quot;:<span>{</span>
@@ -225,7 +276,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

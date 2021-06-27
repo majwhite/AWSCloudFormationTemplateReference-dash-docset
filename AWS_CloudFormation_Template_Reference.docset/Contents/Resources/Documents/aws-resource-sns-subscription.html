@@ -16,10 +16,8 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::SNS::Subscription</code> resource subscribes an endpoint to an Amazon
-                                    Simple Notification Service (Amazon SNS) topic. For a subscription to be created,
-                                    the owner
-                                    of the endpoint must confirm the subscription.
+                                 <p>The <code class="code">AWS::SNS::Subscription</code> resource subscribes an endpoint to an Amazon SNS topic. For a 
+                                    subscription to be created, the owner of the endpoint must confirm the subscription.
                                  </p>
                                  <h2 id="aws-resource-sns-subscription-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -59,12 +57,14 @@ Properties:
                                        <dd>
                                           
                                           <p>The delivery policy JSON assigned to the subscription. Enables the subscriber to define
-                                             the message delivery retry strategy in the case of an HTTP/S endpoint subscribed to
-                                             the topic. For more information, see
+                                             the message delivery retry 
+                                             strategy in the case of an HTTP/S endpoint subscribed to the topic. For more information,
+                                             see
                                              <code class="code">
                                                 <a href="https://docs.aws.amazon.com/sns/latest/api/API_GetSubscriptionAttributes.html">GetSubscriptionAttributes</a>
-                                                </code> in the <em>Amazon Simple Notification
-                                                Service API Reference</em> and <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-message-delivery-retries.html">Message Delivery Retries</a> in the <em>Amazon SNS Developer Guide</em>.
+                                                </code> in the <em>Amazon SNS API Reference</em> and 
+                                             <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-message-delivery-retries.html">Message delivery retries</a> in 
+                                             the <em>Amazon SNS Developer Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -80,7 +80,7 @@ Properties:
                                              specify. For more information, see the <code class="code">Endpoint</code> parameter of the <code class="code">
                                                 <a href="https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html">Subscribe</a>
                                                 </code>
-                                             action in the <em>Amazon Simple Notification Service API Reference</em>.
+                                             action in the <em>Amazon SNS API Reference</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -96,8 +96,9 @@ Properties:
                                              out unwanted messages. For more information, see
                                              <code class="code">
                                                 <a href="https://docs.aws.amazon.com/sns/latest/api/API_GetSubscriptionAttributes.html">GetSubscriptionAttributes</a>
-                                                </code> in the <em>Amazon Simple Notification
-                                                Service API Reference</em> and <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-message-filtering.html">Message Filtering</a> in the <em>Amazon SNS Developer Guide</em>.
+                                                </code> in the <em>Amazon SNS API Reference</em> and 
+                                             <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-message-filtering.html">Message filtering</a> in the 
+                                             <em>Amazon SNS Developer Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -112,8 +113,7 @@ Properties:
                                           <p>The subscription&apos;s protocol. For more information, see the <code class="code">Protocol</code>
                                              parameter of the <code class="code">
                                                 <a href="https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html">Subscribe</a>
-                                                </code> action in the <em>Amazon Simple Notification Service
-                                                API Reference</em>.
+                                                </code> action in the <em>Amazon SNS API Reference</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -129,8 +129,7 @@ Properties:
                                              any JSON formatting and can be sent to Amazon SQS and HTTP/S endpoints. For more
                                              information, see <code class="code">
                                                 <a href="https://docs.aws.amazon.com/sns/latest/api/API_GetSubscriptionAttributes.html">GetSubscriptionAttributes</a>
-                                                </code> in the <em>Amazon Simple Notification
-                                                Service API Reference</em>.
+                                                </code> in the <em>Amazon SNS API Reference</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -152,6 +151,10 @@ Properties:
                                              or reprocessing.
                                           </p>
                                           
+                                          <p>For more information about the redrive policy and dead-letter queues, see <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html">Amazon SQS dead-letter queues</a> 
+                                             in the <em>Amazon SQS Developer Guide</em>.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Json
@@ -163,9 +166,12 @@ Properties:
                                           
                                           <p>For cross-region subscriptions, the region in which the topic resides.</p>
                                           
-                                          <p>If no region is specified, CloudFormation uses the region of the caller as the default.</p>
+                                          <p>If no region is specified, AWS CloudFormation uses the region of the caller as the
+                                             default.
+                                          </p>
                                           
-                                          <p>If you perform an update operation that only updates the <code class="code">Region</code> property of a <code class="code">AWS::SNS::Subscription</code> resource, that operation will fail unless you are either:
+                                          <p>If you perform an update operation that only updates the <code class="code">Region</code> property of a <code class="code">AWS::SNS::Subscription</code> resource, 
+                                             that operation will fail unless you are either:
                                           </p>
                                           
                                           <div class="itemizedlist">
@@ -196,7 +202,34 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-sns-subscription-subscriptionrolearn"></a><span class="term"><code class="code">SubscriptionRoleArn</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>This property applies only to Amazon Kinesis Data Firehose delivery stream subscriptions.
+                                             Specify the ARN of the IAM role that has the following:
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>Permission to write to the Amazon Kinesis Data Firehose delivery stream</p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Amazon SNS listed as a trusted entity</p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>Specifying a valid ARN for this attribute is required for Kinesis Data Firehose delivery
+                                             stream subscriptions. 
+                                             For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html">Fanout 
+                                                to Amazon Kinesis Data Firehose delivery streams</a> in the <em>Amazon SNS Developer Guide.</em></p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -387,7 +420,7 @@ Parameters:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

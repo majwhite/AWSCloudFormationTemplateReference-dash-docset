@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-cloudformation-resourceversion">AWS::CloudFormation::ResourceVersion</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>Registers a resource version with the CloudFormation service. Registering a resource
+                                    version makes it available for use in CloudFormation templates in your AWS account,
+                                    and
+                                    includes:
+                                 </p>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p>Validating the resource schema</p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>Determining which handlers, if any, have been specified for the resource</p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>Making the resource available for use in your account</p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <p>For more information on how to develop resources and ready them for registration,
+                                    see
+                                    <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html">Creating Resource Providers</a> in the <em>CloudFormation CLI User
+                                       Guide</em>.
+                                 </p>
+                                 <p>You can have a maximum of 50 resource versions registered at a time. This maximum
+                                    is per
+                                    account and per region.
+                                 </p>
+                                 <h2 id="aws-resource-cloudformation-resourceversion-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-cloudformation-resourceversion-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::CloudFormation::ResourceVersion&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-cloudformation-resourceversion-executionrolearn">ExecutionRoleArn</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-cloudformation-resourceversion-loggingconfig">LoggingConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-cloudformation-resourceversion-loggingconfig.html">LoggingConfig</a></code>,
+      &quot;<a href="#cfn-cloudformation-resourceversion-schemahandlerpackage">SchemaHandlerPackage</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-cloudformation-resourceversion-typename">TypeName</a>&quot; : <code class="replaceable">String</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-cloudformation-resourceversion-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::CloudFormation::ResourceVersion
+Properties: 
+  <a href="#cfn-cloudformation-resourceversion-executionrolearn">ExecutionRoleArn</a>: <code class="replaceable">String</code>
+  <a href="#cfn-cloudformation-resourceversion-loggingconfig">LoggingConfig</a>: <code class="replaceable">
+    <a href="./aws-properties-cloudformation-resourceversion-loggingconfig.html">LoggingConfig</a></code>
+  <a href="#cfn-cloudformation-resourceversion-schemahandlerpackage">SchemaHandlerPackage</a>: <code class="replaceable">String</code>
+  <a href="#cfn-cloudformation-resourceversion-typename">TypeName</a>: <code class="replaceable">String</code>
+</code></pre></div>
+                                 <h2 id="aws-resource-cloudformation-resourceversion-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-cloudformation-resourceversion-executionrolearn"></a><span class="term"><code class="code">ExecutionRoleArn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking
+                                             the resource. If your resource calls AWS APIs in any of its handlers, you must create
+                                             an
+                                             <em><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM
+                                                   execution role</a></em> that includes the necessary permissions to call those
+                                             AWS APIs, and provision that execution role in your account. When CloudFormation needs
+                                             to
+                                             invoke the resource type handler, CloudFormation assumes this execution role to create
+                                             a
+                                             temporary session token, which it then passes to the resource type handler, thereby
+                                             supplying
+                                             your resource type with the appropriate credentials.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">256</code></p>
+                                          <p><em>Pattern</em>: <code class="code">arn:.+:iam::[0-9]<span>{</span>12}:role/.+</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudformation-resourceversion-loggingconfig"></a><span class="term"><code class="code">LoggingConfig</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Logging configuration information for a resource.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-cloudformation-resourceversion-loggingconfig.html">LoggingConfig</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudformation-resourceversion-schemahandlerpackage"></a><span class="term"><code class="code">SchemaHandlerPackage</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A url to the S3 bucket containing the resource project package that contains the
+                                             neccessary files for the resource you want to register.
+                                          </p>
+                                          
+                                          <p>For information on generating a schema handler package for the resource you want to
+                                             register, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html">submit</a> in
+                                             the <em>CloudFormation CLI User Guide</em>.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>The user registering the resource must be able to access the package in the S3 bucket.
+                                                   That is, the user needs to have <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html">GetObject</a> permissions for the schema
+                                                   handler package. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html">Actions, Resources, and Condition Keys for
+                                                      Amazon S3</a> in the <em>AWS Identity and Access Management User
+                                                      Guide</em>.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">4096</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cloudformation-resourceversion-typename"></a><span class="term"><code class="code">TypeName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name of the resource being registered.</p>
+                                          
+                                          <p>We recommend that resource names adhere to the following pattern:
+                                             <em>company_or_organization</em>::<em>service</em>::<em>type</em>.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>The following organization namespaces are reserved and cannot be used in your resource
+                                                   names:
+                                                </p>
+                                                <div class="itemizedlist">
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                   
+                                                   <ul class="itemizedlist" type="disc">
+                                                      <li class="listitem">
+                                                         
+                                                         <p><code class="code">Alexa</code></p>
+                                                         
+                                                      </li>
+                                                      <li class="listitem">
+                                                         
+                                                         <p><code class="code">AMZN</code></p>
+                                                         
+                                                      </li>
+                                                      <li class="listitem">
+                                                         
+                                                         <p><code class="code">Amazon</code></p>
+                                                         
+                                                      </li>
+                                                      <li class="listitem">
+                                                         
+                                                         <p><code class="code">AWS</code></p>
+                                                         
+                                                      </li>
+                                                      <li class="listitem">
+                                                         
+                                                         <p><code class="code">Custom</code></p>
+                                                         
+                                                      </li>
+                                                      <li class="listitem">
+                                                         
+                                                         <p><code class="code">Dev</code></p>
+                                                         
+                                                      </li>
+                                                   </ul>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">10</code></p>
+                                          <p><em>Maximum</em>: <code class="code">204</code></p>
+                                          <p><em>Pattern</em>: <code class="code">[A-Za-z0-9]<span>{</span>2,64}::[A-Za-z0-9]<span>{</span>2,64}::[A-Za-z0-9]<span>{</span>2,64}(::MODULE)<span>{</span>0,1}</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-cloudformation-resourceversion-return-values">Return values</h2>
+                                 <h3 id="aws-resource-cloudformation-resourceversion-return-values-ref">Ref</h3>
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the ARN of the resource version. For example:
+                                 </p>
+                                 <p><code class="code">arn:aws:cloudformation:us-west-2:012345678901:type/resource/Sample-CloudFormation-Resource/00000001</code></p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-cloudformation-resourceversion-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-cloudformation-resourceversion-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the resource version.</p>
+                                          
+                                       </dd>
+                                       <dt><a id="IsDefaultVersion-fn::getatt"></a><span class="term"><code class="code">IsDefaultVersion</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Whether the resource version is set as the default version.</p>
+                                          
+                                       </dd>
+                                       <dt><a id="ProvisioningType-fn::getatt"></a><span class="term"><code class="code">ProvisioningType</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The provisioning behavior of the resource type. CloudFormation determines the provisioning
+                                             type during registration, based on the types of handlers in the schema handler package
+                                             submitted.
+                                          </p>
+                                          
+                                          <p>Valid values include:</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">FULLY_MUTABLE</code>: The resource type includes an update handler to process
+                                                      updates to the type during stack update operations.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">IMMUTABLE</code>: The resource type does not include an update handler, so the
+                                                      type cannot be updated and must instead be replaced during stack update operations.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">NON_PROVISIONABLE</code>: The resource type does not include all of the
+                                                      following handlers, and therefore cannot actually be provisioned.
+                                                   </p>
+                                                   
+                                                   <div class="itemizedlist">
+                                                       
+                                                       
+                                                       
+                                                      
+                                                      <ul class="itemizedlist" type="disc">
+                                                         <li class="listitem">
+                                                            
+                                                            <p>create</p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p>read</p>
+                                                            
+                                                         </li>
+                                                         <li class="listitem">
+                                                            
+                                                            <p>delete</p>
+                                                            
+                                                         </li>
+                                                      </ul>
+                                                   </div>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                       </dd>
+                                       <dt><a id="TypeArn-fn::getatt"></a><span class="term"><code class="code">TypeArn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the resource.</p>
+                                          
+                                       </dd>
+                                       <dt><a id="VersionId-fn::getatt"></a><span class="term"><code class="code">VersionId</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ID of a specific version of the resource. The version ID is the value at the end
+                                             of
+                                             the Amazon Resource Name (ARN) assigned to the resource version when it is registered.
+                                          </p>
+                                          
+                                       </dd>
+                                       <dt><a id="Visibility-fn::getatt"></a><span class="term"><code class="code">Visibility</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The scope at which the resource is visible and usable in CloudFormation operations.</p>
+                                          
+                                          <p>Valid values include:</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">PRIVATE</code>: The resource is only visible and usable within the account in
+                                                      which it is registered. CloudFormation marks any resources you register as
+                                                      <code class="code">PRIVATE</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><code class="code">PUBLIC</code>: The resource is publically visible and usable within any Amazon
+                                                      account.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-cloudformation-resourceversion--examples">Examples</h2>
+                                 <p></p>
+                                 <h3 id="aws-resource-cloudformation-resourceversion--examples--Specifying_a_resource_version">Specifying a resource version</h3>
+                                 <p>The following example demonstrates how to specify a new resource version.</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-cloudformation-resourceversion--examples--Specifying_a_resource_version--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;ResourceVersion&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::CloudFormation::ResourceVersion&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;TypeName&quot;: &quot;My::Sample::Resource&quot;,
+                &quot;SchemaHandlerPackage&quot;: &quot;s3://my-sample-resourceversion-bucket/my-sample-resource.zip&quot;
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-cloudformation-resourceversion--examples--Specifying_a_resource_version--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  ResourceVersion:
+    Type: AWS::CloudFormation::ResourceVersion
+    Properties:
+      TypeName: My::Sample::Resource
+      SchemaHandlerPackage: s3://my-sample-resourceversion-bucket/my-sample-resource.zip</code></pre></div>
+                                 <h3 id="aws-resource-cloudformation-resourceversion--examples--Specifying_a_resource_version_and_setting_it_as_the_default_version">Specifying a resource version and setting it as the default version</h3>
+                                 <p>The following example demonstrates how to specify and new resource version, and use
+                                    the <code class="code">Ref</code> return value to set that version as the default version.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-cloudformation-resourceversion--examples--Specifying_a_resource_version_and_setting_it_as_the_default_version--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;ResourceVersion&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::CloudFormation::ResourceVersion&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;TypeName&quot;: &quot;My::Sample::Resource&quot;,
+                &quot;SchemaHandlerPackage&quot;: &quot;s3://my-sample-resourceversion-bucket/my-sample-resource.zip&quot;
+            }
+        },
+        &quot;ResourceDefaultVersion&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::CloudFormation::ResourceDefaultVersion&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;TypeVersionArn&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;ResourceVersion&quot;
+                }
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-cloudformation-resourceversion--examples--Specifying_a_resource_version_and_setting_it_as_the_default_version--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  ResourceVersion:
+    Type: AWS::CloudFormation::ResourceVersion
+    Properties:
+      TypeName: My::Sample::Resource
+      SchemaHandlerPackage: s3://my-sample-resourceversion-bucket/my-sample-resource.zip
+  ResourceDefaultVersion:
+    Type: AWS::CloudFormation::ResourceDefaultVersion
+    Properties:
+      TypeVersionArn: !Ref ResourceVersion</code></pre></div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

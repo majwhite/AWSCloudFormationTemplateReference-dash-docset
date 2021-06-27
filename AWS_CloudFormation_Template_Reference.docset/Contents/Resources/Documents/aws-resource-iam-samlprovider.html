@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-iam-samlprovider">AWS::IAM::SAMLProvider</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>Creates an IAM resource that describes an identity provider (IdP) that supports SAML
+                                    2.0.
+                                 </p>
+                                 <p>The SAML provider resource that you create with this operation can be used as a
+                                    principal in an IAM role&apos;s trust policy. Such a policy can enable federated users
+                                    who
+                                    sign in using the SAML IdP to assume the role. You can create an IAM role that
+                                    supports Web-based single sign-on (SSO) to the AWS Management Console or one that
+                                    supports API access
+                                    to AWS.
+                                 </p>
+                                 <p>When you create the SAML provider resource, you upload a SAML metadata document that
+                                    you get from your IdP. That document includes the issuer&apos;s name, expiration information,
+                                    and keys that can be used to validate the SAML authentication response (assertions)
+                                    that
+                                    the IdP sends. You must generate the metadata document using the identity management
+                                    software that is used as your organization&apos;s IdP.
+                                 </p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p> This operation requires <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4</a>.
+                                       </p>
+                                    </div>
+                                 </div>
+                                 <p> For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html">Enabling SAML 2.0
+                                       federated users to access the AWS Management Console
+                                       </a> and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html">About SAML 2.0-based
+                                       federation</a> in the <em>IAM User Guide</em>.
+                                 </p>
+                                 <h2 id="aws-resource-iam-samlprovider-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-iam-samlprovider-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::IAM::SAMLProvider&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-iam-samlprovider-name">Name</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-iam-samlprovider-samlmetadatadocument">SamlMetadataDocument</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-iam-samlprovider-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-iam-samlprovider-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::IAM::SAMLProvider
+Properties: 
+  <a href="#cfn-iam-samlprovider-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-iam-samlprovider-samlmetadatadocument">SamlMetadataDocument</a>: <code class="replaceable">String</code>
+  <a href="#cfn-iam-samlprovider-tags">Tags</a>: <code class="replaceable">
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
+</code></pre></div>
+                                 <h2 id="aws-resource-iam-samlprovider-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-iam-samlprovider-name"></a><span class="term"><code class="code">Name</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name of the provider to create.</p>
+                                          
+                                          <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex" rel="noopener noreferrer" target="_blank"><span>regex pattern</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>) a string of characters consisting of upper and lowercase alphanumeric 
+                                             characters with no spaces. You can also include any of the following characters: _+=,.@-
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">128</code></p>
+                                          <p><em>Pattern</em>: <code class="code">[\w._-]+</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-iam-samlprovider-samlmetadatadocument"></a><span class="term"><code class="code">SamlMetadataDocument</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>An XML document generated by an identity provider (IdP) that supports SAML 2.0. The
+                                             document includes the issuer&apos;s name, expiration information, and keys that can be
+                                             used
+                                             to validate the SAML authentication response (assertions) that are received from the
+                                             IdP. You must generate the metadata document using the identity management software
+                                             that
+                                             is used as your organization&apos;s IdP.
+                                          </p>
+                                          
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html">About SAML 2.0-based
+                                                federation</a> in the <em>IAM User Guide</em>
+                                             
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1000</code></p>
+                                          <p><em>Maximum</em>: <code class="code">10000000</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-iam-samlprovider-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A list of tags that you want to attach to the new IAM SAML provider.
+                                             Each tag consists of a key name and an associated value. For more information about
+                                             tagging, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM resources</a> in the
+                                             <em>IAM User Guide</em>.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags,
+                                                   then the entire request 
+                                                   fails and the resource is not created.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                                          <p><em>Maximum</em>: <code class="code">50</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-iam-samlprovider-return-values">Return values</h2>
+                                 <h3 id="aws-resource-iam-samlprovider-return-values-ref">Ref</h3>
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the ARN.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-iam-samlprovider-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-iam-samlprovider-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Returns the Amazon Resource Name (ARN) for the specified <code class="code">AWS::IAM::SAMLProvider</code> resource.
+                                          </p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

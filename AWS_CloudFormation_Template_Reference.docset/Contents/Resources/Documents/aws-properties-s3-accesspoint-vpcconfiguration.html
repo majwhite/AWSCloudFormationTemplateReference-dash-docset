@@ -45,6 +45,159 @@
                                        </dd>
                                     </dl>
                                  </div>
+                                 <h2 id="aws-properties-s3-accesspoint-vpcconfiguration--examples">Examples</h2>
+                                 <p></p>
+                                 <h3 id="aws-properties-s3-accesspoint-vpcconfiguration--examples--Create_an_S3_Access_Point_restricted_to_a_VPC">Create an S3 Access Point restricted to a VPC</h3>
+                                 <p>The following example creates an Amazon S3 access point restricted to a virtual
+                                    private cloud (VPC). For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html">Configuring IAM policies for
+                                       using access points</a> in the <em>Amazon S3 User Guide</em>.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-s3-accesspoint-vpcconfiguration--examples--Create_an_S3_Access_Point_restricted_to_a_VPC--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;S3Bucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;
+        },
+        &quot;S3BucketPolicy&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::BucketPolicy&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;Bucket&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;S3Bucket&quot;
+                },
+                &quot;PolicyDocument&quot;: <span>{</span>
+                    &quot;Version&quot;: &quot;2012-10-17&quot;,
+                    &quot;Statement&quot;: [
+                        <span>{</span>
+                            &quot;Action&quot;: &quot;*&quot;,
+                            &quot;Effect&quot;: &quot;Allow&quot;,
+                            &quot;Resource&quot;: [
+                                <span>{</span>
+                                    &quot;Fn::GetAtt&quot;: [
+                                        &quot;S3Bucket&quot;,
+                                        &quot;Arn&quot;
+                                    ]
+                                },
+                                <span>{</span>
+                                    &quot;Fn::Join&quot;: [
+                                        &quot;&quot;,
+                                        [
+                                            <span>{</span>
+                                                &quot;Fn::GetAtt&quot;: [
+                                                    &quot;S3Bucket&quot;,
+                                                    &quot;Arn&quot;
+                                                ]
+                                            },
+                                            &quot;/*&quot;
+                                        ]
+                                    ]
+                                }
+                            ],
+                            &quot;Principal&quot;: <span>{</span>
+                                &quot;AWS&quot;: &quot;*&quot;
+                            },
+                            &quot;Condition&quot;: <span>{</span>
+                                &quot;StringEquals&quot;: <span>{</span>
+                                    &quot;s3:DataAccessPointAccount&quot;: <span>{</span>
+                                        &quot;Ref&quot;: &quot;AWS::AccountId&quot;
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        &quot;VPC&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::EC2::VPC&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;CidrBlock&quot;: &quot;10.0.0.0/16&quot;
+            }
+        },
+        &quot;S3AccessPoint&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::AccessPoint&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;Bucket&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;S3Bucket&quot;
+                },
+                &quot;Name&quot;: &quot;my-access-point&quot;,
+                &quot;VpcConfiguration&quot;: <span>{</span>
+                    &quot;VpcId&quot;: <span>{</span>
+                        &quot;Ref&quot;: &quot;VPC&quot;
+                    }
+                },
+                &quot;PublicAccessBlockConfiguration&quot;: <span>{</span>
+                    &quot;BlockPublicAcls&quot;: true,
+                    &quot;IgnorePublicAcls&quot;: true,
+                    &quot;BlockPublicPolicy&quot;: true,
+                    &quot;RestrictPublicBuckets&quot;: true
+                }
+            }
+        }
+    },
+    &quot;Outputs&quot;: <span>{</span>
+        &quot;S3AccessPointArn&quot;: <span>{</span>
+            &quot;Value&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;S3AccessPoint&quot;
+            },
+            &quot;Description&quot;: &quot;ARN of the sample Amazon S3 access point.&quot;
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-s3-accesspoint-vpcconfiguration--examples--Create_an_S3_Access_Point_restricted_to_a_VPC--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+  S3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: S3Bucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Action: &quot;*&quot;
+            Effect: Allow
+            Resource:
+              - Fn::GetAtt:
+                  - S3Bucket
+                  - Arn
+              - Fn::Join:
+                  - &quot;&quot;
+                  - - Fn::GetAtt:
+                        - S3Bucket
+                        - Arn
+                    - /*
+            Principal:
+              AWS: &quot;*&quot;
+            Condition:
+              StringEquals:
+                s3:DataAccessPointAccount:
+                  Ref: AWS::AccountId
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+  S3AccessPoint:
+    Type: AWS::S3::AccessPoint
+    Properties:
+      Bucket:
+        Ref: S3Bucket
+      Name: my-access-point
+      VpcConfiguration:
+        VpcId:
+          Ref: VPC
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        IgnorePublicAcls: true
+        BlockPublicPolicy: true
+        RestrictPublicBuckets: true
+Outputs:
+  S3AccessPointArn:
+    Value:
+      Ref: S3AccessPoint
+    Description: ARN of the sample Amazon S3 access point.</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -55,7 +208,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

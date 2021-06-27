@@ -20,7 +20,7 @@
                                     configuration that can be used by an Auto Scaling group to configure Amazon EC2 instances.
                                     
                                  </p>
-                                 <p>When you update the launch configuration for an Auto Scaling group, AWS CloudFormation
+                                 <p>When you update the launch configuration for an Auto Scaling group, CloudFormation
                                     deletes that resource and creates a new launch configuration with the updated properties
                                     and a
                                     new name. Existing instances are not affected. To update existing instances when you
@@ -508,6 +508,20 @@ Properties:
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                     
                                  </p>
+                                 <h2 id="aws-properties-as-launchconfig--remarks">Remarks</h2>
+                                 <p>CloudFormation marks the Auto Scaling group as successful (by setting its status to
+                                    CREATE_COMPLETE) when its desired capacity is reached. However, if <code class="code">SpotPrice</code> is
+                                    set in the launch configuration, then desired capacity is not used as a criteria for
+                                    success. Whether your request is fulfilled depends on Spot Instance capacity and your
+                                    maximum price. If the current Spot price is less than your specified maximum price,
+                                    Amazon
+                                    EC2 Auto Scaling uses the desired capacity as the target capacity for the group. If
+                                    the
+                                    request for Spot Instances is unsuccessful, it keeps trying. 
+                                 </p>
+                                 <p>You cannot define a duration for the Spot Instances as you can with a <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html#fixed-duration-spot-instances">Spot
+                                       Fleet</a>.
+                                 </p>
                                  <h2 id="aws-properties-as-launchconfig--examples">Examples</h2>
                                  <p>The following examples create launch configurations that can be used by an Auto Scaling
                                     group to configure Amazon EC2 instances. 
@@ -524,13 +538,12 @@ Properties:
                                     is
                                     attached to. 
                                  </p>
-                                 <p>CloudFormation supports parameters from the AWS Systems Manager Parameter Store. In
-                                    this example, the <code class="code">ImageId</code> property of the
-                                    AWS::AutoScaling::LaunchConfiguration references the latest Amazon Linux 2 AMI (EBS-backed
-                                    image) from the Parameter Store. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html">AWS Systems
-                                       Manager Parameter Store</a> in the <em>AWS Systems Manager User
-                                       Guide</em> and the blog post <a href="http://aws.amazon.com/blogs/compute/query-for-the-latest-amazon-linux-ami-ids-using-aws-systems-manager-parameter-store/" rel="noopener noreferrer" target="_blank"><span>Query for the latest Amazon Linux AMI IDs using AWS Systems Manager Parameter
-                                          Store</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> on the AWS Compute Blog.
+                                 <p>CloudFormation supports parameters from the AWS Systems Manager
+                                    Parameter Store. In this example, the <code class="code">ImageId</code> property references the latest
+                                    Amazon Linux 2 AMI (EBS-backed image) from the Parameter Store. For more information,
+                                    see
+                                    <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html">AWS Systems Manager Parameter Store</a> in the <em>AWS Systems Manager User Guide</em> and the blog post <a href="http://aws.amazon.com/blogs/compute/query-for-the-latest-amazon-linux-ami-ids-using-aws-systems-manager-parameter-store/" rel="noopener noreferrer" target="_blank"><span>Query for the latest Amazon Linux AMI IDs using AWS Systems Manager
+                                          Parameter Store</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> on the AWS Compute Blog.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-properties-as-launchconfig--examples--Amazon_EBS-backed_AMI_and_defined_block_device_mappings--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -564,7 +577,7 @@ Properties:
             &quot;DeviceName&quot;:&quot;/dev/sda1&quot;,
             &quot;Ebs&quot;:<span>{</span>
               &quot;VolumeSize&quot;:&quot;30&quot;,
-              &quot;VolumeType&quot;:&quot;gp2&quot;
+              &quot;VolumeType&quot;:&quot;gp3&quot;
             }
           },
           <span>{</span>
@@ -608,7 +621,7 @@ Resources:
         - DeviceName: /dev/sda1
           Ebs: 
             VolumeSize: 30
-            VolumeType: &quot;gp2&quot;
+            VolumeType: &quot;gp3&quot;
         - DeviceName: /dev/sdm
           Ebs: 
             VolumeSize: 100
@@ -623,11 +636,9 @@ Resources:
                                     full template, including the definition of, and further references from the <a href="aws-resource-iam-instanceprofile.html">InstanceProfile</a> object referenced here as <code class="code">RootInstanceProfile</code>, see
                                     <a href="https://s3.amazonaws.com/cloudformation-templates-us-east-1/auto_scaling_with_instance_profile.template" rel="noopener noreferrer" target="_blank"><span>auto_scaling_with_instance_profile.template</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                  </p>
-                                 <p>In this example, the <code class="code">ImageId</code> property of the
-                                    AWS::AutoScaling::LaunchConfiguration references the latest Amazon Linux AMI (instance
-                                    store/S3-backed image) from the Parameter Store. The BlockDeviceMappings property
-                                    lists a
-                                    virtual device <code class="code">ephemeral0</code> mapped to /dev/sdc.
+                                 <p>In this example, the <code class="code">ImageId</code> property references the latest Amazon Linux
+                                    AMI (instance store/S3-backed image) from the Parameter Store. The BlockDeviceMappings
+                                    property lists a virtual device <code class="code">ephemeral0</code> mapped to /dev/sdc.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-properties-as-launchconfig--examples--Instance_store-backed_AMI_with_Spot_price_and_IAM_role--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -758,11 +769,11 @@ Resources:
         &quot;KeyName&quot;:<span>{</span>
           &quot;Ref&quot;:&quot;KeyName&quot;
         },
-        &quot;UserData&quot;: <span>{</span>&quot;Fn::Join&quot;: [&quot;&quot;, [
+        &quot;UserData&quot;: <span>{</span>&quot;Fn::Base64&quot;: <span>{</span>&quot;Fn::Join&quot;: [&quot;&quot;, [
           &quot;#!/bin/bash -x\n&quot;,
           &quot;/opt/aws/bin/cfn-init -v --stack &quot;, <span>{</span>&quot;Ref&quot;: &quot;AWS::StackName&quot;}, &quot; --resource myLaunchConfig &quot;, &quot; --configsets default &quot;, &quot; --region &quot;, <span>{</span>&quot;Ref&quot;: &quot;AWS::Region&quot;}, &quot;\n&quot;,
           &quot;/opt/aws/bin/cfn-signal -e $? --stack &quot;, <span>{</span>&quot;Ref&quot;: &quot;AWS::StackName&quot;}, &quot; --resource myASG &quot;, &quot; --region &quot;, <span>{</span>&quot;Ref&quot;: &quot;AWS::Region&quot;}, &quot;\n&quot;
-        ]]},
+        ]]}},
         &quot;EbsOptimized&quot;:&quot;true&quot;
       }
     }
@@ -797,7 +808,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

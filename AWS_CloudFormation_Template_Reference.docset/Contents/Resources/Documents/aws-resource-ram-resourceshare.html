@@ -25,6 +25,7 @@
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-ram-resourceshare-allowexternalprincipals">AllowExternalPrincipals</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-ram-resourceshare-name">Name</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ram-resourceshare-permissionarns">PermissionArns</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-ram-resourceshare-principals">Principals</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-ram-resourceshare-resourcearns">ResourceArns</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-ram-resourceshare-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
@@ -36,6 +37,8 @@
 Properties: 
   <a href="#cfn-ram-resourceshare-allowexternalprincipals">AllowExternalPrincipals</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-ram-resourceshare-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ram-resourceshare-permissionarns">PermissionArns</a>: <code class="replaceable">
+    - String</code>
   <a href="#cfn-ram-resourceshare-principals">Principals</a>: <code class="replaceable">
     - String</code>
   <a href="#cfn-ram-resourceshare-resourcearns">ResourceArns</a>: <code class="replaceable">
@@ -49,8 +52,8 @@ Properties:
                                        <dt><a id="cfn-ram-resourceshare-allowexternalprincipals"></a><span class="term"><code class="code">AllowExternalPrincipals</code></span></dt>
                                        <dd>
                                           
-                                          <p>Indicates whether principals outside your AWS organization can be associated with
-                                             a resource share.
+                                          <p>Indicates whether principals outside your organization in AWS Organizations can be
+                                             associated with a resource share.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -70,13 +73,77 @@ Properties:
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-ram-resourceshare-permissionarns"></a><span class="term"><code class="code">PermissionArns</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Names (ARNs) of the permissions to associate with the resource
+                                             share. If you do not specify an ARN
+                                             			for the permission, AWS RAM automatically attaches the default version of the permission
+                                             			for each resource type. Only one permission can be associated with each resource
+                                             type in a resource share.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-ram-resourceshare-principals"></a><span class="term"><code class="code">Principals</code></span></dt>
                                        <dd>
                                           
-                                          <p>The principals to associate with the resource share. The possible values are IDs of
-                                             AWS accounts,
-                                             the ARN of an OU or organization from AWS Organizations.
-                                          </p>
+                                          <p>The principals to associate with the resource share. The possible values are:</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>An AWS account ID</p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>An Amazon Resource Name (ARN) of an organization in AWS Organizations
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>An ARN of an organizational unit (OU) in AWS Organizations
+                                                      
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>An ARN of an IAM role</p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>An ARN of an IAM user</p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>Not all resource types can be shared with IAM roles and IAM users. For more information,
+                                                   see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and IAM users</a> in the <em>
+                                                      AWS Resource Access Manager User Guide</em>.
+                                                </p>
+                                             </div>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -87,7 +154,7 @@ Properties:
                                        <dt><a id="cfn-ram-resourceshare-resourcearns"></a><span class="term"><code class="code">ResourceArns</code></span></dt>
                                        <dd>
                                           
-                                          <p>The Amazon Resource Names (ARN) of the resources to associate with the resource share.</p>
+                                          <p>The Amazon Resource Names (ARNs) of the resources to associate with the resource share.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -190,7 +257,7 @@ Resources:
                                           
                                           <p>
                                              <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html">CreateResourceShare</a> in the
-                                             <em>AWS Resource Access Manager API Reference</em>
+                                             <em>AWS  Resource Access Manager API Reference</em>
                                              
                                           </p>
                                           
@@ -216,7 +283,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

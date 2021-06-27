@@ -16,10 +16,9 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::SageMaker::Device</code> resource is an Amazon SageMaker 
-                                    resource type that allows you&#x2028; to register your Devices against an 
-                                    existing SageMaker Edge Manager DeviceFleet. Each device must be listed &#x2028;
-                                    individually in the CFN specification.
+                                 <p>The <code class="code">AWS::SageMaker::Device</code> resource is an Amazon SageMaker resource type
+                                    that allows you to register your Devices against an existing SageMaker Edge Manager
+                                    DeviceFleet. Each device must be listed individually in the CFN specification.
                                  </p>
                                  <h2 id="aws-resource-sagemaker-device-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -28,7 +27,8 @@
   &quot;Type&quot; : &quot;AWS::SageMaker::Device&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-sagemaker-device-device">Device</a>&quot; : <code class="replaceable"><a href="./aws-properties-sagemaker-device-device.html">Device</a></code>,
-      &quot;<a href="#cfn-sagemaker-device-tags">Tags</a>&quot; : <code class="replaceable"><a href="aws-properties-resource-tags.html">Tag</a></code>
+      &quot;<a href="#cfn-sagemaker-device-devicefleetname">DeviceFleetName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-sagemaker-device-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
 }
 </code></pre></div>
@@ -37,43 +37,60 @@
 Properties: 
   <a href="#cfn-sagemaker-device-device">Device</a>: <code class="replaceable">
     <a href="./aws-properties-sagemaker-device-device.html">Device</a></code>
+  <a href="#cfn-sagemaker-device-devicefleetname">DeviceFleetName</a>: <code class="replaceable">String</code>
   <a href="#cfn-sagemaker-device-tags">Tags</a>: <code class="replaceable">
-    <a href="aws-properties-resource-tags.html">Tag</a></code>
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
 </code></pre></div>
                                  <h2 id="aws-resource-sagemaker-device-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
                                        <dt><a id="cfn-sagemaker-device-device"></a><span class="term"><code class="code">Device</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>Edge device you want to create.</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-sagemaker-device-device.html">Device</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-sagemaker-device-devicefleetname"></a><span class="term"><code class="code">DeviceFleetName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name of the fleet the device belongs to.</p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">63</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^[a-zA-Z0-9](-*[a-zA-Z0-9])<span>{</span>0,62}$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
                                        <dt><a id="cfn-sagemaker-device-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>An array of key-value pairs that contain metadata to help you categorize and organize
+                                             your devices. Each tag consists of a key and a value, both of which you define.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: <a href="aws-properties-resource-tags.html">Tag</a> of Json
-                                          </p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                                          <p><em>Maximum</em>: <code class="code">50</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-sagemaker-device-return-values">Return values</h2>
                                  <h3 id="aws-resource-sagemaker-device-return-values-ref">Ref</h3>
-                                 <h3 id="aws-resource-sagemaker-device-return-values-fn--getatt">Fn::GetAtt</h3>
-                                 <h4 id="aws-resource-sagemaker-device-return-values-fn--getatt-fn--getatt"></h4>
-                                 <div class="variablelist">
-                                    <dl>
-                                       <dt><a id="DeviceFleetName-fn::getatt"></a><span class="term"><code class="code">DeviceFleetName</code></span></dt>
-                                       <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
-                                       </dd>
-                                    </dl>
-                                 </div>
+                                 <p>
+                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returnsWhen you pass the logical ID of this resource to the
+                                    intrinsic `Ref` function, Ref returns the DeviceFleetName.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -84,7 +101,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

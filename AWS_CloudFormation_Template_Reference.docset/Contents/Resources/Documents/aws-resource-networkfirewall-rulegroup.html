@@ -85,15 +85,6 @@ Properties:
                                           
                                           <p>An object that defines the rule group rules. </p>
                                           
-                                          <div class="awsdocs-note">
-                                             <div class="awsdocs-note-title">
-                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
-                                             <div class="awsdocs-note-text">
-                                                <p>You must provide either this rule group setting or a <code class="code">Rules</code> setting, but not both. 
-                                                </p>
-                                             </div>
-                                          </div>   
-                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-networkfirewall-rulegroup-rulegroup.html">RuleGroup</a></p>
@@ -292,37 +283,36 @@ Properties:
 } </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h4 id="aws-resource-networkfirewall-rulegroup--examples--Create_a_stateless_rule_group--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">SampleStatelessRulegroup:
-    Type: &apos;AWS::NetworkFirewall::RuleGroup&apos;
-    Properties:
-      RuleGroupName: SampleStatelessRulegroupName
-      Type: STATELESS
-      RuleGroup:
-        RulesSource:
-          StatelessRulesAndCustomActions:
-            StatelessRules:
-              - RuleDefinition:
-                  MatchAttributes:
-                    Sources:
-                      - AddressDefinition: 0.0.0.0/0
-                    Destinations:
-                      - AddressDefinition: 10.0.0.0/8
-                    SourcePorts:
-                      - FromPort: 15000
-                      - ToPort: 30000
-                    DestinationPorts:
-                      - FromPort: 443
-                      - ToPort: 443
-                    Protocols:
-                      - 6
-                  Actions:
-                    - &apos;aws:pass&apos;
-                Priority: 1
-      Capacity: 100
-      Description: Rulegroup description goes here
-      Tags:
-        - Key: Foo
-          Value: Bar
-          </code></pre></div>
+              Type: &apos;AWS::NetworkFirewall::RuleGroup&apos;
+              Properties:
+                RuleGroupName: SampleStatelessRulegroupName
+                Type: STATELESS
+                RuleGroup:
+                  RulesSource:
+                    StatelessRulesAndCustomActions:
+                      StatelessRules:
+                        - RuleDefinition:
+                            MatchAttributes:
+                              Sources:
+                                - AddressDefinition: 0.0.0.0/0
+                              Destinations:
+                                - AddressDefinition: 10.0.0.0/8
+                              SourcePorts:
+                                - FromPort: 15000
+                                  ToPort: 30000
+                              DestinationPorts:
+                                - FromPort: 443
+                                  ToPort: 443
+                              Protocols:
+                                - 6
+                            Actions:
+                              - &apos;aws:pass&apos;
+                          Priority: 1
+                Capacity: 100
+                Description: Rulegroup description goes here
+                Tags:
+                  - Key: Foo
+                    Value: Bar </code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -333,7 +323,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

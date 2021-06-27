@@ -17,7 +17,7 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>Describes the versioning state of an Amazon S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html">PUT
-                                       Bucket versioning</a> in the <em>Amazon Simple Storage Service API Reference</em>.
+                                       Bucket versioning</a> in the <em>Amazon S3 API Reference</em>.
                                  </p>
                                  <h2 id="aws-properties-s3-bucket-versioningconfig-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -46,19 +46,69 @@
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-properties-s3-bucket-versioningconfig--seealso">See also</h2>
-                                 <div class="itemizedlist">
-                                     
-                                    
-                                    <ul class="itemizedlist" type="disc">
-                                       <li class="listitem">
-                                          
-                                          <p>AWS::S3::Bucket <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--examples">Examples</a></p>
-                                          
-                                       </li>
-                                    </ul>
-                                 </div>
+                                 <h2 id="aws-properties-s3-bucket-versioningconfig--examples">Examples</h2>
                                  <p></p>
+                                 <h3 id="aws-properties-s3-bucket-versioningconfig--examples--Enable_versioning_and_replicate_objects">Enable versioning and replicate objects</h3>
+                                 <p>The following example enables versioning and two replication rules. The rules copy
+                                    objects prefixed with either <code class="code">MyPrefix</code> and <code class="code">MyOtherPrefix</code> and
+                                    stores the copied objects in a bucket named <code class="code">my-replication-bucket</code>.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-versioningconfig--examples--Enable_versioning_and_replicate_objects--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;S3Bucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;VersioningConfiguration&quot;: <span>{</span>
+                    &quot;Status&quot;: &quot;Enabled&quot;
+                },
+                &quot;ReplicationConfiguration&quot;: <span>{</span>
+                    &quot;Role&quot;: &quot;arn:aws:iam::123456789012:role/replication_role&quot;,
+                    &quot;Rules&quot;: [
+                        <span>{</span>
+                            &quot;Id&quot;: &quot;MyRule1&quot;,
+                            &quot;Status&quot;: &quot;Enabled&quot;,
+                            &quot;Prefix&quot;: &quot;MyPrefix&quot;,
+                            &quot;Destination&quot;: <span>{</span>
+                                &quot;Bucket&quot;: &quot;arn:aws:s3:::my-replication-bucket&quot;,
+                                &quot;StorageClass&quot;: &quot;STANDARD&quot;
+                            }
+                        },
+                        <span>{</span>
+                            &quot;Status&quot;: &quot;Enabled&quot;,
+                            &quot;Prefix&quot;: &quot;MyOtherPrefix&quot;,
+                            &quot;Destination&quot;: <span>{</span>
+                                &quot;Bucket&quot;: &quot;arn:aws:s3:::my-replication-bucket&quot;
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-versioningconfig--examples--Enable_versioning_and_replicate_objects--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  S3Bucket:
+    Type: &apos;AWS::S3::Bucket&apos;
+    Properties:
+      VersioningConfiguration:
+        Status: Enabled
+      ReplicationConfiguration:
+        Role: &apos;arn:aws:iam::123456789012:role/replication_role&apos;
+        Rules:
+          - Id: MyRule1
+            Status: Enabled
+            Prefix: MyPrefix
+            Destination:
+              Bucket: &apos;arn:aws:s3:::my-replication-bucket&apos;
+              StorageClass: STANDARD
+          - Status: Enabled
+            Prefix: MyOtherPrefix
+            Destination:
+              Bucket: &apos;arn:aws:s3:::my-replication-bucket&apos;</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -69,7 +119,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

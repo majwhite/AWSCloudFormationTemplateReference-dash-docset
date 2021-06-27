@@ -16,7 +16,10 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The query used to define a group.</p>
+                                 <p>The query used to dynamically define the members of a group. For more information
+                                    about how to construct a query, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html">Build queries and groups in
+                                       AWS Resource Groups</a>.
+                                 </p>
                                  <h2 id="aws-properties-resourcegroups-group-resourcequery-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -36,11 +39,43 @@
                                        <dt><a id="cfn-resourcegroups-group-resourcequery-query"></a><span class="term"><code class="code">Query</code></span></dt>
                                        <dd>
                                           
-                                          <p>The query that defines a group. This field is required when the type is
-                                             <code class="code">TAG_FILTERS_1_0</code>.
+                                          <p>The query that defines the membership of the group. This is a structure with
+                                             properties that depend on the <code class="code">Type</code>.
                                           </p>
                                           
-                                          <p><em>Required</em>: Conditional
+                                          <p>The <code class="code">Query</code> structure must be included in the following scenarios:
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>When the <code class="code">Type</code> is <code class="code">TAG_FILTERS_1_0</code>, you must specify a
+                                                      <code class="code">Query</code> structure that contains a <code class="code">TagFilters</code> list of
+                                                      tags. Resources with tags that match those in the <code class="code">TagFilter</code> list
+                                                      become members of the resource group.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>When the <code class="code">Type</code> is <code class="code">CLOUDFORMATION_STACK_1_0</code> then this
+                                                      field is required only when you must specify a CloudFormation stack other than
+                                                      the one you are defining. To do this, the <code class="code">Query</code> structure must
+                                                      contain the <code class="code">StackIdentifier</code> property. If you don&apos;t specify either a
+                                                      <code class="code">Query</code> structure or a <code class="code">StackIdentifier</code> within that
+                                                      <code class="code">Query</code>, then it defaults to the CloudFormation stack that you&apos;re
+                                                      currently constructing.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-resourcegroups-group-query.html">Query</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
@@ -48,9 +83,8 @@
                                        <dt><a id="cfn-resourcegroups-group-resourcequery-type"></a><span class="term"><code class="code">Type</code></span></dt>
                                        <dd>
                                           
-                                          <p>The valid types are <code class="code">TAG_FILTERS_1_0</code> and
-                                             <code class="code">CLOUDFORMATION_STACK_1_0.</code> Each type requires specific attributes for
-                                             the <code class="code">Query</code> object:
+                                          <p>Specifies the type of resource query that determines this group&apos;s membership. There
+                                             are two valid query types:
                                           </p>
                                           
                                           <div class="itemizedlist">
@@ -61,8 +95,8 @@
                                                 <li class="listitem">
                                                    
                                                    <p><code class="code">TAG_FILTERS_1_0</code> indicates that the group is a tag-based group.
-                                                      Group membership is defined by the query&apos;s <code class="code">TagFilters</code> property.
-                                                      Specify the tag filters to use in the query.
+                                                      To complete the group membership, you must include the <code class="code">TagFilters</code>
+                                                      property to specify the tag filters to use in the query.
                                                    </p>
                                                    
                                                 </li>
@@ -70,9 +104,9 @@
                                                    
                                                    <p><code class="code">CLOUDFORMATION_STACK_1_0</code>, the default, indicates that the
                                                       group is a CloudFormation stack-based group. Group membership is based on the
-                                                      CloudFormation stack. Specify the <code class="code">StackIdentifier</code> property in the
-                                                      query to define which stack to associate the group with, or leave it empty to
-                                                      default to the stack where the group is defined.
+                                                      CloudFormation stack. You must specify the <code class="code">StackIdentifier</code> property
+                                                      in the query to define which stack to associate the group with, or leave it
+                                                      empty to default to the stack where the group is defined.
                                                    </p>
                                                    
                                                 </li>
@@ -97,7 +131,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

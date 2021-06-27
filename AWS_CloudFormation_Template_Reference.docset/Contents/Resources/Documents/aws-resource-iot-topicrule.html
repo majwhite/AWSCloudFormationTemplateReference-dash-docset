@@ -27,6 +27,7 @@
   &quot;Type&quot; : &quot;AWS::IoT::TopicRule&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-iot-topicrule-rulename">RuleName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-iot-topicrule-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
       &quot;<a href="#cfn-iot-topicrule-topicrulepayload">TopicRulePayload</a>&quot; : <code class="replaceable"><a href="./aws-properties-iot-topicrule-topicrulepayload.html">TopicRulePayload</a></code>
     }
 }
@@ -35,6 +36,8 @@
                                     <h3 id="aws-resource-iot-topicrule-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::IoT::TopicRule
 Properties: 
   <a href="#cfn-iot-topicrule-rulename">RuleName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-iot-topicrule-tags">Tags</a>: <code class="replaceable">
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
   <a href="#cfn-iot-topicrule-topicrulepayload">TopicRulePayload</a>: <code class="replaceable">
     <a href="./aws-properties-iot-topicrule-topicrulepayload.html">TopicRulePayload</a></code>
 </code></pre></div>
@@ -51,6 +54,30 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-iot-topicrule-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Metadata which can be used to manage the topic rule.</p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p>
+                                                <p>For the CLI command-line parameter use format: --tags
+                                                   &quot;key1=value1&amp;key2=value2...&quot;
+                                                </p>
+                                                <p>For the cli-input-json file use format: &quot;tags&quot;:
+                                                   &quot;key1=value1&amp;key2=value2...&quot;
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-iot-topicrule-topicrulepayload"></a><span class="term"><code class="code">TopicRulePayload</code></span></dt>
                                        <dd>
@@ -106,76 +133,39 @@ Properties:
                                  <h3 id="aws-resource-iot-topicrule--examples--"></h3>
                                  <p>The following example declares an AWS IoT rule.</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-iot-topicrule--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">
-            <span>{</span>
-   &quot;AWSTemplateFormatVersion&quot;:&quot;2010-09-09&quot;,
-   &quot;Resources&quot;:<span>{</span>
-      &quot;MyTopicRule&quot;:<span>{</span>
-         &quot;Type&quot;:&quot;AWS::IoT::TopicRule&quot;,
-         &quot;Properties&quot;:<span>{</span>
-            &quot;RuleName&quot;:<span>{</span>
-               &quot;Ref&quot;:&quot;NameParameter&quot;
-            },
-            &quot;TopicRulePayload&quot;:<span>{</span>
-               &quot;RuleDisabled&quot;:&quot;true&quot;,
-               &quot;Sql&quot;:&quot;SELECT temp FROM &apos;SomeTopic&apos; WHERE temp &gt; 60&quot;,
-               &quot;Actions&quot;:[
-                  <span>{</span>
-                     &quot;S3&quot;:<span>{</span>
-                        &quot;BucketName&quot;:<span>{</span>
-                           &quot;Ref&quot;:&quot;MyBucket&quot;
-                        },
-                        &quot;RoleArn&quot;:<span>{</span>
-                           &quot;Fn::GetAtt&quot;:[
-                              &quot;MyRole&quot;,
-                              &quot;Arn&quot;
-                           ]
-                        },
-                        &quot;Key&quot;:&quot;MyKey.txt&quot;
-                     }
-                  }
-               ]
-            },
-            &quot;MyBucket&quot;:<span>{</span>
-               &quot;Type&quot;:&quot;AWS::S3::Bucket&quot;,
-               &quot;Properties&quot;:<span>{</span>
-                  
-               }
-            },
-            &quot;MyRole&quot;:<span>{</span>
-               &quot;Type&quot;:&quot;AWS::IAM::Role&quot;,
-               &quot;Properties&quot;:<span>{</span>
-                  &quot;AssumeRolePolicyDocument&quot;:<span>{</span>
-                     &quot;Version&quot;:&quot;2012-10-17&quot;,
-                     &quot;Statement&quot;:[
-                        <span>{</span>
-                           &quot;Effect&quot;:&quot;Allow&quot;,
-                           &quot;Principal&quot;:<span>{</span>
-                              &quot;Service&quot;:[
-                                 &quot;iot.amazonaws.com&quot;
-                              ]
-                           },
-                           &quot;Action&quot;:[
-                              &quot;sts:AssumeRole&quot;
-                           ]
-                        }
-                     ]
-                  }
-               }
-            }
-         },
-         &quot;Parameters&quot;:<span>{</span>
-            &quot;NameParameter&quot;:<span>{</span>
-               &quot;Type&quot;:&quot;String&quot;
-            }
-         }
-      }
-   }
-}
-         </code></pre></div>
+                                    <h4 id="aws-resource-iot-topicrule--examples----json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+	&quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+	&quot;Resources&quot;: <span>{</span>
+		&quot;MyTopicRule&quot;: <span>{</span>
+			&quot;Type&quot;: &quot;AWS::IoT::TopicRule&quot;,
+			&quot;Properties&quot;: <span>{</span>
+				&quot;RuleName&quot;: <span>{</span>
+					&quot;Ref&quot;: &quot;NameParameter&quot;
+				},
+				&quot;TopicRulePayload&quot;: <span>{</span>
+					&quot;RuleDisabled&quot;: &quot;true&quot;,
+					&quot;Sql&quot;: &quot;SELECT temp FROM &apos;SomeTopic&apos; WHERE temp &gt; 60&quot;,
+					&quot;Actions&quot;: [<span>{</span>
+						&quot;S3&quot;: <span>{</span>
+							&quot;BucketName&quot;: <span>{</span>
+								&quot;Ref&quot;: &quot;MyBucket&quot;
+							},
+							&quot;RoleArn&quot;: <span>{</span>
+								&quot;Fn::GetAtt&quot;: [
+									&quot;MyRole&quot;,
+									&quot;Arn&quot;
+								]
+							},
+							&quot;Key&quot;: &quot;MyKey.txt&quot;
+						}
+					}]
+				}
+			}
+		}
+	}
+}</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-iot-topicrule--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">
-AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+                                    <h4 id="aws-resource-iot-topicrule--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
 Resources:
   MyTopicRule:
     Type: AWS::IoT::TopicRule
@@ -193,26 +183,7 @@ Resources:
               Fn::GetAtt:
               - MyRole
               - Arn
-            Key: MyKey.txt
-      MyBucket:
-        Type: AWS::S3::Bucket
-        Properties: <span>{</span>}
-      MyRole:
-        Type: AWS::IAM::Role
-        Properties:
-          AssumeRolePolicyDocument:
-            Version: &apos;2012-10-17&apos;
-            Statement:
-            - Effect: Allow
-              Principal:
-                Service:
-                - iot.amazonaws.com
-              Action:
-              - sts:AssumeRole
-    Parameters:
-      NameParameter:
-        Type: String
-         </code></pre></div>
+            Key: MyKey.txt</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -223,7 +194,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

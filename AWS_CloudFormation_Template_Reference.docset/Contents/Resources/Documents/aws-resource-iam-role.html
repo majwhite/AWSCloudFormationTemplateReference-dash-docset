@@ -16,11 +16,11 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Creates a new role for your AWS account. For more information about roles, go to
+                                 <p>Creates a new role for your AWS account. For more information about roles, see
                                     <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html">IAM
-                                       Roles</a>. For information about limitations on role names and the number of roles
-                                    you can create, go to <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html">Limitations on IAM Entities</a> in
-                                    the <em>IAM User Guide</em>.
+                                       roles</a>. For information about quotas for role names and the number of roles
+                                    you can create, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html">IAM and AWS STS quotas</a> in the
+                                    <em>IAM User Guide</em>.
                                  </p>
                                  <h2 id="aws-resource-iam-role-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -93,7 +93,7 @@ Properties:
                                        <dd>
                                           
                                           <p>A list of Amazon Resource Names (ARNs) of the IAM managed policies that you want to
-                                             attach to the user.
+                                             attach to the role.
                                           </p>
                                           
                                           <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and
@@ -111,20 +111,19 @@ Properties:
                                           
                                           <p>The maximum session duration (in seconds) that you want to set for the specified role.
                                              If you do not specify a value for this setting, the default maximum of one hour is
-                                             applied.
-                                             This setting can have a value from 1 hour to 12 hours.
+                                             applied. This setting can have a value from 1 hour to 12 hours.
                                           </p>
                                           
-                                          <p>Anyone who assumes the role from the AWS CLI or API can use the
+                                          <p>Anyone who assumes the role from the  or API can use the
                                              <code class="code">DurationSeconds</code> API parameter or the <code class="code">duration-seconds</code> CLI
                                              parameter to request a longer session. The <code class="code">MaxSessionDuration</code> setting
                                              determines the maximum duration that can be requested using the
                                              <code class="code">DurationSeconds</code> parameter. If users don&apos;t specify a value for the
                                              <code class="code">DurationSeconds</code> parameter, their security credentials are valid for one
-                                             hour by default. This applies when you use the <code class="code">AssumeRole*</code> API operations or
-                                             the <code class="code">assume-role*</code> CLI operations but does not apply when you use those
-                                             operations to create a console URL. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html">Using IAM Roles</a> in the
-                                             <em>IAM User Guide</em>.
+                                             hour by default. This applies when you use the <code class="code">AssumeRole*</code> API operations
+                                             or the <code class="code">assume-role*</code> CLI operations but does not apply when you use those
+                                             operations to create a console URL. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html">Using IAM
+                                                roles</a> in the <em>IAM User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -138,8 +137,8 @@ Properties:
                                        <dt><a id="cfn-iam-role-path"></a><span class="term"><code class="code">Path</code></span></dt>
                                        <dd>
                                           
-                                          <p> The path to the role. For more information about paths, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the
-                                             <em>IAM User Guide</em>.
+                                          <p> The path to the role. For more information about paths, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM
+                                                Identifiers</a> in the <em>IAM User Guide</em>.
                                           </p>
                                           
                                           <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p>
@@ -165,8 +164,8 @@ Properties:
                                           
                                           <p>The ARN of the policy used to set the permissions boundary for the role.</p>
                                           
-                                          <p>For more information about permissions boundaries, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions Boundaries for IAM
-                                                Identities </a> in the <em>IAM User Guide</em>.
+                                          <p>For more information about permissions boundaries, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions boundaries for IAM
+                                                identities </a> in the <em>IAM User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -227,7 +226,8 @@ Properties:
                                        <dt><a id="cfn-iam-role-rolename"></a><span class="term"><code class="code">RoleName</code></span></dt>
                                        <dd>
                                           
-                                          <p>A name for the IAM role. For valid values, see the <code class="code">RoleName</code> parameter for
+                                          <p>A name for the IAM role, up to 64 characters in length. For valid values, see the
+                                             <code class="code">RoleName</code> parameter for
                                              the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">
                                                 <code class="code">CreateRole</code>
                                                 </a> action in the <em>IAM User Guide</em>.
@@ -272,9 +272,9 @@ Properties:
                                        <dt><a id="cfn-iam-role-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
                                           
-                                          <p>A list of tags that are attached to the specified role. For more information about
-                                             tagging, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM
-                                                Identities</a> in the <em>IAM User Guide</em>.
+                                          <p>A list of tags that are attached to the role. For more information about tagging,
+                                             see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM resources</a> in the
+                                             <em>IAM User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -340,13 +340,13 @@ Properties:
                                  </div>
                                  <h2 id="aws-resource-iam-role--examples">Examples</h2>
                                  <p></p>
-                                 <h3 id="aws-resource-iam-role--examples--IAM_Role_with_Embedded_Policy_and_Instance_Profiles">IAM Role with Embedded Policy and Instance Profiles</h3>
+                                 <h3 id="aws-resource-iam-role--examples--_Role_with_Embedded_Policy_and_Instance_Profiles">IAM Role with Embedded Policy and Instance Profiles</h3>
                                  <p>This example shows an embedded policy in the <code class="code">AWS::IAM::Role</code>. The
                                     policy is specified inline in the <code class="code">Policies</code> property of the
                                     <code class="code">AWS::IAM::Role</code>.
                                  </p>
                                  <div id="" name="" class="section langfilter">
-                                    <h4 id="aws-resource-iam-role--examples--IAM_Role_with_Embedded_Policy_and_Instance_Profiles--language_sc3_fgs_qjb"></h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="language_sc3_fgs_qjb "><span>{</span>
+                                    <h4 id="aws-resource-iam-role--examples--_Role_with_Embedded_Policy_and_Instance_Profiles--language_sc3_fgs_qjb"></h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="language_sc3_fgs_qjb "><span>{</span>
     &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
     &quot;Resources&quot;: <span>{</span>
         &quot;RootRole&quot;: <span>{</span>
@@ -400,25 +400,25 @@ Properties:
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-iam-role--examples--IAM_Role_with_Embedded_Policy_and_Instance_Profiles--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+                                    <h4 id="aws-resource-iam-role--examples--_Role_with_Embedded_Policy_and_Instance_Profiles--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &quot;2010-09-09&quot;
 Resources:
   RootRole:
     Type: &apos;AWS::IAM::Role&apos;
     Properties:
       AssumeRolePolicyDocument:
-        Version: 2012-10-17
+        Version: &quot;2012-10-17&quot;
         Statement:
           - Effect: Allow
             Principal:
               Service:
-              - ec2.amazonaws.com
+                - ec2.amazonaws.com
             Action:
               - &apos;sts:AssumeRole&apos;
       Path: /
       Policies:
         - PolicyName: root
           PolicyDocument:
-            Version: 2012-10-17
+            Version: &quot;2012-10-17&quot;
             Statement:
               - Effect: Allow
                 Action: &apos;*&apos;
@@ -429,13 +429,13 @@ Resources:
       Path: /
       Roles:
         - !Ref RootRole</code></pre></div>
-                                 <h3 id="aws-resource-iam-role--examples--IAM_Role_with_External_Policy_and_Instance_Profiles">IAM Role with External Policy and Instance Profiles</h3>
+                                 <h3 id="aws-resource-iam-role--examples--_Role_with_External_Policy_and_Instance_Profiles">IAM Role with External Policy and Instance Profiles</h3>
                                  <p>In this example, the Policy and InstanceProfile resources are specified externally
                                     to the IAM Role. They refer to the role by specifying its name, &quot;RootRole&quot;, in their
                                     respective <code class="code">Roles</code> properties.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-iam-role--examples--IAM_Role_with_External_Policy_and_Instance_Profiles--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-iam-role--examples--_Role_with_External_Policy_and_Instance_Profiles--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
    &quot;Resources&quot;: <span>{</span>
       &quot;RootRole&quot;: <span>{</span>
@@ -483,7 +483,7 @@ Resources:
    }
 }  </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-iam-role--examples--IAM_Role_with_External_Policy_and_Instance_Profiles--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &quot;2010-09-09&quot;
+                                    <h4 id="aws-resource-iam-role--examples--_Role_with_External_Policy_and_Instance_Profiles--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &quot;2010-09-09&quot;
 Resources: 
   RootRole: 
     Type: &quot;AWS::IAM::Role&quot;
@@ -506,20 +506,18 @@ Resources:
       PolicyDocument: 
         Version: &quot;2012-10-17&quot;
         Statement: 
-          - 
-            Effect: &quot;Allow&quot;
+          - Effect: &quot;Allow&quot;
             Action: &quot;*&quot;
             Resource: &quot;*&quot;
       Roles: 
-        - 
-          Ref: &quot;RootRole&quot;
+        - Ref: &quot;RootRole&quot;
   RootInstanceProfile: 
     Type: &quot;AWS::IAM::InstanceProfile&quot;
     Properties: 
       Path: &quot;/&quot;
       Roles: 
-        - 
-          Ref: &quot;RootRole&quot;</code></pre></div>
+        - Ref: &quot;RootRole&quot;
+</code></pre></div>
                                  <h2 id="aws-resource-iam-role--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
@@ -539,8 +537,7 @@ Resources:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-iam.html">AWS Identity and
-                                                Access Management Template Snippets</a>
+                                             <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-iam.html">AWS Identity and Access Management Template Snippets</a>
                                              
                                           </p>
                                           
@@ -566,7 +563,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

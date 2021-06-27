@@ -53,7 +53,9 @@ Properties:
                                        <dt><a id="cfn-elasticloadbalancingv2-listener-alpnpolicy"></a><span class="term"><code class="code">AlpnPolicy</code></span></dt>
                                        <dd>
                                           
-                                          <p>[TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN) policy.</p>
+                                          <p>[TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN)
+                                             policy.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -65,7 +67,8 @@ Properties:
                                        <dd>
                                           
                                           <p>The default SSL server certificate for a secure listener. You must provide exactly
-                                             one certificate if the listener protocol is HTTPS or TLS.
+                                             one
+                                             certificate if the listener protocol is HTTPS or TLS.
                                           </p>
                                           
                                           <p>To create a certificate list for a secure listener, use <a href="aws-resource-elasticloadbalancingv2-listenercertificate.html">AWS::ElasticLoadBalancingV2::ListenerCertificate</a>.
@@ -79,7 +82,9 @@ Properties:
                                        <dt><a id="cfn-elasticloadbalancingv2-listener-defaultactions"></a><span class="term"><code class="code">DefaultActions</code></span></dt>
                                        <dd>
                                           
-                                          <p>The actions for the default rule. You cannot define a condition for a default rule.</p>
+                                          <p>The actions for the default rule. You cannot define a condition for a default
+                                             rule.
+                                          </p>
                                           
                                           <p>To create additional rules for an Application Load Balancer, use <a href="aws-resource-elasticloadbalancingv2-listenerrule.html">AWS::ElasticLoadBalancingV2::ListenerRule</a>.
                                           </p>
@@ -104,7 +109,8 @@ Properties:
                                        <dd>
                                           
                                           <p>The port on which the load balancer is listening. You cannot specify a port for a
-                                             Gateway Load Balancer.
+                                             Gateway
+                                             Load Balancer.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -118,12 +124,13 @@ Properties:
                                        <dt><a id="cfn-elasticloadbalancingv2-listener-protocol"></a><span class="term"><code class="code">Protocol</code></span></dt>
                                        <dd>
                                           
-                                          <p>The protocol for connections from clients to the load balancer. 
-                                             For Application Load Balancers, the supported protocols are HTTP and HTTPS. 
-                                             For Network Load Balancers, the supported protocols are TCP, TLS, UDP, and TCP_UDP.
-                                             
-                                             You can&#x2019;t specify the UDP or TCP_UDP protocol if dual-stack mode is enabled. 
-                                             You cannot specify a protocol for a Gateway Load Balancer.
+                                          <p>The protocol for connections from clients to the load balancer. For Application Load
+                                             Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers,
+                                             the
+                                             supported protocols are TCP, TLS, UDP, and TCP_UDP. You can&#x2019;t specify the UDP or TCP_UDP
+                                             protocol if dual-stack mode is enabled. You cannot specify a protocol for a Gateway
+                                             Load
+                                             Balancer.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -161,19 +168,27 @@ Properties:
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
                                  <h3 id="aws-resource-elasticloadbalancingv2-listener-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
                                  <h4 id="aws-resource-elasticloadbalancingv2-listener-return-values-fn--getatt-fn--getatt"></h4>
                                  <div class="variablelist">
                                     <dl>
                                        <dt><a id="ListenerArn-fn::getatt"></a><span class="term"><code class="code">ListenerArn</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the listener.</p>
+                                          
                                        </dd>
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-elasticloadbalancingv2-listener--examples">Examples</h2>
                                  <p>The following example creates a listener with a default action that redirects HTTP
-                                    requests on port 80
-                                    to HTTPS requests on port 443, retaining the original host name, path, and query string.
+                                    requests on port 80 to HTTPS requests on port 443, retaining the original host name,
+                                    path, and query string.
                                  </p>
                                  <h3 id="aws-resource-elasticloadbalancingv2-listener--examples--"></h3>
                                  <div id="YAML" name="YAML" class="section langfilter">
@@ -184,7 +199,7 @@ Properties:
        - Type: &quot;redirect&quot;
          RedirectConfig:
            Protocol: &quot;HTTPS&quot;
-           Port: &quot;443&quot;
+           Port: 443
            Host: &quot;#<span>{</span>host}&quot;
            Path: &quot;/#<span>{</span>path}&quot;
            Query: &quot;#<span>{</span>query}&quot;
@@ -200,22 +215,22 @@ Properties:
             <span>{</span>
                 &quot;Type&quot;: &quot;redirect&quot;,
                 &quot;RedirectConfig&quot;: <span>{</span>
-                    &quot;Protocol&quot;: &quot;HTTPS&quot;,
-                    &quot;Port&quot;: &quot;443&quot;,
-                    &quot;Host&quot;: &quot;#<span>{</span>host}&quot;,
-                    &quot;Path&quot;: &quot;/#<span>{</span>path}&quot;,
-                    &quot;Query&quot;: &quot;#<span>{</span>query}&quot;,
-                    &quot;StatusCode&quot;: &quot;HTTP_301&quot;
-                }
-            }
-        ],
-        &quot;LoadBalancerArn&quot;: <span>{</span>
-            &quot;Ref&quot;: &quot;myLoadBalancer&quot;
-        },
-        &quot;Port&quot;: 80,
-        &quot;Protocol&quot;: &quot;HTTP&quot;
-    }
-}
+                       &quot;Protocol&quot;: &quot;HTTPS&quot;,
+                       &quot;Port&quot;: 443,
+                       &quot;Host&quot;: &quot;#<span>{</span>host}&quot;,
+                       &quot;Path&quot;: &quot;/#<span>{</span>path}&quot;,
+                       &quot;Query&quot;: &quot;#<span>{</span>query}&quot;,
+                       &quot;StatusCode&quot;: &quot;HTTP_301&quot;
+                   }
+               }
+           ],
+           &quot;LoadBalancerArn&quot;: <span>{</span>
+               &quot;Ref&quot;: &quot;myLoadBalancer&quot;
+           },
+           &quot;Port&quot;: 80,
+           &quot;Protocol&quot;: &quot;HTTP&quot;
+       }
+   }
          </code></pre></div>
                                  <h2 id="aws-resource-elasticloadbalancingv2-listener--seealso">See also</h2>
                                  <div class="itemizedlist">
@@ -227,8 +242,8 @@ Properties:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateListener.html">CreateListener</a> in the
-                                             <em>Elastic Load Balancing API Reference (version 2015-12-01)</em>
+                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateListener.html">CreateListener</a> in the <em>Elastic Load Balancing API Reference
+                                                (version 2015-12-01)</em>
                                              
                                           </p>
                                           
@@ -236,8 +251,8 @@ Properties:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html">Listeners</a> 
-                                             in the <em>User Guide for Application Load Balancers</em> 
+                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html">Listeners</a> in the <em>User Guide for Application Load
+                                                Balancers</em>
                                              
                                           </p>
                                           
@@ -245,8 +260,8 @@ Properties:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html">Listeners</a> 
-                                             in the <em>User Guide for Network Load Balancers</em>
+                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html">Listeners</a> in the <em>User Guide for Network Load
+                                                Balancers</em>
                                              
                                           </p>
                                           
@@ -264,7 +279,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

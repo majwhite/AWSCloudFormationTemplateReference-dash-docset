@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-mediaconnect-flowvpcinterface">AWS::MediaConnect::FlowVpcInterface</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The AWS::MediaConnect::FlowVpcInterface resource is a connection between your AWS
+                                    Elemental MediaConnect flow and a virtual private cloud (VPC) that you created using
+                                    the Amazon Virtual Private Cloud service.
+                                 </p>
+                                 <p>To avoid streaming your content over the public internet, you can add up to two VPC
+                                    interfaces to your flow and use those connections to transfer content between your
+                                    VPC and MediaConnect.
+                                 </p>
+                                 <p>You can update an existing flow to add a VPC interface. If you haven&#x2019;t created the
+                                    flow yet, you must create the flow with a temporary standard source by doing the following:
+                                 </p>
+                                 <div class="orderedlist">
+                                     
+                                     
+                                     
+                                    
+                                    <ol>
+                                       <li>
+                                          <p>Use CloudFormation to create a flow with a standard source that uses to the flow&#x2019;s
+                                             public IP address.
+                                          </p>
+                                       </li>
+                                       <li>
+                                          <p>Use CloudFormation to create a VPC interface to add to this flow. This can also be
+                                             done as part of the previous step.
+                                          </p>
+                                       </li>
+                                       <li>
+                                          <p>After CloudFormation has created the flow and the VPC interface, update the source
+                                             to point to the VPC interface that you created.
+                                          </p>
+                                       </li>
+                                    </ol>
+                                 </div>
+                                 <h2 id="aws-resource-mediaconnect-flowvpcinterface-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-mediaconnect-flowvpcinterface-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::MediaConnect::FlowVpcInterface&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-mediaconnect-flowvpcinterface-flowarn">FlowArn</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-mediaconnect-flowvpcinterface-name">Name</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-mediaconnect-flowvpcinterface-rolearn">RoleArn</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-mediaconnect-flowvpcinterface-securitygroupids">SecurityGroupIds</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+      &quot;<a href="#cfn-mediaconnect-flowvpcinterface-subnetid">SubnetId</a>&quot; : <code class="replaceable">String</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-mediaconnect-flowvpcinterface-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::MediaConnect::FlowVpcInterface
+Properties: 
+  <a href="#cfn-mediaconnect-flowvpcinterface-flowarn">FlowArn</a>: <code class="replaceable">String</code>
+  <a href="#cfn-mediaconnect-flowvpcinterface-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-mediaconnect-flowvpcinterface-rolearn">RoleArn</a>: <code class="replaceable">String</code>
+  <a href="#cfn-mediaconnect-flowvpcinterface-securitygroupids">SecurityGroupIds</a>: <code class="replaceable">
+    - String</code>
+  <a href="#cfn-mediaconnect-flowvpcinterface-subnetid">SubnetId</a>: <code class="replaceable">String</code>
+</code></pre></div>
+                                 <h2 id="aws-resource-mediaconnect-flowvpcinterface-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-mediaconnect-flowvpcinterface-flowarn"></a><span class="term"><code class="code">FlowArn</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the flow.</p>
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-mediaconnect-flowvpcinterface-name"></a><span class="term"><code class="code">Name</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>The name of the VPC Interface. This value must be unique within the current flow.</p>
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-mediaconnect-flowvpcinterface-rolearn"></a><span class="term"><code class="code">RoleArn</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the role that you created when you set up MediaConnect
+                                             as a trusted service.
+                                          </p>
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-mediaconnect-flowvpcinterface-securitygroupids"></a><span class="term"><code class="code">SecurityGroupIds</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>The VPC security groups that you want MediaConnect to use for your VPC configuration.
+                                             You must include at least one security group in the request.
+                                          </p>
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-mediaconnect-flowvpcinterface-subnetid"></a><span class="term"><code class="code">SubnetId</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          
+                                          
+                                          <p>The subnet IDs that you want to use for your VPC interface.</p>
+                                          <p>A range of IP addresses in your VPC. When you create your VPC, you specify a range
+                                             of IPv4 addresses for the VPC in the form of a Classless Inter-Domain Routing (CIDR)
+                                             block; for example, 10.0.0.0/16. This is the primary CIDR block for your VPC. When
+                                             you create a subnet for your VPC, you specify the CIDR block for the subnet, which
+                                             is a subset of the VPC CIDR block.
+                                          </p>
+                                          <p>The subnets that you use across all VPC interfaces on the flow must be in the same
+                                             Availability Zone as the flow.
+                                          </p>
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-mediaconnect-flowvpcinterface-return-values">Return values</h2>
+                                 <h3 id="aws-resource-mediaconnect-flowvpcinterface-return-values-ref">Ref</h3>
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the flow ARN and the name of the VPC interface. For example:
+                                 </p>
+                                 <p><code class="code"><span>{</span> &quot;Ref&quot;: &quot;arn:aws:mediaconnect:us-east-1:111122223333:flow:1-23aBC45dEF67hiJ8-12AbC34DE5fG:BasketballGame|MyVPCInterface&quot;
+                                       }</code></p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-mediaconnect-flowvpcinterface-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-mediaconnect-flowvpcinterface-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="NetworkInterfaceIds-fn::getatt"></a><span class="term"><code class="code">NetworkInterfaceIds</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The IDs of the network interfaces that MediaConnect created in your account.</p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

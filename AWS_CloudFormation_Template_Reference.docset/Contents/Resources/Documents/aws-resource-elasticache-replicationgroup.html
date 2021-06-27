@@ -16,9 +16,34 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::ElastiCache::ReplicationGroup</code> resource creates an Amazon ElastiCache Redis replication group. A replication group
-                                    is a collection of cache clusters, where one of the clusters is a primary read-write
-                                    cluster and the others are read-only replicas. 
+                                 <p>The <code class="code">AWS::ElastiCache::ReplicationGroup</code> 
+                                    resource creates an Amazon ElastiCache Redis replication group. A Redis (cluster mode
+                                    disabled) replication group is a collection of cache clusters, where one of the clusters
+                                    is a primary read-write cluster and the others are read-only replicas. 
+                                 </p>
+                                 <p>A Redis (cluster mode enabled) cluster is comprised of from 1 to 90 shards (API/CLI:
+                                    node groups). 
+                                    Each shard has a primary node and up to 5 read-only replica nodes. The configuration
+                                    can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which is the
+                                    maximum number or replicas allowed.
+                                    
+                                    
+                                 </p>
+                                 <p>The node or shard limit can be increased to a maximum of 500 per cluster if the Redis
+                                    engine version is 5.0.6 or higher. For example, you can choose to configure a 500
+                                    node cluster that ranges between 
+                                    83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and
+                                    no replicas). Make sure there are enough available IP addresses to accommodate the
+                                    increase. 
+                                    Common pitfalls include the subnets in the subnet group have too small a CIDR range
+                                    or the subnets are shared and heavily used by other clusters. For more information,
+                                    see 
+                                    <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html">Creating a Subnet Group</a>. For versions below 5.0.6, 
+                                    the limit is 250 per cluster.
+                                 </p>
+                                 <p>To request a limit increase, see 
+                                    <a href="https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html">AWS Service Limits</a> 
+                                    and choose the limit type <b>Nodes per cluster per instance type</b>. 
                                  </p>
                                  <h2 id="aws-resource-elasticache-replicationgroup-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -38,6 +63,7 @@
       &quot;<a href="#cfn-elasticache-replicationgroup-engineversion">EngineVersion</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-elasticache-replicationgroup-globalreplicationgroupid">GlobalReplicationGroupId</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-elasticache-replicationgroup-kmskeyid">KmsKeyId</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-elasticache-replicationgroup-logdeliveryconfigurations">LogDeliveryConfigurations</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-elasticache-replicationgroup-logdeliveryconfigurationrequest.html">LogDeliveryConfigurationRequest</a>, ... ]</code>,
       &quot;<a href="#cfn-elasticache-replicationgroup-multiazenabled">MultiAZEnabled</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-elasticache-replicationgroup-nodegroupconfiguration">NodeGroupConfiguration</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-elasticache-replicationgroup-nodegroupconfiguration.html">NodeGroupConfiguration</a>, ... ]</code>,
       &quot;<a href="#cfn-elasticache-replicationgroup-notificationtopicarn">NotificationTopicArn</a>&quot; : <code class="replaceable">String</code>,
@@ -78,6 +104,8 @@ Properties:
   <a href="#cfn-elasticache-replicationgroup-engineversion">EngineVersion</a>: <code class="replaceable">String</code>
   <a href="#cfn-elasticache-replicationgroup-globalreplicationgroupid">GlobalReplicationGroupId</a>: <code class="replaceable">String</code>
   <a href="#cfn-elasticache-replicationgroup-kmskeyid">KmsKeyId</a>: <code class="replaceable">String</code>
+  <a href="#cfn-elasticache-replicationgroup-logdeliveryconfigurations">LogDeliveryConfigurations</a>: <code class="replaceable">
+    - <a href="./aws-properties-elasticache-replicationgroup-logdeliveryconfigurationrequest.html">LogDeliveryConfigurationRequest</a></code>
   <a href="#cfn-elasticache-replicationgroup-multiazenabled">MultiAZEnabled</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-elasticache-replicationgroup-nodegroupconfiguration">NodeGroupConfiguration</a>: <code class="replaceable">
     - <a href="./aws-properties-elasticache-replicationgroup-nodegroupconfiguration.html">NodeGroupConfiguration</a></code>
@@ -239,10 +267,6 @@ Properties:
                                              			Generally speaking, the current generation types provide more memory and computational
                                              power
                                              			at lower cost when compared to their equivalent previous generation counterparts.
-                                          </p>
-                                          <p> Changing the CacheNodeType of a Memcached instance is currently not supported. If
-                                             you need to scale using Memcached, we recommend forcing a replacement update by changing
-                                             the <code class="code">LogicalResourceId</code> of the resource.
                                           </p>
                                           
                                           <div class="itemizedlist">
@@ -436,6 +460,7 @@ Properties:
                                              </ul>
                                           </div>
                                           
+                                          <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types by Amazon Region</a></p>
                                           
                                           
                                           <p><em>Required</em>: No
@@ -453,15 +478,6 @@ Properties:
                                              used.
                                           </p>
                                           
-                                          <div class="awsdocs-note">
-                                             <div class="awsdocs-note-title">
-                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
-                                             <div class="awsdocs-note-text">
-                                                <p>If you are restoring to an engine version that is different than the original, you
-                                                   must specify the default version of that version. For example, <code class="code">CacheParameterGroupName=default.redis4.0</code>.
-                                                </p>
-                                             </div>
-                                          </div>
                                           
                                           <p>If you are running Redis version 3.2.4 or later, only one node group (shard), and
                                              want to use a default parameter group, 
@@ -530,7 +546,10 @@ Properties:
                                        <dt><a id="cfn-elasticache-replicationgroup-engine"></a><span class="term"><code class="code">Engine</code></span></dt>
                                        <dd>
                                           
-                                          <p>The name of the cache engine to be used for the clusters in this replication group.</p>
+                                          <p>The name of the cache engine to be used for the clusters in this replication group.
+                                             Must be Redis.
+                                          </p>
+                                          
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -564,7 +583,7 @@ Properties:
                                        <dt><a id="cfn-elasticache-replicationgroup-globalreplicationgroupid"></a><span class="term"><code class="code">GlobalReplicationGroupId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The name of the Global Datastore</p>
+                                          <p>The name of the Global datastore</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -583,6 +602,14 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-elasticache-replicationgroup-logdeliveryconfigurations"></a><span class="term"><code class="code">LogDeliveryConfigurations</code></span></dt>
+                                       <dd>
+                                          <p>Specifies the destination, format and type of the logs.</p>
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-elasticache-replicationgroup-logdeliveryconfigurationrequest.html">LogDeliveryConfigurationRequest</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-elasticache-replicationgroup-multiazenabled"></a><span class="term"><code class="code">MultiAZEnabled</code></span></dt>
                                        <dd>
@@ -1004,9 +1031,9 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>A list of cost allocation tags to be added to this resource. 
+                                          <p>A list of tags to be added to this resource. 
                                              Tags are comma-separated key,value pairs (e.g. Key=<code class="code">myKey</code>, Value=<code class="code">myKeyValue</code>. You can include multiple tags as shown following: 
-                                             Key=<code class="code">myKey</code>, Value=<code class="code">myKeyValue</code> Key=<code class="code">mySecondKey</code>, Value=<code class="code">mySecondKeyValue</code>.
+                                             Key=<code class="code">myKey</code>, Value=<code class="code">myKeyValue</code> Key=<code class="code">mySecondKey</code>, Value=<code class="code">mySecondKeyValue</code>. Tags on replication groups will be replicated to all nodes.
                                           </p>
                                           
                                           
@@ -1180,11 +1207,13 @@ Properties:
                                        </dd>
                                        <dt><a id="ReaderEndPoint.Address-fn::getatt"></a><span class="term"><code class="code">ReaderEndPoint.Address</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          <p>The address of the reader endpoint.</p>
                                        </dd>
                                        <dt><a id="ReaderEndPoint.Port-fn::getatt"></a><span class="term"><code class="code">ReaderEndPoint.Port</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The port used by the reader endpoint.</p>
+                                          
                                        </dd>
                                     </dl>
                                  </div>
@@ -1203,8 +1232,7 @@ Properties:
             &quot;ReplicationGroupDescription&quot;: &quot;my description&quot;,
             &quot;NumCacheClusters&quot;: &quot;2&quot;,
             &quot;Engine&quot;: &quot;redis&quot;,
-            &quot;CacheNodeType&quot;: &quot;cache.m3.medium&quot;,
-            &quot;AutoMinorVersionUpgrade&quot;: &quot;true&quot;,
+            &quot;CacheNodeType&quot;: &quot;cache.m3.medium&quot;,            
             &quot;AutomaticFailoverEnabled&quot;: &quot;true&quot;,
             &quot;CacheSubnetGroupName&quot;: &quot;subnetgroup&quot;,
             &quot;EngineVersion&quot;: &quot;2.8.6&quot;,
@@ -1221,8 +1249,7 @@ Properties:
     ReplicationGroupDescription: my description
     NumCacheClusters: &apos;2&apos;
     Engine: redis
-    CacheNodeType: cache.m3.medium
-    AutoMinorVersionUpgrade: &apos;true&apos;
+    CacheNodeType: cache.m3.medium    
     AutomaticFailoverEnabled: &apos;true&apos;
     CacheSubnetGroupName: subnetgroup
     EngineVersion: 2.8.6
@@ -1239,8 +1266,7 @@ Properties:
     &quot;BasicReplicationGroup&quot;: <span>{</span>
         &quot;Type&quot;: &quot;AWS::ElastiCache::ReplicationGroup&quot;,
         &quot;Properties&quot;: <span>{</span>
-            &quot;AutomaticFailoverEnabled&quot;: true,
-            &quot;AutoMinorVersionUpgrade&quot;: true,
+            &quot;AutomaticFailoverEnabled&quot;: true,            
             &quot;CacheNodeType&quot;: &quot;cache.r3.large&quot;,
             &quot;CacheSubnetGroupName&quot;: <span>{</span>
                 &quot;Ref&quot;: &quot;CacheSubnetGroup&quot;
@@ -1266,8 +1292,7 @@ Properties:
                                     <h4 id="aws-resource-elasticache-replicationgroup--examples--Declare_a_Replication_Group_with_Two_Node_Groups--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">BasicReplicationGroup:
   Type: &apos;AWS::ElastiCache::ReplicationGroup&apos;
   Properties:
-    AutomaticFailoverEnabled: true
-    AutoMinorVersionUpgrade: true
+    AutomaticFailoverEnabled: true    
     CacheNodeType: cache.r3.large
     CacheSubnetGroupName: !Ref CacheSubnetGroup
     Engine: redis
@@ -1295,7 +1320,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>
