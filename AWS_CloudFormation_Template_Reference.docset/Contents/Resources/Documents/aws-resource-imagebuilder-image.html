@@ -28,6 +28,7 @@
                                     <h3 id="aws-resource-imagebuilder-image-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::ImageBuilder::Image&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-imagebuilder-image-containerrecipearn">ContainerRecipeArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-imagebuilder-image-distributionconfigurationarn">DistributionConfigurationArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-imagebuilder-image-enhancedimagemetadataenabled">EnhancedImageMetadataEnabled</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-imagebuilder-image-imagerecipearn">ImageRecipeArn</a>&quot; : <code class="replaceable">String</code>,
@@ -40,6 +41,7 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-imagebuilder-image-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::ImageBuilder::Image
 Properties: 
+  <a href="#cfn-imagebuilder-image-containerrecipearn">ContainerRecipeArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-imagebuilder-image-distributionconfigurationarn">DistributionConfigurationArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-imagebuilder-image-enhancedimagemetadataenabled">EnhancedImageMetadataEnabled</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-imagebuilder-image-imagerecipearn">ImageRecipeArn</a>: <code class="replaceable">String</code>
@@ -52,16 +54,27 @@ Properties:
                                  <h2 id="aws-resource-imagebuilder-image-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
-                                       <dt><a id="cfn-imagebuilder-image-distributionconfigurationarn"></a><span class="term"><code class="code">DistributionConfigurationArn</code></span></dt>
+                                       <dt><a id="cfn-imagebuilder-image-containerrecipearn"></a><span class="term"><code class="code">ContainerRecipeArn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The Amazon Resource Name (ARN) of the distribution configuration.</p>
+                                          <p>The Amazon Resource Name (ARN) of the container recipe that is used for this pipeline.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Pattern</em>: <code class="code">^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d<span>{</span>12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-imagebuilder-image-distributionconfigurationarn"></a><span class="term"><code class="code">DistributionConfigurationArn</code></span></dt>
+                                       <dd>
+                                          		
+                                          <p>The Amazon Resource Name (ARN) of the distribution configuration.</p>
+                                          		
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Pattern</em>: <code class="code">^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]<span>{</span>12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\.(?:x|[0-9]+)\.(?:x|[0-9]+))(?:/[0-9]+)?)?$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-imagebuilder-image-enhancedimagemetadataenabled"></a><span class="term"><code class="code">EnhancedImageMetadataEnabled</code></span></dt>
@@ -69,7 +82,7 @@ Properties:
                                           
                                           <p> Collects additional information about the image being created, including the operating
                                              system (OS) version and package list. This information is used to enhance the overall
-                                             experience of using EC2 Image Builder. Enabled by default. 
+                                             experience of using EC2 Image Builder. Enabled by default.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -83,18 +96,20 @@ Properties:
                                           
                                           <p>The Amazon Resource Name (ARN) of the image recipe.</p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Pattern</em>: <code class="code">^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d<span>{</span>12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]<span>{</span>12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\.(?:x|[0-9]+)\.(?:x|[0-9]+))(?:/[0-9]+)?)?$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-imagebuilder-image-imagetestsconfiguration"></a><span class="term"><code class="code">ImageTestsConfiguration</code></span></dt>
                                        <dd>
-                                          
-                                          <p>The configuration of the image tests used when creating this image.</p>
-                                          
+                                          		
+                                          <p>The configuration settings for your image test components, which includes 
+                                             			a toggle that allows you to turn off tests, and a timeout setting.
+                                          </p>
+                                          		
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-imagebuilder-image-imagetestsconfiguration.html">ImageTestsConfiguration</a></p>
@@ -103,23 +118,22 @@ Properties:
                                        <dt><a id="cfn-imagebuilder-image-infrastructureconfigurationarn"></a><span class="term"><code class="code">InfrastructureConfigurationArn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The Amazon Resource Name (ARN) of the infrastructure configuration used to create
+                                          <p>The Amazon Resource Name (ARN) of the infrastructure configuration associated with
                                              this
-                                             image.
+                                             image pipeline.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Pattern</em>: <code class="code">^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d<span>{</span>12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-imagebuilder-image-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
-                                          
+                                          		
                                           <p>The tags of the image.</p>
-                                          
+                                          	
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Map of String
@@ -131,7 +145,7 @@ Properties:
                                  <h2 id="aws-resource-imagebuilder-image-return-values">Return values</h2>
                                  <h3 id="aws-resource-imagebuilder-image-return-values-ref">Ref</h3>
                                  <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the resource ARN, such as
-                                    <code class="code">arn:aws:imagebuilder:us-west-2:123456789012:image/my-example-image</code>.
+                                    			<code class="code">arn:aws:imagebuilder:us-west-2:123456789012:image/my-example-image</code>.
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
@@ -151,21 +165,21 @@ Properties:
                                           <p>Returns the Amazon Resource Name (ARN) of the image. For example,
                                              <code class="code">arn:aws:imagebuilder:us-west-2:123456789012:image/mybasicrecipe/2019.12.03/1</code>.
                                           </p>
-                                          
+                                          	
                                        </dd>
                                        <dt><a id="ImageId-fn::getatt"></a><span class="term"><code class="code">ImageId</code></span></dt>
                                        <dd>
                                           
-                                          <p>Returns the AMI ID of the EC2 AMI in the Region in which you are using Image
+                                          <p>Returns the AMI ID of the Amazon EC2 AMI in the Region in which you are using Image
                                              Builder.
                                           </p>
-                                          
+                                          	
                                        </dd>
                                        <dt><a id="Name-fn::getatt"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
-                                          
+                                          		
                                           <p>Returns the name of the image.</p>
-                                          
+                                          		
                                        </dd>
                                     </dl>
                                  </div>
@@ -173,7 +187,7 @@ Properties:
                                  <p></p>
                                  <h3 id="aws-resource-imagebuilder-image--examples--Create_an_image">Create an image</h3>
                                  <p>The following example shows the schema for all of the parameters of the Image
-                                    resource document in both YAML and JSON format .
+                                    resource document in both YAML and JSON format.
                                  </p>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h4 id="aws-resource-imagebuilder-image--examples--Create_an_image--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
@@ -226,7 +240,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

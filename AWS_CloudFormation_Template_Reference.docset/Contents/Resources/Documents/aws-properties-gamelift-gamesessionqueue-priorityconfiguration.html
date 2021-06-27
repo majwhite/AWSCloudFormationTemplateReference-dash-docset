@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-properties-gamelift-gamesessionqueue-priorityconfiguration">AWS::GameLift::GameSessionQueue PriorityConfiguration</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>Custom prioritization settings for use by a game session queue when placing new game
+                                    sessions with available game servers. When defined, this configuration replaces the
+                                    default FleetIQ prioritization process, which is as follows:
+                                 </p>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p>If player latency data is included in a game session request, destinations and
+                                             locations are prioritized first based on lowest average latency (1), then on
+                                             lowest hosting cost (2), then on destination list order (3), and finally on
+                                             location (alphabetical) (4). This approach ensures that the queue&apos;s top priority
+                                             is to place game sessions where average player latency is lowest, and--if
+                                             latency is the same--where the hosting cost is less, etc.
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>If player latency data is not included, destinations and locations are
+                                             prioritized first on destination list order (1), and then on location
+                                             (alphabetical) (2). This approach ensures that the queue&apos;s top priority is to
+                                             place game sessions on the first destination fleet listed. If that fleet has
+                                             multiple locations, the game session is placed on the first location (when
+                                             listed alphabetically).
+                                          </p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <p>Changing the priority order will affect how game sessions are placed.</p>
+                                 <h2 id="aws-properties-gamelift-gamesessionqueue-priorityconfiguration-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-properties-gamelift-gamesessionqueue-priorityconfiguration-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-gamelift-gamesessionqueue-priorityconfiguration-locationorder">LocationOrder</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+  &quot;<a href="#cfn-gamelift-gamesessionqueue-priorityconfiguration-priorityorder">PriorityOrder</a>&quot; : <code class="replaceable">[ String, ... ]</code>
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-properties-gamelift-gamesessionqueue-priorityconfiguration-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-gamelift-gamesessionqueue-priorityconfiguration-locationorder">LocationOrder</a>: <code class="replaceable">
+    - String</code>
+  <a href="#cfn-gamelift-gamesessionqueue-priorityconfiguration-priorityorder">PriorityOrder</a>: <code class="replaceable">
+    - String</code>
+</code></pre></div>
+                                 <h2 id="aws-properties-gamelift-gamesessionqueue-priorityconfiguration-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-gamelift-gamesessionqueue-priorityconfiguration-locationorder"></a><span class="term"><code class="code">LocationOrder</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The prioritization order to use for fleet locations, when the
+                                             <code class="code">PriorityOrder</code> property includes <code class="code">LOCATION</code>. Locations are
+                                             identified by AWS Region codes such as <code class="code">us-west-2</code>. Each location can only be
+                                             listed once. 
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Maximum</em>: <code class="code">100</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-gamelift-gamesessionqueue-priorityconfiguration-priorityorder"></a><span class="term"><code class="code">PriorityOrder</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The recommended sequence to use when prioritizing where to place new game sessions.
+                                             Each type can only be listed once.
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">LATENCY</code> -- FleetIQ prioritizes locations where the average player
+                                                      latency (provided in each game session request) is lowest. 
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">COST</code> -- FleetIQ prioritizes destinations with the lowest current
+                                                      hosting costs. Cost is evaluated based on the location, instance type, and fleet
+                                                      type (Spot or On-Demand) for each destination in the queue.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">DESTINATION</code> -- FleetIQ prioritizes based on the order that
+                                                      destinations are listed in the queue configuration.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">LOCATION</code> -- FleetIQ prioritizes based on the provided order of
+                                                      locations, as defined in <code class="code">LocationOrder</code>. 
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Maximum</em>: <code class="code">4</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

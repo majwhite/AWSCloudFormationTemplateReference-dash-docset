@@ -25,8 +25,9 @@
                                     <h3 id="aws-properties-backup-backupplan-backupruleresourcetype-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;<a href="#cfn-backup-backupplan-backupruleresourcetype-completionwindowminutes">CompletionWindowMinutes</a>&quot; : <code class="replaceable">Double</code>,
   &quot;<a href="#cfn-backup-backupplan-backupruleresourcetype-copyactions">CopyActions</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-backup-backupplan-copyactionresourcetype.html">CopyActionResourceType</a>, ... ]</code>,
+  &quot;<a href="#cfn-backup-backupplan-backupruleresourcetype-enablecontinuousbackup">EnableContinuousBackup</a>&quot; : <code class="replaceable">Boolean</code>,
   &quot;<a href="#cfn-backup-backupplan-backupruleresourcetype-lifecycle">Lifecycle</a>&quot; : <code class="replaceable"><a href="./aws-properties-backup-backupplan-lifecycleresourcetype.html">LifecycleResourceType</a></code>,
-  &quot;<a href="#cfn-backup-backupplan-backupruleresourcetype-recoverypointtags">RecoveryPointTags</a>&quot; : <code class="replaceable">Json</code>,
+  &quot;<a href="#cfn-backup-backupplan-backupruleresourcetype-recoverypointtags">RecoveryPointTags</a>&quot; : <code class="replaceable"><span>{</span><code class="replaceable">Key</code> : <code class="replaceable">Value</code>, ...}</code>,
   &quot;<a href="#cfn-backup-backupplan-backupruleresourcetype-rulename">RuleName</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-backup-backupplan-backupruleresourcetype-scheduleexpression">ScheduleExpression</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-backup-backupplan-backupruleresourcetype-startwindowminutes">StartWindowMinutes</a>&quot; : <code class="replaceable">Double</code>,
@@ -37,9 +38,11 @@
                                     <h3 id="aws-properties-backup-backupplan-backupruleresourcetype-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-backup-backupplan-backupruleresourcetype-completionwindowminutes">CompletionWindowMinutes</a>: <code class="replaceable">Double</code>
   <a href="#cfn-backup-backupplan-backupruleresourcetype-copyactions">CopyActions</a>: <code class="replaceable">
     - <a href="./aws-properties-backup-backupplan-copyactionresourcetype.html">CopyActionResourceType</a></code>
+  <a href="#cfn-backup-backupplan-backupruleresourcetype-enablecontinuousbackup">EnableContinuousBackup</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-backup-backupplan-backupruleresourcetype-lifecycle">Lifecycle</a>: <code class="replaceable">
     <a href="./aws-properties-backup-backupplan-lifecycleresourcetype.html">LifecycleResourceType</a></code>
-  <a href="#cfn-backup-backupplan-backupruleresourcetype-recoverypointtags">RecoveryPointTags</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-backup-backupplan-backupruleresourcetype-recoverypointtags">RecoveryPointTags</a>: <code class="replaceable">
+    <code class="replaceable">Key</code> : <code class="replaceable">Value</code></code>
   <a href="#cfn-backup-backupplan-backupruleresourcetype-rulename">RuleName</a>: <code class="replaceable">String</code>
   <a href="#cfn-backup-backupplan-backupruleresourcetype-scheduleexpression">ScheduleExpression</a>: <code class="replaceable">String</code>
   <a href="#cfn-backup-backupplan-backupruleresourcetype-startwindowminutes">StartWindowMinutes</a>: <code class="replaceable">Double</code>
@@ -71,14 +74,24 @@
                                           <p><em>Type</em>: List of <a href="./aws-properties-backup-backupplan-copyactionresourcetype.html">CopyActionResourceType</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-backup-backupplan-backupruleresourcetype-enablecontinuousbackup"></a><span class="term"><code class="code">EnableContinuousBackup</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Enables continuous backup and point-in-time restores (PITR).</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-backup-backupplan-backupruleresourcetype-lifecycle"></a><span class="term"><code class="code">Lifecycle</code></span></dt>
                                        <dd>
                                           
                                           <p>The lifecycle defines when a protected resource is transitioned to cold storage and
                                              when
                                              it expires. AWS Backup transitions and expires backups automatically according to
-                                             the
-                                             lifecycle that you define.
+                                             the lifecycle that you define.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -96,7 +109,7 @@
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: Json
+                                          <p><em>Type</em>: Map of String
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
@@ -140,8 +153,8 @@
                                           
                                           <p>The name of a logical container where backups are stored. Backup vaults are identified
                                              by names that are unique to the account used to create them and the AWS Region where
-                                             they
-                                             are created. They consist of lowercase letters, numbers, and hyphens.
+                                             they are created. They consist of lowercase letters, numbers,
+                                             and hyphens.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -162,7 +175,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -199,14 +199,13 @@ Properties:
                                           </p>
                                           
                                           <p>CloudFormation marks the Auto Scaling group as successful (by setting its status to
-                                             CREATE_COMPLETE) when the desired capacity is reached. However, if <code class="code">SpotPrice</code> is
-                                             set in the <a href="aws-properties-as-launchconfig.html">launch
-                                                configuration</a>, then desired capacity is not used as a criteria for success, because
-                                             whether your request is fulfilled depends on Spot Instance capacity and your maximum
-                                             price. If
-                                             the current Spot price is less than your specified maximum price, Amazon EC2 Auto
-                                             Scaling uses
-                                             <code class="code">DesiredCapacity</code> as the target capacity for the group. 
+                                             CREATE_COMPLETE) when the desired capacity is reached. However, if a maximum Spot
+                                             price is set
+                                             in the launch template or launch configuration that you specified, then desired capacity
+                                             is
+                                             not used as a criteria for success. Whether your request is fulfilled depends on Spot
+                                             Instance
+                                             capacity and your maximum price.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -412,12 +411,13 @@ Properties:
                                           
                                           <p>The policy includes properties that not only define the distribution of On-Demand
                                              Instances and Spot Instances, the maximum price to pay for Spot Instances (optional),
-                                             and how the Auto
-                                             Scaling group allocates instance types to fulfill On-Demand and Spot capacities, but
-                                             also the
-                                             properties that specify the instance configuration information&#x2014;the launch template
-                                             and
-                                             instance types. The policy can also include a weight for each instance type and different
+                                             and how
+                                             the Auto Scaling group allocates instance types to fulfill On-Demand and Spot capacities,
+                                             but
+                                             also the properties that specify the instance configuration information&#x2014;the launch
+                                             template
+                                             and instance types. The policy can also include a weight for each instance type and
+                                             different
                                              launch templates for individual instance types.
                                           </p>
                                           
@@ -487,8 +487,7 @@ Properties:
                                              uses
                                              to call other AWS services on your behalf. By default, Amazon EC2 Auto Scaling uses
                                              a
-                                             service-linked role named AWSServiceRoleForAutoScaling, which it creates if it does
-                                             not exist.
+                                             service-linked role named <code class="code">AWSServiceRoleForAutoScaling</code>, which it creates if it does not exist.
                                              For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html">Service-linked roles
                                                 for Amazon EC2 Auto Scaling</a> in the <em>Amazon EC2 Auto Scaling User
                                                 Guide</em>.
@@ -576,7 +575,7 @@ Properties:
                                                 <p>When you update <code class="code">VPCZoneIdentifier</code>, this retains the same Auto Scaling group
                                                    and replaces old instances with new ones, according to the specified subnets. You
                                                    can
-                                                   optionally specify how AWS CloudFormation handles these updates by using an <a href="aws-attribute-updatepolicy.html">UpdatePolicy
+                                                   optionally specify how CloudFormation handles these updates by using an <a href="aws-attribute-updatepolicy.html">UpdatePolicy
                                                       attribute</a>.
                                                 </p>
                                              </div>
@@ -605,19 +604,32 @@ Properties:
                                     in the
                                     Auto Scaling group. All new instances will get the updated configuration, but existing
                                     instances continue to run with the configuration that they were originally launched
-                                    with. This
-                                    works the same way as any other Auto Scaling group. 
+                                    with.
+                                    This works the same way as any other Auto Scaling group. 
                                  </p>
                                  <p>You can add an <a href="aws-attribute-updatepolicy.html">UpdatePolicy
                                        attribute</a> to your stack to perform rolling updates (or replace the group) when a
                                     change has been made to the group. You can find sample update policies for rolling
-                                    updates in
-                                    <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-autoscaling.html">Auto scaling template
+                                    updates
+                                    in <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-autoscaling.html">Auto scaling template
                                        snippets</a>. Alternatively, you can force a rolling update on your instances at any
                                     time after updating the stack by starting an instance refresh. For more information,
                                     see
                                     <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html">Replacing Auto Scaling instances based on an instance refresh</a> in the
                                     <em>Amazon EC2 Auto Scaling User Guide</em>.
+                                 </p>
+                                 <p>You can use a <a href="aws-attribute-creationpolicy.html">CreationPolicy 
+                                       attribute</a> with an Auto Scaling group to prevent its status from reaching create complete until
+                                    
+                                    CloudFormation receives a specified number of success signals. For more information,
+                                    see <a href="http://aws.amazon.com/blogs/devops/use-a-creationpolicy-to-wait-for-on-instance-configurations/" rel="noopener noreferrer" target="_blank"><span>Use 
+                                          a CreationPolicy to Wait for On-Instance Configurations</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> on the AWS DevOps Blog.
+                                 </p>
+                                 <p>Note that Amazon EC2 Auto Scaling provides scaling activities to help you monitor
+                                    the
+                                    progress of your Auto Scaling group and to assist in troubleshooting any configuration
+                                    issues when launching Amazon EC2 instances. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-verify-scaling-activity.html">Verifying a scaling activity for an Auto Scaling group</a> in the <em>Amazon
+                                       EC2 Auto Scaling User Guide</em>.
                                  </p>
                                  <h2 id="aws-properties-as-group--examples">Examples</h2>
                                  <p>The following examples create or make changes to an Auto Scaling group. </p>
@@ -629,8 +641,8 @@ Properties:
                                     <a href="aws-resource-ec2-launchtemplate.html">AWS::EC2::LaunchTemplate</a> resource that controls the configuration of any
                                     instances that are launched by the Auto Scaling group.
                                  </p>
-                                 <p>It references <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html">parameters</a> for the <code class="code">VPCZoneIdentifier</code> and <code class="code">Version</code>
-                                    (<code class="code">LaunchTemplate</code>) properties. Each of these parameters is a variable that
+                                 <p>The launch template provisions T2 instances in unlimited mode using the
+                                    <code class="code">CPUCredits</code> property. The stack references a <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html">parameter</a> to specify the launch template version. Parameters are variables that
                                     you can specify when you create or update the stack.
                                  </p>
                                  <p>CloudFormation supports parameters from the AWS Systems Manager Parameter Store. In
@@ -662,10 +674,13 @@ Properties:
       &quot;Type&quot;:&quot;AWS::EC2::LaunchTemplate&quot;,
       &quot;Properties&quot;:<span>{</span>
         &quot;LaunchTemplateData&quot;:<span>{</span>
+          &quot;CreditSpecification&quot;:<span>{</span>
+            &quot;CpuCredits&quot;:&quot;unlimited&quot;
+          },
           &quot;ImageId&quot;:<span>{</span>
             &quot;Ref&quot;:&quot;LatestAmiId&quot;
           },
-          &quot;InstanceType&quot;:&quot;t3.micro&quot;
+          &quot;InstanceType&quot;:&quot;t2.micro&quot;
         }
       }
     },
@@ -706,8 +721,10 @@ Resources:
     Type: AWS::EC2::LaunchTemplate
     Properties: 
       LaunchTemplateData: 
+        CreditSpecification: 
+          CpuCredits: Unlimited
         ImageId: !Ref LatestAmiId
-        InstanceType: t3.micro
+        InstanceType: t2.micro
   myASG:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
@@ -728,12 +745,12 @@ Resources:
                                     group itself. 
                                  </p>
                                  <p>Each instance has 300 seconds to warm up before receiving its first health check.
-                                    The
-                                    launch template provisions T2 instances in unlimited mode using the
-                                    <code class="code">CPUCredits</code> property. A block device mapping specifies an EBS volume to
-                                    attach to each instance, in addition to attaching the volumes specified by the AMI.
-                                    Because <code class="code">Monitoring</code> is enabled, EC2 metric data will be available at 1-minute
-                                    intervals (known as detailed monitoring) through CloudWatch. 
+                                    A
+                                    block device mapping specifies an EBS volume to attach to each instance, in addition
+                                    to
+                                    attaching the volumes specified by the AMI. Because <code class="code">Monitoring</code> is enabled,
+                                    EC2 metric data will be available at 1-minute intervals (known as detailed monitoring)
+                                    through CloudWatch. 
                                  </p>
                                  <p>This example also uses intrinsic functions to assign values to certain properties
                                     dynamically. To get the version number of the launch template, it specifies the launch
@@ -755,17 +772,14 @@ Resources:
           &quot;BlockDeviceMappings&quot;:[<span>{</span>
             &quot;Ebs&quot;:<span>{</span>
               &quot;VolumeSize&quot;:&quot;22&quot;,
-              &quot;VolumeType&quot;:&quot;gp2&quot;,
+              &quot;VolumeType&quot;:&quot;gp3&quot;,
               &quot;DeleteOnTermination&quot;: true,
               &quot;Encrypted&quot;: true
             },
             &quot;DeviceName&quot;:&quot;/dev/xvdcz&quot;
           }],
-          &quot;CreditSpecification&quot;:<span>{</span>
-            &quot;CpuCredits&quot;:&quot;unlimited&quot;
-          },
           &quot;ImageId&quot;:&quot;ami-02354e95b39ca8dec&quot;,
-          &quot;InstanceType&quot;:&quot;t2.micro&quot;,
+          &quot;InstanceType&quot;:&quot;t3.micro&quot;,
           &quot;KeyName&quot;:&quot;my-key-pair-useast1&quot;,
           &quot;Monitoring&quot;:<span>{</span>&quot;Enabled&quot;:true},
           &quot;SecurityGroupIds&quot;:[&quot;sg-7c227019&quot;, &quot;sg-903004f8&quot;]
@@ -828,14 +842,12 @@ Resources:
         BlockDeviceMappings: 
           - Ebs:
               VolumeSize: 22
-              VolumeType: gp2
+              VolumeType: gp3
               DeleteOnTermination: true
               Encrypted: true
             DeviceName: /dev/xvdcz
-        CreditSpecification: 
-          CpuCredits: Unlimited
         ImageId: ami-02354e95b39ca8dec
-        InstanceType: t2.micro
+        InstanceType: t3.micro
         KeyName: my-key-pair-useast1
         Monitoring: 
           Enabled: true
@@ -882,8 +894,7 @@ Resources:
                                        </li>
                                        <li class="listitem">
                                           
-                                          <p><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">AWS
-                                                CloudFormation stack updates</a></p>
+                                          <p><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">AWS CloudFormation stack updates</a></p>
                                           
                                        </li>
                                        <li class="listitem">
@@ -906,7 +917,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

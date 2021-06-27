@@ -71,7 +71,13 @@
                                        </div>
                                     </div>
                                  </div>
-                                 <p>Stack A Export</p><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Outputs&quot; : <span>{</span>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    
+                                    <h3 id="intrinsic-function-reference-importvalue-export.json">JSON</h3>
+                                    
+                                    <p>Stack A Export</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Outputs&quot; : <span>{</span>
   &quot;PublicSubnet&quot; : <span>{</span>
     &quot;Description&quot; : &quot;The subnet ID to use for public web servers&quot;,
     &quot;Value&quot; :  <span>{</span> &quot;Ref&quot; : &quot;PublicSubnet&quot; },
@@ -82,7 +88,39 @@
     &quot;Value&quot; :  <span>{</span> &quot;Fn::GetAtt&quot; : [&quot;WebServerSecurityGroup&quot;, &quot;GroupId&quot;] },
     &quot;Export&quot; : <span>{</span> &quot;Name&quot; : <span>{</span>&quot;Fn::Sub&quot;: &quot;$<span>{</span>AWS::StackName}-SecurityGroupID&quot; }}
   }
-}</code></pre><p>Stack B Import</p><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">&quot;Resources&quot; : <span>{</span>
+}</code></pre>
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    
+                                    <h3 id="intrinsic-function-reference-importvalue-export.yaml">YAML</h3>
+                                    
+                                    <p>Stack A Export</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Outputs:
+  PublicSubnet:
+    Description: The subnet ID to use for public web servers
+    Value:
+      Ref: PublicSubnet
+    Export:
+      Name:
+        &apos;Fn::Sub&apos;: &apos;$<span>{</span>AWS::StackName}-SubnetID&apos;
+  WebServerSecurityGroup:
+    Description: The security group ID to use for public web servers
+    Value:
+      &apos;Fn::GetAtt&apos;:
+        - WebServerSecurityGroup
+        - GroupId
+    Export:
+      Name:
+        &apos;Fn::Sub&apos;: &apos;$<span>{</span>AWS::StackName}-SecurityGroupID&apos;</code></pre>
+                                    </div>
+                                 
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    
+                                    <h3 id="intrinsic-function-reference-importvalue-import.json">JSON</h3>
+                                    
+                                    <p>Stack B Import</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">&quot;Resources&quot; : <span>{</span>
   &quot;WebServerInstance&quot; : <span>{</span>
     &quot;Type&quot; : &quot;AWS::EC2::Instance&quot;,
     &quot;Properties&quot; : <span>{</span>
@@ -97,7 +135,32 @@
       }]
     }
   }
-}</code></pre><h2 id="w2ab1c33c28c41c15">Declaration</h2>
+}</code></pre>  
+                                    </div>
+                                 
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    
+                                    <h3 id="intrinsic-function-reference-importvalue-import.yaml">YAML</h3>
+                                    
+                                    <p>Stack B Import</p>
+                                    <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  WebServerInstance:
+    Type: &apos;AWS::EC2::Instance&apos;
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-a1b23456
+      NetworkInterfaces:
+        - GroupSet:
+            - !ImportValue 
+              &apos;Fn::Sub&apos;: &apos;$<span>{</span>NetworkStackNameParameter}-SecurityGroupID&apos;
+          AssociatePublicIpAddress: &apos;true&apos;
+          DeviceIndex: &apos;0&apos;
+          DeleteOnTermination: &apos;true&apos;
+          SubnetId: !ImportValue 
+            &apos;Fn::Sub&apos;: &apos;$<span>{</span>NetworkStackNameParameter}-SubnetID&apos;</code></pre>
+                                    </div>
+                                 
+                                 <h2 id="w2ab1c33c28c41b9">Declaration</h2>
                                  
                                  
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -122,7 +185,6 @@
                                           <p>You can&apos;t use the short form of <code class="code">!ImportValue</code> when it contains a
                                              <code class="code">!Sub</code>. The following example is valid for AWS CloudFormation, but
                                              <em>not</em> valid for YAML:
-                                             
                                           </p><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="">!ImportValue
   !Sub &quot;$<span>{</span>NetworkStack}-SubnetID&quot; </code></pre><p>Instead,
                                              you must use the full function name, for
@@ -133,7 +195,7 @@
                                     
                                  </div>
                                  
-                                 <h2 id="w2ab1c33c28c41c17">Parameters</h2>
+                                 <h2 id="w2ab1c33c28c41c11">Parameters</h2>
                                  
                                  
                                  <div class="variablelist">
@@ -152,12 +214,12 @@
                                     </dl>
                                  </div>
                                  
-                                 <h2 id="w2ab1c33c28c41c19">Return value</h2>
+                                 <h2 id="w2ab1c33c28c41c13">Return value</h2>
                                  
                                  
                                  <p>The stack output value.</p>
                                  
-                                 <h2 id="w2ab1c33c28c41c21">Example</h2>
+                                 <h2 id="w2ab1c33c28c41c15">Example</h2>
                                  
                                  
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -173,7 +235,7 @@
   !Sub &quot;$<span>{</span>NetworkStackName}-SecurityGroupID&quot;</code></pre>
                                     </div>
                                  
-                                 <h2 id="w2ab1c33c28c41c23">Supported functions</h2>
+                                 <h2 id="w2ab1c33c28c41c17">Supported functions</h2>
                                  
                                  
                                  <p>You can use the following functions in the <code class="code">Fn::ImportValue</code> function. The
@@ -244,7 +306,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

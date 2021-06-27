@@ -16,12 +16,17 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">Target</code> property type specifies a target, such as an AWS Lambda function
-                                    or an Amazon Kinesis data stream, that EventBridge invokes when a rule is triggered.
-                                    
+                                 <p>Targets are the resources to be invoked when a rule is triggered. For a complete list
+                                    of
+                                    services and resources that can be set as a target, see <a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutTargets.html">PutTargets</a>.
                                  </p>
-                                 <p>The <code class="code">Targets</code> property of the <a href="aws-resource-events-rule.html">AWS::Events::Rule</a> resource contains a list of one or more <code class="code">Target</code>
-                                    property types.
+                                 <p>If you are setting the event bus of another account as the target, and that account
+                                    granted permission to your account through an organization instead of directly by
+                                    the account
+                                    ID, then you must specify a <code class="code">RoleArn</code> with proper permissions in the
+                                    <code class="code">Target</code> structure. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html">Sending and
+                                       Receiving Events Between AWS Accounts</a> in the <em>Amazon EventBridge User
+                                       Guide</em>.
                                  </p>
                                  <h2 id="aws-properties-events-rule-target-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -92,7 +97,8 @@
                                           
                                           <p>If the event target is an AWS Batch job, this contains the job definition, job name,
                                              and
-                                             other parameters. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/jobs.html">Jobs</a> in the <em>AWS Batch User
+                                             other parameters. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/jobs.html">Jobs</a> in the <em>
+                                                AWS Batch User
                                                 Guide</em>.
                                           </p>
                                           
@@ -105,13 +111,7 @@
                                        <dd>
                                           
                                           <p>The <code class="code">DeadLetterConfig</code> that defines the target queue to send dead-letter queue
-                                             events to. 
-                                          </p>
-                                          
-                                          <p>To learn more using a dead-letter queue to send events that fail to be delivered to
-                                             a
-                                             target, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/rule-dlq.html">Event
-                                                retry policy and using dead-letter queues</a>.
+                                             events to.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -137,12 +137,20 @@
                                        <dt><a id="cfn-events-rule-target-httpparameters"></a><span class="term"><code class="code">HttpParameters</code></span></dt>
                                        <dd>
                                           
-                                          <p>Contains the HTTP parameters to use when the target is a API Gateway REST endpoint.</p>
+                                          <p>Contains the HTTP parameters to use when the target is a API Gateway REST endpoint
+                                             or
+                                             EventBridge ApiDestination.
+                                          </p>
                                           
-                                          <p>If you specify an API Gateway REST API as a target, you can use this parameter to
-                                             specify
-                                             headers, path parameter, query string keys/values as part of your target invoking
-                                             request.
+                                          <p>If you specify an API Gateway REST API or EventBridge ApiDestination as a target,
+                                             you can
+                                             use this parameter to specify headers, path parameters, and query string keys/values
+                                             as part
+                                             of your target invoking request. If you&apos;re using ApiDestinations, the corresponding
+                                             Connection
+                                             can also have these values configured. In case of any conflicting keys, values from
+                                             the
+                                             Connection take precedence.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -153,13 +161,7 @@
                                        <dt><a id="cfn-events-rule-target-id"></a><span class="term"><code class="code">Id</code></span></dt>
                                        <dd>
                                           
-                                          <p>A name for the target. Use a string that will help you identify the target. Each target
-                                             associated with a rule must have an Id unique for that rule.
-                                          </p>
-                                          
-                                          <p>The <code class="code">Id</code> can include alphanumeric characters, periods (.), hyphens (-), and
-                                             underscores (_).
-                                          </p>
+                                          <p>The ID of the target. We recommend using a memorable and unique string.</p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -173,8 +175,10 @@
                                        <dt><a id="cfn-events-rule-target-input"></a><span class="term"><code class="code">Input</code></span></dt>
                                        <dd>
                                           
-                                          <p>Valid JSON text passed to the target. If you use this property, nothing from the event
-                                             text itself is passed to the target.
+                                          <p>Valid JSON text passed to the target. In this case, nothing from the event itself
+                                             is
+                                             passed to the target. For more information, see <a href="http://www.rfc-editor.org/rfc/rfc7159.txt" rel="noopener noreferrer" target="_blank"><span>The JavaScript Object Notation (JSON) Data
+                                                   Interchange Format</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -187,8 +191,10 @@
                                        <dt><a id="cfn-events-rule-target-inputpath"></a><span class="term"><code class="code">InputPath</code></span></dt>
                                        <dd>
                                           
-                                          <p>When you don&apos;t want to pass the entire matched event, <code class="code">InputPath </code> describes
-                                             which part of the event to pass to the target.
+                                          <p>The value of the JSONPath that is used for extracting part of the matched event when
+                                             passing it to the target. You must use JSON dot notation, not bracket notation. For
+                                             more
+                                             information about JSON paths, see <a href="http://goessner.net/articles/JsonPath/" rel="noopener noreferrer" target="_blank"><span>JSONPath</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -231,13 +237,14 @@
                                        <dt><a id="cfn-events-rule-target-redshiftdataparameters"></a><span class="term"><code class="code">RedshiftDataParameters</code></span></dt>
                                        <dd>
                                           
-                                          <p>Contains the Redshift Data API parameters to use when the target is a Redshift
+                                          <p>Contains the Amazon Redshift Data API parameters to use when the target is a Amazon
+                                             Redshift
                                              cluster.
                                           </p>
                                           
-                                          <p>If you specify a Redshift Cluster as a Target, you can use this to specify
-                                             parameters to invoke the Redshift Data API ExecuteStatement based on EventBridge
-                                             events.
+                                          <p>If you specify a Amazon Redshift Cluster as a Target, you can use this to specify
+                                             parameters to
+                                             invoke the Amazon Redshift Data API ExecuteStatement based on EventBridge events.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -248,12 +255,8 @@
                                        <dt><a id="cfn-events-rule-target-retrypolicy"></a><span class="term"><code class="code">RetryPolicy</code></span></dt>
                                        <dd>
                                           
-                                          <p>A <code class="code">RetryPolicy</code> object that includes information about the retry policy
-                                             settings.
-                                          </p>
-                                          
-                                          <p>To learn more using retry policy settings and using dead-letter queues, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/rule-dlq.html">Event retry policy and
-                                                using dead-letter queues</a>.
+                                          <p>The <code class="code">RetryPolicy</code> object that contains the retry policy configuration to use
+                                             for the dead-letter queue.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -269,12 +272,6 @@
                                              triggered. If one rule triggers multiple targets, you can use a different IAM role
                                              for each
                                              target.
-                                          </p>
-                                          
-                                          <p>If you&apos;re setting an event bus in another account as the target and that account granted
-                                             permission to your account through an organization instead of directly by the account
-                                             ID, you
-                                             must specify a <code class="code">RoleArn</code> with proper permissions here in this parameter.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -461,7 +458,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-ec2-enclavecertificateiamroleassociation">AWS::EC2::EnclaveCertificateIamRoleAssociation</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate
+                                    Manager (ACM) certificate. 
+                                    			This enables the certificate to be used by the ACM for Nitro Enclaves application
+                                    inside an enclave. For more 
+                                    			information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html">
+                                       AWS Certificate Manager for Nitro Enclaves</a> in the <em>
+                                       AWS Nitro Enclaves 
+                                       					User Guide</em>.
+                                 </p>
+                                 <p>When the IAM role is associated with the ACM certificate, the certificate, certificate
+                                    chain, and encrypted 
+                                    			private key are placed in an Amazon S3 bucket that only the associated IAM role
+                                    can access. The private key of the certificate 
+                                    			is encrypted with an AWS managed key that has an attached attestation-based key
+                                    policy.
+                                 </p>
+                                 <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission
+                                    to call <code class="code">s3:GetObject</code> 
+                                    			on the Amazon S3 bucket returned by the command. To enable the IAM role to access
+                                    the KMS key,
+                                    			you must grant it permission to call <code class="code">kms:Decrypt</code> on the KMS key returned by the command. 
+                                    			For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy">
+                                       				Grant the role permission to access the certificate and encryption key</a> in the 
+                                    			<em>
+                                       AWS Nitro Enclaves User Guide</em>.
+                                 </p>
+                                 <h2 id="aws-resource-ec2-enclavecertificateiamroleassociation-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-ec2-enclavecertificateiamroleassociation-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::EC2::EnclaveCertificateIamRoleAssociation&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-ec2-enclavecertificateiamroleassociation-certificatearn">CertificateArn</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ec2-enclavecertificateiamroleassociation-rolearn">RoleArn</a>&quot; : <code class="replaceable">String</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-ec2-enclavecertificateiamroleassociation-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::EC2::EnclaveCertificateIamRoleAssociation
+Properties: 
+  <a href="#cfn-ec2-enclavecertificateiamroleassociation-certificatearn">CertificateArn</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ec2-enclavecertificateiamroleassociation-rolearn">RoleArn</a>: <code class="replaceable">String</code>
+</code></pre></div>
+                                 <h2 id="aws-resource-ec2-enclavecertificateiamroleassociation-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-ec2-enclavecertificateiamroleassociation-certificatearn"></a><span class="term"><code class="code">CertificateArn</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>The ARN of the ACM certificate with which to associate the IAM role.</p>
+                                          	     
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">1283</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ec2-enclavecertificateiamroleassociation-rolearn"></a><span class="term"><code class="code">RoleArn</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>The ARN of the IAM role to associate with the ACM certificate. You can associate up
+                                             to 16 IAM roles with an ACM 
+                                             			certificate.
+                                          </p>
+                                          	     
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">1283</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-ec2-enclavecertificateiamroleassociation-return-values">Return values</h2>
+                                 <h3 id="aws-resource-ec2-enclavecertificateiamroleassociation-return-values-ref">Ref</h3>
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the IAM role and ACM certificate association.
+                                 </p>
+                                 <h3 id="aws-resource-ec2-enclavecertificateiamroleassociation-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-ec2-enclavecertificateiamroleassociation-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="CertificateS3BucketName-fn::getatt"></a><span class="term"><code class="code">CertificateS3BucketName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name of the Amazon S3 bucket to which the certificate was uploaded.</p>
+                                          
+                                       </dd>
+                                       <dt><a id="CertificateS3ObjectKey-fn::getatt"></a><span class="term"><code class="code">CertificateS3ObjectKey</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon S3 object key where the certificate, certificate chain, and encrypted private
+                                             key bundle are stored. The 
+                                             object key is formatted as follows:  <code class="code">role_arn</code>/<code class="code">certificate_arn</code>.
+                                          </p>
+                                          
+                                       </dd>
+                                       <dt><a id="EncryptionKmsKeyId-fn::getatt"></a><span class="term"><code class="code">EncryptionKmsKeyId</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ID of the AWS KMS key used to encrypt the private key of the certificate.</p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-ec2-enclavecertificateiamroleassociation--examples">Examples</h2>
+                                 <h3 id="aws-resource-ec2-enclavecertificateiamroleassociation--examples--Associating_an_IAM_role_with_an_ACM_certificate">Associating an IAM role with an ACM certificate</h3>
+                                 <p>The following example associates IAM role <code class="code">arn:aws:iam::123456789012:role/my-acm-role</code> 
+                                    with ACM certificate <code class="code">arn:aws:acm:us-east-1:123456789012:certificate/123abcde-cdef-abcd-1234-123abEXAMPLE</code>.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ec2-enclavecertificateiamroleassociation--examples--Associating_an_IAM_role_with_an_ACM_certificate--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Description&quot;: &quot;myCertAssociation&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;MyEnclaveCertificateIamRoleAssociation&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::EC2::EnclaveCertificateIamRoleAssociation&quot;,
+            &quot;Properties&quot;: <span>{</span>
+        &quot;CertificateArn&quot;: &quot;arn:aws:acm:us-east-1:123456789012:certificate/123abcde-cdef-abcd-1234-123abEXAMPLE&quot;,
+        &quot;RoleArn&quot;: &quot;arn:aws:iam::123456789012:role/my-acm-role&quot;
+            }
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ec2-enclavecertificateiamroleassociation--examples--Associating_an_IAM_role_with_an_ACM_certificate--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  myCertAssociation:
+    Type: AWS::EC2::EnclaveCertificateIamRoleAssociation
+    Properties:
+      CertificateArn:
+        &quot;arn:aws:acm:us-east-1:123456789012:certificate/123abcde-cdef-abcd-1234-123abEXAMPLE&quot;
+      RoleArn:
+        &quot;arn:aws:iam::123456789012:role/my-acm-role&quot;</code></pre></div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

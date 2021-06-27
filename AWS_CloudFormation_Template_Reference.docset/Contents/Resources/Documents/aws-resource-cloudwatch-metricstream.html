@@ -16,7 +16,41 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Reserved for future use.</p>
+                                 <p>Creates or updates a metric stream. Metrics streams can automatically stream CloudWatch
+                                    metrics to 
+                                    AWS destinations including Amazon S3 and to many third-party solutions. For more information,
+                                    see 
+                                    <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html">
+                                       Metric streams</a>. 
+                                 </p>
+                                 <p>To create a metric stream, you must be logged on to an account that has the <code class="code">iam:PassRole</code> permission and
+                                    either the <b>CloudWatchFullAccess</b> policy or the <code class="code">cloudwatch:PutMetricStream</code> permission. 
+                                 </p>
+                                 <p>When you create or update a metric stream, you choose one of the following:</p>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          <p>Stream metrics from all metric namespaces in the account.</p>
+                                       </li>
+                                       <li class="listitem">
+                                          <p>Stream metrics from all metric namespaces in the account, except for the namespaces
+                                             that you list 
+                                             in <code class="code">ExcludeFilters</code>.
+                                          </p>
+                                       </li>
+                                       <li class="listitem">
+                                          <p>Stream metrics from only the metric namespaces that you list in <code class="code">IncludeFilters</code>. 
+                                          </p>
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <p>When you create a metric stream, the stream is created in the <code class="code">running</code> state. If you update an existing metric stream, 
+                                    the state does not change.
+                                 </p>
                                  <h2 id="aws-resource-cloudwatch-metricstream-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -27,6 +61,7 @@
       &quot;<a href="#cfn-cloudwatch-metricstream-firehosearn">FirehoseArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-cloudwatch-metricstream-includefilters">IncludeFilters</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-cloudwatch-metricstream-metricstreamfilter.html">MetricStreamFilter</a>, ... ]</code>,
       &quot;<a href="#cfn-cloudwatch-metricstream-name">Name</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-cloudwatch-metricstream-outputformat">OutputFormat</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-cloudwatch-metricstream-rolearn">RoleArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-cloudwatch-metricstream-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
@@ -41,6 +76,7 @@ Properties:
   <a href="#cfn-cloudwatch-metricstream-includefilters">IncludeFilters</a>: <code class="replaceable">
     - <a href="./aws-properties-cloudwatch-metricstream-metricstreamfilter.html">MetricStreamFilter</a></code>
   <a href="#cfn-cloudwatch-metricstream-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-cloudwatch-metricstream-outputformat">OutputFormat</a>: <code class="replaceable">String</code>
   <a href="#cfn-cloudwatch-metricstream-rolearn">RoleArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-cloudwatch-metricstream-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
@@ -50,7 +86,19 @@ Properties:
                                     <dl>
                                        <dt><a id="cfn-cloudwatch-metricstream-excludefilters"></a><span class="term"><code class="code">ExcludeFilters</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>If you specify this parameter, the stream sends metrics from all metric namespaces
+                                             except 
+                                             for the namespaces that you specify here. You cannot specify both <code class="code">IncludeFilters</code> 
+                                             and <code class="code">ExcludeFilters</code> in the same metric stream.
+                                          </p>
+                                          
+                                          <p>When you modify the <code class="code">IncludeFilters</code> or <code class="code">ExcludeFilters</code> of an existing metric stream
+                                             in any way, the metric stream is effectively restarted, so after such a change you
+                                             will get 
+                                             only the datapoints that have a timestamp after the time of the update.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="./aws-properties-cloudwatch-metricstream-metricstreamfilter.html">MetricStreamFilter</a></p>
@@ -58,7 +106,13 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-cloudwatch-metricstream-firehosearn"></a><span class="term"><code class="code">FirehoseArn</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The ARN of the Amazon Kinesis Firehose delivery stream to use for this metric stream.
+                                             This 
+                                             Amazon Kinesis Firehose delivery stream must already exist and must be in the same
+                                             account as the metric stream. 
+                                          </p>
+                                          
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
@@ -67,7 +121,18 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-cloudwatch-metricstream-includefilters"></a><span class="term"><code class="code">IncludeFilters</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>If you specify this parameter, the stream sends only the metrics from the metric namespaces
+                                             that you specify here. 
+                                             You cannot specify both <code class="code">IncludeFilters</code> and <code class="code">ExcludeFilters</code> in the same metric stream.
+                                          </p>
+                                          
+                                          <p>When you modify the <code class="code">IncludeFilters</code> or <code class="code">ExcludeFilters</code> of an existing metric stream
+                                             in any way, the metric stream is effectively restarted, so after such a change you
+                                             will get 
+                                             only the datapoints that have a timestamp after the time of the update.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="./aws-properties-cloudwatch-metricstream-metricstreamfilter.html">MetricStreamFilter</a></p>
@@ -75,16 +140,48 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-cloudwatch-metricstream-name"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>If you are creating a new metric stream, this is the name for the new stream. 
+                                             The name must be different than the names of other metric streams in this account
+                                             and Region.
+                                          </p>
+                                          
+                                          <p>If you are updating a metric stream, specify the name of that stream here.</p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
+                                       <dt><a id="cfn-cloudwatch-metricstream-outputformat"></a><span class="term"><code class="code">OutputFormat</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The output format for the stream. Valid values are <code class="code">json</code> and
+                                             <code class="code">opentelemetry0.7</code> For more information about metric stream output formats, see 
+                                             <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html">
+                                                Metric streams output formats</a>.
+                                          </p>
+                                          
+                                          <p>This parameter is required.</p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-cloudwatch-metricstream-rolearn"></a><span class="term"><code class="code">RoleArn</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The ARN of an IAM role that this metric stream will use to access Amazon Kinesis Firehose
+                                             
+                                             resources. This IAM role must already exist and must be in the same account as the
+                                             metric stream. 
+                                             This IAM role must include the <code class="code">firehose:PutRecord</code> and <code class="code">firehose:PutRecordBatch</code>
+                                             permissions.
+                                          </p>
+                                          
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
@@ -93,7 +190,12 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-cloudwatch-metricstream-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>An array of key-value pairs to apply to the metric stream.</p>
+                                          
+                                          <p>For more information, see <a href="aws-properties-resource-tags.html">Tag</a>.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
@@ -103,28 +205,82 @@ Properties:
                                  </div>
                                  <h2 id="aws-resource-cloudwatch-metricstream-return-values">Return values</h2>
                                  <h3 id="aws-resource-cloudwatch-metricstream-return-values-ref">Ref</h3>
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the name of the metric stream.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
                                  <h3 id="aws-resource-cloudwatch-metricstream-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
                                  <h4 id="aws-resource-cloudwatch-metricstream-return-values-fn--getatt-fn--getatt"></h4>
                                  <div class="variablelist">
                                     <dl>
                                        <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The ARN of the metric stream.</p>
+                                          
                                        </dd>
                                        <dt><a id="CreationDate-fn::getatt"></a><span class="term"><code class="code">CreationDate</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The date that the metric stream was originally created.</p>
+                                          
                                        </dd>
                                        <dt><a id="LastUpdateDate-fn::getatt"></a><span class="term"><code class="code">LastUpdateDate</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The date that the metric stream was most recently updated.</p>
+                                          
                                        </dd>
                                        <dt><a id="State-fn::getatt"></a><span class="term"><code class="code">State</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The state of the metric stream, either <code class="code">running</code> or <code class="code">stopped</code>.
+                                          </p>
+                                          
                                        </dd>
                                     </dl>
                                  </div>
+                                 <h2 id="aws-resource-cloudwatch-metricstream--examples">Examples</h2>
+                                 <h3 id="aws-resource-cloudwatch-metricstream--examples--Metric_stream_example">Metric stream example</h3>
+                                 <p>The following example creates a metric stream that streams only the metrics in the
+                                    
+                                    <code class="code">AWS/ELB</code> and <code class="code">AWS/EC2</code> namespaces.
+                                 </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-cloudwatch-metricstream--examples--Metric_stream_example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  MyMetricStream:
+    Type: &apos;AWS::CloudWatch::MetricStream&apos;
+    Properties:
+      OutputFormat: &apos;json&apos;
+      FirehoseArn: &apos;arn:aws:firehose:us-east-1:123456789012:deliverystream/MyDeliveryStream&apos;
+      RoleArn: &apos;arn:aws:iam::123456789012:role/service-role/MyRole&apos;
+      IncludeFilters:
+        - Namespace: AWS/ELB
+        - Namespace: AWS/EC2</code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-cloudwatch-metricstream--examples--Metric_stream_example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::CloudWatch::MetricStream&quot;,
+  &quot;Properties&quot; : <span>{</span>
+    &quot;FirehoseArn&quot; : &quot;arn:aws:firehose:us-east-1:123456789012:deliverystream/MyDeliveryStream&quot;,
+    &quot;IncludeFilters&quot; : [
+      <span>{</span>
+        &quot;Namespace&quot;: &quot;AWS/ELB&quot;
+      },
+      <span>{</span>
+        &quot;Namespace&quot;: &quot;AWS/EC2&quot;
+      }
+    ],
+    &quot;Name&quot; : &quot;MyMetricStream&quot;,
+    &quot;OutputFormat&quot; : &quot;json&quot;,
+    &quot;RoleArn&quot; : &quot;arn:aws:iam::123456789012:role/service-role/MyRole&quot;
+  }
+}</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -135,7 +291,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

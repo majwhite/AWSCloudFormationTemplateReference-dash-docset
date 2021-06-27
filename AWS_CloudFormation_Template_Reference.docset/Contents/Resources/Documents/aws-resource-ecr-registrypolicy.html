@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-ecr-registrypolicy">AWS::ECR::RegistryPolicy</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The <code class="code">AWS::ECR::RegistryPolicy</code> resource creates or updates the permissions
+                                    policy for a private registry.
+                                 </p>
+                                 <p>A private registry policy is used to specify permissions for another AWS account and
+                                    is used when configuring cross-account replication. For
+                                    more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html">Registry
+                                       permissions</a> in the <em>Amazon Elastic Container Registry User
+                                       Guide</em>.
+                                 </p>
+                                 <h2 id="aws-resource-ecr-registrypolicy-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-ecr-registrypolicy-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::ECR::RegistryPolicy&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-ecr-registrypolicy-policytext">PolicyText</a>&quot; : <code class="replaceable">Json</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-ecr-registrypolicy-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::ECR::RegistryPolicy
+Properties: 
+  <a href="#cfn-ecr-registrypolicy-policytext">PolicyText</a>: <code class="replaceable">Json</code>
+</code></pre></div>
+                                 <h2 id="aws-resource-ecr-registrypolicy-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-ecr-registrypolicy-policytext"></a><span class="term"><code class="code">PolicyText</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The JSON policy text for your registry.</p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: Json
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-ecr-registrypolicy-return-values">Return values</h2>
+                                 <h3 id="aws-resource-ecr-registrypolicy-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <h4 id="aws-resource-ecr-registrypolicy-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="RegistryId-fn::getatt"></a><span class="term"><code class="code">RegistryId</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The account ID of the private registry the policy is associated with.</p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-ecr-registrypolicy--examples">Examples</h2>
+                                 <p></p>
+                                 <h3 id="aws-resource-ecr-registrypolicy--examples--Specify_a_registry_policy_for_a_private_registry">Specify a registry policy for a private registry</h3>
+                                 <p>The following example specifies a private registry policy in
+                                    <code class="code">us-west-2</code> that grants permission for account
+                                    <code class="code">210987654321</code> to create repositories and replicate their
+                                    contents to your private registry.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ecr-registrypolicy--examples--Specify_a_registry_policy_for_a_private_registry--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;TestRegistryPolicy&quot;: <span>{</span>
+   &quot;Type&quot;: &quot;AWS::ECR::RegistryPolicy&quot;,
+   &quot;Properties&quot;: <span>{</span>
+      &quot;PolicyText&quot;: <span>{</span>
+         &quot;Version&quot;:&quot;2012-10-17&quot;,
+         &quot;Statement&quot;:[
+            <span>{</span>
+               &quot;Sid&quot;:&quot;ReplicationAccessCrossAccount&quot;,
+               &quot;Effect&quot;:&quot;Allow&quot;,
+               &quot;Principal&quot;:<span>{</span>
+                  &quot;AWS&quot;:&quot;arn:aws:iam::210987654321:root&quot;
+               },
+               &quot;Action&quot;:[
+                  &quot;ecr:CreateRepository&quot;,
+                  &quot;ecr:ReplicateImage&quot;
+               ],
+               &quot;Resource&quot;: &quot;arn:aws:ecr:us-west-2:123456789012:repository/*&quot;
+             }
+          ]
+       }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ecr-registrypolicy--examples--Specify_a_registry_policy_for_a_private_registry--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  TestRegistryPolicy:
+    Type: &apos;AWS::ECR::RegistryPolicy&apos;
+    Properties:
+      PolicyText:
+        Version: 2012-10-17
+        Statement:
+          - Sid: UpdatedRegistryPolicy
+            Effect: Allow
+            Principal:
+              AWS: &apos;arn:aws:iam::210987654321:root&apos;
+            Action:
+              - &apos;ecr:CreateRepository&apos;
+              - &apos;ecr:ReplicateImage&apos;
+            Resource: &apos;arn:aws:ecr:us-west-2:123456789012:repository/*&apos;</code></pre></div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

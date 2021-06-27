@@ -25,8 +25,8 @@
                                     For
                                     static targets, the association specifies a schedule for when the configuration is
                                     reapplied.
-                                    For dynamic targets, such as an AWS Resource Group or an AWS Autoscaling Group, State
-                                    Manager
+                                    For dynamic targets, such as an AWS Resource Groups or an AWS Auto Scaling Group,
+                                    State Manager
                                     applies the configuration when new instances are added to the group. The association
                                     also
                                     specifies actions to take when applying the configuration. For example, an association
@@ -45,6 +45,7 @@
       &quot;<a href="#cfn-ssm-association-applyonlyatcroninterval">ApplyOnlyAtCronInterval</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-ssm-association-associationname">AssociationName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-association-automationtargetparametername">AutomationTargetParameterName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ssm-association-calendarnames">CalendarNames</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-ssm-association-complianceseverity">ComplianceSeverity</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-association-documentversion">DocumentVersion</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ssm-association-instanceid">InstanceId</a>&quot; : <code class="replaceable">String</code>,
@@ -66,6 +67,8 @@ Properties:
   <a href="#cfn-ssm-association-applyonlyatcroninterval">ApplyOnlyAtCronInterval</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-ssm-association-associationname">AssociationName</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-association-automationtargetparametername">AutomationTargetParameterName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ssm-association-calendarnames">CalendarNames</a>: <code class="replaceable">
+    - String</code>
   <a href="#cfn-ssm-association-complianceseverity">ComplianceSeverity</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-association-documentversion">DocumentVersion</a>: <code class="replaceable">String</code>
   <a href="#cfn-ssm-association-instanceid">InstanceId</a>: <code class="replaceable">String</code>
@@ -88,11 +91,13 @@ Properties:
                                        <dt><a id="cfn-ssm-association-applyonlyatcroninterval"></a><span class="term"><code class="code">ApplyOnlyAtCronInterval</code></span></dt>
                                        <dd>
                                           
-                                          <p>By default, when you create a new associations, the system runs it immediately after
+                                          
+                                          <p>By default, when you create a new association, the system runs it immediately after
                                              it is
                                              created and then according to the schedule you specified. Specify this option if you
-                                             don&apos;t
-                                             want an association to run immediately after you create it.
+                                             don&apos;t want
+                                             an association to run immediately after you create it. This parameter is not supported
+                                             for rate expressions.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -118,7 +123,9 @@ Properties:
                                           
                                           <p>Specify the target for the association. This target is required for associations that
                                              use an
-                                             Automation document and target resources by using rate controls.
+                                             Automation runbook and target resources by using rate controls. Automation is a capability
+                                             of
+                                             AWS Systems Manager.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -127,6 +134,23 @@ Properties:
                                           </p>
                                           <p><em>Minimum</em>: <code class="code">1</code></p>
                                           <p><em>Maximum</em>: <code class="code">50</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ssm-association-calendarnames"></a><span class="term"><code class="code">CalendarNames</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The names or Amazon Resource Names (ARNs) of the Change Calendar type documents your
+                                             associations are gated under. The associations only run when that Change Calendar
+                                             is open. For
+                                             more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar">
+                                                AWS Systems Manager Change
+                                                Calendar</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-ssm-association-complianceseverity"></a><span class="term"><code class="code">ComplianceSeverity</code></span></dt>
@@ -194,10 +218,10 @@ Properties:
                                           
                                           <p>If a new instance starts and attempts to run an association while Systems Manager
                                              is running
-                                             MaxConcurrency associations, the association is allowed to run. During the next association
-                                             interval, the new instance will process its association within the limit specified
-                                             for
-                                             MaxConcurrency.
+                                             <code class="code">MaxConcurrency</code> associations, the association is allowed to run. During the next
+                                             association interval, the new instance will process its association within the limit
+                                             specified
+                                             for <code class="code">MaxConcurrency</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -222,18 +246,15 @@ Properties:
                                              0, then the
                                              system stops sending requests after the first error is returned. If you run an association
                                              on 50
-                                             instances and set MaxError to 10%, then the system stops sending the request when
-                                             the sixth error
-                                             is received.
+                                             instances and set <code class="code">MaxError</code> to 10%, then the system stops sending the request when
+                                             the sixth error is received.
                                           </p>
                                           
-                                          <p>Executions that are already running an association when MaxErrors is reached are allowed
-                                             to
-                                             complete, but some of these executions may fail as well. If you need to ensure that
-                                             there won&apos;t
-                                             be more than max-errors failed executions, set MaxConcurrency to 1 so that executions
-                                             proceed one
-                                             at a time.
+                                          <p>Executions that are already running an association when <code class="code">MaxErrors</code> is reached
+                                             are allowed to complete, but some of these executions may fail as well. If you need
+                                             to ensure
+                                             that there won&apos;t be more than max-errors failed executions, set <code class="code">MaxConcurrency</code> to 1
+                                             so that executions proceed one at a time.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -282,7 +303,9 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>An S3 bucket where you want to store the output details of the request.</p>
+                                          <p>An Amazon Simple Storage Service (Amazon S3) bucket where you want to store the output
+                                             details of the request.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -298,14 +321,18 @@ Properties:
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: Map of <a href="./aws-properties-ssm-association-parametervalues.html">ParameterValues</a></p>
+                                          <p><em>Type</em>: Map of Json
+                                          </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-ssm-association-scheduleexpression"></a><span class="term"><code class="code">ScheduleExpression</code></span></dt>
                                        <dd>
                                           
                                           
-                                          <p>A cron expression that specifies a schedule when the association runs.</p>
+                                          <p>A cron expression that specifies a schedule when the association runs. The schedule
+                                             runs in
+                                             Coordinated Universal Time (UTC).
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -434,14 +461,14 @@ Resources:
         workingDirectory:
         - &quot;/&quot;
       WaitForSuccessTimeoutSeconds: 300</code></pre></div>
-                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_for_all_managed_instances_in_an_AWS_account">Create an association for all managed instances in an AWS account</h3>
+                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_for_all_managed_instances_in_an_">Create an association for all managed instances in an AWS account</h3>
                                  <p>The following example creates an association that uses the AWS-UpdateSSMAgent SSM
                                     document. The association updates SSM Agent on all managed instances (instances configured
                                     for Systems Manager) in the user&apos;s AWS account according to the specified CRON
                                     schedule.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_for_all_managed_instances_in_an_AWS_account--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_for_all_managed_instances_in_an_--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Resources&quot;: <span>{</span>
     &quot;AllInstanceIdsAssociation&quot;: <span>{</span>
       &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
@@ -463,7 +490,7 @@ Resources:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_for_all_managed_instances_in_an_AWS_account--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_for_all_managed_instances_in_an_--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
 Resources:
   AllInstanceIdsAssociation:
     Type: AWS::SSM::Association
@@ -612,18 +639,17 @@ Resources:
           Values:
             - i-1234567890abcdef0
       AutomationTargetParameterName: InstanceId</code></pre></div>
-                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_that_uses_rate_controls_and_sends_log_output_to_Amazon_S3">Create an association that uses rate controls and sends log output to Amazon S3</h3>
+                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_that_uses_rate_controls_and_sends_log_output_to_">Create an association that uses rate controls and sends log output to Amazon S3</h3>
                                  <p>The following example creates an association that uses rate controls. The association
                                     attempts to update SSM Agent on only 20% of instances at one time. Systems Manager
                                     stops
                                     the association from running on any additional instances if the execution fails on
                                     5% of
-                                    the total number of instances. System Manager also logs the association output to
-                                    Amazon
-                                    S3.
+                                    the total number of instances. Systems Manager also logs the association output to
+                                    Amazon S3.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_uses_rate_controls_and_sends_log_output_to_Amazon_S3--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_uses_rate_controls_and_sends_log_output_to_--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Resources&quot;: <span>{</span>
     &quot;RateControlAssociation&quot;: <span>{</span>
       &quot;Type&quot;: &quot;AWS::SSM::Association&quot;,
@@ -651,7 +677,7 @@ Resources:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_uses_rate_controls_and_sends_log_output_to_Amazon_S3--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_uses_rate_controls_and_sends_log_output_to_--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
 Resources:
   RateControlAssociation:
     Type: AWS::SSM::Association
@@ -1189,12 +1215,12 @@ Outputs:
   WebServerPublic:
     Value: !GetAtt &apos;EC2Instance.PublicDnsName&apos;
     Description: Public DNS for WebServer</code></pre></div>
-                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_that_runs_a_bash_script_with_Systems_Manager_Automation">Create an association that runs a bash script with Systems Manager Automation</h3>
+                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_that_runs_a_bash_script_with__Automation">Create an association that runs a bash script with Systems Manager Automation</h3>
                                  <p>The following example creates an assocation that runs a bash script using State
                                     Manager and Automation with multiple steps. Target is based on tags.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_runs_a_bash_script_with_Systems_Manager_Automation--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_runs_a_bash_script_with__Automation--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Description&quot;: &quot;Deploy Single EC2 Linux Instance&quot;,
   &quot;Parameters&quot;: <span>{</span>
     &quot;LatestAmiId&quot;: <span>{</span>
@@ -1459,7 +1485,7 @@ Outputs:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_runs_a_bash_script_with_Systems_Manager_Automation--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_runs_a_bash_script_with__Automation--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
 Description: &quot;Deploy Single EC2 Linux Instance&quot;
 Parameters:
   LatestAmiId:
@@ -2262,14 +2288,14 @@ Resources:
         EnableDebugLogging:
           - &quot;False&quot;
 </code></pre></div>
-                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_that_joins_targets_to_a_Windows_Active_Directory_domain_and_uses_Systems_Manager_Automation">Create an association that joins targets to a Windows Active Directory domain and
+                                 <h3 id="aws-resource-ssm-association--examples--Create_an_association_that_joins_targets_to_a_Windows_Active_Directory_domain_and_uses__Automation">Create an association that joins targets to a Windows Active Directory domain and
                                     uses Systems Manager Automation
                                  </h3>
                                  <p>The following example creates an association that joins targets to a Windows Active
                                     Directory domain by using State Manager and Automation. Target is based on tags.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_joins_targets_to_a_Windows_Active_Directory_domain_and_uses_Systems_Manager_Automation--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_joins_targets_to_a_Windows_Active_Directory_domain_and_uses__Automation--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
   &quot;Description&quot;: &quot;Deploy single windows EC2 Instance and join domain with SSM Association&quot;,
   &quot;Parameters&quot;: <span>{</span>
@@ -2766,7 +2792,7 @@ Resources:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_joins_targets_to_a_Windows_Active_Directory_domain_and_uses_Systems_Manager_Automation--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+                                    <h4 id="aws-resource-ssm-association--examples--Create_an_association_that_joins_targets_to_a_Windows_Active_Directory_domain_and_uses__Automation--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
 Description: &quot;Deploy single windows EC2 Instance and join domain with SSM Association&quot;
 Parameters:
   DomainAdminPassword:
@@ -3267,7 +3293,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -17,11 +17,19 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>The <code class="code">AWS::Lambda::LayerVersionPermission</code> resource adds permissions to the resource-based policy of
-                                    a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda
+                                    a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda
                                        layer</a>. Use this action to grant layer usage permission to other accounts. You can grant
                                     permission to a
                                     single account, all AWS accounts, or all accounts in an organization.
                                  </p>
+                                 <div class="awsdocs-note awsdocs-important">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>Since the release of the <a href="aws-attribute-updatereplacepolicy.html">UpdateReplacePolicy</a> both <code class="code">UpdateReplacePolicy</code> and <code class="code">DeletionPolicy</code> are required to protect your Resources/LayerPermissions from deletion.
+                                       </p>
+                                    </div>
+                                 </div>
                                  <h2 id="aws-resource-lambda-layerversionpermission-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -56,13 +64,14 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Maximum</em>: <code class="code">22</code></p>
                                           <p><em>Pattern</em>: <code class="code">lambda:GetLayerVersion</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-lambda-layerversionpermission-layerversionarn"></a><span class="term"><code class="code">LayerVersionArn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The Amazon Resource Name (ARN) of the layer.</p>
+                                          <p>The name or Amazon Resource Name (ARN) of the layer.</p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -84,13 +93,18 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Maximum</em>: <code class="code">34</code></p>
                                           <p><em>Pattern</em>: <code class="code">o-[a-z0-9]<span>{</span>10,32}</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-lambda-layerversionpermission-principal"></a><span class="term"><code class="code">Principal</code></span></dt>
                                        <dd>
                                           
-                                          <p>An account ID, or <code class="code">*</code> to grant permission to all AWS accounts.
+                                          <p>An account ID, or <code class="code">*</code> to grant layer usage permission to all
+                                             accounts in an organization, or all AWS accounts (if <code class="code">organizationId</code> is not specified).
+                                             For the last case, make sure that you really do want all AWS accounts to have usage
+                                             permission to this layer.
+                                             
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -143,7 +157,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

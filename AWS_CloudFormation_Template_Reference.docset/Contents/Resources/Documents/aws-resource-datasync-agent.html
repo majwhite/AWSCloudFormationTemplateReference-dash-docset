@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-datasync-agent">AWS::DataSync::Agent</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The <code class="code">AWS::DataSync::Agent</code> resource specifies an AWS DataSync agent to be deployed and activated on your host.
+                                    The activation
+                                    process associates your agent with your account. In the activation process, you specify
+                                    information such as the AWS Region that you want to activate the agent in. You activate
+                                    the
+                                    agent in the AWS Region where your target locations (in Amazon S3, Amazon EFS, or
+                                    Amazon FSx for Windows) reside. Your
+                                    tasks are created in this AWS Region.
+                                 </p>
+                                 <p>You can activate the agent in a VPC (virtual private cloud) or provide the agent access
+                                    to
+                                    a VPC endpoint so you can run tasks without going over the public internet.
+                                 </p>
+                                 <p>You can specify an agent to be used for more than one location. If a task uses multiple
+                                    agents, all of
+                                    them need to have status AVAILABLE for the task to run. If you use multiple agents
+                                    for a
+                                    source location, the status of all the agents must be AVAILABLE for the task to run.
+                                    
+                                 </p>
+                                 <p>For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/activating-agent.html">Activating
+                                       an Agent</a> in the <em>AWS DataSync User Guide</em>.
+                                 </p>
+                                 <p>Agents are automatically updated by AWS on a regular basis, using a mechanism that
+                                    ensures minimal interruption to your tasks.
+                                 </p>
+                                 <p></p>
+                                 <h2 id="aws-resource-datasync-agent-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-datasync-agent-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::DataSync::Agent&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-datasync-agent-activationkey">ActivationKey</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-datasync-agent-agentname">AgentName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-datasync-agent-securitygrouparns">SecurityGroupArns</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+      &quot;<a href="#cfn-datasync-agent-subnetarns">SubnetArns</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
+      &quot;<a href="#cfn-datasync-agent-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
+      &quot;<a href="#cfn-datasync-agent-vpcendpointid">VpcEndpointId</a>&quot; : <code class="replaceable">String</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-datasync-agent-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::DataSync::Agent
+Properties: 
+  <a href="#cfn-datasync-agent-activationkey">ActivationKey</a>: <code class="replaceable">String</code>
+  <a href="#cfn-datasync-agent-agentname">AgentName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-datasync-agent-securitygrouparns">SecurityGroupArns</a>: <code class="replaceable">
+    - String</code>
+  <a href="#cfn-datasync-agent-subnetarns">SubnetArns</a>: <code class="replaceable">
+    - String</code>
+  <a href="#cfn-datasync-agent-tags">Tags</a>: <code class="replaceable">
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
+  <a href="#cfn-datasync-agent-vpcendpointid">VpcEndpointId</a>: <code class="replaceable">String</code>
+</code></pre></div>
+                                 <h2 id="aws-resource-datasync-agent-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-datasync-agent-activationkey"></a><span class="term"><code class="code">ActivationKey</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Your agent activation key. You can get the activation key either by sending an HTTP
+                                             GET
+                                             request with redirects that enable you to get the agent IP address (port 80). Alternatively,
+                                             you can get it from the DataSync console.
+                                          </p>
+                                          
+                                          <p>The redirect URL returned in the response provides you the activation key for your
+                                             agent in the query string parameter <code class="code">activationKey</code>. It might also include other
+                                             activation-related parameters; however, these are merely defaults. The arguments you
+                                             pass to
+                                             this API call determine the actual configuration of your agent.
+                                          </p>
+                                          
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/activating-agent.html">Creating and activating an agent</a> in the <em>
+                                                AWS DataSync User
+                                                Guide.</em>
+                                             
+                                          </p>
+                                          
+                                          
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Maximum</em>: <code class="code">29</code></p>
+                                          <p><em>Pattern</em>: <code class="code">[A-Z0-9]<span>{</span>5}(-[A-Z0-9]<span>{</span>5})<span>{</span>4}</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-datasync-agent-agentname"></a><span class="term"><code class="code">AgentName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name you configured for your agent. This value is a text reference that is used
+                                             to
+                                             identify the agent in the console.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">256</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^[a-zA-Z0-9\s+=._:@/-]+$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-datasync-agent-securitygrouparns"></a><span class="term"><code class="code">SecurityGroupArns</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ARNs of the security groups used to protect your data transfer task subnets. See
+                                             <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_Ec2Config.html#DataSync-Type-Ec2Config-SecurityGroupArns">SecurityGroupArns</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Maximum</em>: <code class="code">1</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-datasync-agent-subnetarns"></a><span class="term"><code class="code">SubnetArns</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Names (ARNs) of the subnets in which DataSync will create elastic
+                                             network interfaces for each data transfer task. The agent that runs a task must be
+                                             private.
+                                             When you start a task that is associated with an agent created in a VPC, or one that
+                                             has
+                                             access to an IP address in a VPC, then the task is also private. In this case, DataSync
+                                             creates four network interfaces for each task in your subnet. For a data transfer
+                                             to work, the
+                                             agent must be able to route to all these four network interfaces.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Maximum</em>: <code class="code">1</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-datasync-agent-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The key-value pair that represents the tag that you want to associate with the agent.
+                                             The value can be an empty string. This value helps you manage, filter, and search
+                                             for your
+                                             agents.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>Valid characters for key and value are letters, spaces, and numbers representable
+                                                   in
+                                                   UTF-8 format, and the following special characters: + - = . _ : / @. 
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                                          <p><em>Maximum</em>: <code class="code">50</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-datasync-agent-vpcendpointid"></a><span class="term"><code class="code">VpcEndpointId</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ID of the VPC (virtual private cloud) endpoint that the agent has access to. This
+                                             is
+                                             the client-side VPC endpoint, also called a PrivateLink. If you don&apos;t have a PrivateLink
+                                             VPC
+                                             endpoint, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html#create-endpoint-service">Creating a VPC Endpoint Service Configuration</a> in the <em>Amazon VPC User Guide</em>.
+                                          </p>
+                                          
+                                          
+                                          <p>For more information about activating your agent in a private network based on Amazon
+                                             VPC, 
+                                             see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/datasync-in-vpc.html">Using AWS DataSync in a Virtual Private Cloud</a> in the <em>AWS DataSync User
+                                                Guide.</em></p>
+                                          
+                                          <p>VPC endpoint ID looks like this: <code class="code">vpce-01234d5aff67890e1</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Pattern</em>: <code class="code">^vpce-[0-9a-f]<span>{</span>17}$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-datasync-agent-return-values">Return values</h2>
+                                 <h3 id="aws-resource-datasync-agent-return-values-ref">Ref</h3>
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> 
+                                    function, <code class="code">Ref</code> returns the agent ARN. For example:
+                                 </p>
+                                 <p><code class="code">arn:aws:datasync:us-east-2:111222333444:agent/agent-0b0addbeef44baca3</code></p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-datasync-agent-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute 
+                                    of this type. The following are the available attributes and sample return values.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, 
+                                    see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-datasync-agent-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="AgentArn-fn::getatt"></a><span class="term"><code class="code">AgentArn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the agent. Use the <code class="code">ListAgents</code> operation
+                                             to return a list of agents for your account and AWS Region.
+                                          </p>
+                                          
+                                       </dd>
+                                       <dt><a id="EndpointType-fn::getatt"></a><span class="term"><code class="code">EndpointType</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint,
+                                             the agent is not accessible over the public internet.
+                                          </p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-datasync-agent--examples">Examples</h2>
+                                 <p></p>
+                                 <h3 id="aws-resource-datasync-agent--examples--DataSync_Agent">DataSync Agent</h3>
+                                 <p>The following example specifies a DataSync agent, named 
+                                    <code class="code">MyAgent</code>. The agent activation key
+                                    is included in the template.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-datasync-agent--examples--DataSync_Agent--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">
+<span>{</span>
+  &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+  &quot;Description&quot;: &quot;Specifies a DataSync agent&quot;,
+  &quot;Resources&quot;: 
+    <span>{</span>
+      &quot;Agent&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::DataSync::Agent&quot;,
+        &quot;Properties&quot;: <span>{</span>
+          &quot;ActivationKey&quot;: &quot;AAAAA-7AAAA-GG7MC-3I9R3-27COD&quot;,
+          &quot;AgentName&quot;: &quot;MyAgent&quot;
+          }
+      }
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-datasync-agent--examples--DataSync_Agent--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">
+AWSTemplateFormatVersion: 2010-09-09
+Description: Specifies a DataSync agent
+Resources:
+  Agent:
+    Type: AWS::DataSync::Agent
+    Properties:
+      ActivationKey: AAAAA-7AAAA-GG7MC-3I9R3-27COD
+      AgentName: MyAgent
+</code></pre></div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

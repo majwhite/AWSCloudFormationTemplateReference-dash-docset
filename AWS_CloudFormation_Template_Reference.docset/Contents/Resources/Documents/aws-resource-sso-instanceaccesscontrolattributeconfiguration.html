@@ -19,15 +19,26 @@
                                  <p>Enables the attribute-based access control (ABAC) feature for the specified AWS SSO
                                     instance. You can also specify new attributes to add to your ABAC configuration during
                                     the
-                                    enabling process. For more information about ABAC, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <em>AWS SSO User Guide</em>.
+                                    enabling process. For more information about ABAC, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in
+                                    the <em>AWS SSO User Guide</em>.
                                  </p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>The <code class="code">InstanceAccessControlAttributeConfiguration</code> property has been
+                                          deprecated but is still supported for backwards compatibility purposes. We recommend
+                                          that you use the <code class="code">AccessControlAttributes</code> property instead.
+                                       </p>
+                                    </div>
+                                 </div>
                                  <h2 id="aws-resource-sso-instanceaccesscontrolattributeconfiguration-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-resource-sso-instanceaccesscontrolattributeconfiguration-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::SSO::InstanceAccessControlAttributeConfiguration&quot;,
   &quot;Properties&quot; : <span>{</span>
-      &quot;<a href="#cfn-sso-instanceaccesscontrolattributeconfiguration-instanceaccesscontrolattributeconfiguration">InstanceAccessControlAttributeConfiguration</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-sso-instanceaccesscontrolattributeconfiguration-accesscontrolattributes">AccessControlAttributes</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-sso-instanceaccesscontrolattributeconfiguration-accesscontrolattribute.html">AccessControlAttribute</a>, ... ]</code>,
       &quot;<a href="#cfn-sso-instanceaccesscontrolattributeconfiguration-instancearn">InstanceArn</a>&quot; : <code class="replaceable">String</code>
     }
 }
@@ -35,21 +46,24 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-sso-instanceaccesscontrolattributeconfiguration-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::SSO::InstanceAccessControlAttributeConfiguration
 Properties: 
-  <a href="#cfn-sso-instanceaccesscontrolattributeconfiguration-instanceaccesscontrolattributeconfiguration">InstanceAccessControlAttributeConfiguration</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-sso-instanceaccesscontrolattributeconfiguration-accesscontrolattributes">AccessControlAttributes</a>: <code class="replaceable">
+    - <a href="./aws-properties-sso-instanceaccesscontrolattributeconfiguration-accesscontrolattribute.html">AccessControlAttribute</a></code>
   <a href="#cfn-sso-instanceaccesscontrolattributeconfiguration-instancearn">InstanceArn</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-resource-sso-instanceaccesscontrolattributeconfiguration-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
-                                       <dt><a id="cfn-sso-instanceaccesscontrolattributeconfiguration-instanceaccesscontrolattributeconfiguration"></a><span class="term"><code class="code">InstanceAccessControlAttributeConfiguration</code></span></dt>
+                                       <dt><a id="cfn-sso-instanceaccesscontrolattributeconfiguration-accesscontrolattributes"></a><span class="term"><code class="code">AccessControlAttributes</code></span></dt>
                                        <dd>
                                           
-                                          <p>Specifies the attributes to add to your ABAC configuration.</p>
+                                          <p>Lists the attributes that are configured for ABAC in the specified AWS SSO
+                                             instance.
+                                          </p>
                                           
-                                          <p><em>Required</em>: Yes
+                                          <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: Json
-                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-sso-instanceaccesscontrolattributeconfiguration-accesscontrolattribute.html">AccessControlAttribute</a></p>
+                                          <p><em>Maximum</em>: <code class="code">50</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-sso-instanceaccesscontrolattributeconfiguration-instancearn"></a><span class="term"><code class="code">InstanceArn</code></span></dt>
@@ -64,60 +78,61 @@ Properties:
                                           <p><em>Minimum</em>: <code class="code">10</code></p>
                                           <p><em>Maximum</em>: <code class="code">1224</code></p>
                                           <p><em>Pattern</em>: <code class="code">arn:aws:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]<span>{</span>16}</code></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-sso-instanceaccesscontrolattributeconfiguration-return-values">Return values</h2>
                                  <h3 id="aws-resource-sso-instanceaccesscontrolattributeconfiguration-return-values-ref">Ref</h3>
                                  <p>Specifies the AWS SSO identity store attributes to add to your ABAC configuration.
-                                    When using an external identity provider as an identity source, you can pass attributes
-                                    through the SAML assertion. Doing so provides an alternative to configuring attributes
-                                    from
+                                    When
+                                    using an external identity provider as an identity source, you can pass attributes
+                                    through
+                                    the SAML assertion. Doing so provides an alternative to configuring attributes from
                                     the AWS SSO identity store. If a SAML assertion passes any of these attributes, AWS
-                                    SSO will replace the attribute value with the value from the AWS SSO identity
-                                    store.
+                                    SSO will
+                                    replace the attribute value with the value from the AWS SSO identity store.
                                  </p>
                                  <h2 id="aws-resource-sso-instanceaccesscontrolattributeconfiguration--examples">Examples</h2>
                                  <p></p>
-                                 <h3 id="aws-resource-sso-instanceaccesscontrolattributeconfiguration--examples--Enabling_and_configuring_attributes_used_for_access_control_in_AWS_SSO">Enabling and configuring attributes used for access control in AWS SSO</h3>
-                                 <p>The following example enables ABAC in AWS SSO and creates a new attribute key <code class="code">CostCenter</code> that is mapped to the Value <code class="code">&#x201C;$<span>{</span>path:enterprise.costCenter}&#x201D;</code> which is coming from your identity source.
+                                 <h3 id="aws-resource-sso-instanceaccesscontrolattributeconfiguration--examples--Enabling_and_configuring_attributes_used_for_access_control_in_">Enabling and configuring attributes used for access control in AWS SSO</h3>
+                                 <p>The following example enables ABAC in AWS SSO and creates a new attribute key
+                                    <code class="code">CostCenter</code> that is mapped to the Value
+                                    <code class="code">&#x201C;$<span>{</span>path:enterprise.costCenter}&#x201D;</code> which is coming from your identity
+                                    source.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-sso-instanceaccesscontrolattributeconfiguration--examples--Enabling_and_configuring_attributes_used_for_access_control_in_AWS_SSO--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-sso-instanceaccesscontrolattributeconfiguration--examples--Enabling_and_configuring_attributes_used_for_access_control_in_--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
     &quot;Resources&quot;: <span>{</span>
         &quot;ABAC&quot;: <span>{</span>
             &quot;Type&quot;: &quot;AWS::SSO::InstanceAccessControlAttributeConfiguration&quot;,
             &quot;Properties&quot;: <span>{</span>
                 &quot;InstanceArn&quot;: &quot;arn:aws:sso:::instance/ssoins-instanceId&quot;,
-                &quot;InstanceAccessControlAttributeConfiguration&quot;: <span>{</span>
-                    &quot;AccessControlAttributes&quot;: [
-                        <span>{</span>
-                            &quot;Key&quot;: &quot;CostCenter&quot;,
-                            &quot;Value&quot;: <span>{</span>
-                                &quot;Source&quot;: [
-                                    &quot;$<span>{</span>path:enterprise.costCenter}&quot;
-                                ]
-                            }
+                &quot;AccessControlAttributes&quot;: [
+                    <span>{</span>
+                        &quot;Key&quot;: &quot;CostCenter&quot;,
+                        &quot;Value&quot;: <span>{</span>
+                            &quot;Source&quot;: [
+                                &quot;$<span>{</span>path:enterprise.costCenter}&quot;
+                            ]
                         }
-                    ]
-                }
+                    }
+                ]
             }
         }
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-sso-instanceaccesscontrolattributeconfiguration--examples--Enabling_and_configuring_attributes_used_for_access_control_in_AWS_SSO--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+                                    <h4 id="aws-resource-sso-instanceaccesscontrolattributeconfiguration--examples--Enabling_and_configuring_attributes_used_for_access_control_in_--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
   ABAC:
-    Type: AWS::SSO::InstanceAccessControlAttributeConfiguration
+    Type: &apos;AWS::SSO::InstanceAccessControlAttributeConfiguration&apos;
     Properties:
       InstanceArn: &apos;arn:aws:sso:::instance/ssoins-instanceId&apos;
-      InstanceAccessControlAttributeConfiguration:
-        AccessControlAttributes:
-          - Key: &apos;CostCenter&apos;
-            Value:
-              Source:
-                - &apos;$<span>{</span>path:enterprise.costCenter}&apos;</code></pre></div>
+      AccessControlAttributes:
+        - Key: CostCenter
+          Value:
+            Source:
+              - &apos;$<span>{</span>path:enterprise.costCenter}&apos;</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -128,7 +143,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

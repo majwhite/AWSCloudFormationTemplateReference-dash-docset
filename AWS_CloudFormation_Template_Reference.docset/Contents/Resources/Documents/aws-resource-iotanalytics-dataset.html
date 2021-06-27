@@ -18,10 +18,9 @@
                                  </div>
                                  <p>The AWS::IoTAnalytics::Dataset resource stores data retrieved from a data store by
                                     applying a
-                                    &quot;queryAction&quot; (an SQL query) or a &quot;containerAction&quot; (executing a containerized application).
-                                    The data set can be populated manually by calling &quot;CreateDatasetContent&quot; or automatically
-                                    according 
-                                    to a &quot;trigger&quot; you specify. For more information, see
+                                    <code class="code">queryAction</code> (an SQL query) or a <code class="code">containerAction</code> (executing a containerized application).
+                                    The data set can be populated manually by calling <code class="code">CreateDatasetContent</code> or automatically according 
+                                    to a <code class="code">trigger</code> you specify. For more information, see
                                     <a href="https://docs.aws.amazon.com/iotanalytics/latest/userguide/welcome.html#aws-iot-analytics-how">
                                        How to Use AWS IoT Analytics</a> in the <em>AWS IoT Analytics User Guide</em>.
                                     
@@ -35,6 +34,7 @@
       &quot;<a href="#cfn-iotanalytics-dataset-actions">Actions</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-iotanalytics-dataset-action.html">Action</a>, ... ]</code>,
       &quot;<a href="#cfn-iotanalytics-dataset-contentdeliveryrules">ContentDeliveryRules</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-iotanalytics-dataset-datasetcontentdeliveryrule.html">DatasetContentDeliveryRule</a>, ... ]</code>,
       &quot;<a href="#cfn-iotanalytics-dataset-datasetname">DatasetName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-iotanalytics-dataset-latedatarules">LateDataRules</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-iotanalytics-dataset-latedatarule.html">LateDataRule</a>, ... ]</code>,
       &quot;<a href="#cfn-iotanalytics-dataset-retentionperiod">RetentionPeriod</a>&quot; : <code class="replaceable"><a href="./aws-properties-iotanalytics-dataset-retentionperiod.html">RetentionPeriod</a></code>,
       &quot;<a href="#cfn-iotanalytics-dataset-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
       &quot;<a href="#cfn-iotanalytics-dataset-triggers">Triggers</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-iotanalytics-dataset-trigger.html">Trigger</a>, ... ]</code>,
@@ -50,6 +50,8 @@ Properties:
   <a href="#cfn-iotanalytics-dataset-contentdeliveryrules">ContentDeliveryRules</a>: <code class="replaceable">
     - <a href="./aws-properties-iotanalytics-dataset-datasetcontentdeliveryrule.html">DatasetContentDeliveryRule</a></code>
   <a href="#cfn-iotanalytics-dataset-datasetname">DatasetName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-iotanalytics-dataset-latedatarules">LateDataRules</a>: <code class="replaceable">
+    - <a href="./aws-properties-iotanalytics-dataset-latedatarule.html">LateDataRule</a></code>
   <a href="#cfn-iotanalytics-dataset-retentionperiod">RetentionPeriod</a>: <code class="replaceable">
     <a href="./aws-properties-iotanalytics-dataset-retentionperiod.html">RetentionPeriod</a></code>
   <a href="#cfn-iotanalytics-dataset-tags">Tags</a>: <code class="replaceable">
@@ -65,7 +67,7 @@ Properties:
                                        <dt><a id="cfn-iotanalytics-dataset-actions"></a><span class="term"><code class="code">Actions</code></span></dt>
                                        <dd>
                                           
-                                          <p>The <code class="code">DatasetAction</code> objects that automatically create the data set
+                                          <p>The <code class="code">DatasetAction</code> objects that automatically create the dataset
                                              contents.
                                           </p>
                                           
@@ -91,7 +93,7 @@ Properties:
                                        <dt><a id="cfn-iotanalytics-dataset-datasetname"></a><span class="term"><code class="code">DatasetName</code></span></dt>
                                        <dd>
                                           
-                                          <p>The name of the data set.</p>
+                                          <p>The name of the dataset.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -102,10 +104,25 @@ Properties:
                                           <p><em>Pattern</em>: <code class="code">^[a-zA-Z0-9_]+$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
+                                       <dt><a id="cfn-iotanalytics-dataset-latedatarules"></a><span class="term"><code class="code">LateDataRules</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A list of data rules that send notifications to CloudWatch, when data arrives late.
+                                             To
+                                             specify <code class="code">lateDataRules</code>, the dataset must use a <a href="https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html">DeltaTimer</a>
+                                             filter.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-iotanalytics-dataset-latedatarule.html">LateDataRule</a></p>
+                                          <p><em>Maximum</em>: <code class="code">1</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-iotanalytics-dataset-retentionperiod"></a><span class="term"><code class="code">RetentionPeriod</code></span></dt>
                                        <dd>
                                           
-                                          <p>Optional. How long, in days, message data is kept for the data set.</p>
+                                          <p>Optional. How long, in days, message data is kept for the dataset.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -129,7 +146,7 @@ Properties:
                                        <dt><a id="cfn-iotanalytics-dataset-triggers"></a><span class="term"><code class="code">Triggers</code></span></dt>
                                        <dd>
                                           
-                                          <p>The <code class="code">DatasetTrigger</code> objects that specify when the data set is automatically
+                                          <p>The <code class="code">DatasetTrigger</code> objects that specify when the dataset is automatically
                                              updated.
                                           </p>
                                           
@@ -147,8 +164,8 @@ Properties:
                                              only the latest version plus the latest succeeded version (if they are different)
                                              are kept for
                                              the time period specified by the <code class="code">retentionPeriod</code> parameter. For more information,
-                                             see <a href="https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions">Keeping Multiple Versions of AWS IoT Analytics Data Sets</a> in the <em>AWS IoT
-                                                Analytics User Guide</em>.
+                                             see <a href="https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions">Keeping Multiple Versions of AWS IoT Analytics datasets</a> in the <em>
+                                                AWS IoT Analytics User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -479,8 +496,8 @@ Resources:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/iotanalytics/latest/userguide/welcome.html#aws-iot-analytics-how">How to Use AWS IoT 
-                                                Analytics</a> in the <em>AWS IoT Analytics User Guide</em>
+                                             <a href="https://docs.aws.amazon.com/iotanalytics/latest/userguide/welcome.html#aws-iot-analytics-how">How to Use AWS IoT Analytics</a>
+                                             in the <em>AWS IoT Analytics User Guide</em>
                                              
                                           </p>
                                           
@@ -506,7 +523,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

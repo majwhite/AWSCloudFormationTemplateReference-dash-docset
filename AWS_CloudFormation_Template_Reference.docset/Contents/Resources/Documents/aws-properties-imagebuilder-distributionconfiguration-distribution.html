@@ -17,19 +17,45 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p> The distribution configuration distribution defines the settings for a specific Region
-                                    in the Distribution Configuration. 
+                                    			in the Distribution Configuration. You must specify whether the distribution is
+                                    for an AMI 
+                                    			or a container image. To do so, include exactly one of the following data types
+                                    for your 
+                                    			distribution:
                                  </p>
+                                 <div class="itemizedlist">
+                                    			 
+                                    			 
+                                    		
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          				
+                                          <p>amiDistributionConfiguration</p>
+                                          			
+                                       </li>
+                                       <li class="listitem">
+                                          				
+                                          <p>containerDistributionConfiguration</p>
+                                          			
+                                       </li>
+                                    </ul>
+                                 </div>
                                  <h2 id="aws-properties-imagebuilder-distributionconfiguration-distribution-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-properties-imagebuilder-distributionconfiguration-distribution-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;<a href="#cfn-imagebuilder-distributionconfiguration-distribution-amidistributionconfiguration">AmiDistributionConfiguration</a>&quot; : <code class="replaceable">Json</code>,
+  &quot;<a href="#cfn-imagebuilder-distributionconfiguration-distribution-containerdistributionconfiguration">ContainerDistributionConfiguration</a>&quot; : <code class="replaceable">Json</code>,
+  &quot;<a href="#cfn-imagebuilder-distributionconfiguration-distribution-launchtemplateconfigurations">LaunchTemplateConfigurations</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-imagebuilder-distributionconfiguration-launchtemplateconfiguration.html">LaunchTemplateConfiguration</a>, ... ]</code>,
   &quot;<a href="#cfn-imagebuilder-distributionconfiguration-distribution-licenseconfigurationarns">LicenseConfigurationArns</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
   &quot;<a href="#cfn-imagebuilder-distributionconfiguration-distribution-region">Region</a>&quot; : <code class="replaceable">String</code>
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-properties-imagebuilder-distributionconfiguration-distribution-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-imagebuilder-distributionconfiguration-distribution-amidistributionconfiguration">AmiDistributionConfiguration</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-imagebuilder-distributionconfiguration-distribution-containerdistributionconfiguration">ContainerDistributionConfiguration</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-imagebuilder-distributionconfiguration-distribution-launchtemplateconfigurations">LaunchTemplateConfigurations</a>: <code class="replaceable">
+    - <a href="./aws-properties-imagebuilder-distributionconfiguration-launchtemplateconfiguration.html">LaunchTemplateConfiguration</a></code>
   <a href="#cfn-imagebuilder-distributionconfiguration-distribution-licenseconfigurationarns">LicenseConfigurationArns</a>: <code class="replaceable">
     - String</code>
   <a href="#cfn-imagebuilder-distributionconfiguration-distribution-region">Region</a>: <code class="replaceable">String</code>
@@ -39,25 +65,52 @@
                                     <dl>
                                        <dt><a id="cfn-imagebuilder-distributionconfiguration-distribution-amidistributionconfiguration"></a><span class="term"><code class="code">AmiDistributionConfiguration</code></span></dt>
                                        <dd>
-                                          
+                                          		
                                           <p> The specific AMI settings, such as launch permissions and AMI tags. For details,
-                                             see example schema below.
+                                             
+                                             			see example schema below.
                                           </p>
-                                          
+                                          	
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Json
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
-                                       <dt><a id="cfn-imagebuilder-distributionconfiguration-distribution-licenseconfigurationarns"></a><span class="term"><code class="code">LicenseConfigurationArns</code></span></dt>
+                                       <dt><a id="cfn-imagebuilder-distributionconfiguration-distribution-containerdistributionconfiguration"></a><span class="term"><code class="code">ContainerDistributionConfiguration</code></span></dt>
+                                       <dd>
+                                          		
+                                          <p>Container distribution settings for encryption, licensing, and sharing 
+                                             			in a specific Region. For details, see example schema below.
+                                          </p>
+                                          	
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Json
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-imagebuilder-distributionconfiguration-distribution-launchtemplateconfigurations"></a><span class="term"><code class="code">LaunchTemplateConfigurations</code></span></dt>
                                        <dd>
                                           
-                                          <p> The License Manager Configuration to associate with the AMI in the specified Region.
-                                             For more information, see the <a href="https://docs.aws.amazon.com/license-manager/latest/APIReference/API_LicenseConfiguration.html">
-                                                LicenseConfiguration API</a>.
+                                          <p>A group of launchTemplateConfiguration settings that apply to image distribution 
+                                             for specified accounts.
                                           </p>
                                           
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-imagebuilder-distributionconfiguration-launchtemplateconfiguration.html">LaunchTemplateConfiguration</a></p>
+                                          <p><em>Maximum</em>: <code class="code">100</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-imagebuilder-distributionconfiguration-distribution-licenseconfigurationarns"></a><span class="term"><code class="code">LicenseConfigurationArns</code></span></dt>
+                                       <dd>
+                                          		
+                                          <p> The License Manager Configuration to associate with the AMI in the specified Region.
+                                             			For more information, see the <a href="https://docs.aws.amazon.com/license-manager/latest/APIReference/API_LicenseConfiguration.html">
+                                                				LicenseConfiguration API</a>.
+                                          </p>
+                                          	
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of String
@@ -67,11 +120,11 @@
                                        </dd>
                                        <dt><a id="cfn-imagebuilder-distributionconfiguration-distribution-region"></a><span class="term"><code class="code">Region</code></span></dt>
                                        <dd>
-                                          
+                                          		
                                           <p> The target Region for the Distribution Configuration. For example,
-                                             <code class="code">eu-west-1</code>. 
+                                             			<code class="code">eu-west-1</code>.
                                           </p>
-                                          
+                                          	
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
@@ -86,8 +139,9 @@
                                  <p></p>
                                  <h3 id="aws-properties-imagebuilder-distributionconfiguration-distribution--examples--Example_AmiDistributionConfiguration_schema">Example AmiDistributionConfiguration schema</h3>
                                  <p>The following example shows the schema for the AmiDistributionConfiguration
-                                    property in both YAML and JSON format. To make an AMI public, set the launch permission
-                                    authorized accounts to <code class="code">all</code>. See the examples for making an AMI public at <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html">EC2 ModifyImageAttribute</a>. 
+                                    property in both YAML and JSON format. To make an AMI public, set the launch 
+                                    permission authorized accounts to <code class="code">all</code>. See the examples for 
+                                    	making an AMI public at <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html">EC2 ModifyImageAttribute</a>.
                                  </p>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h4 id="aws-properties-imagebuilder-distributionconfiguration-distribution--examples--Example_AmiDistributionConfiguration_schema--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AmiDistributionConfiguration:
@@ -130,7 +184,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

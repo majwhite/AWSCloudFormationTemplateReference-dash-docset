@@ -29,7 +29,7 @@
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                     <div class="awsdocs-note-text">
-                                       <p>Limitations apply to RDS Proxy, including DB engine version limitations and AWS
+                                       <p>Limitations apply to RDS Proxy, including DB engine version limitations and AWS 
                                           Region limitations.
                                        </p>
                                        <p>For information about limitations that apply to RDS Proxy for Amazon RDS, see
@@ -249,13 +249,19 @@ Properties:
                                           <p>The writer endpoint for the RDS DB instance or Aurora DB cluster.</p>
                                           
                                        </dd>
+                                       <dt><a id="VpcId-fn::getatt"></a><span class="term"><code class="code">VpcId</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The VPC ID to associate with the DB proxy.</p>
+                                          
+                                       </dd>
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-rds-dbproxy--examples">Examples</h2>
-                                 <h3 id="aws-resource-rds-dbproxy--examples--Creating_a_DB_Proxy_and_registering_a_DB_instance">Creating a DB Proxy and registering a DB instance</h3>
+                                 <h3 id="aws-resource-rds-dbproxy--examples--Creating_a_DB_proxy_and_registering_a_DB_instance">Creating a DB proxy and registering a DB instance</h3>
                                  <p>The following example creates a DB proxy and registers a DB instance.</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-rds-dbproxy--examples--Creating_a_DB_Proxy_and_registering_a_DB_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-rds-dbproxy--examples--Creating_a_DB_proxy_and_registering_a_DB_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
     &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
     &quot;Parameters&quot;: <span>{</span>
         &quot;ProxyName&quot;: <span>{</span>
@@ -325,8 +331,8 @@ Properties:
                 ],
                 &quot;TargetGroupName&quot;: &quot;default&quot;,
                 &quot;ConnectionPoolConfigurationInfo&quot;: <span>{</span>
-                    &quot;MaxConnectionsPercent&quot;: 12,
-                    &quot;MaxIdleConnectionsPercent&quot;: 11,
+                    &quot;MaxConnectionsPercent&quot;: 100,
+                    &quot;MaxIdleConnectionsPercent&quot;: 50,
                     &quot;ConnectionBorrowTimeout&quot;: 120
                 }
             }
@@ -334,7 +340,7 @@ Properties:
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-rds-dbproxy--examples--Creating_a_DB_Proxy_and_registering_a_DB_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+                                    <h4 id="aws-resource-rds-dbproxy--examples--Creating_a_DB_proxy_and_registering_a_DB_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   ProxyName:
     Type: String
@@ -373,8 +379,8 @@ Resources:
       DBInstanceIdentifiers: [!Ref InstanceName]
       TargetGroupName: default
       ConnectionPoolConfigurationInfo:
-          MaxConnectionsPercent: 12
-          MaxIdleConnectionsPercent: 11
+          MaxConnectionsPercent: 100
+          MaxIdleConnectionsPercent: 50
           ConnectionBorrowTimeout: 120
 </code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
@@ -387,7 +393,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -31,6 +31,7 @@
       &quot;<a href="#cfn-codebuild-project-badgeenabled">BadgeEnabled</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-codebuild-project-buildbatchconfig">BuildBatchConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-codebuild-project-projectbuildbatchconfig.html">ProjectBuildBatchConfig</a></code>,
       &quot;<a href="#cfn-codebuild-project-cache">Cache</a>&quot; : <code class="replaceable"><a href="./aws-properties-codebuild-project-projectcache.html">ProjectCache</a></code>,
+      &quot;<a href="#cfn-codebuild-project-concurrentbuildlimit">ConcurrentBuildLimit</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-codebuild-project-description">Description</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-codebuild-project-encryptionkey">EncryptionKey</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-codebuild-project-environment">Environment</a>&quot; : <code class="replaceable"><a href="./aws-properties-codebuild-project-environment.html">Environment</a></code>,
@@ -61,6 +62,7 @@ Properties:
     <a href="./aws-properties-codebuild-project-projectbuildbatchconfig.html">ProjectBuildBatchConfig</a></code>
   <a href="#cfn-codebuild-project-cache">Cache</a>: <code class="replaceable">
     <a href="./aws-properties-codebuild-project-projectcache.html">ProjectCache</a></code>
+  <a href="#cfn-codebuild-project-concurrentbuildlimit">ConcurrentBuildLimit</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-codebuild-project-description">Description</a>: <code class="replaceable">String</code>
   <a href="#cfn-codebuild-project-encryptionkey">EncryptionKey</a>: <code class="replaceable">String</code>
   <a href="#cfn-codebuild-project-environment">Environment</a>: <code class="replaceable">
@@ -164,6 +166,23 @@ Properties:
                                           <p><em>Type</em>: <a href="./aws-properties-codebuild-project-projectcache.html">ProjectCache</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-codebuild-project-concurrentbuildlimit"></a><span class="term"><code class="code">ConcurrentBuildLimit</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The maximum number of concurrent builds that are allowed for this project.</p>
+                                          
+                                          <p>New builds are only started if the current number of builds is less than or equal
+                                             to this limit. 
+                                             If the current build count meets this limit, new builds are throttled and are not
+                                             run.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-codebuild-project-description"></a><span class="term"><code class="code">Description</code></span></dt>
                                        <dd>
                                           
@@ -180,33 +199,25 @@ Properties:
                                        <dt><a id="cfn-codebuild-project-encryptionkey"></a><span class="term"><code class="code">EncryptionKey</code></span></dt>
                                        <dd>
                                           
-                                          <p>
-                                             The alias or Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
-                                             
-                                             customer master key (CMK) that CodeBuild uses to encrypt the build output. If you
-                                             don&apos;t specify a 
-                                             value, CodeBuild uses the AWS-managed CMK for Amazon Simple Storage Service (Amazon
-                                             S3).
+                                          <p>The AWS Key Management Service customer master key (CMK) to be used for encrypting
+                                             the build output
+                                             artifacts.
                                           </p>
                                           
                                           <div class="awsdocs-note">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>
-                                                   You can use a cross-account KMS key to encrypt the build output artifacts if your
-                                                   service role 
-                                                   has permission to that key.
-                                                   
+                                                <p>You can use a cross-account KMS key to encrypt the build output artifacts if your
+                                                   service role has permission to that key. 
                                                 </p>
                                              </div>
                                           </div>
                                           
-                                          <p>
-                                             You can specify either the Amazon Resource Name (ARN) of the CMK or, if available,
-                                             the CMK&apos;s alias (using the 
-                                             format <code class="code">alias/<em>alias-name</em>
-                                                </code>).
+                                          <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available,
+                                             the CMK&apos;s alias (using
+                                             the format <code class="code">alias/&lt;alias-name&gt;</code>). If you don&apos;t specify a 
+                                             value, CodeBuild uses the managed CMK for Amazon Simple Storage Service (Amazon S3).
                                              
                                           </p>
                                           
@@ -250,8 +261,8 @@ Properties:
                                        <dt><a id="cfn-codebuild-project-logsconfig"></a><span class="term"><code class="code">LogsConfig</code></span></dt>
                                        <dd>
                                           
-                                          <p>Information about logs for the build project. A project can create logs in Amazon
-                                             CloudWatch Logs, an
+                                          <p>Information about logs for the build project. A project can create logs in CloudWatch
+                                             Logs, an
                                              S3 bucket, or both. 
                                           </p>
                                           
@@ -332,7 +343,7 @@ Properties:
                                        <dt><a id="cfn-codebuild-project-servicerole"></a><span class="term"><code class="code">ServiceRole</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild
+                                          <p>The ARN of the AWS Identity and Access Management role that enables AWS CodeBuild
                                              to interact with dependent AWS services
                                              on behalf of the AWS account.
                                           </p>
@@ -373,7 +384,7 @@ Properties:
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
                                                    
-                                                   <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>
+                                                   <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>
                                                    
                                                 </li>
                                                 <li class="listitem">
@@ -398,8 +409,7 @@ Properties:
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents
-                                                      the build input ZIP
+                                                   <p>For Amazon S3: the version ID of the object that represents the build input ZIP
                                                       file to use.
                                                    </p>
                                                    
@@ -412,7 +422,9 @@ Properties:
                                           </p>
                                           
                                           <p>For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html">Source Version Sample
-                                                with CodeBuild</a> in the <em>AWS CodeBuild User Guide</em>. 
+                                                with CodeBuild</a> in the <em>
+                                                AWS CodeBuild User Guide</em>. 
+                                             
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -968,7 +980,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

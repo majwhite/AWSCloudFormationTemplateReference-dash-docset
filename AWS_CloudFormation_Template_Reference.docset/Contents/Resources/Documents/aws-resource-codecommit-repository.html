@@ -49,20 +49,22 @@ Properties:
                                        <dt><a id="cfn-codecommit-repository-code"></a><span class="term"><code class="code">Code</code></span></dt>
                                        <dd>
                                           <p>Information about code to be committed to a repository after it is created in 
-                                             an AWS CloudFormation stack.
+                                             an AWS CloudFormation stack. Information about code is only used in resource creation.
+                                             Updates to a stack will not reflect changes made to code 
+                                             properties after initial resource creation.
+                                             
                                           </p>
                                           
                                           <div class="awsdocs-note">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>You can only use this property to add code when creating a repository with a CloudFormation
+                                                <p>You can only use this property to add code when creating a repository with a AWS CloudFormation
                                                    template at creation time. 
                                                    This property cannot be used for updating code to an existing repository.
                                                 </p>
                                              </div>
-                                          </div>
-                                          
+                                          </div> 
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-codecommit-repository-code.html">Code</a></p>
@@ -105,7 +107,8 @@ Properties:
                                                 <p>The repository name must be unique across the calling AWS account. Repository names
                                                    are limited to 100 alphanumeric, dash, and underscore characters, and cannot include
                                                    certain characters. For more information about the limits on repository names, see
-                                                   <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Limits</a> in the <em>AWS CodeCommit User Guide</em>. The
+                                                   <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Quotas</a> in the <em>
+                                                      AWS CodeCommit User Guide</em>. The
                                                    suffix .git is prohibited.
                                                 </p>
                                              </div>
@@ -193,7 +196,7 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-codecommit-repository--examples">Examples</h2>
-                                 <p>The following examples can help you create CodeCommit repositories using CloudFormation.</p>
+                                 <p>The following examples can help you create CodeCommit repositories using AWS CloudFormation.</p>
                                  <h3 id="aws-resource-codecommit-repository--examples--Example">Example</h3>
                                  <p>The following example creates a CodeCommit repository named <em>MyDemoRepo</em>.
                                     The newly created repository is populated with code stored in an Amazon S3 bucket
@@ -211,7 +214,7 @@ Properties:
                 &quot;BranchName&quot;: &quot;development&quot;,
                 &quot;S3&quot;: <span>{</span>
                     &quot;Bucket&quot;: &quot;MySourceCodeBucket&quot;,
-                    &quot;Key&quot;: &quot;MyKey&quot;,
+                    &quot;Keya&quot;: &quot;MyKey&quot;,
                     &quot;ObjectVersion&quot;: &quot;1&quot;
                 }
             }
@@ -233,7 +236,7 @@ Properties:
            </code></pre></div>
                                  <h3 id="aws-resource-codecommit-repository--examples--Example">Example</h3>
                                  <p>The following example creates a CodeCommit repository with a trigger for all events
-                                    in the main branch. 
+                                    in the <em>development</em> branch. 
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-codecommit-repository--examples--Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -244,13 +247,13 @@ Properties:
             &quot;RepositoryDescription&quot;: &quot;a description&quot;,
             &quot;Triggers&quot;: [
                 <span>{</span>
-                    &quot;Name&quot;: &quot;MainTrigger&quot;,
+                    &quot;Name&quot;: &quot;MyTrigger&quot;,
                     &quot;CustomData&quot;: &quot;Project ID 12345&quot;,
                     &quot;DestinationArn&quot;: <span>{</span>
                         &quot;Ref&quot;: &quot;SNSarn&quot;
                     },
                     &quot;Branches&quot;: [
-                        &quot;main&quot;
+                        &quot;development&quot;
                     ],
                     &quot;Events&quot;: [
                         &quot;all&quot;
@@ -267,12 +270,12 @@ Properties:
     RepositoryName: MyRepoName
     RepositoryDescription: a description
     Triggers:
-    - Name: MainTrigger
+    - Name: MyTrigger
       CustomData: Project ID 12345
       DestinationArn:
         Ref: SNSarn
       Branches:
-      - main
+      - development
       Events:
       - all</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
@@ -285,7 +288,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

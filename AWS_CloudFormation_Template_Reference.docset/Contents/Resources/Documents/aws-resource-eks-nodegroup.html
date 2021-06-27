@@ -17,9 +17,10 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>Creates a managed node group for an Amazon EKS cluster. You can only create a node
-                                    group for your cluster that is equal to the current Kubernetes version for the cluster.
-                                    All node groups are created with the latest AMI release version for the respective
-                                    minor
+                                    group
+                                    for your cluster that is equal to the current Kubernetes version for the cluster.
+                                    All
+                                    node groups are created with the latest AMI release version for the respective minor
                                     Kubernetes version of the cluster, unless you deploy a custom AMI using a launch
                                     template. For more information about using launch templates, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch
                                        template support</a>.
@@ -52,6 +53,8 @@
       &quot;<a href="#cfn-eks-nodegroup-scalingconfig">ScalingConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-eks-nodegroup-scalingconfig.html">ScalingConfig</a></code>,
       &quot;<a href="#cfn-eks-nodegroup-subnets">Subnets</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-eks-nodegroup-tags">Tags</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-eks-nodegroup-taints">Taints</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-eks-nodegroup-taint.html">Taint</a>, ... ]</code>,
+      &quot;<a href="#cfn-eks-nodegroup-updateconfig">UpdateConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-eks-nodegroup-updateconfig.html">UpdateConfig</a></code>,
       &quot;<a href="#cfn-eks-nodegroup-version">Version</a>&quot; : <code class="replaceable">String</code>
     }
 }
@@ -79,6 +82,10 @@ Properties:
   <a href="#cfn-eks-nodegroup-subnets">Subnets</a>: <code class="replaceable">
     - String</code>
   <a href="#cfn-eks-nodegroup-tags">Tags</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-eks-nodegroup-taints">Taints</a>: <code class="replaceable">
+    - <a href="./aws-properties-eks-nodegroup-taint.html">Taint</a></code>
+  <a href="#cfn-eks-nodegroup-updateconfig">UpdateConfig</a>: <code class="replaceable">
+    <a href="./aws-properties-eks-nodegroup-updateconfig.html">UpdateConfig</a></code>
   <a href="#cfn-eks-nodegroup-version">Version</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-resource-eks-nodegroup-properties">Properties</h2>
@@ -100,7 +107,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed values</em>: <code class="code">AL2_ARM_64 | AL2_x86_64 | AL2_x86_64_GPU</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">AL2_ARM_64 | AL2_x86_64 | AL2_x86_64_GPU | CUSTOM</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-eks-nodegroup-capacitytype"></a><span class="term"><code class="code">CapacityType</code></span></dt>
@@ -224,15 +231,14 @@ Properties:
                                           
                                           <p>The Amazon Resource Name (ARN) of the IAM role to associate with your node group.
                                              The Amazon EKS worker
-                                             node <code class="code">kubelet</code> daemon makes calls to AWS APIs on your behalf. Nodes
-                                             receive permissions for these API calls through an IAM instance profile and associated
-                                             policies. Before you can launch nodes and register them into a cluster, you must
-                                             create an IAM role for those nodes to use when they are launched. For more
-                                             information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html">Amazon EKS node IAM role</a> in the
-                                             <em>
+                                             node <code class="code">kubelet</code> daemon makes calls to AWS APIs on your behalf. Nodes receive
+                                             permissions for these API calls through an IAM instance profile and associated
+                                             policies. Before you can launch nodes and register them into a cluster, you must create
+                                             an IAM role for those nodes to use when they are launched. For more information, see
+                                             <a href="https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html">Amazon EKS node IAM role</a> in the <em>
                                                 <em>Amazon EKS User Guide</em>
-                                                </em>. If you specify <code class="code">launchTemplate</code>, then don&apos;t specify 
-                                             <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html">
+                                                </em>.
+                                             If you specify <code class="code">launchTemplate</code>, then don&apos;t specify  <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html">
                                                 <code class="code">IamInstanceProfile</code>
                                                 </a> in your launch template,
                                              or the node group  deployment will fail. For more information about using launch templates
@@ -248,12 +254,13 @@ Properties:
                                        <dt><a id="cfn-eks-nodegroup-releaseversion"></a><span class="term"><code class="code">ReleaseVersion</code></span></dt>
                                        <dd>
                                           
-                                          <p>The AMI version of the Amazon EKS-optimized AMI to use with your node group (for
-                                             example, <code class="code">1.14.7-<em>YYYYMMDD</em></code>). By default, the latest
+                                          <p>The AMI version of the Amazon EKS optimized AMI to use with your node group
+                                             (for example, <code class="code">1.14.7-<em>YYYYMMDD</em></code>). By default, the latest
                                              available AMI version for the node group&apos;s current Kubernetes version is used. For
                                              more
-                                             information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html">Amazon EKS-Optimized Linux
-                                                AMI Versions</a> in the <em>Amazon EKS User Guide</em>.
+                                             information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html">Amazon EKS optimized
+                                                Linux AMI Versions</a> in the <em>Amazon EKS User
+                                                Guide</em>.
                                           </p>
                                           
                                           <div class="awsdocs-note">
@@ -304,9 +311,7 @@ Properties:
                                        <dd>
                                           
                                           <p>The subnets to use for the Auto Scaling group that is created for your node group.
-                                             These subnets must have the tag key <code class="code">kubernetes.io/cluster/CLUSTER_NAME</code> with
-                                             a value of <code class="code">shared</code>, where <code class="code">CLUSTER_NAME</code> is replaced with the
-                                             name of your cluster. If you specify <code class="code">launchTemplate</code>, then don&apos;t specify  <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html">
+                                             If you specify <code class="code">launchTemplate</code>, then don&apos;t specify  <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html">
                                                 <code class="code">SubnetId</code>
                                                 </a> in your launch template, or the node group 
                                              deployment will fail. For more information about using launch templates with Amazon
@@ -335,6 +340,38 @@ Properties:
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-eks-nodegroup-taints"></a><span class="term"><code class="code">Taints</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Kubernetes taints to be applied to the nodes in the node group when they are
+                                             created. Effect is one of <code class="code">No_Schedule</code>, <code class="code">Prefer_No_Schedule</code>, or <code class="code">No_Execute</code>. Kubernetes taints
+                                             can be used together with tolerations to control how workloads are scheduled to your
+                                             nodes.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-eks-nodegroup-taint.html">Taint</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-eks-nodegroup-updateconfig"></a><span class="term"><code class="code">UpdateConfig</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The update configuration for the node group.</p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This CloudFormation property is not currently supported.</p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-eks-nodegroup-updateconfig.html">UpdateConfig</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-eks-nodegroup-version"></a><span class="term"><code class="code">Version</code></span></dt>
                                        <dd>
                                           
@@ -361,8 +398,8 @@ Properties:
                                     <code class="code"><span>{</span> &quot;Ref&quot;: &quot;myNodegroup&quot; }</code>
                                     
                                  </p>
-                                 <p>For the Amazon EKS node group <code class="code">myNodegroup</code>, Ref returns the physical
-                                    resource ID of the node group. For example,
+                                 <p>For the Amazon EKS node group <code class="code">myNodegroup</code>, Ref returns the
+                                    physical resource ID of the node group. For example,
                                     <code class="code">&lt;cluster_name&gt;/&lt;nodegroup_name&gt;</code>.
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
@@ -399,8 +436,8 @@ Properties:
                                  </div>
                                  <h2 id="aws-resource-eks-nodegroup--examples">Examples</h2>
                                  <h3 id="aws-resource-eks-nodegroup--examples--Create_a_managed_node_group">Create a managed node group</h3>
-                                 <p>The following example creates an Amazon EKS managed node group
-                                    called <code class="code">standard</code> in the <code class="code">prod</code> cluster.
+                                 <p>The following example creates an Amazon EKS managed node group named
+                                    <code class="code">standard</code> in the <code class="code">prod</code> cluster.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-eks-nodegroup--examples--Create_a_managed_node_group--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -462,8 +499,8 @@ Properties:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/eks/latest/APIReference/API_CreateNodegroup.html">CreateNodegroup</a> in the <em>Amazon EKS API Reference
-                                                </em>.
+                                             <a href="https://docs.aws.amazon.com/eks/latest/APIReference/API_CreateNodegroup.html">CreateNodegroup</a> in the <em>Amazon EKS API
+                                                Reference </em>.
                                           </p>
                                           
                                        </li>
@@ -479,7 +516,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

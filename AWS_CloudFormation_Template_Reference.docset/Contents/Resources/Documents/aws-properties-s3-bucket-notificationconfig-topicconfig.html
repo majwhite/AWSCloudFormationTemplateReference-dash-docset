@@ -43,7 +43,7 @@
                                           <p>The Amazon S3 bucket event about which to send notifications. For more information,
                                              see
                                              <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Supported
-                                                Event Types</a> in the <em>Amazon Simple Storage Service Developer Guide</em>.
+                                                Event Types</a> in the <em>Amazon S3 User Guide</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -82,19 +82,57 @@
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-properties-s3-bucket-notificationconfig-topicconfig--seealso">See also</h2>
-                                 <div class="itemizedlist">
-                                     
-                                    
-                                    <ul class="itemizedlist" type="disc">
-                                       <li class="listitem">
-                                          
-                                          <p>AWS::S3::Bucket <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--examples">Examples</a></p>
-                                          
-                                       </li>
-                                    </ul>
-                                 </div>
+                                 <h2 id="aws-properties-s3-bucket-notificationconfig-topicconfig--examples">Examples</h2>
                                  <p></p>
+                                 <h3 id="aws-properties-s3-bucket-notificationconfig-topicconfig--examples--Receive_S3_bucket_notifications_to_an_SNS_topic">Receive S3 bucket notifications to an SNS topic</h3>
+                                 <p>The following example template shows an Amazon S3 bucket with a notification
+                                    configuration that sends an event to the specified SNS topic when S3 has lost all
+                                    replicas
+                                    of an object.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-notificationconfig-topicconfig--examples--Receive_S3_bucket_notifications_to_an_SNS_topic--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;S3Bucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;AccessControl&quot;: &quot;Private&quot;,
+                &quot;NotificationConfiguration&quot;: <span>{</span>
+                    &quot;TopicConfigurations&quot;: [
+                        <span>{</span>
+                            &quot;Topic&quot;: &quot;arn:aws:sns:us-east-1:123456789012:TestTopic&quot;,
+                            &quot;Event&quot;: &quot;s3:ReducedRedundancyLostObject&quot;
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    &quot;Outputs&quot;: <span>{</span>
+        &quot;BucketName&quot;: <span>{</span>
+            &quot;Value&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;S3Bucket&quot;
+            },
+            &quot;Description&quot;: &quot;Name of the sample Amazon S3 bucket with a notification configuration.&quot;
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-notificationconfig-topicconfig--examples--Receive_S3_bucket_notifications_to_an_SNS_topic--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  S3Bucket:
+    Type: &apos;AWS::S3::Bucket&apos;
+    Properties:
+      AccessControl: Private
+      NotificationConfiguration:
+        TopicConfigurations:
+          - Topic: &apos;arn:aws:sns:us-east-1:123456789012:TestTopic&apos;
+            Event: &apos;s3:ReducedRedundancyLostObject&apos;
+Outputs:
+  BucketName:
+    Value: !Ref S3Bucket
+    Description: Name of the sample Amazon S3 bucket with a notification configuration.</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -105,7 +143,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -16,7 +16,9 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Specifies an Application Load Balancer or a Network Load Balancer.</p>
+                                 <p>Specifies an Application Load Balancer, a Network Load Balancer, or a Gateway Load
+                                    Balancer.
+                                 </p>
                                  <h2 id="aws-resource-elasticloadbalancingv2-loadbalancer-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -59,10 +61,10 @@ Properties:
                                        <dt><a id="cfn-elasticloadbalancingv2-loadbalancer-ipaddresstype"></a><span class="term"><code class="code">IpAddressType</code></span></dt>
                                        <dd>
                                           
-                                          <p>The IP address type. The possible values are <code class="code">ipv4</code> (for IPv4 addresses) 
-                                             and <code class="code">dualstack</code> (for IPv4 and IPv6 addresses). Internal load balancers must 
-                                             use <code class="code">ipv4</code>. You can&#x2019;t specify <code class="code">dualstack</code> for a load balancer with  
-                                             a UDP or TCP_UDP listener.
+                                          <p>The IP address type. The possible values are <code class="code">ipv4</code> (for IPv4 addresses) and
+                                             <code class="code">dualstack</code> (for IPv4 and IPv6 addresses). Internal load balancers must use
+                                             <code class="code">ipv4</code>. You can&#x2019;t specify <code class="code">dualstack</code> for a load balancer with a UDP
+                                             or TCP_UDP listener.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -87,16 +89,18 @@ Properties:
                                        <dd>
                                           
                                           <p>The name of the load balancer. This name must be unique per region per account, can
-                                             have a maximum of 32 characters, 
-                                             must contain only alphanumeric characters or hyphens, must not begin or end with a
-                                             hyphen, and must not begin with &quot;internal-&quot;.
+                                             have
+                                             a maximum of 32 characters, must contain only alphanumeric characters or hyphens,
+                                             must not
+                                             begin or end with a hyphen, and must not begin with &quot;internal-&quot;.
                                           </p>
                                           
                                           <p>If you don&apos;t specify a name, AWS CloudFormation generates a unique physical ID for
-                                             the load balancer. If you specify a name, 
-                                             you cannot perform updates that require replacement of this resource, but you can
-                                             perform other updates. To replace the resource, 
-                                             specify a new name.
+                                             the
+                                             load balancer. If you specify a name, you cannot perform updates that require replacement
+                                             of this resource, but you can perform other updates. To replace the resource, specify
+                                             a new
+                                             name.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -109,18 +113,16 @@ Properties:
                                        <dd>
                                           
                                           <p>The nodes of an Internet-facing load balancer have public IP addresses. The DNS name
-                                             of
-                                             an Internet-facing load balancer is publicly resolvable to the public IP addresses
-                                             of the
-                                             nodes. Therefore, Internet-facing load balancers can route requests from clients over
-                                             the
+                                             of an
+                                             Internet-facing load balancer is publicly resolvable to the public IP addresses of
+                                             the nodes.
+                                             Therefore, Internet-facing load balancers can route requests from clients over the
                                              internet.
                                           </p>
                                           
                                           <p>The nodes of an internal load balancer have only private IP addresses. The DNS name
-                                             of
-                                             an internal load balancer is publicly resolvable to the private IP addresses of the
-                                             nodes.
+                                             of an
+                                             internal load balancer is publicly resolvable to the private IP addresses of the nodes.
                                              Therefore, internal load balancers can route requests only from clients with access
                                              to the VPC
                                              for the load balancer.
@@ -152,8 +154,8 @@ Properties:
                                        <dd>
                                           
                                           <p>The IDs of the public subnets. You can specify only one subnet per Availability Zone.
-                                             
-                                             You must specify either subnets or subnet mappings.
+                                             You
+                                             must specify either subnets or subnet mappings.
                                           </p>
                                           
                                           <p>[Application Load Balancers] You must specify subnets from at least two Availability
@@ -178,8 +180,9 @@ Properties:
                                              can specify one IPv6 address per subnet.
                                           </p>
                                           
-                                          <p>[Gateway Load Balancers] You can specify subnets from one or more Availability
-                                             Zones. You cannot specify Elastic IP addresses for your subnets.
+                                          <p>[Gateway Load Balancers] You can specify subnets from one or more Availability Zones.
+                                             You
+                                             cannot specify Elastic IP addresses for your subnets.
                                           </p>
                                           
                                           <p><em>Required</em>: Conditional
@@ -190,19 +193,19 @@ Properties:
                                        <dt><a id="cfn-elasticloadbalancingv2-loadbalancer-subnets"></a><span class="term"><code class="code">Subnets</code></span></dt>
                                        <dd>
                                           
-                                          <p>The IDs of the subnets. You can specify only one subnet per Availability Zone. 
-                                             You must specify either subnets or subnet mappings.
+                                          <p>The IDs of the subnets. You can specify only one subnet per Availability Zone. You
+                                             must
+                                             specify either subnets or subnet mappings.
                                           </p>
                                           
                                           <p>[Application Load Balancers] You must specify subnets from at least two Availability
-                                             Zones. When you
-                                             specify subnets for an existing Application Load Balancer, they replace the previously
-                                             enabled subnets.
+                                             Zones. When you specify subnets for an existing Application Load Balancer, they replace
+                                             the
+                                             previously enabled subnets.
                                           </p>
                                           
                                           <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones
                                              when you create the load balancer. 
-                                             You can&apos;t change the subnets for an existing Network Load Balancer.
                                           </p>
                                           
                                           <p><em>Required</em>: Conditional
@@ -256,22 +259,24 @@ Properties:
                                        <dt><a id="CanonicalHostedZoneID-fn::getatt"></a><span class="term"><code class="code">CanonicalHostedZoneID</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ID of the Amazon Route 53 hosted zone associated with the load balancer. For example,
-                                             <code class="code">Z2P70J7EXAMPLE</code>.
+                                          <p>The ID of the Amazon Route 53 hosted zone associated with the load balancer. For
+                                             example, <code class="code">Z2P70J7EXAMPLE</code>.
                                           </p>
                                           
                                        </dd>
                                        <dt><a id="DNSName-fn::getatt"></a><span class="term"><code class="code">DNSName</code></span></dt>
                                        <dd>
                                           
-                                          <p>The DNS name for the load balancer. For example, <code class="code">my-load-balancer-424835706.us-west-2.elb.amazonaws.com</code>.
+                                          <p>The DNS name for the load balancer. For example,
+                                             <code class="code">my-load-balancer-424835706.us-west-2.elb.amazonaws.com</code>.
                                           </p>
                                           
                                        </dd>
                                        <dt><a id="LoadBalancerFullName-fn::getatt"></a><span class="term"><code class="code">LoadBalancerFullName</code></span></dt>
                                        <dd>
                                           
-                                          <p>The full name of the load balancer. For example, <code class="code">app/my-load-balancer/50dc6c495c0c9188</code>.
+                                          <p>The full name of the load balancer. For example,
+                                             <code class="code">app/my-load-balancer/50dc6c495c0c9188</code>.
                                           </p>
                                           
                                        </dd>
@@ -295,13 +300,14 @@ Properties:
                                      
                                      
                                      
+                                     
                                     
                                     <ul class="itemizedlist" type="disc">
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateLoadBalancer.html">CreateLoadBalancer</a> in the
-                                             <em>Elastic Load Balancing API Reference (version 2015-12-01)</em>
+                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateLoadBalancer.html">CreateLoadBalancer</a> in the <em>Elastic Load Balancing API
+                                                Reference (version 2015-12-01)</em>
                                              
                                           </p>
                                           
@@ -309,7 +315,8 @@ Properties:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application">User Guide for Application Load Balancers</a>
+                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application">User
+                                                Guide for Application Load Balancers</a>
                                              
                                           </p>
                                           
@@ -317,7 +324,17 @@ Properties:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network">User Guide for Network Load Balancers</a>
+                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network">User Guide
+                                                for Network Load Balancers</a>
+                                             
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>
+                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway">User Guide
+                                                for Gateway Load Balancers</a>
                                              
                                           </p>
                                           
@@ -335,7 +352,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

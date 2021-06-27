@@ -24,6 +24,7 @@
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-properties-fsx-filesystem-windowsconfiguration-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;<a href="#cfn-fsx-filesystem-windowsconfiguration-activedirectoryid">ActiveDirectoryId</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-fsx-filesystem-windowsconfiguration-aliases">Aliases</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
   &quot;<a href="#cfn-fsx-filesystem-windowsconfiguration-automaticbackupretentiondays">AutomaticBackupRetentionDays</a>&quot; : <code class="replaceable">Integer</code>,
   &quot;<a href="#cfn-fsx-filesystem-windowsconfiguration-copytagstobackups">CopyTagsToBackups</a>&quot; : <code class="replaceable">Boolean</code>,
   &quot;<a href="#cfn-fsx-filesystem-windowsconfiguration-dailyautomaticbackupstarttime">DailyAutomaticBackupStartTime</a>&quot; : <code class="replaceable">String</code>,
@@ -36,6 +37,8 @@
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-properties-fsx-filesystem-windowsconfiguration-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-fsx-filesystem-windowsconfiguration-activedirectoryid">ActiveDirectoryId</a>: <code class="replaceable">String</code>
+  <a href="#cfn-fsx-filesystem-windowsconfiguration-aliases">Aliases</a>: <code class="replaceable">
+    - String</code>
   <a href="#cfn-fsx-filesystem-windowsconfiguration-automaticbackupretentiondays">AutomaticBackupRetentionDays</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-fsx-filesystem-windowsconfiguration-copytagstobackups">CopyTagsToBackups</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-fsx-filesystem-windowsconfiguration-dailyautomaticbackupstarttime">DailyAutomaticBackupStartTime</a>: <code class="replaceable">String</code>
@@ -56,7 +59,7 @@
                                              file system should join when it&apos;s created.
                                           </p>
                                           
-                                          <p><em>Required</em>: No
+                                          <p><em>Required</em>: Conditional
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -64,6 +67,67 @@
                                           <p><em>Maximum</em>: <code class="code">12</code></p>
                                           <p><em>Pattern</em>: <code class="code">^d-[0-9a-f]<span>{</span>10}$</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-fsx-filesystem-windowsconfiguration-aliases"></a><span class="term"><code class="code">Aliases</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>An array of one or more DNS alias names that you want to associate with the Amazon
+                                             FSx file system. 
+                                             Aliases allow you to use existing DNS names to access the data in your Amazon FSx
+                                             file system. 
+                                             You can associate up to 50 aliases with a file system at any time. 
+                                          </p>
+                                          
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html">Working with DNS Aliases</a> and 
+                                             <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html">Walkthrough 5: Using DNS aliases to access your file system</a>, including
+                                             additional steps you must take to be able to access your file system using a DNS alias.
+                                          </p>
+                                          
+                                          <p>An alias name has to meet the following requirements:</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>Formatted as a fully-qualified domain name (FQDN), <code class="code">hostname.domain</code>, for example, <code class="code">accounting.example.com</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Can contain alphanumeric characters, the underscore (_), and the hyphen (-).</p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Cannot start or end with a hyphen.</p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Can start with a numeric.</p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters
+                                             (a-z), regardless of how you specify them: 
+                                             as uppercase letters, lowercase letters, or the corresponding letters in escape codes.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of String
+                                          </p>
+                                          <p><em>Maximum</em>: <code class="code">50</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-fsx-filesystem-windowsconfiguration-automaticbackupretentiondays"></a><span class="term"><code class="code">AutomaticBackupRetentionDays</code></span></dt>
                                        <dd>
@@ -191,7 +255,9 @@
                                           
                                           <p>The configuration that Amazon FSx uses to join the Windows File Server instance to
                                              your self-managed (including on-premises) Microsoft Active Directory (AD)
-                                             directory.
+                                             directory. For more information, see 
+                                             <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html">
+                                                Using Amazon FSx with your self-managed Microsoft Active Directory</a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -207,7 +273,7 @@
                                              the <em>n</em>th increments, between 2^3 (8) and 2^11 (2048).
                                           </p>
                                           
-                                          <p><em>Required</em>: No
+                                          <p><em>Required</em>: Conditional
                                           </p>
                                           <p><em>Type</em>: Integer
                                           </p>
@@ -241,7 +307,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

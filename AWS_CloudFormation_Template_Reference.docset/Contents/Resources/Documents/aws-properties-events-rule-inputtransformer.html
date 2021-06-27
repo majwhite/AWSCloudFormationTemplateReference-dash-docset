@@ -16,11 +16,9 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">InputTransformer</code> property type specifies settings that provide custom
-                                    input to an EventBridge target based on certain event data.
-                                 </p>
-                                 <p>
-                                    <code class="code">InputTransformer</code> is a property of the <a href="aws-properties-events-rule-target.html">Target</a> property type.
+                                 <p>Contains the parameters needed for you to provide custom input to a target based on
+                                    one or
+                                    more pieces of data extracted from the event.
                                  </p>
                                  <h2 id="aws-properties-events-rule-inputtransformer-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -47,8 +45,9 @@
                                           </p>
                                           
                                           <p>
-                                             <code class="code">InputPathsMap</code> is an array key-value pairs, where each value is a valid JSON path.
-                                             You can have as many as 10 key-value pairs. You must use JSON dot notation, not bracket
+                                             <code class="code">InputPathsMap</code> is an array key-value pairs, where each value is a valid JSON
+                                             path. You can have as many as 100 key-value pairs. You must use JSON dot notation,
+                                             not bracket
                                              notation.
                                           </p>
                                           
@@ -68,10 +67,116 @@
                                              of the
                                              keys from <code class="code">InputPathsMap</code> to customize the data sent to the target. Enclose each
                                              <code class="code">InputPathsMaps</code> value in brackets: &lt;<em>value</em>&gt; The
-                                             <code class="code">InputTemplate</code> must be valid JSON. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_InputTransformer.html#API_InputTransformer_Contents">InputTransformer</a> in the <em>Amazon EventBridge API
-                                                Reference</em>.
+                                             InputTemplate must be valid JSON.
                                           </p>
                                           
+                                          
+                                          <p>If <code class="code">InputTemplate</code> is a JSON object (surrounded by curly braces), the following
+                                             restrictions apply:
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>The placeholder cannot be used as an object key.</p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>The following example shows the syntax for using <code class="code">InputPathsMap</code> and
+                                             <code class="code">InputTemplate</code>.
+                                          </p>
+                                          
+                                          <p>
+                                             <code class="code"> &quot;InputTransformer&quot;:</code>
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <code class="code"><span>{</span></code>
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <code class="code">&quot;InputPathsMap&quot;: <span>{</span>&quot;instance&quot;: &quot;$.detail.instance&quot;,&quot;status&quot;:
+                                                &quot;$.detail.status&quot;},</code>
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <code class="code">&quot;InputTemplate&quot;: &quot;&lt;instance&gt; is in state &lt;status&gt;&quot;</code>
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <code class="code">}</code>
+                                             
+                                          </p>
+                                          
+                                          <p>To have the <code class="code">InputTemplate</code> include quote marks within a JSON string, escape
+                                             each quote marks with a slash, as in the following example:
+                                          </p>
+                                          
+                                          <p>
+                                             <code class="code"> &quot;InputTransformer&quot;:</code>
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <code class="code"><span>{</span></code>
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <code class="code">&quot;InputPathsMap&quot;: <span>{</span>&quot;instance&quot;: &quot;$.detail.instance&quot;,&quot;status&quot;:
+                                                &quot;$.detail.status&quot;},</code>
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <code class="code">&quot;InputTemplate&quot;: &quot;&lt;instance&gt; is in state \&quot;&lt;status&gt;\&quot;&quot;</code>
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <code class="code">}</code>
+                                             
+                                          </p>
+                                          
+                                          <p>The <code class="code">InputTemplate</code> can also be valid JSON with varibles in quotes or out, as
+                                             in the following example:
+                                          </p>
+                                          
+                                          <p>
+                                             <code class="code"> &quot;InputTransformer&quot;:</code>
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <code class="code"><span>{</span></code>
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <code class="code">&quot;InputPathsMap&quot;: <span>{</span>&quot;instance&quot;: &quot;$.detail.instance&quot;,&quot;status&quot;:
+                                                &quot;$.detail.status&quot;},</code>
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <code class="code">&quot;InputTemplate&quot;: &apos;<span>{</span>&quot;myInstance&quot;: &lt;instance&gt;,&quot;myStatus&quot;: &quot;&lt;instance&gt; is
+                                                in state \&quot;&lt;status&gt;\&quot;&quot;}&apos;</code>
+                                             
+                                          </p>
+                                          
+                                          <p>
+                                             <code class="code">}</code>
+                                             
+                                          </p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -93,7 +198,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

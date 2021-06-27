@@ -25,9 +25,8 @@
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-iotwireless-wirelessdevice-description">Description</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-iotwireless-wirelessdevice-destinationname">DestinationName</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-iotwireless-wirelessdevice-lorawandevice">LoRaWANDevice</a>&quot; : <code class="replaceable"><a href="./aws-properties-iotwireless-wirelessdevice-lorawandevice.html">LoRaWANDevice</a></code>,
+      &quot;<a href="#cfn-iotwireless-wirelessdevice-lorawan">LoRaWAN</a>&quot; : <code class="replaceable"><a href="./aws-properties-iotwireless-wirelessdevice-lorawandevice.html">LoRaWANDevice</a></code>,
       &quot;<a href="#cfn-iotwireless-wirelessdevice-name">Name</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-iotwireless-wirelessdevice-nexttoken">NextToken</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-iotwireless-wirelessdevice-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
       &quot;<a href="#cfn-iotwireless-wirelessdevice-type">Type</a>&quot; : <code class="replaceable">String</code>
     }
@@ -38,10 +37,9 @@
 Properties: 
   <a href="#cfn-iotwireless-wirelessdevice-description">Description</a>: <code class="replaceable">String</code>
   <a href="#cfn-iotwireless-wirelessdevice-destinationname">DestinationName</a>: <code class="replaceable">String</code>
-  <a href="#cfn-iotwireless-wirelessdevice-lorawandevice">LoRaWANDevice</a>: <code class="replaceable">
+  <a href="#cfn-iotwireless-wirelessdevice-lorawan">LoRaWAN</a>: <code class="replaceable">
     <a href="./aws-properties-iotwireless-wirelessdevice-lorawandevice.html">LoRaWANDevice</a></code>
   <a href="#cfn-iotwireless-wirelessdevice-name">Name</a>: <code class="replaceable">String</code>
-  <a href="#cfn-iotwireless-wirelessdevice-nexttoken">NextToken</a>: <code class="replaceable">String</code>
   <a href="#cfn-iotwireless-wirelessdevice-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
   <a href="#cfn-iotwireless-wirelessdevice-type">Type</a>: <code class="replaceable">String</code>
@@ -51,8 +49,8 @@ Properties:
                                     <dl>
                                        <dt><a id="cfn-iotwireless-wirelessdevice-description"></a><span class="term"><code class="code">Description</code></span></dt>
                                        <dd>
-                                          
-                                          <p>The description of the new resource.</p>
+                                          		
+                                          <p>The description of the new resource. Maximum length is 2048.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -74,11 +72,11 @@ Properties:
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
-                                       <dt><a id="cfn-iotwireless-wirelessdevice-lorawandevice"></a><span class="term"><code class="code">LoRaWANDevice</code></span></dt>
+                                       <dt><a id="cfn-iotwireless-wirelessdevice-lorawan"></a><span class="term"><code class="code">LoRaWAN</code></span></dt>
                                        <dd>
                                           		
                                           <p>The device configuration information to use to create the wireless device. Must be
-                                             at least one of OtaaV10X, OtaaV11, AbpV11, or AbpV10X.
+                                             at least one of OtaaV10x, OtaaV11, AbpV11, or AbpV10x.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -89,19 +87,8 @@ Properties:
                                        <dt><a id="cfn-iotwireless-wirelessdevice-name"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
                                           
-                                          <p>The name of the new resource.</p>
+                                          <p>The name of the new resource. Maximum length is 256.</p>
                                           
-                                          <p><em>Required</em>: No
-                                          </p>
-                                          <p><em>Type</em>: String
-                                          </p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                                       </dd>
-                                       <dt><a id="cfn-iotwireless-wirelessdevice-nexttoken"></a><span class="term"><code class="code">NextToken</code></span></dt>
-                                       <dd>
-                                          		
-                                          <p>This parameter isn&apos;t needed to create this resource. Do not include it in your template.</p>
-                                          	
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -112,7 +99,9 @@ Properties:
                                        <dd>
                                           		
                                           		
-                                          <p>An array of key-value pairs to apply to this resource.</p>
+                                          <p>An array of key-value pairs to apply to this resource. Tags can have a minimum of
+                                             0 and a maximum of 50 items.
+                                          </p>
                                           		
                                           <p>For more information, see <a href="aws-properties-resource-tags.html">Tag</a>.
                                           </p>
@@ -156,15 +145,6 @@ Properties:
                                           <p>The ID of the wireless device created.</p>
                                           	
                                        </dd>
-                                       <dt><a id="ThingArn-fn::getatt"></a><span class="term"><code class="code">ThingArn</code></span></dt>
-                                       <dd>
-                                          		
-                                          <p>The ARN of the thing associated with the device. The parameter is empty if a thing
-                                             
-                                             		was not associated with the device.
-                                          </p>
-                                          	
-                                       </dd>
                                        <dt><a id="ThingName-fn::getatt"></a><span class="term"><code class="code">ThingName</code></span></dt>
                                        <dd>
                                           		
@@ -185,7 +165,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

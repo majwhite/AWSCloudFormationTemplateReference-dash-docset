@@ -72,6 +72,7 @@
                                     <h3 id="aws-resource-codegurureviewer-repositoryassociation-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::CodeGuruReviewer::RepositoryAssociation&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-codegurureviewer-repositoryassociation-bucketname">BucketName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-codegurureviewer-repositoryassociation-connectionarn">ConnectionArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-codegurureviewer-repositoryassociation-name">Name</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-codegurureviewer-repositoryassociation-owner">Owner</a>&quot; : <code class="replaceable">String</code>,
@@ -83,6 +84,7 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-codegurureviewer-repositoryassociation-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::CodeGuruReviewer::RepositoryAssociation
 Properties: 
+  <a href="#cfn-codegurureviewer-repositoryassociation-bucketname">BucketName</a>: <code class="replaceable">String</code>
   <a href="#cfn-codegurureviewer-repositoryassociation-connectionarn">ConnectionArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-codegurureviewer-repositoryassociation-name">Name</a>: <code class="replaceable">String</code>
   <a href="#cfn-codegurureviewer-repositoryassociation-owner">Owner</a>: <code class="replaceable">String</code>
@@ -93,6 +95,15 @@ Properties:
                                  <h2 id="aws-resource-codegurureviewer-repositoryassociation-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-codegurureviewer-repositoryassociation-bucketname"></a><span class="term"><code class="code">BucketName</code></span></dt>
+                                       <dd>
+                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
                                        <dt><a id="cfn-codegurureviewer-repositoryassociation-connectionarn"></a><span class="term"><code class="code">ConnectionArn</code></span></dt>
                                        <dd>
                                           
@@ -164,7 +175,40 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-codegurureviewer-repositoryassociation-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          			
+                                          <p>
+                                             				An array of key-value pairs used to tag an associated repository. A tag is a custom
+                                             attribute label with two parts: 
+                                             			
+                                          </p>
+                                          			
+                                          <div class="itemizedlist">
+                                             				 
+                                             				 
+                                             			
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   					
+                                                   <p>A <em>tag key</em> (for example, <code class="code">CostCenter</code>,
+                                                      						<code class="code">Environment</code>, <code class="code">Project</code>, or <code class="code">Secret</code>). Tag
+                                                      						keys are case sensitive.
+                                                   </p>
+                                                   				
+                                                </li>
+                                                <li class="listitem">
+                                                   					
+                                                   <p>An optional field known as a <em>tag value</em> (for example,
+                                                      						<code class="code">111122223333</code>, <code class="code">Production</code>, or a team name).
+                                                      						Omitting the tag value is the same as using an empty string. Like tag keys,
+                                                      tag
+                                                      						values are case sensitive.
+                                                   </p>
+                                                   				
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          		
+                                          	
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
@@ -289,8 +333,7 @@ Properties:
     Type: AWS::CodeGuruReviewer::RepositoryAssociation
     Properties:
       Name: MyRepositoryName
-      Type: CodeCommit
-    DependsOn: MyRepository</code></pre></div>
+      Type: CodeCommit</code></pre></div>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-codegurureviewer-repositoryassociation--examples--Create_an_AWS_CodeCommit_repository_association_with_a_new_CodeCommit_repository--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Resources&quot;: <span>{</span>
@@ -305,8 +348,7 @@ Properties:
       &quot;Properties&quot;: <span>{</span>
         &quot;Name&quot;: &quot;MyRepositoryName&quot;,
         &quot;Type&quot;: &quot;CodeCommit&quot;
-      },
-      &quot;DependsOn&quot;: &quot;MyRepository&quot;
+      }
     }
   }
 }</code></pre></div>
@@ -330,8 +372,10 @@ Properties:
     &quot;MyRepositoryAssociation&quot;: <span>{</span>
       &quot;Type&quot;: &quot;AWS::CodeGuruReviewer::RepositoryAssociation&quot;,
       &quot;Properties&quot;: <span>{</span>
-        &quot;Name&quot;: &quot;MyRepository&quot;,
-        &quot;Type&quot;: &quot;CodeCommit&quot;
+        &quot;Name&quot;: &quot;MyBitbucketRepoName&quot;,
+        &quot;Type&quot;: &quot;Bitbucket&quot;,
+        &quot;ConnectionArn&quot;: &quot;arn:aws:codestar-connections:us-west-2:123456789012:connection/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee&quot;,
+        &quot;Owner&quot;: &quot;MyOwnerName&quot;
       }
     }
   }
@@ -364,6 +408,47 @@ Properties:
     }
   }
 }</code></pre></div>
+                                 <h3 id="aws-resource-codegurureviewer-repositoryassociation--examples--Create_a_repository_association_with_tags">Create a repository association with tags</h3>
+                                 <p>The following example creates an Amazon CodeGuru Reviewer repository association that
+                                    has two tags. The repository is an AWS CodeCommit repository. 
+                                    			Use the <code class="code">Tags</code> property the same way to add tags when you create a BitBucket or GitHub Enterprise
+                                    repository association.
+                                 </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-codegurureviewer-repositoryassociation--examples--Create_a_repository_association_with_tags--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  MyRepositoryAssociation:
+    Type: AWS::CodeGuruReviewer::RepositoryAssociation
+    Properties:
+      Name: MyRepository
+      Type: CodeCommit
+      Tags:
+        - Key: tag1-key
+          Value: tag1-value
+        - Key: tag2-key
+          Value: tag2-value</code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-codegurureviewer-repositoryassociation--examples--Create_a_repository_association_with_tags--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Resources&quot;: <span>{</span>
+    &quot;MyRepositoryAssociation&quot;: <span>{</span>
+      &quot;Type&quot;: &quot;AWS::CodeGuruReviewer::RepositoryAssociation&quot;,
+      &quot;Properties&quot;: <span>{</span>
+        &quot;Name&quot;: &quot;MyRepository&quot;,
+        &quot;Type&quot;: &quot;CodeCommit&quot;,
+        &quot;Tags&quot;: [
+          <span>{</span>
+            &quot;Key&quot;: &quot;tag1-key&quot;,
+            &quot;Value&quot;: &quot;tag1-value&quot;
+          },
+          <span>{</span>
+            &quot;Key&quot;: &quot;tag2-key&quot;,
+            &quot;Value&quot;: &quot;tag2-value&quot;
+          }
+        ]
+      }
+    }
+  }
+}
+</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -374,7 +459,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

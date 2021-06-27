@@ -31,7 +31,8 @@
                                  </div>
                                  <p><b>Updating DB clusters</b></p>
                                  <p>When properties labeled &quot;<em>Update requires:</em>
-                                    <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a>&quot; are updated, AWS CloudFormation first creates a replacement DB
+                                    <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">
+                                       Replacement</a>&quot; are updated, AWS CloudFormation first creates a replacement DB
                                     cluster, then changes references from other dependent resources to point to the
                                     replacement DB cluster, and finally deletes the old DB cluster.
                                  </p>
@@ -99,7 +100,7 @@
                                  </div>
                                  <p>For more information about updating other properties of this resource, see <code class="code">
                                        <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html">ModifyDBCluster</a></code>. For more information about updating stacks, see
-                                    <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">AWS
+                                    <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">AWS 
                                        CloudFormation Stacks Updates</a>.
                                  </p>
                                  <p><b>Deleting DB clusters</b></p>
@@ -200,7 +201,7 @@ Properties:
                                           <p>Provides a list of the AWS Identity and Access Management (IAM) roles that are associated
                                              with the DB cluster. 
                                              IAM roles that are associated with a DB cluster grant permission for the DB cluster
-                                             to access other AWS services
+                                             to access other Amazon Web Services
                                              on your behalf.
                                           </p>
                                           
@@ -365,18 +366,6 @@ Properties:
                                              </div>
                                           </div>
                                           
-                                          <div class="awsdocs-note">
-                                             <div class="awsdocs-note-title">
-                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
-                                             <div class="awsdocs-note-text">
-                                                <p> If this argument is omitted, <code class="code">default.aurora5.6</code> is used. If
-                                                   <code class="code">default.aurora5.6</code> is used, specifying <code class="code">aurora-mysql</code> or
-                                                   <code class="code">aurora-postgresql</code> for the <code class="code">Engine</code> property might result
-                                                   in an error.
-                                                </p>
-                                             </div>
-                                          </div>
-                                          
                                           <p>To list all of the available DB cluster parameter group names, use the following
                                              command:
                                           </p>
@@ -510,8 +499,7 @@ Properties:
                                        <dt><a id="cfn-rds-dbcluster-enginemode"></a><span class="term"><code class="code">EngineMode</code></span></dt>
                                        <dd>
                                           
-                                          <p>The DB engine mode of the DB cluster, either <code class="code">provisioned</code> 
-                                             <code class="code">serverless</code>, 
+                                          <p>The DB engine mode of the DB cluster, either <code class="code">provisioned</code>, <code class="code">serverless</code>, 
                                              <code class="code">parallelquery</code>, <code class="code">global</code>, or <code class="code">multimaster</code>.
                                           </p>
                                           
@@ -626,8 +614,11 @@ Properties:
                                           
                                           <p>
                                              If you are configuring an Aurora global database cluster and want your Aurora DB cluster
-                                             to be a member in the global database cluster, 
-                                             specify the global cluster ID of the global database cluster.
+                                             to be a secondary member in the global database 
+                                             cluster, specify the global cluster ID of the global database cluster. To define the
+                                             primary database cluster of the global cluster, 
+                                             use the <a href="aws-resource-rds-globalcluster.html">AWS::RDS::GlobalCluster</a> 
+                                             resource.
                                              
                                           </p>
                                           
@@ -683,14 +674,14 @@ Properties:
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>If you specify the <code class="code">SourceDBInstanceIdentifier</code> or
+                                                <p>If you specify the <code class="code">SourceDBClusterIdentifier</code> or
                                                    <code class="code">SnapshotIdentifier</code> property, don&apos;t specify this property. The value
                                                    is inherited from the source DB instance or snapshot.
                                                 </p>
                                              </div>
                                           </div>
                                           
-                                          <p><em>Required</em>: No
+                                          <p><em>Required</em>: Conditional
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -705,14 +696,14 @@ Properties:
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>If you specify the <code class="code">SourceDBInstanceIdentifier</code> or
+                                                <p>If you specify the <code class="code">SourceDBClusterIdentifier</code> or
                                                    <code class="code">SnapshotIdentifier</code> property, don&apos;t specify this property. The value
                                                    is inherited from the source DB instance or snapshot.
                                                 </p>
                                              </div>
                                           </div>
                                           
-                                          <p><em>Required</em>: No
+                                          <p><em>Required</em>: Conditional
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
@@ -775,17 +766,9 @@ Properties:
                                        <dt><a id="cfn-rds-dbcluster-preferredbackupwindow"></a><span class="term"><code class="code">PreferredBackupWindow</code></span></dt>
                                        <dd>
                                           
-                                          <p>The daily time range during which automated backups are created
-                                             if automated backups are enabled
-                                             using the <code class="code">BackupRetentionPeriod</code> parameter.
-                                             
-                                          </p>
-                                          
-                                          <p>The default is a 30-minute window selected at random from an
-                                             8-hour block of time for each AWS Region. 
-                                             To see the time blocks available, see 
-                                             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora">
-                                                Adjusting the Preferred DB Cluster Maintenance Window</a> in the <em>Amazon Aurora User Guide.</em>
+                                          <p>The daily time range during which automated backups are created. For more information,
+                                             see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow">
+                                                Backup Window</a> in the <em>Amazon Aurora User Guide.</em>
                                              
                                           </p>
                                           
@@ -1060,7 +1043,9 @@ Properties:
                                        <dt><a id="cfn-rds-dbcluster-sourcedbclusteridentifier"></a><span class="term"><code class="code">SourceDBClusterIdentifier</code></span></dt>
                                        <dd>
                                           
-                                          <p>The identifier of the source DB cluster from which to restore.</p>
+                                          <p>When restoring a DB cluster to a point in time, the identifier of the source DB cluster
+                                             from which to restore.
+                                          </p>
                                           
                                           <p>Constraints:</p>
                                           
@@ -1102,7 +1087,7 @@ Properties:
                                           <p>Indicates whether the DB cluster is encrypted.</p>
                                           
                                           <p>If you specify the <code class="code">SnapshotIdentifier</code> or
-                                             <code class="code">SourceDBInstanceIdentifier</code> property, don&apos;t specify this property. The
+                                             <code class="code">SourceDBClusterIdentifier</code> property, don&apos;t specify this property. The
                                              value is inherited from the snapshot or source DB instance. 
                                           </p>
                                           
@@ -1404,7 +1389,7 @@ RDSDBParameterGroup:
   &quot;Parameters&quot; : <span>{</span>
       &quot;DBUsername&quot; : <span>{</span>
         &quot;NoEcho&quot; : &quot;true&quot;,
-        &quot;Description&quot; : &quot;Username for MySQL database access&quot;,
+        &quot;Description&quot; : &quot;Username for PostgreSQL database access&quot;,
 
         &quot;Type&quot; : &quot;String&quot;,
         &quot;MinLength&quot; : &quot;1&quot;,
@@ -1414,7 +1399,7 @@ RDSDBParameterGroup:
       },
       &quot;DBPassword&quot; : <span>{</span>
         &quot;NoEcho&quot; : &quot;true&quot;,
-        &quot;Description&quot; : &quot;Password MySQL database access&quot;,
+        &quot;Description&quot; : &quot;Password for PostgreSQL database access&quot;,
 
         &quot;Type&quot; : &quot;String&quot;,
         &quot;MinLength&quot; : &quot;8&quot;,
@@ -1482,7 +1467,7 @@ Description: &gt;-
 Parameters:
   DBUsername:
     NoEcho: &apos;true&apos;
-    Description: Username for MySQL database access
+    Description: Username for PostgreSQL database access
     Type: String
     MinLength: &apos;1&apos;
     MaxLength: &apos;16&apos;
@@ -1490,7 +1475,7 @@ Parameters:
     ConstraintDescription: must begin with a letter and contain only alphanumeric characters.
   DBPassword:
     NoEcho: &apos;true&apos;
-    Description: Password MySQL database access
+    Description: Password for PostgreSQL database access
     Type: String
     MinLength: &apos;8&apos;
     MaxLength: &apos;41&apos;
@@ -1644,7 +1629,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

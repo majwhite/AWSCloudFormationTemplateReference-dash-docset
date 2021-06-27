@@ -18,7 +18,7 @@
                                  </div>
                                  <p>Describes where logs are stored and the prefix that Amazon S3 assigns to all log object
                                     keys for a bucket. For examples and more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html">PUT Bucket logging</a> in the
-                                    <em>Amazon Simple Storage Service API Reference</em>.
+                                    <em>Amazon S3 API Reference</em>.
                                  </p>
                                  <h2 id="aws-properties-s3-bucket-loggingconfig-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -39,9 +39,10 @@
                                        <dd>
                                           
                                           <p>The name of the bucket where Amazon S3 should store server access log files. You can
-                                             store log files in any bucket that you own. By default, logs are stored in the bucket
-                                             where
-                                             the <code class="code">LoggingConfiguration</code> property is defined.
+                                             store
+                                             log files in any bucket that you own. By default, logs are stored in the bucket where
+                                             the
+                                             <code class="code">LoggingConfiguration</code> property is defined.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -67,19 +68,64 @@
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-properties-s3-bucket-loggingconfig--seealso">See also</h2>
-                                 <div class="itemizedlist">
-                                     
-                                    
-                                    <ul class="itemizedlist" type="disc">
-                                       <li class="listitem">
-                                          
-                                          <p>AWS::S3::Bucket <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--examples">Examples</a></p>
-                                          
-                                       </li>
-                                    </ul>
-                                 </div>
+                                 <h2 id="aws-properties-s3-bucket-loggingconfig--examples">Examples</h2>
                                  <p></p>
+                                 <h3 id="aws-properties-s3-bucket-loggingconfig--examples--Log_access_requests_for_a_specific_S3_bucket">Log access requests for a specific S3 bucket</h3>
+                                 <p>The following example template creates two S3 buckets. The <code class="code">LoggingBucket</code>
+                                    bucket store the logs from the <code class="code">S3Bucket</code> bucket. To receive logs from the
+                                    <code class="code">S3Bucket</code> bucket, the logging bucket requires log delivery write
+                                    permissions.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-loggingconfig--examples--Log_access_requests_for_a_specific_S3_bucket--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;S3Bucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;AccessControl&quot;: &quot;Private&quot;,
+                &quot;LoggingConfiguration&quot;: <span>{</span>
+                    &quot;DestinationBucketName&quot;: <span>{</span>
+                        &quot;Ref&quot;: &quot;LoggingBucket&quot;
+                    },
+                    &quot;LogFilePrefix&quot;: &quot;testing-logs&quot;
+                }
+            }
+        },
+        &quot;LoggingBucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;AccessControl&quot;: &quot;LogDeliveryWrite&quot;
+            }
+        }
+    },
+    &quot;Outputs&quot;: <span>{</span>
+        &quot;BucketName&quot;: <span>{</span>
+            &quot;Value&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;S3Bucket&quot;
+            },
+            &quot;Description&quot;: &quot;Name of the sample Amazon S3 bucket with a logging configuration.&quot;
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-s3-bucket-loggingconfig--examples--Log_access_requests_for_a_specific_S3_bucket--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  S3Bucket:
+    Type: &apos;AWS::S3::Bucket&apos;
+    Properties:
+      AccessControl: Private
+      LoggingConfiguration:
+        DestinationBucketName: !Ref LoggingBucket
+        LogFilePrefix: testing-logs
+  LoggingBucket:
+    Type: &apos;AWS::S3::Bucket&apos;
+    Properties:
+      AccessControl: LogDeliveryWrite
+Outputs:
+  BucketName:
+    Value: !Ref S3Bucket
+    Description: Name of the sample Amazon S3 bucket with a logging configuration.</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -90,7 +136,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

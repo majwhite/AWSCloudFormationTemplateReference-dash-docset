@@ -26,7 +26,7 @@
                                        				Distribution Points</b> extension of each certificate it issues. Your S3
                                     			bucket policy must give write permission to ACM Private CA. 
                                  </p>
-                                 <p>ACM Private CAA assets that are stored in Amazon S3 can be protected with encryption.
+                                 <p>ACM Private CA assets that are stored in Amazon S3 can be protected with encryption.
                                     
                                     For more information, see <a href="https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption">Encrypting Your
                                        			CRLs</a>.
@@ -212,7 +212,8 @@
   &quot;<a href="#cfn-acmpca-certificateauthority-crlconfiguration-customcname">CustomCname</a>&quot; : <code class="replaceable">String</code>,
   &quot;<a href="#cfn-acmpca-certificateauthority-crlconfiguration-enabled">Enabled</a>&quot; : <code class="replaceable">Boolean</code>,
   &quot;<a href="#cfn-acmpca-certificateauthority-crlconfiguration-expirationindays">ExpirationInDays</a>&quot; : <code class="replaceable">Integer</code>,
-  &quot;<a href="#cfn-acmpca-certificateauthority-crlconfiguration-s3bucketname">S3BucketName</a>&quot; : <code class="replaceable">String</code>
+  &quot;<a href="#cfn-acmpca-certificateauthority-crlconfiguration-s3bucketname">S3BucketName</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-acmpca-certificateauthority-crlconfiguration-s3objectacl">S3ObjectAcl</a>&quot; : <code class="replaceable">String</code>
 }
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
@@ -220,6 +221,7 @@
   <a href="#cfn-acmpca-certificateauthority-crlconfiguration-enabled">Enabled</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-acmpca-certificateauthority-crlconfiguration-expirationindays">ExpirationInDays</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-acmpca-certificateauthority-crlconfiguration-s3bucketname">S3BucketName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-acmpca-certificateauthority-crlconfiguration-s3objectacl">S3ObjectAcl</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-properties-acmpca-certificateauthority-crlconfiguration-properties">Properties</h2>
                                  <div class="variablelist">
@@ -227,14 +229,12 @@
                                        <dt><a id="cfn-acmpca-certificateauthority-crlconfiguration-customcname"></a><span class="term"><code class="code">CustomCname</code></span></dt>
                                        <dd>
                                           
-                                          		       
                                           <p>Name inserted into the certificate <b>CRL Distribution
-                                                				Points</b> extension that enables the use of an alias for the CRL
-                                             			distribution point. Use this value if you don&apos;t want the name of your S3 bucket
-                                             to be
-                                             			public.
+                                                Points</b> extension that enables the use of an alias for the CRL
+                                             distribution point. Use this value if you don&apos;t want the name of your S3 bucket to
+                                             be
+                                             public.
                                           </p>
-                                          	     
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -246,14 +246,14 @@
                                        </dd>
                                        <dt><a id="cfn-acmpca-certificateauthority-crlconfiguration-enabled"></a><span class="term"><code class="code">Enabled</code></span></dt>
                                        <dd>
-                                          		       
+                                          
                                           <p>Boolean value that specifies whether certificate revocation lists (CRLs) are enabled.
-                                             			You can use this value to enable certificate revocation for a new CA when you call
+                                             You can use this value to enable certificate revocation for a new CA when you call
                                              the
-                                             				<a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> action or for an existing CA when you call the
-                                             				<a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html">UpdateCertificateAuthority</a> action. 
+                                             <code class="code">CreateCertificateAuthority</code> operation or for an existing CA when you
+                                             call the <code class="code">UpdateCertificateAuthority</code> operation. 
                                           </p>
-                                          	     
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Boolean
@@ -279,8 +279,8 @@
                                           <p>Name of the S3 bucket that contains the CRL. If you do not provide a value for the
                                              				<b>CustomCname</b> argument, the name of your S3 bucket
                                              			is placed into the <b>CRL Distribution Points</b> extension of
-                                             			the issued certificate. You can change the name of your bucket by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html">UpdateCertificateAuthority</a> action. You must specify a bucket policy that
-                                             			allows ACM Private CA to write the CRL to your bucket.
+                                             			the issued certificate. You can change the name of your bucket by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html">UpdateCertificateAuthority</a> operation. You must specify a <a href="https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-policies">bucket
+                                                				policy</a> that allows ACM Private CA to write the CRL to your bucket.
                                           </p>
                                           	     
                                           <p><em>Required</em>: No
@@ -289,6 +289,39 @@
                                           </p>
                                           <p><em>Minimum</em>: <code class="code">3</code></p>
                                           <p><em>Maximum</em>: <code class="code">255</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-acmpca-certificateauthority-crlconfiguration-s3objectacl"></a><span class="term"><code class="code">S3ObjectAcl</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>Determines whether the CRL will be publicly readable or privately held in the CRL
+                                             Amazon S3 bucket. If you choose PUBLIC_READ, the CRL will be accessible over the public
+                                             internet. If you choose BUCKET_OWNER_FULL_CONTROL, only the owner of the CRL S3 bucket
+                                             can access the CRL, and your PKI clients may need an alternative method of access.
+                                             
+                                          </p>
+                                          
+                                          <p>If no value is specified, the default is PUBLIC_READ.</p>
+                                          
+                                          <p><em>Note:</em> This default can cause CA creation to fail in some
+                                             circumstances. If you have have enabled the Block Public Access (BPA) feature in your
+                                             S3
+                                             account, then you must specify the value of this parameter as
+                                             <code class="code">BUCKET_OWNER_FULL_CONTROL</code>, and not doing so results in an error. If you
+                                             have disabled BPA in S3, then you can specify either
+                                             <code class="code">BUCKET_OWNER_FULL_CONTROL</code> or <code class="code">PUBLIC_READ</code> as the
+                                             value.
+                                          </p>
+                                          
+                                          <p>For more information, see <a href="https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-bpa">Blocking public access to the
+                                                S3 bucket</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>
@@ -303,7 +336,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

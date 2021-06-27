@@ -23,9 +23,11 @@
                                     <h3 id="aws-resource-databrew-dataset-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::DataBrew::Dataset&quot;,
   &quot;Properties&quot; : <span>{</span>
-      &quot;<a href="#cfn-databrew-dataset-formatoptions">FormatOptions</a>&quot; : <code class="replaceable">Json</code>,
-      &quot;<a href="#cfn-databrew-dataset-input">Input</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-databrew-dataset-format">Format</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-databrew-dataset-formatoptions">FormatOptions</a>&quot; : <code class="replaceable"><a href="./aws-properties-databrew-dataset-formatoptions.html">FormatOptions</a></code>,
+      &quot;<a href="#cfn-databrew-dataset-input">Input</a>&quot; : <code class="replaceable"><a href="./aws-properties-databrew-dataset-input.html">Input</a></code>,
       &quot;<a href="#cfn-databrew-dataset-name">Name</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-databrew-dataset-pathoptions">PathOptions</a>&quot; : <code class="replaceable"><a href="./aws-properties-databrew-dataset-pathoptions.html">PathOptions</a></code>,
       &quot;<a href="#cfn-databrew-dataset-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
 }
@@ -33,24 +35,40 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-databrew-dataset-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::DataBrew::Dataset
 Properties: 
-  <a href="#cfn-databrew-dataset-formatoptions">FormatOptions</a>: <code class="replaceable">Json</code>
-  <a href="#cfn-databrew-dataset-input">Input</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-databrew-dataset-format">Format</a>: <code class="replaceable">String</code>
+  <a href="#cfn-databrew-dataset-formatoptions">FormatOptions</a>: <code class="replaceable">
+    <a href="./aws-properties-databrew-dataset-formatoptions.html">FormatOptions</a></code>
+  <a href="#cfn-databrew-dataset-input">Input</a>: <code class="replaceable">
+    <a href="./aws-properties-databrew-dataset-input.html">Input</a></code>
   <a href="#cfn-databrew-dataset-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-databrew-dataset-pathoptions">PathOptions</a>: <code class="replaceable">
+    <a href="./aws-properties-databrew-dataset-pathoptions.html">PathOptions</a></code>
   <a href="#cfn-databrew-dataset-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
 </code></pre></div>
                                  <h2 id="aws-resource-databrew-dataset-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
-                                       <dt><a id="cfn-databrew-dataset-formatoptions"></a><span class="term"><code class="code">FormatOptions</code></span></dt>
+                                       <dt><a id="cfn-databrew-dataset-format"></a><span class="term"><code class="code">Format</code></span></dt>
                                        <dd>
                                           
-                                          <p>Options that define how DataBrew interprets the data in the dataset.</p>
+                                          <p>The file format of a dataset that is created from an S3 file or folder.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: Json
+                                          <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Allowed values</em>: <code class="code">CSV | EXCEL | JSON | PARQUET</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-databrew-dataset-formatoptions"></a><span class="term"><code class="code">FormatOptions</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A set of options that define how DataBrew interprets the data in the dataset.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-databrew-dataset-formatoptions.html">FormatOptions</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-databrew-dataset-input"></a><span class="term"><code class="code">Input</code></span></dt>
@@ -62,8 +80,7 @@ Properties:
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
-                                          <p><em>Type</em>: Json
-                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-databrew-dataset-input.html">Input</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-databrew-dataset-name"></a><span class="term"><code class="code">Name</code></span></dt>
@@ -78,6 +95,16 @@ Properties:
                                           <p><em>Minimum</em>: <code class="code">1</code></p>
                                           <p><em>Maximum</em>: <code class="code">255</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-databrew-dataset-pathoptions"></a><span class="term"><code class="code">PathOptions</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-databrew-dataset-pathoptions.html">PathOptions</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-databrew-dataset-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
@@ -100,8 +127,8 @@ Properties:
                                     <code class="code"><span>{</span> &quot;Ref&quot;: &quot;myDataset&quot; }</code>
                                     
                                  </p>
-                                 <p>For an AWS Glue DataBrew dataset named&#xA0;<code class="code">myDataset</code>,&#xA0;<code class="code">Ref</code>&#xA0;returns the name of the dataset.
-                                    
+                                 <p>For an AWS Glue DataBrew dataset named&#xA0;<code class="code">myDataset</code>,&#xA0;<code class="code">Ref</code>&#xA0;returns
+                                    the name of the dataset. 
                                  </p>
                                  <h2 id="aws-resource-databrew-dataset--examples">Examples</h2>
                                  <p></p>
@@ -164,7 +191,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

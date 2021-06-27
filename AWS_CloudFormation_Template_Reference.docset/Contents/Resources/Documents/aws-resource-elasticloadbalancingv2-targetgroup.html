@@ -16,10 +16,10 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Specifies a target group for an Application Load Balancer or Network Load Balancer.</p>
-                                 <p>Before you register a Lambda function as a target, you must create a <code class="code">AWS::Lambda::Permission</code> 
-                                    resource that grants the Elastic Load Balancing service principal permission to invoke
-                                    the Lambda function.
+                                 <p>Specifies a target group for a load balancer.</p>
+                                 <p>Before you register a Lambda function as a target, you must create a
+                                    <code class="code">AWS::Lambda::Permission</code> resource that grants the Elastic Load Balancing
+                                    service principal permission to invoke the Lambda function.
                                  </p>
                                  <h2 id="aws-resource-elasticloadbalancingv2-targetgroup-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -38,6 +38,7 @@
       &quot;<a href="#cfn-elasticloadbalancingv2-targetgroup-name">Name</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-elasticloadbalancingv2-targetgroup-port">Port</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-elasticloadbalancingv2-targetgroup-protocol">Protocol</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-elasticloadbalancingv2-targetgroup-protocolversion">ProtocolVersion</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-elasticloadbalancingv2-targetgroup-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
       &quot;<a href="#cfn-elasticloadbalancingv2-targetgroup-targetgroupattributes">TargetGroupAttributes</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-elasticloadbalancingv2-targetgroup-targetgroupattribute.html">TargetGroupAttribute</a>, ... ]</code>,
       &quot;<a href="#cfn-elasticloadbalancingv2-targetgroup-targets">Targets</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-elasticloadbalancingv2-targetgroup-targetdescription.html">TargetDescription</a>, ... ]</code>,
@@ -62,6 +63,7 @@ Properties:
   <a href="#cfn-elasticloadbalancingv2-targetgroup-name">Name</a>: <code class="replaceable">String</code>
   <a href="#cfn-elasticloadbalancingv2-targetgroup-port">Port</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-elasticloadbalancingv2-targetgroup-protocol">Protocol</a>: <code class="replaceable">String</code>
+  <a href="#cfn-elasticloadbalancingv2-targetgroup-protocolversion">ProtocolVersion</a>: <code class="replaceable">String</code>
   <a href="#cfn-elasticloadbalancingv2-targetgroup-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
   <a href="#cfn-elasticloadbalancingv2-targetgroup-targetgroupattributes">TargetGroupAttributes</a>: <code class="replaceable">
@@ -79,8 +81,9 @@ Properties:
                                        <dd>
                                           
                                           <p>Indicates whether health checks are enabled. If the target type is <code class="code">lambda</code>,
-                                             health checks are disabled by default but can be enabled. If the target type is <code class="code">instance</code> 
-                                             or <code class="code">ip</code>, health checks are always enabled and cannot be disabled.
+                                             health checks are disabled by default but can be enabled. If the target type is
+                                             <code class="code">instance</code> or <code class="code">ip</code>, health checks are always enabled and cannot be
+                                             disabled.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -95,10 +98,11 @@ Properties:
                                           <p>The approximate amount of time, in seconds, between health checks of an individual
                                              target.
                                              If the target group protocol is TCP, TLS, UDP, or TCP_UDP, the supported values are
-                                             10 and 30 seconds. 
-                                             If the target group protocol is HTTP or HTTPS, the default is 30 seconds. 
-                                             If the target group protocol is GENEVE, the default is 10 seconds. 
-                                             If the target type is <code class="code">lambda</code>, the default is 35 seconds.
+                                             10 and 30
+                                             seconds. If the target group protocol is HTTP or HTTPS, the default is 30 seconds.
+                                             If the
+                                             target group protocol is GENEVE, the default is 10 seconds. If the target type is
+                                             <code class="code">lambda</code>, the default is 35 seconds.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -116,9 +120,8 @@ Properties:
                                           
                                           <p>[HTTP1 or HTTP2 protocol version] The ping path. The default is /.</p>
                                           
-                                          <p>[GRPC protocol version] The path of a custom health check method with the format /package.service/method.
-                                             
-                                             The default is /AWS.ALB/healthcheck.
+                                          <p>[GRPC protocol version] The path of a custom health check method with the format
+                                             /package.service/method. The default is /AWS.ALB/healthcheck.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -169,13 +172,13 @@ Properties:
                                        <dd>
                                           
                                           <p>The amount of time, in seconds, during which no response from a target means a failed
-                                             health check. 
-                                             For target groups with a protocol of HTTP, HTTPS, or GENEVE, the default is 5 seconds.
-                                             
-                                             For target groups with a protocol of TCP or TLS, this value must be 6 seconds for
-                                             HTTP health checks 
-                                             and 10 seconds for TCP and HTTPS health checks.
-                                             If the target type is <code class="code">lambda</code>, the default is 30 seconds.
+                                             health check. For target groups with a protocol of HTTP, HTTPS, or GENEVE, the default
+                                             is 5
+                                             seconds. For target groups with a protocol of TCP or TLS, this value must be 6 seconds
+                                             for
+                                             HTTP health checks and 10 seconds for TCP and HTTPS health checks. If the target type
+                                             is
+                                             <code class="code">lambda</code>, the default is 30 seconds.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -209,7 +212,6 @@ Properties:
                                        <dd>
                                           
                                           <p>[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful
-                                             
                                              response from a target.
                                           </p>
                                           
@@ -224,8 +226,8 @@ Properties:
                                           <p>The name of the target group.</p>
                                           
                                           <p>This name must be unique per region per account, can have a maximum of 32 characters,
-                                             must contain only alphanumeric characters or hyphens, and must not begin or end with
-                                             a
+                                             must
+                                             contain only alphanumeric characters or hyphens, and must not begin or end with a
                                              hyphen.
                                           </p>
                                           
@@ -240,9 +242,9 @@ Properties:
                                           
                                           <p>The port on which the targets receive traffic. This port is used unless you specify
                                              a port
-                                             override when registering the target. 
-                                             If the target is a Lambda function, this parameter does not apply. 
-                                             If the protocol is GENEVE, the supported port is 6081.
+                                             override when registering the target. If the target is a Lambda function, this parameter
+                                             does
+                                             not apply. If the protocol is GENEVE, the supported port is 6081.
                                           </p>
                                           
                                           <p><em>Required</em>: Conditional
@@ -256,13 +258,13 @@ Properties:
                                        <dt><a id="cfn-elasticloadbalancingv2-targetgroup-protocol"></a><span class="term"><code class="code">Protocol</code></span></dt>
                                        <dd>
                                           
-                                          <p>The protocol to use for routing traffic to the targets. 
-                                             For Application Load Balancers, the supported protocols are HTTP and HTTPS. 
-                                             For Network Load Balancers, the supported protocols are TCP, TLS, UDP, or TCP_UDP.
-                                             
-                                             For Gateway Load Balancers, the supported protocol is GENEVE. 
-                                             A TCP_UDP listener must be associated with a TCP_UDP target group. 
-                                             If the target is a Lambda function, this parameter does not apply.
+                                          <p>The protocol to use for routing traffic to the targets. For Application Load Balancers,
+                                             the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported
+                                             protocols are TCP, TLS, UDP, or TCP_UDP. For Gateway Load Balancers, the supported
+                                             protocol is
+                                             GENEVE. A TCP_UDP listener must be associated with a TCP_UDP target group. If the
+                                             target is a
+                                             Lambda function, this parameter does not apply.
                                           </p>
                                           
                                           <p><em>Required</em>: Conditional
@@ -270,6 +272,19 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Allowed values</em>: <code class="code">GENEVE | HTTP | HTTPS | TCP | TCP_UDP | TLS | UDP</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-elasticloadbalancingv2-targetgroup-protocolversion"></a><span class="term"><code class="code">ProtocolVersion</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>[HTTP/HTTPS protocol] The protocol version. The possible values are <code class="code">GRPC</code>,
+                                             <code class="code">HTTP1</code>, and <code class="code">HTTP2</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-elasticloadbalancingv2-targetgroup-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
@@ -319,18 +334,19 @@ Properties:
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">instance</code> - Register targets by instance ID. This is the default value.
+                                                      <code class="code">instance</code> - Register targets by instance ID. This is the default
+                                                      value.
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">ip</code> - Register targets by IP address. You can specify IP addresses 
-                                                      from the subnets of the virtual private cloud (VPC) for the target group, the RFC
-                                                      1918 
-                                                      range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range 
-                                                      (100.64.0.0/10). You can&apos;t specify publicly routable IP addresses.
+                                                      <code class="code">ip</code> - Register targets by IP address. You can specify IP addresses from
+                                                      the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918
+                                                      range
+                                                      (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10).
+                                                      You can&apos;t specify publicly routable IP addresses.
                                                    </p>
                                                    
                                                 </li>
@@ -375,7 +391,6 @@ Properties:
                                        <dd>
                                           
                                           <p>The identifier of the virtual private cloud (VPC). If the target is a Lambda function,
-                                             
                                              this parameter does not apply. Otherwise, this parameter is required.
                                           </p>
                                           
@@ -407,14 +422,16 @@ Properties:
                                        <dd>
                                           
                                           <p>The Amazon Resource Names (ARNs) of the load balancers that route traffic to this
-                                             target group.
+                                             target
+                                             group.
                                           </p>
                                           
                                        </dd>
                                        <dt><a id="TargetGroupFullName-fn::getatt"></a><span class="term"><code class="code">TargetGroupFullName</code></span></dt>
                                        <dd>
                                           
-                                          <p>The full name of the target group. For example, <code class="code">targetgroup/my-target-group/cbf133c568e0d028</code>.
+                                          <p>The full name of the target group. For example,
+                                             <code class="code">targetgroup/my-target-group/cbf133c568e0d028</code>.
                                           </p>
                                           
                                        </dd>
@@ -428,7 +445,9 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-elasticloadbalancingv2-targetgroup--examples">Examples</h2>
-                                 <p>The following example creates a target group where the target is a Lambda function.</p>
+                                 <p>The following example creates a target group where the target is a Lambda
+                                    function.
+                                 </p>
                                  <h3 id="aws-resource-elasticloadbalancingv2-targetgroup--examples--"></h3>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h4 id="aws-resource-elasticloadbalancingv2-targetgroup--examples----yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
@@ -503,13 +522,14 @@ Properties:
                                      
                                      
                                      
+                                     
                                     
                                     <ul class="itemizedlist" type="disc">
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateTargetGroup.html">CreateTargetGroup</a> in the
-                                             <em>Elastic Load Balancing API Reference (version 2015-12-01)</em>
+                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateTargetGroup.html">CreateTargetGroup</a> in the <em>Elastic Load Balancing API
+                                                Reference (version 2015-12-01)</em>
                                              
                                           </p>
                                           
@@ -517,8 +537,8 @@ Properties:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html">Target Groups</a> 
-                                             in the <em>User Guide for Application Load Balancers</em> 
+                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html">Target groups</a> in the <em>User Guide for Application Load
+                                                Balancers</em>
                                              
                                           </p>
                                           
@@ -526,8 +546,18 @@ Properties:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html">Target Groups</a> 
-                                             in the <em>User Guide for Network Load Balancers</em>
+                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html">Target groups</a> in the <em>User Guide for Network Load
+                                                Balancers</em>
+                                             
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>
+                                             <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/target-groups.html">Target
+                                                groups</a> in the <em>User Guide for Gateway Load
+                                                Balancers</em>
                                              
                                           </p>
                                           
@@ -545,7 +575,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

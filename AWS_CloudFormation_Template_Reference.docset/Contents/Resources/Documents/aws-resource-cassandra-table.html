@@ -30,8 +30,10 @@
       &quot;<a href="#cfn-cassandra-table-clusteringkeycolumns">ClusteringKeyColumns</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-cassandra-table-clusteringkeycolumn.html">ClusteringKeyColumn</a>, ... ]</code>,
       &quot;<a href="#cfn-cassandra-table-keyspacename">KeyspaceName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-cassandra-table-partitionkeycolumns">PartitionKeyColumns</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-cassandra-table-column.html">Column</a>, ... ]</code>,
+      &quot;<a href="#cfn-cassandra-table-pointintimerecoveryenabled">PointInTimeRecoveryEnabled</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-cassandra-table-regularcolumns">RegularColumns</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-cassandra-table-column.html">Column</a>, ... ]</code>,
-      &quot;<a href="#cfn-cassandra-table-tablename">TableName</a>&quot; : <code class="replaceable">String</code>
+      &quot;<a href="#cfn-cassandra-table-tablename">TableName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-cassandra-table-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
 }
 </code></pre></div>
@@ -45,9 +47,12 @@ Properties:
   <a href="#cfn-cassandra-table-keyspacename">KeyspaceName</a>: <code class="replaceable">String</code>
   <a href="#cfn-cassandra-table-partitionkeycolumns">PartitionKeyColumns</a>: <code class="replaceable">
     - <a href="./aws-properties-cassandra-table-column.html">Column</a></code>
+  <a href="#cfn-cassandra-table-pointintimerecoveryenabled">PointInTimeRecoveryEnabled</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-cassandra-table-regularcolumns">RegularColumns</a>: <code class="replaceable">
     - <a href="./aws-properties-cassandra-table-column.html">Column</a></code>
   <a href="#cfn-cassandra-table-tablename">TableName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-cassandra-table-tags">Tags</a>: <code class="replaceable">
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
 </code></pre></div>
                                  <h2 id="aws-resource-cassandra-table-properties">Properties</h2>
                                  <div class="variablelist">
@@ -125,6 +130,21 @@ Properties:
                                           <p><em>Type</em>: List of <a href="./aws-properties-cassandra-table-column.html">Column</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
+                                       <dt><a id="cfn-cassandra-table-pointintimerecoveryenabled"></a><span class="term"><code class="code">PointInTimeRecoveryEnabled</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies if point-in-time recovery is enabled or disabled for the table. The options
+                                             are <code class="code">PointInTimeRecoveryEnabled=true</code> and
+                                             <code class="code">PointInTimeRecoveryEnabled=false</code>. 
+                                             If not specified, the default is <code class="code">PointInTimeRecoveryEnabled=false</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-cassandra-table-regularcolumns"></a><span class="term"><code class="code">RegularColumns</code></span></dt>
                                        <dd>
                                           
@@ -141,7 +161,8 @@ Properties:
                                        <dt><a id="cfn-cassandra-table-tablename"></a><span class="term"><code class="code">TableName</code></span></dt>
                                        <dd>
                                           
-                                          <p>The name of the table to be created. If you don&apos;t specify a name, AWS CloudFormation
+                                          <p>The name of the table to be created. The table name is case sensitive. If you don&apos;t
+                                             specify a name, AWS CloudFormation
                                              generates a unique ID and uses that ID for the table name. For more information, see
                                              <a href="aws-properties-name.html">Name
                                                 Type</a>.
@@ -173,6 +194,18 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-cassandra-table-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A list of key-value pair tags to be
+                                             attached to the resource.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>
                                  </div>
@@ -258,10 +291,6 @@ Resources:
             &quot;ColumnType&quot;:&quot;TEXT&quot;
           },
           <span>{</span>
-            &quot;ColumnName&quot;:&quot;division&quot;,
-            &quot;ColumnType&quot;:&quot;TEXT&quot;
-          },
-          <span>{</span>
             &quot;ColumnName&quot;:&quot;project&quot;,
             &quot;ColumnType&quot;:&quot;TEXT&quot;
           },
@@ -314,8 +343,6 @@ Resources:
         ColumnType: TEXT
       - ColumnName: region
         ColumnType: TEXT
-      - ColumnName: division
-        ColumnType: TEXT
       - ColumnName: project
         ColumnType: TEXT
       - ColumnName: role
@@ -331,6 +358,119 @@ Resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5</code></pre></div>
+                                 <h3 id="aws-resource-cassandra-table--examples--Create_a_Table_with_Point-in-time_Recovery_enabled_and_with_tags.">Create a Table with Point-in-time Recovery enabled and with tags.</h3>
+                                 <p>The following example creates a table with point-in-time enabled and with tags.</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-cassandra-table--examples--Create_a_Table_with_Point-in-time_Recovery_enabled_and_with_tags.--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+   &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+   &quot;Resources&quot;: <span>{</span>
+      &quot;mySecondTable&quot;: <span>{</span>
+         &quot;Type&quot;: &quot;AWS::Cassandra::Table&quot;,
+         &quot;Properties&quot;: <span>{</span>
+            &quot;KeyspaceName&quot;: &quot;MyNewKeyspace&quot;,
+            &quot;TableName&quot;: &quot;Employees&quot;,
+            &quot;PartitionKeyColumns&quot;: [
+               <span>{</span>
+                  &quot;ColumnName&quot;: &quot;id&quot;,
+                  &quot;ColumnType&quot;: &quot;ASCII&quot;
+               }
+            ],
+            &quot;ClusteringKeyColumns&quot;: [
+               <span>{</span>
+                  &quot;Column&quot;: <span>{</span>
+                     &quot;ColumnName&quot;: &quot;division&quot;,
+                     &quot;ColumnType&quot;: &quot;ASCII&quot;
+                  },
+                  &quot;OrderBy&quot;: &quot;ASC&quot;
+               }
+            ],
+            &quot;RegularColumns&quot;: [
+               <span>{</span>
+                  &quot;ColumnName&quot;: &quot;name&quot;,
+                  &quot;ColumnType&quot;: &quot;TEXT&quot;
+               },
+               <span>{</span>
+                  &quot;ColumnName&quot;: &quot;region&quot;,
+                  &quot;ColumnType&quot;: &quot;TEXT&quot;
+               },
+               <span>{</span>
+                  &quot;ColumnName&quot;: &quot;project&quot;,
+                  &quot;ColumnType&quot;: &quot;TEXT&quot;
+               },
+               <span>{</span>
+                  &quot;ColumnName&quot;: &quot;role&quot;,
+                  &quot;ColumnType&quot;: &quot;TEXT&quot;
+               },
+               <span>{</span>
+                  &quot;ColumnName&quot;: &quot;pay_scale&quot;,
+                  &quot;ColumnType&quot;: &quot;TEXT&quot;
+               },
+               <span>{</span>
+                  &quot;ColumnName&quot;: &quot;vacation_hrs&quot;,
+                  &quot;ColumnType&quot;: &quot;FLOAT&quot;
+               },
+               <span>{</span>
+                  &quot;ColumnName&quot;: &quot;manager_id&quot;,
+                  &quot;ColumnType&quot;: &quot;TEXT&quot;
+               }
+            ],
+            &quot;PointInTimeRecoveryEnabled&quot;: true,
+            &quot;Tags&quot;: [
+               <span>{</span>
+                  &quot;Key&quot;: &quot;tag1&quot;,
+                  &quot;Value&quot;: &quot;val1&quot;
+               },
+               <span>{</span>
+                  &quot;Key&quot;: &quot;tag2&quot;,
+                  &quot;Value&quot;: &quot;val2&quot;
+               }
+            ]
+         }
+      }
+   }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-cassandra-table--examples--Create_a_Table_with_Point-in-time_Recovery_enabled_and_with_tags.--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &apos;2010-09-09&apos;
+Resources:
+  mySecondTable:
+    Type: AWS::Cassandra::Table
+    Properties:
+      KeyspaceName: MyNewKeyspace
+      TableName: Employees
+      PartitionKeyColumns:
+      - ColumnName: id
+        ColumnType: ASCII
+      ClusteringKeyColumns:
+      - Column:
+          ColumnName: division
+          ColumnType: ASCII
+        OrderBy: ASC
+      RegularColumns:
+      - ColumnName: name
+        ColumnType: TEXT
+      - ColumnName: region
+        ColumnType: TEXT
+      - ColumnName: project
+        ColumnType: TEXT
+      - ColumnName: role
+        ColumnType: TEXT
+      - ColumnName: pay_scale
+        ColumnType: TEXT
+      - ColumnName: vacation_hrs
+        ColumnType: FLOAT
+      - ColumnName: manager_id
+        ColumnType: TEXT
+      BillingMode:
+        Mode: PROVISIONED
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+      PointInTimeRecoveryEnabled: true
+      Tags:
+        - Key: tag1
+          Value: val1
+        - Key: tag2
+          Value: val2</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -341,7 +481,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

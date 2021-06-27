@@ -19,7 +19,8 @@
                                  <p>A <em>broker</em> is a message broker environment running on Amazon MQ. It is
                                     the basic building block of Amazon MQ.
                                  </p>
-                                 <p>The <code class="code">AWS::AmazonMQ::Broker</code> resource lets you create Amazon MQ brokers, add
+                                 <p>The <code class="code">AWS::AmazonMQ::Broker</code> resource lets you create Amazon MQ for ActiveMQ and Amazon MQ for RabbitMQ brokers,
+                                    add
                                     configuration changes or modify users for a speified ActiveMQ broker, return information
                                     about the
                                     specified broker, and delete the broker. For more information, see <a href="https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/amazon-mq-how-it-works.html">How Amazon MQ works</a> in the <em>Amazon MQ Developer
@@ -186,9 +187,10 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>Enables automatic upgrades to new minor versions for brokers, as new engine versions
-                                             are released. The automatic upgrades occur during the maintenance window of the broker
-                                             or after a
+                                          <p>Enables automatic upgrades to new minor versions for brokers, as new broker engine
+                                             versions
+                                             are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled
+                                             maintenance window of the broker or after a
                                              manual broker reboot.
                                           </p>
                                           
@@ -218,11 +220,11 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>A list of information about the configuration.<span> Does not apply to RabbitMQ brokers.</span></p>
+                                          <p>A list of information about the configuration. Does not apply to RabbitMQ brokers.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-amazonmq-broker-configurationid.html">ConfigurationId</a></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
                                        </dd>
                                        <dt><a id="cfn-amazonmq-broker-deploymentmode"></a><span class="term"><code class="code">DeploymentMode</code></span></dt>
                                        <dd>
@@ -258,7 +260,7 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>Encryption options for the broker.<span> Does not apply to RabbitMQ brokers.</span></p>
+                                          <p>Encryption options for the broker. Does not apply to RabbitMQ brokers.</p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-amazonmq-broker-encryptionoptions.html">EncryptionOptions</a></p>
@@ -268,7 +270,7 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ<span> and RABBITMQ</span>.
+                                          <p>The type of broker engine. Currently, Amazon MQ supports <code class="code">ACTIVEMQ</code> and <code class="code">RABBITMQ</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -300,14 +302,15 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt">Some interruptions</a></p>
                                        </dd>
                                        <dt><a id="cfn-amazonmq-broker-ldapservermetadata"></a><span class="term"><code class="code">LdapServerMetadata</code></span></dt>
                                        <dd>
                                           
                                           
                                           <p>Optional. The metadata of the LDAP server used to authenticate and authorize
-                                             connections to the broker.<span> Does not apply to RabbitMQ brokers.</span></p>
+                                             connections to the broker. Does not apply to RabbitMQ brokers.
+                                          </p>
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-amazonmq-broker-ldapservermetadata.html">LdapServerMetadata</a></p>
@@ -384,9 +387,11 @@ Properties:
                                              Zones. Amazon MQ will not be able to create
                                              VPC endpoints for your broker with multiple subnets in the same Availability Zone.
                                              A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet).
-                                             An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets.<span> A CLUSTER_MULTI_AZ deployment (RABBITMQ)
-                                                has no subnet requirements when deployed with public accessibility, deployment without
-                                                public accessibility requires at least one subnet.</span></p>
+                                             An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ
+                                             deployment (RABBITMQ)
+                                             has no subnet requirements when deployed with public accessibility, deployment without
+                                             public accessibility requires at least one subnet.
+                                          </p>
                                           
                                           <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
@@ -427,10 +432,10 @@ Properties:
                                           
                                           
                                           <p>The list of ActiveMQ users (persons or applications) who can access queues and topics.
-                                             <span>For RabbitMQ brokers, one and only one administrative user is accepted and created
-                                                when a broker is first provisioned.
-                                                All subsequent RabbitMQ users are created by via the RabbitMQ web console or by using
-                                                the RabbitMQ management API.</span>
+                                             For RabbitMQ brokers, one and only one administrative user is accepted and created
+                                             when a broker is first provisioned.
+                                             All subsequent RabbitMQ users are created by via the RabbitMQ web console or by using
+                                             the RabbitMQ management API.
                                              This value can contain only alphanumeric characters, dashes, periods, underscores,
                                              and tildes
                                              (- . _ ~). This value must be 2-100 characters long.
@@ -511,7 +516,9 @@ Properties:
                                        <dt><a id="IpAddresses-fn::getatt"></a><span class="term"><code class="code">IpAddresses</code></span></dt>
                                        <dd>
                                           
-                                          <p>The IP addresses of each broker instance as a list of strings.<span> Does not apply to RabbitMQ brokers.</span></p>
+                                          <p>The IP addresses of each broker instance as a list of strings. Does not apply to RabbitMQ
+                                             brokers.
+                                          </p>
                                           
                                           <p>
                                              <code class="code">[&apos;198.51.100.2&apos;, &apos;203.0.113.9&apos;]</code>
@@ -571,19 +578,9 @@ Properties:
                                     a broker with one administrative user,
                                     while the ActiveMQ example creates a broker with one user that belongs to a group.
                                  </p>
-                                 <div class="awsdocs-note">
-                                    <div class="awsdocs-note-title">
-                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
-                                    <div class="awsdocs-note-text">
-                                       <p>We don&apos;t recommend including plaintext passwords in AWS CloudFormation templates.
-                                          To
-                                          securely retrieve your user credentials, add a <code class="code">Ref</code> to your template.
-                                       </p>
-                                    </div>
-                                 </div>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-amazonmq-broker--examples--Basic_Amazon_MQ_Broker--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Description&quot;: &quot;Create a basic ActiveMQ broker&quot;,
+  &quot;Description&quot;: &quot;Create a basic Amazon MQ for ActiveMQ broker&quot;,
   &quot;Resources&quot;: <span>{</span>
     &quot;BasicBroker&quot;: <span>{</span>
       &quot;Type&quot;: &quot;AWS::AmazonMQ::Broker&quot;,
@@ -601,8 +598,8 @@ Properties:
             &quot;Groups&quot;: [
               &quot;MyGroup&quot;
             ],
-            &quot;Password&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqPassword&quot; },
-            &quot;Username&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqUsername&quot; }
+            &quot;Password&quot; : &quot;AmazonMqPassword&quot;,
+            &quot;Username&quot; : &quot;AmazonMqUsername&quot;
           }
         ]
       }
@@ -611,7 +608,7 @@ Properties:
 }</code></pre></div>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-amazonmq-broker--examples--Basic_Amazon_MQ_Broker--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-&quot;Description&quot;: &quot;Create a basic RabbitMQ broker&quot;,
+&quot;Description&quot;: &quot;Create a basic Amazon MQ for RabbitMQ broker&quot;,
 &quot;Resources&quot;: <span>{</span>
   &quot;BasicBroker&quot;: <span>{</span>
     &quot;Type&quot;: &quot;AWS::AmazonMQ::Broker&quot;,
@@ -625,8 +622,8 @@ Properties:
       &quot;PubliclyAccessible&quot;: &quot;true&quot;,
       &quot;Users&quot;: [
           <span>{</span>
-            &quot;Password&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqPassword&quot; },
-            &quot;Username&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqUsername&quot; }
+            &quot;Password&quot; : &quot;AmazonMqPassword&quot;,
+            &quot;Username&quot; : &quot;AmazonMqUsername&quot;
           }
         ]
       }
@@ -635,7 +632,7 @@ Properties:
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h4 id="aws-resource-amazonmq-broker--examples--Basic_Amazon_MQ_Broker--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- 
-Description: &quot;Create a basic ActiveMQ broker&quot;
+Description: &quot;Create a basic Amazon MQ for ActiveMQ broker&quot;
 Resources: 
   BasicBroker:
     Type: &quot;AWS::AmazonMQ::Broker&quot;
@@ -652,13 +649,11 @@ Resources:
           ConsoleAccess: &quot;true&quot;
           Groups: 
             - MyGroup
-          Password: 
-            Ref: AmazonMqPassword           
-          Username: 
-            Ref: AmazonMqUsername</code></pre></div>
+          Password: AmazonMqPassword           
+          Username: AmazonMqUsername</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h4 id="aws-resource-amazonmq-broker--examples--Basic_Amazon_MQ_Broker--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">--- 
-Description: &quot;Create a basic RabbitMQ broker&quot;
+Description: &quot;Create a basic Amazon MQ for RabbitMQ broker&quot;
 Resources: 
   BasicBroker:
     Type: &quot;AWS::AmazonMQ::Broker&quot;
@@ -672,20 +667,19 @@ Resources:
       PubliclyAccessible: &quot;true&quot;
       Users: 
         - 
-          Password: 
-            Ref: AmazonMqPassword            
-          Username: 
-            Ref: AmazonMqUsername</code></pre></div>
+          Password: AmazonMqPassword            
+          Username: AmazonMqUsername</code></pre></div>
                                  <h3 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker">Complex Amazon MQ Broker</h3>
                                  <p>The following example creates a complex Amazon MQ broker. The ActiveMQ example
                                     creates a broker with two users that don&apos;t belong to a group and one user that belongs
                                     in a group.
-                                    <span>The RabbitMQ example creates one administrator user, which can then create and manage
-                                       other
-                                       users via the RabbitMQ web console or the management API.</span></p>
+                                    The RabbitMQ example creates one administrator user, which can then create and manage
+                                    other
+                                    users via the RabbitMQ web console or the management API.
+                                 </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Description&quot;: &quot;Create a complex ActiveMQ broker&quot;,
+  &quot;Description&quot;: &quot;Create a complex, single-instance Amazon MQ for ActiveMQ broker&quot;,
   &quot;Resources&quot;: <span>{</span>
     &quot;ComplexBroker&quot;: <span>{</span>
       &quot;Type&quot;: &quot;AWS::AmazonMQ::Broker&quot;,
@@ -720,18 +714,18 @@ Resources:
         ],         
         &quot;Users&quot;: [<span>{</span>
           &quot;ConsoleAccess&quot;: &quot;true&quot;,
-          &quot;Password&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqPassword&quot; },
-          &quot;Username&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqUsername&quot; }
+          &quot;Password&quot; : &quot;AmazonMqPassword&quot;,
+          &quot;Username&quot; : &quot;AmazonMqUsername&quot;
         }, <span>{</span>
-          &quot;Password&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqPassword2&quot; },
-          &quot;Username&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqUsername2&quot; }
+          &quot;Password&quot; : &quot;AmazonMqPassword2&quot;,
+          &quot;Username&quot; : &quot;AmazonMqUsername2&quot;
         }, <span>{</span>
           &quot;Groups&quot;: [
             &quot;MyGroup1&quot;,
             &quot;MyGroup2&quot;
           ],
-          &quot;Password&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqPassword3&quot; },          
-          &quot;Username&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqUsername3&quot; }
+          &quot;Password&quot; : &quot;AmazonMqPassword3&quot;,          
+          &quot;Username&quot; : &quot;AmazonMqUsername3&quot; 
         }]
       }
     }
@@ -739,7 +733,7 @@ Resources:
 }</code></pre></div>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Description&quot;: &quot;Create a single-instance RabbitMQ broker without public accessibility&quot;,
+  &quot;Description&quot;: &quot;Create a complex, single-instance Amazon MQ RabbitMQ broker without public accessibility&quot;,
   &quot;Resources&quot;: <span>{</span>
     &quot;ComplexBroker&quot;: <span>{</span>
       &quot;Type&quot;: &quot;AWS::AmazonMQ::Broker&quot;,
@@ -767,8 +761,8 @@ Resources:
         ],
         &quot;Users&quot;: [
           <span>{</span>
-            &quot;Password&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqPassword&quot; },
-            &quot;Username&quot; : <span>{</span> &quot;Ref&quot; : &quot;AmazonMqUsername&quot; }
+            &quot;Password&quot; : &quot;AmazonMqPassword&quot;,
+            &quot;Username&quot; : &quot;AmazonMqUsername&quot;
           }
         ]
       }
@@ -776,7 +770,7 @@ Resources:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: Create a complex ActiveMQ broker
+                                    <h4 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: Create a complex, single-instance Amazon MQ for ActiveMQ broker
 Resources:
   ComplexBroker:
     Type: &apos;AWS::AmazonMQ::Broker&apos;
@@ -808,18 +802,18 @@ Resources:
         - subnet-67d8e90f
       Users:
         - ConsoleAccess: &apos;true&apos;
-          Password: !Ref AmazonMqPassword
-          Username: !Ref AmazonMqUsername
-        - Password: !Ref AmazonMqPassword2
-          Username: !Ref AmazonMqUsername2
+          Password: AmazonMqPassword
+          Username: AmazonMqUsername
+        - Password: AmazonMqPassword2
+          Username: AmazonMqUsername2
         - Groups:
             - MyGroup1
             - MyGroup2
-          Password: !Ref AmazonMqPassword3
-          Username: !Ref AmazonMqUsername3
+          Password: AmazonMqPassword3
+          Username: AmazonMqUsername3
 </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: Create a single-instance RabbitMQ broker without public accessibility
+                                    <h4 id="aws-resource-amazonmq-broker--examples--Complex_Amazon_MQ_Broker--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: Create a single-instance Amazon MQ for RabbitMQ broker without public accessibility
 Resources:
   ComplexBroker:
     Type: &apos;AWS::AmazonMQ::Broker&apos;
@@ -842,8 +836,8 @@ Resources:
       SubnetIds:
         - &apos;subnet-123456b7891abcd1f&apos;
       Users:
-        - Password: !Ref AmazonMqPassword
-          Username: !Ref AmazonMqUsername
+        - Password: AmazonMqPassword
+          Username: AmazonMqUsername
       </code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
@@ -855,7 +849,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -19,11 +19,34 @@
                                  <p>The <code class="code">AWS::Lambda::Function</code> resource creates a Lambda function. To create a function, you need a
                                     <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html">deployment package</a> and an
                                     <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html">execution role</a>.
-                                    The deployment package contains your function code. The execution role grants the
-                                    function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming
-                                    and AWS X-Ray for
-                                    request tracing.
+                                    The deployment package is a .zip file  archive or container image that contains your
+                                    function code. 
+                                    The execution role grants the function permission to use AWS services, such as Amazon
+                                    CloudWatch Logs 
+                                    for log streaming and AWS X-Ray for request tracing.
                                  </p>
+                                 <p>You set the package type to <code class="code">Image</code> if the deployment package is a 
+                                    <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html">container image</a>. For a container image, 
+                                    the code property must include the URI of a container image in the Amazon ECR registry.
+                                    You do not need to specify the handler and runtime properties. 
+                                 </p>
+                                 <p>You set the package type to <code class="code">Zip</code> if the deployment package is a 
+                                    <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip">.zip file archive</a>. 
+                                    For a .zip file archive, the code property specifies the location of the .zip file.
+                                    You must also specify the handler and
+                                    runtime properties.
+                                 </p>
+                                 <p>You can use <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html">code signing</a> 
+                                    if your deployment package is a .zip file archive. To enable code signing for this
+                                    function, 
+                                    specify the ARN of a code-signing configuration. When a user
+                                    attempts to deploy a code package with <code class="code">UpdateFunctionCode</code>, Lambda checks that the code
+                                    package has a valid signature from a trusted publisher. The code-signing configuration
+                                    includes a set of signing profiles, which define the trusted publishers for this function.
+                                 </p>
+                                 <p>For a complete introduction to Lambda functions, see 
+                                    <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-welcome.html">What is Lambda?</a>
+                                    in the <em>Lambda developer guide.</em></p>
                                  <h2 id="aws-resource-lambda-function-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -149,8 +172,11 @@ Properties:
                                           
                                           
                                           <p>Connection settings for an Amazon EFS file system. To connect a function to a file
-                                             system, a mount target must be available in every Availability Zone that your function
-                                             connects to. If your template contains an <a href="aws-resource-efs-mounttarget.html">AWS::EFS::MountTarget</a> resource, you must also specify a <code class="code">DependsOn</code> attribute to ensure that the mount target is created or updated before the function.
+                                             system, a mount target must be available 
+                                             in every Availability Zone that your function connects to. If your template contains
+                                             an 
+                                             <a href="aws-resource-efs-mounttarget.html">AWS::EFS::MountTarget</a> resource, 
+                                             you must also specify a <code class="code">DependsOn</code> attribute to ensure that the mount target is created or updated before the function.
                                           </p>
                                           
                                           <p>For more information about using the <code class="code">DependsOn</code> attribute, see <a href="aws-attribute-dependson.html">DependsOn Attribute</a>.
@@ -167,8 +193,8 @@ Properties:
                                        <dd>
                                           
                                           <p>The name of the Lambda function, up to 64 characters in length. If you don&apos;t specify
-                                             a name, AWS
-                                             CloudFormation generates one.
+                                             a name, AWS CloudFormation 
+                                             generates one.
                                           </p>
                                           
                                           <p>If you specify a name, you cannot perform updates that require replacement of this
@@ -204,9 +230,8 @@ Properties:
                                        <dt><a id="cfn-lambda-function-imageconfig"></a><span class="term"><code class="code">ImageConfig</code></span></dt>
                                        <dd>
                                           
-                                          <p>Configuration values that override the container image Dockerfile settings. See  
-                                             
-                                             <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html">Container settings</a>. 
+                                          <p>Configuration values that override the container image Dockerfile settings. See
+                                             <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms">Container settings</a>. 
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -246,9 +271,9 @@ Properties:
                                        <dt><a id="cfn-lambda-function-memorysize"></a><span class="term"><code class="code">MemorySize</code></span></dt>
                                        <dd>
                                           
-                                          <p>The amount of memory available to the function at runtime. Increasing the function&apos;s
-                                             memory also increases its CPU
-                                             allocation. The default value is 128 MB. The value can be any multiple of 1 MB.
+                                          <p>The amount of  <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html">memory available to the function</a> at runtime.
+                                             Increasing the function memory also increases its CPU allocation. The default value
+                                             is 128 MB. The value can be any multiple of 1 MB.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -260,7 +285,7 @@ Properties:
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-lambda-function-packagetype"></a><span class="term"><code class="code">PackageType</code></span></dt>
-                                       <dd> 
+                                       <dd>
                                           
                                           <p>The type of deployment package. Set to <code class="code">Image</code> for container image and set <code class="code">Zip</code> for .zip file archive.
                                           </p>
@@ -307,9 +332,9 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Allowed values</em>: <code class="code">dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | go1.x | java11 | java8
-                                                | java8.al2 | nodejs | nodejs10.x | nodejs12.x | nodejs4.3 | nodejs4.3-edge | nodejs6.10
-                                                | nodejs8.10 | provided | provided.al2 | python2.7 | python3.6 | python3.7 | python3.8
-                                                | ruby2.5 | ruby2.7</code></p>
+                                                | java8.al2 | nodejs | nodejs10.x | nodejs12.x | nodejs14.x | nodejs4.3 | nodejs4.3-edge
+                                                | nodejs6.10 | nodejs8.10 | provided | provided.al2 | python2.7 | python3.6 | python3.7
+                                                | python3.8 | ruby2.5 | ruby2.7</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-lambda-function-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
@@ -329,7 +354,7 @@ Properties:
                                           
                                           <p>The amount of time that Lambda allows a function to run before stopping it. The default
                                              is 3 seconds. The
-                                             maximum allowed value is 900 seconds.
+                                             maximum allowed value is 900 seconds. For additional information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html">Lambda execution environment</a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -342,8 +367,8 @@ Properties:
                                        <dt><a id="cfn-lambda-function-tracingconfig"></a><span class="term"><code class="code">TracingConfig</code></span></dt>
                                        <dd>
                                           
-                                          <p>Set <code class="code">Mode</code> to <code class="code">Active</code> to sample and trace a subset of incoming requests with AWS
-                                             X-Ray.
+                                          <p>Set <code class="code">Mode</code> to <code class="code">Active</code> to sample and trace a subset of incoming requests with
+                                             <a href="https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html">X-Ray</a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -354,9 +379,8 @@ Properties:
                                        <dt><a id="cfn-lambda-function-vpcconfig"></a><span class="term"><code class="code">VpcConfig</code></span></dt>
                                        <dd>
                                           
-                                          <p>For network connectivity to AWS resources in a VPC, specify a list of security groups
-                                             and subnets in the
-                                             VPC.
+                                          <p>For network connectivity to AWS resources in a <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-network.html">VPC</a>, 
+                                             specify a list of security groups and subnets in the VPC.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -490,7 +514,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

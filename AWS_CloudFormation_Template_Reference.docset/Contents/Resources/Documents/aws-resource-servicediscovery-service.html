@@ -88,7 +88,8 @@
       &quot;<a href="#cfn-servicediscovery-service-healthcheckcustomconfig">HealthCheckCustomConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-servicediscovery-service-healthcheckcustomconfig.html">HealthCheckCustomConfig</a></code>,
       &quot;<a href="#cfn-servicediscovery-service-name">Name</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-servicediscovery-service-namespaceid">NamespaceId</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-servicediscovery-service-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
+      &quot;<a href="#cfn-servicediscovery-service-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
+      &quot;<a href="#cfn-servicediscovery-service-type">Type</a>&quot; : <code class="replaceable">String</code>
     }
 }
 </code></pre></div>
@@ -106,6 +107,7 @@ Properties:
   <a href="#cfn-servicediscovery-service-namespaceid">NamespaceId</a>: <code class="replaceable">String</code>
   <a href="#cfn-servicediscovery-service-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
+  <a href="#cfn-servicediscovery-service-type">Type</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-resource-servicediscovery-service-properties">Properties</h2>
                                  <div class="variablelist">
@@ -125,7 +127,7 @@ Properties:
                                        <dt><a id="cfn-servicediscovery-service-dnsconfig"></a><span class="term"><code class="code">DnsConfig</code></span></dt>
                                        <dd>
                                           
-                                          <p>A complex type that contains information about the Route&#xA0;53 DNS records that you want
+                                          <p>A complex type that contains information about the Route 53 DNS records that you want
                                              AWS Cloud Map to create when you
                                              register an instance.
                                           </p>
@@ -145,7 +147,7 @@ Properties:
                                              that you specify in <code class="code">DnsConfig</code>.
                                           </p>
                                           
-                                          <p>For information about the charges for health checks, see <a href="http://aws.amazon.com/route53/pricing/" rel="noopener noreferrer" target="_blank"><span>Amazon Route&#xA0;53 Pricing</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                          <p>For information about the charges for health checks, see <a href="http://aws.amazon.com/route53/pricing/" rel="noopener noreferrer" target="_blank"><span>Amazon Route 53 Pricing</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -194,7 +196,8 @@ Properties:
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>You must specify a value for <code class="code">NamespaceId</code> either for the service properties or for <a href="aws-properties-servicediscovery-service-dnsconfig.html">DnsConfig</a>. Don&apos;t specify a value in both places. 
+                                                <p>You must specify a value for <code class="code">NamespaceId</code> either for the service properties or for <a href="aws-properties-servicediscovery-service-dnsconfig.html">DnsConfig</a>.
+                                                   Don&apos;t specify a value in both places. 
                                                 </p>
                                              </div>
                                           </div>
@@ -222,6 +225,22 @@ Properties:
                                           <p><em>Maximum</em>: <code class="code">200</code></p>
                                           <p><em>Update requires</em>: Updates are not supported.
                                           </p>
+                                       </dd>
+                                       <dt><a id="cfn-servicediscovery-service-type"></a><span class="term"><code class="code">Type</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>If present, specifies that the service instances are only discoverable using the <code class="code">DiscoverInstances</code>
+                                             API operation. No DNS records is registered for the service instances. The only valid
+                                             value is
+                                             <code class="code">HTTP</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">HTTP</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                     </dl>
                                  </div>
@@ -268,8 +287,8 @@ Properties:
                                  <h3 id="aws-resource-servicediscovery-service--examples--Create_a_service">Create a service</h3>
                                  <p>The following example creates a service based on a public DNS namespace. The service
                                     includes settings for
-                                    Amazon Route 53 A and AAAA records that have a routing policy of <code class="code">WEIGHTED</code>. It also includes a
-                                    Route 53 health check.
+                                    Amazon Route 53 A and AAAA records that have a routing policy of <code class="code">WEIGHTED</code>. It also includes a Route 53
+                                    health check.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-servicediscovery-service--examples--Create_a_service--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -342,7 +361,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

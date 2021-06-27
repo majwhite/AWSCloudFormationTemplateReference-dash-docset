@@ -17,9 +17,9 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>The <code class="code">AWS::Detective::MemberInvitation</code> resource is an Amazon Detective
-                                    resource type that sends an invitation to join a Detective behavior graph. The
-                                    invitation is sent from the master account to the root user email address of an AWS
-                                    account.
+                                    resource type that creates an invitation to join a Detective behavior graph. The
+                                    administrator account can choose whether to send an email notification of the invitation
+                                    to the root user email address of the AWS account.
                                  </p>
                                  <h2 id="aws-resource-detective-memberinvitation-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -27,6 +27,7 @@
                                     <h3 id="aws-resource-detective-memberinvitation-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::Detective::MemberInvitation&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-detective-memberinvitation-disableemailnotification">DisableEmailNotification</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-detective-memberinvitation-grapharn">GraphArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-detective-memberinvitation-memberemailaddress">MemberEmailAddress</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-detective-memberinvitation-memberid">MemberId</a>&quot; : <code class="replaceable">String</code>,
@@ -37,6 +38,7 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-detective-memberinvitation-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Detective::MemberInvitation
 Properties: 
+  <a href="#cfn-detective-memberinvitation-disableemailnotification">DisableEmailNotification</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-detective-memberinvitation-grapharn">GraphArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-detective-memberinvitation-memberemailaddress">MemberEmailAddress</a>: <code class="replaceable">String</code>
   <a href="#cfn-detective-memberinvitation-memberid">MemberId</a>: <code class="replaceable">String</code>
@@ -45,6 +47,19 @@ Properties:
                                  <h2 id="aws-resource-detective-memberinvitation-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-detective-memberinvitation-disableemailnotification"></a><span class="term"><code class="code">DisableEmailNotification</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Whether to send an invitation email to the member account. If set to true, the member
+                                             account does not receive an invitation email.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-detective-memberinvitation-grapharn"></a><span class="term"><code class="code">GraphArn</code></span></dt>
                                        <dd>
                                           
@@ -106,7 +121,7 @@ Properties:
                                  <h3 id="aws-resource-detective-memberinvitation--examples--Sending_a_behavior_graph_invitation_to_a_member_account">Sending a behavior graph invitation to a member account</h3>
                                  <p>This example shows how to declare a new
                                     <code class="code">AWS:Detective:MemberInvitation</code> resource to create a new
-                                    invitation to a member account.
+                                    invitation to a member account and send an email notification.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-detective-memberinvitation--examples--Sending_a_behavior_graph_invitation_to_a_member_account--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;MemberInvitation&quot;: <span>{</span>
@@ -126,6 +141,29 @@ Properties:
       MemberId: 444455556666
       MemberEmailAddress: mmajor@example.com
       Message: This is Paul Santos. I need to add your account to the data we use for security investigation in Detective. If you have any questions, contact me at psantos@example.com.</code></pre></div>
+                                 <h3 id="aws-resource-detective-memberinvitation--examples--Blocking_the_email_notification_of_an_invitation_to_a_member_account">Blocking the email notification of an invitation to a member account</h3>
+                                 <p>This example shows how to declare a new
+                                    <code class="code">AWS:Detective:MemberInvitation</code> resource to create a new
+                                    invitation to a member account. The email notification is blocked.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-detective-memberinvitation--examples--Blocking_the_email_notification_of_an_invitation_to_a_member_account--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;MemberInvitation&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::Detective::MemberInvitation&quot;,
+    &quot;Properties&quot;: <span>{</span>
+        &quot;GraphArn&quot;: &quot;arn:aws:detective:us-east-1:111122223333:graph:027c7c4610ea4aacaf0b883093cab899&quot;,
+        &quot;MemberId&quot;: &quot;444455556666&quot;,
+        &quot;MemberEmailAddress&quot;: &quot;mmajor@example.com&quot;,
+        &quot;DisableEmailNotification&quot;: &quot;true&quot;
+     }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-detective-memberinvitation--examples--Blocking_the_email_notification_of_an_invitation_to_a_member_account--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MemberInvitation:
+    Type: AWS::Detective::MemberInvitation
+    Properties:
+      GraphArn: &quot;arn:aws:detective:us-east-1:111122223333:graph:027c7c4610ea4aacaf0b883093cab899&quot;
+      MemberId: 444455556666
+      MemberEmailAddress: mmajor@example.com
+      DisableEmailNotification: true</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -136,7 +174,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

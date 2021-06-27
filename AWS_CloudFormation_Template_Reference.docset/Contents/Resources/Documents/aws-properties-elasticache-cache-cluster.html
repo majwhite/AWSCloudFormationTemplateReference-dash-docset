@@ -34,6 +34,7 @@
       &quot;<a href="#cfn-elasticache-cachecluster-clustername">ClusterName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-elasticache-cachecluster-engine">Engine</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-elasticache-cachecluster-engineversion">EngineVersion</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-elasticache-cachecluster-logdeliveryconfigurations">LogDeliveryConfigurations</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-elasticache-cachecluster-logdeliveryconfigurationrequest.html">LogDeliveryConfigurationRequest</a>, ... ]</code>,
       &quot;<a href="#cfn-elasticache-cachecluster-notificationtopicarn">NotificationTopicArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-elasticache-cachecluster-numcachenodes">NumCacheNodes</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-elasticache-cachecluster-port">Port</a>&quot; : <code class="replaceable">Integer</code>,
@@ -62,6 +63,8 @@ Properties:
   <a href="#cfn-elasticache-cachecluster-clustername">ClusterName</a>: <code class="replaceable">String</code>
   <a href="#cfn-elasticache-cachecluster-engine">Engine</a>: <code class="replaceable">String</code>
   <a href="#cfn-elasticache-cachecluster-engineversion">EngineVersion</a>: <code class="replaceable">String</code>
+  <a href="#cfn-elasticache-cachecluster-logdeliveryconfigurations">LogDeliveryConfigurations</a>: <code class="replaceable">
+    - <a href="./aws-properties-elasticache-cachecluster-logdeliveryconfigurationrequest.html">LogDeliveryConfigurationRequest</a></code>
   <a href="#cfn-elasticache-cachecluster-notificationtopicarn">NotificationTopicArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-elasticache-cachecluster-numcachenodes">NumCacheNodes</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-elasticache-cachecluster-port">Port</a>: <code class="replaceable">Integer</code>
@@ -318,6 +321,7 @@ Properties:
                                              </ul>
                                           </div>
                                           
+                                          <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types by Amazon Region</a></p>
                                           
                                           <p><b>Additional node type info</b></p>
                                           
@@ -440,6 +444,7 @@ Properties:
                                              
                                           </p>
                                           
+                                          
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
@@ -465,6 +470,14 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-elasticache-cachecluster-logdeliveryconfigurations"></a><span class="term"><code class="code">LogDeliveryConfigurations</code></span></dt>
+                                       <dd>
+                                          <p>Specifies the destination, format and type of the logs.</p>
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-elasticache-cachecluster-logdeliveryconfigurationrequest.html">LogDeliveryConfigurationRequest</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-elasticache-cachecluster-notificationtopicarn"></a><span class="term"><code class="code">NotificationTopicArn</code></span></dt>
@@ -786,7 +799,7 @@ Properties:
                                        <dt><a id="cfn-elasticache-cachecluster-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>        
                                           
-                                          <p>A list of cost allocation tags to be added to this resource.</p>
+                                          <p>A list of tags to be added to this resource.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -862,6 +875,17 @@ Properties:
                                              cluster.
                                           </p>  
                                           
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>Redis (cluster mode disabled) replication groups don&apos;t have this attribute. Therefore,
+                                                   <code class="code">Fn::GetAtt</code> returns a value for this attribute only
+                                                   if the replication group is clustered. Otherwise, <code class="code">Fn::GetAtt</code>
+                                                   fails.
+                                                </p>
+                                             </div>
+                                          </div>
                                           
                                        </dd>
                                        <dt><a id="RedisEndpoint.Address-fn::getatt"></a><span class="term"><code class="code">RedisEndpoint.Address</code></span></dt>
@@ -930,8 +954,7 @@ Properties:
     },
     &quot;ElasticacheCluster&quot;: <span>{</span>
         &quot;Type&quot;: &quot;AWS::ElastiCache::CacheCluster&quot;,
-        &quot;Properties&quot;: <span>{</span>
-            &quot;AutoMinorVersionUpgrade&quot;: &quot;true&quot;,
+        &quot;Properties&quot;: <span>{</span>            
             &quot;Engine&quot;: &quot;memcached&quot;,
             &quot;CacheNodeType&quot;: &quot;cache.t2.micro&quot;,
             &quot;NumCacheNodes&quot;: &quot;1&quot;,
@@ -958,8 +981,7 @@ Properties:
         SourceSecurityGroupName: !Ref InstanceSecurityGroup
 ElasticacheCluster:
   Type: &apos;AWS::ElastiCache::CacheCluster&apos;
-  Properties:
-    AutoMinorVersionUpgrade: &apos;true&apos;
+  Properties:    
     Engine: memcached
     CacheNodeType: cache.t2.micro
     NumCacheNodes: &apos;1&apos;
@@ -1040,7 +1062,7 @@ ElasticacheCluster:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

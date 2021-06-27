@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-datasync-locationefs">AWS::DataSync::LocationEFS</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The <code class="code">AWS::DataSync::LocationEFS</code> resource specifies an endpoint for an Amazon EFS location.
+                                 </p>
+                                 <h2 id="aws-resource-datasync-locationefs-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-datasync-locationefs-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::DataSync::LocationEFS&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-datasync-locationefs-ec2config">Ec2Config</a>&quot; : <code class="replaceable"><a href="./aws-properties-datasync-locationefs-ec2config.html">Ec2Config</a></code>,
+      &quot;<a href="#cfn-datasync-locationefs-efsfilesystemarn">EfsFilesystemArn</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-datasync-locationefs-subdirectory">Subdirectory</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-datasync-locationefs-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-datasync-locationefs-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::DataSync::LocationEFS
+Properties: 
+  <a href="#cfn-datasync-locationefs-ec2config">Ec2Config</a>: <code class="replaceable">
+    <a href="./aws-properties-datasync-locationefs-ec2config.html">Ec2Config</a></code>
+  <a href="#cfn-datasync-locationefs-efsfilesystemarn">EfsFilesystemArn</a>: <code class="replaceable">String</code>
+  <a href="#cfn-datasync-locationefs-subdirectory">Subdirectory</a>: <code class="replaceable">String</code>
+  <a href="#cfn-datasync-locationefs-tags">Tags</a>: <code class="replaceable">
+    - <a href="aws-properties-resource-tags.html">Tag</a></code>
+</code></pre></div>
+                                 <h2 id="aws-resource-datasync-locationefs-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-datasync-locationefs-ec2config"></a><span class="term"><code class="code">Ec2Config</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The subnet and security group that the Amazon EFS file system uses. The security group
+                                             that you provide needs to be able to communicate with the security group on the mount
+                                             target
+                                             in the subnet specified.
+                                          </p>
+                                          
+                                          <p>The exact relationship between security group M (of the mount target) and security
+                                             group S (which you provide for DataSync to use at this stage) is as follows: 
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p> Security group M (which you associate with the mount target) must allow inbound
+                                                      access for the Transmission Control Protocol (TCP) on the NFS port (2049) from security
+                                                      group S. You can enable inbound connections either by IP address (CIDR range) or security
+                                                      group. 
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>Security group S (provided to DataSync to access EFS) should have a rule that
+                                                      enables outbound connections to the NFS port on one of the file system&#x2019;s mount targets.
+                                                      You can enable outbound connections either by IP address (CIDR range) or security
+                                                      group.
+                                                   </p>
+                                                   
+                                                   <p>For information about security groups and mount targets, see <a href="https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access">Security Groups for Amazon EC2 Instances and Mount Targets</a> in the
+                                                      <em>Amazon EFS User Guide.</em>
+                                                      
+                                                   </p>
+                                                   
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-datasync-locationefs-ec2config.html">Ec2Config</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-datasync-locationefs-efsfilesystemarn"></a><span class="term"><code class="code">EfsFilesystemArn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Name (ARN) for the Amazon EFS file system.</p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Maximum</em>: <code class="code">128</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\-0-9]*:[0-9]<span>{</span>12}:file-system/fs-.*$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-datasync-locationefs-subdirectory"></a><span class="term"><code class="code">Subdirectory</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A subdirectory in the location&#x2019;s path. This subdirectory in the EFS file system is
+                                             used
+                                             to read data from the EFS source location or write data to the EFS destination. By
+                                             default,
+                                             AWS DataSync uses the root directory.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>
+                                                   <code class="code">Subdirectory</code> must be specified with forward slashes. For example,
+                                                   <code class="code">/path/to/folder</code>.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Maximum</em>: <code class="code">4096</code></p>
+                                          <p><em>Pattern</em>: <code class="code">^[a-zA-Z0-9_\-\+\./\(\)\p<span>{</span>Zs}]*$</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-datasync-locationefs-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The key-value pair that represents a tag that you want to add to the resource. The
+                                             value can be an empty string. This value helps you manage, filter, and search for
+                                             your
+                                             resources. We recommend that you create a name tag for your location.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
+                                          <p><em>Maximum</em>: <code class="code">50</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-datasync-locationefs-return-values">Return values</h2>
+                                 <h3 id="aws-resource-datasync-locationefs-return-values-ref">Ref</h3>
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> 
+                                    function, <code class="code">Ref</code> returns the location resource ARN. For example:
+                                 </p>
+                                 <p><code class="code">arn:aws:datasync:us-east-2:111222333444:location/loc-07db7abfc326c50s3</code></p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-datasync-locationefs-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute 
+                                    of this type. The following are the available attributes and sample return values.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, 
+                                    see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-datasync-locationefs-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="LocationArn-fn::getatt"></a><span class="term"><code class="code">LocationArn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the Amazon EFS file system.</p>
+                                          
+                                       </dd>
+                                       <dt><a id="LocationUri-fn::getatt"></a><span class="term"><code class="code">LocationUri</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The URL of the Amazon EFS file system.</p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-datasync-locationefs--examples">Examples</h2>
+                                 <p></p>
+                                 <h3 id="aws-resource-datasync-locationefs--examples--Create_an_EFS_location_for_DataSync">Create an EFS location for DataSync</h3>
+                                 <p>The following example specifies an EFS location to be used by
+                                    DataSync, with the subdirectory <code class="code">MySubdirectory</code>.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-datasync-locationefs--examples--Create_an_EFS_location_for_DataSync--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+&quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+&quot;Description&quot;: &quot;Specifies an EFS location for DataSync&quot;,
+&quot;Resources&quot;: 
+  <span>{</span>
+  &quot;LocationEFS&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::DataSync::LocationEFS&quot;,
+    &quot;Properties&quot;: <span>{</span>
+      &quot;Ec2Config&quot;: <span>{</span>
+      &quot;SecurityGroupArns&quot;: [
+        &quot;arn:aws:ec2:us-east-2:11122233344:security-group/sg-0117195988293d62f&quot;
+        ],
+        &quot;SubnetArn&quot;: &quot;arn:aws:ec2:us-east-2:11122233344:subnet/subnet-f45a0e678&quot;
+      },
+      &quot;EfsFilesystemArn&quot;: &quot;arn:aws:elasticfilesystem:us-east-2:111222333444:file-system/fs-12345efs&quot;,
+      &quot;Subdirectory&quot;: &quot;/MySubdirectory&quot;
+    }
+  }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-datasync-locationefs--examples--Create_an_EFS_location_for_DataSync--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">
+AWSTemplateFormatVersion: 2010-09-09
+Description: Specifies an EFS location for DataSync
+Resources:
+  LocationEFS:
+    Type: AWS::DataSync::LocationEFS
+      Properties: 
+        Ec2Config: 
+          SecurityGroupArns: 
+            - arn:aws:ec2:us-east-2:11122233344:security-group/sg-0117195988293d62f
+          SubnetArn: arn:aws:ec2:us-east-2:11122233344:subnet/subnet-f45a0e678
+        EfsFilesystemArn: arn:aws:elasticfilesystem:us-east-2:111222333444:file-system/fs-12345efs
+        Subdirectory: /MySubdirectory            
+</code></pre></div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

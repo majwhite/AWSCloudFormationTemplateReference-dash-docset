@@ -17,8 +17,18 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>Specifies a route in a route table within a VPC.</p>
-                                 <p>You must specify one of the following targets: <code class="code">EgressOnlyInternetGatewayId</code>, <code class="code">GatewayId</code>, <code class="code">InstanceId</code>, <code class="code">NatGatewayId</code>,
-                                    <code class="code">NetworkInterfaceId</code>, <code class="code">TransitGatewayId</code>, or <code class="code">VpcPeeringConnectionId</code>.
+                                 <p>You must specify either <code class="code">DestinationCidrBlock</code> or <code class="code">DestinationIpv6CidrBlock</code>, 
+                                    plus the ID of one of the target resources.
+                                 </p>
+                                 <p>If you create a route that references a transit gateway in the same template where
+                                    you create  
+                                    the transit gateway, you must declare a dependency on the transit gateway attachment.
+                                    The route 
+                                    table cannot use the transit gateway until it has successfully attached to the VPC.
+                                    Add a 
+                                    <a href="aws-attribute-dependson.html">
+                                       DependsOn Attribute</a> in the <code class="code">AWS::EC2::Route</code> resource to explicitly declare a
+                                    dependency on the <code class="code">AWS::EC2::TransitGatewayAttachment</code> resource.
                                  </p>
                                  <h2 id="aws-resource-ec2-route-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -75,11 +85,8 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-ec2-route-destinationcidrblock"></a><span class="term"><code class="code">DestinationCidrBlock</code></span></dt>
                                        <dd>
-                                          		
+                                          		       
                                           <p>The IPv4 CIDR block used for the destination match.</p>
-                                          
-                                          <p>You must specify the <code class="code">DestinationCidrBlock</code> or <code class="code">DestinationIpv6CidrBlock</code> property.
-                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -91,9 +98,6 @@ Properties:
                                        <dd>
                                           
                                           <p>The IPv6 CIDR block used for the destination match.</p>
-                                          
-                                          <p>You must specify the <code class="code">DestinationCidrBlock</code> or <code class="code">DestinationIpv6CidrBlock</code> property.
-                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -125,7 +129,7 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-ec2-route-instanceid"></a><span class="term"><code class="code">InstanceId</code></span></dt>
                                        <dd>
-                                          		
+                                          		       
                                           <p>The ID of a NAT instance in your VPC.</p>
                                           
                                           <p><em>Required</em>: No
@@ -158,7 +162,7 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-ec2-route-networkinterfaceid"></a><span class="term"><code class="code">NetworkInterfaceId</code></span></dt>
                                        <dd>
-                                          		
+                                          		       
                                           <p>The ID of the network interface.</p>
                                           
                                           <p><em>Required</em>: No
@@ -223,10 +227,10 @@ Properties:
                                  </p>
                                  <h2 id="aws-resource-ec2-route--examples">Examples</h2>
                                  <p></p>
-                                 <h3 id="aws-resource-ec2-route--examples--Add_a_Route">Add a Route</h3>
-                                 <p>The following example adds a route that is added to a gateway.</p>
+                                 <h3 id="aws-resource-ec2-route--examples--Create_a_route_to_a_gateway">Create a route to a gateway</h3>
+                                 <p>The following example adds a route that is added to an internet gateway.</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ec2-route--examples--Add_a_Route--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">
+                                    <h4 id="aws-resource-ec2-route--examples--Create_a_route_to_a_gateway--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">
 &quot;myRoute&quot; : <span>{</span>
    &quot;Type&quot; : &quot;AWS::EC2::Route&quot;,
    &quot;DependsOn&quot; : &quot;GatewayToInternet&quot;,
@@ -237,7 +241,7 @@ Properties:
    }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ec2-route--examples--Add_a_Route--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  myRoute:
+                                    <h4 id="aws-resource-ec2-route--examples--Create_a_route_to_a_gateway--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  myRoute:
     Type: AWS::EC2::Route
     DependsOn: GatewayToInternet
     Properties:
@@ -299,7 +303,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

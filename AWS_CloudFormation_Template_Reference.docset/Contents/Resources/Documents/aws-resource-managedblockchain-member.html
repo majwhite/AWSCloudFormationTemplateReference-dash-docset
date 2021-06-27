@@ -124,13 +124,63 @@ Properties:
                                  </div>
                                  <h2 id="aws-resource-managedblockchain-member--examples">Examples</h2>
                                  <p></p>
-                                 <h3 id="aws-resource-managedblockchain-member--examples--Create_a_New_Managed_Blockchain_Network_and_the_First_Member">Create a New Managed Blockchain Network and the First Member</h3>
+                                 <h3 id="aws-resource-managedblockchain-member--examples--Create_a_new_Managed_Blockchain_network_for_Hyperledger_Fabric_and_the_first_member">Create a new Managed Blockchain network for Hyperledger Fabric and the first member</h3>
                                  <p>When you create the first member in a Managed Blockchain network, you also specify
                                     parameters to create the network.
                                  </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-managedblockchain-member--examples--Create_a_new_Managed_Blockchain_network_for_Hyperledger_Fabric_and_the_first_member--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: &quot;Basic initial member template&quot;
+Parameters:
+  MemberName:
+    Type: String
+  MemberDescription:
+    Type: String
+  MemberAdminUsername:
+    Type: String
+  MemberAdminPassword:
+    Type: String
+  NetworkName:
+    Type: String
+  NetworkDescription:
+    Type: String
+  Edition:
+    Type: String
+  ThresholdPercentage:
+    Type: Number
+  ThresholdComparator:
+    Type: String
+  ProposalDurationInHours:
+    Type: Number
+
+Resources:
+  Member:
+    Type: &quot;AWS::ManagedBlockchain::Member&quot;
+    Properties:
+      NetworkConfiguration:
+        Name: !Ref NetworkName
+        Description: !Ref NetworkDescription
+        Framework: &quot;HYPERLEDGER_FABRIC&quot;
+        FrameworkVersion: &quot;1.2&quot;
+        NetworkFrameworkConfiguration:
+          NetworkFabricConfiguration:
+            Edition: !Ref Edition
+        VotingPolicy:
+          ApprovalThresholdPolicy:
+            ThresholdPercentage: !Ref ThresholdPercentage
+            ProposalDurationInHours: !Ref ProposalDurationInHours
+            ThresholdComparator: !Ref ThresholdComparator
+      MemberConfiguration:
+        Name: !Ref MemberName
+        Description: !Ref MemberDescription
+        MemberFrameworkConfiguration:
+          MemberFabricConfiguration:
+            AdminUsername: !Ref MemberAdminUsername
+            AdminPassword: !Ref MemberAdminPassword
+
+        </code></pre></div>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-managedblockchain-member--examples--Create_a_New_Managed_Blockchain_Network_and_the_First_Member--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Description&quot;: &quot;Basic Initial Member template&quot;,
+                                    <h4 id="aws-resource-managedblockchain-member--examples--Create_a_new_Managed_Blockchain_network_for_Hyperledger_Fabric_and_the_first_member--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Description&quot;: &quot;Basic initial member template&quot;,
   &quot;Parameters&quot;: <span>{</span>
     &quot;MemberName&quot;: <span>{</span>
       &quot;Type&quot;: &quot;String&quot;
@@ -199,60 +249,10 @@ Properties:
     }
   }
 }</code></pre></div>
-                                 <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-managedblockchain-member--examples--Create_a_New_Managed_Blockchain_Network_and_the_First_Member--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: &quot;Basic Initial Member template&quot;
-Parameters:
-  MemberName:
-    Type: String
-  MemberDescription:
-    Type: String
-  MemberAdminUsername:
-    Type: String
-  MemberAdminPassword:
-    Type: String
-  NetworkName:
-    Type: String
-  NetworkDescription:
-    Type: String
-  Edition:
-    Type: String
-  ThresholdPercentage:
-    Type: Number
-  ThresholdComparator:
-    Type: String
-  ProposalDurationInHours:
-    Type: Number
-
-Resources:
-  Member:
-    Type: &quot;AWS::ManagedBlockchain::Member&quot;
-    Properties:
-      NetworkConfiguration:
-        Name: !Ref NetworkName
-        Description: !Ref NetworkDescription
-        Framework: &quot;HYPERLEDGER_FABRIC&quot;
-        FrameworkVersion: &quot;1.2&quot;
-        NetworkFrameworkConfiguration:
-          NetworkFabricConfiguration:
-            Edition: !Ref Edition
-        VotingPolicy:
-          ApprovalThresholdPolicy:
-            ThresholdPercentage: !Ref ThresholdPercentage
-            ProposalDurationInHours: !Ref ProposalDurationInHours
-            ThresholdComparator: !Ref ThresholdComparator
-      MemberConfiguration:
-        Name: !Ref MemberName
-        Description: !Ref MemberDescription
-        MemberFrameworkConfiguration:
-          MemberFabricConfiguration:
-            AdminUsername: !Ref MemberAdminUsername
-            AdminPassword: !Ref MemberAdminPassword
-
-</code></pre></div>
-                                 <h3 id="aws-resource-managedblockchain-member--examples--Create_an_Additional_Member_in_an_Existing_Network">Create an Additional Member in an Existing Network</h3>
+                                 <h3 id="aws-resource-managedblockchain-member--examples--Create_an_additional_member_in_an_existing_Hyperledger_Fabric_network">Create an additional member in an existing Hyperledger Fabric network</h3>
                                  <p></p>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-managedblockchain-member--examples--Create_an_Additional_Member_in_an_Existing_Network--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: Basic Secondary Member template
+                                    <h4 id="aws-resource-managedblockchain-member--examples--Create_an_additional_member_in_an_existing_Hyperledger_Fabric_network--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: &quot;Basic additional member template&quot;
 Parameters:
   MemberName:
     Type: String
@@ -281,8 +281,8 @@ Resources:
       InvitationId: !Ref InvitationId
             </code></pre></div>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-managedblockchain-member--examples--Create_an_Additional_Member_in_an_Existing_Network--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Description&quot;: &quot;Basic Additional Member template&quot;,
+                                    <h4 id="aws-resource-managedblockchain-member--examples--Create_an_additional_member_in_an_existing_Hyperledger_Fabric_network--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+           &quot;Description&quot;: &quot;Basic additional member template&quot;,
   &quot;Parameters&quot;: <span>{</span>
       &quot;MemberName&quot;: <span>{</span>
           &quot;Type&quot;: &quot;String&quot;
@@ -343,7 +343,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

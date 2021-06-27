@@ -177,7 +177,13 @@ Properties:
                                        <dt><a id="cfn-awsec2networkinterface-sourcedestcheck"></a><span class="term"><code class="code">SourceDestCheck</code></span></dt>
                                        <dd>
                                           
-                                          <p>Indicates whether traffic to or from the instance is validated.</p>
+                                          <p>Enable or disable source/destination checks, which ensure that the instance
+                                             is either the source or the destination of any traffic that it receives.
+                                             If the value is <code class="code">true</code>, source/destination checks are enabled;
+                                             otherwise, they are disabled. The default value is <code class="code">true</code>. 
+                                             You must disable source/destination checks if the instance runs services 
+                                             such as network address translation, routing, or firewalls.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -243,23 +249,17 @@ Properties:
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-ec2-network-interface--examples">Examples</h2>
-                                 <p>
-                                    <em>Tip</em>
-                                    
-                                 </p>
-                                 <p>For more <code class="code">NetworkInterface</code> template examples, 
-                                    see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ec2.html#cfn-template-snippets-eni">Elastic Network Interface (ENI) Template
-                                       Snippets</a>.
-                                 </p>
-                                 <h3 id="aws-resource-ec2-network-interface--examples--Simple_Standalone_ENI">Simple Standalone ENI</h3>
-                                 <p>This is a simple standalone Elastic Network Interface (ENI), using all of the available
-                                    properties.
+                                 <p></p>
+                                 <h3 id="aws-resource-ec2-network-interface--examples--Basic_network_interface">Basic network interface</h3>
+                                 <p>This example creates a standalone elastic network interface (ENI). To learn how to
+                                    attach 
+                                    this network interface to an instance at launch, see the next example on this page.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ec2-network-interface--examples--Simple_Standalone_ENI--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;myENI&quot; : <span>{</span>
+                                    <h4 id="aws-resource-ec2-network-interface--examples--Basic_network_interface--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;myENI&quot; : <span>{</span>
    &quot;Type&quot; : &quot;AWS::EC2::NetworkInterface&quot;,
    &quot;Properties&quot; : <span>{</span>
-      &quot;Tags&quot;: [<span>{</span>&quot;Key&quot;:&quot;foo&quot;,&quot;Value&quot;:&quot;bar&quot;}],
+      &quot;Tags&quot;: [<span>{</span>&quot;Key&quot;:&quot;stack&quot;,&quot;Value&quot;:&quot;production&quot;}],
       &quot;Description&quot;: &quot;A nice description.&quot;,
       &quot;SourceDestCheck&quot;: &quot;false&quot;,
       &quot;GroupSet&quot;: [&quot;sg-75zzz219&quot;],
@@ -268,31 +268,31 @@ Properties:
    }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ec2-network-interface--examples--Simple_Standalone_ENI--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">   myENI:
+                                    <h4 id="aws-resource-ec2-network-interface--examples--Basic_network_interface--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">   myENI:
       Type: AWS::EC2::NetworkInterface
       Properties:
          Tags:
-         - Key: foo
-           Value: bar
+         - Key: stack
+           Value: production
          Description: A nice description.
          SourceDestCheck: &apos;false&apos;
          GroupSet:
          - sg-75zzz219
          SubnetId: subnet-3z648z53
          PrivateIpAddress: 10.0.0.16</code></pre></div>
-                                 <h3 id="aws-resource-ec2-network-interface--examples--ENI_on_an_EC2_instance">ENI on an EC2 instance</h3>
-                                 <p>This is an example of an ENI on an EC2 instance. In this example, one ENI is added
-                                    to the instance. 
-                                    If you want to add more than one ENI, you can specify a list for the NetworkInterface
-                                    property. 
-                                    However, you can specify multiple ENIs only if all the ENIs have just private IP addresses
+                                 <h3 id="aws-resource-ec2-network-interface--examples--Attach_a_network_interface_to_an_EC2_instance_at_launch">Attach a network interface to an EC2 instance at launch</h3>
+                                 <p>This example attaches a network interface an EC2 instance.  
+                                    You can use the NetworkInterface property to add more than one network interface.
                                     
-                                    (no associated public IP address). If you have an ENI with a public IP address, specify
-                                    it 
-                                    and then use the <code class="code">AWS::EC2::NetworkInterfaceAttachment</code> resource to add additional ENIs.
+                                    However, you can specify multiple network interfaces if they all have only private
+                                    IP addresses 
+                                    (no associated public IP address). If you have a network interface with a public IP
+                                    address, 
+                                    specify when you launch the instance and then use <code class="code">AWS::EC2::NetworkInterfaceAttachment</code> 
+                                    to attach the additional network interfaces.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-ec2-network-interface--examples--ENI_on_an_EC2_instance--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Ec2Instance&quot; : <span>{</span>
+                                    <h4 id="aws-resource-ec2-network-interface--examples--Attach_a_network_interface_to_an_EC2_instance_at_launch--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Ec2Instance&quot; : <span>{</span>
    &quot;Type&quot; : &quot;AWS::EC2::Instance&quot;,
    &quot;Properties&quot; : <span>{</span>
       &quot;ImageId&quot; : <span>{</span> &quot;Fn::FindInMap&quot; : [ &quot;RegionMap&quot;, <span>{</span> &quot;Ref&quot; : &quot;AWS::Region&quot; }, &quot;AMI&quot; ]},
@@ -300,13 +300,13 @@ Properties:
       &quot;SecurityGroupIds&quot; : [<span>{</span> &quot;Ref&quot; : &quot;WebSecurityGroup&quot; }],
       &quot;SubnetId&quot; : <span>{</span> &quot;Ref&quot; : &quot;SubnetId&quot; },
       &quot;NetworkInterfaces&quot; : [ <span>{</span>
-         &quot;NetworkInterfaceId&quot; : <span>{</span>&quot;Ref&quot; : &quot;controlXface&quot;}, &quot;DeviceIndex&quot; : &quot;1&quot; } ],
+         &quot;NetworkInterfaceId&quot; : <span>{</span>&quot;Ref&quot; : &quot;myENI&quot;}, &quot;DeviceIndex&quot; : &quot;1&quot; } ],
       &quot;Tags&quot; : [ <span>{</span>&quot;Key&quot; : &quot;Role&quot;, &quot;Value&quot; : &quot;Test Instance&quot;}],
       &quot;UserData&quot; : <span>{</span> &quot;Fn::Base64&quot; : <span>{</span> &quot;Ref&quot; : &quot;WebServerPort&quot; }}
    }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-ec2-network-interface--examples--ENI_on_an_EC2_instance--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Ec2Instance:
+                                    <h4 id="aws-resource-ec2-network-interface--examples--Attach_a_network_interface_to_an_EC2_instance_at_launch--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Ec2Instance:
    Type: AWS::EC2::Instance
    Properties:
       ImageId:
@@ -322,7 +322,7 @@ Properties:
          Ref: SubnetId
       NetworkInterfaces:
       - NetworkInterfaceId:
-         Ref: controlXface
+         Ref: myENI
         DeviceIndex: &apos;0&apos;
       Tags:
       - Key: Role
@@ -354,7 +354,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

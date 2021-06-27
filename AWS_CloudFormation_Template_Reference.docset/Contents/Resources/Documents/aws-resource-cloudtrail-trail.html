@@ -18,6 +18,7 @@
                                  </div>
                                  <p>Creates a trail that specifies the settings for delivery of log data to an Amazon
                                     S3 bucket. 
+                                    
                                  </p>
                                  <h2 id="aws-resource-cloudtrail-trail-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -67,8 +68,8 @@ Properties:
                                        <dd>
                                           
                                           <p>Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier
-                                             that represents the log group to which CloudTrail logs will be delivered. Not required
-                                             unless you specify CloudWatchLogsRoleArn.
+                                             that represents the log group to which CloudTrail logs are delivered. Not required
+                                             unless you specify <code class="code">CloudWatchLogsRoleArn</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: Conditional
@@ -100,12 +101,15 @@ Properties:
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
                                                 <p>When you disable log file integrity validation, the chain of digest files is broken
-                                                   after one hour. CloudTrail will not create digest files for log files that were delivered
-                                                   during a period in which log file integrity validation was disabled. For example,
-                                                   if you enable log file integrity validation at noon on January 1, disable it at noon
-                                                   on January 2, and re-enable it at noon on January 10, digest files will not be created
-                                                   for the log files delivered from noon on January 2 to noon on January 10. The same
-                                                   applies whenever you stop CloudTrail logging or delete a trail.
+                                                   after one hour. CloudTrail 
+                                                   does not create digest files for log files that were delivered during a period in
+                                                   which log file integrity validation 
+                                                   was disabled. For example, if you enable log file integrity validation at noon on
+                                                   January 1, disable it at noon on 
+                                                   January 2, and re-enable it at noon on January 10, digest files will not be created
+                                                   for the log files delivered from noon 
+                                                   on January 2 to noon on January 10. The same applies whenever you stop CloudTrail
+                                                   logging or delete a trail.
                                                 </p>
                                              </div>
                                           </div>
@@ -155,7 +159,7 @@ Properties:
                                        <dt><a id="cfn-cloudtrail-trail-islogging"></a><span class="term"><code class="code">IsLogging</code></span></dt>
                                        <dd>
                                           
-                                          <p>Whether the CloudTrail is currently logging AWS API calls.</p>
+                                          <p>Whether the CloudTrail trail is currently logging AWS API calls.</p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -186,7 +190,7 @@ Properties:
                                        <dt><a id="cfn-cloudtrail-trail-kmskeyid"></a><span class="term"><code class="code">KMSKeyId</code></span></dt>
                                        <dd>
                                           
-                                          <p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The
+                                          <p>Specifies the AWS KMS key ID to use to encrypt the logs delivered by CloudTrail. The
                                              value can be an alias name prefixed by &quot;alias/&quot;, a fully specified ARN to an alias,
                                              a fully
                                              specified ARN to a key, or a globally unique identifier.
@@ -313,7 +317,7 @@ Properties:
                                                 <li class="listitem">
                                                    
                                                    <p>Have no adjacent periods, underscores or dashes. Names like <code class="code">my-_namespace</code>
-                                                      and <code class="code">my--namespace</code> are invalid.
+                                                      and <code class="code">my--namespace</code> are not valid.
                                                    </p>
                                                    
                                                 </li>
@@ -362,7 +366,8 @@ Properties:
                                           
                                           <p>
                                              When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the ARN of the Amazon SNS topic that&apos;s associated with the CloudTrail trail,
-                                             such as <code class="code">arn:aws:sns:us-east-2:123456789012:mySNSTopic</code>. 
+                                             
+                                             such as <code class="code">arn:aws:sns:us-east-2:123456789012:mySNSTopic</code>.
                                           </p>
                                           
                                        </dd>
@@ -373,12 +378,13 @@ Properties:
                                  <h3 id="aws-resource-cloudtrail-trail--examples--Example">Example</h3>
                                  <p>The following example creates a trail that logs events in all regions, an Amazon S3
                                     bucket where logs are published, and
-                                    an SNS topic where notifications are sent. The bucket and topic policies allow CloudTrail
-                                    (from
+                                    an Amazon SNS topic where notifications are sent. The bucket and topic policies allow
+                                    CloudTrail (from
                                     the specified regions) to publish logs to the S3 bucket and to send notifications
                                     to an
                                     email that you specify. For information about CloudTrail
-                                    bucket policies, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_bucket_policy.html">Amazon S3 Bucket Policy</a> in the <em>AWS CloudTrail User Guide</em>.
+                                    bucket policies, see 
+                                    <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_bucket_policy.html">Amazon S3 Bucket Policy</a> in the <em>AWS CloudTrail User Guide</em>.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-cloudtrail-trail--examples--Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -518,8 +524,8 @@ Properties:
     }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-cloudtrail-trail--examples--Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  AWSTemplateFormatVersion: &quot;2010-09-09&quot;
-  Parameters: 
+                                    <h4 id="aws-resource-cloudtrail-trail--examples--Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &quot;2010-09-09&quot;
+Parameters: 
     OperatorEmail: 
       Description: &quot;Email address to notify when new logs are published.&quot;
       Type: String
@@ -593,7 +599,20 @@ Properties:
             - Topic
             - TopicName
         IsLogging: true
-        IsMultiRegionTrail: true</code></pre></div>
+        IsMultiRegionTrail: true
+Outputs:
+  ARN:
+    Description: The trail ARN
+    Value:
+      &apos;Fn::GetAtt&apos;:
+        - Trail
+        - Arn
+  TopicArn:
+    Description: The SnS Topic ARN
+    Value:
+      &apos;Fn::GetAtt&apos;:
+        - Trail
+        - SnsTopicArn</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -604,7 +623,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

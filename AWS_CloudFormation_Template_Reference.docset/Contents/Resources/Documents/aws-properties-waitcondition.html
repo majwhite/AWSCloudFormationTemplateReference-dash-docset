@@ -196,57 +196,66 @@ Properties:
                                  <h3 id="aws-properties-waitcondition--examples--WaitCondition_that_waits_for_the_desired_number_of_instances_in_a_web_server_group">WaitCondition that waits for the desired number of instances in a web server group</h3>
                                  <p></p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-properties-waitcondition--examples--WaitCondition_that_waits_for_the_desired_number_of_instances_in_a_web_server_group--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;WebServerGroup&quot; : <span>{</span>
-  &quot;Type&quot; : &quot;AWS::AutoScaling::AutoScalingGroup&quot;,
-  &quot;Properties&quot; : <span>{</span>
-    &quot;AvailabilityZones&quot; : <span>{</span> &quot;Fn::GetAZs&quot; : &quot;&quot; },
-    &quot;LaunchConfigurationName&quot; : <span>{</span> &quot;Ref&quot; : &quot;LaunchConfig&quot; },
-    &quot;MinSize&quot; : &quot;1&quot;,
-    &quot;MaxSize&quot; : &quot;5&quot;,
-    &quot;DesiredCapacity&quot; : <span>{</span> &quot;Ref&quot; : &quot;WebServerCapacity&quot; },
-    &quot;LoadBalancerNames&quot; : [ <span>{</span> &quot;Ref&quot; : &quot;ElasticLoadBalancer&quot; } ]
-  }
-},
-        
-&quot;WaitHandle&quot; : <span>{</span>
-  &quot;Type&quot; : &quot;AWS::CloudFormation::WaitConditionHandle&quot;
-},
-        
-&quot;WaitCondition&quot; : <span>{</span>
-  &quot;Type&quot; : &quot;AWS::CloudFormation::WaitCondition&quot;,
-  &quot;DependsOn&quot; : &quot;WebServerGroup&quot;,
-  &quot;Properties&quot; : <span>{</span>
-    &quot;Handle&quot;  : <span>{</span> &quot;Ref&quot; : &quot;WaitHandle&quot; },
-    &quot;Timeout&quot; : &quot;300&quot;,
-    &quot;Count&quot;   : <span>{</span> &quot;Ref&quot; : &quot;WebServerCapacity&quot; }
-  }
+                                    <h4 id="aws-properties-waitcondition--examples--WaitCondition_that_waits_for_the_desired_number_of_instances_in_a_web_server_group--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;WebServerGroup&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::AutoScaling::AutoScalingGroup&quot;,
+        &quot;Properties&quot;: <span>{</span>
+            &quot;AvailabilityZones&quot;: <span>{</span>
+                &quot;Fn::GetAZs&quot;: &quot;&quot;,
+                &quot;LaunchConfigurationName&quot;: <span>{</span>
+                    &quot;Ref&quot;: &quot;LaunchConfig&quot;
+                }
+            },
+            &quot;MinSize&quot;: &quot;1&quot;,
+            &quot;MaxSize&quot;: &quot;5&quot;,
+            &quot;DesiredCapacity&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;WebServerCapacity&quot;
+            },
+            &quot;LoadBalancerNames&quot;: [
+                <span>{</span>
+                    &quot;Ref&quot;: &quot;ElasticLoadBalancer&quot;
+                }
+            ]
+        }
+    },
+    &quot;WaitHandle&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::CloudFormation::WaitConditionHandle&quot;
+    },
+    &quot;WaitCondition&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::CloudFormation::WaitCondition&quot;,
+        &quot;DependsOn&quot;: &quot;WebServerGroup&quot;,
+        &quot;Properties&quot;: <span>{</span>
+            &quot;Handle&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;WaitHandle&quot;
+            },
+            &quot;Timeout&quot;: &quot;300&quot;,
+            &quot;Count&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;WebServerCapacity&quot;
+            }
+        }
+    }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-properties-waitcondition--examples--WaitCondition_that_waits_for_the_desired_number_of_instances_in_a_web_server_group--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">WebServerGroup: 
+                                    <h4 id="aws-properties-waitcondition--examples--WaitCondition_that_waits_for_the_desired_number_of_instances_in_a_web_server_group--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">WebServerGroup:
   Type: AWS::AutoScaling::AutoScalingGroup
-  Properties: 
-    AvailabilityZones: 
-      Fn::GetAZs: &quot;&quot;
-    LaunchConfigurationName: 
-      Ref: &quot;LaunchConfig&quot;
-    MinSize: &quot;1&quot;
-    MaxSize: &quot;5&quot;
-    DesiredCapacity: 
-      Ref: &quot;WebServerCapacity&quot;
-    LoadBalancerNames: 
-      - 
-        Ref: &quot;ElasticLoadBalancer&quot;
-WaitHandle: 
+  Properties:
+    AvailabilityZones:
+      Fn::GetAZs: &apos;&apos;
+      LaunchConfigurationName: !Ref &apos;LaunchConfig&apos;
+    MinSize: &apos;1&apos;
+    MaxSize: &apos;5&apos;
+    DesiredCapacity: !Ref &apos;WebServerCapacity&apos;
+    LoadBalancerNames:
+      - !Ref &apos;ElasticLoadBalancer&apos;
+WaitHandle:
   Type: AWS::CloudFormation::WaitConditionHandle
-WaitCondition: 
+WaitCondition:
   Type: AWS::CloudFormation::WaitCondition
-  DependsOn: &quot;WebServerGroup&quot;
-  Properties: 
-    Handle: 
-      Ref: &quot;WaitHandle&quot;
-    Timeout: &quot;300&quot;
-    Count: 
-      Ref: &quot;WebServerCapacity&quot;</code></pre></div>
+  DependsOn: WebServerGroup
+  Properties:
+    Handle: !Ref &apos;WaitHandle&apos;
+    Timeout: &apos;300&apos;
+    Count: !Ref &apos;WebServerCapacity&apos;</code></pre></div>
                                  <h2 id="aws-properties-waitcondition--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
@@ -284,7 +293,7 @@ WaitCondition:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

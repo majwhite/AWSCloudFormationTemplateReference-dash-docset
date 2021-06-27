@@ -74,7 +74,12 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-sagemaker-project-servicecatalogprovisioningdetails"></a><span class="term"><code class="code">ServiceCatalogProvisioningDetails</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The product ID and provisioning artifact ID to provision a service catalog. For
+                                             information, see <a href="https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html">What is AWS Service
+                                                Catalog</a>.
+                                          </p>
+                                          
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: Json
@@ -83,7 +88,15 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-sagemaker-project-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>A list of key-value pairs to apply to this resource.</p>
+                                          
+                                          <p>For more information, see <a href="aws-properties-resource-tags.html">Resource
+                                                Tag</a> and <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using
+                                                Cost Allocation Tags</a> in the <em> AWS Billing and Cost Management User
+                                                Guide</em>.
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of <a href="aws-properties-resource-tags.html">Tag</a></p>
@@ -99,26 +112,66 @@ Properties:
                                     <dl>
                                        <dt><a id="CreationTime-fn::getatt"></a><span class="term"><code class="code">CreationTime</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The time that the project was created.</p>
+                                          
                                        </dd>
                                        <dt><a id="ProjectArn-fn::getatt"></a><span class="term"><code class="code">ProjectArn</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the project.</p>
+                                          
                                        </dd>
                                        <dt><a id="ProjectId-fn::getatt"></a><span class="term"><code class="code">ProjectId</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The ID of the project. This ID is prepended to all entities associated with this
+                                             project.
+                                          </p>
+                                          
                                        </dd>
                                        <dt><a id="ProjectStatus-fn::getatt"></a><span class="term"><code class="code">ProjectStatus</code></span></dt>
                                        <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
-                                       </dd>
-                                       <dt><a id="ServiceCatalogProvisionedProductDetails-fn::getatt"></a><span class="term"><code class="code">ServiceCatalogProvisionedProductDetails</code></span></dt>
-                                       <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
+                                          
+                                          <p>The status of the project.</p>
+                                          
                                        </dd>
                                     </dl>
                                  </div>
+                                 <h2 id="aws-resource-sagemaker-project--examples">Examples</h2>
+                                 <h3 id="aws-resource-sagemaker-project--examples--SageMaker_Project_Example">SageMaker Project Example</h3>
+                                 <p>The following example creates a SageMaker Project.</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-sagemaker-project--examples--SageMaker_Project_Example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+   &quot;Description&quot;: &quot;AWS SageMaker Project basic template&quot;,
+   &quot;Resources&quot;: <span>{</span>
+      &quot;SampleProject&quot;: <span>{</span>
+         &quot;Type&quot;: &quot;AWS::SageMaker::Project&quot;,
+         &quot;Properties&quot;: <span>{</span>
+            &quot;ProjectName&quot;: &quot;project1&quot;,
+            &quot;ProjectDescription&quot;: &quot;Project Description&quot;,
+            &quot;ServiceCatalogProvisioningDetails&quot;: <span>{</span>
+               &quot;ProductId&quot;: &quot;prod-53ibyqbj2cgmo&quot;,
+               &quot;ProvisioningArtifactId&quot;: &quot;pa-sm4pjfuzictpe&quot;
+            }
+         }
+      }
+   }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-sagemaker-project--examples--SageMaker_Project_Example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">---
+Description: AWS SageMaker Project basic template
+
+Resources:
+
+  SampleProject:
+    Type: AWS::SageMaker::Project
+    Properties:
+      ProjectName: &quot;SampleProject&quot;
+      ProjectDescription: &quot;Project Description&quot;
+      ServiceCatalogProvisioningDetails:
+        ProductId: &quot;prod-53ibyqbj2cgmo&quot;
+        ProvisioningArtifactId: &quot;pa-sm4pjfuzictpe&quot;</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -129,7 +182,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-properties-wafv2-webacl-jsonbody">AWS::WAFv2::WebACL JsonBody</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The body of a web request, inspected as JSON. The body immediately follows the request
+                                    headers. This is used in the <code class="code">FieldToMatch</code> specification.
+                                 </p>
+                                 <p>Use the specifications in this object to indicate which parts of the JSON body to
+                                    inspect using the rule&apos;s inspection criteria. AWS WAF inspects only the parts of the
+                                    JSON that result from the matches that you indicate.  
+                                 </p>
+                                 <h2 id="aws-properties-wafv2-webacl-jsonbody-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-properties-wafv2-webacl-jsonbody-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-wafv2-webacl-jsonbody-invalidfallbackbehavior">InvalidFallbackBehavior</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-wafv2-webacl-jsonbody-matchpattern">MatchPattern</a>&quot; : <code class="replaceable"><a href="./aws-properties-wafv2-webacl-jsonmatchpattern.html">JsonMatchPattern</a></code>,
+  &quot;<a href="#cfn-wafv2-webacl-jsonbody-matchscope">MatchScope</a>&quot; : <code class="replaceable">String</code>
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-properties-wafv2-webacl-jsonbody-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-wafv2-webacl-jsonbody-invalidfallbackbehavior">InvalidFallbackBehavior</a>: <code class="replaceable">String</code>
+  <a href="#cfn-wafv2-webacl-jsonbody-matchpattern">MatchPattern</a>: <code class="replaceable">
+    <a href="./aws-properties-wafv2-webacl-jsonmatchpattern.html">JsonMatchPattern</a></code>
+  <a href="#cfn-wafv2-webacl-jsonbody-matchscope">MatchScope</a>: <code class="replaceable">String</code>
+</code></pre></div>
+                                 <h2 id="aws-properties-wafv2-webacl-jsonbody-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-wafv2-webacl-jsonbody-invalidfallbackbehavior"></a><span class="term"><code class="code">InvalidFallbackBehavior</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>What AWS WAF should do if it fails to completely parse the JSON body. The options
+                                             are the following:
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                             	 
+                                             	 
+                                             	 
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   		   
+                                                   <p>
+                                                      <code class="code">EVALUATE_AS_STRING</code> - Inspect the body as
+                                                      			plain text. AWS WAF applies the text transformations and
+                                                      			inspection criteria that you defined for the JSON inspection to
+                                                      			the body text string.
+                                                   </p>
+                                                   	
+                                                </li>
+                                                <li class="listitem">
+                                                   		   
+                                                   <p>
+                                                      <code class="code">MATCH</code> - Treat the web request as matching
+                                                      			the rule statement. AWS WAF applies the rule action to the
+                                                      			request.
+                                                   </p>
+                                                   	
+                                                </li>
+                                                <li class="listitem">
+                                                   		   
+                                                   <p>
+                                                      <code class="code">NO_MATCH</code> - Treat the web request as not
+                                                      			matching the rule statement.
+                                                   </p>
+                                                   	
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>If you don&apos;t provide this setting, AWS WAF parses and evaluates the content only up
+                                             to the first parsing failure that it encounters. 
+                                          </p>
+                                          
+                                          <p>AWS WAF does its best to parse the entire JSON body, but might be forced
+                                             	to stop for reasons such as invalid characters, duplicate keys,
+                                             	truncation, and any content whose root node isn&apos;t an object or an array. 
+                                          </p>
+                                          
+                                          <p>AWS WAF parses the JSON in the following examples as two valid key,
+                                             	value pairs: 
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                             	 
+                                             	 
+                                             	 
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   		   
+                                                   <p>Missing comma:
+                                                      			<code class="code"><span>{</span>&quot;key1&quot;:&quot;value1&quot;&quot;key2&quot;:&quot;value2&quot;}</code>
+                                                      
+                                                   </p>
+                                                   	
+                                                </li>
+                                                <li class="listitem">
+                                                   		   
+                                                   <p>Missing colon:
+                                                      			<code class="code"><span>{</span>&quot;key1&quot;:&quot;value1&quot;,&quot;key2&quot;&quot;value2&quot;}</code>
+                                                      
+                                                   </p>
+                                                   	
+                                                </li>
+                                                <li class="listitem">
+                                                   		   
+                                                   <p>Extra colons:
+                                                      			<code class="code"><span>{</span>&quot;key1&quot;::&quot;value1&quot;,&quot;key2&quot;&quot;value2&quot;}</code>
+                                                      
+                                                   </p>
+                                                   	
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">EVALUATE_AS_STRING | MATCH | NO_MATCH</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-wafv2-webacl-jsonbody-matchpattern"></a><span class="term"><code class="code">MatchPattern</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The patterns to look for in the JSON body. AWS WAF inspects the results of these pattern
+                                             matches against the rule inspection criteria. 
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-wafv2-webacl-jsonmatchpattern.html">JsonMatchPattern</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-wafv2-webacl-jsonbody-matchscope"></a><span class="term"><code class="code">MatchScope</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The parts of the JSON to match against using the <code class="code">MatchPattern</code>. If you specify <code class="code">All</code>, AWS WAF matches against keys and values. 
+                                          </p>
+                                          
+                                          <p>Valid Values: <code class="code">ALL</code> | <code class="code">KEY</code> | <code class="code">VALUE</code></p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">ALL | KEY | VALUE</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

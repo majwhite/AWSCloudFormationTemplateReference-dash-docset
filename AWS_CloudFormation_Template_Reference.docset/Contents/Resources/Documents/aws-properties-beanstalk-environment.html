@@ -29,6 +29,7 @@
       &quot;<a href="#cfn-beanstalk-environment-cnameprefix">CNAMEPrefix</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-beanstalk-environment-description">Description</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-beanstalk-environment-name">EnvironmentName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-beanstalk-environment-operations-role">OperationsRole</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-beanstalk-environment-optionsettings">OptionSettings</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-beanstalk-option-settings.html">OptionSetting</a>, ... ]</code>,
       &quot;<a href="#cfn-beanstalk-environment-platformarn">PlatformArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-beanstalk-environment-solutionstackname">SolutionStackName</a>&quot; : <code class="replaceable">String</code>,
@@ -46,6 +47,7 @@ Properties:
   <a href="#cfn-beanstalk-environment-cnameprefix">CNAMEPrefix</a>: <code class="replaceable">String</code>
   <a href="#cfn-beanstalk-environment-description">Description</a>: <code class="replaceable">String</code>
   <a href="#cfn-beanstalk-environment-name">EnvironmentName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-beanstalk-environment-operations-role">OperationsRole</a>: <code class="replaceable">String</code>
   <a href="#cfn-beanstalk-environment-optionsettings">OptionSettings</a>: <code class="replaceable">
     - <a href="./aws-properties-beanstalk-option-settings.html">OptionSetting</a></code>
   <a href="#cfn-beanstalk-environment-platformarn">PlatformArn</a>: <code class="replaceable">String</code>
@@ -143,6 +145,36 @@ Properties:
                                           <p><em>Maximum</em>: <code class="code">40</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
+                                       <dt><a id="cfn-beanstalk-environment-operations-role"></a><span class="term"><code class="code">OperationsRole</code></span></dt>
+                                       <dd>
+                                          
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>The operations role feature of AWS Elastic Beanstalk is in beta release and is subject
+                                                   to change.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment&apos;s
+                                             operations role. If specified, Elastic Beanstalk uses the operations role for permissions
+                                             to downstream
+                                             services during this call and during subsequent calls acting on this environment.
+                                             To specify
+                                             an operations role, you must have the <code class="code">iam:PassRole</code> permission for the role.
+                                          </p>
+                                          
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">256</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-beanstalk-environment-optionsettings"></a><span class="term"><code class="code">OptionSettings</code></span></dt>
                                        <dd>
                                           
@@ -164,7 +196,8 @@ Properties:
                                           <p>The Amazon Resource Name (ARN) of the custom platform to use with the environment.
                                              For
                                              more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html">Custom Platforms</a> in the
-                                             <em>AWS Elastic Beanstalk Developer Guide</em>.
+                                             <em>
+                                                AWS Elastic Beanstalk Developer Guide</em>.
                                           </p>
                                           
                                           <div class="awsdocs-note">
@@ -190,7 +223,8 @@ Properties:
                                              environment. If
                                              specified, Elastic Beanstalk sets the configuration values to the default values associated
                                              with the
-                                             specified solution stack. For a list of current solution stacks, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html">Elastic Beanstalk Supported Platforms</a> in the <em>AWS Elastic Beanstalk
+                                             specified solution stack. For a list of current solution stacks, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html">Elastic Beanstalk Supported Platforms</a> in the <em>
+                                                AWS Elastic Beanstalk
                                                 Platforms</em> guide.
                                           </p>
                                           
@@ -335,7 +369,7 @@ Properties:
 Properties: 
   ApplicationName: 
     Ref: sampleApplication
-  Description: &quot;AWS Elastic Beanstalk Environment running PHP Sample Application&quot;
+    Description: &quot;AWS Elastic Beanstalk Environment running PHP Sample Application&quot;
   EnvironmentName: SamplePHPEnvironment
   TemplateName: DefaultConfiguration
   VersionLabel: &quot;Initial Version&quot;</code></pre></div>
@@ -361,7 +395,7 @@ Properties:
 Properties: 
   ApplicationName: 
     Ref: sampleApplication
-  Description: &quot;AWS Elastic Beanstalk Environment running Python Sample Application&quot;
+    Description: &quot;AWS Elastic Beanstalk Environment running Python Sample Application&quot;
   EnvironmentName: SamplePythonEnvironment
   SolutionStackName: &quot;64bit Amazon Linux 2017.03 v2.5.0 running Python 2.7&quot;
   OptionSettings: 
@@ -882,8 +916,7 @@ Resources:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.environments.html">Creating an AWS
-                                                Elastic Beanstalk Environment</a> in the <em>AWS Elastic Beanstalk Developer
+                                             <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.environments.html">Creating an AWS Elastic Beanstalk Environment</a> in the <em>AWS Elastic Beanstalk Developer
                                                 Guide</em>
                                              
                                           </p>
@@ -917,7 +950,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -16,9 +16,8 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::CloudFormation::StackSet</code> enables you to provision stacks into AWS
-                                    accounts and across Regions by using a single CloudFormation template. In the stack
-                                    set, you
+                                 <p>The <code class="code">AWS::CloudFormation::StackSet</code> enables you to provision stacks into AWS accounts and across Regions by using a single
+                                    CloudFormation template. In the stack set, you
                                     specify the template to use, as well as any parameters and capabilities that the template
                                     requires.
                                  </p>
@@ -30,6 +29,7 @@
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-cloudformation-stackset-administrationrolearn">AdministrationRoleARN</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-cloudformation-stackset-autodeployment">AutoDeployment</a>&quot; : <code class="replaceable"><a href="./aws-properties-cloudformation-stackset-autodeployment.html">AutoDeployment</a></code>,
+      &quot;<a href="#cfn-cloudformation-stackset-callas">CallAs</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-cloudformation-stackset-capabilities">Capabilities</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-cloudformation-stackset-description">Description</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-cloudformation-stackset-executionrolename">ExecutionRoleName</a>&quot; : <code class="replaceable">String</code>,
@@ -50,6 +50,7 @@ Properties:
   <a href="#cfn-cloudformation-stackset-administrationrolearn">AdministrationRoleARN</a>: <code class="replaceable">String</code>
   <a href="#cfn-cloudformation-stackset-autodeployment">AutoDeployment</a>: <code class="replaceable">
     <a href="./aws-properties-cloudformation-stackset-autodeployment.html">AutoDeployment</a></code>
+  <a href="#cfn-cloudformation-stackset-callas">CallAs</a>: <code class="replaceable">String</code>
   <a href="#cfn-cloudformation-stackset-capabilities">Capabilities</a>: <code class="replaceable">
     - String</code>
   <a href="#cfn-cloudformation-stackset-description">Description</a>: <code class="replaceable">String</code>
@@ -74,15 +75,15 @@ Properties:
                                        <dd>
                                           
                                           <p>The Amazon Resource Number (ARN) of the IAM role to use to create this stack set.
-                                             Specify an IAM role only if you are using customized administrator roles to control
-                                             which users or groups can manage specific stack sets within the same administrator
-                                             account.
+                                             Specify
+                                             an IAM role only if you are using customized administrator roles to control which
+                                             users or
+                                             groups can manage specific stack sets within the same administrator account.
                                           </p>
                                           
                                           <p>Use customized administrator roles to control which users or groups can manage specific
-                                             stack sets within the same administrator account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html">Prerequisites: Granting Permissions for Stack
-                                                Set Operations</a> in the <em>AWS CloudFormation User Guide</em>.
-                                          </p>  
+                                             stack sets within the same administrator account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html">Prerequisites: Granting Permissions for Stack Set Operations</a> in the <em>AWS CloudFormation User Guide</em>.
+                                          </p>
                                           
                                           <p><em>Minimum</em>: <code class="code">20</code></p>
                                           
@@ -97,8 +98,9 @@ Properties:
                                        <dt><a id="cfn-cloudformation-stackset-autodeployment"></a><span class="term"><code class="code">AutoDeployment</code></span></dt>
                                        <dd>
                                           
-                                          <p>[<code class="code">Service-managed</code> permissions] Describes whether StackSets automatically deploys to AWS Organizations
-                                             accounts that are added to a target organization or organizational unit (OU). 
+                                          <p>[<code class="code">Service-managed</code> permissions] Describes whether StackSets automatically
+                                             deploys to AWS Organizations accounts that are added to a target organization or
+                                             organizational unit (OU).
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -106,13 +108,66 @@ Properties:
                                           <p><em>Type</em>: <a href="./aws-properties-cloudformation-stackset-autodeployment.html">AutoDeployment</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-cloudformation-stackset-callas"></a><span class="term"><code class="code">CallAs</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>[Service-managed permissions] Specifies whether you are acting as an account administrator
+                                             in the organization&apos;s management account or as a delegated administrator in a member
+                                             account.
+                                          </p>
+                                          
+                                          <p>By default, <code class="code">SELF</code> is specified. Use <code class="code">SELF</code> for stack sets with
+                                             self-managed permissions.
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>To create a stack set with service-managed permissions while signed in to the
+                                                      management account, specify <code class="code">SELF</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>To create a stack set with service-managed permissions while signed in to a delegated
+                                                      administrator account, specify <code class="code">DELEGATED_ADMIN</code>.
+                                                   </p>
+                                                   
+                                                   <p>Your AWS account must be registered as a delegated admin in the management account.
+                                                      For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a
+                                                         delegated administrator</a> in the <em>AWS CloudFormation User
+                                                         Guide</em>.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>Stack sets with service-managed permissions are created in the management account,
+                                             including stack sets that are created by delegated administrators.
+                                          </p>
+                                          
+                                          <p><em>Valid Values</em>: <code class="code">SELF</code> | <code class="code">DELEGATED_ADMIN</code></p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-cloudformation-stackset-capabilities"></a><span class="term"><code class="code">Capabilities</code></span></dt>
                                        <dd>
                                           
                                           <p>The capabilities that are allowed in the stack set. Some stack set templates might
                                              include resources that can affect permissions in your AWS account&#x2014;for example, by
-                                             creating
-                                             new AWS Identity and Access Management (IAM) users. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities">Acknowledging IAM Resources in AWS CloudFormation Templates</a>.
+                                             creating new
+                                             AWS Identity and Access Management (IAM) users. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities">Acknowledging
+                                                IAM Resources in AWS CloudFormation Templates</a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -140,8 +195,8 @@ Properties:
                                        <dd>
                                           
                                           <p>The name of the IAM execution role to use to create the stack set. If you do not specify
-                                             an execution role, AWS CloudFormation uses the AWSCloudFormationStackSetExecutionRole
-                                             role for the stack set operation.
+                                             an execution role, AWS CloudFormation uses the <code class="code">AWSCloudFormationStackSetExecutionRole</code> role for
+                                             the stack set operation.
                                           </p>
                                           
                                           <p><em>Minimum</em>: <code class="code">1</code></p>
@@ -159,7 +214,9 @@ Properties:
                                        <dt><a id="cfn-cloudformation-stackset-operationpreferences"></a><span class="term"><code class="code">OperationPreferences</code></span></dt>
                                        <dd>
                                           
-                                          <p>The user-specified preferences for how AWS CloudFormation performs a stack set operation.</p>
+                                          <p>The user-specified preferences for how AWS CloudFormation performs a stack set
+                                             operation.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -238,7 +295,8 @@ Properties:
                                        <dd>
                                           
                                           <p>The name to associate with the stack set. The name must be unique in the Region where
-                                             you create your stack set.
+                                             you
+                                             create your stack set.
                                           </p>
                                           
                                           <p><em>Maximum</em>: <code class="code">128</code></p>
@@ -265,7 +323,8 @@ Properties:
                                           
                                           <p>The key-value pairs to associate with this stack set and the stacks created from it.
                                              AWS CloudFormation also propagates these tags to supported resources that are created
-                                             in the stacks. A maximum number of 50 tags can be specified.
+                                             in the
+                                             stacks. A maximum number of 50 tags can be specified.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -277,10 +336,12 @@ Properties:
                                        <dd>
                                           
                                           <p>The structure that contains the template body, with a minimum length of 1 byte and
-                                             a maximum length of 51,200 bytes.
+                                             a
+                                             maximum length of 51,200 bytes.
                                           </p>
                                           
-                                          <p>You must include either <code class="code">TemplateURL</code> or <code class="code">TemplateBody</code> in a StackSet, but you cannot use both.
+                                          <p>You must include either <code class="code">TemplateURL</code> or <code class="code">TemplateBody</code> in a
+                                             StackSet, but you cannot use both.
                                           </p>
                                           
                                           <p><em>Minimum</em>: <code class="code">1</code></p>
@@ -297,10 +358,12 @@ Properties:
                                        <dd>
                                           
                                           <p>Location of file containing the template body. The URL must point to a template (max
-                                             size: 460,800 bytes) that is located in an Amazon S3 bucket.
+                                             size:
+                                             460,800 bytes) that is located in an Amazon S3 bucket.
                                           </p>
                                           
-                                          <p>You must include either <code class="code">TemplateURL</code> or <code class="code">TemplateBody</code> in a StackSet, but you cannot use both.
+                                          <p>You must include either <code class="code">TemplateURL</code> or <code class="code">TemplateBody</code> in a
+                                             StackSet, but you cannot use both.
                                           </p>
                                           
                                           <p><em>Minimum</em>: <code class="code">1</code></p>
@@ -317,12 +380,15 @@ Properties:
                                  </div>
                                  <h2 id="aws-resource-cloudformation-stackset-return-values">Return values</h2>
                                  <h3 id="aws-resource-cloudformation-stackset-return-values-ref">Ref</h3>
-                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the StackSetId.
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function,
+                                    <code class="code">Ref</code> returns the StackSetId.
                                  </p>
                                  <h3 id="aws-resource-cloudformation-stackset-return-values-fn--getatt">Fn::GetAtt</h3>
-                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type.
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute
+                                    of this type.
                                  </p>
-                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> instrinsic function, see <a href="intrinsic-function-reference-getatt.html"><code class="code">Fn::GetAtt</code></a>.
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> instrinsic function, see
+                                    <a href="intrinsic-function-reference-getatt.html"><code class="code">Fn::GetAtt</code></a>.
                                  </p>
                                  <h4 id="aws-resource-cloudformation-stackset-return-values-fn--getatt-fn--getatt"></h4>
                                  <div class="variablelist">
@@ -335,6 +401,19 @@ Properties:
                                        </dd>
                                     </dl>
                                  </div>
+                                 <h2 id="aws-resource-cloudformation-stackset--seealso">See also</h2>
+                                 <div class="itemizedlist">
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-sampletemplates.html">AWS CloudFormation StackSets sample templates</a></p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <p></p>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -345,7 +424,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

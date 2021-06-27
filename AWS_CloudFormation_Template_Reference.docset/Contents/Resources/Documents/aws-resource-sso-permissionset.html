@@ -24,7 +24,7 @@
   &quot;Type&quot; : &quot;AWS::SSO::PermissionSet&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-sso-permissionset-description">Description</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-sso-permissionset-inlinepolicy">InlinePolicy</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-sso-permissionset-inlinepolicy">InlinePolicy</a>&quot; : <code class="replaceable">Json</code>,
       &quot;<a href="#cfn-sso-permissionset-instancearn">InstanceArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-sso-permissionset-managedpolicies">ManagedPolicies</a>&quot; : <code class="replaceable">[ String, ... ]</code>,
       &quot;<a href="#cfn-sso-permissionset-name">Name</a>&quot; : <code class="replaceable">String</code>,
@@ -38,7 +38,7 @@
                                     <h3 id="aws-resource-sso-permissionset-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::SSO::PermissionSet
 Properties: 
   <a href="#cfn-sso-permissionset-description">Description</a>: <code class="replaceable">String</code>
-  <a href="#cfn-sso-permissionset-inlinepolicy">InlinePolicy</a>: <code class="replaceable">String</code>
+  <a href="#cfn-sso-permissionset-inlinepolicy">InlinePolicy</a>: <code class="replaceable">Json</code>
   <a href="#cfn-sso-permissionset-instancearn">InstanceArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-sso-permissionset-managedpolicies">ManagedPolicies</a>: <code class="replaceable">
     - String</code>
@@ -73,7 +73,7 @@ Properties:
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: String
+                                          <p><em>Type</em>: Json
                                           </p>
                                           <p><em>Minimum</em>: <code class="code">1</code></p>
                                           <p><em>Maximum</em>: <code class="code">10240</code></p>
@@ -83,8 +83,9 @@ Properties:
                                        <dt><a id="cfn-sso-permissionset-instancearn"></a><span class="term"><code class="code">InstanceArn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ARN of the SSO instance under which the operation will be executed. For more information
-                                             about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <em>AWS General Reference</em>.
+                                          <p>The ARN of the SSO instance under which the operation will be executed. For more
+                                             information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and
+                                                AWS Service Namespaces</a> in the <em>AWS General Reference</em>.
                                           </p>
                                           
                                           <p><em>Required</em>: Yes
@@ -187,7 +188,8 @@ Properties:
                                        <dt><a id="PermissionSetArn-fn::getatt"></a><span class="term"><code class="code">PermissionSetArn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The permission set ARN of the permission set, such as <code class="code">arn:aws:sso:::permissionSet/ins-instanceid/ps-permissionsetid</code>.
+                                          <p>The permission set ARN of the permission set, such as
+                                             <code class="code">arn:aws:sso:::permissionSet/ins-instanceid/ps-permissionsetid</code>.
                                           </p>
                                           
                                        </dd>
@@ -195,18 +197,19 @@ Properties:
                                  </div>
                                  <h2 id="aws-resource-sso-permissionset--examples">Examples</h2>
                                  <p></p>
-                                 <h3 id="aws-resource-sso-permissionset--examples--Creating_a_new_custom_permission_set_for_AWS_SSO">Creating a new custom permission set for AWS SSO</h3>
-                                 <p>The following example creates a custom permission set <code class="code">&#x201C;PermissionSet&#x201D;</code>
+                                 <h3 id="aws-resource-sso-permissionset--examples--Creating_a_new_custom_permission_set_for_">Creating a new custom permission set for AWS SSO</h3>
+                                 <p>The following example creates a custom permission set <code class="code">PermissionSet</code>
                                     with a managed policies attachment and inline policy.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-sso-permissionset--examples--Creating_a_new_custom_permission_set_for_AWS_SSO--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+                                    <h4 id="aws-resource-sso-permissionset--examples--Creating_a_new_custom_permission_set_for_--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
    &quot;PermissionSet&quot;: <span>{</span>
       &quot;Type&quot;: &quot;AWS::SSO::PermissionSet&quot;,
       &quot;Properties&quot;: <span>{</span>
          &quot;InstanceArn&quot;: &quot;arn:aws:sso:::instance/ssoins-instanceId&quot;,
          &quot;Name&quot;: &quot;PermissionSet&quot;,
          &quot;Description&quot;: &quot;This is a sample permission set.&quot;,
+         &quot;SessionDuration&quot;: &quot;PT8H&quot;,
          &quot;ManagedPolicies&quot;: [
             &quot;arn:aws:iam::aws:policy/AdministratorAccess&quot;
          ],
@@ -221,12 +224,13 @@ Properties:
    }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-sso-permissionset--examples--Creating_a_new_custom_permission_set_for_AWS_SSO--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">PermissionSet:
+                                    <h4 id="aws-resource-sso-permissionset--examples--Creating_a_new_custom_permission_set_for_--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">PermissionSet:
     Type: AWS::SSO::PermissionSet
     Properties:
       InstanceArn: &apos;arn:aws:sso:::instance/ssoins-instanceId&apos;
       Name: &apos;PermissionSet&apos;
       Description: &apos;This is a sample permission set.&apos;
+      SessionDuration: &apos;PT8H&apos;
       ManagedPolicies:
         - &apos;arn:aws:iam::aws:policy/AdministratorAccess&apos;
       InlinePolicy: &apos;Inline policy json string&apos;
@@ -243,7 +247,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

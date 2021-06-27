@@ -76,7 +76,7 @@ Properties:
                                              to
                                              access the service, such as an Amazon SNS topic ARN or Lambda function ARN. The service
                                              token
-                                             must be from the same region in which you are creating the stack.
+                                             must be from the same Region in which you are creating the stack.
                                           </p>
                                           
                                           <p>Updates are not supported.</p>
@@ -124,9 +124,9 @@ Properties:
                                     CloudFormation receives the response, it compares the <code class="code">PhysicalResourceId</code>
                                     between the old and new custom resources. If they are different, CloudFormation recognizes
                                     the update as a replacement and sends a delete request to the old resource. For a
-                                    step-by-step walkthrough of this process, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-custom-resources-sns.html#crpg-walkthrough-stack-updates">Stack updates</a>. 
+                                    step-by-step walkthrough of this process, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-custom-resources-sns.html#crpg-walkthrough-stack-updates">Stack updates</a>.
                                  </p>
-                                 <p>Note the following: </p>
+                                 <p>Note the following:</p>
                                  <div class="itemizedlist">
                                      
                                      
@@ -141,8 +141,7 @@ Properties:
                                        </li>
                                        <li class="listitem">
                                           
-                                          <p>For more information about resource behavior during updates, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">AWS
-                                                CloudFormation stacks updates</a>.
+                                          <p>For more information about resource behavior during updates, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">AWS CloudFormation stacks updates</a>.
                                           </p>
                                           
                                        </li>
@@ -167,54 +166,67 @@ Properties:
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-cfn-customresource--examples--Creating_a_custom_resource_definition_in_a_template--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;AWSTemplateFormatVersion&quot; : &quot;2010-09-09&quot;,
-  &quot;Resources&quot; : <span>{</span>
-    &quot;MyFrontEndTest&quot; : <span>{</span>
-      &quot;Type&quot;: &quot;Custom::PingTester&quot;,
-      &quot;Version&quot; : &quot;1.0&quot;,
-      &quot;Properties&quot; : <span>{</span>
-        &quot;ServiceToken&quot;: &quot;arn:aws:sns:us-east-1:84969EXAMPLE:CRTest&quot;,
-        &quot;key1&quot; : &quot;string&quot;,
-        &quot;key2&quot; : [ &quot;list&quot; ],
-        &quot;key3&quot; : <span>{</span> &quot;key4&quot; : &quot;map&quot; }
-      }
-    }
-  },
-  &quot;Outputs&quot; : <span>{</span>
-    &quot;CustomResourceAttribute1&quot; : <span>{</span>
-      &quot;Value&quot; : <span>{</span> &quot;Fn::GetAtt&quot; : [&quot;MyFrontEndTest&quot;, &quot;responseKey1&quot;] }
+    &quot;AWSTemplateFormatVersion&quot;: &quot;2010-09-09&quot;,
+    &quot;Resources&quot;: <span>{</span>
+        &quot;MyFrontEndTest&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;Custom::PingTester&quot;,
+            &quot;Version&quot;: &quot;1.0&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;ServiceToken&quot;: &quot;arn:aws:sns:us-east-1:84969EXAMPLE:CRTest&quot;,
+                &quot;key1&quot;: &quot;string&quot;,
+                &quot;key2&quot;: [
+                    &quot;list&quot;
+                ],
+                &quot;key3&quot;: <span>{</span>
+                    &quot;key4&quot;: &quot;map&quot;
+                }
+            }
+        }
     },
-    &quot;CustomResourceAttribute2&quot; : <span>{</span>
-      &quot;Value&quot; : <span>{</span> &quot;Fn::GetAtt&quot; : [&quot;MyFrontEndTest&quot;, &quot;responseKey2&quot;] }
+    &quot;Outputs&quot;: <span>{</span>
+        &quot;CustomResourceAttribute1&quot;: <span>{</span>
+            &quot;Value&quot;: <span>{</span>
+                &quot;Fn::GetAtt&quot;: [
+                    &quot;MyFrontEndTest&quot;,
+                    &quot;responseKey1&quot;
+                ]
+            }
+        },
+        &quot;CustomResourceAttribute2&quot;: <span>{</span>
+            &quot;Value&quot;: <span>{</span>
+                &quot;Fn::GetAtt&quot;: [
+                    &quot;MyFrontEndTest&quot;,
+                    &quot;responseKey2&quot;
+                ]
+            }
+        }
     }
-  }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-cfn-customresource--examples--Creating_a_custom_resource_definition_in_a_template--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &quot;2010-09-09&quot;
-Resources: 
-  MyFrontEndTest: 
-    Type: &quot;Custom::PingTester&quot;
-    Version: &quot;1.0&quot;
-    Properties: 
-      ServiceToken: &quot;arn:aws:sns:us-east-1:84969EXAMPLE:CRTest&quot;
+                                    <h4 id="aws-resource-cfn-customresource--examples--Creating_a_custom_resource_definition_in_a_template--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  MyFrontEndTest:
+    Type: &apos;Custom::PingTester&apos;
+    Version: &apos;1.0&apos;
+    Properties:
+      ServiceToken: &apos;arn:aws:sns:us-east-1:84969EXAMPLE:CRTest&apos;
       key1: string
-      key2: 
+      key2:
         - list
-      key3: 
+      key3:
         key4: map
-Outputs: 
-  CustomResourceAttribute1: 
-    Value: 
-      Fn::GetAtt: 
-        - MyFrontEndTest
-        - responseKey1
-  CustomResourceAttribute2: 
-    Value: 
-      Fn::GetAtt: 
-        - MyFrontEndTest
-        - responseKey2</code></pre></div>
-                                 <h3 id="aws-resource-cfn-customresource--examples--Using_an_AWS_Lambda_function_in_a_custom_resource">Using an AWS Lambda function in a custom resource</h3>
-                                 <p>With Lambda functions and custom resources, you can run custom code in response to
+Outputs:
+  CustomResourceAttribute1:
+    Value: !GetAtt 
+      - MyFrontEndTest
+      - responseKey1
+  CustomResourceAttribute2:
+    Value: !GetAtt 
+      - MyFrontEndTest
+      - responseKey2</code></pre></div>
+                                 <h3 id="aws-resource-cfn-customresource--examples--Using_a_Lambda_function_in_a_custom_resource">Using a Lambda function in a custom resource</h3>
+                                 <p>With AWS Lambda functions and custom resources, you can run custom code in response
+                                    to
                                     stack events (create, update, and delete). The following custom resource invokes a
                                     Lambda
                                     function and sends it the StackName property as input. The function uses this property
@@ -222,23 +234,48 @@ Outputs:
                                     get outputs from the appropriate stack.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-cfn-customresource--examples--Using_an_AWS_Lambda_function_in_a_custom_resource--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;MyCustomResource&quot; : <span>{</span>
-  &quot;Type&quot; : &quot;Custom::TestLambdaCrossStackRef&quot;,
-  &quot;Properties&quot; : <span>{</span>
-    &quot;ServiceToken&quot;: <span>{</span> &quot;Fn::Join&quot;: [ &quot;&quot;, [ &quot;arn:aws:lambda:&quot;, <span>{</span> &quot;Ref&quot;: &quot;AWS::Region&quot; }, &quot;:&quot;, <span>{</span> &quot;Ref&quot;: &quot;AWS::AccountId&quot; }, &quot;:function:&quot;, <span>{</span>&quot;Ref&quot; : &quot;LambdaFunctionName&quot;} ] ] },
-    &quot;StackName&quot;: <span>{</span>
-      &quot;Ref&quot;: &quot;NetworkStackName&quot;
+                                    <h4 id="aws-resource-cfn-customresource--examples--Using_a_Lambda_function_in_a_custom_resource--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;MyCustomResource&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;Custom::TestLambdaCrossStackRef&quot;,
+        &quot;Properties&quot;: <span>{</span>
+            &quot;ServiceToken&quot;: <span>{</span>
+                &quot;Fn::Join&quot;: [
+                    &quot;&quot;,
+                    [
+                        &quot;arn:aws:lambda:&quot;,
+                        <span>{</span>
+                            &quot;Ref&quot;: &quot;AWS::Region&quot;
+                        },
+                        &quot;:&quot;,
+                        <span>{</span>
+                            &quot;Ref&quot;: &quot;AWS::AccountId&quot;
+                        },
+                        &quot;:function:&quot;,
+                        <span>{</span>
+                            &quot;Ref&quot;: &quot;LambdaFunctionName&quot;
+                        }
+                    ]
+                ]
+            },
+            &quot;StackName&quot;: <span>{</span>
+                &quot;Ref&quot;: &quot;NetworkStackName&quot;
+            }
+        }
     }
-  }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-cfn-customresource--examples--Using_an_AWS_Lambda_function_in_a_custom_resource--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyCustomResource: 
-  Type: &quot;Custom::TestLambdaCrossStackRef&quot;
-  Properties: 
-    ServiceToken:
-      !Sub arn:aws:lambda:$<span>{</span>AWS::Region}:$<span>{</span>AWS::AccountId}:function:$<span>{</span>LambdaFunctionName}
-    StackName: 
-      Ref: &quot;NetworkStackName&quot;</code></pre></div>
+                                    <h4 id="aws-resource-cfn-customresource--examples--Using_a_Lambda_function_in_a_custom_resource--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyCustomResource:
+      Type: &apos;Custom::TestLambdaCrossStackRef&apos;
+      Properties:
+      ServiceToken: !Join 
+      - &apos;&apos;
+      - - &apos;arn:aws:lambda:&apos;
+      - !Ref &apos;AWS::Region&apos;
+      - &apos;:&apos;
+      - !Ref &apos;AWS::AccountId&apos;
+      - &apos;:function:&apos;
+      - !Ref LambdaFunctionName
+      StackName: !Ref NetworkStackName</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -249,7 +286,7 @@ Outputs:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

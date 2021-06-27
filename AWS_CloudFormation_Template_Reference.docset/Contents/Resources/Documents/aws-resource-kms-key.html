@@ -16,25 +16,33 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::KMS::Key</code> resource specifies a <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">symmetric or asymmetric</a> <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">customer master key</a> (CMK)
-                                    in AWS Key Management Service (AWS KMS).
+                                 <p>The <code class="code">AWS::KMS::Key</code> resource specifies a <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">symmetric or asymmetric</a>
+                                    <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">customer
+                                       master key</a> (CMK) in AWS Key Management Service (AWS KMS).
                                  </p>
-                                 <p>You can use symmetric CMKs to encrypt and decrypt
-                                    small amounts of data, but they are more commonly used to generate data keys and
-                                    data key pairs. You can also use symmetric CMKs to encrypt data stored in AWS
-                                    services that are <a href="http://aws.amazon.com/kms/features/#AWS_Service_Integration" rel="noopener noreferrer" target="_blank"><span>integrated with AWS KMS</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/overview.html">What is AWS Key Management Service?</a> in the <em>AWS Key Management Service Developer Guide</em>.
+                                 <p>You can use symmetric CMKs to encrypt and decrypt small amounts of data, but they
+                                    are more
+                                    commonly used to generate data keys and data key pairs. You can also use symmetric
+                                    CMKs to
+                                    encrypt data stored in AWS services that are <a href="http://aws.amazon.com/kms/features/#AWS_Service_Integration" rel="noopener noreferrer" target="_blank"><span>integrated with AWS KMS</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a>.
+                                    For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/overview.html">What is AWS Key Management Service?</a> in
+                                    the <em>AWS Key Management Service Developer Guide</em>.
                                  </p>
                                  <p>You can use asymmetric CMKs to encrypt and decrypt data or sign messages and verify
-                                    signatures.
+                                    signatures. To create an asymmetric key, you must specify an asymmetric <code class="code">KeySpec</code>
+                                    value and a <code class="code">KeyUsage</code> value.
                                  </p>
                                  <div class="awsdocs-note awsdocs-important">
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                     <div class="awsdocs-note-text">
-                                       <p>If you change the value of a <code class="code">Replacement</code> property, such as <code class="code">KeyUsage</code> or <code class="code">KeySpec</code>, on an existing CMK, the existing CMK is <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html">scheduled for deletion</a> and a new CMK is created with the specified value.
+                                       <p>If you change the value of a <code class="code">Replacement</code> property, such as
+                                          <code class="code">KeyUsage</code> or <code class="code">KeySpec</code>, on an existing CMK, the existing CMK is
+                                          <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html">scheduled
+                                             for deletion</a> and a new CMK is created with the specified value.
                                        </p>
-                                       <p>While scheduled for deletion, the existing CMK becomes unusable. If you don&apos;t <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html#deleting-keys-scheduling-key-deletion">cancel the scheduled deletion</a> of the existing CMK outside of CloudFormation, all data encrypted under the existing
-                                          CMK becomes unrecoverable when the CMK is deleted.
+                                       <p>While scheduled for deletion, the existing CMK becomes unusable. If you don&apos;t <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html#deleting-keys-scheduling-key-deletion">cancel the scheduled deletion</a> of the existing CMK outside of CloudFormation, all
+                                          data encrypted under the existing CMK becomes unrecoverable when the CMK is deleted.
                                        </p>
                                     </div>
                                  </div>
@@ -50,6 +58,7 @@
       &quot;<a href="#cfn-kms-key-keypolicy">KeyPolicy</a>&quot; : <code class="replaceable">Json</code>,
       &quot;<a href="#cfn-kms-key-keyspec">KeySpec</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-kms-key-keyusage">KeyUsage</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-kms-key-multiregion">MultiRegion</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-kms-key-pendingwindowindays">PendingWindowInDays</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-kms-key-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
     }
@@ -64,6 +73,7 @@ Properties:
   <a href="#cfn-kms-key-keypolicy">KeyPolicy</a>: <code class="replaceable">Json</code>
   <a href="#cfn-kms-key-keyspec">KeySpec</a>: <code class="replaceable">String</code>
   <a href="#cfn-kms-key-keyusage">KeyUsage</a>: <code class="replaceable">String</code>
+  <a href="#cfn-kms-key-multiregion">MultiRegion</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-kms-key-pendingwindowindays">PendingWindowInDays</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-kms-key-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
@@ -106,8 +116,8 @@ Properties:
                                              or <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_ScheduleKeyDeletion.html">ScheduleKeyDeletion</a> operations.
                                           </p>
                                           
-                                          <p>For information about the key states of a CMK, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">Key state: Effect on your CMK</a> in the <em>AWS Key Management Service Developer Guide</em>.
-                                             
+                                          <p>For information about the key states of a CMK, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">Key state: Effect on your CMK</a> in the
+                                             <em>AWS Key Management Service Developer Guide</em>. 
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -124,14 +134,15 @@ Properties:
                                              (CMK). By default, automation key rotation is not enabled.
                                           </p>
                                           
-                                          <p>When you enable automatic rotation, AWS KMS automatically creates new key material
-                                             for the
-                                             CMK 365 days after the enable (or reenable) date and every 365 days thereafter. AWS
-                                             KMS
-                                             retains all key material until you delete the CMK.
+                                          <p>AWS KMS does not support automatic key rotation on asymmetric CMKs. For
+                                             asymmetric CMKs, omit the <code class="code">EnableKeyRotation</code> property or set it to
+                                             <code class="code">false</code>.
                                           </p>
                                           
-                                          <p>For detailed information about automatic key rotation, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html">Rotating customer master keys</a> in
+                                          <p>When you enable automatic rotation, AWS KMS automatically creates new key
+                                             material for the CMK 365 days after the enable (or reenable) date and every 365 days
+                                             thereafter. AWS KMS retains all key material until you delete the CMK. For
+                                             detailed information about automatic key rotation, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html">Rotating customer master keys</a> in
                                              the <em>AWS Key Management Service Developer Guide</em>.
                                           </p>
                                           
@@ -146,8 +157,8 @@ Properties:
                                           
                                           
                                           
-                                          <p>The key policy that authorizes use of the CMK. The key policy must observe the following
-                                             rules.
+                                          <p>The key policy that authorizes use of the CMK. The key policy must conform to the
+                                             following rules.
                                           </p>
                                           
                                           <div class="itemizedlist">
@@ -170,11 +181,11 @@ Properties:
                                                 <li class="listitem">
                                                    
                                                    <p>Each statement in the key policy must contain one or more principals. The principals
-                                                      in the key policy must exist and be visible to AWS KMS. When you create a new AWS
-                                                      principal (for example, an IAM user or role), you might need to enforce a delay before
-                                                      including the new principal in a key policy because the new principal might not be
-                                                      immediately visible to AWS KMS. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency">Changes that I make are not always immediately visible</a> in the <em>AWS
-                                                         Identity and Access Management User Guide</em>.
+                                                      in the key policy must exist and be visible to AWS KMS. When you create a new
+                                                      AWS principal (for example, an IAM user or role), you might need to
+                                                      enforce a delay before including the new principal in a key policy because the new
+                                                      principal might not be immediately visible to AWS KMS. For more information,
+                                                      see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency">Changes that I make are not always immediately visible</a> in the <em>AWS Identity and Access Management User Guide</em>.
                                                    </p>
                                                    
                                                 </li>
@@ -187,13 +198,11 @@ Properties:
                                           </div>
                                           
                                           <p>If you are unsure of which policy to use, consider the <em>default key
-                                                policy</em>. This is the key policy that AWS KMS applies to CMKs that are created by
-                                             using the CreateKey API with no specified key policy. It gives the AWS account that
-                                             owns the
-                                             key permission to perform all operations on the key. It also allows you write IAM
-                                             policies to
-                                             authorize access to the key. For details, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default">Default key
-                                                policy</a> in the <em>AWS Key Management Service Developer
+                                                policy</em>. This is the key policy that AWS KMS applies to CMKs that are
+                                             created by using the CreateKey API with no specified key policy. It gives the AWS
+                                             account that owns the key permission to perform all operations on the key. It
+                                             also allows you write IAM policies to authorize access to the key. For details, see
+                                             <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default">Default key policy</a> in the <em>AWS Key Management Service Developer
                                                 Guide</em>.
                                           </p>
                                           
@@ -219,13 +228,14 @@ Properties:
                                                 Guide</em>.
                                           </p>
                                           
-                                          <p>The <code class="code">KeySpec</code> property (<code class="code">CustomerMasterKeySpec</code> type) determines whether the CMK contains a symmetric key
-                                             or an asymmetric key pair. It also determines the encryption algorithms or signing
-                                             algorithms
-                                             that the CMK supports. You can&apos;t change the <code class="code">KeySpec</code> after the CMK
-                                             is created. To further restrict the algorithms that can be used with the CMK, use
-                                             a condition
-                                             key in its key policy or IAM policy. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-algorithm">kms:EncryptionAlgorithm</a> or <a href="https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-signing-algorithm">kms:Signing Algorithm</a> in the <em>AWS Key Management Service Developer
+                                          <p>The <code class="code">KeySpec</code> property (<code class="code">CustomerMasterKeySpec</code> type) determines
+                                             whether the CMK contains a symmetric key or an asymmetric key pair. It also determines
+                                             the
+                                             encryption algorithms or signing algorithms that the CMK supports. You can&apos;t change
+                                             the
+                                             <code class="code">KeySpec</code> after the CMK is created. To further restrict the algorithms that can
+                                             be used with the CMK, use a condition key in its key policy or IAM policy. For more
+                                             information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-algorithm">kms:EncryptionAlgorithm</a> or <a href="https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-signing-algorithm">kms:Signing Algorithm</a> in the <em>AWS Key Management Service Developer
                                                 Guide</em>.
                                           </p>
                                           
@@ -233,10 +243,10 @@ Properties:
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>If you change the <code class="code">KeySpec</code> of an existing CMK, the existing CMK is scheduled for deletion and a new CMK is created
-                                                   with the specified <code class="code">KeySpec</code> value. While the scheduled deletion is pending, you can&apos;t use the existing CMK. Unless
-                                                   you <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html#deleting-keys-scheduling-key-deletion">cancel the scheduled deletion</a> of the CMK outside of CloudFormation, all data encrypted under the existing CMK becomes
-                                                   unrecoverable when the CMK is deleted.
+                                                <p>If you change the <code class="code">KeySpec</code> of an existing CMK, the existing CMK is scheduled
+                                                   for deletion and a new CMK is created with the specified <code class="code">KeySpec</code> value. While
+                                                   the scheduled deletion is pending, you can&apos;t use the existing CMK. Unless you <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html#deleting-keys-scheduling-key-deletion">cancel the scheduled deletion</a> of the CMK outside of CloudFormation, all data
+                                                   encrypted under the existing CMK becomes unrecoverable when the CMK is deleted.
                                                 </p>
                                              </div>
                                           </div>
@@ -245,13 +255,11 @@ Properties:
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p><a href="http://aws.amazon.com/kms/features/#AWS_Service_Integration" rel="noopener noreferrer" target="_blank"><span>AWS services that
-                                                         are integrated with AWS KMS</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> use symmetric CMKs to protect your data. These
-                                                   services do not support asymmetric CMKs. For help determining whether a CMK is symmetric
-                                                   or
-                                                   asymmetric, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/find-symm-asymm.html">Identifying Symmetric and Asymmetric
-                                                      CMKs</a> in the <em>AWS Key Management Service Developer
-                                                      Guide</em>.
+                                                <p><a href="http://aws.amazon.com/kms/features/#AWS_Service_Integration" rel="noopener noreferrer" target="_blank"><span>AWS
+                                                         services that are integrated with AWS KMS</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> use symmetric CMKs to
+                                                   protect your data. These services do not support asymmetric CMKs. For help determining
+                                                   whether a CMK is symmetric or asymmetric, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/find-symm-asymm.html">Identifying Symmetric and Asymmetric
+                                                      CMKs</a> in the <em>AWS Key Management Service Developer Guide</em>.
                                                 </p>
                                              </div>
                                           </div>
@@ -364,7 +372,7 @@ Properties:
                                                    
                                                 </li>
                                              </ul>
-                                          </div>    
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -376,19 +384,22 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>Determines the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations">cryptographic operations</a> for which you can use the CMK. The default value
-                                             is <code class="code">ENCRYPT_DECRYPT</code>. This property is required only for asymmetric CMKs. You
-                                             can&apos;t change the <code class="code">KeyUsage</code> value after the CMK is created.
+                                          <p>Determines the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations">cryptographic
+                                                operations</a> for which you can use the CMK. The default value is
+                                             <code class="code">ENCRYPT_DECRYPT</code>. This property is required only for asymmetric CMKs. You can&apos;t
+                                             change the <code class="code">KeyUsage</code> value after the CMK is created.
                                           </p>
                                           
                                           <div class="awsdocs-note awsdocs-important">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>If you change the <code class="code">KeyUsage</code> of an existing CMK, the existing CMK is scheduled for deletion and a new CMK is created
-                                                   with the specified <code class="code">KeyUsage</code> value. While the scheduled deletion is pending, you can&apos;t use the existing CMK. Unless
-                                                   you <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html#deleting-keys-scheduling-key-deletion">cancel the scheduled deletion</a> of the CMK outside of CloudFormation, all data encrypted under the existing CMK becomes
-                                                   unrecoverable when the CMK is deleted.
+                                                <p>If you change the <code class="code">KeyUsage</code> of an existing CMK, the existing CMK is
+                                                   scheduled for deletion and a new CMK is created with the specified <code class="code">KeyUsage</code>
+                                                   value. While the scheduled deletion is pending, you can&apos;t use the existing CMK. Unless
+                                                   you
+                                                   <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html#deleting-keys-scheduling-key-deletion">cancel the scheduled deletion</a> of the CMK outside of CloudFormation, all data
+                                                   encrypted under the existing CMK becomes unrecoverable when the CMK is deleted.
                                                 </p>
                                              </div>
                                           </div>
@@ -430,40 +441,105 @@ Properties:
                                           <p><em>Allowed values</em>: <code class="code">ENCRYPT_DECRYPT | SIGN_VERIFY</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
+                                       <dt><a id="cfn-kms-key-multiregion"></a><span class="term"><code class="code">MultiRegion</code></span></dt>
+                                       <dd>
+                                          
+                                          
+                                          <p>Creates a multi-Region primary CMK that you can replicate in other AWS Regions.</p>
+                                          
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If you change the <code class="code">MultiRegion</code> property of an existing CMK, the existing CMK
+                                                   is scheduled for deletion and a new CMK is created with the specified
+                                                   <code class="code">Multi-Region</code> value. While the scheduled deletion is pending, you can&apos;t use
+                                                   the existing CMK. Unless you <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html#deleting-keys-scheduling-key-deletion">cancel the scheduled deletion</a> of the CMK outside of CloudFormation, all data
+                                                   encrypted under the existing CMK becomes unrecoverable when the CMK is deleted.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p>For a multi-Region CMK, set to this property to <code class="code">true</code>. For a single-Region
+                                             CMK, omit this property or set it to <code class="code">false</code>. The default value is
+                                             <code class="code">false</code>.
+                                          </p>
+                                          
+                                          <p><em>Multi-Region keys</em> are an AWS KMS feature that lets you
+                                             create multiple interoperable CMKs in different AWS Regions. Because these
+                                             CMKs have the same key ID, key material, and other metadata, you can use them to encrypt
+                                             data
+                                             in one AWS Region and decrypt it in a different AWS Region
+                                             without making a cross-Region call or exposing the plaintext data. For more information,
+                                             see
+                                             <a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html">Using multi-Region keys</a> in the <em>AWS Key Management Service Developer
+                                                Guide</em>.
+                                          </p>
+                                          
+                                          <p>You can create a symmetric or asymmetric multi-Region CMK, and you can create a
+                                             multi-Region CMK with imported key material. However, you cannot create a multi-Region
+                                             CMK in
+                                             a custom key store.
+                                          </p>
+                                          
+                                          <p>To create a replica of this primary key in a different AWS Region ,
+                                             create an <a href="aws-resource-kms-replicakey.html">AWS::KMS::ReplicaKey</a> resource in a CloudFormation stack in the replica Region.
+                                             Specify the key ARN of this primary key.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
                                        <dt><a id="cfn-kms-key-pendingwindowindays"></a><span class="term"><code class="code">PendingWindowInDays</code></span></dt>
                                        <dd>
                                           
                                           
                                           
-                                          <p>Specifies the number of days in the waiting period before AWS KMS deletes a CMK that
-                                             has
-                                             been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The
-                                             default
-                                             value is 30 days.
+                                          <p>Specifies the number of days in the waiting period before AWS KMS deletes a
+                                             CMK that has been removed from a CloudFormation stack. Enter a value between 7 and
+                                             30 days.
+                                             The default value is 30 days.
                                           </p>
                                           
                                           <p>When you remove a customer master key (CMK) from a CloudFormation stack, AWS KMS schedules
                                              the CMK for deletion and starts the mandatory waiting period. The
                                              <code class="code">PendingWindowInDays</code> property determines the length of waiting period. During
-                                             the waiting period, the key state of CMK is <code class="code">Pending Deletion</code>, which prevents the
-                                             CMK from being used in cryptographic operations. When the waiting period expires,
-                                             AWS KMS
-                                             permanently deletes the CMK.
+                                             the waiting period, the key state of CMK is <code class="code">Pending Deletion</code> or <code class="code">Pending
+                                                Replica Deletion</code>, which prevents the CMK from being used in cryptographic operations.
+                                             When the waiting period expires, AWS KMS permanently deletes the CMK.
+                                          </p>
+                                          
+                                          <p>AWS KMS will not delete a <a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html">multi-Region primary
+                                                key</a> that has replica keys. If you remove a multi-Region primary key from a
+                                             CloudFormation stack, its key state changes to <code class="code">PendingReplicaDeletion</code> so it
+                                             cannot be replicated or used in cryptographic operations. This state can persist indefinitely.
+                                             When the last of its replica keys is deleted, the key state of the primary key changes
+                                             to
+                                             <code class="code">PendingDeletion</code> and the waiting period specified by
+                                             <code class="code">PendingWindowInDays</code> begins. When this waiting period expires, AWS KMS deletes the primary key. For details,
+                                             see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-delete.html">Deleting multi-Region
+                                                keys</a> in the <em>AWS Key Management Service Developer Guide</em>.
                                           </p>
                                           
                                           <p>You cannot use a CloudFormation template to cancel deletion of the CMK after you remove
-                                             it from the stack, regardless of the waiting period. If you specify a CMK in your
-                                             template,
-                                             even one with the same name, CloudFormation creates a new CMK. To cancel deletion
-                                             of a CMK,
-                                             use the AWS KMS console or the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CancelKeyDeletion.html">CancelKeyDeletion</a>
+                                             it
+                                             from the stack, regardless of the waiting period. If you specify a CMK in your template,
+                                             even
+                                             one with the same name, CloudFormation creates a new CMK. To cancel deletion of a
+                                             CMK, use the
+                                             AWS KMS console or the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CancelKeyDeletion.html">CancelKeyDeletion</a>
                                              operation.
                                           </p>
                                           
-                                          <p>For information about the <code class="code">PendingDeletion</code> key state, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">Key state: Effect on your CMK</a> in the <em>AWS Key Management Service Developer
-                                                Guide</em>. For more information about deleting CMKs, see the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_ScheduleKeyDeletion.html">ScheduleKeyDeletion</a> operation in the <em>AWS Key Management Service API
-                                                Reference</em> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html">Deleting customer master keys</a> in
-                                             the <em>AWS Key Management Service Developer Guide</em>. 
+                                          <p>For information about the <code class="code">Pending Deletion</code> and <code class="code">Pending Replica
+                                                Deletion</code> key states, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">Key state: Effect on your CMK</a> in the
+                                             <em>AWS Key Management Service Developer Guide</em>. For more information about
+                                             deleting CMKs, see the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_ScheduleKeyDeletion.html">ScheduleKeyDeletion</a>
+                                             operation in the <em>AWS Key Management Service API Reference</em> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html">Deleting customer
+                                                master keys</a> in the <em>AWS Key Management Service Developer Guide</em>. 
                                           </p>
                                           
                                           <p><em>Minimum</em>: 7
@@ -482,21 +558,23 @@ Properties:
                                        <dd>
                                           
                                           
-                                          <p>An array of key-value pairs to apply to this resource.</p>
+                                          <p>Assigns one or more tags to the replica key.</p>
                                           
                                           <div class="awsdocs-note">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>Tagging or untagging a CMK can allow or deny permission to the
-                                                   CMK. For details, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/abac.html">Using ABAC in AWS KMS</a> in the <em>AWS Key Management Service Developer
+                                                <p>Tagging or untagging a CMK can allow or deny permission to the CMK. For details, see
+                                                   <a href="https://docs.aws.amazon.com/kms/latest/developerguide/abac.html">Using ABAC in
+                                                      AWS KMS</a> in the <em>AWS Key Management Service Developer
                                                       Guide</em>.
                                                 </p>
                                              </div>
                                           </div>
                                           
-                                          <p>For information about tags in AWS KMS, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html">Tagging keys</a> in the <em>AWS Key Management Service Developer
-                                                Guide</em>. For information about tags in CloudFormation, see <a href="aws-properties-resource-tags.html">Tag</a>.
+                                          <p>For information about tags in AWS KMS, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html">Tagging keys</a> in the
+                                             <em>AWS Key Management Service Developer Guide</em>. For information about tags
+                                             in CloudFormation, see <a href="aws-properties-resource-tags.html">Tag</a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -527,11 +605,13 @@ Properties:
                                        <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK), such as
+                                          <p>The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK), such
+                                             as
                                              <code class="code">arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.
                                           </p>
                                           
-                                          <p>For information about the key ARN of a CMK, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key ARN</a> in the <em>AWS Key Management Service Developer Guide</em>.
+                                          <p>For information about the key ARN of a CMK, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key ARN</a> in the
+                                             <em>AWS Key Management Service Developer Guide</em>.
                                           </p>
                                           
                                        </dd>
@@ -542,7 +622,8 @@ Properties:
                                              <code class="code">1234abcd-12ab-34cd-56ef-1234567890ab</code>.
                                           </p>
                                           
-                                          <p>For information about the key ID of a CMK, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id">Key ID</a> in the <em>AWS Key Management Service Developer Guide</em>.
+                                          <p>For information about the key ID of a CMK, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id">Key ID</a> in the
+                                             <em>AWS Key Management Service Developer Guide</em>.
                                           </p>
                                           
                                        </dd>
@@ -550,18 +631,20 @@ Properties:
                                  </div>
                                  <h2 id="aws-resource-kms-key--examples">Examples</h2>
                                  <h3 id="aws-resource-kms-key--examples--Create_a_symmetric_CMK">Create a symmetric CMK</h3>
-                                 <p>The following example creates a symmetric CMK. The key policy for the CMK
-                                    allows <code class="code">Alice</code> to manage the key and allows <code class="code">Bob</code> to view the CMK
-                                    and use it in cryptographic operations. It also allows the AWS account (root) full
-                                    access
-                                    to the key. This prevents you from losing control of the key if both <code class="code">Alice</code>
-                                    and <code class="code">Bob</code> are deleted from the account.
+                                 <p>The following example creates a symmetric CMK. The key policy for the CMK allows
+                                    <code class="code">Alice</code> to manage the key and allows <code class="code">Bob</code> to view the CMK and use
+                                    it in cryptographic operations. It also allows the AWS account (root) full access
+                                    to the
+                                    key. This prevents you from losing control of the key if both <code class="code">Alice</code> and
+                                    <code class="code">Bob</code> are deleted from the account.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-kms-key--examples--Create_a_symmetric_CMK--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;myKey&quot; : <span>{</span>
   &quot;Type&quot; : &quot;AWS::KMS::Key&quot;,
   &quot;Properties&quot; : <span>{</span>
     &quot;Description&quot; : &quot;An example symmetric CMK&quot;,
+    &quot;EnableKeyRotation&quot;: true,
+    &quot;PendingWindowInDays&quot;: 20,
     &quot;KeyPolicy&quot; : <span>{</span>
       &quot;Version&quot;: &quot;2012-10-17&quot;,
       &quot;Id&quot;: &quot;key-default-1&quot;,
@@ -576,7 +659,7 @@ Properties:
         <span>{</span>
           &quot;Sid&quot;: &quot;Allow administration of the key&quot;,
           &quot;Effect&quot;: &quot;Allow&quot;,
-          &quot;Principal&quot;: <span>{</span> &quot;AWS&quot;: &quot;arn:aws:iam::123456789012:user/Alice&quot; },
+          &quot;Principal&quot;: <span>{</span> &quot;AWS&quot;: &quot;arn:aws:iam::111122223333:user/Alice&quot; },
           &quot;Action&quot;: [
             &quot;kms:Create*&quot;,
             &quot;kms:Describe*&quot;,
@@ -596,7 +679,7 @@ Properties:
         <span>{</span>
           &quot;Sid&quot;: &quot;Allow use of the key&quot;,
           &quot;Effect&quot;: &quot;Allow&quot;,
-          &quot;Principal&quot;: <span>{</span> &quot;AWS&quot;: &quot;arn:aws:iam::123456789012:user/Bob&quot; },
+          &quot;Principal&quot;: <span>{</span> &quot;AWS&quot;: &quot;arn:aws:iam::111122223333:user/Bob&quot; },
           &quot;Action&quot;: [
             &quot;kms:DescribeKey&quot;,
             &quot;kms:Encrypt&quot;,
@@ -610,12 +693,14 @@ Properties:
       ]
     }
   }
-}</code></pre></div>
+}      </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h4 id="aws-resource-kms-key--examples--Create_a_symmetric_CMK--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">myKey:
   Type: AWS::KMS::Key
   Properties:
     Description: An example symmetric CMK
+    EnableKeyRotation: true
+    PendingWindowInDays: 20
     KeyPolicy:
       Version: &apos;2012-10-17&apos;
       Id: key-default-1
@@ -629,7 +714,7 @@ Properties:
       - Sid: Allow administration of the key
         Effect: Allow
         Principal:
-          AWS: arn:aws:iam::123456789012:user/Alice
+          AWS: arn:aws:iam::111122223333:user/Alice
         Action:
         - kms:Create*
         - kms:Describe*
@@ -647,7 +732,7 @@ Properties:
       - Sid: Allow use of the key
         Effect: Allow
         Principal:
-          AWS: arn:aws:iam::123456789012:user/Bob
+          AWS: arn:aws:iam::111122223333:user/Bob
         Action:
         - kms:DescribeKey
         - kms:Encrypt
@@ -658,10 +743,19 @@ Properties:
         Resource: &apos;*&apos;</code></pre></div>
                                  <h3 id="aws-resource-kms-key--examples--Create_a_symmetric_CMK_with_a_resource_tag">Create a symmetric CMK with a resource tag</h3>
                                  <p>The following example creates a symmetric CMK with one resource tag.</p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>Tagging or untagging a CMK can allow or deny permission to the CMK. For details, see
+                                          <a href="https://docs.aws.amazon.com/kms/latest/developerguide/abac.html">Using ABAC in
+                                             AWS KMS</a> in the <em>AWS Key Management Service Developer
+                                             Guide</em>.
+                                       </p>
+                                    </div>
+                                 </div>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-kms-key--examples--Create_a_symmetric_CMK_with_a_resource_tag--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-  &quot;Resources&quot; : <span>{</span>
-    &quot;myKey&quot; : <span>{</span>
+                                    <h4 id="aws-resource-kms-key--examples--Create_a_symmetric_CMK_with_a_resource_tag--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;myKeyWithTag&quot; : <span>{</span>
       &quot;Type&quot; : &quot;AWS::KMS::Key&quot;,
       &quot;Properties&quot; : <span>{</span>
         &quot;KeyPolicy&quot; : <span>{</span>
@@ -698,8 +792,7 @@ Properties:
   }
 }</code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-kms-key--examples--Create_a_symmetric_CMK_with_a_resource_tag--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
-  myKey:
+                                    <h4 id="aws-resource-kms-key--examples--Create_a_symmetric_CMK_with_a_resource_tag--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">myKeyWithTag:
     Type: AWS::KMS::Key
     Properties:
       KeyPolicy:
@@ -727,8 +820,233 @@ Parameters:
     Type: String
   Value:
     Type: String</code></pre></div>
+                                 <h3 id="aws-resource-kms-key--examples--Create_an_asymmetric_CMK">Create an asymmetric CMK</h3>
+                                 <p>The following example creates an RSA asymmetric CMK for signing and verification.
+                                    For an
+                                    asymmetric CMK, you must specify <code class="code">KeySpec</code> and <code class="code">KeyUsage</code>
+                                    properties. The <code class="code">EnableKeyRotation</code> property must be omitted or set to <code class="code">false</code>.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-kms-key--examples--Create_an_asymmetric_CMK--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;RSASigningKey&quot; : <span>{</span>
+  &quot;Type&quot; : &quot;AWS::KMS::Key&quot;,
+  &quot;Properties&quot; : <span>{</span>
+    &quot;Description&quot; : &quot;RSA-3047 asymmetric CMK for signing and verification&quot;,
+    &quot;KeySpec&quot; : &quot;RSA_3072&quot;,
+    &quot;KeyUsage&quot; : &quot;SIGN_VERIFY&quot;,
+    &quot;KeyPolicy&quot; : <span>{</span>
+      &quot;Version&quot;: &quot;2012-10-17&quot;,
+      &quot;Id&quot;: &quot;key-default-1&quot;,
+      &quot;Statement&quot;: [
+        <span>{</span>
+          &quot;Sid&quot;: &quot;Enable IAM User Permissions&quot;,
+          &quot;Effect&quot;: &quot;Allow&quot;,
+          &quot;Principal&quot;: <span>{</span>&quot;AWS&quot;: &quot;arn:aws:iam::111122223333:root&quot;},
+          &quot;Action&quot;: &quot;kms:*&quot;,
+          &quot;Resource&quot;: &quot;*&quot;
+        },
+        <span>{</span>
+          &quot;Sid&quot;: &quot;Allow administration of the key&quot;,
+          &quot;Effect&quot;: &quot;Allow&quot;,
+          &quot;Principal&quot;: <span>{</span> &quot;AWS&quot;: &quot;arn:aws:iam::111122223333:role/Admin&quot; },
+          &quot;Action&quot;: [
+            &quot;kms:Create*&quot;,
+            &quot;kms:Describe*&quot;,
+            &quot;kms:Enable*&quot;,
+            &quot;kms:List*&quot;,
+            &quot;kms:Put*&quot;,
+            &quot;kms:Update*&quot;,
+            &quot;kms:Revoke*&quot;,
+            &quot;kms:Disable*&quot;,
+            &quot;kms:Get*&quot;,
+            &quot;kms:Delete*&quot;,
+            &quot;kms:ScheduleKeyDeletion&quot;,
+            &quot;kms:CancelKeyDeletion&quot;
+          ],
+          &quot;Resource&quot;: &quot;*&quot;
+        },
+        <span>{</span>
+          &quot;Sid&quot;: &quot;Allow use of the key&quot;,
+          &quot;Effect&quot;: &quot;Allow&quot;,
+          &quot;Principal&quot;: <span>{</span> &quot;AWS&quot;: &quot;arn:aws:iam::111122223333:role/Developer&quot; },
+          &quot;Action&quot;: [
+            &quot;kms:Sign&quot;,
+            &quot;kms:Verify&quot;,
+            &quot;kms:DescribeKey&quot;
+          ], 
+          &quot;Resource&quot;: &quot;*&quot;
+        }    
+      ]
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-kms-key--examples--Create_an_asymmetric_CMK--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">RSASigningKey:
+  Type: AWS::KMS::Key
+  Properties:
+    Description: RSA-3047 asymmetric CMK for signing and verification
+    KeySpec: RSA_3072
+    KeyUsage: SIGN_VERIFY
+    KeyPolicy:
+      Version: &apos;2012-10-17&apos;
+      Id: key-default-1
+      Statement:
+      - Sid: Enable IAM User Permissions
+        Effect: Allow
+        Principal:
+          AWS: arn:aws:iam::111122223333:root
+        Action: kms:*
+        Resource: &apos;*&apos;
+      - Sid: Allow administration of the key
+        Effect: Allow
+        Principal:
+          AWS: arn:aws:iam::111122223333:role/Admin
+        Action:
+        - kms:Create*
+        - kms:Describe*
+        - kms:Enable*
+        - kms:List*
+        - kms:Put*
+        - kms:Update*
+        - kms:Revoke*
+        - kms:Disable*
+        - kms:Get*
+        - kms:Delete*
+        - kms:ScheduleKeyDeletion
+        - kms:CancelKeyDeletion
+        Resource: &apos;*&apos;
+      - Sid: Allow use of the key
+        Effect: Allow
+        Principal:
+          AWS: arn:aws:iam::111122223333:role/Developer
+        Action:        
+        - kms:Sign
+        - kms:Verify
+        - kms:DescribeKey
+        Resource: &apos;*&apos;</code></pre></div>
+                                 <h3 id="aws-resource-kms-key--examples--Create_a_multi-Region_primary_CMK">Create a multi-Region primary CMK</h3>
+                                 <p>The following example creates a multi-Region primary CMK.</p>
+                                 <p><em>Multi-Region keys</em> are an AWS KMS feature that lets you create
+                                    multiple interoperable CMKs in different AWS Regions. Because these CMKs have the
+                                    same key ID,
+                                    key material, and other metadata, you can use them to encrypt data in one AWS Region
+                                    and
+                                    decrypt it in a different AWS Region without making a cross-Region call or exposing
+                                    the
+                                    plaintext data. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html">Using multi-Region
+                                       keys</a> in the <em>AWS Key Management Service Developer Guide</em>.
+                                 </p>
+                                 <p>To replicate this primary key into a different AWS Region, use the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kms-replica-key.html">AWS::KMS::ReplicaKey</a> CloudFormation resource.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-kms-key--examples--Create_a_multi-Region_primary_CMK--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;myPrimaryKey&quot; : <span>{</span>
+  &quot;Type&quot; : &quot;AWS::KMS::Key&quot;,
+  &quot;Properties&quot; : <span>{</span>
+    &quot;Description&quot; : &quot;An example multi-Region primary key&quot;,
+    &quot;MultiRegion&quot;: true,
+    &quot;EnableKeyRotation&quot;: true,
+    &quot;PendingWindowInDays&quot;: 10,
+    &quot;KeyPolicy&quot; : <span>{</span>
+      &quot;Version&quot;: &quot;2012-10-17&quot;,
+      &quot;Id&quot;: &quot;key-default-1&quot;,
+      &quot;Statement&quot;: [
+        <span>{</span>
+          &quot;Sid&quot;: &quot;Enable IAM User Permissions&quot;,
+          &quot;Effect&quot;: &quot;Allow&quot;,
+          &quot;Principal&quot;: <span>{</span>&quot;AWS&quot;: &quot;arn:aws:iam::111122223333:root&quot;},
+          &quot;Action&quot;: &quot;kms:*&quot;,
+          &quot;Resource&quot;: &quot;*&quot;
+        },
+        <span>{</span>
+          &quot;Sid&quot;: &quot;Allow administration of the key&quot;,
+          &quot;Effect&quot;: &quot;Allow&quot;,
+          &quot;Principal&quot;: <span>{</span> &quot;AWS&quot;: &quot;arn:aws:iam::111122223333:user/Alice&quot; },
+          &quot;Action&quot;: [
+            &quot;kms:ReplicateKey&quot;,
+            &quot;kms:Create*&quot;,
+            &quot;kms:Describe*&quot;,
+            &quot;kms:Enable*&quot;,
+            &quot;kms:List*&quot;,
+            &quot;kms:Put*&quot;,
+            &quot;kms:Update*&quot;,
+            &quot;kms:Revoke*&quot;,
+            &quot;kms:Disable*&quot;,
+            &quot;kms:Get*&quot;,
+            &quot;kms:Delete*&quot;,
+            &quot;kms:ScheduleKeyDeletion&quot;,
+            &quot;kms:CancelKeyDeletion&quot;
+          ],
+          &quot;Resource&quot;: &quot;*&quot;
+        },
+        <span>{</span>
+          &quot;Sid&quot;: &quot;Allow use of the key&quot;,
+          &quot;Effect&quot;: &quot;Allow&quot;,
+          &quot;Principal&quot;: <span>{</span> &quot;AWS&quot;: &quot;arn:aws:iam::111122223333:user/Bob&quot; },
+          &quot;Action&quot;: [
+            &quot;kms:DescribeKey&quot;,
+            &quot;kms:Encrypt&quot;,
+            &quot;kms:Decrypt&quot;,
+            &quot;kms:ReEncrypt*&quot;,
+            &quot;kms:GenerateDataKey&quot;,
+            &quot;kms:GenerateDataKeyWithoutPlaintext&quot;
+          ], 
+          &quot;Resource&quot;: &quot;*&quot;
+        }    
+      ]
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-kms-key--examples--Create_a_multi-Region_primary_CMK--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">myPrimaryKey:
+  Type: AWS::KMS::Key
+  Properties:
+    Description: An example multi-Region primary key
+    MultiRegion: true
+    EnableKeyRotation: true
+    PendingWindowInDays 10
+    KeyPolicy:
+      Version: &apos;2012-10-17&apos;
+      Id: key-default-1
+      Statement:
+      - Sid: Enable IAM User Permissions
+        Effect: Allow
+        Principal:
+          AWS: arn:aws:iam::111122223333:root
+        Action: kms:*
+        Resource: &apos;*&apos;
+      - Sid: Allow administration of the key
+        Effect: Allow
+        Principal:
+          AWS: arn:aws:iam::111122223333:user/Alice
+        Action:
+        - kms:ReplicateKey
+        - kms:Create*
+        - kms:Describe*
+        - kms:Enable*
+        - kms:List*
+        - kms:Put*
+        - kms:Update*
+        - kms:Revoke*
+        - kms:Disable*
+        - kms:Get*
+        - kms:Delete*
+        - kms:ScheduleKeyDeletion
+        - kms:CancelKeyDeletion
+        Resource: &apos;*&apos;
+      - Sid: Allow use of the key
+        Effect: Allow
+        Principal:
+          AWS: arn:aws:iam::111122223333:user/Bob
+        Action:
+        - kms:DescribeKey
+        - kms:Encrypt
+        - kms:Decrypt
+        - kms:ReEncrypt*
+        - kms:GenerateDataKey
+        - kms:GenerateDataKeyWithoutPlaintext
+        Resource: &apos;*&apos;</code></pre></div>
                                  <h2 id="aws-resource-kms-key--seealso">See also</h2>
                                  <div class="itemizedlist">
+                                     
                                      
                                      
                                      
@@ -737,8 +1055,7 @@ Parameters:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html">Creating
-                                                keys</a> in the <em>AWS Key Management Service Developer
+                                             <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">Customer master keys</a> in the <em>AWS Key Management Service Developer
                                                 Guide</em>.
                                           </p>
                                           
@@ -754,14 +1071,22 @@ Parameters:
                                        <li class="listitem">
                                           
                                           <p>
-                                             <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">Customer master keys</a> in the <em>AWS Key Management Service Developer
+                                             <a href="https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html">Creating
+                                                keys</a> in the <em>AWS Key Management Service Developer
                                                 Guide</em>.
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>
+                                             <a href="https://docs.aws.amazon.com/kms/latest/developerguide/create-primary-keys.html">Creating multi-Region primary keys</a> in the <em>AWS Key Management Service
+                                                Developer Guide</em>.
                                           </p>
                                           
                                        </li>
                                     </ul>
                                  </div>
-                                 <p></p>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -772,7 +1097,7 @@ Parameters:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

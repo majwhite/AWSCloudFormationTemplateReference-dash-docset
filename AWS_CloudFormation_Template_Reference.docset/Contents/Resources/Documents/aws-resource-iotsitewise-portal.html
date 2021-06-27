@@ -18,8 +18,8 @@
                                  </div>
                                  <p>Creates a portal, which can contain projects and dashboards. Before you can create
                                     a
-                                    portal, you must enable AWS Single Sign-On. AWS IoT SiteWise Monitor uses AWS SSO
-                                    to manage user permissions. For more
+                                    portal, you must enable AWS SSO. AWS IoT SiteWise Monitor uses AWS SSO to manage user
+                                    permissions. For more
                                     information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso">Enabling
                                        AWS SSO</a> in the <em>AWS IoT SiteWise User Guide</em>.
                                  </p>
@@ -40,6 +40,7 @@
                                     <h3 id="aws-resource-iotsitewise-portal-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::IoTSiteWise::Portal&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-iotsitewise-portal-portalauthmode">PortalAuthMode</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-iotsitewise-portal-portalcontactemail">PortalContactEmail</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-iotsitewise-portal-portaldescription">PortalDescription</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-iotsitewise-portal-portalname">PortalName</a>&quot; : <code class="replaceable">String</code>,
@@ -51,6 +52,7 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-iotsitewise-portal-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::IoTSiteWise::Portal
 Properties: 
+  <a href="#cfn-iotsitewise-portal-portalauthmode">PortalAuthMode</a>: <code class="replaceable">String</code>
   <a href="#cfn-iotsitewise-portal-portalcontactemail">PortalContactEmail</a>: <code class="replaceable">String</code>
   <a href="#cfn-iotsitewise-portal-portaldescription">PortalDescription</a>: <code class="replaceable">String</code>
   <a href="#cfn-iotsitewise-portal-portalname">PortalName</a>: <code class="replaceable">String</code>
@@ -61,6 +63,54 @@ Properties:
                                  <h2 id="aws-resource-iotsitewise-portal-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-iotsitewise-portal-portalauthmode"></a><span class="term"><code class="code">PortalAuthMode</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The service to use to authenticate users to the portal. Choose from the following
+                                             options:
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">SSO</code> &#x2013; The portal uses AWS Single Sign-On to authenticate users and manage
+                                                      user permissions. Before you can create a portal that uses AWS SSO, you must enable
+                                                      AWS SSO.
+                                                      For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso">Enabling AWS SSO</a> in the
+                                                      <em>AWS IoT SiteWise User Guide</em>. This option is only available in AWS Regions other than
+                                                      the China Regions.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">IAM</code> &#x2013; The portal uses AWS Identity and Access Management (IAM) to authenticate users
+                                                      and manage
+                                                      user permissions. This option is only available in China (Beijing).
+                                                   </p>          
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>You can&apos;t change this value after you create a portal.</p>
+                                          
+                                          <p>Default: <code class="code">SSO</code>
+                                             
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
                                        <dt><a id="cfn-iotsitewise-portal-portalcontactemail"></a><span class="term"><code class="code">PortalContactEmail</code></span></dt>
                                        <dd>
                                           
@@ -177,17 +227,6 @@ Properties:
                                           </p>
                                           
                                        </dd>
-                                       <dt><a id="PortalStatus-fn::getatt"></a><span class="term"><code class="code">PortalStatus</code></span></dt>
-                                       <dd>
-                                          
-                                          <p>The status of the portal, which contains a state (<code class="code">CREATING</code> after successfully
-                                             calling this operation) and any error message.
-                                          </p>
-                                          
-                                          <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
-                                          </p>
-                                          
-                                       </dd>
                                     </dl>
                                  </div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
@@ -200,7 +239,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

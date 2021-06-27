@@ -16,15 +16,29 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>The <code class="code">AWS::MWAA::Environment</code> resource creates an Amazon MWAA environment with Apache Airflow.
+                                 <p>The <code class="code">AWS::MWAA::Environment</code> resource creates an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
+                                    
                                  </p>
+                                 <div class="highlights">
+                                    <p><strong>Topics</strong></p>
+                                    <ul>
+                                       <li><a href="#aws-resource-mwaa-environment-syntax">Syntax</a></li>
+                                       <li><a href="#aws-resource-mwaa-environment-properties">Properties</a></li>
+                                       <li><a href="#aws-resource-mwaa-environment-return-values">Return values</a></li>
+                                       <li><a href="#aws-resource-mwaa-environment--examples">Examples</a></li>
+                                       <li><a href="./aws-properties-mwaa-environment-loggingconfiguration.html">AWS::MWAA::Environment LoggingConfiguration</a></li>
+                                       <li><a href="./aws-properties-mwaa-environment-moduleloggingconfiguration.html">AWS::MWAA::Environment ModuleLoggingConfiguration</a></li>
+                                       <li><a href="./aws-properties-mwaa-environment-networkconfiguration.html">AWS::MWAA::Environment NetworkConfiguration</a></li>
+                                       <li><a href="./aws-properties-mwaa-environment-tagmap.html">AWS::MWAA::Environment TagMap</a></li>
+                                    </ul>
+                                 </div>
                                  <h2 id="aws-resource-mwaa-environment-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-resource-mwaa-environment-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::MWAA::Environment&quot;,
   &quot;Properties&quot; : <span>{</span>
-      &quot;<a href="#cfn-mwaa-environment-airflowconfigurationoptions">AirflowConfigurationOptions</a>&quot; : <code class="replaceable"><a href="./aws-properties-mwaa-environment-airflowconfigurationoptions.html">AirflowConfigurationOptions</a></code>,
+      &quot;<a href="#cfn-mwaa-environment-airflowconfigurationoptions">AirflowConfigurationOptions</a>&quot; : <code class="replaceable">Json</code>,
       &quot;<a href="#cfn-mwaa-environment-airflowversion">AirflowVersion</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-mwaa-environment-dags3path">DagS3Path</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-mwaa-environment-environmentclass">EnvironmentClass</a>&quot; : <code class="replaceable">String</code>,
@@ -32,15 +46,17 @@
       &quot;<a href="#cfn-mwaa-environment-kmskey">KmsKey</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-mwaa-environment-loggingconfiguration">LoggingConfiguration</a>&quot; : <code class="replaceable"><a href="./aws-properties-mwaa-environment-loggingconfiguration.html">LoggingConfiguration</a></code>,
       &quot;<a href="#cfn-mwaa-environment-maxworkers">MaxWorkers</a>&quot; : <code class="replaceable">Integer</code>,
+      &quot;<a href="#cfn-mwaa-environment-minworkers">MinWorkers</a>&quot; : <code class="replaceable">Integer</code>,
+      &quot;<a href="#cfn-mwaa-environment-name">Name</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-mwaa-environment-networkconfiguration">NetworkConfiguration</a>&quot; : <code class="replaceable"><a href="./aws-properties-mwaa-environment-networkconfiguration.html">NetworkConfiguration</a></code>,
       &quot;<a href="#cfn-mwaa-environment-pluginss3objectversion">PluginsS3ObjectVersion</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-mwaa-environment-pluginss3path">PluginsS3Path</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-mwaa-environment-requirementss3objectversion">RequirementsS3ObjectVersion</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-mwaa-environment-requirementss3path">RequirementsS3Path</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-mwaa-environment-schedulers">Schedulers</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-mwaa-environment-sourcebucketarn">SourceBucketArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-mwaa-environment-tags">Tags</a>&quot; : <code class="replaceable"><a href="./aws-properties-mwaa-environment-tagmap.html">TagMap</a></code>,
       &quot;<a href="#cfn-mwaa-environment-webserveraccessmode">WebserverAccessMode</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-mwaa-environment-webserverurl">WebserverUrl</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-mwaa-environment-weeklymaintenancewindowstart">WeeklyMaintenanceWindowStart</a>&quot; : <code class="replaceable">String</code>
     }
 }
@@ -48,8 +64,7 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-mwaa-environment-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::MWAA::Environment
 Properties: 
-  <a href="#cfn-mwaa-environment-airflowconfigurationoptions">AirflowConfigurationOptions</a>: <code class="replaceable">
-    <a href="./aws-properties-mwaa-environment-airflowconfigurationoptions.html">AirflowConfigurationOptions</a></code>
+  <a href="#cfn-mwaa-environment-airflowconfigurationoptions">AirflowConfigurationOptions</a>: <code class="replaceable">Json</code>
   <a href="#cfn-mwaa-environment-airflowversion">AirflowVersion</a>: <code class="replaceable">String</code>
   <a href="#cfn-mwaa-environment-dags3path">DagS3Path</a>: <code class="replaceable">String</code>
   <a href="#cfn-mwaa-environment-environmentclass">EnvironmentClass</a>: <code class="replaceable">String</code>
@@ -58,17 +73,19 @@ Properties:
   <a href="#cfn-mwaa-environment-loggingconfiguration">LoggingConfiguration</a>: <code class="replaceable">
     <a href="./aws-properties-mwaa-environment-loggingconfiguration.html">LoggingConfiguration</a></code>
   <a href="#cfn-mwaa-environment-maxworkers">MaxWorkers</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-mwaa-environment-minworkers">MinWorkers</a>: <code class="replaceable">Integer</code>
+  <a href="#cfn-mwaa-environment-name">Name</a>: <code class="replaceable">String</code>
   <a href="#cfn-mwaa-environment-networkconfiguration">NetworkConfiguration</a>: <code class="replaceable">
     <a href="./aws-properties-mwaa-environment-networkconfiguration.html">NetworkConfiguration</a></code>
   <a href="#cfn-mwaa-environment-pluginss3objectversion">PluginsS3ObjectVersion</a>: <code class="replaceable">String</code>
   <a href="#cfn-mwaa-environment-pluginss3path">PluginsS3Path</a>: <code class="replaceable">String</code>
   <a href="#cfn-mwaa-environment-requirementss3objectversion">RequirementsS3ObjectVersion</a>: <code class="replaceable">String</code>
   <a href="#cfn-mwaa-environment-requirementss3path">RequirementsS3Path</a>: <code class="replaceable">String</code>
+  <a href="#cfn-mwaa-environment-schedulers">Schedulers</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-mwaa-environment-sourcebucketarn">SourceBucketArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-mwaa-environment-tags">Tags</a>: <code class="replaceable">
     <a href="./aws-properties-mwaa-environment-tagmap.html">TagMap</a></code>
   <a href="#cfn-mwaa-environment-webserveraccessmode">WebserverAccessMode</a>: <code class="replaceable">String</code>
-  <a href="#cfn-mwaa-environment-webserverurl">WebserverUrl</a>: <code class="replaceable">String</code>
   <a href="#cfn-mwaa-environment-weeklymaintenancewindowstart">WeeklyMaintenanceWindowStart</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-resource-mwaa-environment-properties">Properties</h2>
@@ -77,27 +94,22 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-airflowconfigurationoptions"></a><span class="term"><code class="code">AirflowConfigurationOptions</code></span></dt>
                                        <dd>
                                           
-                                          <p>Key/value pairs representing Apache Airflow configuration variables. Apache Airflow
-                                             configuration is divided into sections. The keys of the key/value pairs are prefixed
-                                             by
-                                             their section. For example:
+                                          <p>A list of key-value pairs containing the Airflow configuration options for your environment.
+                                             For example, <code class="code">core.default_timezone: utc</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html">Apache Airflow configuration options</a>.
                                           </p>
-                                          
-                                          <p><code class="code">[webserver]</code></p>
-                                          
-                                          <p><code class="code">default_ui_timezone=UTC</code></p>
-                                          
-                                          <p>Is represented as: <code class="code">&quot;webserver.default_ui_timezone&quot;: &quot;UTC&quot;</code></p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: <a href="./aws-properties-mwaa-environment-airflowconfigurationoptions.html">AirflowConfigurationOptions</a></p>
+                                          <p><em>Type</em>: Json
+                                          </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-mwaa-environment-airflowversion"></a><span class="term"><code class="code">AirflowVersion</code></span></dt>
                                        <dd>
                                           
-                                          <p>The version of Apache Airflow to use for the environment.</p>
+                                          <p>The version of Apache Airflow to use for the environment. If no value is specified,
+                                             defaults to the latest version. Valid values: <code class="code">v2.0.2</code>, <code class="code">1.10.12</code>.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -108,7 +120,8 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-dags3path"></a><span class="term"><code class="code">DagS3Path</code></span></dt>
                                        <dd>
                                           
-                                          <p>The path to the DAGs folder in the S3 bucket.</p>
+                                          <p>The relative path to the DAGs folder on your Amazon S3 bucket. For example, <code class="code">dags</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html">Adding or updating DAGs</a>.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -119,7 +132,8 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-environmentclass"></a><span class="term"><code class="code">EnvironmentClass</code></span></dt>
                                        <dd>
                                           
-                                          <p>The instance class to use to create the environment.</p>
+                                          <p>The environment class type. Valid values: <code class="code">mw1.small</code>, <code class="code">mw1.medium</code>, <code class="code">mw1.large</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html">Amazon MWAA environment class</a>.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -130,7 +144,9 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-executionrolearn"></a><span class="term"><code class="code">ExecutionRoleArn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ARN of the IAM role to use as the execution role for the environment.</p>
+                                          <p>The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access
+                                             AWS resources in your environment. For example, <code class="code">arn:aws:iam::123456789:role/my-execution-role</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html">Amazon MWAA Execution role</a>.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -141,21 +157,21 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-kmskey"></a><span class="term"><code class="code">KmsKey</code></span></dt>
                                        <dd>
                                           
-                                          <p>The AWS Key Management Service (KMS) key to encrypt and decrypt the data in your
-                                             environment. You can use an AWS KMS key managed by MWAA, or a custom KMS key
-                                             (advanced).
+                                          <p>The AWS Key Management Service (KMS) key to encrypt and decrypt the data in your environment.
+                                             You can use an AWS KMS key managed by MWAA, or a customer-managed KMS key (advanced).
                                           </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-mwaa-environment-loggingconfiguration"></a><span class="term"><code class="code">LoggingConfiguration</code></span></dt>
                                        <dd>
                                           
-                                          <p>Specifies the logging settings for the environment.</p>
+                                          <p>The Apache Airflow logs being sent to CloudWatch Logs: <code class="code">DagProcessingLogs</code>, <code class="code">SchedulerLogs</code>, <code class="code">TaskLogs</code>, <code class="code">WebserverLogs</code>, <code class="code">WorkerLogs</code>.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -165,7 +181,11 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-maxworkers"></a><span class="term"><code class="code">MaxWorkers</code></span></dt>
                                        <dd>
                                           
-                                          <p>The maximum number of workers to scale up to in the environment.</p>
+                                          <p>The maximum number of workers that you want to run in your environment. MWAA scales
+                                             the number of Apache Airflow workers up to the number you specify in the <code class="code">MaxWorkers</code> field. For example, <code class="code">20</code>. When there are no more tasks running, and no more in the queue, MWAA disposes of
+                                             the extra workers leaving the one worker that is included with your environment, or
+                                             the number you specify in <code class="code">MinWorkers</code>.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -173,22 +193,48 @@ Properties:
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-mwaa-environment-minworkers"></a><span class="term"><code class="code">MinWorkers</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The minimum number of workers that you want to run in your environment. MWAA scales
+                                             the number of Apache Airflow workers up to the number you specify in the <code class="code">MaxWorkers</code> field. When there are no more tasks running, and no more in the queue, MWAA disposes
+                                             of the extra workers leaving the worker count you specify in the <code class="code">MinWorkers</code> field. For example, <code class="code">2</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-mwaa-environment-name"></a><span class="term"><code class="code">Name</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name of your Amazon MWAA environment.</p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
                                        <dt><a id="cfn-mwaa-environment-networkconfiguration"></a><span class="term"><code class="code">NetworkConfiguration</code></span></dt>
                                        <dd>
                                           
-                                          <p>The VPC networking components to use for your Amazon MWAA environment. The VPC network
-                                             must include at least two private subnets and one VPC security group.
+                                          <p>The VPC networking components used to secure and enable network traffic between the
+                                             AWS resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: <a href="./aws-properties-mwaa-environment-networkconfiguration.html">NetworkConfiguration</a></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-mwaa-environment-pluginss3objectversion"></a><span class="term"><code class="code">PluginsS3ObjectVersion</code></span></dt>
                                        <dd>
                                           
-                                          <p>The version of the plugins.zip in file to use from the S3 bucket.</p>
+                                          <p>The version of the plugins.zip file on your Amazon S3 bucket. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html">Installing custom plugins</a>.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -199,7 +245,8 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-pluginss3path"></a><span class="term"><code class="code">PluginsS3Path</code></span></dt>
                                        <dd>
                                           
-                                          <p>The S3 URI to the plugins.zip file to use for the environment.</p>
+                                          <p>The relative path to the <code class="code">plugins.zip</code> file on your Amazon S3 bucket. For example, <code class="code">plugins.zip</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html">Installing custom plugins</a>.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -210,7 +257,9 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-requirementss3objectversion"></a><span class="term"><code class="code">RequirementsS3ObjectVersion</code></span></dt>
                                        <dd>
                                           
-                                          <p>The version of the requirements.txt in file to use from the S3 bucket.</p>
+                                          <p>The version of the requirements.txt file on your Amazon S3 bucket. To learn more,
+                                             see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html">Installing Python dependencies</a>.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -221,7 +270,8 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-requirementss3path"></a><span class="term"><code class="code">RequirementsS3Path</code></span></dt>
                                        <dd>
                                           
-                                          <p>The S3 URI to the requirements.txt file to use for the environment.</p>
+                                          <p>The relative path to the <code class="code">requirements.txt</code> file on your Amazon S3 bucket. For example, <code class="code">requirements.txt</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html">Installing Python dependencies</a>.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -229,11 +279,42 @@ Properties:
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-mwaa-environment-schedulers"></a><span class="term"><code class="code">Schedulers</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The number of schedulers that you want to run in your environment. Valid values: </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p><b>v2.0.2</b> - Accepts between 2 to 5. Defaults to 2.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p><b>v1.10.12</b> - Accepts 1.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Integer
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-mwaa-environment-sourcebucketarn"></a><span class="term"><code class="code">SourceBucketArn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ARN of the S3 bucket to use to store your DAGs and associated support files for
-                                             the environment.
+                                          <p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and supporting
+                                             files are stored. For example, <code class="code">arn:aws:s3:::my-airflow-bucket-unique-name</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html">Create an Amazon S3 bucket for Amazon MWAA</a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -245,7 +326,8 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
                                           
-                                          <p>The metadata tags you want to attach to your environment.</p>
+                                          <p>The key-value tag pairs associated to your environment. For example, <code class="code">&quot;Environment&quot;: &quot;Staging&quot;</code>. To learn more, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging</a>.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -255,22 +337,8 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-webserveraccessmode"></a><span class="term"><code class="code">WebserverAccessMode</code></span></dt>
                                        <dd>
                                           
-                                          <p>The mode to access the Apache Airflow web server. Use a public network to allow access
-                                             to the Apache Airflow UI in your environment over the Internet. You can manage
-                                             permissions by using an IAM policy. Choose a private network to limits access to Apache
-                                             Airflow to only users within your VPC.
+                                          <p>The Apache Airflow <em>Web server</em> access mode. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html">Apache Airflow access modes</a>. Valid values: <code class="code">PRIVATE_ONLY</code> or <code class="code">PUBLIC_ONLY</code>.
                                           </p>
-                                          
-                                          <p><em>Required</em>: No
-                                          </p>
-                                          <p><em>Type</em>: String
-                                          </p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                                       </dd>
-                                       <dt><a id="cfn-mwaa-environment-webserverurl"></a><span class="term"><code class="code">WebserverUrl</code></span></dt>
-                                       <dd>
-                                          
-                                          <p>The URL to access the Apache Airflow UI in the environment.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -281,11 +349,22 @@ Properties:
                                        <dt><a id="cfn-mwaa-environment-weeklymaintenancewindowstart"></a><span class="term"><code class="code">WeeklyMaintenanceWindowStart</code></span></dt>
                                        <dd>
                                           
-                                          <p>The day and time of the week to start weekly maintenance updates of your environment,
-                                             in the format DAY:HH:MM, such as TUE:03:30. You can specify a start time in 30 minute
-                                             increments only. Supported input includes the following:
-                                             MON|TUE|WED|THU|FRI|SAT|SUN:([01]\\d|2[0-3]):(00|30)
+                                          <p>The day and time of the week to start weekly maintenance updates of your environment
+                                             in the following format: <code class="code">DAY:HH:MM</code>. For example: <code class="code">TUE:03:30</code>. You can specify a start time in 30 minute increments only. Supported input includes
+                                             the following:
                                           </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>MON|TUE|WED|THU|FRI|SAT|SUN:([01]\\d|2[0-3]):(00|30)</p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -312,41 +391,122 @@ Properties:
                                        <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ARN for the environment.</p>
+                                          <p>The ARN for the Amazon MWAA environment.</p>
                                           
                                        </dd>
-                                       <dt><a id="CreatedAt-fn::getatt"></a><span class="term"><code class="code">CreatedAt</code></span></dt>
+                                       <dt><a id="LoggingConfiguration.DagProcessingLogs.CloudWatchLogGroupArn-fn::getatt"></a><span class="term"><code class="code">LoggingConfiguration.DagProcessingLogs.CloudWatchLogGroupArn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The time and date at which that the environment was created.</p>
+                                          <p>The ARN for the CloudWatch Logs group where the Apache Airflow DAG processing logs
+                                             are published.
+                                          </p>
                                           
                                        </dd>
-                                       <dt><a id="LastUpdate-fn::getatt"></a><span class="term"><code class="code">LastUpdate</code></span></dt>
+                                       <dt><a id="WebserverUrl-fn::getatt"></a><span class="term"><code class="code">WebserverUrl</code></span></dt>
                                        <dd>
                                           
-                                          <p>A time stamp for time of the last update to the environment.</p>
-                                          
-                                       </dd>
-                                       <dt><a id="Name-fn::getatt"></a><span class="term"><code class="code">Name</code></span></dt>
-                                       <dd>
-                                          
-                                          <p>The name of the environment.</p>
-                                          
-                                       </dd>
-                                       <dt><a id="ServiceRoleArn-fn::getatt"></a><span class="term"><code class="code">ServiceRoleArn</code></span></dt>
-                                       <dd>
-                                          
-                                          <p>The ARN of the role used for the environment.</p>
-                                          
-                                       </dd>
-                                       <dt><a id="Status-fn::getatt"></a><span class="term"><code class="code">Status</code></span></dt>
-                                       <dd>
-                                          
-                                          <p>The status of the environment.</p>
+                                          <p>The URL of your Apache Airflow UI.</p>
                                           
                                        </dd>
                                     </dl>
                                  </div>
+                                 <h2 id="aws-resource-mwaa-environment--examples">Examples</h2>
+                                 <p></p>
+                                 <h3 id="aws-resource-mwaa-environment--examples--Create_a_MWAA_environment_-_JSON">Create a MWAA environment - JSON</h3>
+                                 <p>The following example shows how to create a MWAA environment:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-mwaa-environment--examples--Create_a_MWAA_environment_-_JSON--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Environment&quot;: <span>{</span>
+        &quot;Type&quot;: &quot;AWS::MWAA::Environment&quot;,
+        &quot;Properties&quot;: <span>{</span>
+            &quot;Name&quot;: &quot;my-airflow-environment&quot;,
+            &quot;AirflowConfigurationOptions&quot;: <span>{</span>
+                &quot;logging.logging_level&quot;: &quot;INFO&quot;,
+                &quot;core.default_timezone&quot;: &quot;utc&quot;
+            },
+            &quot;Tags&quot;: <span>{</span>
+                &quot;Environment&quot;: &quot;Staging&quot;,
+                &quot;Team&quot;: &quot;Analytics&quot;
+            },
+            &quot;NetworkConfiguration&quot;: <span>{</span>
+                &quot;SubnetIds&quot;: [
+                    &quot;subnet-123456&quot;,
+                    &quot;subnet-789011&quot;
+                ],
+                &quot;SecurityGroupIds&quot;: [
+                    &quot;sg-0101010&quot;
+                ]
+            },
+            &quot;LoggingConfiguration&quot;: <span>{</span>
+                &quot;DagProcessingLogs&quot;: <span>{</span>
+                    &quot;Enabled&quot;: true,
+                    &quot;LogLevel&quot;: &quot;INFO&quot;
+                },
+                &quot;SchedulerLogs&quot;: <span>{</span>
+                    &quot;Enabled&quot;: false,
+                    &quot;LogLevel&quot;: &quot;INFO&quot;
+                },
+                &quot;TaskLogs&quot;: <span>{</span>
+                    &quot;Enabled&quot;: true,
+                    &quot;LogLevel&quot;: &quot;INFO&quot;
+                },
+                &quot;WebserverLogs&quot;: <span>{</span>
+                    &quot;Enabled&quot;: false,
+                    &quot;LogLevel&quot;: &quot;INFO&quot;
+                },
+                &quot;WorkerLogs&quot;: <span>{</span>
+                    &quot;Enabled&quot;: false,
+                    &quot;LogLevel&quot;: &quot;INFO&quot;
+                }
+            },
+            &quot;SourceBucketArn&quot;: &quot;arn:aws:s3:::my-dags-bucket&quot;,
+            &quot;ExecutionRoleArn&quot;: &quot;arn:aws:iam::012345678900:role/service-role/my-execution-role&quot;,
+            &quot;MaxWorkers&quot;: 1,
+            &quot;DagS3Path&quot;: &quot;dags&quot;,
+            &quot;EnvironmentClass&quot;: &quot;mw1.small&quot;
+        }
+    }
+}</code></pre></div>
+                                 <h3 id="aws-resource-mwaa-environment--examples--Create_a_MWAA_environment_-_YAML">Create a MWAA environment - YAML</h3>
+                                 <p>The following example shows how to create a MWAA environment:</p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-mwaa-environment--examples--Create_a_MWAA_environment_-_YAML--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Environment: 
+    Properties: 
+      AirflowConfigurationOptions: 
+        core.default_timezone: utc
+        logging.logging_level: INFO
+      DagS3Path: dags
+      EnvironmentClass: mw1.small
+      ExecutionRoleArn: &quot;arn:aws:iam::012345678900:role/service-role/my-execution-role&quot;
+      LoggingConfiguration: 
+        DagProcessingLogs: 
+          Enabled: true
+          LogLevel: INFO
+        SchedulerLogs: 
+          Enabled: false
+          LogLevel: INFO
+        TaskLogs: 
+          Enabled: true
+          LogLevel: INFO
+        WebserverLogs: 
+          Enabled: false
+          LogLevel: INFO
+        WorkerLogs: 
+          Enabled: false
+          LogLevel: INFO
+      MaxWorkers: 1
+      Name: my-airflow-environment
+      NetworkConfiguration: 
+        SecurityGroupIds: 
+          - sg-0101010
+        SubnetIds: 
+          - subnet-123456
+          - subnet-789011
+      SourceBucketArn: &quot;arn:aws:s3:::my-dags-bucket&quot;
+      Tags: 
+        Environment: Staging
+        Team: Analytics
+    Type: &quot;AWS::MWAA::Environment&quot;</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -357,7 +517,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

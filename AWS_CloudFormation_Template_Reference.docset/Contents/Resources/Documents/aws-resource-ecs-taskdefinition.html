@@ -30,6 +30,7 @@
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-ecs-taskdefinition-containerdefinitions">ContainerDefinitions</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-ecs-taskdefinition-containerdefinitions.html">ContainerDefinition</a>, ... ]</code>,
       &quot;<a href="#cfn-ecs-taskdefinition-cpu">Cpu</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-ecs-taskdefinition-ephemeralstorage">EphemeralStorage</a>&quot; : <code class="replaceable"><a href="./aws-properties-ecs-taskdefinition-ephemeralstorage.html">EphemeralStorage</a></code>,
       &quot;<a href="#cfn-ecs-taskdefinition-executionrolearn">ExecutionRoleArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ecs-taskdefinition-family">Family</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ecs-taskdefinition-inferenceaccelerators">InferenceAccelerators</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-ecs-taskdefinition-inferenceaccelerator.html">InferenceAccelerator</a>, ... ]</code>,
@@ -52,6 +53,8 @@ Properties:
   <a href="#cfn-ecs-taskdefinition-containerdefinitions">ContainerDefinitions</a>: <code class="replaceable">
     - <a href="./aws-properties-ecs-taskdefinition-containerdefinitions.html">ContainerDefinition</a></code>
   <a href="#cfn-ecs-taskdefinition-cpu">Cpu</a>: <code class="replaceable">String</code>
+  <a href="#cfn-ecs-taskdefinition-ephemeralstorage">EphemeralStorage</a>: <code class="replaceable">
+    <a href="./aws-properties-ecs-taskdefinition-ephemeralstorage.html">EphemeralStorage</a></code>
   <a href="#cfn-ecs-taskdefinition-executionrolearn">ExecutionRoleArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-ecs-taskdefinition-family">Family</a>: <code class="replaceable">String</code>
   <a href="#cfn-ecs-taskdefinition-inferenceaccelerators">InferenceAccelerators</a>: <code class="replaceable">
@@ -146,6 +149,16 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ecs-taskdefinition-ephemeralstorage"></a><span class="term"><code class="code">EphemeralStorage</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>The ephemeral storage settings to use for tasks run with the task definition.</p>
+                                          	     
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-ecs-taskdefinition-ephemeralstorage.html">EphemeralStorage</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-ecs-taskdefinition-executionrolearn"></a><span class="term"><code class="code">ExecutionRoleArn</code></span></dt>
@@ -263,9 +276,7 @@ Properties:
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>This parameter is not supported for Windows containers or tasks using the Fargate
-                                                   launch type.
-                                                </p>
+                                                <p>This parameter is not supported for Windows containers or tasks run on AWS Fargate.</p>
                                              </div>
                                           </div> 
                                           
@@ -281,7 +292,7 @@ Properties:
                                           		       
                                           <p>The amount (in MiB) of memory used by the task.</p>
                                           		       
-                                          <p>If using the EC2 launch type, you must specify either a task-level
+                                          <p>If your tasks will be run on Amazon EC2 instances, you must specify either a task-level
                                              			memory value or a container-level memory value. This field is optional and any
                                              value can
                                              			be used. If a task-level memory value is specified then the container-level memory
@@ -290,9 +301,9 @@ Properties:
                                              			reservation, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html">ContainerDefinition</a>.
                                           </p>
                                           		       
-                                          <p>If using the Fargate launch type, this field is required and you must
-                                             			use one of the following values, which determines your range of valid values for
-                                             the
+                                          <p>If your tasks will be run on AWS Fargate, this field is required and you must use
+                                             one of
+                                             			the following values, which determines your range of valid values for the
                                              				<code class="code">cpu</code> parameter:
                                           </p> 
                                           
@@ -431,9 +442,7 @@ Properties:
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>This parameter is not supported for Windows containers or tasks using the Fargate
-                                                   launch type.
-                                                </p>
+                                                <p>This parameter is not supported for Windows containers or tasks run on AWS Fargate.</p>
                                              </div>
                                           </div> 
                                           
@@ -447,10 +456,15 @@ Properties:
                                        <dt><a id="cfn-ecs-taskdefinition-placementconstraints"></a><span class="term"><code class="code">PlacementConstraints</code></span></dt>
                                        <dd>
                                           		       
-                                          <p>An array of placement constraint objects to use for tasks. This field is not valid
-                                             if
-                                             			you are using the Fargate launch type for your task.
-                                          </p>
+                                          <p>An array of placement constraint objects to use for tasks.</p>
+                                          		       
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>This parameter is not supported for tasks run on AWS Fargate.</p>
+                                             </div>
+                                          </div>
                                           	     
                                           <p><em>Required</em>: No
                                           </p>
@@ -481,12 +495,12 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-ecs-taskdefinition-requirescompatibilities"></a><span class="term"><code class="code">RequiresCompatibilities</code></span></dt>
                                        <dd>
-                                          		       
-                                          <p>The launch type the task requires. If no value is specified, it will default to
-                                             				<code class="code">EC2</code>. Valid values include <code class="code">EC2</code> and
-                                             			<code class="code">FARGATE</code>.
+                                          
+                                          <p>The task launch types the task definition was validated against. To determine which
+                                             task launch types the task definition is validated for, see the
+                                             <code class="code">TaskDefinition$compatibilities</code> parameter.
                                           </p>
-                                          	     
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: List of String
@@ -570,7 +584,7 @@ Properties:
                                        <dd>
                                           		       
                                           <p>The short name or full Amazon Resource Name (ARN) of the AWS Identity and Access Management
-                                             (IAM) role that grants containers in the
+                                             role that grants containers in the
                                              			task permission to call AWS APIs on your behalf. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html">Amazon ECS
                                                 				Task Role</a> in the <em>Amazon Elastic Container Service Developer Guide</em>.
                                           </p>
@@ -580,8 +594,8 @@ Properties:
                                              also run some
                                              			configuration code in order to take advantage of the feature. For more information,
                                              see
-                                             				<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html">Windows IAM Roles
-                                                				for Tasks</a> in the <em>Amazon Elastic Container Service Developer Guide</em>.
+                                             				<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html">Windows IAM roles
+                                                				for tasks</a> in the <em>Amazon Elastic Container Service Developer Guide</em>.
                                           </p>
                                           	     
                                           <p><em>Required</em>: No
@@ -593,14 +607,19 @@ Properties:
                                        <dt><a id="cfn-ecs-taskdefinition-volumes"></a><span class="term"><code class="code">Volumes</code></span></dt>
                                        <dd>
                                           		       
-                                          <p>The list of volume definitions for the task.</p>
-                                          		       
-                                          <p>If your tasks are using the Fargate launch type, the <code class="code">host</code>
-                                             			and <code class="code">sourcePath</code> parameters are not supported.
+                                          <p>The list of data volume definitions for the task. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html">Using data volumes in tasks</a> in the
+                                             			<em>Amazon Elastic Container Service Developer Guide</em>.
                                           </p>
                                           		       
-                                          <p>For more information about volume definition parameters and defaults, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html">Amazon ECS Task Definitions</a> in the <em>Amazon Elastic Container Service Developer Guide</em>.
-                                          </p>
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>The <code class="code">host</code> and <code class="code">sourcePath</code> parameters are not supported for
+                                                   				tasks run on AWS Fargate.
+                                                </p>
+                                             </div>
+                                          </div>
                                           	     
                                           <p><em>Required</em>: No
                                           </p>
@@ -624,16 +643,6 @@ Properties:
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
-                                 <h3 id="aws-resource-ecs-taskdefinition-return-values-fn--getatt">Fn::GetAtt</h3>
-                                 <h4 id="aws-resource-ecs-taskdefinition-return-values-fn--getatt-fn--getatt"></h4>
-                                 <div class="variablelist">
-                                    <dl>
-                                       <dt><a id="TaskDefinitionArn-fn::getatt"></a><span class="term"><code class="code">TaskDefinitionArn</code></span></dt>
-                                       <dd>
-                                          <p>Not currently supported by AWS CloudFormation.</p>
-                                       </dd>
-                                    </dl>
-                                 </div>
                                  <h2 id="aws-resource-ecs-taskdefinition--examples">Examples</h2>
                                  <p></p>
                                  <h3 id="aws-resource-ecs-taskdefinition--examples--Create_an_Amazon_ECS_task_definition">Create an Amazon ECS task definition</h3>
@@ -871,7 +880,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

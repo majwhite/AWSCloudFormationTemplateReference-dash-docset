@@ -20,7 +20,8 @@
                                     installing, and configuring software packages or for defining tests to run on software
                                     packages. They also define validation and security hardening steps. A component is
                                     defined
-                                    using a YAML document format. For more information, see <a href="https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-application-documents.html">Using Documents in EC2 Image Builder</a>.
+                                    using a YAML document format. For more information, see <a href="https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-application-documents.html">Using 
+                                       	Documents in Image Builder</a>.
                                  </p>
                                  <h2 id="aws-resource-imagebuilder-component-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -62,10 +63,10 @@ Properties:
                                     <dl>
                                        <dt><a id="cfn-imagebuilder-component-changedescription"></a><span class="term"><code class="code">ChangeDescription</code></span></dt>
                                        <dd>
-                                          
+                                          		
                                           <p>A change description of the component. For example <code class="code">initial version</code>.
                                           </p>
-                                          
+                                          	
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -83,7 +84,7 @@ Properties:
                                                 HelloWorldStep\n action: ExecuteBash\n inputs:\n commands:\n - echo \&quot;Hello World!
                                                 Test.\&quot;\n</code>. See Examples below for the schema for creating a component using Data. 
                                           </p>
-                                          
+                                          	
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -92,9 +93,9 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-imagebuilder-component-description"></a><span class="term"><code class="code">Description</code></span></dt>
                                        <dd>
-                                          
+                                          		
                                           <p>The description of the component.</p>
-                                          
+                                          	
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -105,7 +106,7 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-imagebuilder-component-kmskeyid"></a><span class="term"><code class="code">KmsKeyId</code></span></dt>
                                        <dd>
-                                          
+                                          	      
                                           <p>The KMS key identifier used to encrypt the component.</p>
                                           
                                           <p><em>Required</em>: No
@@ -130,10 +131,10 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-imagebuilder-component-platform"></a><span class="term"><code class="code">Platform</code></span></dt>
                                        <dd>
-                                          
+                                          		
                                           <p>The platform of the component. For example, <code class="code">Windows</code>.
                                           </p>
-                                          
+                                          	
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
@@ -148,7 +149,7 @@ Properties:
                                              is
                                              available, a prefix match is performed against the parent image OS version during
                                              image recipe
-                                             creation. 
+                                             creation.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -172,7 +173,13 @@ Properties:
                                        <dt><a id="cfn-imagebuilder-component-uri"></a><span class="term"><code class="code">Uri</code></span></dt>
                                        <dd>
                                           
-                                          <p>The URI of the component document.</p>
+                                          <p>The uri of the component. Must be an Amazon S3 URL and the requester must have permission
+                                             to
+                                             access the Amazon S3 bucket. If you use Amazon S3, you can specify component content
+                                             up to your service
+                                             quota. Either <code class="code">data</code> or <code class="code">uri</code> can be used to specify the data within the
+                                             component.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -182,10 +189,10 @@ Properties:
                                        </dd>
                                        <dt><a id="cfn-imagebuilder-component-version"></a><span class="term"><code class="code">Version</code></span></dt>
                                        <dd>
-                                          
+                                          		
                                           <p>The component version. For example, <code class="code">1.0.0</code>.
                                           </p>
-                                          
+                                          	
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: String
@@ -198,7 +205,7 @@ Properties:
                                  <h2 id="aws-resource-imagebuilder-component-return-values">Return values</h2>
                                  <h3 id="aws-resource-imagebuilder-component-return-values-ref">Ref</h3>
                                  <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the resource ARN, such as
-                                    <code class="code">arn:aws:imagebuilder:us-west-2:123456789012:component/examplecomponent/2019.12.02/1</code>.
+                                    			<code class="code">arn:aws:imagebuilder:us-west-2:123456789012:component/examplecomponent/2019.12.02/1</code>.
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
@@ -214,27 +221,33 @@ Properties:
                                     <dl>
                                        <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
                                        <dd>
-                                          
+                                          		
                                           <p>Returns the Amazon Resource Name (ARN) of the component. The following pattern is
-                                             applied:
-                                             <code class="code">^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d<span>{</span>12}|aws):(?:image-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$</code>.
+                                             			applied:
+                                             			<code class="code">^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d<span>{</span>12}|aws):(?:image-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$</code>.
                                           </p>
-                                          
+                                          	
                                        </dd>
                                        <dt><a id="Encrypted-fn::getatt"></a><span class="term"><code class="code">Encrypted</code></span></dt>
                                        <dd>
-                                          
+                                          		
                                           <p>Returns the encryption status of the component. For example <code class="code">true</code> or
-                                             <code class="code">false</code>.
+                                             			<code class="code">false</code>.
                                           </p>
-                                          
+                                          	
+                                       </dd>
+                                       <dt><a id="Name-fn::getatt"></a><span class="term"><code class="code">Name</code></span></dt>
+                                       <dd>
+                                          		
+                                          <p>Returns the name of the component.</p>
+                                          	
                                        </dd>
                                        <dt><a id="Type-fn::getatt"></a><span class="term"><code class="code">Type</code></span></dt>
                                        <dd>
-                                          
+                                          		
                                           <p>Returns the component type. For example, <code class="code">BUILD</code> or <code class="code">TEST</code>.
                                           </p>
-                                          
+                                          	
                                        </dd>
                                     </dl>
                                  </div>
@@ -253,10 +266,12 @@ Properties:
     Properties:
       Name: &apos;component-name&apos;
       Platform: &apos;Linux&apos;
-      Version: &quot;1.0.0&quot;
+      Version: &apos;1.0.0&apos;
       Description: &apos;description&apos;
       ChangeDescription: &apos;change-description&apos;
       KmsKeyId: &apos;customer-kms-key-id&apos;
+      SupportedOsVersions: 
+        - &apos;Amazon Linux 2&apos;
       Tags:
         CustomerComponentTagKey1: &apos;CustomerComponentTagValue1&apos;
         CustomerComponentTagKey2: &apos;CustomerComponentTagValue2&apos;
@@ -300,6 +315,7 @@ Properties:
                 &quot;Description&quot;: &quot;description&quot;,
                 &quot;ChangeDescription&quot;: &quot;change-description&quot;,
                 &quot;KmsKeyId&quot;: &quot;customer-kms-key-id&quot;,
+                &quot;SupportedOsVersions&quot;: [&quot;Amazon Linux 2&quot;],
                 &quot;Tags&quot;: <span>{</span>
                     &quot;CustomerComponentTagKey1&quot;: &quot;CustomerComponentTagValue1&quot;,
                     &quot;CustomerComponentTagKey2&quot;: &quot;CustomerComponentTagValue2&quot;
@@ -322,12 +338,15 @@ Properties:
     Properties:
       Name: &apos;component-name&apos;
       Platform: &apos;Linux&apos;
-      Version: &quot;1.0.0&quot;
+      Version: &apos;1.0.0&apos;
       # Require one of &apos;Data&apos; or &apos;Uri&apos; for Component template
       Uri: &apos;s3://imagebuilder/component_document.yml&apos;
       Description: &apos;description&apos;
       ChangeDescription: &apos;change-description&apos;
       KmsKeyId: &apos;customer-kms-key-id&apos;
+      SupportedOsVersions: 
+      - &apos;CentOS&apos;
+      - &apos;Red Hat Enterprise Linux&apos;
       Tags:
         CustomerComponentTagKey1: &apos;CustomerComponentTagValue1&apos;
         CustomerComponentTagKey2: &apos;CustomerComponentTagValue2&apos;</code></pre></div>
@@ -344,6 +363,7 @@ Properties:
                 &quot;Description&quot;: &quot;description&quot;,
                 &quot;ChangeDescription&quot;: &quot;change-description&quot;,
                 &quot;KmsKeyId&quot;: &quot;customer-kms-key-id&quot;,
+                &quot;SupportedOsVersions&quot;: [&quot;CentOS&quot;, &quot;Red Hat Enterprise Linux&quot;],
                 &quot;Tags&quot;: <span>{</span>
                     &quot;CustomerComponentTagKey1&quot;: &quot;CustomerComponentTagValue1&quot;,
                     &quot;CustomerComponentTagKey2&quot;: &quot;CustomerComponentTagValue2&quot;
@@ -362,7 +382,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

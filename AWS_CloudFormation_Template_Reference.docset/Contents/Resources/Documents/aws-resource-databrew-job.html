@@ -26,14 +26,15 @@
       &quot;<a href="#cfn-databrew-job-datasetname">DatasetName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-databrew-job-encryptionkeyarn">EncryptionKeyArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-databrew-job-encryptionmode">EncryptionMode</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-databrew-job-jobsample">JobSample</a>&quot; : <code class="replaceable"><a href="./aws-properties-databrew-job-jobsample.html">JobSample</a></code>,
       &quot;<a href="#cfn-databrew-job-logsubscription">LogSubscription</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-databrew-job-maxcapacity">MaxCapacity</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-databrew-job-maxretries">MaxRetries</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-databrew-job-name">Name</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-databrew-job-outputlocation">OutputLocation</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-databrew-job-outputlocation">OutputLocation</a>&quot; : <code class="replaceable"><a href="./aws-properties-databrew-job-outputlocation.html">OutputLocation</a></code>,
       &quot;<a href="#cfn-databrew-job-outputs">Outputs</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-databrew-job-output.html">Output</a>, ... ]</code>,
       &quot;<a href="#cfn-databrew-job-projectname">ProjectName</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-databrew-job-recipe">Recipe</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-databrew-job-recipe">Recipe</a>&quot; : <code class="replaceable"><a href="./aws-properties-databrew-job-recipe.html">Recipe</a></code>,
       &quot;<a href="#cfn-databrew-job-rolearn">RoleArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-databrew-job-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
       &quot;<a href="#cfn-databrew-job-timeout">Timeout</a>&quot; : <code class="replaceable">Integer</code>,
@@ -47,15 +48,19 @@ Properties:
   <a href="#cfn-databrew-job-datasetname">DatasetName</a>: <code class="replaceable">String</code>
   <a href="#cfn-databrew-job-encryptionkeyarn">EncryptionKeyArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-databrew-job-encryptionmode">EncryptionMode</a>: <code class="replaceable">String</code>
+  <a href="#cfn-databrew-job-jobsample">JobSample</a>: <code class="replaceable">
+    <a href="./aws-properties-databrew-job-jobsample.html">JobSample</a></code>
   <a href="#cfn-databrew-job-logsubscription">LogSubscription</a>: <code class="replaceable">String</code>
   <a href="#cfn-databrew-job-maxcapacity">MaxCapacity</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-databrew-job-maxretries">MaxRetries</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-databrew-job-name">Name</a>: <code class="replaceable">String</code>
-  <a href="#cfn-databrew-job-outputlocation">OutputLocation</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-databrew-job-outputlocation">OutputLocation</a>: <code class="replaceable">
+    <a href="./aws-properties-databrew-job-outputlocation.html">OutputLocation</a></code>
   <a href="#cfn-databrew-job-outputs">Outputs</a>: <code class="replaceable">
     - <a href="./aws-properties-databrew-job-output.html">Output</a></code>
   <a href="#cfn-databrew-job-projectname">ProjectName</a>: <code class="replaceable">String</code>
-  <a href="#cfn-databrew-job-recipe">Recipe</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-databrew-job-recipe">Recipe</a>: <code class="replaceable">
+    <a href="./aws-properties-databrew-job-recipe.html">Recipe</a></code>
   <a href="#cfn-databrew-job-rolearn">RoleArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-databrew-job-tags">Tags</a>: <code class="replaceable">
     - <a href="aws-properties-resource-tags.html">Tag</a></code>
@@ -82,8 +87,7 @@ Properties:
                                        <dd>
                                           
                                           <p>The Amazon Resource Name (ARN) of an encryption key that is used to protect the job
-                                             output.  For more information, see 
-                                             <a href="https://docs.aws.amazon.com/databrew/latest/dg/encryption-security-configuration.html">Encrypting data
+                                             output. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/encryption-security-configuration.html">Encrypting data
                                                 written by DataBrew jobs</a>
                                              
                                           </p>
@@ -109,7 +113,7 @@ Properties:
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.
+                                                      <code class="code">SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.
                                                    </p>
                                                    
                                                 </li>
@@ -129,6 +133,21 @@ Properties:
                                           <p><em>Type</em>: String
                                           </p>
                                           <p><em>Allowed values</em>: <code class="code">SSE-KMS | SSE-S3</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-databrew-job-jobsample"></a><span class="term"><code class="code">JobSample</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A sample configuration for profile jobs only, which determines the number of rows
+                                             on which the
+                                             profile job is run. If a <code class="code">JobSample</code> value isn&apos;t provided, the default value
+                                             is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the
+                                             size parameter.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-databrew-job-jobsample.html">JobSample</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-databrew-job-logsubscription"></a><span class="term"><code class="code">LogSubscription</code></span></dt>
@@ -186,8 +205,7 @@ Properties:
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: Json
-                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-databrew-job-outputlocation.html">OutputLocation</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-databrew-job-outputs"></a><span class="term"><code class="code">Outputs</code></span></dt>
@@ -203,7 +221,7 @@ Properties:
                                        <dt><a id="cfn-databrew-job-projectname"></a><span class="term"><code class="code">ProjectName</code></span></dt>
                                        <dd>
                                           
-                                          <p>The name of the project that the job is associated with.</p>        
+                                          <p>The name of the project that the job is associated with.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -220,14 +238,13 @@ Properties:
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: Json
-                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-databrew-job-recipe.html">Recipe</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-databrew-job-rolearn"></a><span class="term"><code class="code">RoleArn</code></span></dt>
                                        <dd>
                                           
-                                          <p>The Amazon Resource Name (ARN) of the role that will be assumed for this job.</p>
+                                          <p>The Amazon Resource Name (ARN) of the role to be assumed for this job.</p>
                                           
                                           <p><em>Required</em>: Yes
                                           </p>
@@ -308,8 +325,8 @@ Properties:
                                     <code class="code"><span>{</span> &quot;Ref&quot;: &quot;myJob&quot; }</code>
                                     
                                  </p>
-                                 <p>For an AWS Glue DataBrew job named&#xA0;<code class="code">myJob</code>,&#xA0;<code class="code">Ref</code>&#xA0;returns the name of the job.
-                                    
+                                 <p>For an AWS Glue DataBrew job named&#xA0;<code class="code">myJob</code>,&#xA0;<code class="code">Ref</code>&#xA0;returns the name
+                                    of the job. 
                                  </p>
                                  <h2 id="aws-resource-databrew-job--examples">Examples</h2>
                                  <p></p>
@@ -325,6 +342,9 @@ Resources:
       Name: job-name
       DatasetName: dataset-name
       RoleArn: arn:aws:iam::12345678910:role/PassRoleAdmin
+      JobSample: 
+        Mode: &apos;CUSTOM_ROWS&apos;
+        Size: 50000 
       OutputLocation:
         Bucket: !Join [ &apos;&apos;, [&apos;databrew-cfn-integration-tests-&apos;, !Ref &apos;AWS::Region&apos;, &apos;-&apos;, !Ref &apos;AWS::AccountId&apos; ] ]
       Tags: [<span>{</span>Key: key00AtCreate, Value: value001AtCreate}]
@@ -342,6 +362,9 @@ Resources:
                 &quot;Name&quot;: &quot;job-test&quot;,
                 &quot;DatasetName&quot;: &quot;dataset-test&quot;,
                 &quot;RoleArn&quot;: &quot;arn:aws:iam::1234567891011:role/PassRoleAdmin&quot;,
+                &quot;JobSample&quot;: <span>{</span>
+                    &quot;Mode&quot;: &quot;FULL_DATASET&quot;
+                },
                 &quot;OutputLocation&quot;: <span>{</span>
                     &quot;Bucket&quot;: &quot;test-output&quot;,
                     &quot;Key&quot;: &quot;job-output.json&quot;
@@ -367,7 +390,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -34,22 +34,13 @@
                                     to protect. The resources can be an Amazon CloudFront distribution, an Amazon API
                                     Gateway REST API, an Application Load Balancer, or an AWS AppSync GraphQL API.  
                                  </p>
-                                 <div class="awsdocs-note">
-                                    <div class="awsdocs-note-title">
-                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
-                                    <div class="awsdocs-note-text">
-                                       <p>You can only use up to 3 levels of nested rule statements when you manage your web
-                                          ACLs and rule groups using AWS CloudFormation. This limitation doesn&apos;t exist when
-                                          you use the API and SDKs.  
-                                       </p>
-                                    </div>
-                                 </div>
                                  <h2 id="aws-resource-wafv2-webacl-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h3 id="aws-resource-wafv2-webacl-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::WAFv2::WebACL&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-wafv2-webacl-customresponsebodies">CustomResponseBodies</a>&quot; : <code class="replaceable"><span>{</span><code class="replaceable">Key</code> : <code class="replaceable">Value</code>, ...}</code>,
       &quot;<a href="#cfn-wafv2-webacl-defaultaction">DefaultAction</a>&quot; : <code class="replaceable"><a href="./aws-properties-wafv2-webacl-defaultaction.html">DefaultAction</a></code>,
       &quot;<a href="#cfn-wafv2-webacl-description">Description</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-wafv2-webacl-name">Name</a>&quot; : <code class="replaceable">String</code>,
@@ -63,6 +54,8 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-wafv2-webacl-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::WAFv2::WebACL
 Properties: 
+  <a href="#cfn-wafv2-webacl-customresponsebodies">CustomResponseBodies</a>: <code class="replaceable">
+    <code class="replaceable">Key</code> : <code class="replaceable">Value</code></code>
   <a href="#cfn-wafv2-webacl-defaultaction">DefaultAction</a>: <code class="replaceable">
     <a href="./aws-properties-wafv2-webacl-defaultaction.html">DefaultAction</a></code>
   <a href="#cfn-wafv2-webacl-description">Description</a>: <code class="replaceable">String</code>
@@ -78,6 +71,29 @@ Properties:
                                  <h2 id="aws-resource-wafv2-webacl-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-wafv2-webacl-customresponsebodies"></a><span class="term"><code class="code">CustomResponseBodies</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A map of custom response keys and content bodies. When you create a rule with a block
+                                             action, you can send a custom response to the web request. You define these for the
+                                             web ACL, and then use them in the rules and default actions that you define in the
+                                             web ACL. 
+                                          </p> 
+                                          
+                                          <p>For information about customizing web requests and responses, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html">Customizing web requests and responses in AWS WAF</a> in the 
+                                             <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. 
+                                          </p>
+                                          
+                                          <p>For information about the limits on count and size for custom request and response
+                                             settings, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/limits.html">AWS WAF quotas</a> in the 
+                                             <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. 
+                                          </p> 
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Map of <a href="./aws-properties-wafv2-webacl-customresponsebody.html">CustomResponseBody</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-wafv2-webacl-defaultaction"></a><span class="term"><code class="code">DefaultAction</code></span></dt>
                                        <dd>
                                           
@@ -92,9 +108,7 @@ Properties:
                                        <dt><a id="cfn-wafv2-webacl-description"></a><span class="term"><code class="code">Description</code></span></dt>
                                        <dd>
                                           
-                                          <p>A friendly description of the Web ACL. You cannot change the description of a Web
-                                             ACL after you create it.
-                                          </p>
+                                          <p>A description of the web ACL that helps with identification. </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -108,8 +122,8 @@ Properties:
                                        <dt><a id="cfn-wafv2-webacl-name"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
                                           
-                                          <p>A friendly name of the Web ACL. You cannot change the name of a Web ACL after you
-                                             create it.
+                                          <p>The descriptive name of the web ACL. You cannot change the name of a web ACL after
+                                             you create it.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -119,12 +133,12 @@ Properties:
                                           <p><em>Minimum</em>: <code class="code">1</code></p>
                                           <p><em>Maximum</em>: <code class="code">128</code></p>
                                           <p><em>Pattern</em>: <code class="code">^[\w\-]+$</code></p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-wafv2-webacl-rules"></a><span class="term"><code class="code">Rules</code></span></dt>
                                        <dd>
                                           
-                                          <p>The Rule statements used to identify the web requests that you 
+                                          <p>The rule statements used to identify the web requests that you 
                                              want to allow, block, or count. Each rule includes one top-level statement that AWS
                                              WAF uses to identify matching  
                                              web requests, and parameters that govern how AWS WAF handles them. 
@@ -139,8 +153,8 @@ Properties:
                                        <dt><a id="cfn-wafv2-webacl-scope"></a><span class="term"><code class="code">Scope</code></span></dt>
                                        <dd>
                                           
-                                          <p>Specifies whether this is for an AWS CloudFront distribution or for a regional application.
-                                             A regional
+                                          <p>Specifies whether this is for an Amazon CloudFront distribution or for a regional
+                                             application. A regional
                                              application can be an Application Load Balancer (ALB), an Amazon API Gateway REST
                                              API, or an AWS AppSync GraphQL API. Valid Values are <code class="code">CLOUDFRONT</code> and <code class="code">REGIONAL</code>.
                                           </p>
@@ -158,7 +172,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-wafv2-webacl-tags"></a><span class="term"><code class="code">Tags</code></span></dt>
                                        <dd>
@@ -173,9 +187,9 @@ Properties:
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>To modify tags on existing resources, use the AWS WAF console or the APIs. With AWS
-                                                   CloudFormation, you can only add tags to AWS WAF resources during resource creation.
-                                                   
+                                                <p>To modify tags on existing resources, use the AWS WAF APIs or command line interface.
+                                                   With AWS CloudFormation, you can only add tags to AWS WAF resources during resource
+                                                   creation. 
                                                 </p>
                                              </div>
                                           </div>
@@ -224,27 +238,61 @@ Properties:
                                           
                                           <p>The ID of the web ACL.</p>
                                        </dd>
+                                       <dt><a id="LabelNamespace-fn::getatt"></a><span class="term"><code class="code">LabelNamespace</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The label namespace prefix for this web ACL. All labels added by rules in this web
+                                             ACL have this prefix.
+                                          </p>
+                                          
+                                          <p>The syntax for the label namespace prefix for a web ACL is the following: <code class="code">awswaf:&lt;account ID&gt;:webacl:&lt;web ACL name&gt;:</code></p>
+                                          
+                                          <p>When a rule with a label matches a web request, AWS WAF adds the fully qualified label
+                                             to the request. A fully qualified label is made up of the label namespace from the
+                                             rule group or web ACL where the rule is defined and the label from the rule, separated
+                                             by a colon.
+                                          </p>
+                                          
+                                       </dd>
                                     </dl>
                                  </div>
                                  <h2 id="aws-resource-wafv2-webacl--examples">Examples</h2>
                                  <p></p>
-                                 <h3 id="aws-resource-wafv2-webacl--examples--Create_a_web_ACL">Create a web ACL</h3>
-                                 <p>The following shows an example web ACL specification. </p>
+                                 <h3 id="aws-resource-wafv2-webacl--examples--Create_a_web_ACL_with_custom_request_and_response_handling">Create a web ACL with custom request and response handling</h3>
+                                 <p>The following shows an example web ACL specification. This example includes custom
+                                    request and response configurations.
+                                 </p>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-wafv2-webacl--examples--Create_a_web_ACL--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: Create WebACL example
-Resources:
+                                    <h4 id="aws-resource-wafv2-webacl--examples--Create_a_web_ACL_with_custom_request_and_response_handling--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Description: Create WebACL example
+            Resources:
   ExampleWebACL:
-    Type: AWS::WAFv2::WebACL
+    Type: &apos;AWS::WAFv2::WebACL&apos;
     Properties:
-      Name: ExampleWebACL
+      Name: ExampleWebACL1
       Scope: REGIONAL
       Description: This is an example WebACL
       DefaultAction:
-        Allow: <span>{</span>}
+        Allow:
+          CustomRequestHandling:
+            InsertHeaders:
+              - Name: AllowActionHeader1Name
+                Value: AllowActionHeader1Value
+              - Name: AllowActionHeader2Name
+                Value: AllowActionHeader2Value
       VisibilityConfig:
         SampledRequestsEnabled: true
         CloudWatchMetricsEnabled: true
         MetricName: ExampleWebACLMetric
+      CustomResponseBodies:
+        CustomResponseBodyKey1:
+          ContentType: TEXT_PLAIN
+          Content: this is a plain text
+        CustomResponseBodyKey2:
+          ContentType: APPLICATION_JSON
+          Content: &apos;<span>{</span>&quot;jsonfieldname&quot;: &quot;jsonfieldvalue&quot;}&apos;
+        CustomResponseBodyKey3:
+          ContentType: TEXT_HTML
+                Content: &lt;html&gt;HTML text content&lt;/html&gt;
       Rules:
         - Name: RuleWithAWSManagedRules
           Priority: 0
@@ -262,7 +310,15 @@ Resources:
         - Name: BlockXssAttack
           Priority: 1
           Action:
-            Block: <span>{</span>}
+            Block:
+              CustomResponse:
+                ResponseCode: 503
+                CustomResponseBodyKey: CustomResponseBodyKey1
+                ResponseHeaders:
+                  - Name: BlockActionHeader1Name
+                    Value: BlockActionHeader1Value
+                  - Name: BlockActionHeader2Name
+                    Value: BlockActionHeader2Value
           VisibilityConfig:
             SampledRequestsEnabled: true
             CloudWatchMetricsEnabled: true
@@ -275,8 +331,8 @@ Resources:
                 - Priority: 1
                   Type: NONE</code></pre></div>
                                  <div id="JSON" name="JSON" class="section langfilter">
-                                    <h4 id="aws-resource-wafv2-webacl--examples--Create_a_web_ACL--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Description&quot;: &quot;Create WebACL example&quot;,
-  &quot;Resources&quot;: <span>{</span>
+                                    <h4 id="aws-resource-wafv2-webacl--examples--Create_a_web_ACL_with_custom_request_and_response_handling--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;Description&quot;: &quot;Create WebACL example&quot;,
+            &quot;Resources&quot;: <span>{</span>
     &quot;ExampleWebACL&quot;: <span>{</span>
       &quot;Type&quot;: &quot;AWS::WAFv2::WebACL&quot;,
       &quot;Properties&quot;: <span>{</span>
@@ -284,12 +340,39 @@ Resources:
         &quot;Scope&quot;: &quot;REGIONAL&quot;,
         &quot;Description&quot;: &quot;This is an example WebACL&quot;,
         &quot;DefaultAction&quot;: <span>{</span>
-          &quot;Allow&quot;: <span>{</span>}
+          &quot;Allow&quot;: <span>{</span>
+            &quot;CustomRequestHandling&quot;: <span>{</span>
+              &quot;InsertHeaders&quot;: [
+                <span>{</span>
+                  &quot;Name&quot;: &quot;AllowActionHeader1Name&quot;,
+                  &quot;Value&quot;: &quot;AllowActionHeader1Value&quot;
+                },
+                <span>{</span>
+                  &quot;Name&quot;: &quot;AllowActionHeader2Name&quot;,
+                  &quot;Value&quot;: &quot;AllowActionHeader2Value&quot;
+                }
+              ]
+            }
+          }
         },
         &quot;VisibilityConfig&quot;: <span>{</span>
           &quot;SampledRequestsEnabled&quot;: true,
           &quot;CloudWatchMetricsEnabled&quot;: true,
           &quot;MetricName&quot;: &quot;ExampleWebACLMetric&quot;
+        },
+        &quot;CustomResponseBodies&quot;: <span>{</span>
+          &quot;CustomResponseBodyKey1&quot;: <span>{</span>
+            &quot;ContentType&quot;: &quot;TEXT_PLAIN&quot;,
+            &quot;Content&quot;: &quot;this is a plain text&quot;
+          },
+          &quot;CustomResponseBodyKey2&quot;: <span>{</span>
+            &quot;ContentType&quot;: &quot;APPLICATION_JSON&quot;,
+            &quot;Content&quot;: &quot;<span>{</span>\&quot;jsonfieldname\&quot;: \&quot;jsonfieldvalue\&quot;}&quot;
+          },
+          &quot;CustomResponseBodyKey3&quot;: <span>{</span>
+            &quot;ContentType&quot;: &quot;TEXT_HTML&quot;,
+                &quot;Content&quot;: &quot;&lt;html&gt;HTML text content&lt;/html&gt;&quot;
+          }
         },
         &quot;Rules&quot;: [
           <span>{</span>
@@ -305,7 +388,7 @@ Resources:
             },
             &quot;Statement&quot;: <span>{</span>
               &quot;ManagedRuleGroupStatement&quot;: <span>{</span>
-                &quot;VendorName&quot;: &quot;AWS&quot;,
+            &quot;VendorName&quot;: &quot;AWS&quot;,
                 &quot;Name&quot;: &quot;AWSManagedRulesCommonRuleSet&quot;,
                 &quot;ExcludedRules&quot;: []
               }
@@ -315,7 +398,22 @@ Resources:
             &quot;Name&quot;: &quot;BlockXssAttack&quot;,
             &quot;Priority&quot;: 1,
             &quot;Action&quot;: <span>{</span>
-              &quot;Block&quot;: <span>{</span>}
+              &quot;Block&quot;: <span>{</span>
+                &quot;CustomResponse&quot;: <span>{</span>
+                  &quot;ResponseCode&quot;: 503,
+                  &quot;CustomResponseBodyKey&quot;: &quot;CustomResponseBodyKey1&quot;,
+                  &quot;ResponseHeaders&quot;: [
+                    <span>{</span>
+                      &quot;Name&quot;: &quot;BlockActionHeader1Name&quot;,
+                      &quot;Value&quot;: &quot;BlockActionHeader1Value&quot;
+                    },
+                    <span>{</span>
+                      &quot;Name&quot;: &quot;BlockActionHeader2Name&quot;,
+                      &quot;Value&quot;: &quot;BlockActionHeader2Value&quot;
+                    }
+                  ]
+                }
+              }
             },
             &quot;VisibilityConfig&quot;: <span>{</span>
               &quot;SampledRequestsEnabled&quot;: true,
@@ -340,6 +438,98 @@ Resources:
       }
     }
   } </code></pre></div>
+                                 <h3 id="aws-resource-wafv2-webacl--examples--Create_a_web_ACL_with_JSON_body_parsing">Create a web ACL with JSON body parsing</h3>
+                                 <p>The following shows an example web ACL specification. This example includes inspection
+                                    of the web request body as JSON.
+                                 </p>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-wafv2-webacl--examples--Create_a_web_ACL_with_JSON_body_parsing--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  ExampleWebACL:
+    Type: &apos;AWS::WAFv2::WebACL&apos;
+    Properties:
+      Name: TestingJsonBody
+      Scope: REGIONAL
+      Description: WebACL for JsonBody Testing
+      DefaultAction:
+        Allow:
+      VisibilityConfig:
+        SampledRequestsEnabled: true
+        CloudWatchMetricsEnabled: true
+        MetricName: ExampleWebACLMetric
+      Rules:
+        - Name: TestJsonBodyRule
+          Priority: 0
+          Action:
+            Block: <span>{</span>}
+          VisibilityConfig:
+            SampledRequestsEnabled: true
+            CloudWatchMetricsEnabled: true
+            MetricName: JsonBodyMatchMetric
+          Statement:
+            ByteMatchStatement:
+              FieldToMatch:
+                JsonBody:
+                  MatchPattern:
+                    IncludedPaths:
+                      - /foo
+                      - /bar
+                    MatchScope: VALUE
+                    InvalidFallbackBehavior: MATCH
+              PositionalConstraint: EXACTLY
+              SearchString: BadBot
+              TextTransformations:
+                - Type: NONE
+                  Priority: 0 </code></pre></div>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-wafv2-webacl--examples--Create_a_web_ACL_with_JSON_body_parsing--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span> &quot;Name&quot;: &quot;TestingJsonBody&quot;,
+ &quot;Scope&quot;: &quot;REGIONAL&quot;,
+ &quot;DefaultAction&quot;: 
+  <span>{</span>
+   &quot;Allow&quot;: 
+    <span>{</span>}
+  },
+ &quot;Description&quot;: &quot;WebACL for JsonBody Testing&quot;,
+ &quot;Rules&quot;: 
+  [
+    <span>{</span>&quot;Name&quot;: &quot;TestJsonBodyRule&quot;,
+     &quot;Priority&quot;: 1,
+     &quot;Statement&quot;: 
+      <span>{</span>&quot;ByteMatchStatement&quot;: 
+        <span>{</span>&quot;SearchString&quot;: &quot;BadBot&quot;,
+         &quot;FieldToMatch&quot;: 
+          <span>{</span>
+           &quot;JsonBody&quot;: 
+            <span>{</span>&quot;MatchPattern&quot;: 
+              <span>{</span>
+               &quot;IncludedPaths&quot;: 
+                [&quot;/foo&quot;, &quot;/bar&quot;]
+              },
+             &quot;MatchScope&quot;: &quot;VALUE&quot;,  
+             &quot;InvalidFallbackBehavior&quot;: &quot;MATCH&quot;
+             }
+          },
+         &quot;TextTransformations&quot;: 
+          [
+            <span>{</span>&quot;Priority&quot;: 1,
+             &quot;Type&quot;: &quot;NONE&quot;}
+          ],
+         &quot;PositionalConstraint&quot;: &quot;EXACTLY&quot;}
+      },
+     &quot;Action&quot;: 
+      <span>{</span>&quot;Block&quot;: 
+        <span>{</span>}
+      },
+     &quot;VisibilityConfig&quot;: 
+      <span>{</span>&quot;SampledRequestsEnabled&quot;: true,
+       &quot;CloudWatchMetricsEnabled&quot;: true,
+       &quot;MetricName&quot;: &quot;JsonBodyMatchMetric&quot;}
+    }
+  ],
+ &quot;VisibilityConfig&quot;: 
+  <span>{</span>&quot;SampledRequestsEnabled&quot;: true,
+   &quot;CloudWatchMetricsEnabled&quot;: true,
+   &quot;MetricName&quot;: &quot;TestingJsonBodyMetric&quot;}
+} </code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -350,7 +540,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -39,6 +39,7 @@
       &quot;<a href="#cfn-apigatewayv2-integration-payloadformatversion">PayloadFormatVersion</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-apigatewayv2-integration-requestparameters">RequestParameters</a>&quot; : <code class="replaceable">Json</code>,
       &quot;<a href="#cfn-apigatewayv2-integration-requesttemplates">RequestTemplates</a>&quot; : <code class="replaceable">Json</code>,
+      &quot;<a href="#cfn-apigatewayv2-integration-responseparameters">ResponseParameters</a>&quot; : <code class="replaceable">Json</code>,
       &quot;<a href="#cfn-apigatewayv2-integration-templateselectionexpression">TemplateSelectionExpression</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-apigatewayv2-integration-timeoutinmillis">TimeoutInMillis</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-apigatewayv2-integration-tlsconfig">TlsConfig</a>&quot; : <code class="replaceable"><a href="./aws-properties-apigatewayv2-integration-tlsconfig.html">TlsConfig</a></code>
@@ -62,6 +63,7 @@ Properties:
   <a href="#cfn-apigatewayv2-integration-payloadformatversion">PayloadFormatVersion</a>: <code class="replaceable">String</code>
   <a href="#cfn-apigatewayv2-integration-requestparameters">RequestParameters</a>: <code class="replaceable">Json</code>
   <a href="#cfn-apigatewayv2-integration-requesttemplates">RequestTemplates</a>: <code class="replaceable">Json</code>
+  <a href="#cfn-apigatewayv2-integration-responseparameters">ResponseParameters</a>: <code class="replaceable">Json</code>
   <a href="#cfn-apigatewayv2-integration-templateselectionexpression">TemplateSelectionExpression</a>: <code class="replaceable">String</code>
   <a href="#cfn-apigatewayv2-integration-timeoutinmillis">TimeoutInMillis</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-apigatewayv2-integration-tlsconfig">TlsConfig</a>: <code class="replaceable">
@@ -292,16 +294,26 @@ Properties:
                                           
                                           
                                           
+                                          
                                           <p>For WebSocket APIs, a key-value map specifying request parameters that are passed
                                              from the method request to the backend. The key is an integration request parameter
                                              name and the associated value is a method request parameter value or static value
                                              that must be enclosed within single quotes and pre-encoded as required by the backend.
                                              The method request parameter value must match the pattern of <code class="code">method.request.<code class="replaceable"><span>{</span>location}</code>.<code class="replaceable"><span>{</span>name}</code>
-                                                </code>, where <code class="code"> <code class="replaceable"><span>{</span>location}</code> </code> is <code class="code">querystring</code>, <code class="code">path</code>, or <code class="code">header</code>; and <code class="code"><code class="replaceable"><span>{</span>name}</code></code> must be a valid and unique method request parameter name.
+                                                </code>, where <code class="code">
+                                                <code class="replaceable"><span>{</span>location}</code>
+                                                </code> is <code class="code">querystring</code>, <code class="code">path</code>, or <code class="code">header</code>; and <code class="code">
+                                                <code class="replaceable"><span>{</span>name}</code>
+                                                </code> must be a valid and unique method request parameter name.
                                           </p>
-                                          <p>For HTTP APIs, request parameters are a key-value map specifying parameters that are
-                                             passed to <code class="code">AWS_PROXY</code> integrations with a specified <code class="code">integrationSubtype</code>. You can provide static values, or map request data, stage variables, or context
-                                             variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html">Working with AWS service integrations for HTTP APIs</a>.
+                                          <p>For HTTP API integrations with a specified <code class="code">integrationSubtype</code>,  request parameters are a key-value map specifying parameters that are passed to
+                                             <code class="code">AWS_PROXY</code> integrations. You can provide static values, or map request data, stage variables,
+                                             or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html">Working with AWS service integrations for HTTP APIs</a>.
+                                          </p>
+                                          <p>For HTTP API integrations without a specified <code class="code">integrationSubtype</code>  request parameters are a key-value map specifying how to transform HTTP requests
+                                             before sending them to the backend. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;
+                                             where action can be <code class="code">append</code>, <code class="code">overwrite</code> or<code class="code"> remove</code>. For values, you can provide static values, or map request data, stage variables,
+                                             or context variables that are evaluated at runtime. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html">Transforming API requests and responses</a>.
                                           </p>
                                           <p><em>Required</em>: No
                                           </p>
@@ -318,6 +330,23 @@ Properties:
                                              is the key in this map, and the template (as a String) is the value. Supported only
                                              for WebSocket APIs.
                                           </p>
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Json
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-apigatewayv2-integration-responseparameters"></a><span class="term"><code class="code">ResponseParameters</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Supported only for HTTP APIs. You use response parameters to transform the HTTP response
+                                             from a backend
+                                             integration before returning the response to clients. Specify a key-value map from
+                                             a selection key to response
+                                             parameters. The selection key must be a valid HTTP status code within the range of
+                                             200-599. The value is of type <a href="aws-properties-apigatewayv2-integration-responseparameterlist.html"><code class="code">ResponseParameterList</code></a>. To learn more, see <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html">Transforming API requests and responses</a>. 
+                                          </p>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: Json
@@ -376,20 +405,19 @@ Properties:
                                  <h2 id="aws-resource-apigatewayv2-integration--examples">Examples</h2>
                                  <p></p>
                                  <h3 id="aws-resource-apigatewayv2-integration--examples--Integration_creation_example">Integration creation example</h3>
-                                 <p>The following example creates an <code class="code">integration</code> resource
-                                    named <code class="code">MyIntegration</code> for the <code class="code">MyApi</code> API, whose
-                                    credentials are specified by <code class="code">MyCredentialsArn</code>.
+                                 <p>The following example creates a Lambda integration for an HTTP API. For full examples,
+                                    see <a href="https://github.com/awsdocs/amazon-api-gateway-developer-guide/tree/main/cloudformation-templates" rel="noopener noreferrer" target="_blank"><span>example CloudFormation templates</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> on GitHub.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-apigatewayv2-integration--examples--Integration_creation_example--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
-    &quot;MyIntegration&quot;: <span>{</span>
+    &quot;Integration&quot;: <span>{</span>
         &quot;Type&quot;: &quot;AWS::ApiGatewayV2::Integration&quot;,
         &quot;Properties&quot;: <span>{</span>
             &quot;ApiId&quot;: <span>{</span>
-                &quot;Ref&quot;: &quot;MyApi&quot;
+                &quot;Ref&quot;: &quot;HTTPApi&quot;
             },
             &quot;Description&quot;: &quot;Lambda Integration&quot;,
-            &quot;IntegrationType&quot;: &quot;AWS&quot;,
+            &quot;IntegrationType&quot;: &quot;AWS_PROXY&quot;,
             &quot;IntegrationUri&quot;: <span>{</span>
                 &quot;Fn::Join&quot;: [
                     &quot;&quot;,
@@ -404,38 +432,91 @@ Properties:
                         },
                         &quot;:lambda:path/2015-03-31/functions/&quot;,
                         <span>{</span>
-                            &quot;Ref&quot;: &quot;MyLambdaFunction&quot;
+                            &quot;Fn::GetAtt&quot;: [
+                                &quot;MyLambdaFunction&quot;,
+                                &quot;Arn&quot;
+                            ]
                         },
                         &quot;/invocations&quot;
                     ]
                 ]
             },
-            &quot;CredentialsArn&quot;: &quot;MyCredentialsArn&quot;,
-            &quot;IntegrationMethod&quot;: &quot;GET&quot;,
-            &quot;ConnectionType&quot;: &quot;INTERNET&quot;
+            &quot;IntegrationMethod&quot;: &quot;POST&quot;,
+            &quot;PayloadFormatVersion&quot;: &quot;2.0&quot;
         }
     }
-}</code></pre></div>
+} </code></pre></div>
                                  <div id="YAML" name="YAML" class="section langfilter">
-                                    <h4 id="aws-resource-apigatewayv2-integration--examples--Integration_creation_example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyIntegration:
+                                    <h4 id="aws-resource-apigatewayv2-integration--examples--Integration_creation_example--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Integration:
   Type: &apos;AWS::ApiGatewayV2::Integration&apos;
   Properties:
-    ApiId: !Ref MyApi
+    ApiId: !Ref HTTPApi
     Description: Lambda Integration
-    IntegrationType: AWS
-    IntegrationUri: !Join 
+    IntegrationType: AWS_PROXY
+    IntegrationUri: !Join
       - &apos;&apos;
       - - &apos;arn:&apos;
         - !Ref &apos;AWS::Partition&apos;
         - &apos;:apigateway:&apos;
         - !Ref &apos;AWS::Region&apos;
         - &apos;:lambda:path/2015-03-31/functions/&apos;
-        - !Ref MyLambdaFunction
+        - !GetAtt MyLambdaFunction.Arn
         - /invocations
-    CredentialsArn: MyCredentialsArn
-    IntegrationMethod: GET
-    ConnectionType: INTERNET
+    IntegrationMethod: POST
+    PayloadFormatVersion: &apos;2.0&apos;
 </code></pre></div>
+                                 <h3 id="aws-resource-apigatewayv2-integration--examples--Integration_with_parameter_mapping_for_an_HTTP_API">Integration with parameter mapping for an HTTP API</h3>
+                                 <p>The following example creates an integration with parameter mapping. The request parameters
+                                    add a header named <code class="code">header1</code> to the request before it reaches the backend integration. The response
+                                    parameters add a header to the integration&apos;s response named <code class="code">header2</code>, with the static value
+                                    <code class="code">headervalue</code>, when the integration returns a 200 status code.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-apigatewayv2-integration--examples--Integration_with_parameter_mapping_for_an_HTTP_API--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;MyIntegration&quot;: <span>{</span>
+    &quot;Type&quot;: &quot;AWS::ApiGatewayV2::Integration&quot;,
+    &quot;Properties&quot;: <span>{</span>
+      &quot;ApiId&quot;: <span>{</span>
+        &quot;Ref&quot;: &quot;MyApi&quot;
+      },
+      &quot;Description&quot;: &quot;HTTP proxy integration&quot;,
+      &quot;IntegrationType&quot;: &quot;HTTP_PROXY&quot;,
+      &quot;IntegrationMethod&quot;: &quot;ANY&quot;,
+      &quot;IntegrationUri&quot;: &quot;https://api.example.com&quot;,
+      &quot;PayloadFormatVersion&quot;: &quot;1.0&quot;,
+      &quot;RequestParameters&quot;: <span>{</span>
+        &quot;append:header.header1&quot;: &quot;$context.requestId&quot;
+      },
+      &quot;ResponseParameters&quot;: <span>{</span>
+        &quot;200&quot;: <span>{</span>
+          &quot;ResponseParameters&quot;: [
+            <span>{</span>
+              &quot;Source&quot;: &quot;headervalue&quot;,
+              &quot;Destination&quot;: &quot;append:header.header2&quot;
+            }
+          ]
+        }
+      }
+    }
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-apigatewayv2-integration--examples--Integration_with_parameter_mapping_for_an_HTTP_API--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">MyIntegration:
+Type: AWS::ApiGatewayV2::Integration
+Properties:
+  ApiId: !Ref MyApi
+  Description: HTTP proxy integration
+  IntegrationType: HTTP_PROXY
+  IntegrationMethod: ANY
+  IntegrationUri: https://api.example.com
+  PayloadFormatVersion: 1.0
+  RequestParameters:
+    &quot;append:header.header1&quot;: &quot;$context.requestId&quot;
+  ResponseParameters:
+    &quot;200&quot;:
+      ResponseParameters:
+        - Source: &quot;headerValue&quot;
+          Destination: &quot;append:header.header2&quot; </code></pre></div>
                                  <h2 id="aws-resource-apigatewayv2-integration--seealso">See also</h2>
                                  <div class="itemizedlist">
                                      
@@ -460,7 +541,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

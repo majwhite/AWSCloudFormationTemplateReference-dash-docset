@@ -33,6 +33,7 @@
       &quot;<a href="#cfn-ecs-service-deploymentcontroller">DeploymentController</a>&quot; : <code class="replaceable"><a href="./aws-properties-ecs-service-deploymentcontroller.html">DeploymentController</a></code>,
       &quot;<a href="#cfn-ecs-service-desiredcount">DesiredCount</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-ecs-service-enableecsmanagedtags">EnableECSManagedTags</a>&quot; : <code class="replaceable">Boolean</code>,
+      &quot;<a href="#cfn-ecs-service-enableexecutecommand">EnableExecuteCommand</a>&quot; : <code class="replaceable">Boolean</code>,
       &quot;<a href="#cfn-ecs-service-healthcheckgraceperiodseconds">HealthCheckGracePeriodSeconds</a>&quot; : <code class="replaceable">Integer</code>,
       &quot;<a href="#cfn-ecs-service-launchtype">LaunchType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ecs-service-loadbalancers">LoadBalancers</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-ecs-service-loadbalancer.html">LoadBalancer</a>, ... ]</code>,
@@ -43,7 +44,6 @@
       &quot;<a href="#cfn-ecs-service-propagatetags">PropagateTags</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ecs-service-role">Role</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ecs-service-schedulingstrategy">SchedulingStrategy</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-ecs-service-servicearn">ServiceArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ecs-service-servicename">ServiceName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-ecs-service-serviceregistries">ServiceRegistries</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-ecs-service-serviceregistry.html">ServiceRegistry</a>, ... ]</code>,
       &quot;<a href="#cfn-ecs-service-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>,
@@ -63,6 +63,7 @@ Properties:
     <a href="./aws-properties-ecs-service-deploymentcontroller.html">DeploymentController</a></code>
   <a href="#cfn-ecs-service-desiredcount">DesiredCount</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-ecs-service-enableecsmanagedtags">EnableECSManagedTags</a>: <code class="replaceable">Boolean</code>
+  <a href="#cfn-ecs-service-enableexecutecommand">EnableExecuteCommand</a>: <code class="replaceable">Boolean</code>
   <a href="#cfn-ecs-service-healthcheckgraceperiodseconds">HealthCheckGracePeriodSeconds</a>: <code class="replaceable">Integer</code>
   <a href="#cfn-ecs-service-launchtype">LaunchType</a>: <code class="replaceable">String</code>
   <a href="#cfn-ecs-service-loadbalancers">LoadBalancers</a>: <code class="replaceable">
@@ -77,7 +78,6 @@ Properties:
   <a href="#cfn-ecs-service-propagatetags">PropagateTags</a>: <code class="replaceable">String</code>
   <a href="#cfn-ecs-service-role">Role</a>: <code class="replaceable">String</code>
   <a href="#cfn-ecs-service-schedulingstrategy">SchedulingStrategy</a>: <code class="replaceable">String</code>
-  <a href="#cfn-ecs-service-servicearn">ServiceArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-ecs-service-servicename">ServiceName</a>: <code class="replaceable">String</code>
   <a href="#cfn-ecs-service-serviceregistries">ServiceRegistries</a>: <code class="replaceable">
     - <a href="./aws-properties-ecs-service-serviceregistry.html">ServiceRegistry</a></code>
@@ -102,6 +102,9 @@ Properties:
                                              be used.
                                           </p>
                                           
+                                          <p>Review the <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-capacity-providers.html#capacity-providers-considerations">Capacity provider considerations</a> in the
+                                             <em>Amazon Elastic Container Service Developer Guide.</em></p>
+                                          
                                           <p>If a <code class="code">capacityProviderStrategy</code> is specified, the <code class="code">launchType</code>
                                              parameter must be omitted. If no <code class="code">capacityProviderStrategy</code> or
                                              <code class="code">launchType</code> is specified, the
@@ -113,7 +116,7 @@ Properties:
                                              CreateCapacityProvider API operation.
                                           </p>
                                           
-                                          <p>To use a AWS Fargate capacity provider, specify either the <code class="code">FARGATE</code> or
+                                          <p>To use an AWS Fargate capacity provider, specify either the <code class="code">FARGATE</code> or
                                              <code class="code">FARGATE_SPOT</code> capacity providers. The AWS Fargate capacity providers are
                                              available to all accounts and only need to be associated with a cluster to be
                                              used.
@@ -157,7 +160,9 @@ Properties:
                                        <dt><a id="cfn-ecs-service-deploymentcontroller"></a><span class="term"><code class="code">DeploymentController</code></span></dt>
                                        <dd>
                                           		       
-                                          <p>The deployment controller to use for the service.</p>
+                                          <p>The deployment controller to use for the service. If no deployment controller is
+                                             			specified, the default value of <code class="code">ECS</code> is used.
+                                          </p>
                                           	     
                                           <p><em>Required</em>: No
                                           </p>
@@ -171,7 +176,9 @@ Properties:
                                              running on your cluster.
                                           </p>
                                           
-                                          <p>If a desired count is not specified, a default value of <code class="code">1</code> is used. When using the <code class="code">DAEMON</code> scheduling strategy, the desired count is not required.
+                                          <p>If a desired count is not specified, a default value of <code class="code">1</code> is used. When
+                                             using the <code class="code">DAEMON</code> scheduling strategy, the desired count is not
+                                             required.
                                           </p>
                                           
                                           <p><em>Required</em>: Conditional
@@ -194,6 +201,20 @@ Properties:
                                           <p><em>Type</em>: Boolean
                                           </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-ecs-service-enableexecutecommand"></a><span class="term"><code class="code">EnableExecuteCommand</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>Whether or not the execute command functionality is enabled for the service. If
+                                             				<code class="code">true</code>, the execute command functionality is enabled for all containers
+                                             			in tasks as part of the service.
+                                          </p>
+                                          	     
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: Boolean
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-ecs-service-healthcheckgraceperiodseconds"></a><span class="term"><code class="code">HealthCheckGracePeriodSeconds</code></span></dt>
                                        <dd>
@@ -235,7 +256,7 @@ Properties:
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed values</em>: <code class="code">EC2 | FARGATE</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">EC2 | EXTERNAL | FARGATE</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-ecs-service-loadbalancers"></a><span class="term"><code class="code">LoadBalancers</code></span></dt>
@@ -304,15 +325,16 @@ Properties:
                                           <p>The platform version that your tasks in the service are running on. A platform version
                                              			is specified only for tasks using the Fargate launch type. If one isn&apos;t
                                              			specified, the <code class="code">LATEST</code> platform version is used by default. For more
-                                             			information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">AWS Fargate Platform
-                                                				Versions</a> in the <em>Amazon Elastic Container Service Developer Guide</em>.
+                                             			information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">
+                                                AWS Fargate platform
+                                                				versions</a> in the <em>Amazon Elastic Container Service Developer Guide</em>.
                                           </p>
                                           	     
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-ecs-service-propagatetags"></a><span class="term"><code class="code">PropagateTags</code></span></dt>
                                        <dd>
@@ -358,7 +380,7 @@ Properties:
                                                    				controller, multiple target groups, or Elastic Inference accelerators in which
                                                    case
                                                    				you should not specify a role here. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html">Using
-                                                      					Service-Linked Roles for Amazon ECS</a> in the
+                                                      					service-linked roles for Amazon ECS</a> in the
                                                    					<em>Amazon Elastic Container Service Developer Guide</em>.
                                                 </p>
                                              </div>
@@ -369,7 +391,7 @@ Properties:
                                              path.
                                              			For example, if a role with the name <code class="code">bar</code> has a path of <code class="code">/foo/</code>
                                              			then you would specify <code class="code">/foo/bar</code> as the role name. For more information, see
-                                             				<a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names">Friendly Names and Paths</a> in the <em>IAM User Guide</em>.
+                                             				<a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names">Friendly names and paths</a> in the <em>IAM User Guide</em>.
                                           </p>
                                           	     
                                           <p><em>Required</em>: No
@@ -439,24 +461,11 @@ Properties:
                                           <p><em>Allowed values</em>: <code class="code">DAEMON | REPLICA</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
-                                       <dt><a id="cfn-ecs-service-servicearn"></a><span class="term"><code class="code">ServiceArn</code></span></dt>
-                                       <dd>
-                                          		       
-                                          <p>The ARN that identifies the service. The ARN contains the <code class="code">arn:aws:ecs</code> namespace, followed by the Region of the service, the AWS account ID of the service
-                                             owner, the <code class="code">service</code> namespace, and then the service name. For example, <code class="code">arn:aws:ecs:region:012345678910:service/my-service</code>.
-                                          </p>
-                                          	     
-                                          <p><em>Required</em>: No
-                                          </p>
-                                          <p><em>Type</em>: String
-                                          </p>
-                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
-                                       </dd>
                                        <dt><a id="cfn-ecs-service-servicename"></a><span class="term"><code class="code">ServiceName</code></span></dt>
                                        <dd>
                                           		       
-                                          <p>The name of your service. Up to 255 letters (uppercase and lowercase), numbers, and
-                                             hyphens are allowed. Service names must be unique within
+                                          <p>The name of your service. Up to 255 letters (uppercase and lowercase), numbers, underscores,
+                                             and hyphens are allowed. Service names must be unique within
                                              			a cluster, but you can have similarly named services in multiple clusters within
                                              a
                                              			Region or across multiple Regions.
@@ -471,18 +480,18 @@ Properties:
                                        <dt><a id="cfn-ecs-service-serviceregistries"></a><span class="term"><code class="code">ServiceRegistries</code></span></dt>
                                        <dd>
                                           		       
-                                          <p>The details of the service discovery registries to assign to this service. For more
+                                          <p>The details of the service discovery registry to associate with this service. For
+                                             more
                                              			information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html">Service
-                                                				Discovery</a>.
+                                                				discovery</a>.
                                           </p>
                                           		       
                                           <div class="awsdocs-note">
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>Service discovery is supported for Fargate tasks if you are using
-                                                   				platform version v1.1.0 or later. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">AWS Fargate Platform
-                                                      					Versions</a>.
+                                                <p>Each service may be associated with one service registry. Multiple service
+                                                   				registries per service isn&apos;t supported.
                                                 </p>
                                              </div>
                                           </div>
@@ -618,6 +627,10 @@ Properties:
                                           <p>The name of the Amazon ECS service, such as <code class="code">sample-webapp</code>.
                                           </p>
                                           
+                                       </dd>
+                                       <dt><a id="ServiceArn-fn::getatt"></a><span class="term"><code class="code">ServiceArn</code></span></dt>
+                                       <dd>
+                                          <p>Not currently supported in AWS CloudFormation.</p>
                                        </dd>
                                     </dl>
                                  </div>
@@ -1030,6 +1043,32 @@ Resources:
 Outputs:
   Cluster:
     Value: !Ref cluster</code></pre></div>
+                                 <h3 id="aws-resource-ecs-service--examples--Define_a_service_with_ECS_Exec_enabled">Define a service with ECS Exec enabled</h3>
+                                 <p>The following example defines a service with ECS Exec enabled. For more
+                                    information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html">Using ECS Exec for
+                                       debugging</a> in the <em>Amazon ECS Developer
+                                       Guide</em>.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-resource-ecs-service--examples--Define_a_service_with_ECS_Exec_enabled--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json ">&quot;ECSService&quot;: <span>{</span>
+  &quot;Type&quot;: &quot;AWS::ECS::Service&quot;,
+  &quot;Properties&quot; : <span>{</span>
+    &quot;Cluster&quot;: <span>{</span> &quot;Ref&quot;: &quot;ECSCluster&quot; },
+    &quot;DesiredCount&quot;: 1,
+    &quot;TaskDefinition&quot; : <span>{</span> &quot;Ref&quot;: &quot;ECSTaskDefinition&quot; },
+    &quot;EnableExecuteCommand&quot;: &quot;true&quot;
+  }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-resource-ecs-service--examples--Define_a_service_with_ECS_Exec_enabled--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">ECSService: 
+  Type: AWS::ECS::Service
+  Properties: 
+    Cluster: 
+      Ref: &quot;ECSCluster&quot;
+    DesiredCount: 1
+    TaskDefinition: 
+      Ref: &quot;ECSTaskDefinition&quot;
+    EnableExecuteCommand: true</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -1040,7 +1079,7 @@ Outputs:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -111,7 +111,11 @@ Properties:
                                        <dt><a id="cfn-ec2-ec2fleet-replaceunhealthyinstances"></a><span class="term"><code class="code">ReplaceUnhealthyInstances</code></span></dt>
                                        <dd>
                                           
-                                          <p>Indicates whether EC2 Fleet should replace unhealthy instances.</p>
+                                          <p>Indicates whether EC2 Fleet should replace unhealthy Spot Instances. Supported only
+                                             for
+                                             fleets of type <code class="code">maintain</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#ec2-fleet-health-checks">EC2 Fleet
+                                                health checks</a> in the <em>Amazon EC2 User Guide</em>.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -132,11 +136,18 @@ Properties:
                                        <dt><a id="cfn-ec2-ec2fleet-tagspecifications"></a><span class="term"><code class="code">TagSpecifications</code></span></dt>
                                        <dd>
                                           
-                                          <p>The key-value pair for tagging the EC2 Fleet request on creation. The value for
-                                             <code class="code">ResourceType</code> must be <code class="code">fleet</code>, otherwise the fleet request fails.
-                                             To tag instances at launch, specify the tags in the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template">launch
-                                                template</a>. For information about tagging after launch, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources">Tagging your
-                                                resources</a>.
+                                          <p>The key-value pair for tagging the EC2 Fleet request on creation. For more information,
+                                             see 
+                                             <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources">Tagging your resources</a>.
+                                          </p>
+                                          
+                                          <p>If the fleet type is <code class="code">instant</code>, specify a resource type of <code class="code">fleet</code> 
+                                             to tag the fleet or <code class="code">instance</code> to tag the instances at launch.
+                                          </p>
+                                          
+                                          <p>If the fleet type is <code class="code">maintain</code> or <code class="code">request</code>, specify a resource
+                                             type of <code class="code">fleet</code> to tag the fleet. You cannot specify a resource type of
+                                             <code class="code">instance</code>. To tag instances at launch, specify the tags in a <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template">launch template</a>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -168,7 +179,7 @@ Properties:
                                        <dt><a id="cfn-ec2-ec2fleet-type"></a><span class="term"><code class="code">Type</code></span></dt>
                                        <dd>
                                           
-                                          <p>The type of request. The default value is <code class="code">maintain</code>.
+                                          <p>The fleet type. The default value is <code class="code">maintain</code>.
                                           </p>
                                           
                                           <div class="itemizedlist">
@@ -180,7 +191,7 @@ Properties:
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">maintain</code> - The EC2 Fleet plaees an asynchronous request for your desired
+                                                      <code class="code">maintain</code> - The EC2 Fleet places an asynchronous request for your desired
                                                       capacity, and continues to maintain your desired Spot capacity by replenishing
                                                       interrupted Spot Instances.
                                                    </p>
@@ -256,6 +267,24 @@ Properties:
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
                                  </p>
+                                 <h3 id="aws-resource-ec2-ec2fleet-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-ec2-ec2fleet-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="FleetId-fn::getatt"></a><span class="term"><code class="code">FleetId</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ID of the EC2 Fleet.</p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
                                  <h2 id="aws-resource-ec2-ec2fleet--seealso">See also</h2>
                                  <div class="itemizedlist">
                                     				         
@@ -281,7 +310,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

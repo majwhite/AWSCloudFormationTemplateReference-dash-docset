@@ -29,11 +29,13 @@
   &quot;Type&quot; : &quot;AWS::Transfer::Server&quot;,
   &quot;Properties&quot; : <span>{</span>
       &quot;<a href="#cfn-transfer-server-certificate">Certificate</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-transfer-server-domain">Domain</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-transfer-server-endpointdetails">EndpointDetails</a>&quot; : <code class="replaceable"><a href="./aws-properties-transfer-server-endpointdetails.html">EndpointDetails</a></code>,
       &quot;<a href="#cfn-transfer-server-endpointtype">EndpointType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-transfer-server-identityproviderdetails">IdentityProviderDetails</a>&quot; : <code class="replaceable"><a href="./aws-properties-transfer-server-identityproviderdetails.html">IdentityProviderDetails</a></code>,
       &quot;<a href="#cfn-transfer-server-identityprovidertype">IdentityProviderType</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-transfer-server-loggingrole">LoggingRole</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-transfer-server-protocoldetails">ProtocolDetails</a>&quot; : <code class="replaceable"><a href="./aws-properties-transfer-server-protocoldetails.html">ProtocolDetails</a></code>,
       &quot;<a href="#cfn-transfer-server-protocols">Protocols</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-transfer-server-protocol.html">Protocol</a>, ... ]</code>,
       &quot;<a href="#cfn-transfer-server-securitypolicyname">SecurityPolicyName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-transfer-server-tags">Tags</a>&quot; : <code class="replaceable">[ <a href="aws-properties-resource-tags.html">Tag</a>, ... ]</code>
@@ -44,6 +46,7 @@
                                     <h3 id="aws-resource-transfer-server-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::Transfer::Server
 Properties: 
   <a href="#cfn-transfer-server-certificate">Certificate</a>: <code class="replaceable">String</code>
+  <a href="#cfn-transfer-server-domain">Domain</a>: <code class="replaceable">String</code>
   <a href="#cfn-transfer-server-endpointdetails">EndpointDetails</a>: <code class="replaceable">
     <a href="./aws-properties-transfer-server-endpointdetails.html">EndpointDetails</a></code>
   <a href="#cfn-transfer-server-endpointtype">EndpointType</a>: <code class="replaceable">String</code>
@@ -51,6 +54,8 @@ Properties:
     <a href="./aws-properties-transfer-server-identityproviderdetails.html">IdentityProviderDetails</a></code>
   <a href="#cfn-transfer-server-identityprovidertype">IdentityProviderType</a>: <code class="replaceable">String</code>
   <a href="#cfn-transfer-server-loggingrole">LoggingRole</a>: <code class="replaceable">String</code>
+  <a href="#cfn-transfer-server-protocoldetails">ProtocolDetails</a>: <code class="replaceable">
+    <a href="./aws-properties-transfer-server-protocoldetails.html">ProtocolDetails</a></code>
   <a href="#cfn-transfer-server-protocols">Protocols</a>: <code class="replaceable">
     - <a href="./aws-properties-transfer-server-protocol.html">Protocol</a></code>
   <a href="#cfn-transfer-server-securitypolicyname">SecurityPolicyName</a>: <code class="replaceable">String</code>
@@ -144,6 +149,18 @@ Properties:
                                           <p><em>Maximum</em>: <code class="code">1600</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
+                                       <dt><a id="cfn-transfer-server-domain"></a><span class="term"><code class="code">Domain</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies the domain of the storage system that is used for file transfers.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Allowed values</em>: <code class="code">EFS | S3</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
                                        <dt><a id="cfn-transfer-server-endpointdetails"></a><span class="term"><code class="code">EndpointDetails</code></span></dt>
                                        <dd>
                                           
@@ -193,10 +210,12 @@ Properties:
                                        <dt><a id="cfn-transfer-server-identityproviderdetails"></a><span class="term"><code class="code">IdentityProviderDetails</code></span></dt>
                                        <dd>
                                           
-                                          <p>Required when <code class="code">IdentityProviderType</code> is set to <code class="code">API_GATEWAY</code>.
-                                             Accepts an array containing all of the information required to call a customer-supplied
-                                             authentication API, including the API Gateway URL. Not required when
-                                             <code class="code">IdentityProviderType</code> is set to <code class="code">SERVICE_MANAGED</code>.
+                                          <p>Required when <code class="code">IdentityProviderType</code> is set to
+                                             <code class="code">AWS_DIRECTORY_SERVICE</code> or <code class="code">API_GATEWAY</code>. Accepts an array containing
+                                             all of the information required to use a directory in <code class="code">AWS_DIRECTORY_SERVICE</code> or
+                                             invoke a customer-supplied authentication API, including the API Gateway URL. Not
+                                             required
+                                             when <code class="code">IdentityProviderType</code> is set to <code class="code">SERVICE_MANAGED</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -209,24 +228,37 @@ Properties:
                                           
                                           <p>Specifies the mode of authentication for a server. The default value is
                                              <code class="code">SERVICE_MANAGED</code>, which allows you to store and access user credentials within
-                                             the AWS Transfer Family service. Use the <code class="code">API_GATEWAY</code> value to integrate with an
-                                             identity provider of your choosing. The <code class="code">API_GATEWAY</code> setting requires you to
-                                             provide an API Gateway endpoint URL to call for authentication using the
-                                             <code class="code">IdentityProviderDetails</code> parameter.
+                                             the AWS Transfer Family service.
+                                          </p>
+                                          
+                                          <p>Use <code class="code">AWS_DIRECTORY_SERVICE</code> to provide access to
+                                             Active Directory groups in AWS Managed Active Directory or Microsoft Active Directory
+                                             in your
+                                             on-premises environment or in AWS using AD Connectors. This option also requires you
+                                             to
+                                             provide a Directory ID using the <code class="code">IdentityProviderDetails</code> parameter.
+                                          </p>
+                                          
+                                          <p>Use the <code class="code">API_GATEWAY</code> value to integrate with an identity provider of your choosing. The
+                                             <code class="code">API_GATEWAY</code> setting requires you to provide an API Gateway endpoint URL to call
+                                             for authentication using the <code class="code">IdentityProviderDetails</code> parameter.
                                           </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
-                                          <p><em>Allowed values</em>: <code class="code">API_GATEWAY | SERVICE_MANAGED</code></p>
+                                          <p><em>Allowed values</em>: <code class="code">API_GATEWAY | AWS_DIRECTORY_SERVICE | SERVICE_MANAGED</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
                                        </dd>
                                        <dt><a id="cfn-transfer-server-loggingrole"></a><span class="term"><code class="code">LoggingRole</code></span></dt>
                                        <dd>
                                           
-                                          <p>Allows the service to write your users&apos; activity to your Amazon CloudWatch logs for
-                                             monitoring and auditing purposes.
+                                          <p>Specifies the Amazon Resource Name (ARN) of the AWS Identity and Access Management
+                                             (IAM) role that allows a server to turn
+                                             on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When set, user activity
+                                             can be viewed in
+                                             your CloudWatch logs.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -236,6 +268,27 @@ Properties:
                                           <p><em>Minimum</em>: <code class="code">20</code></p>
                                           <p><em>Maximum</em>: <code class="code">2048</code></p>
                                           <p><em>Pattern</em>: <code class="code">arn:.*role/.*</code></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-transfer-server-protocoldetails"></a><span class="term"><code class="code">ProtocolDetails</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Protocol settings that are configured for your server.</p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>
+                                                   Only valid in the <code class="code">UpdateServer</code> API.
+                                                   
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-transfer-server-protocoldetails.html">ProtocolDetails</a></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-transfer-server-protocols"></a><span class="term"><code class="code">Protocols</code></span></dt>
@@ -280,8 +333,7 @@ Properties:
                                  <h2 id="aws-resource-transfer-server-return-values">Return values</h2>
                                  <h3 id="aws-resource-transfer-server-return-values-ref">Ref</h3>
                                  <p>
-                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the ServerId, such as <code class="code">s-01234567890abcdef</code>, and
-                                    the server ARN, such as
+                                    When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the server ARN, such as
                                     <code class="code">arn:aws:transfer:us-east-1:123456789012:server/s-01234567890abcdef</code>.
                                  </p>
                                  <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
@@ -408,7 +460,7 @@ Resources:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

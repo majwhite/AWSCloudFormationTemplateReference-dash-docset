@@ -17,8 +17,11 @@
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
                                  <p>Specifies a network interface that is to be attached to an instance.</p>
-                                 <p>
-                                    			<code class="code">NetworkInterface</code> is a property of the <a href="aws-properties-ec2-instance.html">AWS::EC2::Instance</a> resource.
+                                 <p>You can create a network interface when launching an instance. For an example, see
+                                    the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html#aws-properties-ec2-instance--examples--Automatically_assign_a_public_IP_address">AWS::EC2::Instance examples</a>.
+                                 </p>
+                                 <p>Alternatively, you can attach an existing network interface when launching an instance.
+                                    For an example, see the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-interface.html#aws-resource-ec2-network-interface--examples--Basic_network_interface">AWS::EC2:NetworkInterface examples</a>.
                                  </p>
                                  <h2 id="aws-properties-ec2-network-iface-embedded-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -61,15 +64,10 @@
                                        <dt><a id="aws-properties-ec2-network-iface-embedded-associatepubip"></a><span class="term"><code class="code">AssociatePublicIpAddress</code></span></dt>
                                        <dd>
                                           
-                                          <p>Indicates whether to assign a public IPv4 address to an instance you launch in a VPC.
-                                             The
-                                             public IP address can only be assigned to a network interface for eth0, and can only
-                                             be
-                                             assigned to a new network interface, not an existing one. You cannot specify more
-                                             than one
-                                             network interface in the request. If launching into a default subnet, the default
-                                             value is
-                                             <code class="code">true</code>.
+                                          <p>Indicates whether to assign a public IPv4 address to an instance. 
+                                             Applies only if creating a network interface when launching an instance.
+                                             The network interface must be the primary network interface.
+                                             If launching into a default subnet, the default value is <code class="code">true</code>.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -81,9 +79,8 @@
                                        <dt><a id="aws-properties-ec2-network-iface-embedded-delete"></a><span class="term"><code class="code">DeleteOnTermination</code></span></dt>
                                        <dd>
                                           
-                                          <p>If set to <code class="code">true</code>, the interface is deleted when the instance is terminated. You can
-                                             specify <code class="code">true</code> only if creating a new network interface when launching an
-                                             instance.
+                                          <p>Indicates whether the network interface is deleted when the instance is terminated.
+                                             Applies only if creating a network interface when launching an instance.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -112,8 +109,8 @@
                                              A primary network interface has a device index of 0.
                                           </p> 
                                           
-                                          <p>If you specify a network interface when launching an instance, 
-                                             you must specify the device index.
+                                          <p>If you create a network interface when launching an instance, you must specify the
+                                             device index.
                                           </p>
                                           
                                           <p><em>Required</em>: Conditional
@@ -154,7 +151,12 @@
                                        <dt><a id="cfn-ec2-instance-networkinterface-ipv6addresses"></a><span class="term"><code class="code">Ipv6Addresses</code></span></dt>
                                        <dd>
                                           
-                                          <p>The IPv6 addresses associated with the network interface.</p>
+                                          <p>One or more IPv6 addresses to assign to the network interface. You cannot specify
+                                             this option and the option to assign a number of IPv6 addresses in the same request.
+                                             You
+                                             cannot specify this option if you&apos;ve specified a minimum number of instances to
+                                             launch.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -164,11 +166,7 @@
                                        <dt><a id="aws-properties-ec2-network-iface-embedded-network-iface"></a><span class="term"><code class="code">NetworkInterfaceId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ID of the network interface.</p>
-                                          
-                                          <p>If you are creating a Spot Fleet, omit this parameter because you can&#x2019;t specify a
-                                             network interface ID in a launch specification.
-                                          </p>
+                                          <p>The ID of the network interface, when attaching an existing network interface.</p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -179,9 +177,8 @@
                                        <dt><a id="aws-properties-ec2-network-iface-embedded-privateipaddress"></a><span class="term"><code class="code">PrivateIpAddress</code></span></dt>
                                        <dd>
                                           
-                                          <p>The private IPv4 address of the network interface. Applies only if creating a network
-                                             interface when launching an instance. You cannot specify this option if you&apos;re launching
-                                             	more than one instance in a <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html">RunInstances</a> request.
+                                          <p>The private IPv4 address of the network interface. 
+                                             Applies only if creating a network interface when launching an instance.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -193,9 +190,8 @@
                                        <dt><a id="aws-properties-ec2-network-iface-embedded-privateipaddresses"></a><span class="term"><code class="code">PrivateIpAddresses</code></span></dt>
                                        <dd>
                                           
-                                          <p>One or more private IPv4 addresses to assign to the network interface. Only one private
-                                             IPv4 address can be designated as primary. You cannot specify this option if you&apos;re
-                                             	launching more than one instance in a <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html">RunInstances</a> request.
+                                          <p>One or more private IPv4 addresses to assign to the network interface. 
+                                             Only one private IPv4 address can be designated as primary.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -206,10 +202,9 @@
                                        <dt><a id="aws-properties-ec2-network-iface-embedded-secondprivateip"></a><span class="term"><code class="code">SecondaryPrivateIpAddressCount</code></span></dt>
                                        <dd>
                                           
-                                          <p>The number of secondary private IPv4 addresses. You can&apos;t specify this option and
-                                             specify more than one private IP address using the private IP addresses option. You
-                                             cannot specify this option if you&apos;re
-                                             	launching more than one instance in a <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html">RunInstances</a> request.
+                                          <p>The number of secondary private IPv4 addresses. 
+                                             You can&apos;t specify this option and specify more than one private IP address using the
+                                             private IP addresses option.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -221,7 +216,9 @@
                                        <dt><a id="aws-properties-ec2-network-iface-embedded-subnetid"></a><span class="term"><code class="code">SubnetId</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ID of the subnet.</p>
+                                          <p>The ID of the subnet associated with the network interface. Applies only if creating
+                                             a network interface when launching an instance.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
@@ -241,7 +238,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

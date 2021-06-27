@@ -29,9 +29,10 @@
                                     <h3 id="aws-resource-stepfunctions-statemachine-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
   &quot;Type&quot; : &quot;AWS::StepFunctions::StateMachine&quot;,
   &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-stepfunctions-statemachine-definition">Definition</a>&quot; : <code class="replaceable"><a href="./aws-properties-stepfunctions-statemachine-definition.html">Definition</a></code>,
       &quot;<a href="#cfn-stepfunctions-statemachine-definitions3location">DefinitionS3Location</a>&quot; : <code class="replaceable"><a href="./aws-properties-stepfunctions-statemachine-s3location.html">S3Location</a></code>,
       &quot;<a href="#cfn-stepfunctions-statemachine-definitionstring">DefinitionString</a>&quot; : <code class="replaceable">String</code>,
-      &quot;<a href="#cfn-stepfunctions-statemachine-definitionsubstitutions">DefinitionSubstitutions</a>&quot; : <code class="replaceable"><a href="./aws-properties-stepfunctions-statemachine-definitionsubstitutions.html">DefinitionSubstitutions</a></code>,
+      &quot;<a href="#cfn-stepfunctions-statemachine-definitionsubstitutions">DefinitionSubstitutions</a>&quot; : <code class="replaceable"><span>{</span><code class="replaceable">Key</code> : <code class="replaceable">Value</code>, ...}</code>,
       &quot;<a href="#cfn-stepfunctions-statemachine-loggingconfiguration">LoggingConfiguration</a>&quot; : <code class="replaceable"><a href="./aws-properties-stepfunctions-statemachine-loggingconfiguration.html">LoggingConfiguration</a></code>,
       &quot;<a href="#cfn-stepfunctions-statemachine-rolearn">RoleArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-stepfunctions-statemachine-statemachinename">StateMachineName</a>&quot; : <code class="replaceable">String</code>,
@@ -44,12 +45,14 @@
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h3 id="aws-resource-stepfunctions-statemachine-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::StepFunctions::StateMachine
 Properties: 
+  <a href="#cfn-stepfunctions-statemachine-definition">Definition</a>: <code class="replaceable">
+    <a href="./aws-properties-stepfunctions-statemachine-definition.html">Definition</a></code>
   <a href="#cfn-stepfunctions-statemachine-definitions3location">DefinitionS3Location</a>: <code class="replaceable">
     <a href="./aws-properties-stepfunctions-statemachine-s3location.html">S3Location</a></code>
   <a href="#cfn-stepfunctions-statemachine-definitionstring">DefinitionString</a>: <code class="replaceable">
     String</code>
   <a href="#cfn-stepfunctions-statemachine-definitionsubstitutions">DefinitionSubstitutions</a>: <code class="replaceable">
-    <a href="./aws-properties-stepfunctions-statemachine-definitionsubstitutions.html">DefinitionSubstitutions</a></code>
+    <code class="replaceable">Key</code> : <code class="replaceable">Value</code></code>
   <a href="#cfn-stepfunctions-statemachine-loggingconfiguration">LoggingConfiguration</a>: <code class="replaceable">
     <a href="./aws-properties-stepfunctions-statemachine-loggingconfiguration.html">LoggingConfiguration</a></code>
   <a href="#cfn-stepfunctions-statemachine-rolearn">RoleArn</a>: <code class="replaceable">String</code>
@@ -63,11 +66,24 @@ Properties:
                                  <h2 id="aws-resource-stepfunctions-statemachine-properties">Properties</h2>
                                  <div class="variablelist">
                                     <dl>
+                                       <dt><a id="cfn-stepfunctions-statemachine-definition"></a><span class="term"><code class="code">Definition</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon States Language definition of the state machine. The state machine definition
+                                             must be in JSON or YAML, and the format of the object must
+                                             match the format of your AWS Step Functions template file. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-stepfunctions-statemachine-definition.html">Definition</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
                                        <dt><a id="cfn-stepfunctions-statemachine-definitions3location"></a><span class="term"><code class="code">DefinitionS3Location</code></span></dt>
                                        <dd>
                                           
                                           <p>The name of the S3 bucket where the state machine definition is stored. The state
-                                             machine definition must be a JSON file.
+                                             machine definition must be a JSON or YAML file.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -78,7 +94,8 @@ Properties:
                                        <dt><a id="cfn-stepfunctions-statemachine-definitionstring"></a><span class="term"><code class="code">DefinitionString</code></span></dt>
                                        <dd> 
                                           
-                                          <p>The Amazon States Language definition of the state machine. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.
+                                          <p>The Amazon States Language definition of the state machine. The state machine definition
+                                             must be in JSON. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.
                                           </p> 
                                           
                                           <p><em>Required</em>: No
@@ -91,18 +108,20 @@ Properties:
                                        <dd>
                                           
                                           <p>A map (string to string) that specifies the mappings for placeholder variables in
-                                             the 
+                                             the
                                              state machine definition. This enables the customer to inject values obtained at runtime,
-                                             for example from intrinsic functions, in the state machine definition.         
-                                             Variables can
-                                             be template parameter names, resource logical IDs, resource attributes, or a variable
+                                             for example from intrinsic functions, in the state machine definition. Variables can
+                                             be
+                                             template parameter names, resource logical IDs, resource attributes, or a variable
                                              in a
-                                             key-value map. 
+                                             key-value map.
+                                             
                                           </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
-                                          <p><em>Type</em>: <a href="./aws-properties-stepfunctions-statemachine-definitionsubstitutions.html">DefinitionSubstitutions</a></p>
+                                          <p><em>Type</em>: Map of String
+                                          </p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-stepfunctions-statemachine-loggingconfiguration"></a><span class="term"><code class="code">LoggingConfiguration</code></span></dt>
@@ -114,9 +133,8 @@ Properties:
                                              <div class="awsdocs-note-title">
                                                 <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                              <div class="awsdocs-note-text">
-                                                <p>By default, the
-                                                   <code class="code">level</code> is set to <code class="code">OFF</code>. For more information see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html">Log
-                                                      Levels</a> in the AWS Step Functions User Guide.
+                                                <p>By default, the <code class="code">level</code> is set to <code class="code">OFF</code>. For more information
+                                                   see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html">Log Levels</a> in the AWS Step Functions User Guide.
                                                 </p>
                                              </div>
                                           </div>
@@ -396,32 +414,31 @@ Resources:
           Key: &quot;keyname2&quot;
           Value: &quot;value2&quot;</code></pre></div>
                                  <h3 id="aws-resource-stepfunctions-statemachine--examples--Using_DefinitionSubstitutions">Using DefinitionSubstitutions</h3>
-                                 <p>In this example template, <code class="code">HelloFunction:</code> is defined 
-                                    for the <code class="code">DefinitionSubstitutions</code> property.
-                                    In the <code class="code">hello_world.json</code>
-                                    definition file, that follows<code class="code">$<span>{</span>HelloFunction}</code> will be replaced by 
+                                 <p>In this example template, <code class="code">HelloFunction:</code> is defined for the
+                                    <code class="code">DefinitionSubstitutions</code> property. In the
+                                    <code class="code">hello_world.json</code> definition file, that
+                                    follows<code class="code">$<span>{</span>HelloFunction}</code> will be replaced by
                                     <code class="code">arn:aws:lambda:us-east-1:111122223333:function:HelloFunction</code>.
                                  </p>
                                  <div id="YAML" name="YAML" class="section langfilter">
                                     <h4 id="aws-resource-stepfunctions-statemachine--examples--Using_DefinitionSubstitutions--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">AWSTemplateFormatVersion: &quot;2010-09-09&quot;
 Description: An example template for a Step Functions state machine.
-  Resources:
-    MyStateMachine:
-      Type: AWS::StepFunctions::StateMachine
-      Properties:
-        StateMachineName: HelloWorld-StateMachine
-        DefinitionS3Location:
-          Bucket: example_bucket
-          Key: hello_world.json
-        DefinitionSubstitutions:
-          HelloFunction: arn:aws:lambda:us-east-1:111122223333:function:HelloFunction
-        RoleArn: arn:aws:iam::111122223333:role/service-role/StatesExecutionRole-us-east-1
+Resources:
+  MyStateMachine:
+    Type: AWS::StepFunctions::StateMachine
+    Properties:
+      StateMachineName: HelloWorld-StateMachine
+      DefinitionS3Location:
+        Bucket: example_bucket
+        Key: hello_world.json
+      DefinitionSubstitutions:
+        HelloFunction: arn:aws:lambda:us-east-1:111122223333:function:HelloFunction
+      RoleArn: arn:aws:iam::111122223333:role/service-role/StatesExecutionRole-us-east-1
          </code></pre></div>
                                  <h3 id="aws-resource-stepfunctions-statemachine--examples--hello_world.json">hello_world.json</h3>
-                                 <p>
-                                    A definition file where <code class="code">$<span>{</span>HelloFunction}</code> will be replaced by 
-                                    <code class="code">arn:aws:lambda:us-east-1:111122223333:function:HelloFunction</code>.
-                                    from the preceding example template.
+                                 <p> A definition file where <code class="code">$<span>{</span>HelloFunction}</code> will be replaced by
+                                    <code class="code">arn:aws:lambda:us-east-1:111122223333:function:HelloFunction</code>. from
+                                    the preceding example template.
                                  </p>
                                  <div id="JSON" name="JSON" class="section langfilter">
                                     <h4 id="aws-resource-stepfunctions-statemachine--examples--hello_world.json--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
@@ -444,7 +461,7 @@ Description: An example template for a Step Functions state machine.
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

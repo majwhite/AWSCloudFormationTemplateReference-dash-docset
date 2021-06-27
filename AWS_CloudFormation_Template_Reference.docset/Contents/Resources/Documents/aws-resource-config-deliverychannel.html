@@ -20,9 +20,8 @@
                                     			information to an Amazon S3 bucket and Amazon SNS topic.
                                  </p>
                                  <p>Before you can create a delivery channel, you must create a
-                                    			configuration recorder.
-                                 </p>
-                                 <p>You can use this action to change the Amazon S3 bucket or an
+                                    			configuration recorder. You can use this action to change the Amazon S3 bucket
+                                    or an
                                     			Amazon SNS topic of the existing delivery channel. To change the
                                     			Amazon S3 bucket or an Amazon SNS topic, call this action and
                                     			specify the changed values for the S3 bucket and the SNS topic. If
@@ -30,12 +29,16 @@
                                     			topic, this action will keep the existing value for the parameter
                                     			that is not changed.
                                  </p>
+                                 <p>You can have only one delivery channel per region per AWS account, and the delivery
+                                    channel is required to use AWS Config.
+                                 </p>
                                  <div class="awsdocs-note">
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                     <div class="awsdocs-note-text">
-                                       <p>You can have only one delivery channel per region in your
-                                          				account.
+                                       <p>AWS Config does not support the delivery channel to an Amazon S3 bucket bucket where
+                                          object lock is enabled.
+                                          For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-overview.html">How S3 Object Lock works</a>.
                                        </p>
                                     </div>
                                  </div>
@@ -76,6 +79,7 @@
       &quot;<a href="#cfn-config-deliverychannel-name">Name</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-config-deliverychannel-s3bucketname">S3BucketName</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-config-deliverychannel-s3keyprefix">S3KeyPrefix</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-config-deliverychannel-s3kmskeyarn">S3KmsKeyArn</a>&quot; : <code class="replaceable">String</code>,
       &quot;<a href="#cfn-config-deliverychannel-snstopicarn">SnsTopicARN</a>&quot; : <code class="replaceable">String</code>
     }
 }
@@ -88,6 +92,7 @@ Properties:
   <a href="#cfn-config-deliverychannel-name">Name</a>: <code class="replaceable">String</code>
   <a href="#cfn-config-deliverychannel-s3bucketname">S3BucketName</a>: <code class="replaceable">String</code>
   <a href="#cfn-config-deliverychannel-s3keyprefix">S3KeyPrefix</a>: <code class="replaceable">String</code>
+  <a href="#cfn-config-deliverychannel-s3kmskeyarn">S3KmsKeyArn</a>: <code class="replaceable">String</code>
   <a href="#cfn-config-deliverychannel-snstopicarn">SnsTopicARN</a>: <code class="replaceable">String</code>
 </code></pre></div>
                                  <h2 id="aws-resource-config-deliverychannel-properties">Properties</h2>
@@ -135,8 +140,8 @@ Properties:
                                           </p>
                                           		       
                                           <p>If you specify a bucket that belongs to another AWS account,
-                                             			that bucket must have policies that grant access permissions to AWS
-                                             			Config. For more information, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html">Permissions for the Amazon S3 Bucket</a> in the AWS Config
+                                             			that bucket must have policies that grant access permissions to AWS Config. For
+                                             more information, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html">Permissions for the Amazon S3 Bucket</a> in the AWS Config
                                              			Developer Guide.
                                           </p>
                                           	     
@@ -150,6 +155,20 @@ Properties:
                                        <dd>
                                           		       
                                           <p>The prefix for the specified Amazon S3 bucket.</p>
+                                          	     
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-config-deliverychannel-s3kmskeyarn"></a><span class="term"><code class="code">S3KmsKeyArn</code></span></dt>
+                                       <dd>
+                                          		       
+                                          <p>The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) customer managed
+                                             key (CMK) used to encrypt objects delivered by AWS Config.
+                                             			Must belong to the same Region as the destination S3 bucket.
+                                          </p>
                                           	     
                                           <p><em>Required</em>: No
                                           </p>
@@ -225,7 +244,7 @@ Properties:
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

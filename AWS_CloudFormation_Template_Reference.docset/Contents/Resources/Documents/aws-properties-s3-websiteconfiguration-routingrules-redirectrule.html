@@ -91,6 +91,18 @@
                                              only if <code class="code">ReplaceKeyWith</code> is not provided.
                                           </p>
                                           
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>Replacement must be made for object keys containing special characters (such as carriage
+                                                   returns) when using 
+                                                   XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
+                                                      XML related object key constraints</a>.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -106,6 +118,18 @@
                                              only if <code class="code">ReplaceKeyPrefixWith</code> is not provided.
                                           </p>
                                           
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>Replacement must be made for object keys containing special characters (such as carriage
+                                                   returns) when using 
+                                                   XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
+                                                      XML related object key constraints</a>.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
@@ -114,19 +138,116 @@
                                        </dd>
                                     </dl>
                                  </div>
-                                 <h2 id="aws-properties-s3-websiteconfiguration-routingrules-redirectrule--seealso">See also</h2>
-                                 <div class="itemizedlist">
-                                     
-                                    
-                                    <ul class="itemizedlist" type="disc">
-                                       <li class="listitem">
-                                          
-                                          <p>AWS::S3::Bucket <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html#aws-properties-s3-bucket--examples">Examples</a></p>
-                                          
-                                       </li>
-                                    </ul>
-                                 </div>
+                                 <h2 id="aws-properties-s3-websiteconfiguration-routingrules-redirectrule--examples">Examples</h2>
                                  <p></p>
+                                 <h3 id="aws-properties-s3-websiteconfiguration-routingrules-redirectrule--examples--Configure_a_static_website_with_a_routing_rule">Configure a static website with a routing rule</h3>
+                                 <p>In this example, <code class="code">AWS::S3::Bucket&apos;s Fn::GetAtt</code> values are used to provide
+                                    outputs. If an HTTP 404 error occurs, the routing rule redirects requests to an EC2
+                                    instance and inserts the object key prefix <code class="code">report-404/</code> in the redirect. For
+                                    example, if you request a page called <code class="code">ExamplePage.html</code> and it results in an
+                                    HTTP 404 error, the request is routed to a page called
+                                    <code class="code">report-404/ExamplePage.html</code> on the specified instance. For all other HTTP
+                                    error codes, <code class="code">error.html</code> is returned. 
+                                 </p>
+                                 <p>This example also specifies a metrics configuration called <code class="code">EntireBucket</code>
+                                    that enables CloudWatch request metrics at the bucket level.
+                                 </p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h4 id="aws-properties-s3-websiteconfiguration-routingrules-redirectrule--examples--Configure_a_static_website_with_a_routing_rule--json">JSON</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+    &quot;Resources&quot;: <span>{</span>
+        &quot;S3Bucket&quot;: <span>{</span>
+            &quot;Type&quot;: &quot;AWS::S3::Bucket&quot;,
+            &quot;Properties&quot;: <span>{</span>
+                &quot;AccessControl&quot;: &quot;PublicRead&quot;,
+                &quot;BucketName&quot;: &quot;public-bucket&quot;,
+                &quot;MetricsConfigurations&quot;: [
+                    <span>{</span>
+                        &quot;Id&quot;: &quot;EntireBucket&quot;
+                    }
+                ],
+                &quot;WebsiteConfiguration&quot;: <span>{</span>
+                    &quot;IndexDocument&quot;: &quot;index.html&quot;,
+                    &quot;ErrorDocument&quot;: &quot;error.html&quot;,
+                    &quot;RoutingRules&quot;: [
+                        <span>{</span>
+                            &quot;RoutingRuleCondition&quot;: <span>{</span>
+                                &quot;HttpErrorCodeReturnedEquals&quot;: &quot;404&quot;,
+                                &quot;KeyPrefixEquals&quot;: &quot;out1/&quot;
+                            },
+                            &quot;RedirectRule&quot;: <span>{</span>
+                                &quot;HostName&quot;: &quot;ec2-11-22-333-44.compute-1.amazonaws.com&quot;,
+                                &quot;ReplaceKeyPrefixWith&quot;: &quot;report-404/&quot;
+                            }
+                        }
+                    ]
+                }
+            },
+            &quot;DeletionPolicy&quot;: &quot;Retain&quot;
+        }
+    },
+    &quot;Outputs&quot;: <span>{</span>
+        &quot;WebsiteURL&quot;: <span>{</span>
+            &quot;Value&quot;: <span>{</span>
+                &quot;Fn::GetAtt&quot;: [
+                    &quot;S3Bucket&quot;,
+                    &quot;WebsiteURL&quot;
+                ]
+            },
+            &quot;Description&quot;: &quot;URL for website hosted on S3&quot;
+        },
+        &quot;S3BucketSecureURL&quot;: <span>{</span>
+            &quot;Value&quot;: <span>{</span>
+                &quot;Fn::Join&quot;: [
+                    &quot;&quot;,
+                    [
+                        &quot;https://&quot;,
+                        <span>{</span>
+                            &quot;Fn::GetAtt&quot;: [
+                                &quot;S3Bucket&quot;,
+                                &quot;DomainName&quot;
+                            ]
+                        }
+                    ]
+                ]
+            },
+            &quot;Description&quot;: &quot;Name of S3 bucket to hold website content&quot;
+        }
+    }
+}</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-s3-websiteconfiguration-routingrules-redirectrule--examples--Configure_a_static_website_with_a_routing_rule--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  S3Bucket:
+    Type: &apos;AWS::S3::Bucket&apos;
+    Properties:
+      AccessControl: PublicRead
+      BucketName: public-bucket
+      MetricsConfigurations:
+        - Id: EntireBucket
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+        RoutingRules:
+          - RoutingRuleCondition:
+              HttpErrorCodeReturnedEquals: &apos;404&apos;
+              KeyPrefixEquals: out1/
+            RedirectRule:
+              HostName: ec2-11-22-333-44.compute-1.amazonaws.com
+              ReplaceKeyPrefixWith: report-404/
+    DeletionPolicy: Retain
+Outputs:
+  WebsiteURL:
+    Value: !GetAtt
+      - S3Bucket
+      - WebsiteURL
+    Description: URL for website hosted on S3
+  S3BucketSecureURL:
+    Value: !Join
+      - &apos;&apos;
+      - - &apos;https://&apos;
+        - !GetAtt
+          - S3Bucket
+          - DomainName
+    Description: Name of S3 bucket to hold website content</code></pre></div>
                                  <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
                                  <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
                               </div>
@@ -137,7 +258,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

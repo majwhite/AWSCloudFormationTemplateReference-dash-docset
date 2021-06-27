@@ -49,9 +49,10 @@
                                                    <p>
                                                       <code class="code">deregistration_delay.timeout_seconds</code> - The amount of time, in seconds,
                                                       for Elastic Load Balancing to wait before changing the state of a deregistering target
-                                                      from
-                                                      <code class="code">draining</code> to <code class="code">unused</code>. The range is 0-3600 seconds. The default
-                                                      value is 300 seconds. If the target is a Lambda function, this attribute is not supported.
+                                                      from <code class="code">draining</code> to <code class="code">unused</code>. The range is 0-3600 seconds. The
+                                                      default value is 300 seconds. If the target is a Lambda function, this attribute is
+                                                      not
+                                                      supported.
                                                    </p>
                                                    
                                                 </li>
@@ -60,7 +61,8 @@
                                           
                                           
                                           <p>The following attributes are supported by both Application Load Balancers and Network
-                                             Load Balancers:
+                                             Load
+                                             Balancers:
                                           </p>
                                           
                                           <div class="itemizedlist">
@@ -71,17 +73,18 @@
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">stickiness.enabled</code> - Indicates whether sticky sessions are enabled. 
-                                                      The value is <code class="code">true</code> or <code class="code">false</code>. The default is <code class="code">false</code>.
+                                                      <code class="code">stickiness.enabled</code> - Indicates whether sticky sessions are enabled. The
+                                                      value is <code class="code">true</code> or <code class="code">false</code>. The default is
+                                                      <code class="code">false</code>.
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">stickiness.type</code> - The type of sticky sessions. The possible values are  
-                                                      <code class="code">lb_cookie</code> for Application Load Balancers or <code class="code">source_ip</code> for
-                                                      Network Load Balancers.
+                                                      <code class="code">stickiness.type</code> - The type of sticky sessions. The possible values are
+                                                      <code class="code">lb_cookie</code> and <code class="code">app_cookie</code> for Application Load Balancers or
+                                                      <code class="code">source_ip</code> for Network Load Balancers.
                                                    </p>
                                                    
                                                 </li>
@@ -90,11 +93,13 @@
                                           
                                           
                                           <p>The following attributes are supported only if the load balancer is an Application
-                                             Load Balancer
-                                             and the target is an instance or an IP address:
+                                             Load
+                                             Balancer and the target is an instance or an IP address:
                                           </p>
                                           
                                           <div class="itemizedlist">
+                                              
+                                              
                                               
                                               
                                               
@@ -104,31 +109,55 @@
                                                    
                                                    <p>
                                                       <code class="code">load_balancing.algorithm.type</code> - The load balancing algorithm determines
-                                                      how the load balancer selects targets when routing requests. The value is <code class="code">round_robin</code> 
-                                                      or <code class="code">least_outstanding_requests</code>. The default is <code class="code">round_robin</code>.
+                                                      how the load balancer selects targets when routing requests. The value is
+                                                      <code class="code">round_robin</code> or <code class="code">least_outstanding_requests</code>. The default is
+                                                      <code class="code">round_robin</code>.
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">slow_start.duration_seconds</code> - The time period, in seconds, during which a 
+                                                      <code class="code">slow_start.duration_seconds</code> - The time period, in seconds, during which a
                                                       newly registered target receives an increasing share of the traffic to the target
-                                                      group. 
-                                                      After this time period ends, the target receives its full share of traffic. 
-                                                      The range is 30-900 seconds (15 minutes). The default is 0 seconds (disabled).
+                                                      group.
+                                                      After this time period ends, the target receives its full share of traffic. The range
+                                                      is
+                                                      30-900 seconds (15 minutes). The default is 0 seconds (disabled).
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">stickiness.lb_cookie.duration_seconds</code> - The time period, in seconds, during which 
-                                                      requests from a client should be routed to the same target. After this time period
-                                                      expires, the load 
-                                                      balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800
-                                                      seconds). The 
-                                                      default value is 1 day (86400 seconds).
+                                                      <code class="code">stickiness.app_cookie.cookie_name</code> - Indicates the name of the
+                                                      application-based cookie. Names that start with the following prefixes are not allowed:
+                                                      <code class="code">AWSALB</code>, <code class="code">AWSALBAPP</code>, and <code class="code">AWSALBTG</code>; they&apos;re reserved
+                                                      for use by the load balancer.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">stickiness.app_cookie.duration_seconds</code> - The time period, in seconds,
+                                                      during which requests from a client should be routed to the same target. After this
+                                                      time
+                                                      period expires, the application-based cookie is considered stale. The range is 1 second
+                                                      to
+                                                      1 week (604800 seconds). The default value is 1 day (86400 seconds).
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">stickiness.lb_cookie.duration_seconds</code> - The time period, in seconds,
+                                                      during which requests from a client should be routed to the same target. After this
+                                                      time
+                                                      period expires, the load balancer-generated cookie is considered stale. The range
+                                                      is 1
+                                                      second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).
                                                    </p>
                                                    
                                                 </li>
@@ -137,8 +166,7 @@
                                           
                                           
                                           <p>The following attribute is supported only if the load balancer is an Application Load
-                                             Balancer 
-                                             and the target is a Lambda function:
+                                             Balancer and the target is a Lambda function:
                                           </p>
                                           
                                           <div class="itemizedlist">
@@ -150,11 +178,11 @@
                                                    <p>
                                                       <code class="code">lambda.multi_value_headers.enabled</code> - Indicates whether the request and
                                                       response headers that are exchanged between the load balancer and the Lambda function
-                                                      include
-                                                      arrays of values or strings. The value is <code class="code">true</code> or <code class="code">false</code>. The
-                                                      default is <code class="code">false</code>. If the value is <code class="code">false</code> and the request contains
-                                                      a duplicate header field name or query parameter key, the load balancer uses the last
-                                                      value sent by the client.
+                                                      include arrays of values or strings. The value is <code class="code">true</code> or <code class="code">false</code>.
+                                                      The default is <code class="code">false</code>. If the value is <code class="code">false</code> and the request
+                                                      contains a duplicate header field name or query parameter key, the load balancer uses
+                                                      the
+                                                      last value sent by the client.
                                                    </p>
                                                    
                                                 </li>
@@ -167,23 +195,38 @@
                                           <div class="itemizedlist">
                                               
                                               
+                                              
                                              
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">deregistration_delay.connection_termination.enabled</code> - Indicates whether 
+                                                      <code class="code">deregistration_delay.connection_termination.enabled</code> - Indicates whether
                                                       the load balancer terminates connections at the end of the deregistration timeout.
-                                                      The value is 
-                                                      <code class="code">true</code> or <code class="code">false</code>. The default is <code class="code">false</code>.
+                                                      The
+                                                      value is <code class="code">true</code> or <code class="code">false</code>. The default is
+                                                      <code class="code">false</code>.
                                                    </p>
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
                                                    <p>
-                                                      <code class="code">proxy_protocol_v2.enabled</code> - Indicates whether Proxy Protocol version 2 is enabled.
-                                                      The value is <code class="code">true</code> or <code class="code">false</code>. The default is <code class="code">false</code>.
+                                                      <code class="code">preserve_client_ip.enabled</code> - Indicates whether client IP preservation is
+                                                      enabled. The value is <code class="code">true</code> or <code class="code">false</code>. The default is disabled if
+                                                      the target group type is IP address and the target group protocol is TCP or TLS.
+                                                      Otherwise, the default is enabled. Client IP preservation cannot be disabled for UDP
+                                                      and
+                                                      TCP_UDP target groups.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">proxy_protocol_v2.enabled</code> - Indicates whether Proxy Protocol version 2 is
+                                                      enabled. The value is <code class="code">true</code> or <code class="code">false</code>. The default is
+                                                      <code class="code">false</code>.
                                                    </p>
                                                    
                                                 </li>
@@ -221,7 +264,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

@@ -16,23 +16,23 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>Contains information about the event destination that email sending events are
-                                    published to. Event destinations are associated with configuration sets. When you
-                                    specify an event destination, you provide one, and only one, destination. You can
-                                    send
-                                    event data to Amazon CloudWatch or Amazon Kinesis Data Firehose. For more information
-                                    about using configuration sets, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer
-                                       Guide</a>.
-                                 </p>
+                                 <p>Contains information about an event destination.</p>
                                  <div class="awsdocs-note">
                                     <div class="awsdocs-note-title">
                                        <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
                                     <div class="awsdocs-note-text">
-                                       <p>You can&apos;t specify Amazon SNS event destinations in CloudFormation
-                                          templates.
+                                       <p>When you create or update an event destination, you must provide one, and only
+                                          one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis Firehose
+                                          or Amazon Simple Notification Service (Amazon SNS).
                                        </p>
                                     </div>
                                  </div>
+                                 <p>Event destinations are associated with configuration sets, which enable you to publish
+                                    email sending events to Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple
+                                    Notification Service (Amazon SNS). For information about
+                                    using configuration sets, see the <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer
+                                       Guide</a>.
+                                 </p>
                                  <h2 id="aws-properties-ses-configurationseteventdestination-eventdestination-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
                                  <div id="JSON" name="JSON" class="section langfilter">
@@ -89,7 +89,7 @@
                                        <dd>
                                           
                                           <p>An object that contains the delivery stream ARN and the IAM role ARN associated with
-                                             an Amazon Kinesis Data Firehose event destination.
+                                             an Amazon Kinesis Firehose event destination.
                                           </p>
                                           
                                           <p><em>Required</em>: No
@@ -102,6 +102,77 @@
                                           
                                           <p>The type of email sending events to publish to the event destination.</p>
                                           
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">send</code> - The call was successful and Amazon SES is attempting to deliver the email.
+                                                   </p> 
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">reject</code> - Amazon SES determined that the email contained a virus and rejected it.
+                                                   </p> 
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">bounce</code> - The recipient&apos;s mail server permanently rejected the email. This corresponds to
+                                                      a hard bounce.
+                                                   </p> 
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">complaint</code> - The recipient marked the email as spam.
+                                                   </p> 
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">delivery</code> - Amazon SES successfully delivered the email to the recipient&apos;s mail server.
+                                                   </p> 
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">open</code> - The recipient received the email and opened it in their email client.
+                                                   </p> 
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">click</code> - The recipient clicked one or more links in the email.
+                                                   </p> 
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">renderingFailure</code> - Amazon SES did not send the email because of a template rendering issue.
+                                                   </p> 
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
                                           <p><em>Required</em>: Yes
                                           </p>
                                           <p><em>Type</em>: List of String
@@ -111,7 +182,7 @@
                                        <dt><a id="cfn-ses-configurationseteventdestination-eventdestination-name"></a><span class="term"><code class="code">Name</code></span></dt>
                                        <dd>
                                           
-                                          <p>The name of the event destination. The name must:</p>
+                                          <p>The name of the event destination. The name must meet the following requirements:</p>
                                           
                                           <div class="itemizedlist">
                                               
@@ -120,16 +191,14 @@
                                              <ul class="itemizedlist" type="disc">
                                                 <li class="listitem">
                                                    
-                                                   
-                                                   <p>This value can only contain ASCII letters (a&#x2013;z, A&#x2013;Z), numbers (0&#x2013;9),
+                                                   <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9),
                                                       underscores (_), or dashes (-).
                                                    </p>
-                                                   
                                                    
                                                 </li>
                                                 <li class="listitem">
                                                    
-                                                   <p>Contain fewer than 64 characters.</p>
+                                                   <p>Contain 64 characters or fewer.</p>
                                                    
                                                 </li>
                                              </ul>
@@ -153,7 +222,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>

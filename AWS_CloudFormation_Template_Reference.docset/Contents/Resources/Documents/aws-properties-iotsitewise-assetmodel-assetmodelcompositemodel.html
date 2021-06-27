@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-properties-iotsitewise-assetmodel-assetmodelcompositemodel">AWS::IoTSiteWise::AssetModel AssetModelCompositeModel</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>Contains information about a composite model in an asset model. This object contains
+                                    the
+                                    asset property definitions that you define in the composite model. You can use composite
+                                    asset
+                                    models to define alarms on this asset model.
+                                 </p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>The alarms feature is in preview release for AWS IoT SiteWise, AWS IoT Events, and
+                                          SiteWise Monitor, 
+                                          and is subject to change. We recommend that you use this feature only with test data,
+                                          
+                                          and not in production environments. For more information, 
+                                          see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/industrial-alarms.html">Monitoring data with alarms</a> 
+                                          in the <em>AWS IoT SiteWise User Guide</em>.
+                                       </p>
+                                    </div>
+                                 </div>
+                                 <p>If you use the <code class="code">AssetModelCompositeModel</code> property to create an alarm, you must use the following information to define three
+                                    asset model properties:
+                                 </p>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p>Use an asset model property to specify the alarm type.</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>The name must be <code class="code">AWS/ALARM_TYPE</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>The data type must be <code class="code">STRING</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>For the <code class="code">Type</code> property, the type name must be <code class="code">Attribute</code> and the default value must be <code class="code">IOT_EVENTS</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>Use an asset model property to specify the alarm source.</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>The name must be <code class="code">AWS/ALARM_SOURCE</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>The data type must be <code class="code">STRING</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>For the <code class="code">Type</code> property, the type name must be <code class="code">Attribute</code> and the default value must be the ARN of the alarm model 
+                                                      that you created in AWS IoT Events.
+                                                   </p>
+                                                   
+                                                   <div class="awsdocs-note">
+                                                      <div class="awsdocs-note-title">
+                                                         <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                                      <div class="awsdocs-note-text">
+                                                         <p>For the ARN of the alarm model, you can use the <code class="code">Fn::Sub</code> intrinsic function to substitute the <code class="code">AWS::Partition</code>, 
+                                                            <code class="code">AWS::Region</code>, and <code class="code">AWS::AccountId</code> variables in an input string with values that you specify. 
+                                                         </p>
+                                                         <p>For example, <code class="code">Fn::Sub: &quot;arn:$<span>{</span>AWS::Partition}:iotevents:$<span>{</span>AWS::Region}:$<span>{</span>AWS::AccountId}:alarmModel/TestAlarmModel&quot;</code>.
+                                                         </p>
+                                                         <p>Replace <code class="code">TestAlarmModel</code> with the name of your alarm model.
+                                                         </p>
+                                                         <p>For more information about using the <code class="code">Fn::Sub</code> intrinsic function, 
+                                                            see <a href="intrinsic-function-reference-sub.html">Fn::Sub</a>.
+                                                         </p>
+                                                      </div>
+                                                   </div>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>Use an asset model property to specify the state of the alarm.</p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>The name must be <code class="code">AWS/ALARM_STATE</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>The data type must be <code class="code">STRUCT</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>The <code class="code">DataTypeSpec</code> value must be <code class="code">AWS/ALARM_STATE</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>For the <code class="code">Type</code> property, the type name must be <code class="code">Measurement</code>.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <p>At the bottom of this page, we provide a YAML example that you can modify to create
+                                    an alarm.
+                                 </p>
+                                 <h2 id="aws-properties-iotsitewise-assetmodel-assetmodelcompositemodel-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-properties-iotsitewise-assetmodel-assetmodelcompositemodel-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;<a href="#cfn-iotsitewise-assetmodel-assetmodelcompositemodel-compositemodelproperties">CompositeModelProperties</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-iotsitewise-assetmodel-assetmodelproperty.html">AssetModelProperty</a>, ... ]</code>,
+  &quot;<a href="#cfn-iotsitewise-assetmodel-assetmodelcompositemodel-description">Description</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-iotsitewise-assetmodel-assetmodelcompositemodel-name">Name</a>&quot; : <code class="replaceable">String</code>,
+  &quot;<a href="#cfn-iotsitewise-assetmodel-assetmodelcompositemodel-type">Type</a>&quot; : <code class="replaceable">String</code>
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-properties-iotsitewise-assetmodel-assetmodelcompositemodel-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">  <a href="#cfn-iotsitewise-assetmodel-assetmodelcompositemodel-compositemodelproperties">CompositeModelProperties</a>: <code class="replaceable">
+    - <a href="./aws-properties-iotsitewise-assetmodel-assetmodelproperty.html">AssetModelProperty</a></code>
+  <a href="#cfn-iotsitewise-assetmodel-assetmodelcompositemodel-description">Description</a>: <code class="replaceable">String</code>
+  <a href="#cfn-iotsitewise-assetmodel-assetmodelcompositemodel-name">Name</a>: <code class="replaceable">String</code>
+  <a href="#cfn-iotsitewise-assetmodel-assetmodelcompositemodel-type">Type</a>: <code class="replaceable">String</code>
+</code></pre></div>
+                                 <h2 id="aws-properties-iotsitewise-assetmodel-assetmodelcompositemodel-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-iotsitewise-assetmodel-assetmodelcompositemodel-compositemodelproperties"></a><span class="term"><code class="code">CompositeModelProperties</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The asset property definitions for this composite model.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-iotsitewise-assetmodel-assetmodelproperty.html">AssetModelProperty</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-iotsitewise-assetmodel-assetmodelcompositemodel-description"></a><span class="term"><code class="code">Description</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The description of the composite model.</p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-iotsitewise-assetmodel-assetmodelcompositemodel-name"></a><span class="term"><code class="code">Name</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The name of the composite model.</p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-iotsitewise-assetmodel-assetmodelcompositemodel-type"></a><span class="term"><code class="code">Type</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The type of the composite model. For alarm composite models, this type is
+                                             <code class="code">AWS/ALARM</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-properties-iotsitewise-assetmodel-assetmodelcompositemodel--examples">Examples</h2>
+                                 <p></p>
+                                 <h3 id="aws-properties-iotsitewise-assetmodel-assetmodelcompositemodel--examples--Create_an_alarm_model">Create an alarm model</h3>
+                                 <p>You can modify the following example to create an alarm model.</p>
+                                 <div class="awsdocs-note">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>Replace <code class="code">TestAlarmModel</code> with the name of your alarm model.
+                                       </p>
+                                    </div>
+                                 </div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h4 id="aws-properties-iotsitewise-assetmodel-assetmodelcompositemodel--examples--Create_an_alarm_model--yaml">YAML</h4><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Resources:
+  AssetModelWithAlarmCompositeModel:
+    Type: AWS::IoTSiteWise::AssetModel
+    Properties:
+      AssetModelName: AssetModelWithValidAlarmCompositeModel
+      AssetModelDescription: AssetModelWithValidAlarmCompositeModel
+      AssetModelCompositeModels:
+        - Description: compositeModel created by cfn
+          Name: TestAlarmCompositeModel
+          Type: AWS/ALARM
+          CompositeModelProperties:
+            - LogicalId: MyLogicalId_for_ALARM_TYPE_1
+              Name: AWS/ALARM_TYPE
+              DataType: STRING
+              Type:
+                TypeName: Attribute
+                Attribute:
+                  DefaultValue: IOT_EVENTS
+            - LogicalId: MyLogicalId_for_ALARM_SOURCE_1
+              Name: AWS/ALARM_SOURCE
+              DataType: STRING
+              Type:
+                TypeName: Attribute
+                Attribute:
+                DefaultValue:
+                  Fn::Sub: &quot;arn:$<span>{</span>AWS::Partition}:iotevents:$<span>{</span>AWS::Region}:$<span>{</span>AWS::AccountId}:alarmModel/TestAlarmModel&quot;
+            - LogicalId: MyLogicalId_for_ALARM_STATE_1
+              Name: AWS/ALARM_STATE
+              DataType: STRUCT
+              DataTypeSpec: AWS/ALARM_STATE
+              Type:
+                TypeName: Measurement</code></pre></div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

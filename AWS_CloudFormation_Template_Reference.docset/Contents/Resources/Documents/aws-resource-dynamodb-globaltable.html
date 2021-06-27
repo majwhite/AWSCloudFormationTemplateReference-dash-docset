@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/awsdocs.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/awsdocs.min.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="content" style="padding: 10px 30px;">
+    <div id="main-content" class="awsui-util-container">
+                              <div id="main-col-body">
+                                 <awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner>
+                                 <h1 class="topictitle" id="aws-resource-dynamodb-globaltable">AWS::DynamoDB::GlobalTable</h1>
+                                 <div class="awsdocs-page-header-container">
+                                    <awsdocs-page-header></awsdocs-page-header>
+                                    <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
+                                 </div>
+                                 <p>The <code class="code">AWS::DynamoDB::GlobalTable</code> resource enables you to create and manage
+                                    a Version 2019.11.21 global table. This resource cannot be used to create or manage
+                                    a
+                                    Version 2017.11.29 global table.
+                                 </p>
+                                 <div class="awsdocs-note awsdocs-important">
+                                    <div class="awsdocs-note-title">
+                                       <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                    <div class="awsdocs-note-text">
+                                       <p>You cannot convert a resource of type <code class="code">AWS::DynamoDB::Table</code> into a
+                                          resource of type <code class="code">AWS::DynamoDB::GlobalTable</code> by changing its type in
+                                          your template. <b>Doing so might result in the deletion of your
+                                             DynamoDB table.</b></p>
+                                    </div>
+                                 </div>
+                                 <p>You should be aware of the following behaviors when working with DynamoDB global
+                                    tables.
+                                 </p>
+                                 <div class="itemizedlist">
+                                     
+                                     
+                                     
+                                     
+                                    
+                                    <ul class="itemizedlist" type="disc">
+                                       <li class="listitem">
+                                          
+                                          <p>The IAM Principal executing the stack operation must have the permissions
+                                             listed below in all regions where you plan to have a global table replica. The
+                                             IAM Principal&apos;s permissions should not have restrictions based on IP source
+                                             address. Some global tables operations (for example, adding a replica) are
+                                             asynchronous, and require that the IAM Principal is valid until they complete.
+                                             You should not delete the Principal (user or IAM role) until CloudFormation has
+                                             finished updating your stack.
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:CreateTable</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:UpdateTable</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:DeleteTable</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:DescribeContinuousBackups</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:DescribeContributorInsights</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:DescribeTable</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:DescribeTableReplicaAutoScaling</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:DescribeTimeToLive</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:ListTables</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:UpdateTimeToLive</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:UpdateContributorInsights</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:UpdateContinuousBackups</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:ListTagsOfResource</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:TagResource</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:UntagResource</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:BatchWriteItem</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:CreateTableReplica</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:DeleteItem</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:DeleteTableReplica</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:DisableKinesisStreamingDestination</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:EnableKinesisStreamingDestination</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:GetItem</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:PutItem</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:Query</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:Scan</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:UpdateItem</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:DescribeTableReplicaAutoScaling</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">dynamodb:UpdateTableReplicaAutoScaling</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">iam:CreateServiceLinkedRole</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">kms:CreateGrant</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">kms:DescribeKey</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">application-autoscaling:DeleteScalingPolicy</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">application-autoscaling:DeleteScheduledAction</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">application-autoscaling:DeregisterScalableTarget</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">application-autoscaling:DescribeScalingPolicies</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">application-autoscaling:DescribeScalableTargets</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">application-autoscaling:PutScalingPolicy</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">application-autoscaling:PutScheduledAction</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">application-autoscaling:RegisterScalableTarget</code></p>
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>When using provisioned billing mode, CloudFormation will create an auto
+                                             scaling policy on each of your replicas to control their write capacities. You
+                                             must configure this policy using the
+                                             <code class="code">WriteProvisionedThroughputSettings</code> property. CloudFormation
+                                             will ensure that all replicas have the same write capacity auto scaling
+                                             property. You cannot directly specify a value for write capacity for a global
+                                             table.
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>If your table uses provisioned capacity, you must configure auto scaling
+                                             directly in the <code class="code">AWS::DynamoDB::GlobalTable</code> resource. You should not
+                                             configure additional auto scaling policies on any of the table replicas or
+                                             global secondary indexes, either via API or via
+                                             <code class="code">AWS::ApplicationAutoScaling::ScalableTarget</code> or
+                                             <code class="code">AWS::ApplicationAutoScaling::ScalingPolicy</code>. Doing so might
+                                             result in unexpected behavior and is unsupported.
+                                          </p>
+                                          
+                                       </li>
+                                       <li class="listitem">
+                                          
+                                          <p>In AWS CloudFormation, each global table is controlled by a single stack, in a
+                                             single region, regardless of the number of replicas. When you deploy your
+                                             template, CloudFormation will create/update all replicas as part of a single
+                                             stack operation. You should not deploy the same
+                                             <code class="code">AWS::DynamoDB::GlobalTable</code> resource in multiple regions. Doing
+                                             so will result in errors, and is unsupported. If you deploy your application
+                                             template in multiple regions, you can use conditions to only create the resource
+                                             in a single region. Alternatively, you can choose to define your
+                                             <code class="code">AWS::DynamoDB::GlobalTable</code> resources in a stack separate from
+                                             your application stack, and make sure it is only deployed to a single
+                                             region.
+                                          </p>
+                                          
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <h2 id="aws-resource-dynamodb-globaltable-syntax">Syntax</h2>
+                                 <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
+                                 <div id="JSON" name="JSON" class="section langfilter">
+                                    <h3 id="aws-resource-dynamodb-globaltable-syntax.json">JSON</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="json "><span>{</span>
+  &quot;Type&quot; : &quot;AWS::DynamoDB::GlobalTable&quot;,
+  &quot;Properties&quot; : <span>{</span>
+      &quot;<a href="#cfn-dynamodb-globaltable-attributedefinitions">AttributeDefinitions</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-dynamodb-globaltable-attributedefinition.html">AttributeDefinition</a>, ... ]</code>,
+      &quot;<a href="#cfn-dynamodb-globaltable-billingmode">BillingMode</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-dynamodb-globaltable-globalsecondaryindexes">GlobalSecondaryIndexes</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-dynamodb-globaltable-globalsecondaryindex.html">GlobalSecondaryIndex</a>, ... ]</code>,
+      &quot;<a href="#cfn-dynamodb-globaltable-keyschema">KeySchema</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-dynamodb-globaltable-keyschema.html">KeySchema</a>, ... ]</code>,
+      &quot;<a href="#cfn-dynamodb-globaltable-localsecondaryindexes">LocalSecondaryIndexes</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-dynamodb-globaltable-localsecondaryindex.html">LocalSecondaryIndex</a>, ... ]</code>,
+      &quot;<a href="#cfn-dynamodb-globaltable-replicas">Replicas</a>&quot; : <code class="replaceable">[ <a href="./aws-properties-dynamodb-globaltable-replicaspecification.html">ReplicaSpecification</a>, ... ]</code>,
+      &quot;<a href="#cfn-dynamodb-globaltable-ssespecification">SSESpecification</a>&quot; : <code class="replaceable"><a href="./aws-properties-dynamodb-globaltable-ssespecification.html">SSESpecification</a></code>,
+      &quot;<a href="#cfn-dynamodb-globaltable-streamspecification">StreamSpecification</a>&quot; : <code class="replaceable"><a href="./aws-properties-dynamodb-globaltable-streamspecification.html">StreamSpecification</a></code>,
+      &quot;<a href="#cfn-dynamodb-globaltable-tablename">TableName</a>&quot; : <code class="replaceable">String</code>,
+      &quot;<a href="#cfn-dynamodb-globaltable-timetolivespecification">TimeToLiveSpecification</a>&quot; : <code class="replaceable"><a href="./aws-properties-dynamodb-globaltable-timetolivespecification.html">TimeToLiveSpecification</a></code>,
+      &quot;<a href="#cfn-dynamodb-globaltable-writeprovisionedthroughputsettings">WriteProvisionedThroughputSettings</a>&quot; : <code class="replaceable"><a href="./aws-properties-dynamodb-globaltable-writeprovisionedthroughputsettings.html">WriteProvisionedThroughputSettings</a></code>
+    }
+}
+</code></pre></div>
+                                 <div id="YAML" name="YAML" class="section langfilter">
+                                    <h3 id="aws-resource-dynamodb-globaltable-syntax.yaml">YAML</h3><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"><awsui-icon name="copy"></awsui-icon></div></div><code class="yaml ">Type: AWS::DynamoDB::GlobalTable
+Properties: 
+  <a href="#cfn-dynamodb-globaltable-attributedefinitions">AttributeDefinitions</a>: <code class="replaceable">
+    - <a href="./aws-properties-dynamodb-globaltable-attributedefinition.html">AttributeDefinition</a></code>
+  <a href="#cfn-dynamodb-globaltable-billingmode">BillingMode</a>: <code class="replaceable">String</code>
+  <a href="#cfn-dynamodb-globaltable-globalsecondaryindexes">GlobalSecondaryIndexes</a>: <code class="replaceable">
+    - <a href="./aws-properties-dynamodb-globaltable-globalsecondaryindex.html">GlobalSecondaryIndex</a></code>
+  <a href="#cfn-dynamodb-globaltable-keyschema">KeySchema</a>: <code class="replaceable">
+    - <a href="./aws-properties-dynamodb-globaltable-keyschema.html">KeySchema</a></code>
+  <a href="#cfn-dynamodb-globaltable-localsecondaryindexes">LocalSecondaryIndexes</a>: <code class="replaceable">
+    - <a href="./aws-properties-dynamodb-globaltable-localsecondaryindex.html">LocalSecondaryIndex</a></code>
+  <a href="#cfn-dynamodb-globaltable-replicas">Replicas</a>: <code class="replaceable">
+    - <a href="./aws-properties-dynamodb-globaltable-replicaspecification.html">ReplicaSpecification</a></code>
+  <a href="#cfn-dynamodb-globaltable-ssespecification">SSESpecification</a>: <code class="replaceable">
+    <a href="./aws-properties-dynamodb-globaltable-ssespecification.html">SSESpecification</a></code>
+  <a href="#cfn-dynamodb-globaltable-streamspecification">StreamSpecification</a>: <code class="replaceable">
+    <a href="./aws-properties-dynamodb-globaltable-streamspecification.html">StreamSpecification</a></code>
+  <a href="#cfn-dynamodb-globaltable-tablename">TableName</a>: <code class="replaceable">String</code>
+  <a href="#cfn-dynamodb-globaltable-timetolivespecification">TimeToLiveSpecification</a>: <code class="replaceable">
+    <a href="./aws-properties-dynamodb-globaltable-timetolivespecification.html">TimeToLiveSpecification</a></code>
+  <a href="#cfn-dynamodb-globaltable-writeprovisionedthroughputsettings">WriteProvisionedThroughputSettings</a>: <code class="replaceable">
+    <a href="./aws-properties-dynamodb-globaltable-writeprovisionedthroughputsettings.html">WriteProvisionedThroughputSettings</a></code>
+</code></pre></div>
+                                 <h2 id="aws-resource-dynamodb-globaltable-properties">Properties</h2>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="cfn-dynamodb-globaltable-attributedefinitions"></a><span class="term"><code class="code">AttributeDefinitions</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A list of attributes that describe the key schema for the global table and
+                                             indexes.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-dynamodb-globaltable-attributedefinition.html">AttributeDefinition</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-dynamodb-globaltable-billingmode"></a><span class="term"><code class="code">BillingMode</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies how you are charged for read and write throughput and how you manage
+                                             capacity. Valid values are:
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   <p><code class="code">PAY_PER_REQUEST</code></p>
+                                                </li>
+                                                <li class="listitem">
+                                                   <p><code class="code">PROVISIONED</code></p>
+                                                </li>
+                                             </ul>
+                                          </div>
+                                          
+                                          <p>All replicas in your global table will have the same billing mode. If you use
+                                             <code class="code">PROVISIONED</code> billing mode, you must provide an auto scaling
+                                             configuration via the <code class="code">WriteProvisionedThroughputSettings</code> property. The
+                                             default value of this property is <code class="code">PROVISIONED</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-dynamodb-globaltable-globalsecondaryindexes"></a><span class="term"><code class="code">GlobalSecondaryIndexes</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Global secondary indexes to be created on the global table. You can create up to 20
+                                             global secondary indexes. Each replica in your global table will have the same global
+                                             secondary index settings. You can only create or delete one global secondary index
+                                             in a
+                                             single stack operation.
+                                          </p>
+                                          
+                                          <p>Since the backfilling of an index could take a long time, CloudFormation does not
+                                             wait
+                                             for the index to become active. If a stack operation rolls back, CloudFormation might
+                                             not delete an index that has been added. In that case, you will need to delete the
+                                             index
+                                             manually.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-dynamodb-globaltable-globalsecondaryindex.html">GlobalSecondaryIndex</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-dynamodb-globaltable-keyschema"></a><span class="term"><code class="code">KeySchema</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies the attributes that make up the primary key for the table. The attributes
+                                             in
+                                             the <code class="code">KeySchema</code> property must also be defined in the
+                                             <code class="code">AttributeDefinitions</code> property.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-dynamodb-globaltable-keyschema.html">List</a> of <a href="./aws-properties-dynamodb-globaltable-keyschema.html">KeySchema</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-dynamodb-globaltable-localsecondaryindexes"></a><span class="term"><code class="code">LocalSecondaryIndexes</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Local secondary indexes to be created on the table. You can create up to five local
+                                             secondary indexes. Each index is scoped to a given hash key value. The size of each
+                                             hash
+                                             key can be up to 10 gigabytes. Each replica in your global table will have the same
+                                             local secondary index settings.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-dynamodb-globaltable-localsecondaryindex.html">LocalSecondaryIndex</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-dynamodb-globaltable-replicas"></a><span class="term"><code class="code">Replicas</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies the list of replicas for your global table. The list must contain at least
+                                             one element, the region where the stack defining the global table is deployed. For
+                                             example, if you define your table in a stack deployed to us-east-1, you must have
+                                             an
+                                             entry in <code class="code">Replicas</code> with the region us-east-1. You cannot remove the replica
+                                             in the stack region.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>Adding a replica might take a few minutes for an empty table, or up to several
+                                                   hours for large tables. If you want to add or remove a replica, we recommend
+                                                   submitting an <code class="code">UpdateStack</code> operation containing only that change.
+                                                </p>
+                                                <p>If you add or delete a replica during an update, we recommend that you don&apos;t
+                                                   update any other resources. If your stack fails to update and is rolled back while
+                                                   adding a new replica, you might need to manually delete the replica.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p>You can create a new global table with up to two replicas. You can add or remove
+                                             replicas after table creation, but you can only add or remove a single replica in
+                                             each
+                                             update.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: Yes
+                                          </p>
+                                          <p><em>Type</em>: List of <a href="./aws-properties-dynamodb-globaltable-replicaspecification.html">ReplicaSpecification</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-dynamodb-globaltable-ssespecification"></a><span class="term"><code class="code">SSESpecification</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies the settings to enable server-side encryption. These settings will be
+                                             applied to all replicas. If you plan to use customer-managed KMS keys, you must provide
+                                             a key for each replica using the
+                                             <code class="code">ReplicaSpecification.ReplicaSSESpecification</code> property.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-dynamodb-globaltable-ssespecification.html">SSESpecification</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-dynamodb-globaltable-streamspecification"></a><span class="term"><code class="code">StreamSpecification</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies the streams settings on your global table. You must provide a value for
+                                             this
+                                             property if your global table contains more than one replica. You can only change
+                                             the
+                                             streams settings if your global table has only one replica.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-dynamodb-globaltable-streamspecification.html">StreamSpecification</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-dynamodb-globaltable-tablename"></a><span class="term"><code class="code">TableName</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>A name for the global table. If you don&apos;t specify a name, AWS CloudFormation generates
+                                             a unique ID and uses that ID as the table name. For more information, see <a href="aws-properties-name.html">Name
+                                                type</a>.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note awsdocs-important">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-warning" variant="error"></awsui-icon><span>Important</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>If you specify a name, you cannot perform updates that require replacement of this
+                                                   resource. You can perform updates that require no or some interruption. If you must
+                                                   replace the resource, specify a new name.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: String
+                                          </p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement">Replacement</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-dynamodb-globaltable-timetolivespecification"></a><span class="term"><code class="code">TimeToLiveSpecification</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies the time to live (TTL) settings for the table. This setting will be applied
+                                             to all replicas.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-dynamodb-globaltable-timetolivespecification.html">TimeToLiveSpecification</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                       <dt><a id="cfn-dynamodb-globaltable-writeprovisionedthroughputsettings"></a><span class="term"><code class="code">WriteProvisionedThroughputSettings</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Specifies an auto scaling policy for write capacity. This policy will be applied to
+                                             all replicas. This setting must be specified if <code class="code">BillingMode</code> is set to
+                                             <code class="code">PROVISIONED</code>.
+                                          </p>
+                                          
+                                          <p><em>Required</em>: No
+                                          </p>
+                                          <p><em>Type</em>: <a href="./aws-properties-dynamodb-globaltable-writeprovisionedthroughputsettings.html">WriteProvisionedThroughputSettings</a></p>
+                                          <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <h2 id="aws-resource-dynamodb-globaltable-return-values">Return values</h2>
+                                 <h3 id="aws-resource-dynamodb-globaltable-return-values-ref">Ref</h3>
+                                 <p>When you pass the logical ID of this resource to the intrinsic <code class="code">Ref</code> function, <code class="code">Ref</code> returns the table name.
+                                 </p>
+                                 <p>For more information about using the <code class="code">Ref</code> function, see <a href="intrinsic-function-reference-ref.html">Ref</a>.
+                                 </p>
+                                 <h3 id="aws-resource-dynamodb-globaltable-return-values-fn--getatt">Fn::GetAtt</h3>
+                                 <p>The <code class="code">Fn::GetAtt</code> intrinsic function returns a value for a specified attribute of this type. The following
+                                    are the available attributes and sample return values.
+                                 </p> 
+                                 
+                                 <p>For more information about using the <code class="code">Fn::GetAtt</code> intrinsic function, see <a href="intrinsic-function-reference-getatt.html">Fn::GetAtt</a>.
+                                 </p>
+                                 <h4 id="aws-resource-dynamodb-globaltable-return-values-fn--getatt-fn--getatt"></h4>
+                                 <div class="variablelist">
+                                    <dl>
+                                       <dt><a id="Arn-fn::getatt"></a><span class="term"><code class="code">Arn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The Amazon Resource Name (ARN) of the DynamoDB table, such as
+                                             <code class="code">arn:aws:dynamodb:us-east-2:123456789012:table/myDynamoDBTable</code>. The ARN
+                                             returned is that of the replica in the region the stack is deployed to.
+                                          </p>
+                                          
+                                       </dd>
+                                       <dt><a id="StreamArn-fn::getatt"></a><span class="term"><code class="code">StreamArn</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>The ARN of the DynamoDB stream, such as
+                                             <code class="code">arn:aws:dynamodb:us-east-1:123456789012:table/testddbstack-myDynamoDBTable-012A1SL7SMP5Q/stream/2015-11-30T20:10:00.000</code>.
+                                             The <code class="code">StreamArn</code> returned is that of the replica in the region the stack is
+                                             deployed to.
+                                          </p>
+                                          
+                                          <div class="awsdocs-note">
+                                             <div class="awsdocs-note-title">
+                                                <awsui-icon name="status-info" variant="link"></awsui-icon><span>Note</span></div>
+                                             <div class="awsdocs-note-text">
+                                                <p>You must specify the <code class="code">StreamSpecification</code> property to use this
+                                                   attribute.
+                                                </p>
+                                             </div>
+                                          </div>
+                                          
+                                       </dd>
+                                       <dt><a id="TableId-fn::getatt"></a><span class="term"><code class="code">TableId</code></span></dt>
+                                       <dd>
+                                          
+                                          <p>Unique identifier for the table, such as
+                                             <code class="code">a123b456-01ab-23cd-123a-111222aaabbb</code>. The <code class="code">TableId</code> returned
+                                             is that of the replica in the region the stack is deployed to.
+                                          </p>
+                                          
+                                       </dd>
+                                    </dl>
+                                 </div>
+                                 <awsdocs-copyright class="copyright-print"></awsdocs-copyright>
+                                 <awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback>
+                              </div>
+                              <noscript>
+                                 <div>
+                                    <div>
+                                       <div>
+                                          <div id="js_error_message">
+                                             <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
+                                                   browser.</strong></p>
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
+                                                enabled. Please refer to your browser&apos;s Help pages for instructions.
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </noscript>
+                              
+                              <awsdocs-page-utilities></awsdocs-page-utilities>
+                           </div></div>
+</body>
+</html>

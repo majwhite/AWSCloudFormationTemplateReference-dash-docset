@@ -16,10 +16,8 @@
                                     <awsdocs-page-header></awsdocs-page-header>
                                     <awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector>
                                  </div>
-                                 <p>(MQ) The Secrets Manager secret that stores your broker credentials. To encrypt the
-                                    secret, you can use customer or service managed keys.
-                                    When using a customer managed KMS key, the Lambda execution role requires kms:Decrypt
-                                    permissions.
+                                 <p>An array of the authentication protocol, or the VPC components to secure your event
+                                    source.
                                  </p>
                                  <h2 id="aws-properties-lambda-eventsourcemapping-sourceaccessconfiguration-syntax">Syntax</h2>
                                  <p>To declare this entity in your AWS CloudFormation template, use the following syntax:</p>
@@ -39,23 +37,80 @@
                                        <dt><a id="cfn-lambda-eventsourcemapping-sourceaccessconfiguration-type"></a><span class="term"><code class="code">Type</code></span></dt>
                                        <dd>
                                           
-                                          <p>Set the value to BASIC_AUTH.</p>
+                                          <p>The type of authentication protocol or the VPC components for your event source. For
+                                             example: <code class="code">&quot;Type&quot;:&quot;SASL_SCRAM_512_AUTH&quot;</code>.
+                                          </p>
+                                          
+                                          <div class="itemizedlist">
+                                              
+                                              
+                                              
+                                              
+                                              
+                                             
+                                             <ul class="itemizedlist" type="disc">
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">BASIC_AUTH</code> - (MQ) The Secrets Manager secret that stores your broker credentials.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch
+                                                      data from your Self-Managed Apache Kafka cluster.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your Self-Managed Apache Kafka
+                                                      brokers.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">SASL_SCRAM_256_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication
+                                                      of your Self-Managed Apache Kafka brokers.
+                                                   </p>
+                                                   
+                                                </li>
+                                                <li class="listitem">
+                                                   
+                                                   <p>
+                                                      <code class="code">SASL_SCRAM_512_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication
+                                                      of your Self-Managed Apache Kafka brokers.
+                                                   </p>
+                                                   
+                                                </li>
+                                             </ul>
+                                          </div>
                                           
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Allowed values</em>: <code class="code">BASIC_AUTH | SASL_SCRAM_256_AUTH | SASL_SCRAM_512_AUTH | VPC_SECURITY_GROUP | VPC_SUBNET</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                        <dt><a id="cfn-lambda-eventsourcemapping-sourceaccessconfiguration-uri"></a><span class="term"><code class="code">URI</code></span></dt>
                                        <dd>
                                           
-                                          <p>The ARN of the AWS Secrets Manager secret. </p>
+                                          <p>The value for your chosen configuration in <code class="code">Type</code>. For example: <code class="code">&quot;URI&quot;: &quot;arn:aws:secretsmanager:us-east-1:01234567890:secret:MyBrokerSecretName&quot;</code>.
+                                          </p>
                                           
                                           <p><em>Required</em>: No
                                           </p>
                                           <p><em>Type</em>: String
                                           </p>
+                                          <p><em>Minimum</em>: <code class="code">1</code></p>
+                                          <p><em>Maximum</em>: <code class="code">200</code></p>
+                                          <p><em>Pattern</em>: <code class="code">[a-zA-Z0-9-\/*:_+=.@-]*</code></p>
                                           <p><em>Update requires</em>: <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-no-interrupt">No interruption</a></p>
                                        </dd>
                                     </dl>
@@ -70,7 +125,7 @@
                                           <div id="js_error_message">
                                              <p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning"> <strong>Javascript is disabled or is unavailable in your
                                                    browser.</strong></p>
-                                             <p>To use the AWS Documentation, Javascript must be
+                                             <p>To use the Amazon Web Services Documentation, Javascript must be
                                                 enabled. Please refer to your browser&apos;s Help pages for instructions.
                                              </p>
                                           </div>
